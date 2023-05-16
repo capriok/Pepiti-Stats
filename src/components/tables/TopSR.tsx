@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import RiderLink from '../RiderLink'
 import Table from '../Table'
 
 interface Props {
@@ -13,7 +14,11 @@ export default function TopSR({ worldSR, seeMore }: Props) {
     {
       key: 'name',
       label: 'Rider',
-      render: (name, row) => <Link href={`/profile/${row._id}`}>{name}</Link>,
+      render: (name, row) => (
+        <RiderLink href={`/profile/${row._id}`} donator={row.donation > 0}>
+          {name}
+        </RiderLink>
+      ),
     },
     {
       key: 'SR',

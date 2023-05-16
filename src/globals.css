@@ -4,7 +4,7 @@
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--secondary) var(--primary);
+  scrollbar-color: var(--priamry) var(--secondary);
 }
 
 /* Chrome, Edge, and Safari */
@@ -14,12 +14,16 @@
 }
 
 *::-webkit-scrollbar-track {
-  background: var(--primary);
+  background: var(--secondary);
   border-radius: 5px;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: var(--secondary);
+  background: var(--primary);
   border-radius: 10px;
-  border: 1px solid var(--primary);
+}
+
+:root {
+  --primary: #333333;
+  --secondary: #151515;
 }

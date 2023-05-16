@@ -4,7 +4,8 @@ import Link from 'next/link'
 import React, { Suspense, useState } from 'react'
 import Api from '~/api/api'
 import Spinner from '~/components/Spinner'
-import TrackTableServer from './TrackTableServer'
+import Table from '~/components/Table'
+import ServerTrackTable from './ServerTrackTable'
 
 interface Props {
   trackList: any
@@ -26,7 +27,7 @@ export default function TopTracks({ trackList }: Props) {
   return (
     <div className="overflow-auto md:w-full">
       <h3 className="font-bold text-lg mb-4">Track Records</h3>
-      <div className="flex px-1">
+      <div className="flex mb-2">
         <select
           value={selectedTrack}
           className="select w-full border-none select-xs md:select-sm"
@@ -34,9 +35,9 @@ export default function TopTracks({ trackList }: Props) {
           {trackSelectOptions}
         </select>
       </div>
-      <Suspense fallback={<Spinner />}>
+      <Suspense fallback={<Spinner className="m-5" />}>
         {/* @ts-expect-error */}
-        <TrackTableServer selectedTrack={selectedTrack} />
+        <ServerTrackTable selectedTrack={selectedTrack} />
       </Suspense>
       <div className="w-full text-right ">
         <Link href={`/track/${selectedTrack}`} className="text-sm text-primary link no-underline">

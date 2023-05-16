@@ -176,9 +176,9 @@ const Table: React.FC<TableProps> = (props) => {
         )}
         {resultsEnabled && <div className="self-end pb-2">Results: {data.length}</div>}
       </div>
-      <div className="w-full overflow-x-auto">
-        <table className="w-full table table-compact my-0">
-          <thead className="text-xs uppercase bg-neutral-800/40 text-neutral-500 dark:bg-neutral-800/40/50 dark:text-gray-400">
+      <div className="w-full overflow-x-auto ">
+        <table className="w-full table table-compact my-0 ">
+          <thead className="text-xs uppercase bg-neutral-800/40 text-neutral-400 dark:bg-neutral-800/40/50 dark:text-gray-400">
             <tr>{tableColumns}</tr>
           </thead>
           <tbody>{tableBodyData}</tbody>

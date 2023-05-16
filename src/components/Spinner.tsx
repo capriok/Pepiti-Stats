@@ -3,19 +3,16 @@
 import React from 'react'
 
 interface Props {
-  size?: string
-  color?: string
+  className: string
 }
 
 function Spinner(props: Props) {
-  const { size = 'w-5 h-5', color = 'text-neutral-500 fill-neutral-300' } = props
-
   return (
     <div className="text-center">
       <div role="status">
         <svg
           aria-hidden="true"
-          className={`inline ${size} mr-2 ${color} animate-spin`}
+          className={`inline w-5 h-5 mr-2 text-neutral-500 fill-neutral-300 animate-spin ${props.className}`}
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg">

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import RiderLink from '../RiderLink'
 import Table from '../Table'
 
 interface Props {
@@ -18,7 +19,11 @@ export default function TopWorldRecords({ worldRecords, seeMore }: Props) {
       key: 'name',
       label: 'Rider',
       render: (name, row) => {
-        return <Link href={`/profile/${row._id}`}>{name}</Link>
+        return (
+          <RiderLink href={`/profile/${row._id}`} donator={row.donation > 0}>
+            {name}
+          </RiderLink>
+        )
       },
     },
     {

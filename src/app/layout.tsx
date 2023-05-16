@@ -12,7 +12,7 @@ import useAuthUser from '~/utils/useAuthUser'
 import NavBar from '~/components/Navbar'
 import Footer from '~/components/Footer'
 
-import './globals.css'
+import '~/globals.css'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const user = await useAuthUser()

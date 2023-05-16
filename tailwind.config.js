@@ -25,10 +25,7 @@ module.exports = {
       {
         theme: {
           'base-100': '#181a1b',
-          primary: '#26b044',
-          secondary: '#1dd962',
-          accent: '#7d39ed',
-          neutral: '#57534e',
+          primary: '#21af34',
           info: '#3ABFF8',
           success: '#36D399',
           warning: '#FBBD23',

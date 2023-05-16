@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Table from '~/components/Table'
 import { handleBikeColor } from '~/utils/handleBikeColor'
 import { handleLapTimes } from '~/utils/handleLapTimes'
+import RiderLink from '../RiderLink'
 
 interface Props {
   records: TrackRecord[]
@@ -19,7 +20,7 @@ export const TrackTable = ({ records }: Props) => {
     {
       key: 'name',
       label: 'Name',
-      render: (name, row) => <Link href={`/profile/${row.rider_guid}`}>{name}</Link>,
+      render: (name, row) => <RiderLink href={`/profile/${row.rider_guid}`}>{name}</RiderLink>,
     },
     {
       key: 'lap_time',

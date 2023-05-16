@@ -6,8 +6,8 @@ interface Props {
   selectedTrack: string
 }
 
-export default async function TrackTableServer({ selectedTrack }: Props) {
-  const [trackStats] = await Promise.all([Api.GetTrackRecords(selectedTrack)])
+export default async function ServerTrackTable({ selectedTrack }: Props) {
+  const trackStats = await Api.GetTrackRecords(selectedTrack)
 
   return <TrackTable records={trackStats?.records.slice(0, 10)} />
 }

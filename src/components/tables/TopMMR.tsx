@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import RiderLink from '../RiderLink'
 import Table from '../Table'
 
 interface Props {
@@ -13,7 +14,11 @@ export default function TopMMR({ worldMMR, seeMore }: Props) {
     {
       key: 'name',
       label: 'Rider',
-      render: (name, row) => <Link href={`/profile/${row._id}`}>{name}</Link>,
+      render: (name, row) => (
+        <RiderLink href={`/profile/${row._id}`} donator={row.donation > 0}>
+          {name}
+        </RiderLink>
+      ),
     },
     {
       key: 'MMR',
@@ -23,7 +28,7 @@ export default function TopMMR({ worldMMR, seeMore }: Props) {
   ]
 
   return (
-    <div>
+    <div className="flex flex-col items-end">
       <Table columns={columns} data={worldMMR.riders} />
       {seeMore && (
         <Link href="/dashboard/top/mmr" className="text-sm text-primary link no-underline">
