@@ -12,8 +12,7 @@ const privateRequest = async (url: string, token: string) => {
       authorization: token ? `Bearer ${token}` : '',
     },
   })
-  const data = await res.json()
-  return data
+  return res.json()
 }
 
 const postRequest = async (url: string, token: string, body: any) => {
@@ -24,12 +23,11 @@ const postRequest = async (url: string, token: string, body: any) => {
     method: 'POST',
     body: JSON.stringify(body),
   })
-  const data = await res.json()
-  return data
+  return res.json()
 }
 
 class PepitiApi {
-  public async GetApiStats(): Promise<SummaryStats> {
+  public async GetSummaryStats(): Promise<SummaryStats> {
     const data = await publicRequest(`/summary`)
     return data
   }

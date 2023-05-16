@@ -1,20 +1,17 @@
 'use client'
 
 import Link from 'next/link'
-import React, { use, useState } from 'react'
+import React, { Suspense, useState } from 'react'
 import Api from '~/api/api'
-import { TrackTable } from '~/components/tables/TrackTable'
+import Spinner from '~/components/Spinner'
 import TrackTableServer from './TrackTableServer'
 
 interface Props {
   trackList: any
 }
 
-export default async function TopTracks({ trackList }: Props) {
+export default function TopTracks({ trackList }: Props) {
   const [selectedTrack, setSelectedTrack] = useState('Forest Raceway')
-
-  const trackStats = await Api.GetTrackRecords(selectedTrack)
-  console.log(trackStats)
 
   const trackSelectOptions = trackList.map((track) => (
     <option key={track._id} value={track.name}>
@@ -37,8 +34,10 @@ export default async function TopTracks({ trackList }: Props) {
           {trackSelectOptions}
         </select>
       </div>
-      {/* @ts-expect-error */}
-      <TrackTableServer selectedTrack={selectedTrack} />
+      <Suspense fallback={<Spinner />}>
+        {/* @ts-expect-error */}
+        <TrackTableServer selectedTrack={selectedTrack} />
+      </Suspense>
       <div className="w-full text-right ">
         <Link href={`/track/${selectedTrack}`} className="text-sm text-primary link no-underline">
           See More

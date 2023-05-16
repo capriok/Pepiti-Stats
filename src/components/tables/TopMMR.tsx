@@ -23,7 +23,7 @@ export default function TopMMR({ worldMMR, seeMore }: Props) {
   ]
 
   return (
-    <div className="flex flex-col items-end">
+    <div>
       <Table columns={columns} data={worldMMR.riders} />
       {seeMore && (
         <Link href="/dashboard/top/mmr" className="text-sm text-primary link no-underline">
