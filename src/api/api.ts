@@ -36,7 +36,7 @@ class PepitiApi {
     return data
   }
 
-  public async SearchForRider(term: any) {
+  public async SearchForRider(term: string): Promise<{ results: Array<Rider> }> {
     const data = await publicRequest(`/rider/search/${term}`)
     return data
   }

@@ -1,6 +1,6 @@
 import React from 'react'
 import Api from '~/api/api'
-import { TrackTable } from '~/components/tables/TrackTable'
+import { TrackRecordsTable } from '~/components/tables/TrackRecordsTable'
 
 interface Props {
   selectedTrack: string
@@ -9,5 +9,5 @@ interface Props {
 export default async function ServerTrackTable({ selectedTrack }: Props) {
   const trackStats = await Api.GetTrackRecords(selectedTrack)
 
-  return <TrackTable records={trackStats?.records.slice(0, 10)} />
+  return <TrackRecordsTable records={trackStats?.records.slice(0, 10)} />
 }

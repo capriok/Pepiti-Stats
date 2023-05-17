@@ -9,7 +9,7 @@ interface Props {
   seeMore?: boolean
 }
 
-export default function TopMMR({ worldMMR, seeMore }: Props) {
+export default function MMRRecordsTable({ worldMMR, seeMore }: Props) {
   const columns = [
     {
       key: 'name',

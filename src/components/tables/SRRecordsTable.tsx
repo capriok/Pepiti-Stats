@@ -9,7 +9,7 @@ interface Props {
   seeMore?: boolean
 }
 
-export default function TopSR({ worldSR, seeMore }: Props) {
+export default function SRRecordsTable({ worldSR, seeMore }: Props) {
   const columns = [
     {
       key: 'name',

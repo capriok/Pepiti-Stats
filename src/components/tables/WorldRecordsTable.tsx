@@ -9,7 +9,7 @@ interface Props {
   seeMore?: boolean
 }
 
-export default function TopWorldRecords({ worldRecords, seeMore }: Props) {
+export default function WorldRecordsTable({ worldRecords, seeMore }: Props) {
   const data: any = Object.keys(worldRecords.riders).map((rk) => ({
     ...worldRecords.riders[rk],
   }))

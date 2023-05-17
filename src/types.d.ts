@@ -12,6 +12,34 @@ interface SummaryStats {
   laps: number
 }
 
+interface Rider {
+  _id: string
+  MMR: number
+  SR: number
+  name: string
+  contact: number
+  banned: boolean
+  banned_by: null | string
+  avatar: string
+  type: 'user'
+  donation: number
+  seasons: Season[]
+  races: {
+    first: number
+    second: number
+    third: number
+    total_races: number
+    fastlap: number
+    holeshot: number
+  }
+}
+
+interface Season {
+  name: string
+  MMR: number
+  position: number
+}
+
 interface RiderRecord {
   _id: string
   avatar: string

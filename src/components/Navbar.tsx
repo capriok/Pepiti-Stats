@@ -1,25 +1,27 @@
 'use client'
-import { PackageIcon, ShieldIcon, UserIcon } from 'lucide-react'
+import {
+  FileWarningIcon,
+  FlagIcon,
+  LayoutDashboardIcon,
+  MenuIcon,
+  PackageIcon,
+  ScrollTextIcon,
+  ShieldIcon,
+  TrophyIcon,
+  UserIcon,
+} from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 
-export interface Link {
-  displayName: string
-  href: string
-  icon?: React.ReactNode
-}
-
 interface Props {
   user: User
-  centerLinks?: Link[]
-  centerContent?: React.ReactNode
 }
 
 function NavBar(props: Props) {
   const pathname = usePathname()
-  const { user, centerLinks, centerContent } = props
+  const { user } = props
 
   const profileNavigationContent = (
     <>
@@ -35,14 +37,13 @@ function NavBar(props: Props) {
           <li>
             <Link href={`/rider-report`} className="flex justify-between">
               Report Rider
-              <ShieldIcon />
+              <FlagIcon />
             </Link>
           </li>
           <li>
             <Link href={`/blacklists`} className="flex justify-between">
               Blacklists
-              <ShieldIcon />
-              <PackageIcon />
+              <FileWarningIcon />
             </Link>
           </li>
           {user.isAdmin && (
@@ -55,6 +56,7 @@ function NavBar(props: Props) {
           )}
         </>
       )}
+
       <Link
         href="https://pepiti.com/stats/api/v0/steam_login"
         target="_blank"
@@ -66,12 +68,12 @@ function NavBar(props: Props) {
   )
 
   const endLinks = [
-    { displayName: 'Dashboard', href: '/dashboard', icon: <></> },
-    { displayName: 'Leagues', href: '/leagues', icon: <></> },
-    { displayName: 'Races', href: '/races', icon: <></> },
+    { displayName: 'Dashboard', href: '/dashboard', icon: <LayoutDashboardIcon /> },
+    { displayName: 'Leagues', href: '/leagues', icon: <TrophyIcon /> },
+    { displayName: 'Races', href: '/races', icon: <ScrollTextIcon /> },
   ]
 
-  const endNavLinks = endLinks.map((link: Link, idx) => {
+  const endNavLinks = endLinks.map((link, idx) => {
     const isActive =
       pathname === link.href || (link.href === '/races' && pathname.includes(link.href))
         ? 'btn-active'
@@ -82,23 +84,16 @@ function NavBar(props: Props) {
         key={idx}
         href={link.href}
         className={`mr-2 flex justify-between btn btn-sm btn-ghost normal-case ${isActive}`}>
-        {link.displayName}
-        {link.icon}
-      </Link>
-    )
-  })
-
-  const centerNavLinks = centerLinks?.map((link: Link, idx) => {
-    const isActive = pathname.includes(link.href)
-    return (
-      <Link href={link.href} key={idx} className={`btn ${isActive ? 'btn-active' : ''}`}>
-        {link.displayName}
+        <div className="flex gap-2 justify-center items-center">
+          {link.displayName}
+          {link.icon}
+        </div>
       </Link>
     )
   })
 
   return (
-    <div className="background sticky top-0 z-50  backdrop-blur-md ">
+    <div className="background sticky top-0 z-50 backdrop-blur-md ">
       <div className="navbar max-w-[1500px] mx-auto">
         <div className="navbar-start">
           <Link href="/dashboard" className="btn btn-ghost">
@@ -111,12 +106,7 @@ function NavBar(props: Props) {
             />
           </Link>
         </div>
-        <div className="navbar-center">
-          {/* If we want to put something in the center of the navbar */}
-          {centerContent}
-          {/* If we want center navbar links */}
-          {centerNavLinks && <div className="">{centerNavLinks}</div>}
-        </div>
+
         <div className="navbar-end">
           {/* Desktop View */}
           <div className="hidden lg:flex lg:px-1">{endNavLinks}</div>
@@ -124,12 +114,12 @@ function NavBar(props: Props) {
           {/* Mobile View - Dropdown */}
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-md rounded-btn">
-              {/* <IconMenu2 /> */}
+              <MenuIcon />
             </label>
             <ul
               tabIndex={0}
-              className="menu dropdown-content p-2 shadow background rounded-box w-52 mt-4">
-              <div className="lg:hidden">
+              className="menu dropdown-content p-2 shadow bg-base-200 rounded-box w-52 mt-4">
+              <div className="lg:hidden bg-base-200">
                 <span className="opacity-50 font-semibold py-1">Navigation</span>
                 {endNavLinks}
               </div>

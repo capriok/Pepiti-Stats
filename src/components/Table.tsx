@@ -137,17 +137,18 @@ const Table: React.FC<TableProps> = (props) => {
   })
 
   /** maps prepped data to table rows in respective column */
-  const tableBodyData = data.map((row) => {
+  const tableBodyData = data.map((row, rowIdx) => {
     return (
       <tr key={row._id}>
         {columns.map((column, colIdx) => {
-          let fixed = colIdx === 0 ? 'sticky left-0' : ''
+          const isOdd = rowIdx % 2 === 0 ? 'bg-base-100' : 'bg-base-200'
+          const fixed = colIdx === 0 ? 'sticky left-0' : ''
           const dataKey = column.key
           const renderer = column.render
           const value = row[dataKey]
 
           return (
-            <td key={dataKey} className={options.cns.row + fixed}>
+            <td key={dataKey} className={`${isOdd} ${options.cns.row} ${fixed} p-[5px]`}>
               <div>{renderer ? renderer(value, row) : value}</div>
             </td>
           )
@@ -177,7 +178,7 @@ const Table: React.FC<TableProps> = (props) => {
         {resultsEnabled && <div className="self-end pb-2">Results: {data.length}</div>}
       </div>
       <div className="w-full overflow-x-auto ">
-        <table className="w-full table table-compact my-0 ">
+        <table className="w-full table table-compact my-0">
           <thead className="text-xs uppercase bg-neutral-800/40 text-neutral-400 dark:bg-neutral-800/40/50 dark:text-gray-400">
             <tr>{tableColumns}</tr>
           </thead>

@@ -1,11 +1,12 @@
 import Api from '~/api/api'
 import PageHeader from '~/components/PageHeader'
-import RiderTrackSearch from './components/RiderTrackSearch'
+import RiderSearch from './components/RiderSearch'
 import SummaryStats from './components/Summary'
-import TopTracks from './components/TopTracks'
-import TopWorldRecords from '~/components/tables/TopWorldRecords'
-import TopMMR from '~/components/tables/TopMMR'
-import TopSR from '~/components/tables/TopSR'
+import TrackRecords from './components/TrackRecords'
+import WorldRecordsTable from '~/components/tables/WorldRecordsTable'
+import MMRRecordsTable from '~/components/tables/MMRRecordsTable'
+import SRRecordsTable from '~/components/tables/SRRecordsTable'
+import { Suspense } from 'react'
 
 export default async function Page() {
   const apiStats = await Api.GetSummaryStats()
@@ -16,7 +17,14 @@ export default async function Page() {
 
   return (
     <>
-      <PageHeader title="Dashboard" extra={<RiderTrackSearch tracksData={trackList?.tracks} />} />
+      <PageHeader
+        title="Dashboard"
+        extra={
+          <Suspense fallback={<></>}>
+            <RiderSearch />
+          </Suspense>
+        }
+      />
 
       <div className="flex flex-col gap-10 w-full mx-auto py-5">
         <SummaryStats stats={apiStats} />
@@ -24,19 +32,19 @@ export default async function Page() {
         <div className="grid md:grid-cols-3 gap-5">
           <div>
             <h3 className="pb-2">Top Records</h3>
-            <TopWorldRecords worldRecords={worldRecords} seeMore />
+            <WorldRecordsTable worldRecords={worldRecords} seeMore />
           </div>
           <div>
             <h3 className="pb-2">Top MMR</h3>
-            <TopMMR worldMMR={worldMMR} seeMore />
+            <MMRRecordsTable worldMMR={worldMMR} seeMore />
           </div>
           <div>
             <h3 className="pb-2">Top SR</h3>
-            <TopSR worldSR={worldSR} seeMore />
+            <SRRecordsTable worldSR={worldSR} seeMore />
           </div>
         </div>
 
-        <TopTracks trackList={trackList.tracks} />
+        <TrackRecords trackList={trackList.tracks} />
       </div>
     </>
   )

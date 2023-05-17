@@ -11,7 +11,7 @@ interface Props {
   trackList: any
 }
 
-export default function TopTracks({ trackList }: Props) {
+export default function TrackRecords({ trackList }: Props) {
   const [selectedTrack, setSelectedTrack] = useState('Forest Raceway')
 
   const trackSelectOptions = trackList.map((track) => (
@@ -27,19 +27,17 @@ export default function TopTracks({ trackList }: Props) {
   return (
     <div className="overflow-auto md:w-full">
       <h3 className="font-bold text-lg mb-4">Track Records</h3>
-      <div className="flex mb-2">
-        <select
-          value={selectedTrack}
-          className="select w-full border-none select-xs md:select-sm"
-          onChange={handleTrackSelect}>
-          {trackSelectOptions}
-        </select>
-      </div>
+      <select
+        value={selectedTrack}
+        className="select w-full bg-base-200 mb-2 border-none select-xs md:select-sm"
+        onChange={handleTrackSelect}>
+        {trackSelectOptions}
+      </select>
       <Suspense fallback={<Spinner className="m-5" />}>
         {/* @ts-expect-error */}
         <ServerTrackTable selectedTrack={selectedTrack} />
       </Suspense>
-      <div className="w-full text-right ">
+      <div className="w-full text-right mt-2">
         <Link href={`/track/${selectedTrack}`} className="text-sm text-primary link no-underline">
           See More
         </Link>

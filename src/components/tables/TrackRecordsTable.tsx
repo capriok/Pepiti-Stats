@@ -10,7 +10,7 @@ interface Props {
   records: TrackRecord[]
 }
 
-export const TrackTable = ({ records }: Props) => {
+export const TrackRecordsTable = ({ records }: Props) => {
   const data = records.slice(0, 250).map((r) => ({
     ...r,
     name: r.rider_name,
