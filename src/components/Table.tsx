@@ -114,7 +114,7 @@ const Table: React.FC<TableProps> = (props) => {
           const index = props.data.findIndex((d) => row._id === d._id)
           const rank = index + 1
           return (
-            <div className="flex justify-start items-center font-medium text-base sticky left-0">
+            <div className="flex justify-start items-center font-medium text-base">
               <div className={`w-2 h-5 ml-2 mr-4 ${rankStyle && handleRankColor(rank)}`} />
               <div className="py-1">{rank}</div>
             </div>
@@ -130,7 +130,7 @@ const Table: React.FC<TableProps> = (props) => {
   /** maps prepped columns to header row */
   const tableColumns = columns.map((column) => {
     return (
-      <th key={column.key} scope="col" className={options.cns.header}>
+      <th key={column.key} className={options.cns.header}>
         <span>{column.label}</span>
       </th>
     )
@@ -140,15 +140,14 @@ const Table: React.FC<TableProps> = (props) => {
   const tableBodyData = data.map((row, rowIdx) => {
     return (
       <tr key={row._id}>
-        {columns.map((column, colIdx) => {
+        {columns.map((column) => {
           const isOdd = rowIdx % 2 === 0 ? 'bg-base-100' : 'bg-base-200'
-          const fixed = colIdx === 0 ? 'sticky left-0' : ''
           const dataKey = column.key
           const renderer = column.render
           const value = row[dataKey]
 
           return (
-            <td key={dataKey} className={`${isOdd} ${options.cns.row} ${fixed} p-[5px]`}>
+            <td key={dataKey} className={`${isOdd} ${options.cns.row} p-[5px]`}>
               <div>{renderer ? renderer(value, row) : value}</div>
             </td>
           )
@@ -177,7 +176,7 @@ const Table: React.FC<TableProps> = (props) => {
         )}
         {resultsEnabled && <div className="self-end pb-2">Results: {data.length}</div>}
       </div>
-      <div className="w-full overflow-x-auto ">
+      <div className="w-full overflow-x-auto">
         <table className="w-full table table-compact my-0">
           <thead className="text-xs uppercase bg-neutral-800/40 text-neutral-400 dark:bg-neutral-800/40/50 dark:text-gray-400">
             <tr>{tableColumns}</tr>

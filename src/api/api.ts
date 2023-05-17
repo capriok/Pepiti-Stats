@@ -1,13 +1,16 @@
 const ENDPOINT = process.env.NEXT_PUBLIC_PEPITI
+const nextConfig = { next: { revalidate: 10 } }
 
 const publicRequest = async (url: string) => {
-  const res = await fetch(ENDPOINT + url)
-  const data = await res.json()
-  return data
+  const res = await fetch(ENDPOINT + url, {
+    ...nextConfig,
+  })
+  return res.json()
 }
 
 const privateRequest = async (url: string, token: string) => {
   const res = await fetch(ENDPOINT + url, {
+    ...nextConfig,
     headers: {
       authorization: token ? `Bearer ${token}` : '',
     },
@@ -17,11 +20,11 @@ const privateRequest = async (url: string, token: string) => {
 
 const postRequest = async (url: string, token: string, body: any) => {
   const res = await fetch(ENDPOINT + url, {
+    method: 'POST',
+    body: JSON.stringify(body),
     headers: {
       authorization: token ? `Bearer ${token}` : '',
     },
-    method: 'POST',
-    body: JSON.stringify(body),
   })
   return res.json()
 }
@@ -60,7 +63,7 @@ class PepitiApi {
 
   // RIDER
 
-  public async GetRider(guid: string): Promise<{ rider: any }> {
+  public async GetRider(guid: string): Promise<RiderProfile> {
     const data = await publicRequest(`/rider/${guid}`)
     return data
   }
@@ -72,7 +75,7 @@ class PepitiApi {
     const data = await publicRequest(`/rider/${guid}/races`)
     return data
   }
-  public async GetRiderMMRHistory(guid: string): Promise<{ history: any }> {
+  public async GetRiderMMRHistory(guid: string): Promise<{ _id: string; MMR_updates: Array<any> }> {
     const data = await publicRequest(`/rider/${guid}/mmr_history`)
     return data
   }

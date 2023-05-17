@@ -13,34 +13,18 @@ import NavBar from '~/components/Navbar'
 import Footer from '~/components/Footer'
 
 import '~/globals.css'
+import { usePathname } from 'next/navigation'
+import DonationBanner from './dashboard/components/DonationBanner'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const user = await useAuthUser()
-
   return (
     <html lang="en">
       <body className={inter.className}>
         <NavBar user={user} />
-
-        <DonationBanner />
-
         <div className="max-w-[1400px] px-2 md:px-0 mx-auto flex-1 w-full">{children}</div>
         <Footer user={user} />
       </body>
     </html>
-  )
-}
-
-const DonationBanner = () => {
-  return (
-    <div className="bg-green-500/50 py-1 text-center text-white">
-      <a
-        target="_blank"
-        rel="noreferrer"
-        href={`https://paypal.me/pepitisdevs?country.x=US&locale.x=en_US`}
-        className="hover:text-green-200 cursor-pointer">
-        Help us out with a donation!
-      </a>
-    </div>
   )
 }

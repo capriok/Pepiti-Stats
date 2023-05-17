@@ -10,28 +10,27 @@ interface Item {
 
 interface Props {
   items: Item[]
+  wide?: boolean
 }
 
-export default function Tabs({ items }: Props) {
+export default function Tabs({ items, wide }: Props) {
   const [activeTab, setActiveTab] = useState(items[0])
 
   const handleClick = (key) => setActiveTab(key)
 
   const Tab = ({ tab }) => {
-    const active = tab.name === activeTab.key ? 'tab-active' : ''
+    const active = tab.key === activeTab.key ? 'bg-secondary/60 text-white' : 'bg-base-200'
 
     return (
       <button
         onClick={() => handleClick(tab)}
-        className={`tab max-sm:tab-sm md:tab-md tab-lifted ${active}`}>
+        className={`tab md:tab-md tab-lifted ${wide ? 'w-full' : ''} ${active}`}>
         {tab.label}
       </button>
     )
   }
 
   const tabs = items.map((item) => <Tab key={item.key} tab={item} />)
-
-  console.log('%cTabs: Active', 'color:steelblue', activeTab)
 
   return (
     <>

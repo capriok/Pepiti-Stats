@@ -1,8 +1,7 @@
 'use client'
 
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import Loader from '~/components/Loader'
 import Spinner from '~/components/Spinner'
 import { XIcon } from 'lucide-react'
 import Api from '~/api/api'
@@ -50,22 +49,14 @@ function RiderSearch() {
           </button>
         )}
       </div>
-      <SearchDropdown
-        term={term}
-        open={open}
-        setOpen={setOpen}
-        loading={loading}
-        results={results}
-      />
+      <SearchDropdown term={term} open={open} loading={loading} results={results} />
     </div>
   )
 }
 
 export default RiderSearch
 
-const SearchDropdown = ({ term, open, setOpen, loading, results }) => {
-  console.log(results)
-
+const SearchDropdown = ({ term, open, loading, results }) => {
   const openCn = open ? 'opacity-100 absolute' : 'opacity-0 hidden'
 
   return (
