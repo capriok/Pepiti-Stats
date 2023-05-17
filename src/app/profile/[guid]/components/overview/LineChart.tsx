@@ -71,7 +71,7 @@ export default function LineChart({ historyData }) {
         <div className="text-neutral-400">Showing {limit} Races</div>
         <div className="btn-group">
           <button
-            className="btn btn-sm hover:bg-secondary/60  rounded-r-none bg-base-100 border-none"
+            className="btn btn-sm hover:bg-secondary/60 rounded-r-none bg-base-100 border-none"
             onClick={() => setLimit((l) => (l > 5 ? l - 1 : l))}>
             -
           </button>

@@ -26,14 +26,14 @@ export default function TrackRecords({ trackList }: Props) {
 
   return (
     <div className="overflow-auto md:w-full">
-      <h3 className="font-bold text-lg mb-4">Track Records</h3>
-      <select
-        value={selectedTrack}
-        className="select w-full bg-base-200 mb-1 border-none select-xs md:select-sm"
-        onChange={handleTrackSelect}>
-        {trackSelectOptions}
-      </select>
-      <Suspense fallback={<Spinner className="m-5" />}>
+      <h3 className="text-lg font-semibold mb-2">Track Records</h3>
+      <Suspense fallback={<SkeletonTable />}>
+        <select
+          value={selectedTrack}
+          className="select w-full bg-base-200 mb-1 border-none select-xs md:select-sm"
+          onChange={handleTrackSelect}>
+          {trackSelectOptions}
+        </select>
         {/* @ts-expect-error */}
         <ServerTrackTable selectedTrack={selectedTrack} />
       </Suspense>
@@ -45,3 +45,38 @@ export default function TrackRecords({ trackList }: Props) {
     </div>
   )
 }
+
+const SkeletonTable = () => (
+  <>
+    <select className="select w-full bg-base-200 mb-1 border-none select-xs md:select-sm">
+      <option key="loading" value="loading">
+        <Spinner />
+      </option>
+    </select>
+    <Table
+      // prettier-ignore
+      data={[
+    {_id: '1', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '2', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '3', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '4', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '5', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '6', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '7', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '8', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '9', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '0', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+  ]}
+      // prettier-ignore
+      columns={[
+      { key: 'rank', label: 'Rank' },
+      { key: 'name', label: 'Name' },
+      { key: 'lapTime', label: 'Lap Time' },
+      { key: 'averageSpeed', label: 'Average Speed' },
+      { key: 'split1', label: 'Split 1' },
+      { key: 'split2', label: 'Split 2' },
+      { key: 'bike', label: 'Bike' },
+    ]}
+    />
+  </>
+)

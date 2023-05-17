@@ -31,15 +31,15 @@ export default async function Page() {
 
         <div className="grid md:grid-cols-3 gap-5">
           <div>
-            <h3 className="pb-2">Top Records</h3>
+            <h3 className="text-lg font-semibold pb-2">Top Records</h3>
             <WorldRecordsTable worldRecords={worldRecords} seeMore />
           </div>
           <div>
-            <h3 className="pb-2">Top MMR</h3>
+            <h3 className="text-lg font-semibold pb-2">Top MMR</h3>
             <MMRRecordsTable worldMMR={worldMMR} seeMore />
           </div>
           <div>
-            <h3 className="pb-2">Top SR</h3>
+            <h3 className="text-lg font-semibold pb-2">Top SR</h3>
             <SRRecordsTable worldSR={worldSR} seeMore />
           </div>
         </div>
