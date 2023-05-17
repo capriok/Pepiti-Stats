@@ -3,6 +3,7 @@ interface User {
   name: string
   avatar: string
   isAdmin: boolean
+  token: string
 }
 
 interface SummaryStats {
@@ -12,7 +13,7 @@ interface SummaryStats {
   laps: number
 }
 
-interface Rider {
+interface RiderSearch {
   _id: string
   MMR: number
   SR: number
@@ -40,7 +41,7 @@ interface Season {
   position: number
 }
 
-interface RiderRecord {
+interface RiderProfile {
   _id: string
   avatar: string
   MMR: string
@@ -255,7 +256,7 @@ interface RaceData {
     Date: number
   }
   riders: {
-    [key: string]: Rider
+    [key: string]: RiderSearch
   }
   riders_guid: Array<string>
   track: string
@@ -302,7 +303,7 @@ interface Classification {
   }
 }
 
-interface Rider {
+interface RiderSearch {
   race_number: number
   name: string
   bike_name: string

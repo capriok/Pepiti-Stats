@@ -31,7 +31,7 @@ export default function SRRecordsTable({ worldSR, seeMore }: Props) {
     <div className="flex flex-col items-end">
       <Table columns={columns} data={worldSR.riders} />
       {seeMore && (
-        <Link href="/dashboard/top/sr" className="text-sm text-primary link no-underline">
+        <Link href="/dashboard/top/sr" className="text-sm text-primary link no-underline pt-2">
           See More
         </Link>
       )}

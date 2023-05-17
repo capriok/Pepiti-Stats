@@ -11,7 +11,7 @@ function RiderSearch() {
   const [term, setTerm] = useState('')
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [results, setResults] = useState<Array<Rider>>([])
+  const [results, setResults] = useState<Array<RiderSearch>>([])
 
   const fetchPlayerData = async () => {
     setLoading(true)

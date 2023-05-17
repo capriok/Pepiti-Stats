@@ -98,6 +98,7 @@ function NavBar(props: Props) {
         <div className="navbar-start">
           <Link href="/dashboard" className="btn btn-ghost">
             <Image
+              priority={true}
               src="/assets/brand/SVGs/icon-V2.svg"
               className="h-10 w-h-10"
               alt="pepiti_brand"

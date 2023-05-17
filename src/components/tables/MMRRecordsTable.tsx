@@ -31,7 +31,7 @@ export default function MMRRecordsTable({ worldMMR, seeMore }: Props) {
     <div className="flex flex-col items-end">
       <Table columns={columns} data={worldMMR.riders} />
       {seeMore && (
-        <Link href="/dashboard/top/mmr" className="text-sm text-primary link no-underline">
+        <Link href="/dashboard/top/mmr" className="text-sm text-primary link no-underline pt-2">
           See More
         </Link>
       )}

@@ -37,7 +37,7 @@ export default function WorldRecordsTable({ worldRecords, seeMore }: Props) {
     <div className="flex flex-col items-end">
       <Table columns={columns} data={data} />
       {seeMore && (
-        <Link href="/dashboard/top/riders" className="text-sm text-primary link no-underline">
+        <Link href="/dashboard/top/riders" className="text-sm text-primary link no-underline pt-2">
           See More
         </Link>
       )}

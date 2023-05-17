@@ -29,7 +29,7 @@ export default function TrackRecords({ trackList }: Props) {
       <h3 className="font-bold text-lg mb-4">Track Records</h3>
       <select
         value={selectedTrack}
-        className="select w-full bg-base-200 mb-2 border-none select-xs md:select-sm"
+        className="select w-full bg-base-200 mb-1 border-none select-xs md:select-sm"
         onChange={handleTrackSelect}>
         {trackSelectOptions}
       </select>

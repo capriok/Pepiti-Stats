@@ -9,7 +9,7 @@ async function useAuthUser() {
 
   try {
     const decode = jwt_decode(token!)
-    return makeUser(decode)
+    return makeUser({ ...decode, token: token })
   } catch (error) {
     const nullUser = makeUser({})
     return nullUser
@@ -24,5 +24,6 @@ const makeUser = (u): User => {
     name: u?.name ?? '',
     avatar: u?.avatar ?? '',
     isAdmin: u?.type === 'admin' ?? false,
+    token: u?.token ?? '',
   }
 }

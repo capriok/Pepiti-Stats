@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import Api from '~/api/api'
 import PageHeader from '~/components/PageHeader'
 import RiderSearch from './components/RiderSearch'
@@ -6,7 +7,6 @@ import TrackRecords from './components/TrackRecords'
 import WorldRecordsTable from '~/components/tables/WorldRecordsTable'
 import MMRRecordsTable from '~/components/tables/MMRRecordsTable'
 import SRRecordsTable from '~/components/tables/SRRecordsTable'
-import { Suspense } from 'react'
 
 export default async function Page() {
   const apiStats = await Api.GetSummaryStats()

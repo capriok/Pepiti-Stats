@@ -33,7 +33,13 @@ export default function Footer({ user }) {
     <footer className="p-10 bg-base-200 text-base-content mt-5">
       <div className="footer mx-auto max-w-[1500px]">
         <div>
-          <Image src="/assets/brand/SVGs/icon-V2.svg" width={120} height={120} alt="" />
+          <Image
+            priority={true}
+            src="/assets/brand/SVGs/icon-V2.svg"
+            width={120}
+            height={120}
+            alt="pepiti_brand"
+          />
           <p>
             Copyright © {date.getFullYear()} Pepiti
             <br />

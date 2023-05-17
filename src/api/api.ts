@@ -27,6 +27,8 @@ const postRequest = async (url: string, token: string, body: any) => {
 }
 
 class PepitiApi {
+  // STATS
+
   public async GetSummaryStats(): Promise<SummaryStats> {
     const data = await publicRequest(`/summary`)
     return data
@@ -35,29 +37,8 @@ class PepitiApi {
     const data = await publicRequest(`/top/${slug}/${limit}`)
     return data
   }
-
-  public async SearchForRider(term: string): Promise<{ results: Array<Rider> }> {
+  public async SearchForRider(term: string): Promise<{ results: Array<RiderSearch> }> {
     const data = await publicRequest(`/rider/search/${term}`)
-    return data
-  }
-  public async GetRider(guid: string): Promise<{ rider: any }> {
-    const data = await publicRequest(`/rider/${guid}`)
-    return { rider: data }
-  }
-  public async GetAuthRider(guid: string, token: string): Promise<{ rider: any }> {
-    const data = await privateRequest(`/rider/${guid}`, token)
-    return { rider: data }
-  }
-  public async GetRiderRecords(guid: string): Promise<{ records: any }> {
-    const data = await publicRequest(`/rider/${guid}/records`)
-    return data
-  }
-  public async GetRiderRaces(guid: string): Promise<{ races: any }> {
-    const data = await publicRequest(`/rider/${guid}/races`)
-    return data
-  }
-  public async GetRiderMMRHistory(guid: string): Promise<{ history: any }> {
-    const data = await publicRequest(`/rider/${guid}/mmr_history`)
     return data
   }
   public async GetRecentRaces(): Promise<{ records: any }> {
@@ -72,15 +53,31 @@ class PepitiApi {
     const data = await publicRequest(`/records/track_names`)
     return data
   }
-  public async GetTrackRecords(slug: string): Promise<{
-    records: any
-    total_records: any
-    track: any
-  }> {
-    'use server'
+  public async GetTrackRecords(slug: string): Promise<Track> {
     const data = await publicRequest(`/records/track/${slug}`)
     return data
   }
+
+  // RIDER
+
+  public async GetRider(guid: string): Promise<{ rider: any }> {
+    const data = await publicRequest(`/rider/${guid}`)
+    return data
+  }
+  public async GetRiderRecords(guid: string): Promise<{ records: any }> {
+    const data = await publicRequest(`/rider/${guid}/records`)
+    return data
+  }
+  public async GetRiderRaces(guid: string): Promise<{ races: any }> {
+    const data = await publicRequest(`/rider/${guid}/races`)
+    return data
+  }
+  public async GetRiderMMRHistory(guid: string): Promise<{ history: any }> {
+    const data = await publicRequest(`/rider/${guid}/mmr_history`)
+    return data
+  }
+
+  // LEAGUES
 
   public async GetAuthLeagues(token: string): Promise<{ leagues: any[] }> {
     const data = await privateRequest('/my_leagues', token)
@@ -127,14 +124,7 @@ class PepitiApi {
     },
   }
 
-  public Login(): string {
-    const steam_login = 'https://pepiti.com/stats/api/v0/steam_login'
-    return steam_login
-  }
-
-  public async Logout(): Promise<{ status: boolean }> {
-    return { status: false }
-  }
+  // ADMINISTRATION
 
   public async BlackListSR(): Promise<{ records: any }> {
     const data = await publicRequest('/blacklist.json')
@@ -144,6 +134,27 @@ class PepitiApi {
   public async BlackListNonSR(): Promise<{ records: any }> {
     const data = await publicRequest('/blacklist_non_sr.json ')
     return data
+  }
+
+  public async BanRider(guid: string, reason: string, token: string): Promise<any> {
+    const data = await privateRequest(`/rider/${guid}/ban/${reason}`, token)
+    return data
+  }
+
+  public async UnBanRider(guid: string, token: string): Promise<any> {
+    const data = await privateRequest(`/rider/${guid}/unban`, token)
+    return data
+  }
+
+  // AUTHENTICATION
+
+  public Login(): string {
+    const steam_login = 'https://pepiti.com/stats/api/v0/steam_login'
+    return steam_login
+  }
+
+  public async Logout(): Promise<{ status: boolean }> {
+    return { status: false }
   }
 }
 
