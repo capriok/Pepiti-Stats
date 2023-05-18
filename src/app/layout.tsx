@@ -13,8 +13,6 @@ import NavBar from '~/components/Navbar'
 import Footer from '~/components/Footer'
 
 import '~/globals.css'
-import { usePathname } from 'next/navigation'
-import DonationBanner from './dashboard/components/DonationBanner'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const user = await useAuthUser()

@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import React, { Suspense, useState } from 'react'
-import Api from '~/api/api'
 import Spinner from '~/components/Spinner'
 import Table from '~/components/Table'
 import ServerTrackTable from './ServerTrackTable'

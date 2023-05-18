@@ -6,9 +6,7 @@ export default function Footer({ user }) {
   const date = new Date()
   const authGuid = user._id
 
-  const isSignedIn = !!user._id
-
-  const userLinks = isSignedIn ? (
+  const userLinks = user.guid ? (
     <>
       <Link href={`/profile/${authGuid}`} className="link link-hover">
         Profile
@@ -31,7 +29,7 @@ export default function Footer({ user }) {
 
   return (
     <footer className="p-10 bg-base-200 text-base-content mt-5">
-      <div className="footer mx-auto max-w-[1500px]">
+      <div className="footer mx-auto max-w-[1400px]">
         <div>
           <Image
             priority={true}
@@ -64,6 +62,18 @@ export default function Footer({ user }) {
         <div>
           <span className="footer-title">User</span>
           {userLinks}
+        </div>
+        <div>
+          <span className="footer-title">Donations</span>
+          <div>Help pay for services you enjoy</div>
+          <div className="bg-secondary/60 hover:bg-secondary text-white btn btn-ghost btn-sm normal-case">
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href={`https://paypal.me/pepitisdevs?country.x=US&locale.x=en_US`}>
+              Donate to Pepiti.com
+            </a>
+          </div>
         </div>
       </div>
     </footer>

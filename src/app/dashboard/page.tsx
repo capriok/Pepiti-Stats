@@ -7,13 +7,14 @@ import TrackRecords from './components/TrackRecords'
 import WorldRecordsTable from '~/components/tables/WorldRecordsTable'
 import MMRRecordsTable from '~/components/tables/MMRRecordsTable'
 import SRRecordsTable from '~/components/tables/SRRecordsTable'
+import DonationMarquee from '~/components/DonationMarquee'
 
 export default async function Page() {
   const apiStats = await Api.GetSummaryStats()
-  const trackList = await Api.GetTrackNames()
   const worldRecords = await Api.GetDynamicTopRecords('riders', 10)
   const worldMMR = await Api.GetDynamicTopRecords('mmr', 10)
   const worldSR = await Api.GetDynamicTopRecords('sr', 10)
+  const trackList = await Api.GetTrackNames()
 
   return (
     <>
@@ -45,6 +46,8 @@ export default async function Page() {
         </div>
 
         <TrackRecords trackList={trackList.tracks} />
+
+        <div className="mt-10">{/* <DonationMarquee /> */}</div>
       </div>
     </>
   )

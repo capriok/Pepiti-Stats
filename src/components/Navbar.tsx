@@ -80,7 +80,7 @@ function NavBar(props: Props) {
       <Link
         key={idx}
         href={link.href}
-        className={`mr-2 flex justify-between btn btn-sm btn-ghost hover:bg-transparent hover:underline normal-case`}>
+        className="mr-2 flex justify-between btn btn-ghost normal-case">
         <div className="flex gap-2 justify-center items-center">
           {link.displayName}
           {link.icon}
@@ -91,7 +91,7 @@ function NavBar(props: Props) {
 
   return (
     <>
-      <div className="bg-base-200 sticky top-0 z-50 backdrop-blur-md ">
+      <div className="bg-base-200 sticky top-0 z-50 backdrop-blur-md">
         <div className="navbar max-w-[1500px] mx-auto">
           <div className="navbar-start">
             <Link href="/dashboard" className="btn btn-ghost">

@@ -16,8 +16,6 @@ interface Props {
 export default function RiderRecordsTable({ records }: Props) {
   const [term, setTerm] = useState('')
 
-  console.log(records)
-
   const data = records.map((record) => ({
     _id: record._id,
     date: parseInt(record._id.slice(0, 8), 16) * 1000,
