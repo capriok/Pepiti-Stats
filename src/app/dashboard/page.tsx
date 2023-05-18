@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import Api from '~/api/api'
 import PageHeader from '~/components/PageHeader'
 import RiderSearch from './components/RiderSearch'
@@ -18,29 +17,22 @@ export default async function Page() {
 
   return (
     <>
-      <PageHeader
-        title="Dashboard"
-        extra={
-          <Suspense fallback={<></>}>
-            <RiderSearch />
-          </Suspense>
-        }
-      />
+      <PageHeader title="Dashboard" extra={<RiderSearch />} />
 
-      <div className="flex flex-col gap-10 w-full mx-auto py-5">
+      <div className="mx-auto flex w-full flex-col gap-10 py-5">
         <SummaryStats stats={apiStats} />
 
-        <div className="grid md:grid-cols-3 gap-5">
+        <div className="grid gap-5 md:grid-cols-3">
           <div>
-            <h3 className="text-lg font-semibold pb-2">Top Records</h3>
+            <h3 className="pb-2 text-lg font-semibold">Top Records</h3>
             <WorldRecordsTable worldRecords={worldRecords} seeMore />
           </div>
           <div>
-            <h3 className="text-lg font-semibold pb-2">Top MMR</h3>
+            <h3 className="pb-2 text-lg font-semibold">Top MMR</h3>
             <MMRRecordsTable worldMMR={worldMMR} seeMore />
           </div>
           <div>
-            <h3 className="text-lg font-semibold pb-2">Top SR</h3>
+            <h3 className="pb-2 text-lg font-semibold">Top SR</h3>
             <SRRecordsTable worldSR={worldSR} seeMore />
           </div>
         </div>

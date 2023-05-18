@@ -8,13 +8,13 @@ export default function Footer({ user }) {
 
   const userLinks = user.guid ? (
     <>
-      <Link href={`/profile/${authGuid}`} className="link link-hover">
+      <Link href={`/profile/${authGuid}`} className="link-hover link">
         Profile
       </Link>
-      <Link href={`/profile/${authGuid}/races`} className="link link-hover">
+      <Link href={`/profile/${authGuid}/races`} className="link-hover link">
         Races
       </Link>
-      <Link href={`/profile/${authGuid}/records`} className="link link-hover">
+      <Link href={`/profile/${authGuid}/records`} className="link-hover link">
         Records
       </Link>
     </>
@@ -28,7 +28,7 @@ export default function Footer({ user }) {
   )
 
   return (
-    <footer className="p-10 bg-base-200 text-base-content mt-5">
+    <footer className="mt-5 bg-base-200 p-10 text-base-content">
       <div className="footer mx-auto max-w-[1400px]">
         <div>
           <Image
@@ -49,13 +49,13 @@ export default function Footer({ user }) {
         </div>
         <div>
           <span className="footer-title">Services</span>
-          <Link href="/dashboard" className="link link-hover">
+          <Link href="/dashboard" className="link-hover link">
             Dashboard
           </Link>
-          <Link href="/leagues" className="link link-hover">
+          <Link href="/leagues" className="link-hover link">
             Leagues
           </Link>
-          <Link href="/races" className="link link-hover">
+          <Link href="/races" className="link-hover link">
             All Races
           </Link>
         </div>
@@ -66,7 +66,7 @@ export default function Footer({ user }) {
         <div>
           <span className="footer-title">Donations</span>
           <div>Help pay for services you enjoy</div>
-          <div className="bg-secondary/60 hover:bg-secondary text-white btn btn-ghost btn-sm normal-case">
+          <div className="btn-ghost btn-sm btn bg-secondary/60 normal-case text-white hover:bg-secondary">
             <a
               target="_blank"
               rel="noreferrer"

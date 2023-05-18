@@ -42,8 +42,8 @@ export const RiderWorldRecordsTable = ({ rider }: Props) => {
   ]
 
   return (
-    <div className="w-full flex flex-col items-start card card-body p-4 pt-0 bg-base-200">
-      <div className="flex gap-2 text-lg my-4 font-semibold">
+    <div className="card card-body flex w-full flex-col items-start bg-base-200 p-4 pt-0">
+      <div className="my-4 flex gap-2 text-lg font-semibold">
         <div>Total World Records:</div>
         <div>{rider.world_records.total}</div>
       </div>

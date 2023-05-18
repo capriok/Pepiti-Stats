@@ -1,3 +1,3 @@
 export function dateIsValid(date) {
-   return !isNaN(date) && date instanceof Date
+  return !isNaN(date) && date instanceof Date
 }

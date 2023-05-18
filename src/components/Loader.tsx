@@ -4,13 +4,13 @@ interface Props {
 
 export default function Loader({ text = 'Loading...' }: Props) {
   return (
-    <div className="flex flex-col h-screen justify-center align-middle">
-      {text && <div className="font-semibold text-neutral-200 text-center text-2xl">{text}</div>}
+    <div className="flex h-screen flex-col justify-center align-middle">
+      {text && <div className="text-center text-2xl font-semibold text-neutral-200">{text}</div>}
 
       <div role="status" className="mx-auto mt-4">
         <svg
           aria-hidden="true"
-          className="inline w-8 h-8 mr-2 animate-spin text-gray-600 fill-green-500"
+          className="mr-2 inline h-8 w-8 animate-spin fill-green-500 text-gray-600"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg">

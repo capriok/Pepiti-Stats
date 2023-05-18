@@ -35,5 +35,9 @@ module.exports = {
       },
     ],
   },
-  plugins: [require('@tailwindcss/typography'), require('daisyui')],
+  plugins: [
+    require('prettier-plugin-tailwindcss'),
+    require('@tailwindcss/typography'),
+    require('daisyui'),
+  ],
 }

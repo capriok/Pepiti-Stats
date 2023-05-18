@@ -12,17 +12,17 @@ export default function DonationMarquee({}: Props) {
 
   return (
     <div>
-      <div className="text-lg text-semibold mb-2">Recent Donations</div>
-      <div className="stats gap-5 w-full">
+      <div className="text-semibold mb-2 text-lg">Recent Donations</div>
+      <div className="stats w-full gap-5">
         {donations.map((donation) => (
-          <div key={donation.id} className="stat card card-body p-4 bg-base-200 text-white">
+          <div key={donation.id} className="stat card card-body bg-base-200 p-4 text-white">
             <div className="flex justify-between">
               <div className="text-lg">{donation.donator}</div>
-              <div className="text-neutral-400 text-sm">
+              <div className="text-sm text-neutral-400">
                 {new Date(donation.date).toLocaleDateString()}
               </div>
             </div>
-            <div className="flex justify-end text-lg gap-1">
+            <div className="flex justify-end gap-1 text-lg">
               <div className="text-secondary/60">{donation.currency}</div>
               <div>{donation.amount}</div>
             </div>

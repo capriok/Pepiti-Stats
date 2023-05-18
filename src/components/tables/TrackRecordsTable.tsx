@@ -46,8 +46,8 @@ export const TrackRecordsTable = ({ records }: Props) => {
       key: 'bike',
       label: 'Bike',
       render: (bike) => (
-        <div className="flex justify-start items-center">
-          <div className={`w-2 h-5 mr-3 ${handleBikeColor(bike)}`} />
+        <div className="flex items-center justify-start">
+          <div className={`mr-3 h-5 w-2 ${handleBikeColor(bike)}`} />
           <div className="py-1">
             <p>{bike} </p>
           </div>

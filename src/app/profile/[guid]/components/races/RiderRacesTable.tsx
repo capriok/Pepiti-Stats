@@ -77,16 +77,16 @@ export default function RiderRacesTable({ races }: Props) {
 
   return (
     <div className="pb-4">
-      <div className="text-xl my-4 font-semibold">Recent Races</div>
+      <div className="my-4 text-xl font-semibold">Recent Races</div>
       <Table columns={columns} data={data} rankEnabled={false} rowCn="py-4" />
     </div>
   )
 
   return (
     <>
-      <div className="mt-5 mb-2">
+      <div className="mb-2 mt-5">
         <input
-          className="bg-neutral-700 w-full p-2 border-green-900 ring-green-900 focus:outline-none focus:border-green-500 focus:ring-green-500 rounded-md"
+          className="w-full rounded-md border-green-900 bg-neutral-700 p-2 ring-green-900 focus:border-green-500 focus:outline-none focus:ring-green-500"
           placeholder="Search for track..."
           value={term}
           onChange={(event) => setTerm(event.currentTarget.value)}
@@ -109,18 +109,18 @@ export default function RiderRacesTable({ races }: Props) {
 
             return (
               <div key={idx} className="rounded-box bg-neutral-800/40 p-3">
-                <div className="flex justify-between items-center">
+                <div className="flex items-center justify-between">
                   <div className="flex flex-col gap-3">
                     <Link
                       prefetch={false}
-                      className="link link-primary text-xl"
+                      className="link-primary link text-xl"
                       href={`/track/${race.track}`}>
                       {race.track}
                     </Link>
                     <Link
                       prefetch={false}
                       href={`/races/${race._id}`}
-                      className="link link-hover text-neutral-400">
+                      className="link-hover link text-neutral-400">
                       Race Details
                     </Link>
                   </div>
@@ -131,7 +131,7 @@ export default function RiderRacesTable({ races }: Props) {
                 {race.Classification && (
                   <>
                     <div>
-                      <div className="flex justify-between mb-3">
+                      <div className="mb-3 flex justify-between">
                         <span className="caption">Previous MMR: {race.MMR.old_MMR}</span>
                         {/* <p className="caption">BPP: {race.MMR.BPP}</p>
                                  <p className="caption">PRB: {race.MMR.PRB}</p>
@@ -183,13 +183,13 @@ const MMRBadge = ({ mmr }: { mmr: number }) => {
     <div
       className={`${
         mmr > 0 ? 'bg-green-500/30' : mmr === 0 ? 'bg-orange-500/30' : 'bg-red-500/30'
-      } w-fit px-2 py-1 rounded-full`}>
-      <p
+      } w-fit rounded-full px-2 py-1`}>
+      <div
         className={`${
           mmr > 0 ? 'text-green-200' : mmr === 0 ? 'text-orange-200' : 'text-red-200'
-        } font-semibold text-md`}>
+        } text-md font-semibold`}>
         {mmr > 0 ? '+' + mmr : mmr}
-      </p>
+      </div>
     </div>
   )
 }
@@ -197,12 +197,12 @@ const MMRBadge = ({ mmr }: { mmr: number }) => {
 const FastestLapTab = ({ fastestLap }: { fastestLap: FastestLap }) => {
   return (
     <div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mt-2">
-        <div className="bg-neutral-700/30 rounded-lg p-8">
+      <div className="mt-2 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="rounded-lg bg-neutral-700/30 p-8">
           <p className="text-lg">Position</p>
           <h3 className="text-2xl font-bold">{fastestLap.Pos}</h3>
         </div>
-        <div className="bg-neutral-700/30 rounded-lg p-8">
+        <div className="rounded-lg bg-neutral-700/30 p-8">
           <p className="text-lg">Lap Time</p>
           <h3 className="text-2xl font-bold">
             {typeof fastestLap.LapTime !== 'string'
@@ -210,11 +210,11 @@ const FastestLapTab = ({ fastestLap }: { fastestLap: FastestLap }) => {
               : fastestLap.LapTime}
           </h3>
         </div>
-        <div className="bg-neutral-700/30 rounded-lg p-8">
+        <div className="rounded-lg bg-neutral-700/30 p-8">
           <p className="text-lg">Lap</p>
           <h3 className="text-2xl font-bold">{fastestLap.Lap ? `#${fastestLap.Lap}` : '-'}</h3>
         </div>
-        <div className="bg-neutral-700/30 rounded-lg p-8">
+        <div className="rounded-lg bg-neutral-700/30 p-8">
           <p className="text-lg">Average Speed</p>
           <h3 className="text-2xl font-bold">
             {fastestLap.Speed ? fastestLap.Speed.toFixed(2) : '-'}
@@ -233,28 +233,28 @@ const ClassificationTab = ({
 }) => {
   return (
     <div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4 mt-2 mr-0 ml-0 not-prose">
-        <div className="bg-neutral-700/30 rounded-lg p-8">
+      <div className="not-prose ml-0 mr-0 mt-2 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+        <div className="rounded-lg bg-neutral-700/30 p-8">
           <p className="text-lg">Position</p>
           <h3 className="text-2xl font-bold">{classification.Pos ?? '-'}</h3>
         </div>
-        <div className="bg-neutral-700/30 rounded-lg p-8">
+        <div className="rounded-lg bg-neutral-700/30 p-8">
           <p className="text-lg">Laps</p>
           <h3 className="text-2xl font-bold">{classification.Laps ? classification.Laps : '-'}</h3>
         </div>
-        <div className="bg-neutral-700/30 rounded-lg p-8">
+        <div className="rounded-lg bg-neutral-700/30 p-8">
           <p className="text-lg">Gap</p>
           <h3 className="text-2xl font-bold">
             {typeof classification.Gap === 'number' ? handleLapTimes(classification.Gap) : '-'}
           </h3>
         </div>
-        <div className="bg-neutral-700/30 rounded-lg p-8">
+        <div className="rounded-lg bg-neutral-700/30 p-8">
           <p className="text-lg">Penalties</p>
           <h3 className="text-2xl font-bold">
             {classification.Penalty ? classification.Penalty : '-'}
           </h3>
         </div>
-        <div className="bg-neutral-700/30 rounded-lg p-8">
+        <div className="rounded-lg bg-neutral-700/30 p-8">
           <p className="text-lg">Fastest Lap</p>
           <h3 className="text-2xl font-bold">{fastestLap ? handleLapTimes(fastestLap) : '-'}</h3>
         </div>

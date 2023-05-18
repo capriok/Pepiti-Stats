@@ -24,19 +24,19 @@ export default async function AdminControls({ user, rider }) {
 
   return (
     user.isAdmin && (
-      <div className="flex justify-end mb-2">
+      <div className="mb-2 flex justify-end">
         {rider.banned ? (
-          <button className="btn btn-error btn-sm" onClick={() => unbanUser()}>
+          <button className="btn-error btn-sm btn" onClick={() => unbanUser()}>
             Unban User
           </button>
         ) : (
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-sm btn-error">
+          <div className="dropdown-end dropdown">
+            <label tabIndex={0} className="btn-error btn-sm btn">
               Ban User
             </label>
             <div
               tabIndex={0}
-              className="dropdown-content bg-neutral-800/70 backdrop-blur-md card card-compact w-64 mx-auto p-2 shadow-xl border-[1px] border-error mt-2">
+              className="card dropdown-content card-compact mx-auto mt-2 w-64 border-[1px] border-error bg-neutral-800/70 p-2 shadow-xl backdrop-blur-md">
               <div className="card-body">
                 <div>
                   <label className="label">
@@ -44,11 +44,11 @@ export default async function AdminControls({ user, rider }) {
                   </label>
                   <input
                     ref={reasonRef}
-                    className="input input-bordered input-sm w-full"
+                    className="input-bordered input input-sm w-full"
                     placeholder="Reason for ban..."
                   />
                 </div>
-                <button className="btn btn-error btn-sm" onClick={() => banUser()}>
+                <button className="btn-error btn-sm btn" onClick={() => banUser()}>
                   Ban
                 </button>
               </div>

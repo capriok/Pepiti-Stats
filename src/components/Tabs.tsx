@@ -24,7 +24,7 @@ export default function Tabs({ items, wide }: Props) {
     return (
       <button
         onClick={() => handleClick(tab)}
-        className={`tab md:tab-md tab-lifted ${wide ? 'w-full' : ''} ${active}`}>
+        className={`tab-lifted tab md:tab-md ${wide ? 'w-full' : ''} ${active}`}>
         {tab.label}
       </button>
     )

@@ -19,7 +19,7 @@ export const RiderProfile = ({ rider }: Props) => {
       key: 'overview',
       label: 'Overview',
       children: (
-        <div className="flex flex-col lg:flex-row gap-5">
+        <div className="flex flex-col gap-5 lg:flex-row">
           <RiderWorldRecordsTable rider={rider} />
           <div className="w-full">
             <Suspense fallback={<Spinner />}>
@@ -57,22 +57,22 @@ export const RiderProfile = ({ rider }: Props) => {
   ]
   return (
     <>
-      <div className="mt-3 rounded-box not-prose p-0 md:p-5 mx-auto">
+      <div className="not-prose rounded-box mx-auto mt-3 p-0 md:p-5">
         <div className="max-w-full">
-          <div className="flex flex-col lg:flex-row lg:justify-between items-center lg:gap-10">
-            <div className="w-full flex-1 flex justify-center">
+          <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:gap-10">
+            <div className="flex w-full flex-1 justify-center">
               <RiderAvatar rider={rider} />
             </div>
-            <div className="w-full lg:w-3/4 overflow-hidden">
-              <div className="text-md font-semibold pb-2">Rider Stats</div>
+            <div className="w-full overflow-hidden lg:w-3/4">
+              <div className="text-md pb-2 font-semibold">Rider Stats</div>
               <RiderStats rider={rider} />
-              <div className="text-md font-semibold pb-2">Race Stats</div>
+              <div className="text-md pb-2 font-semibold">Race Stats</div>
               <RaceStats rider={rider} />
             </div>
           </div>
         </div>
       </div>
-      <div className="mt-10 card-body bg-base-200 p-0 rounded-lg">
+      <div className="card-body mt-10 rounded-lg bg-base-200 p-0">
         <Tabs items={items} wide={true} />
       </div>
     </>
@@ -82,8 +82,8 @@ export const RiderProfile = ({ rider }: Props) => {
 const RiderAvatar = ({ rider }) => {
   return (
     <div className="flex flex-col items-center gap-3">
-      <div className="avatar indicator">
-        <span className={`indicator-item badge ${rider.online ? 'badge-primary' : 'badge-error'}`}>
+      <div className="indicator avatar">
+        <span className={`badge indicator-item ${rider.online ? 'badge-primary' : 'badge-error'}`}>
           {rider.online ? 'Online' : 'Offline'}
         </span>
         {rider.avatar ? (
@@ -96,19 +96,19 @@ const RiderAvatar = ({ rider }) => {
             alt="riderAvatar"
           />
         ) : (
-          <div className="avatar placeholder">
-            <div className="bg-neutral-focus text-neutral-content rounded-md w-24">
+          <div className="placeholder avatar">
+            <div className="w-24 rounded-md bg-neutral-focus text-neutral-content">
               <span className="text-3xl">{rider.name.slice(0, 2)}</span>
             </div>
           </div>
         )}
       </div>
       <div>
-        <div className="md:text-2xl flex gap-2 font-semibold">{rider.name}</div>
+        <div className="flex gap-2 font-semibold md:text-2xl">{rider.name}</div>
         {rider.donation > 0 && (
           <Image
             src="/assets//brand/SVGs/flag.svg"
-            className="w-6 h-6"
+            className="h-6 w-6"
             alt=""
             width={10}
             height={10}
@@ -121,7 +121,7 @@ const RiderAvatar = ({ rider }) => {
 
 const RiderStats = ({ rider }) => {
   return (
-    <div className="stats bg-base-200 shadow-xl w-full mb-10">
+    <div className="stats mb-10 w-full bg-base-200 shadow-xl">
       <div className="stat">
         <div className="stat-title">MMR</div>
         <div className="stat-value py-2 text-2xl">{rider.MMR}</div>
@@ -162,7 +162,7 @@ const RiderStats = ({ rider }) => {
 
 const RaceStats = ({ rider }) => {
   return (
-    <div className="stats bg-base-200 shadow-xl w-full">
+    <div className="stats w-full bg-base-200 shadow-xl">
       <div className="stat">
         <div className="stat-title">First</div>
         <div className="stat-value py-2 text-2xl">{rider.races.first}</div>

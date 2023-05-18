@@ -114,8 +114,8 @@ const Table: React.FC<TableProps> = (props) => {
           const index = props.data.findIndex((d) => row._id === d._id)
           const rank = index + 1
           return (
-            <div className="flex justify-start items-center font-medium text-base">
-              <div className={`w-2 h-5 ml-2 mr-4 ${rankStyle && handleRankColor(rank)}`} />
+            <div className="flex items-center justify-start text-base font-medium">
+              <div className={`ml-2 mr-4 h-5 w-2 ${rankStyle && handleRankColor(rank)}`} />
               <div className="py-1">{rank}</div>
             </div>
           )
@@ -170,15 +170,15 @@ const Table: React.FC<TableProps> = (props) => {
               value={term}
               placeholder={`Search by ${searchKey}...`}
               onChange={(e) => setTerm(e.currentTarget.value)}
-              className="input input-bordered mb-3 w-full md:w-[400px]"
+              className="input-bordered input mb-3 w-full md:w-[400px]"
             />
           </div>
         )}
         {resultsEnabled && <div className="self-end pb-2">Results: {data.length}</div>}
       </div>
       <div className="w-full overflow-x-auto">
-        <table className="w-full table table-compact my-0">
-          <thead className="text-xs uppercase bg-neutral-800/40 text-neutral-400 dark:bg-neutral-800/40/50 dark:text-gray-400">
+        <table className="table-compact my-0 table w-full">
+          <thead className="dark:bg-neutral-800/40/50 bg-neutral-800/40 text-xs uppercase text-neutral-400 dark:text-gray-400">
             <tr>{tableColumns}</tr>
           </thead>
           <tbody>{tableBodyData}</tbody>

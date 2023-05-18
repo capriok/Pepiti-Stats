@@ -12,7 +12,7 @@ function Spinner(props: Props) {
       <div role="status">
         <svg
           aria-hidden="true"
-          className={`inline w-6 h-6 mr-2 text-neutral-500 fill-neutral-300 animate-spin ${props.className}`}
+          className={`mr-2 inline h-6 w-6 animate-spin fill-neutral-300 text-neutral-500 ${props.className}`}
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg">

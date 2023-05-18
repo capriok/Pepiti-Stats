@@ -96,6 +96,12 @@ interface TrackRecord {
   race_id?: string
 }
 
+interface RecentRace {
+  _id: string
+  by: string
+  track: string
+}
+
 interface AllTracks {
   records: {
     _id: string

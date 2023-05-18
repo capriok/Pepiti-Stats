@@ -20,7 +20,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en">
       <body className={inter.className}>
         <NavBar user={user} />
-        <div className="max-w-[1400px] px-2 md:px-0 mx-auto flex-1 w-full">{children}</div>
+        <div className="mx-auto w-full max-w-[1400px] flex-1 px-2 md:px-0">{children}</div>
         <Footer user={user} />
       </body>
     </html>

@@ -63,7 +63,7 @@ function NavBar(props: Props) {
         href="https://pepiti.com/stats/api/v0/steam_login"
         target="_blank"
         referrerPolicy="origin"
-        className="btn btn-ghost text-error">
+        className="btn-ghost btn text-error">
         {user.guid ? 'Change User' : 'Sign In'}
       </Link>
     </>
@@ -80,8 +80,8 @@ function NavBar(props: Props) {
       <Link
         key={idx}
         href={link.href}
-        className="mr-2 flex justify-between btn btn-ghost normal-case">
-        <div className="flex gap-2 justify-center items-center">
+        className="btn-ghost btn mr-2 flex justify-between normal-case">
+        <div className="flex items-center justify-center gap-2">
           {link.displayName}
           {link.icon}
         </div>
@@ -91,14 +91,14 @@ function NavBar(props: Props) {
 
   return (
     <>
-      <div className="bg-base-200 sticky top-0 z-50 backdrop-blur-md">
-        <div className="navbar max-w-[1500px] mx-auto">
+      <div className="sticky top-0 z-50 bg-base-200 backdrop-blur-md">
+        <div className="navbar mx-auto max-w-[1500px]">
           <div className="navbar-start">
-            <Link href="/dashboard" className="btn btn-ghost">
+            <Link href="/dashboard" className="btn-ghost btn">
               <Image
                 priority={true}
                 src="/assets/brand/SVGs/icon-V2.svg"
-                className="h-10 w-h-10"
+                className="w-h-10 h-10"
                 alt="pepiti_brand"
                 width={50}
                 height={50}
@@ -111,15 +111,15 @@ function NavBar(props: Props) {
             <div className="hidden lg:flex lg:px-1">{endNavLinks}</div>
 
             {/* Mobile View - Dropdown */}
-            <div className="dropdown dropdown-end">
-              <label tabIndex={0} className="btn btn-ghost btn-md rounded-btn">
+            <div className="dropdown-end dropdown">
+              <label tabIndex={0} className="btn-ghost rounded-btn btn-md btn">
                 <MenuIcon />
               </label>
               <ul
                 tabIndex={0}
-                className="menu dropdown-content p-2 shadow bg-base-200 rounded-box w-52 mt-4">
-                <div className="lg:hidden bg-base-200">
-                  <span className="opacity-50 font-semibold py-1">Navigation</span>
+                className="dropdown-content menu rounded-box mt-4 w-52 bg-base-200 p-2 shadow">
+                <div className="bg-base-200 lg:hidden">
+                  <span className="py-1 font-semibold opacity-50">Navigation</span>
                   {endNavLinks}
                 </div>
                 {profileNavigationContent}

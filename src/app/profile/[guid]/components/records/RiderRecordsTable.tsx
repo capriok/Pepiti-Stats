@@ -67,7 +67,7 @@ export default function RiderRecordsTable({ records }: Props) {
         const bikeColor = handleBikeColor(bike)
         return (
           <div className="flex">
-            <div className={`w-2 h-5 mr-3 ${bikeColor}`} />
+            <div className={`mr-3 h-5 w-2 ${bikeColor}`} />
             {bike ? bike : '-'}
           </div>
         )
@@ -77,20 +77,20 @@ export default function RiderRecordsTable({ records }: Props) {
 
   return (
     <div className="pb-4">
-      <div className="text-xl my-4 font-semibold">Personal Records</div>
+      <div className="my-4 text-xl font-semibold">Personal Records</div>
       <Table columns={columns} data={data} rankEnabled={false} rowCn="py-4" />
     </div>
   )
 
   return (
     <>
-      <div className="mt-5 mb-2">
+      <div className="mb-2 mt-5">
         <input
           placeholder="Search for track..."
           value={term}
           onChange={(event) => setTerm(event.currentTarget.value)}
           type="text"
-          className="bg-neutral-700 w-full p-2 border-green-900 ring-green-900 focus:outline-none focus:border-green-500 focus:ring-green-500 rounded-md"
+          className="w-full rounded-md border-green-900 bg-neutral-700 p-2 ring-green-900 focus:border-green-500 focus:outline-none focus:ring-green-500"
         />
       </div>
       <div className="flex flex-col gap-5 text-neutral-400">
@@ -107,9 +107,9 @@ export default function RiderRecordsTable({ records }: Props) {
 
             const bikeColor = handleBikeColor(record.bike)
             return (
-              <div key={idx} className="bg-neutral-800/40 border-none rounded-box p-5">
+              <div key={idx} className="rounded-box border-none bg-neutral-800/40 p-5">
                 <div className="flex flex-col gap-3">
-                  <div className="flex justify-between w-full">
+                  <div className="flex w-full justify-between">
                     <h1 className="text-2xl font-bold">
                       <Link
                         prefetch={false}
@@ -122,14 +122,14 @@ export default function RiderRecordsTable({ records }: Props) {
                       {dateIsValid(date) ? date.toLocaleDateString() : '-'}
                     </div>
                   </div>
-                  <div className="flex justify-start font-medium my-3">
-                    <div className={`w-2 h-5 mr-3 ${bikeColor}`} />
+                  <div className="my-3 flex justify-start font-medium">
+                    <div className={`mr-3 h-5 w-2 ${bikeColor}`} />
                     <div>
                       <p>{record.bike}</p>
                     </div>
                   </div>
                 </div>
-                <div className="stats shadow-lg w-full">
+                <div className="stats w-full shadow-lg">
                   <div className="stat">
                     <div className="stat-figure ">
                       <BikeIcon />
@@ -137,7 +137,7 @@ export default function RiderRecordsTable({ records }: Props) {
                     <div className="stat-title">Average Speed</div>
                     <div className="stat-value py-2 text-2xl">
                       {(record.average_speed * METER_TO_MILE).toFixed(2)}{' '}
-                      <span className="font-normal text-sm">mph</span>
+                      <span className="text-sm font-normal">mph</span>
                     </div>
                   </div>
 

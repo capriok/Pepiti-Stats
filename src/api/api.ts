@@ -1,14 +1,14 @@
 const ENDPOINT = process.env.NEXT_PUBLIC_PEPITI
 const nextConfig = { next: { revalidate: 10 } }
 
-const publicRequest = async (url: string) => {
+export const publicRequest = async (url: string) => {
   const res = await fetch(ENDPOINT + url, {
     ...nextConfig,
   })
   return res.json()
 }
 
-const privateRequest = async (url: string, token: string) => {
+export const privateRequest = async (url: string, token: string) => {
   const res = await fetch(ENDPOINT + url, {
     ...nextConfig,
     headers: {
@@ -18,16 +18,16 @@ const privateRequest = async (url: string, token: string) => {
   return res.json()
 }
 
-const postRequest = async (url: string, token: string, body: any) => {
-  const res = await fetch(ENDPOINT + url, {
-    method: 'POST',
-    body: JSON.stringify(body),
-    headers: {
-      authorization: token ? `Bearer ${token}` : '',
-    },
-  })
-  return res.json()
-}
+// const postRequest = async (url: string, token: string, body: any) => {
+//   const res = await fetch(ENDPOINT + url, {
+//     method: 'POST',
+//     body: JSON.stringify(body),
+//     headers: {
+//       authorization: token ? `Bearer ${token}` : '',
+//     },
+//   })
+//   return res.json()
+// }
 
 class PepitiApi {
   // STATS
@@ -44,11 +44,11 @@ class PepitiApi {
     const data = await publicRequest(`/rider/search/${term}`)
     return data
   }
-  public async GetRecentRaces(): Promise<{ records: any }> {
+  public async GetRecentRaces(): Promise<{ races: Array<RecentRace> }> {
     const data = await publicRequest('/races')
     return data
   }
-  public async GetRace(raceId: string): Promise<any> {
+  public async GetRace(raceId: string): Promise<Race> {
     const data = await publicRequest(`/races/${raceId}`)
     return data
   }
@@ -56,8 +56,8 @@ class PepitiApi {
     const data = await publicRequest(`/records/track_names`)
     return data
   }
-  public async GetTrackRecords(slug: string): Promise<Track> {
-    const data = await publicRequest(`/records/track/${slug}`)
+  public async GetTrackRecords(track: string): Promise<Track> {
+    const data = await publicRequest(`/records/track/${track}`)
     return data
   }
 
@@ -82,50 +82,50 @@ class PepitiApi {
 
   // LEAGUES
 
-  public async GetAuthLeagues(token: string): Promise<{ leagues: any[] }> {
-    const data = await privateRequest('/my_leagues', token)
-    return data
-  }
+  // public async GetAuthLeagues(token: string): Promise<{ leagues: any[] }> {
+  //   const data = await privateRequest('/my_leagues', token)
+  //   return data
+  // }
 
-  public async GetLeagues(): Promise<{ leagues: LeagueData[] }> {
-    const data = await publicRequest('/leagues')
-    return data
-  }
+  // public async GetLeagues(): Promise<{ leagues: LeagueData[] }> {
+  //   const data = await publicRequest('/leagues')
+  //   return data
+  // }
 
-  public async GetLeague(leagueId: string, token: string): Promise<LeagueData> {
-    const data = await privateRequest(`/league/${leagueId}`, token)
-    return data
-  }
+  // public async GetLeague(leagueId: string, token: string): Promise<LeagueData> {
+  //   const data = await privateRequest(`/league/${leagueId}`, token)
+  //   return data
+  // }
 
-  league = {
-    join: async (leagueId: string, body: any, token: string) => {
-      const data = await postRequest(`/league/${leagueId}/join`, token, { data: 'data' })
-      return data
-    },
-    check: async (leagueId: string, token: string) => {
-      const data = await privateRequest(`/league/${leagueId}/check`, token)
-      return data
-    },
-  }
+  // league = {
+  //   join: async (leagueId: string, body: any, token: string) => {
+  //     const data = await postRequest(`/league/${leagueId}/join`, token, { data: 'data' })
+  //     return data
+  //   },
+  //   check: async (leagueId: string, token: string) => {
+  //     const data = await privateRequest(`/league/${leagueId}/check`, token)
+  //     return data
+  //   },
+  // }
 
-  leagueRace = {
-    get: async (raceId: string, token: string) => {
-      const data = await privateRequest(`/race/${raceId}`, token)
-      return data
-    },
-    join: async (raceId: string, token: string) => {
-      const data = await postRequest(`/race/${raceId}/join`, token, { data: 'data' })
-      return data
-    },
-    leave: async (raceId: string, token: string, body?: any) => {
-      const data = await postRequest(`/race/${raceId}/leave`, token, { data: 'data' })
-      return data
-    },
-    check: async (raceId: string, token: string) => {
-      const data = await privateRequest(`/race/${raceId}/check`, token)
-      return data
-    },
-  }
+  // leagueRace = {
+  //   get: async (raceId: string, token: string) => {
+  //     const data = await privateRequest(`/race/${raceId}`, token)
+  //     return data
+  //   },
+  //   join: async (raceId: string, token: string) => {
+  //     const data = await postRequest(`/race/${raceId}/join`, token, { data: 'data' })
+  //     return data
+  //   },
+  //   leave: async (raceId: string, token: string, body?: any) => {
+  //     const data = await postRequest(`/race/${raceId}/leave`, token, { data: 'data' })
+  //     return data
+  //   },
+  //   check: async (raceId: string, token: string) => {
+  //     const data = await privateRequest(`/race/${raceId}/check`, token)
+  //     return data
+  //   },
+  // }
 
   // ADMINISTRATION
 

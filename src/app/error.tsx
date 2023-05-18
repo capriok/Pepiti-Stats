@@ -13,9 +13,9 @@ export default function Error({ error, reset }: Props) {
   }, [error])
 
   return (
-    <main className="w-[400px] h-[80vh] grid place-items-center mx-auto">
-      <div className="flex flex-col w-fit justify-center items-center">
-        <p className="mb-2 text-lg text-center">Thats not right</p>
+    <main className="mx-auto grid h-[80vh] w-[400px] place-items-center">
+      <div className="flex w-fit flex-col items-center justify-center">
+        <p className="mb-2 text-center text-lg">Thats not right</p>
         <p className="mb-6 text-sm">The page was unable to load</p>
         <button className="w-fit" onClick={() => reset()}>
           Reload
