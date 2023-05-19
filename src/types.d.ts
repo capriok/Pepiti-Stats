@@ -215,7 +215,7 @@ type Racer = {
   category: string
   guid: string
   position: number
-  raceTime: number | string
+  raceTime: number
   gap: number
   penalty: number
   laps: number
