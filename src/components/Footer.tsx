@@ -28,7 +28,7 @@ export default function Footer({ user }) {
   )
 
   return (
-    <footer className="mt-5 bg-base-200 p-10 text-base-content">
+    <footer className="bg-base-200 p-10 text-base-content">
       <div className="footer mx-auto max-w-[1400px]">
         <div>
           <Image

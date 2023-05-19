@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 interface Item {
   key: string
-  label: string
+  label: any
   children: JSX.Element
 }
 

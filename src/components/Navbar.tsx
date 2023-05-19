@@ -14,7 +14,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
-import DonationBanner from '~/app/dashboard/components/DonationBanner'
+import DonationBanner from '~/app/(app)/dashboard/components/DonationBanner'
 
 interface Props {
   user: User

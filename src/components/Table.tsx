@@ -130,7 +130,7 @@ const Table: React.FC<TableProps> = (props) => {
   /** maps prepped columns to header row */
   const tableColumns = columns.map((column) => {
     return (
-      <th key={column.key} className={options.cns.header}>
+      <th key={column.key} className={'py-4' + options.cns.header}>
         <span>{column.label}</span>
       </th>
     )

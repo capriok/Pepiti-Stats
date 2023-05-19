@@ -127,189 +127,54 @@ interface Track {
   total_records: number
 }
 
-interface WorldRecords {
-  [key: string]: {
-    name: string
-    total: number
-  }
-}
-
-interface TopRecordData {
+interface RaceSession {
   _id: string
-  MMR: number
-  SR: number
-  name: string
-  contact: number
-  donation: number
-  laps: number
-  banned: boolean
-  banned_by: null | string
-}
-
-interface MMR {
-  BPP: number
-  PRB: number
-  NRB: number
-  total: number
-}
-interface FastestLap {
-  '@Num': number
-  RaceNum: number
-  Pos: number
-  LapTime: number | string
-  Lap: number
-  Gap: number
-  Speed: number | undefined
-}
-
-interface Classification {
-  RaceNum: 'string'
-  Pos: number
-  Status: string
-  RaceTime: number
-  Laps: number
-  Lapped: string
-  Gap: number
-  Penalty: number
-}
-
-interface Race {
-  MMR: { [key: string]: MMR }
-  FastestLap: { [key: string]: FastestLap }
-  Classification: { [key: string]: Classification }
-}
-
-interface LeagueRace {
-  _id: string
+  Warmup: Warmup
   by: string
-  league_id: string
-  timestamp: number
-  division_by: string
-  config: {
-    weather: {
-      realistic: number
-      conditions: number
-      temperature: number
-      wind_direction: number
-      wind_speed: number
-      track_conditions: number
-    }
-    connection: {
-      maxclient: number
-    }
-    event: {
-      category: string[]
-      track: string
-      track_layout: string
-    }
-    deformation: {
-      scale: string
-      auto_reset: number
-    }
-    polls: {
-      disable_during_races: string
-    }
-    race: {
-      format: number
-      quick_race: number
-      practice_length: number
-      qualifypractice_length: number
-      warmup_length: number
-      race_length_format: number
-      race_minutes: number
-      race_extralaps: number
-      restart_delay: number
-    }
-  }
-  status: number
+  event: Event
+  riders: { [key: string]: Rider }
   riders_guid: string[]
-  total_riders: number
-  divisions: {
-    name: string
-    riders: {
-      guid: string
-      team: string
-      bike_id: string
-      race_number: number
-      name: string
-      record: {
-        _id: string
-        category: string
-        rider_guid: string
-        track: string
-        average_speed: number
-        bike: string
-        lap_time: number
-        rider_name: string
-        split_1: number
-        split_2: number
-        air_temp: number
-        conditions: string
-        race_id: string
-        session: string
-      }
-    }[]
-  }[]
-}
-
-interface RaceData {
-  _id: string
-  Warmup: RaceTypeData
-  by: string
-  event: {
-    Type: string
-    Name: string | null
-    Date: number
-  }
-  riders: {
-    [key: string]: RiderSearch
-  }
-  riders_guid: Array<string>
   track: string
-  Race1: RaceTypeData
-  Race2: RaceTypeData
+  Race2: Race2
 }
 
-type RaceTypeData = {
-  wheater: {
-    air_temp: number
-    conditions: string
-  }
-} & Classification &
-  MMR &
-  FastestLap
-
-interface FastestLap {
-  [key: string]: number
+interface Race2 {
+  holeshot: null
+  wheater: Wheater
+  Classification: { [key: string]: Race2Classification }
+  FastestLap: { [key: string]: number }
+  MMR: { [key: string]: Mmr }
 }
 
-interface MMR {
-  [key: string]: {
-    BPP: number
-    old_MMR: number
-    PRB: number
-    NRB: number
-    FL: number
-    total: number
-  }
+interface Warmup {
+  holeshot: null
+  wheater: Wheater
+  Classification: { [key: string]: Classification }
+  FastestLap: { [key: string]: number }
 }
 
 interface Classification {
-  [key: string]: {
-    '@Num': number
-    RaceNum: number
-    Pos: number
-    Status: string
-    RaceTime: string | number
-    Laps: number
-    Lapped: string | number
-    Gap: number
-    Penalty: number
-    guid: string
-  }
+  RaceNum: string
+  BestLap: number
+  Pos: number
+  Laps?: number
+  TotalLaps?: number
+  Gap?: number
+  Speed?: string
 }
 
-interface RiderSearch {
+interface Wheater {
+  air_temp: number
+  conditions: string
+}
+
+interface Event {
+  Type: string
+  Name: null
+  Date: number
+}
+
+interface Rider {
   race_number: number
   name: string
   bike_name: string
@@ -318,55 +183,4 @@ interface RiderSearch {
   guid: string
   extra_data: string
   empty: string
-}
-
-interface LeagueData {
-  _id: string
-  by: string
-  logo: string
-  trophy: string
-  name: string
-  description: string
-  verified: boolean
-  hidden: boolean
-  keep_bike_selection: true
-  total_riders: number
-  riders: {
-    [key: string]: LeagueRider
-  }
-  requirements: LeagueRequirements
-  races: Array<LeagueRace>
-}
-
-type LeagueRace = {
-  _id: string
-  timestamp: number
-  config: {
-    event: {
-      category: string[]
-      track: string
-      track_layout: string
-    }
-  }
-  status: number
-  total_riders: number
-  track_image_url: string
-}
-
-type LeagueRider = {
-  guid: string
-  team: string
-  bike_id: string
-  race_number: number
-  name: string
-  points: number
-}
-
-type LeagueRequirements = {
-  [key: string]: number
-  MMR: number
-  SR: number
-  races: number
-  laps: number
-  records: number
 }
