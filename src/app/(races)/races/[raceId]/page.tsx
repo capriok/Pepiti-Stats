@@ -4,7 +4,7 @@ import Race from './components/Race'
 
 export default async function Page({ params: { raceId } }) {
   const raceSession = await Api.GetRace(raceId)
-  let session = processRaceSession(raceSession)
+  let session = processRaceSession(raceSession) as ProcessedRaceSession
 
   return <Race session={session} />
 }

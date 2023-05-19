@@ -22,14 +22,14 @@ export default function RaceHero({ race }: Props) {
   const { data: winner, isLoading } = useSwr(`/rider/${race.winner.guid}`, publicRequest)
 
   return (
-    <div className="m-10 flex gap-5">
-      <div className="card card-body w-[60%] bg-base-200 p-0">
+    <div className="my-5 flex flex-col gap-5 md:m-5 md:flex-row">
+      <div className="card card-body w-full bg-base-200 p-0 md:w-[60%]">
         <div className="my-6 flex w-full justify-center text-3xl font-semibold">Winner Circle</div>
 
         <div className="min-h-[200px]">
           <RiderAvatar rider={isLoading ? loadingWinner : winner} />
         </div>
-        <div className="p-4">
+        <div>
           <div className="flex w-full justify-around">
             <div className="flex w-full flex-1 flex-col items-center">
               <div className="mb-2 flex w-[30%] flex-col justify-start whitespace-nowrap">
@@ -103,7 +103,7 @@ function RaceNotables({ race }: { race: Race }) {
   console.log(race.standings)
 
   return (
-    <div className="card card-body flex w-[40%] flex-col bg-base-200">
+    <div className="card card-body flex w-full flex-col bg-base-200 md:w-[40%]">
       <div className="flex-1">
         <div className="mb-4 flex justify-center text-xl font-semibold">Podium</div>
         <div className="mb-4 flex flex-col border-b border-neutral-500/20 pb-2">
