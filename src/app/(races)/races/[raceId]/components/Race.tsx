@@ -1,43 +1,36 @@
 'use client'
 
 import React from 'react'
-import { publicRequest } from '~/api'
 import PageHeader from '~/components/PageHeader'
 import Tabs from '~/components/Tabs'
-import MMRTable from './MMRAnalysis'
+import MMRAnalysisTable from './MMRAnalysis'
 import RaceHero from './RaceHero'
-import RaceOverview from './RaceOverview'
-import useSwr from 'swr'
-import Spinner from '~/components/Spinner'
+import RaceStandingsTable from './RaceStandingsTable'
 
 interface Props {
-  raceSession: RaceSession
+  session: any
 }
 
-export default function Race({ raceSession }: Props) {
-  const race = raceSession['Race2']
-
+export default function Race({ session }: Props) {
   return (
     <div className="w-full">
       <PageHeader
-        title={raceSession.track}
-        extra={
-          <div className="text-lg font-semibold">{raceSession.riders_guid.length + ' Riders'}</div>
-        }
+        title={session.track}
+        extra={<div className="text-lg font-semibold">{session.headCount + ' Riders'}</div>}
       />
-      {!race ? <DataUnavailable /> : <RaceContent raceSession={raceSession} race={race} />}
+      {!session.races.race2 ? <DataUnavailable /> : <RaceContent race={session.races.race2} />}
     </div>
   )
 }
 
-const RaceContent = ({ raceSession, race }) => {
+const RaceContent = ({ race }) => {
   const items = [
     {
-      key: 'raceOverview',
-      label: 'Race Overview',
+      key: 'raceStandings',
+      label: 'Race Standings',
       children: (
         <div className="max-h-full overflow-y-auto bg-table-bg bg-contain bg-center bg-no-repeat md:h-full">
-          <RaceOverview raceSession={raceSession} race={race} />
+          <RaceStandingsTable standings={race.standings} />
         </div>
       ),
     },
@@ -46,24 +39,15 @@ const RaceContent = ({ raceSession, race }) => {
       label: 'MMR Analysis',
       children: (
         <div className="h-full overflow-y-auto bg-table-bg bg-contain bg-center bg-no-repeat">
-          <MMRTable raceSession={raceSession} race={race} />
+          <MMRAnalysisTable standings={race.standings} />
         </div>
       ),
     },
   ]
 
-  const winnerRaceNum = Object.keys(race.Classification).find(
-    (raceNum) => race?.Classification[raceNum]?.Pos === 1
-  )
-  const winnerGuid = raceSession.riders[winnerRaceNum!].guid
-
-  const { data: winner, isLoading } = useSwr(`/rider/${winnerGuid}`, publicRequest)
-
-  if (isLoading) return <Spinner />
-
   return (
     <>
-      <RaceHero raceSession={raceSession} race={race} winner={winner} />
+      <RaceHero race={race} winner={race.winner} />
       <Tabs items={items} wide={true} />
     </>
   )

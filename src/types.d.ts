@@ -135,10 +135,11 @@ interface RaceSession {
   riders: { [key: string]: Rider }
   riders_guid: string[]
   track: string
-  Race2: Race2
+  Race1: SessionRace
+  Race2: SessionRace
 }
 
-interface Race2 {
+interface SessionRace {
   holeshot: null
   wheater: Wheater
   Classification: { [key: string]: Race2Classification }

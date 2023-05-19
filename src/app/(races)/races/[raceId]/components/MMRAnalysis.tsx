@@ -7,36 +7,11 @@ import Table from '~/components/Table'
 import { toFixedIfNecessary } from '~/utils/toFixedIfNecessary'
 
 interface Props {
-  raceSession: RaceSession
-  race: any
+  standings: any
 }
 
-const MMRAnalysis = ({ raceSession, race }: Props) => {
-  const orderedByPosition = Object.keys(race.Classification)
-    .reduce((acc: any[], curr) => {
-      acc[race.Classification[curr].Pos - 1] = race.Classification[curr]
-
-      return acc
-    }, [])
-    .filter((obj) => obj)
-
-  const data = orderedByPosition.map((rider, idx) => {
-    const riderGuid = raceSession.riders[rider.RaceNum].guid
-    const mmrResults = race.MMR[rider.RaceNum]
-    const riderName = raceSession.riders[rider.RaceNum].name
-
-    return {
-      _id: riderGuid,
-      name: riderName,
-      newMmr: mmrResults.old_MMR + mmrResults.total,
-      mmrGain: mmrResults.total,
-      bpp: mmrResults.BPP,
-      fl: mmrResults.FL,
-      hs: mmrResults.HS,
-      nrb: mmrResults.NRB,
-      prb: mmrResults.PRB,
-    }
-  })
+const MMRAnalysisTable = ({ standings }: Props) => {
+  console.log(standings)
 
   const columns = [
     {
@@ -109,7 +84,7 @@ const MMRAnalysis = ({ raceSession, race }: Props) => {
     },
   ]
 
-  return <Table columns={columns} data={data} />
+  return <Table columns={columns} data={standings} />
 }
 
-export default MMRAnalysis
+export default MMRAnalysisTable

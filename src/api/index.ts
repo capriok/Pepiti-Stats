@@ -44,20 +44,23 @@ class PepitiApi {
     const data = await publicRequest(`/rider/search/${term}`)
     return data
   }
-  public async GetRecentRaces(): Promise<{ races: Array<RecentRace> }> {
-    const data = await publicRequest('/races')
-    return data
-  }
-  public async GetRace(raceId: string): Promise<RaceSession> {
-    const data = await publicRequest(`/races/${raceId}`)
-    return data
-  }
   public async GetTrackNames() {
     const data = await publicRequest(`/records/track_names`)
     return data
   }
   public async GetTrackRecords(track: string): Promise<Track> {
     const data = await publicRequest(`/records/track/${track}`)
+    return data
+  }
+
+  // RACES
+
+  public async GetRecentRaces(): Promise<{ races: Array<RecentRace> }> {
+    const data = await publicRequest('/races')
+    return data
+  }
+  public async GetRace(raceId: string): Promise<RaceSession> {
+    const data = await publicRequest(`/races/${raceId}`)
     return data
   }
 

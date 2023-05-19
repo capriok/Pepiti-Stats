@@ -3,11 +3,11 @@ import Image from 'next/image'
 export default function RiderAvatar({ rider }) {
   return (
     <div className="flex flex-col items-center gap-3">
-      <div className="indicator avatar">
+      <div className="indicator avatar min-h-[128px]">
         <span className={`badge indicator-item ${rider.online ? 'badge-primary' : 'badge-error'}`}>
           {rider.online ? 'Online' : 'Offline'}
         </span>
-        {rider.avatar ? (
+        {rider.avatar && !rider.avatar.includes(optedOutAvatar) ? (
           <Image
             priority={true}
             width={120}
@@ -24,7 +24,7 @@ export default function RiderAvatar({ rider }) {
           </div>
         )}
       </div>
-      <div>
+      <div className="flex gap-2">
         <div className="flex gap-2 font-semibold md:text-2xl">{rider.name}</div>
         {rider.donation > 0 && (
           <Image
@@ -39,3 +39,5 @@ export default function RiderAvatar({ rider }) {
     </div>
   )
 }
+
+const optedOutAvatar = 'fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full'

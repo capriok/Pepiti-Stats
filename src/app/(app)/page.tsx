@@ -5,116 +5,34 @@ export default function Page() {
   return (
     <>
       {/* Hero */}
-      <div className="hero min-h-screen">
-        <div className="hero-content flex-col-reverse lg:flex-row-reverse ">
-          <div className="mockup-window w-full border border-neutral md:w-8/12">
+      <div className="hero flex min-h-screen items-start justify-center md:items-center">
+        <div className="hero-content w-full  max-w-full flex-1 flex-col-reverse justify-between p-1 lg:flex-row-reverse">
+          <div className="w-full rounded-lg border border-white/20 md:mockup-window">
             <Image
-              src="/assets/dashboard.png"
-              className="my-2 object-cover"
-              width={700}
-              height={1100}
-              alt=""
-              priority
+              src="/assets/hero-dashboard.png"
+              className="my-2 h-full w-full"
+              width={1200}
+              height={1000}
+              alt="hero-dashboard"
+              priority={true}
             />
           </div>
-          <div>
-            <h1 className="mb-5 text-5xl font-bold leading-relaxed">
-              Competition for{' '}
-              <span className="-pt-2 mx-auto w-fit bg-primary text-5xl font-bold text-black">
-                Everyone
-              </span>
+          <div className="min-w-[50%]">
+            <div className="mb-5 mt-5 h-[1px] w-[150px] border border-white/40 md:mb-10" />
+
+            <h1 className="mb-5 text-4xl font-bold leading-relaxed md:text-6xl">
+              Competition for <div className="text-5xl md:text-7xl">Everyone.</div>
             </h1>
 
-            <p className="mb-5">
-              Where you can view your post race stats, join leagues, view global leaderboards, and
-              keep an eye on your competition.
+            <p className="my-5 text-neutral-400">
+              We are a community of racing and statistic enthusiasts
             </p>
-            <Link href="/dashboard" className="btn-primary btn">
-              Take me to the dashboard!
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Profile */}
-      <h1 className="text-center">Your Profile</h1>
-      <p className="text-center">
-        Here you will see all of your personal stats, race stats and your MMR history.
-      </p>
-      <div className="mockup-window mx-auto w-fit border border-neutral bg-base-300">
-        <div className="flex justify-center bg-base-200 ">
-          <Image
-            src="/assets/profile.png"
-            width={671}
-            height={1134}
-            alt=""
-            className="my-0"
-            priority
-          />
-        </div>
-      </div>
-
-      <div className="flex flex-col justify-evenly lg:flex-row lg:gap-20">
-        <div>
-          <h3>Your Records</h3>
-          <p>View a quick overview of all of the records you have set in game on Pepiti servers.</p>
-          <div className="mockup-window mx-auto w-fit border border-neutral bg-base-300">
-            <div className="flex justify-center bg-base-200 ">
-              <Image
-                src="/assets/profile-records.png"
-                width={671}
-                height={1134}
-                alt=""
-                className="my-0"
-                priority
-              />
-            </div>
-          </div>
-        </div>
-        <div>
-          <h3>Your Races</h3>
-          <p>See all of the important details of each race you complete on a Pepiti server.</p>
-          <div className="mockup-window mx-auto w-fit border border-neutral bg-base-300">
-            <div className="flex justify-center bg-base-200 ">
-              <Image
-                src="/assets/profile-races.png"
-                width={600}
-                height={1134}
-                alt=""
-                className="my-0"
-                priority
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Call to Action */}
-      <div className="hero min-h-screen">
-        <div className="hero-content flex-col lg:flex-row">
-          <div className="mockup-phone border-primary">
-            <div className="camera"></div>
-            <div className="display">
-              <div className="phone-1 artboard artboard-demo bg-neutral-900">
-                <Image
-                  src="/assets/profile-mobile.png"
-                  width={600}
-                  height={1000}
-                  alt=""
-                  className="my-0"
-                  priority
-                />
-              </div>
-            </div>
-          </div>
-          <div>
-            <h1 className="text-5xl font-bold">Start Competing Today!</h1>
-            <p>
-              Sign up with your Steam profile and start setting some records in Pepiti servers on MX
-              Bikes.
+            <p className="my-5">
+              Access race stats in real-time, host and join leagues, connect with fellow races
+              through social integrations, and compete with rivals through global leaderboards
             </p>
-            <Link href="/dashboard" className="btn-primary btn">
-              Go to dashboard
+            <Link href="/dashboard" className="btn-outline btn-secondary btn mb-4">
+              <div className="text-white/80">Take me to the dashboard!</div>
             </Link>
           </div>
         </div>
