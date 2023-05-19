@@ -82,106 +82,149 @@ interface RiderProfile {
   }
 }
 
-interface TrackRecord {
-  _id: string
-  category: string
-  rider_guid: string
-  track: string
-  average_speed: number
-  bike: string
-  lap_time: number
-  rider_name: string
-  split_1: number
-  split_2: number
-  race_id?: string
-}
-
 interface RecentRace {
   _id: string
   by: string
   track: string
 }
 
-interface AllTracks {
-  records: {
-    _id: string
-    name: string
-    laps: number
-    wr: {
-      [key: string]: Omit<TrackRecord, '_id'>
-    }
-    records: TrackRecord[]
-  }[]
-}
-
-interface Track {
-  track: {
-    _id: string
-    name: string
-    laps: number
-    wr: {
-      [key: string]: Omit<TrackRecord, '_id'>
-    }
-  }
+interface TrackRecords {
+  track: Track
   records: TrackRecord[]
   total_records: number
 }
 
+interface Track {
+  _id: string
+  name: string
+  laps: number
+  wr: {
+    'MX2 OEM'?: TrackRecord
+    'MX1 OEM'?: TrackRecord
+    'MX2-2T OEM'?: TrackRecord
+    'MX1-2T OEM'?: TrackRecord
+    'MX3 OEM'?: TrackRecord
+  }
+}
+
+interface TrackRecord {
+  _id: string
+  category: string
+  rider_guid: string
+  track: string
+  air_temp: number
+  average_speed: number
+  bike: string
+  conditions: string
+  lap_time: number
+  race_id: string
+  rider_name: string
+  session: string
+  split_1: number
+  split_2: number
+  race_number?: number
+  timestamp?: number
+  [key: string]: any
+}
 interface RaceSession {
   _id: string
-  Warmup: Warmup
+  Warmup: {
+    holeshot: null
+    wheater: {
+      air_temp: number
+      conditions: string
+    }
+    Classification: {
+      [key: string]: {
+        RaceNum: string
+        BestLap: number
+        Pos: number
+        Laps?: number
+        TotalLaps?: number
+        Gap?: number
+        Speed?: string
+      }
+    }
+    FastestLap: { [key: string]: number }
+  }
   by: string
-  event: Event
-  riders: { [key: string]: Rider }
+  event: {
+    Type: string
+    Name: null
+    Date: number
+  }
+  riders: {
+    [key: string]: {
+      race_number: number
+      name: string
+      bike_name: string
+      bike_short_name: string
+      category: string
+      guid: string
+      extra_data: string
+      empty: string
+    }
+  }
   riders_guid: string[]
   track: string
-  Race1: SessionRace
-  Race2: SessionRace
+  Race1?: {
+    holeshot: null
+    wheater: Wheater
+    Classification: { [key: string]: Race2Classification }
+    FastestLap: { [key: string]: number }
+    MMR: { [key: string]: Mmr }
+  }
+  Race2?: {
+    holeshot: null
+    wheater: Wheater
+    Classification: { [key: string]: Race2Classification }
+    FastestLap: { [key: string]: number }
+    MMR: { [key: string]: Mmr }
+  }
 }
 
-interface SessionRace {
-  holeshot: null
-  wheater: Wheater
-  Classification: { [key: string]: Race2Classification }
-  FastestLap: { [key: string]: number }
-  MMR: { [key: string]: Mmr }
+type ProcessedRaceSession = {
+  name: null
+  date: number
+  type: string
+  track: string
+  headCount: number
+  races: {
+    race1: Race | null
+    race2: Race | null
+  }
 }
 
-interface Warmup {
-  holeshot: null
-  wheater: Wheater
-  Classification: { [key: string]: Classification }
-  FastestLap: { [key: string]: number }
+type Race = {
+  weather: Weather
+  standings: Racer[]
+  winner: Racer
 }
 
-interface Classification {
-  RaceNum: string
-  BestLap: number
-  Pos: number
-  Laps?: number
-  TotalLaps?: number
-  Gap?: number
-  Speed?: string
-}
-
-interface Wheater {
-  air_temp: number
+type Weather = {
   conditions: string
+  airTemp: number
 }
 
-interface Event {
-  Type: string
-  Name: null
-  Date: number
-}
-
-interface Rider {
-  race_number: number
+type Racer = {
+  _id: string
   name: string
-  bike_name: string
-  bike_short_name: string
+  raceNumber: string
+  bikeName: string
+  bikeNameShort: string
   category: string
   guid: string
-  extra_data: string
-  empty: string
+  position: number
+  raceTime: number | string
+  gap: number
+  penalty: number
+  laps: number
+  fastestLap: string
+  newMmr: number
+  mmrGain: number
+  bpp: number
+  fl: number
+  hs: number
+  nrb: number
+  prb: number
 }

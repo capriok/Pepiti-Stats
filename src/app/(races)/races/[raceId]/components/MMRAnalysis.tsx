@@ -20,22 +20,22 @@ const MMRAnalysisTable = ({ standings }: Props) => {
       render: (name, row) => <RiderLink href={`/profile/${row._id}`}>{name}</RiderLink>,
     },
     {
+      key: 'mmrGain',
+      label: (
+        <div className="tooltip tooltip-bottom" data-tip="MMR Gain +/-">
+          MMR +/-
+        </div>
+      ),
+      render: (mmrGain) => <MMRPill mmr={toFixedIfNecessary(mmrGain)} />,
+    },
+    {
       key: 'newMmr',
       label: (
         <div className="tooltip tooltip-bottom" data-tip="Old MMR + MMR Gain">
           New MMR
         </div>
       ),
-      render: (newMmr) => <Pill text={newMmr} color="neutral" />,
-    },
-    {
-      key: 'mmrGain',
-      label: (
-        <div className="tooltip tooltip-bottom" data-tip="MMR Gain">
-          Gain
-        </div>
-      ),
-      render: (mmrGain) => <MMRPill mmr={toFixedIfNecessary(mmrGain)} />,
+      render: (newMmr) => <Pill text={newMmr} />,
     },
     {
       key: 'bpp',

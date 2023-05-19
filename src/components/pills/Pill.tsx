@@ -3,7 +3,7 @@ interface PillProps {
   color?: string
 }
 
-export const Pill = ({ text, color }: PillProps) => {
+export const Pill = ({ text, color = "neutral" }: PillProps) => {
   const bgColor = color ? `bg-${color}-500/30` : 'bg-neutral-500/30'
   const textColor = color ? `text-${color}-300` : 'text-neutral-300'
 

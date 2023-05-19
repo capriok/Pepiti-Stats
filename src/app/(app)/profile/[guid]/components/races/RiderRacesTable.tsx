@@ -5,6 +5,7 @@ import { handleLapTimes } from '~/utils/handleLapTimes'
 import handlePlaceSuffix from '~/utils/handlePlaceSuffix'
 import MMRPill from '~/components/pills/MMRPill'
 import Table from '~/components/Table'
+import { Pill } from '~/components/pills/Pill'
 
 interface Props {
   races: any
@@ -68,7 +69,7 @@ export default function RiderRacesTable({ races }: Props) {
     {
       key: 'newMMR',
       label: 'New MMR',
-      render: (newMMR, row) => <MMRPill mmr={newMMR} />,
+      render: (newMMR, row) => <Pill text={newMMR} />,
     },
   ]
 

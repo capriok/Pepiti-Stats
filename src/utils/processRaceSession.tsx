@@ -11,7 +11,6 @@ export default function processRaceSession(session: RaceSession) {
 
         return {
           _id: rider.guid,
-          avatar: '',
           name: rider.name,
           raceNumber: raceNumber,
           bikeName: rider.bike_name,

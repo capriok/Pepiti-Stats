@@ -1,5 +1,3 @@
-import Image from 'next/image'
-import { InfoIcon } from 'lucide-react'
 import ServerLineChart from './overview/ServerLineChart'
 import { RiderWorldRecordsTable } from './overview/RiderWorldRecordsTable'
 import Tabs from '~/components/Tabs'
@@ -57,26 +55,24 @@ export const RiderProfile = ({ rider }: Props) => {
     },
   ]
   return (
-    <>
-      <div className="not-prose rounded-box mx-auto mt-3 p-0 md:p-5">
-        <div className="max-w-full">
-          <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:gap-10">
-            <div className="flex w-full flex-1 justify-center">
-              <RiderAvatar rider={rider} />
-            </div>
-            <div className="w-full overflow-hidden lg:w-3/4">
-              <div className="text-md pb-2 font-semibold">Rider Stats</div>
-              <RiderStats rider={rider} />
-              <div className="text-md pb-2 font-semibold">Race Stats</div>
-              <RaceStats rider={rider} />
-            </div>
+    <div className="mb-20">
+      <div className=" mx-auto mt-3 p-0 md:p-5">
+        <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:gap-10">
+          <div className="flex w-full flex-1 justify-center">
+            <RiderAvatar rider={rider} />
+          </div>
+          <div className="w-full overflow-hidden lg:w-3/4">
+            <div className="pb-2 text-lg font-semibold">Rider Stats</div>
+            <RiderStats rider={rider} />
+            <div className="pb-2 text-lg font-semibold">Race Stats</div>
+            <RaceStats rider={rider} />
           </div>
         </div>
       </div>
       <div className="card-body mt-10 rounded-lg bg-base-200 p-0">
         <Tabs items={items} wide={true} />
       </div>
-    </>
+    </div>
   )
 }
 

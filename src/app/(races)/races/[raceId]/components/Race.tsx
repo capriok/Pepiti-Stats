@@ -8,7 +8,7 @@ import RaceHero from './RaceHero'
 import RaceStandingsTable from './RaceStandingsTable'
 
 interface Props {
-  session: any
+  session: ProcessedRaceSession
 }
 
 export default function Race({ session }: Props) {
@@ -23,7 +23,7 @@ export default function Race({ session }: Props) {
   )
 }
 
-const RaceContent = ({ race }) => {
+const RaceContent = ({ race }: { race: Race }) => {
   const items = [
     {
       key: 'raceStandings',

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 
 interface Item {
   key: string
@@ -14,23 +14,28 @@ interface Props {
 }
 
 export default function Tabs({ items, wide }: Props) {
+  const [isPending, startTransition] = useTransition()
   const [activeTab, setActiveTab] = useState(items[0])
 
-  const handleClick = (key) => setActiveTab(key)
+  function selectTab(item) {
+    startTransition(() => {
+      setActiveTab(item)
+    })
+  }
 
-  const Tab = ({ tab }) => {
-    const active = tab.key === activeTab.key ? 'bg-secondary/60 text-white' : 'bg-base-200'
+  function Tab({ item }) {
+    const active = item.key === activeTab.key ? 'bg-secondary/60 text-white' : 'bg-base-200'
 
     return (
       <button
-        onClick={() => handleClick(tab)}
-        className={`tab-lifted tab md:tab-md ${wide ? 'w-full' : ''} ${active}`}>
-        {tab.label}
+        onClick={() => selectTab(item)}
+        className={`tab-lifted tab min-h-[35px] ${wide ? 'w-full' : ''} ${active}`}>
+        <div className="text-[15px]">{item.label}</div>
       </button>
     )
   }
 
-  const tabs = items.map((item) => <Tab key={item.key} tab={item} />)
+  const tabs = items.map((item) => <Tab key={item.key} item={item} />)
 
   return (
     <>
