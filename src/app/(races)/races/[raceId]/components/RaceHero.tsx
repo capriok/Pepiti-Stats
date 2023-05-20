@@ -36,7 +36,10 @@ export default function RaceHero({ race }: Props) {
                 <div className="text-md font-semibold text-neutral-500">Race Number</div>
                 <div className="flex items-center text-lg text-secondary">
                   <div className={`ml-2 mr-4 h-5 w-2 ${handleRankColor(1)}`} />
-                  <div>#{race.winner.raceNumber}</div>
+                  <div className="flex gap-1">
+                    <div className="text-neutral-500/80"># </div>
+                    <div>{race.winner.raceNumber}</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -110,7 +113,10 @@ function RaceNotables({ race }: { race: Race }) {
           <div className="text-md mb-2 font-semibold text-neutral-500">Second Place</div>
           <div className="flex justify-between">
             <div className="flex gap-2">
-              <div className="text-secondary">#{riderWithSecondPlace?.raceNumber}</div>
+              <div className="flex gap-1">
+                <div className="text-neutral-500/80"># </div>
+                <div className="text-secondary">{riderWithSecondPlace?.raceNumber}</div>
+              </div>
               <div className=" text-neutral-500/80">|</div>
               <div>{riderWithSecondPlace?.name}</div>
             </div>
@@ -123,7 +129,10 @@ function RaceNotables({ race }: { race: Race }) {
           <div className="text-md mb-2 font-semibold text-neutral-500">Third Place</div>
           <div className="flex justify-between">
             <div className="flex gap-2">
-              <div className="text-secondary">#{riderWithThirdPlace?.raceNumber}</div>
+              <div className="flex gap-1">
+                <div className="text-neutral-500/80"># </div>
+                <div className="text-secondary">{riderWithThirdPlace?.raceNumber}</div>
+              </div>
               <div className=" text-neutral-500/80">|</div>
               <div>{riderWithThirdPlace?.name}</div>
             </div>
@@ -140,7 +149,10 @@ function RaceNotables({ race }: { race: Race }) {
           <div className="text-md mb-2 font-semibold text-neutral-500">Fastest Lap</div>
           <div className="flex justify-between">
             <div className="flex gap-2">
-              <div className="text-secondary">#{riderWithFastestLap?.raceNumber}</div>
+              <div className="flex gap-1">
+                <div className="text-neutral-500/80"># </div>
+                <div className="text-secondary">{riderWithFastestLap?.raceNumber}</div>
+              </div>
               <div className=" text-neutral-500/80">|</div>
               <div>{riderWithFastestLap?.name}</div>
             </div>
@@ -151,7 +163,10 @@ function RaceNotables({ race }: { race: Race }) {
           <div className="text-md mb-2 font-semibold text-neutral-500">Highest MMR Gainer</div>
           <div className="flex justify-between">
             <div className="flex gap-2">
-              <div className="text-secondary">#{riderWithHighestMmrGain?.raceNumber}</div>
+              <div className="flex gap-1">
+                <div className="text-neutral-500/80"># </div>
+                <div className="text-secondary">{riderWithHighestMmrGain?.raceNumber}</div>
+              </div>
               <div className=" text-neutral-500/80">|</div>
               <div>{riderWithHighestMmrGain?.name}</div>
             </div>

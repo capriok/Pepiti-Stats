@@ -81,10 +81,10 @@ export default function RiderRecordsTable({ records }: Props) {
 
   return (
     <div className="pb-4">
-      <div className="flex items-center justify-between">
-        <div className="my-4 text-xl font-semibold">Personal Records</div>
+      <div className="flex flex-col items-start md:items-center justify-between md:flex-row">
+        <div className="my-4 text-xl font-semibold ">Personal Records</div>
         <input
-          className="input-bordered input input-sm w-[400px]"
+          className="input-bordered input input-sm w-full md:w-[400px]"
           placeholder="Search by Track..."
           onChange={(e) => setTerm(e.target.value)}
         />

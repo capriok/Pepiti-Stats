@@ -79,10 +79,10 @@ export default function RiderRacesTable({ races }: Props) {
 
   return (
     <div className="pb-4">
-      <div className="flex items-center justify-between">
-        <div className="my-4 text-xl font-semibold">Recent Races</div>
+      <div className="flex flex-col items-start justify-between md:flex-row md:items-center">
+        <div className="my-4 whitespace-nowrap text-xl font-semibold">Recent Races</div>
         <input
-          className="input-bordered input input-sm w-[400px]"
+          className="input-bordered input input-sm w-full md:w-[400px]"
           placeholder="Search by Track..."
           onChange={(e) => setTerm(e.target.value)}
         />

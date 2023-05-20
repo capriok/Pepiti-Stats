@@ -19,7 +19,12 @@ export const RaceStandingsTable = ({ standings }: Props) => {
     {
       key: 'raceNumber',
       label: 'Race #',
-      render: (raceNumber, row) => `# ${raceNumber}`,
+      render: (raceNumber, row) => (
+        <div className="flex gap-1">
+          <div className="text-neutral-500/80"># </div>
+          <div>{raceNumber}</div>
+        </div>
+      ),
     },
     {
       key: 'position',
@@ -45,7 +50,7 @@ export const RaceStandingsTable = ({ standings }: Props) => {
     {
       key: 'penalty',
       label: 'Penalty',
-      render: (penalty, row) => (penalty ? penalty : '-'),
+      render: (penalty, row) => (penalty ? penalty + ' s' : '-'),
     },
     {
       key: 'fastestLap',

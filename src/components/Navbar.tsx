@@ -80,8 +80,8 @@ function NavBar(props: Props) {
       <Link
         key={idx}
         href={link.href}
-        className="btn-ghost btn mr-2 flex justify-between normal-case">
-        <div className="flex items-center justify-center gap-2">
+        className="btn-ghost btn flex justify-between normal-case md:mr-2">
+        <div className="flex w-full items-center justify-between md:justify-center md:gap-2">
           {link.displayName}
           {link.icon}
         </div>
