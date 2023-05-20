@@ -19,7 +19,7 @@ export const DesktopTrackList = ({ races }: Props) => {
 
   return (
     <>
-      <div className="hidden max-h-screen w-1/4 flex-col gap-2 overflow-y-auto bg-base-200 px-2 pb-3 lg:sticky lg:top-0 lg:flex">
+      <div className="sticky top-0 hidden max-h-screen w-full min-w-[300px] max-w-[300px] flex-col gap-2 overflow-y-auto bg-base-200 px-2 pb-3 lg:flex">
         <p className="my-2 flex justify-center text-lg">{races.length} Recent Races</p>
         <div className="mb-4">
           <input

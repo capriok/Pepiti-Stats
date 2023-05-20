@@ -71,8 +71,8 @@ function NavBar(props: Props) {
 
   const endLinks = [
     { displayName: 'Dashboard', href: '/dashboard', icon: <LayoutDashboardIcon /> },
-    // { displayName: 'Leagues', href: '/leagues', icon: <TrophyIcon /> },
     { displayName: 'Races', href: '/races', icon: <ScrollTextIcon /> },
+    { displayName: 'Leagues', href: '/leagues', icon: <TrophyIcon /> },
   ]
 
   const endNavLinks = endLinks.map((link, idx) => {

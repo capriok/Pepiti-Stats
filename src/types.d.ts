@@ -170,14 +170,14 @@ interface RaceSession {
   Race1?: {
     holeshot: null
     wheater: Wheater
-    Classification: { [key: string]: Race2Classification }
+    Classification: { [key: string]: RaceClassification }
     FastestLap: { [key: string]: number }
     MMR: { [key: string]: Mmr }
   }
   Race2?: {
     holeshot: null
     wheater: Wheater
-    Classification: { [key: string]: Race2Classification }
+    Classification: { [key: string]: RaceClassification }
     FastestLap: { [key: string]: number }
     MMR: { [key: string]: Mmr }
   }
@@ -190,6 +190,7 @@ type ProcessedRaceSession = {
   track: string
   headCount: number
   races: {
+    warmup: Race | null
     race1: Race | null
     race2: Race | null
   }

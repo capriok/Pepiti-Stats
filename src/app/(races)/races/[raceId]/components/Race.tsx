@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import PageHeader from '~/components/PageHeader'
 import Tabs from '~/components/Tabs'
 import MMRAnalysisTable from './MMRAnalysis'
@@ -12,13 +12,48 @@ interface Props {
 }
 
 export default function Race({ session }: Props) {
+  console.log(session)
+
+  const items = [
+    {
+      key: 'race1',
+      label: 'Race 1',
+      children: !session.races.race1 ? (
+        <DataUnavailable />
+      ) : (
+        <RaceContent race={session.races.race1} />
+      ),
+    },
+    {
+      key: 'race2',
+      label: 'Race 2',
+      children: !session.races.race2 ? (
+        <DataUnavailable />
+      ) : (
+        <RaceContent race={session.races.race2} />
+      ),
+    },
+  ]
+
+  const [tab, setTab] = useState(items[1])
+
   return (
-    <div className="w-full">
+    <div className="w-full lg:mx-2">
+      <div className="ml-4 mt-2 md:mt-4">
+        <Tabs
+          items={items}
+          defaultActive="race2"
+          onChange={(tab) => setTab(tab)}
+          renderChildren={false}
+        />
+      </div>
       <PageHeader
+        wide={true}
         title={session.track}
         extra={<div className="text-lg font-semibold">{session.headCount + ' Riders'}</div>}
+        marginTop={false}
       />
-      {!session.races.race2 ? <DataUnavailable /> : <RaceContent race={session.races.race2} />}
+      {tab.children}
     </div>
   )
 }

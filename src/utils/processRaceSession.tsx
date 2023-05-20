@@ -52,12 +52,10 @@ export default function processRaceSession(session: RaceSession) {
     track: session.track,
     headCount: session.riders_guid?.length,
     races: {
-      race1: session.Race1 ? {} : null,
+      race1: session.Race1 ? formatRace('Race1') : null,
       race2: session.Race2 ? formatRace('Race2') : null,
     },
   }
-
-  console.log(processed)
 
   return processed
 }

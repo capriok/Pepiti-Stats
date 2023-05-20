@@ -11,15 +11,27 @@ interface Item {
 interface Props {
   items: Item[]
   wide?: boolean
+  defaultActive?: string
+  onChange?: (item: Item) => void
+  renderChildren?: boolean
 }
 
-export default function Tabs({ items, wide }: Props) {
+export default function Tabs({
+  items,
+  wide,
+  defaultActive,
+  onChange,
+  renderChildren = true,
+}: Props) {
   const [isPending, startTransition] = useTransition()
-  const [activeTab, setActiveTab] = useState(items[0])
+  const [activeTab, setActiveTab] = useState(
+    defaultActive ? items.find((t) => t.key === defaultActive) ?? items[0] : items[0]
+  )
 
   function selectTab(item) {
     startTransition(() => {
       setActiveTab(item)
+      onChange && onChange(item)
     })
   }
 
@@ -40,7 +52,11 @@ export default function Tabs({ items, wide }: Props) {
   return (
     <>
       <div className="tabs flex-nowrap">{tabs}</div>
-      {activeTab.children}
+      {renderChildren && activeTab.children}
     </>
   )
+}
+
+Tabs.defaultProps = {
+  onChange() {},
 }
