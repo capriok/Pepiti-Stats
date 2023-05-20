@@ -8,7 +8,7 @@ async function useAuthUser() {
   const token = cookieStore.get('access_token')?.value
 
   try {
-    const decode = jwt_decode(token!)
+    const decode = jwt_decode(token!) ?? {}
     return makeUser({ ...decode, token: token })
   } catch (error) {
     const nullUser = makeUser({})
