@@ -17,8 +17,6 @@
     "autoprefixer": "10.4.14",
     "chart.js": "^4.1.1",
     "daisyui": "^2.51.5",
-    "embla-carousel-autoplay": "^7.0.5",
-    "embla-carousel-react": "^7.0.5",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.2",
     "jwt-decode": "3.1.2",

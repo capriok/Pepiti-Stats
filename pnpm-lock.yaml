@@ -25,12 +25,6 @@ dependencies:
   daisyui:
     specifier: ^2.51.5
     version: 2.51.5(autoprefixer@10.4.14)(postcss@8.4.23)
-  embla-carousel-autoplay:
-    specifier: ^7.0.5
-    version: 7.0.5(embla-carousel@7.0.5)
-  embla-carousel-react:
-    specifier: ^7.0.5
-    version: 7.0.5(react@18.2.0)
   eslint:
     specifier: 8.40.0
     version: 8.40.0
@@ -890,27 +884,6 @@ packages:
 
   /electron-to-chromium@1.4.395:
     resolution: {integrity: sha512-r8IgVPlJsCs7yezgmuBTaOMuu8lgU0mzg+wcLLo0xVy5s+rpuFTI9tEKhHVaMIPgeJPjxwTDHUZqoBEsNMDbCQ==}
-    dev: false
-
-  /embla-carousel-autoplay@7.0.5(embla-carousel@7.0.5):
-    resolution: {integrity: sha512-3tvlhJuBvyj99k/SBIHTZ1dNdAVjK0LOH1NFXbV5GCaaeyENHt1Uv/h5C2+fHdMGLovUs5PeuwCQL1LFnjz/xw==}
-    peerDependencies:
-      embla-carousel: 7.0.5
-    dependencies:
-      embla-carousel: 7.0.5
-    dev: false
-
-  /embla-carousel-react@7.0.5(react@18.2.0):
-    resolution: {integrity: sha512-qhw980gKj7G+O5d3WSwj0TyhcbpGP3DqJPiAatt1t3wEEcZqn7csaIfLh4e1N/0kna9sZfZZRzz+//NSrUodSg==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.1 || ^18.0.0
-    dependencies:
-      embla-carousel: 7.0.5
-      react: 18.2.0
-    dev: false
-
-  /embla-carousel@7.0.5:
-    resolution: {integrity: sha512-loRcu0La0F7bhEMwbvgpi14iaaIEdwacH1xoplnaYfwN4KMgECkiuLgu4lx+v6MYd6lSpg/bw7ZxEuLUwYjavg==}
     dev: false
 
   /emoji-regex@9.2.2:
