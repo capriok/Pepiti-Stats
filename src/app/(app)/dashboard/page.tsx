@@ -32,14 +32,19 @@ export default async function Page() {
             <MMRRecordsTable worldMMR={worldMMR} seeMore />
           </div>
           <div>
-            <h3 className="pb-2 text-lg font-semibold">Top SR</h3>
+            <h3 className="flex items-center gap-2 pb-2">
+              <div className="text-lg font-semibold">Top SR</div>
+              <div className="stat-desc text-sm">(Safety Rating)</div>
+            </h3>
             <SRRecordsTable worldSR={worldSR} seeMore />
           </div>
         </div>
 
         <TrackRecords trackList={trackList.tracks} />
 
-        <div className="mt-10">{/* <DonationMarquee /> */}</div>
+        <div className="mt-10">
+          <DonationMarquee />
+        </div>
       </div>
     </>
   )
