@@ -38,7 +38,6 @@ interface TableColumn {
  */
 export interface TableOptions {
   paginationEnabled?: boolean
-  pageSize?: number
   searchEnabled?: boolean
   searchKey?: string
   rankEnabled?: boolean
@@ -58,7 +57,6 @@ interface TableProps extends TableOptions {
 const Table: React.FC<TableProps> = (props) => {
   const {
     paginationEnabled = false,
-    pageSize = 10,
     searchEnabled = false,
     searchKey = 'name',
     rankEnabled = true,
@@ -86,6 +84,7 @@ const Table: React.FC<TableProps> = (props) => {
   }, [searchEnabled, searchKey, rankEnabled, rankStyle, headerCn, rowCn])
 
   const [page, setPage] = useState(0)
+  const [pageSize, setPageSize] = useState(10)
   const [term, setTerm] = useState('')
 
   /** preps the data for the table to use */
@@ -204,19 +203,29 @@ const Table: React.FC<TableProps> = (props) => {
           <div className="mr-5">
             Page: {page + 1} / {Math.floor(data.length / pageSize) + 1}
           </div>
-          <div className="btn-group">
-            <button
-              className="btn-ghost btn-sm btn bg-base-100"
-              onClick={() => handlePageChange(page > 0 ? page - 1 : page)}
-              disabled={page === 0}>
-              Prev Page
-            </button>
-            <button
-              className="btn-ghost btn-sm btn bg-base-100"
-              onClick={() => handlePageChange(paginatedData.length ? page + 1 : page)}
-              disabled={paginatedData.length < 10}>
-              Next Page
-            </button>
+          <div className="flex gap-2">
+            <div className="btn-group">
+              <button
+                className="btn-ghost btn-sm btn bg-base-100"
+                onClick={() => handlePageChange(page > 0 ? page - 1 : page)}
+                disabled={page === 0}>
+                Prev Page
+              </button>
+              <button
+                className="btn-ghost btn-sm btn bg-base-100"
+                onClick={() => handlePageChange(paginatedData.length ? page + 1 : page)}
+                disabled={paginatedData.length < pageSize}>
+                Next Page
+              </button>
+            </div>
+            <select
+              className="input input-sm"
+              onChange={(e) => setPageSize(parseInt(e.target.value))}>
+              <option value={10}>10</option>
+              <option value={25}>25</option>
+              <option value={50}>50</option>
+              <option value={100}>100</option>
+            </select>
           </div>
         </div>
       )}
