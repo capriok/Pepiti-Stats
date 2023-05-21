@@ -56,7 +56,7 @@ export const RiderProfile = ({ rider }: Props) => {
   ]
   return (
     <>
-      <div className="mx-auto mt-3 p-0 md:p-5">
+      <div className="mx-auto p-0 md:p-5">
         <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:gap-10">
           <div className="md:mt-0flex mt-10 w-full flex-1 justify-center">
             <RiderAvatar rider={rider} />
