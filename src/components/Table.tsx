@@ -178,6 +178,11 @@ const Table: React.FC<TableProps> = (props) => {
     setPage(page)
   }
 
+  const handlePageSizeChange = (pageSize) => {
+    setPageSize(parseInt(pageSize))
+    setPage(0)
+  }
+
   return (
     <div className="w-full">
       <div className="flex justify-between">
@@ -192,15 +197,15 @@ const Table: React.FC<TableProps> = (props) => {
       </div>
       <div className="w-full overflow-x-auto">
         <table className="table-compact my-0 table w-full">
-          <thead className="dark:bg-neutral-800/40/50 bg-neutral-800/40 text-xs uppercase text-neutral-400 dark:text-gray-400">
+          <thead className="bg-base-200 text-xs uppercase text-neutral-400">
             <tr>{tableColumns}</tr>
           </thead>
           <tbody>{tableBodyData}</tbody>
         </table>
       </div>
       {paginationEnabled && (
-        <div className="mt-4 flex items-center justify-between">
-          <div className="mr-5">
+        <div className="mt-4 flex flex-col items-center justify-between md:flex-row">
+          <div className="mb-2 mr-5 md:mb-0">
             Page: {page + 1} / {Math.floor(data.length / pageSize) + 1}
           </div>
           <div className="flex gap-2">
@@ -220,7 +225,7 @@ const Table: React.FC<TableProps> = (props) => {
             </div>
             <select
               className="input input-sm"
-              onChange={(e) => setPageSize(parseInt(e.target.value))}>
+              onChange={(e) => handlePageSizeChange(e.target.value)}>
               <option value={10}>10</option>
               <option value={25}>25</option>
               <option value={50}>50</option>

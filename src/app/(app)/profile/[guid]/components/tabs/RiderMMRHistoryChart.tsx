@@ -13,7 +13,6 @@ import {
   BarElement,
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
-import Spinner from '~/components/Spinner'
 
 interface Props {
   mmrHistory: Array<RiderMMRHistory>
@@ -67,7 +66,7 @@ export default function RiderMMRHistoryChart({ mmrHistory }: Props) {
   }
 
   return (
-    <div className="w-full p-4 pt-0">
+    <div className="w-full min-w-[40%] p-4 pt-0">
       <div className="m-4 mx-auto flex w-full justify-between">
         <div className="text-lg font-semibold">
           <div>MMR History</div>

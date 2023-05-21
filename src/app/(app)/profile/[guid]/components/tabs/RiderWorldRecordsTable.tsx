@@ -15,7 +15,7 @@ const categories = [
 ]
 
 interface Props {
-  worldRecords: any
+  worldRecords: RiderWorldRecords
 }
 
 export default function RiderWorldRecordsTable({ worldRecords }: Props) {

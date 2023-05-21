@@ -22,7 +22,7 @@ export default async function Page() {
       <div className="mx-auto flex w-full flex-col gap-10">
         <SummaryStats stats={apiStats} />
 
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid gap-5 lg:grid-cols-3">
           <div>
             <div className="pb-2 text-lg font-semibold">Top Records</div>
             <WorldRecordsTable worldRecords={worldRecords} seeMore />

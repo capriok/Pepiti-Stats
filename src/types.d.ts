@@ -48,19 +48,7 @@ interface RiderProfile {
   SR: string
   name: string
   contact: number
-  world_records: {
-    [key: string]: number
-    'MX1 OEM': number
-    'MX1-2T OEM': number
-    'MX2 OEM': number
-    'MX2-2T OEM': number
-    'MX3 OEM': number
-    'SM1 OEM': number
-    'SM1-2t OEM': number
-    'SM2 OEM': number
-    'SM2-2t OEM': number
-    total: number
-  }
+  world_records: RiderWorldRecords
   total_laps: number
   favorite_bike: {
     name: string
@@ -80,6 +68,20 @@ interface RiderProfile {
     third: number
     total_races: number
   }
+}
+
+interface RiderWorldRecords {
+  [key: string]: number
+  'MX1 OEM': number
+  'MX1-2T OEM': number
+  'MX2 OEM': number
+  'MX2-2T OEM': number
+  'MX3 OEM': number
+  'SM1 OEM': number
+  'SM1-2t OEM': number
+  'SM2 OEM': number
+  'SM2-2t OEM': number
+  total: number
 }
 
 interface RiderMMRUpdates {
@@ -201,7 +203,6 @@ type ProcessedRaceSession = {
   track: string
   headCount: number
   races: {
-    warmup: Race | null
     race1: Race | null
     race2: Race | null
   }

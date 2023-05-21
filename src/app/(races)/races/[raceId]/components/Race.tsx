@@ -37,7 +37,7 @@ export default function Race({ session }: Props) {
 
   return (
     <div className="w-full lg:mx-2">
-      <div className="ml-4 mt-2 md:mt-4">
+      <div className="ml-4 mt-2">
         <Tabs
           items={items}
           defaultActive="race2"

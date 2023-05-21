@@ -16,7 +16,7 @@ export default function ProfileTabs({ rider, mmrHistory }: Props) {
       key: 'overview',
       label: 'Overview',
       children: (
-        <div className="flex min-h-[420px] flex-col gap-5 lg:flex-row">
+        <div className="flex min-h-[420px] flex-col gap-5 md:flex-row">
           <RiderWorldRecordsTable worldRecords={rider.world_records} />
           <RiderMMRHistoryChart mmrHistory={mmrHistory} />
         </div>

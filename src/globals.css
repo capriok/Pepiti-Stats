@@ -26,6 +26,10 @@
 :root {
   --primary: #333333;
   --secondary: #151515;
+}
 
-  --test: #178626;
+@layer components {
+  .table th:first-child {
+    position: unset;
+  }
 }
