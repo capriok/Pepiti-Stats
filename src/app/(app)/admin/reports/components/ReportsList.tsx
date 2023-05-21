@@ -8,7 +8,6 @@ export default function ReportsList({ reports }) {
   const [openId, setOpenId] = useState(null)
 
   const handleIdleControlsClick = (id) => {
-    console.log(id)
     setOpenId(id)
   }
 

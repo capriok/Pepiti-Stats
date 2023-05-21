@@ -15,10 +15,10 @@ const Managers = () => {
   return (
     <div className="md: mt-6 flex w-full flex-col px-0 text-white md:flex-row md:px-4">
       <div className="mr-4 flex flex-col">
-        <div className="mb-4 text-2xl">Blacklists</div>
+        <div className="my-4 text-xl font-semibold">Blacklists</div>
         <Link
           href="/admin/blacklist"
-          className="card card-body mb-2 flex w-[300px] cursor-pointer bg-neutral-800/40 no-underline hover:bg-neutral-800">
+          className="card card-body mb-2 flex w-[300px] cursor-pointer bg-base-200 no-underline hover:bg-neutral-800">
           <div className="flex">
             <NewspaperIcon />
             <div className="ml-4">Blacklist</div>
@@ -26,10 +26,10 @@ const Managers = () => {
         </Link>
       </div>
       <div className="mr-4 flex flex-col">
-        <div className="mb-4 text-2xl">Ban Reports</div>
+        <div className="my-4 text-xl font-semibold">Rider Reports</div>
         <Link
           href="/admin/reports"
-          className="card card-body mb-2 flex w-[300px] cursor-pointer bg-neutral-800/40 no-underline hover:bg-neutral-800">
+          className="card card-body mb-2 flex w-[300px] cursor-pointer bg-base-200 no-underline hover:bg-neutral-800">
           <div className="flex">
             <NewspaperIcon />
             <div className="ml-4">Rider Reports</div>

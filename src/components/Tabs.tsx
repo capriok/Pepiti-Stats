@@ -42,7 +42,7 @@ export default function Tabs({
       <button
         onClick={() => selectTab(item)}
         className={`tab-lifted tab min-h-[35px] ${wide ? 'w-full' : ''} ${active}`}>
-        <div className="text-[15px]">{item.label}</div>
+        <div className="whitespace-nowrap text-[15px]">{item.label}</div>
       </button>
     )
   }

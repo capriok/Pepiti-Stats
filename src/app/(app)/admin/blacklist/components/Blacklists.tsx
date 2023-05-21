@@ -1,4 +1,5 @@
 'use client'
+
 import { usePathname } from 'next/navigation'
 import { Pill } from '~/components/pills/Pill'
 import Table from '~/components/Table'
@@ -12,6 +13,7 @@ interface Props {
 
 export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Props) {
   const pathname = usePathname()
+  const isAdministrating = pathname.includes('admin') && isAdmin
 
   const tabs = [
     {
@@ -19,7 +21,7 @@ export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Pro
       label: 'Safety Rating Blacklist',
       children: (
         <div className="p-4 pt-0">
-          <BlacklistTable blacklist={blacklistSR} isAdmin={isAdmin} />
+          <BlacklistTable blacklist={blacklistSR} isAdmin={isAdministrating} />
         </div>
       ),
     },
@@ -28,7 +30,7 @@ export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Pro
       label: 'General Blacklist',
       children: (
         <div className="p-4 pt-0">
-          <BlacklistTable blacklist={blacklistNonSR} isAdmin={isAdmin} />
+          <BlacklistTable blacklist={blacklistNonSR} isAdmin={isAdministrating} />
         </div>
       ),
     },

@@ -80,8 +80,8 @@ function NavBar(props: Props) {
       <Link
         key={idx}
         href={link.href}
-        className="btn-ghost btn flex justify-between normal-case md:mr-2">
-        <div className="min-lg:justify-center min-lg:gap-2 flex w-full items-center justify-between">
+        className="btn-ghost btn flex justify-between font-normal normal-case lg:mr-2 lg:font-semibold">
+        <div className="flex w-full items-center justify-between max-md:text-[16px] lg:gap-2 ">
           {link.displayName}
           {link.icon}
         </div>
@@ -119,7 +119,7 @@ function NavBar(props: Props) {
                 tabIndex={0}
                 className="dropdown-content menu rounded-box mt-4 w-52 bg-base-200 p-2 shadow">
                 <div className="bg-base-200 lg:hidden">
-                  <span className="py-1 font-semibold opacity-50">Navigation</span>
+                  <div className="stats-desc p-2 font-semibold">Navigation</div>
                   {endNavLinks}
                 </div>
                 {profileNavigationContent}
