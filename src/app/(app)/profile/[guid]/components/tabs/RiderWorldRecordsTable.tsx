@@ -15,17 +15,17 @@ const categories = [
 ]
 
 interface Props {
-  rider: any
+  worldRecords: any
 }
 
-export const RiderWorldRecordsTable = ({ rider }: Props) => {
-  const riderWRCategories = Object.keys(rider.world_records).filter((c) => categories.includes(c))
+export default function RiderWorldRecordsTable({ worldRecords }: Props) {
+  const riderWRCategories = Object.keys(worldRecords).filter((c) => categories.includes(c))
 
   const data = riderWRCategories
     .map((category, i) => ({
-      _id: i + category + rider.world_records[category],
+      _id: i + category + worldRecords[category],
       category: category,
-      records: rider.world_records[category],
+      records: worldRecords[category],
     }))
     .sort((a, b) => b.records - a.records)
 
@@ -42,10 +42,10 @@ export const RiderWorldRecordsTable = ({ rider }: Props) => {
   ]
 
   return (
-    <div className="card card-body flex w-full flex-col items-start bg-base-200 p-4 pt-0">
+    <div className="flex w-full flex-col items-start p-4 pt-0">
       <div className="my-4 flex gap-2 text-lg font-semibold">
         <div>Total World Records:</div>
-        <div>{rider.world_records.total}</div>
+        <div>{worldRecords.total}</div>
       </div>
       <Table data={data} columns={columns} rankEnabled={false} />
     </div>

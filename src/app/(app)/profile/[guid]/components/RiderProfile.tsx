@@ -1,59 +1,13 @@
-import ServerLineChart from './overview/ServerLineChart'
-import { RiderWorldRecordsTable } from './overview/RiderWorldRecordsTable'
-import Tabs from '~/components/Tabs'
-import ServerRiderRaces from './races/ServerRiderRaces'
-import ServerRiderRecords from './records/ServerRiderRecords'
 import { METER_TO_MILE } from '~/utils/constants'
-import { Suspense } from 'react'
-import Spinner from '~/components/Spinner'
 import RiderAvatar from './RiderAvatar'
+import ProfileTabs from './ProfileTabs'
 
 interface Props {
-  rider: any
+  rider: RiderProfile
+  mmrHistory: Array<RiderMMRHistory>
 }
 
-export const RiderProfile = ({ rider }: Props) => {
-  const items = [
-    {
-      key: 'overview',
-      label: 'Overview',
-      children: (
-        <div className="flex flex-col gap-5 lg:flex-row">
-          <RiderWorldRecordsTable rider={rider} />
-          <div className="w-full">
-            <Suspense fallback={<Spinner />}>
-              {/* @ts-expect-error */}
-              <ServerLineChart guid={rider._id} />
-            </Suspense>
-          </div>
-        </div>
-      ),
-    },
-    {
-      key: 'races',
-      label: 'Races',
-      children: (
-        <div className="p-6 pt-0">
-          <Suspense fallback={<Spinner />}>
-            {/* @ts-expect-error */}
-            <ServerRiderRaces guid={rider._id} />
-          </Suspense>
-        </div>
-      ),
-    },
-    {
-      key: 'records',
-      label: 'Records',
-      children: (
-        <div className="p-6 pt-0">
-          <Suspense fallback={<Spinner />}>
-            {/* @ts-expect-error */}
-            <ServerRiderRecords guid={rider._id} />
-          </Suspense>
-        </div>
-      ),
-    },
-  ]
+export const RiderProfile = ({ rider, mmrHistory }: Props) => {
   return (
     <>
       <div className="mx-auto p-0 md:p-5">
@@ -69,9 +23,7 @@ export const RiderProfile = ({ rider }: Props) => {
           </div>
         </div>
       </div>
-      <div className="card-body mt-10 rounded-lg bg-base-200 p-0">
-        <Tabs items={items} wide={true} />
-      </div>
+      <ProfileTabs rider={rider} mmrHistory={mmrHistory} />
     </>
   )
 }

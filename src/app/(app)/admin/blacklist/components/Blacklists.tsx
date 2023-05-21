@@ -103,7 +103,6 @@ const BlacklistTable = ({ blacklist, isAdmin }) => {
       paginationEnabled={true}
       searchKey="guid"
       searchEnabled={true}
-      resultsEnabled={false}
     />
   )
 }

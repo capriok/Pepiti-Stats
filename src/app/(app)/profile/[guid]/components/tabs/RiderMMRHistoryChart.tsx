@@ -13,11 +13,16 @@ import {
   BarElement,
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
+import Spinner from '~/components/Spinner'
 
-export default function LineChart({ historyData }) {
+interface Props {
+  mmrHistory: Array<RiderMMRHistory>
+}
+
+export default function RiderMMRHistoryChart({ mmrHistory }: Props) {
   const [limit, setLimit] = useState(20)
 
-  const totaledData = historyData
+  const totaledData = mmrHistory
     .reduce((acc: Array<number>, curr, currIdx) => {
       if (currIdx !== 0) {
         // add each to prev idx
@@ -28,7 +33,7 @@ export default function LineChart({ historyData }) {
       }
       return acc
     }, [])
-    .slice(historyData.length - limit)
+    .slice(mmrHistory.length - limit)
 
   const labels = totaledData
     .map((_, idx) => {
@@ -39,7 +44,7 @@ export default function LineChart({ historyData }) {
     })
     .reverse()
 
-  const data = {
+  const chartData = {
     labels,
     datasets: [
       {
@@ -62,10 +67,10 @@ export default function LineChart({ historyData }) {
   }
 
   return (
-    <div className="card rounded-box card-body w-full bg-base-200 p-4 pt-0">
+    <div className="w-full p-4 pt-0">
       <div className="m-4 mx-auto flex w-full justify-between">
         <div className="text-lg font-semibold">
-          <div>MMR History </div>
+          <div>MMR History</div>
         </div>
         <div className="flex items-center justify-center">
           <div className="pr-4 text-neutral-400">{limit} Races</div>
@@ -77,13 +82,13 @@ export default function LineChart({ historyData }) {
             </button>
             <button
               className="btn-sm btn  rounded-l-none border-none bg-base-100 hover:bg-secondary/60"
-              onClick={() => setLimit((l) => (l < historyData.length ? l + 1 : l))}>
+              onClick={() => setLimit((l) => (l < mmrHistory.length ? l + 1 : l))}>
               +
             </button>
           </div>
         </div>
       </div>
-      <Line options={options} data={data} />
+      <Line options={options} data={chartData} />
     </div>
   )
 }

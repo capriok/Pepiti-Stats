@@ -12,8 +12,6 @@ interface Props {
 }
 
 export default function Race({ session }: Props) {
-  console.log(session)
-
   const items = [
     {
       key: 'race1',

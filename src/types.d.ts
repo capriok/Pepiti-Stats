@@ -24,7 +24,7 @@ interface RiderSearch {
   avatar: string
   type: 'user'
   donation: number
-  seasons: Season[]
+  seasons: LeaguesSeason[]
   races: {
     first: number
     second: number
@@ -35,7 +35,7 @@ interface RiderSearch {
   }
 }
 
-interface Season {
+interface LeaguesSeason {
   name: string
   MMR: number
   position: number
@@ -80,6 +80,17 @@ interface RiderProfile {
     third: number
     total_races: number
   }
+}
+
+interface RiderMMRUpdates {
+  _id: string
+  MMR_updates: RiderMMRHistory[]
+}
+
+interface RiderMMRHistory {
+  timestamp: number
+  mmr: number
+  type: string
 }
 
 interface RecentRace {

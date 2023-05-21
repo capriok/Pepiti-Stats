@@ -12,6 +12,8 @@ interface Props {
 }
 
 export default function RaceOverview({ race }: Props) {
+  console.log('%cRace', 'color: steelblue', race)
+
   return (
     <div className="my-5 flex flex-col gap-5 lg:my-6 lg:flex-row">
       <WinnerCircle race={race} />
@@ -102,8 +104,6 @@ function RaceNotables({ race }: { race: Race }) {
     (maxItem, currentItem) => (currentItem.mmrGain > maxItem.mmrGain ? currentItem : maxItem),
     race.standings[0]
   )
-
-  console.log(race)
 
   return (
     <div className="card card-body flex w-full flex-col bg-base-200 lg:w-[40%]">

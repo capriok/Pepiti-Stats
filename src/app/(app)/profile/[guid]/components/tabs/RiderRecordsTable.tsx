@@ -1,20 +1,31 @@
 'use client'
 
-import React, { useState } from 'react'
-import Link from 'next/link'
+import React from 'react'
+import { publicRequest } from '~/api'
+import useSWR from 'swr'
 import { AlarmPlusIcon, BikeIcon, HourglassIcon } from 'lucide-react'
 import { handleBikeColor } from '~/utils/handleBikeColor'
 import { dateIsValid } from '~/utils/dateIsValid'
 import { handleLapTimes } from '~/utils/handleLapTimes'
 import { METER_TO_MILE } from '~/utils/constants'
 import Table from '~/components/Table'
+import Spinner from '~/components/Spinner'
 
 interface Props {
-  records: Array<any>
+  guid: string
 }
 
-export default function RiderRecordsTable({ records }: Props) {
-  const data = records.map((record) => ({
+export default function RiderRecordsTable({ guid }: Props) {
+  const { data, isLoading } = useSWR(`/rider/${guid}/records`, publicRequest)
+
+  if (isLoading)
+    return (
+      <div className="my-5">
+        <Spinner />
+      </div>
+    )
+
+  const records = data.records.map((record) => ({
     _id: record._id,
     date: parseInt(record._id.slice(0, 8), 16) * 1000,
     track: record.track,
@@ -74,17 +85,14 @@ export default function RiderRecordsTable({ records }: Props) {
   ]
 
   return (
-    <>
-      <div className="my-4 text-xl font-semibold ">Personal Records</div>
-      <Table
-        columns={columns}
-        data={data}
-        searchKey="track"
-        searchEnabled={true}
-        paginationEnabled={true}
-        rankEnabled={false}
-        rowCn="py-4"
-      />
-    </>
+    <Table
+      columns={columns}
+      data={records}
+      searchKey="track"
+      searchEnabled={true}
+      paginationEnabled={true}
+      rankEnabled={false}
+      rowCn="py-4"
+    />
   )
 }

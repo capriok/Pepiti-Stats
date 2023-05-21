@@ -1,18 +1,30 @@
 'use client'
-import { useState } from 'react'
+
+import useSWR from 'swr'
 import { dateIsValid } from '~/utils/dateIsValid'
 import { handleLapTimes } from '~/utils/handleLapTimes'
 import handlePlaceSuffix from '~/utils/handlePlaceSuffix'
 import MMRPill from '~/components/pills/MMRPill'
 import Table from '~/components/Table'
 import { Pill } from '~/components/pills/Pill'
+import { publicRequest } from '~/api'
+import Spinner from '~/components/Spinner'
 
 interface Props {
-  races: any
+  guid: string
 }
 
-export default function RiderRacesTable({ races }: Props) {
-  const data = races.map((race) => ({
+export default function RiderRacesTable({ guid }: Props) {
+  const { data, isLoading } = useSWR(`/rider/${guid}/races`, publicRequest)
+
+  if (isLoading)
+    return (
+      <div className="my-5">
+        <Spinner />
+      </div>
+    )
+
+  const races = data.races.map((race) => ({
     date: parseInt(race._id.slice(0, 8), 16) * 1000,
     track: race.track,
     position: race?.Classification?.Pos ?? '',
@@ -74,17 +86,14 @@ export default function RiderRacesTable({ races }: Props) {
   ]
 
   return (
-    <>
-      <div className="my-4 whitespace-nowrap text-xl font-semibold">Recent Races</div>
-      <Table
-        columns={columns}
-        data={data}
-        searchKey="track"
-        searchEnabled={true}
-        paginationEnabled={true}
-        rankEnabled={false}
-        rowCn="py-4"
-      />
-    </>
+    <Table
+      columns={columns}
+      data={races}
+      searchKey="track"
+      searchEnabled={true}
+      paginationEnabled={true}
+      rankEnabled={false}
+      rowCn="py-4"
+    />
   )
 }

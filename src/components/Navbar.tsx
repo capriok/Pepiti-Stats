@@ -92,7 +92,7 @@ function NavBar(props: Props) {
   return (
     <>
       <div className="sticky top-0 z-50 bg-base-200 backdrop-blur-md">
-        <div className="navbar mx-auto max-w-[1500px]">
+        <div className="navbar mx-auto max-w-[1400px]">
           <div className="navbar-start">
             <Link href="/dashboard" className="btn-ghost btn">
               <Image

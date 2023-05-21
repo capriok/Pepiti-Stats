@@ -20,7 +20,7 @@ export default function Tabs({
   items,
   wide,
   defaultActive,
-  onChange,
+  onChange = function () {},
   renderChildren = true,
 }: Props) {
   const [isPending, startTransition] = useTransition()
@@ -55,8 +55,4 @@ export default function Tabs({
       {renderChildren && activeTab.children}
     </>
   )
-}
-
-Tabs.defaultProps = {
-  onChange() {},
 }

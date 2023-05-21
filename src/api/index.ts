@@ -78,7 +78,7 @@ class PepitiApi {
     const data = await publicRequest(`/rider/${guid}/races`)
     return data
   }
-  public async GetRiderMMRHistory(guid: string): Promise<{ _id: string; MMR_updates: Array<any> }> {
+  public async GetRiderMMRHistory(guid: string): Promise<RiderMMRUpdates> {
     const data = await publicRequest(`/rider/${guid}/mmr_history`)
     return data
   }

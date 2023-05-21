@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from 'react'
 import { handleRankColor } from '~/utils/handleRankColor'
+import { Pill } from './pills/Pill'
 
 /**
  *  table data can include any properties but must include a unique _id
@@ -42,7 +43,6 @@ export interface TableOptions {
   searchKey?: string
   rankEnabled?: boolean
   rankStyle?: boolean
-  resultsEnabled?: boolean
   headerCn?: string
   rowCn?: string
 }
@@ -63,7 +63,6 @@ const Table: React.FC<TableProps> = (props) => {
     searchKey = 'name',
     rankEnabled = true,
     rankStyle = true,
-    resultsEnabled = false,
     headerCn = '',
     rowCn = '',
   } = props
@@ -200,23 +199,27 @@ const Table: React.FC<TableProps> = (props) => {
           <tbody>{tableBodyData}</tbody>
         </table>
       </div>
-      <div className="flex justify-between">
-        <div>{resultsEnabled && <div className="mt-4">Results: ${paginatedData.length}</div>}</div>
-        {paginationEnabled && (
-          <div className="btn-group mt-4">
+      {paginationEnabled && (
+        <div className="mt-4 flex items-center justify-between">
+          <div className="mr-5">
+            Page: {page + 1} / {Math.floor(data.length / pageSize) + 1}
+          </div>
+          <div className="btn-group">
             <button
-              className="btn-sm btn"
-              onClick={() => handlePageChange(page > 0 ? page - 1 : page)}>
+              className="btn-ghost btn-sm btn bg-base-100"
+              onClick={() => handlePageChange(page > 0 ? page - 1 : page)}
+              disabled={page === 0}>
               Prev Page
             </button>
             <button
-              className="btn-sm btn"
-              onClick={() => handlePageChange(paginatedData.length ? page + 1 : page)}>
+              className="btn-ghost btn-sm btn bg-base-100"
+              onClick={() => handlePageChange(paginatedData.length ? page + 1 : page)}
+              disabled={paginatedData.length < 10}>
               Next Page
             </button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }

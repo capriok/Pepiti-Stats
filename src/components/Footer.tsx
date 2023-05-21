@@ -2,30 +2,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-export default function Footer({ user }) {
-  const date = new Date()
-  const authGuid = user._id
+interface Props {
+  user: User
+}
 
-  const userLinks = user.guid ? (
-    <>
-      <Link href={`/profile/${authGuid}`} className="link-hover link">
-        Profile
-      </Link>
-      <Link href={`/profile/${authGuid}/races`} className="link-hover link">
-        Races
-      </Link>
-      <Link href={`/profile/${authGuid}/records`} className="link-hover link">
-        Records
-      </Link>
-    </>
-  ) : (
-    <Link
-      href="https://pepiti.com/stats/api/v0/steam_login"
-      target="_blank"
-      referrerPolicy="origin">
-      Sign in
-    </Link>
-  )
+export default function Footer({ user }: Props) {
+  const date = new Date()
 
   return (
     <footer className="mt-10 bg-base-200 p-10 text-base-content">
@@ -52,16 +34,35 @@ export default function Footer({ user }) {
           <Link href="/dashboard" className="link-hover link">
             Dashboard
           </Link>
+          <Link href="/races" className="link-hover link">
+            Recent Races
+          </Link>
           <Link href="/leagues" className="link-hover link">
             Leagues
-          </Link>
-          <Link href="/races" className="link-hover link">
-            All Races
           </Link>
         </div>
         <div>
           <span className="footer-title">User</span>
-          {userLinks}
+          {user.guid ? (
+            <>
+              <Link href={`/profile/${user.guid}`} className="link-hover link">
+                Profile
+              </Link>
+              <Link href={`/profile/${user.guid}/#races`} className="link-hover link">
+                Races
+              </Link>
+              <Link href={`/profile/${user.guid}/#records`} className="link-hover link">
+                Records
+              </Link>
+            </>
+          ) : (
+            <Link
+              href="https://pepiti.com/stats/api/v0/steam_login"
+              target="_blank"
+              referrerPolicy="origin">
+              Sign in
+            </Link>
+          )}
         </div>
         <div>
           <span className="footer-title">Donations</span>
