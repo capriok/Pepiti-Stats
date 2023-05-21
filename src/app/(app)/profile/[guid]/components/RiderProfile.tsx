@@ -33,7 +33,7 @@ export const RiderProfile = ({ rider }: Props) => {
       key: 'races',
       label: 'Races',
       children: (
-        <div className="px-4">
+        <div className="p-6 pt-0">
           <Suspense fallback={<Spinner />}>
             {/* @ts-expect-error */}
             <ServerRiderRaces guid={rider._id} />
@@ -45,7 +45,7 @@ export const RiderProfile = ({ rider }: Props) => {
       key: 'records',
       label: 'Records',
       children: (
-        <div className="px-4">
+        <div className="p-6 pt-0">
           <Suspense fallback={<Spinner />}>
             {/* @ts-expect-error */}
             <ServerRiderRecords guid={rider._id} />
@@ -55,8 +55,8 @@ export const RiderProfile = ({ rider }: Props) => {
     },
   ]
   return (
-    <div className="mb-20">
-      <div className=" mx-auto mt-3 p-0 md:p-5">
+    <>
+      <div className="mx-auto mt-3 p-0 md:p-5">
         <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:gap-10">
           <div className="md:mt-0flex mt-10 w-full flex-1 justify-center">
             <RiderAvatar rider={rider} />
@@ -72,7 +72,7 @@ export const RiderProfile = ({ rider }: Props) => {
       <div className="card-body mt-10 rounded-lg bg-base-200 p-0">
         <Tabs items={items} wide={true} />
       </div>
-    </div>
+    </>
   )
 }
 

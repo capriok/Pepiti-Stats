@@ -22,7 +22,7 @@ export default function RaceStandingsTable({ standings }: Props) {
       render: (raceNumber, row) => (
         <div className="flex gap-1">
           <div className="text-neutral-500"># </div>
-          <div className="text-secondary">{raceNumber}</div>
+          <div className="text-primary">{raceNumber}</div>
         </div>
       ),
     },

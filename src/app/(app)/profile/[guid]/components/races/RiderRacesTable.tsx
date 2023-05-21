@@ -12,8 +12,6 @@ interface Props {
 }
 
 export default function RiderRacesTable({ races }: Props) {
-  const [term, setTerm] = useState('')
-
   const data = races.map((race) => ({
     date: parseInt(race._id.slice(0, 8), 16) * 1000,
     track: race.track,
@@ -75,19 +73,18 @@ export default function RiderRacesTable({ races }: Props) {
     },
   ]
 
-  const filteredData = data.filter((race) => race.track.toLowerCase().includes(term.toLowerCase()))
-
   return (
-    <div className="pb-4">
-      <div className="flex flex-col items-start justify-between md:flex-row md:items-center">
-        <div className="my-4 whitespace-nowrap text-xl font-semibold">Recent Races</div>
-        <input
-          className="input-bordered input input-sm w-full md:w-[400px]"
-          placeholder="Search by Track..."
-          onChange={(e) => setTerm(e.target.value)}
-        />
-      </div>
-      <Table columns={columns} data={filteredData} rankEnabled={false} rowCn="py-4" />
-    </div>
+    <>
+      <div className="my-4 whitespace-nowrap text-xl font-semibold">Recent Races</div>
+      <Table
+        columns={columns}
+        data={data}
+        searchKey="track"
+        searchEnabled={true}
+        paginationEnabled={true}
+        rankEnabled={false}
+        rowCn="py-4"
+      />
+    </>
   )
 }

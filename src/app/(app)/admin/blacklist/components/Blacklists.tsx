@@ -5,33 +5,38 @@ import Table from '~/components/Table'
 import Tabs from '~/components/Tabs'
 
 interface Props {
-  user: User
+  isAdmin: boolean
   blacklistSR: any
   blacklistNonSR: any
 }
 
-export default function Blacklists({ user, blacklistSR, blacklistNonSR }: Props) {
+export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Props) {
   const pathname = usePathname()
-
-  const isAdminPage = pathname!.includes('/admin')
-  const isAdmin = isAdminPage && user.isAdmin
 
   const tabs = [
     {
       key: 'blacklist-sr',
       label: 'Safety Rating Blacklist',
-      children: <BlacklistTable blacklist={blacklistSR} isAdmin={isAdmin} />,
+      children: (
+        <div className="p-4 pt-0">
+          <BlacklistTable blacklist={blacklistSR} isAdmin={isAdmin} />
+        </div>
+      ),
     },
     {
       key: 'blacklist-nonsr',
       label: 'General Blacklist',
-      children: <BlacklistTable blacklist={blacklistNonSR} isAdmin={isAdmin} />,
+      children: (
+        <div className="p-4 pt-0">
+          <BlacklistTable blacklist={blacklistNonSR} isAdmin={isAdmin} />
+        </div>
+      ),
     },
   ]
 
   return (
     <div className="flex justify-center">
-      <div className="card card-body w-full bg-base-200">
+      <div className="card card-body w-full bg-base-200 p-0">
         <Tabs items={tabs} wide={true} />
       </div>
     </div>
@@ -95,9 +100,10 @@ const BlacklistTable = ({ blacklist, isAdmin }) => {
       data={data}
       columns={columns}
       rankEnabled={false}
+      paginationEnabled={true}
       searchKey="guid"
       searchEnabled={true}
-      resultsEnabled={true}
+      resultsEnabled={false}
     />
   )
 }

@@ -39,7 +39,7 @@ function WinnerCircle({ race }: { race: Race }) {
           <div className="flex w-full flex-1 flex-col items-center">
             <div className="mb-2 flex flex-col items-center justify-center whitespace-nowrap">
               <div className="text-md font-semibold text-neutral-500">Race Number</div>
-              <div className="flex items-center text-lg text-secondary">
+              <div className="flex items-center text-lg text-primary">
                 <div className={`ml-2 mr-4 h-5 w-2 ${handleRankColor(1)}`} />
                 <div className="flex gap-1">
                   <div className="text-neutral-500"># </div>
@@ -103,6 +103,8 @@ function RaceNotables({ race }: { race: Race }) {
     race.standings[0]
   )
 
+  console.log(race)
+
   return (
     <div className="card card-body flex w-full flex-col bg-base-200 lg:w-[40%]">
       <div className="flex-1">
@@ -113,7 +115,7 @@ function RaceNotables({ race }: { race: Race }) {
             <div className="flex gap-2">
               <div className="flex gap-1">
                 <div className="text-neutral-500"># </div>
-                <div className="text-secondary">{riderWithSecondPlace?.raceNumber}</div>
+                <div className="text-primary">{riderWithSecondPlace?.raceNumber}</div>
               </div>
               <div className=" text-neutral-500">|</div>
               <div>{riderWithSecondPlace?.name}</div>
@@ -129,7 +131,7 @@ function RaceNotables({ race }: { race: Race }) {
             <div className="flex gap-2">
               <div className="flex gap-1">
                 <div className="text-neutral-500"># </div>
-                <div className="text-secondary">{riderWithThirdPlace?.raceNumber}</div>
+                <div className="text-primary">{riderWithThirdPlace?.raceNumber}</div>
               </div>
               <div className=" text-neutral-500">|</div>
               <div>{riderWithThirdPlace?.name}</div>
@@ -149,12 +151,12 @@ function RaceNotables({ race }: { race: Race }) {
             <div className="flex gap-2">
               <div className="flex gap-1">
                 <div className="text-neutral-500"># </div>
-                <div className="text-secondary">{riderWithFastestLap?.raceNumber}</div>
+                <div className="text-primary">{riderWithFastestLap?.raceNumber}</div>
               </div>
               <div className=" text-neutral-500">|</div>
               <div>{riderWithFastestLap?.name}</div>
             </div>
-            <div>{handleLapTimes(parseInt(riderWithFastestLap.fastestLap))}</div>
+            <div>{handleLapTimes(parseInt(riderWithFastestLap?.fastestLap))}</div>
           </div>
         </div>
         <div className="mb-4 flex flex-col border-b border-neutral-500/20 pb-2">
@@ -163,12 +165,12 @@ function RaceNotables({ race }: { race: Race }) {
             <div className="flex gap-2">
               <div className="flex gap-1">
                 <div className="text-neutral-500"># </div>
-                <div className="text-secondary">{riderWithHighestMmrGain?.raceNumber}</div>
+                <div className="text-primary">{riderWithHighestMmrGain?.raceNumber}</div>
               </div>
-              <div className=" text-neutral-500">|</div>
+              <div className="text-neutral-500">|</div>
               <div>{riderWithHighestMmrGain?.name}</div>
             </div>
-            <MMRPill mmr={riderWithHighestMmrGain.mmrGain} />
+            <MMRPill mmr={riderWithHighestMmrGain?.mmrGain} />
           </div>
         </div>
       </div>

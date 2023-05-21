@@ -14,8 +14,6 @@ interface Props {
 }
 
 export default function RiderRecordsTable({ records }: Props) {
-  const [term, setTerm] = useState('')
-
   const data = records.map((record) => ({
     _id: record._id,
     date: parseInt(record._id.slice(0, 8), 16) * 1000,
@@ -75,21 +73,18 @@ export default function RiderRecordsTable({ records }: Props) {
     },
   ]
 
-  const filteredData = data.filter((record) =>
-    record.track.toLowerCase().includes(term.toLowerCase())
-  )
-
   return (
-    <div className="pb-4">
-      <div className="flex flex-col items-start md:items-center justify-between md:flex-row">
-        <div className="my-4 text-xl font-semibold ">Personal Records</div>
-        <input
-          className="input-bordered input input-sm w-full md:w-[400px]"
-          placeholder="Search by Track..."
-          onChange={(e) => setTerm(e.target.value)}
-        />
-      </div>
-      <Table columns={columns} data={filteredData} rankEnabled={false} rowCn="py-4" />
-    </div>
+    <>
+      <div className="my-4 text-xl font-semibold ">Personal Records</div>
+      <Table
+        columns={columns}
+        data={data}
+        searchKey="track"
+        searchEnabled={true}
+        paginationEnabled={true}
+        rankEnabled={false}
+        rowCn="py-4"
+      />
+    </>
   )
 }

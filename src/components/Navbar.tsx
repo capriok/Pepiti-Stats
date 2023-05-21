@@ -37,7 +37,7 @@ function NavBar(props: Props) {
             </Link>
           </li>
           <li>
-            <Link href={`/rider-report`} className="flex justify-between">
+            <Link href={`/report`} className="flex justify-between">
               Report Rider
               <FlagIcon />
             </Link>

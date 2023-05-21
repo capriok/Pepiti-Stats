@@ -19,11 +19,13 @@ export default async function Page() {
           </Link>
         }
       />
-      <Blacklists
-        user={user}
-        blacklistSR={blacklistSR.riders.filter((r) => r.banned_by === 'SR')}
-        blacklistNonSR={blacklistNonSR.riders}
-      />
+      <div className="mt-4">
+        <Blacklists
+          isAdmin={user.isAdmin}
+          blacklistSR={blacklistSR.riders.filter((r) => r.banned_by === 'SR')}
+          blacklistNonSR={blacklistNonSR.riders}
+        />
+      </div>
     </>
   )
 }

@@ -5,7 +5,7 @@ interface Props {
 export default function SummaryStats({ stats }: Props) {
   return (
     <div className="flex flex-col overflow-x-scroll md:overflow-visible">
-      <div className="stats mx-auto mt-3 flex w-fit bg-base-200 shadow md:w-full">
+      <div className="stats mx-auto flex w-fit bg-base-200 shadow md:w-full">
         <div className="stat place-items-center">
           <div className="stat-title">Laps</div>
           <div className="stat-value py-2 text-3xl text-primary">{stats.laps.toLocaleString()}</div>

@@ -19,7 +19,7 @@ export default async function Page() {
     <>
       <PageHeader title="Dashboard" extra={<RiderSearch />} />
 
-      <div className="mx-auto flex w-full flex-col gap-10 py-5">
+      <div className="mx-auto flex w-full flex-col gap-10">
         <SummaryStats stats={apiStats} />
 
         <div className="grid gap-5 md:grid-cols-3">

@@ -11,8 +11,6 @@ interface Props {
 }
 
 export default function MMRAnalysisTable({ standings }: Props) {
-  console.log(standings)
-
   const columns = [
     {
       key: 'name',
@@ -22,7 +20,7 @@ export default function MMRAnalysisTable({ standings }: Props) {
     {
       key: 'mmrGain',
       label: (
-        <div className="tooltip tooltip-bottom" data-tip="MMR Gain +/-">
+        <div className="tooltip tooltip-bottom tooltip-accent" data-tip="MMR Gain +/-">
           MMR +/-
         </div>
       ),
@@ -31,7 +29,7 @@ export default function MMRAnalysisTable({ standings }: Props) {
     {
       key: 'newMmr',
       label: (
-        <div className="tooltip tooltip-bottom" data-tip="Old MMR + MMR Gain">
+        <div className="tooltip tooltip-bottom tooltip-accent" data-tip="Old MMR + MMR Gain">
           New MMR
         </div>
       ),
@@ -40,7 +38,7 @@ export default function MMRAnalysisTable({ standings }: Props) {
     {
       key: 'bpp',
       label: (
-        <div className="tooltip tooltip-bottom" data-tip="Position Bonus">
+        <div className="tooltip tooltip-bottom tooltip-accent" data-tip="Position Bonus">
           BPP
         </div>
       ),
@@ -49,7 +47,7 @@ export default function MMRAnalysisTable({ standings }: Props) {
     {
       key: 'prb',
       label: (
-        <div className="tooltip tooltip-bottom" data-tip="Positive Rank Bonus">
+        <div className="tooltip tooltip-bottom tooltip-accent" data-tip="Positive Rank Bonus">
           PRB
         </div>
       ),
@@ -58,7 +56,7 @@ export default function MMRAnalysisTable({ standings }: Props) {
     {
       key: 'nrb',
       label: (
-        <div className="tooltip tooltip-bottom" data-tip="Negative Rank Bonus">
+        <div className="tooltip tooltip-bottom tooltip-accent" data-tip="Negative Rank Bonus">
           NRB
         </div>
       ),
@@ -67,7 +65,7 @@ export default function MMRAnalysisTable({ standings }: Props) {
     {
       key: 'fl',
       label: (
-        <div className="tooltip tooltip-bottom" data-tip="Fastest Lap">
+        <div className="tooltip tooltip-bottom tooltip-accent" data-tip="Fastest Lap">
           FL
         </div>
       ),
@@ -76,7 +74,7 @@ export default function MMRAnalysisTable({ standings }: Props) {
     {
       key: 'hs',
       label: (
-        <div className="tooltip tooltip-bottom" data-tip="Holeshot">
+        <div className="tooltip tooltip-bottom tooltip-accent" data-tip="Holeshot">
           HS
         </div>
       ),

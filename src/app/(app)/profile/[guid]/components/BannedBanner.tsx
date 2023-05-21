@@ -7,7 +7,7 @@ export default function BannedBanner({ banned, reason }) {
     banned && (
       <div className="alert alert-error flex w-fit justify-end gap-2 py-2">
         <div
-          className="tooltip tooltip-bottom whitespace-pre-line text-left md:tooltip-bottom"
+          className="tooltip tooltip-bottom tooltip-accent whitespace-pre-line text-left md:tooltip-bottom"
           data-tip={tipText}>
           <InfoIcon />
         </div>

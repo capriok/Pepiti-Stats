@@ -39,7 +39,7 @@ export default function DesktopTrackList({ races }: Props) {
                 isActive ? 'text-md bg-secondary/60 py-3 text-white ' : 'bg-base-100'
               }`}>
               <div className="opacity-40">{raceInfo.by === 'pep' ? 'Pepiti' : raceInfo.by}</div>
-              <div>{raceInfo.track}</div>
+              <div className="text-right">{raceInfo.track}</div>
             </button>
           )
         })}
