@@ -11,7 +11,7 @@ export default function BannedBanner({ banned, reason }) {
           data-tip={tipText}>
           <InfoIcon />
         </div>
-        <h1>{reason + ' Ban'}</h1>
+        <div>{reason + ' Ban'}</div>
       </div>
     )
   )

@@ -37,7 +37,7 @@ function RiderSearch() {
     <div className="relative flex justify-center gap-2">
       <div className="relative">
         <input
-          className="input-bordered input w-[400px]"
+          className="input-bordered input w-full md:w-[400px]"
           placeholder={`Search for Riders...`}
           value={term}
           onChange={(e) => setTerm(e.currentTarget.value)}
@@ -61,7 +61,7 @@ const SearchDropdown = ({ term, open, loading, results }) => {
 
   return (
     <div
-      className={`${openCn} scroll absolute top-14 z-20 flex max-h-[300px] w-[400px] flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-700/50 ring-2 ring-primary/40 backdrop-blur-lg transition-opacity`}>
+      className={`${openCn} scroll absolute top-14 z-20 flex max-h-[300px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-700/50 ring-2 ring-primary/40 backdrop-blur-lg transition-opacity md:w-[400px]`}>
       {loading && <Spinner className="py-4" />}
 
       {!results.length && term.length < 2 && (
@@ -77,9 +77,9 @@ const SearchDropdown = ({ term, open, loading, results }) => {
               <div>{search.name}</div>
               {search.banned && (
                 <div className="flex">
-                  <h1 className="mr-2 text-sm font-bold text-red-600">
+                  <div className="mr-2 text-sm font-bold text-red-600">
                     {search.banned_by + ' Ban'}
-                  </h1>
+                  </div>
                 </div>
               )}
             </div>

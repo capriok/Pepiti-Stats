@@ -7,7 +7,7 @@ interface Props {
   races: Array<RecentRace>
 }
 
-export const DesktopTrackList = ({ races }: Props) => {
+export default function DesktopTrackList({ races }: Props) {
   const router = useRouter()
   const pathname = usePathname()
   const raceId = pathname.split('/')[2]

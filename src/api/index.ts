@@ -132,12 +132,12 @@ class PepitiApi {
 
   // ADMINISTRATION
 
-  public async BlackListSR(): Promise<{ records: any }> {
+  public async GetBlackListSR(): Promise<{ riders: any }> {
     const data = await publicRequest('/blacklist.json')
     return data
   }
 
-  public async BlackListNonSR(): Promise<{ records: any }> {
+  public async GetBlackListNonSR(): Promise<{ riders: any }> {
     const data = await publicRequest('/blacklist_non_sr.json ')
     return data
   }

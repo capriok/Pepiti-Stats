@@ -32,7 +32,7 @@ export default function TrackRecords({ trackList }: Props) {
 
   return (
     <div className="overflow-auto md:w-full">
-      <h3 className="mb-2 text-lg font-semibold">Track Records</h3>
+      <div className="mb-2 text-lg font-semibold">Track Records</div>
       <select
         value={selectedTrack}
         className="select select-xs mb-1 w-full border-none bg-base-200 md:select-sm"

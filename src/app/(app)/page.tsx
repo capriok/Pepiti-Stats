@@ -20,9 +20,9 @@ export default function Page() {
           <div className="min-w-[50%]">
             <div className="mb-5 mt-5 h-[1px] w-[150px] border border-white/40 md:mb-10" />
 
-            <h1 className="mb-5 text-4xl font-bold leading-relaxed md:text-6xl">
+            <div className="mb-5 text-4xl font-bold leading-relaxed md:text-6xl">
               Competition for <div className="text-5xl md:text-7xl">Everyone.</div>
-            </h1>
+            </div>
 
             <p className="my-5 text-neutral-400">
               We are a community of racing and statistic enthusiasts

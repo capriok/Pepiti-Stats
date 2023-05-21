@@ -10,7 +10,7 @@ interface Props {
   standings: any
 }
 
-const MMRAnalysisTable = ({ standings }: Props) => {
+export default function MMRAnalysisTable({ standings }: Props) {
   console.log(standings)
 
   const columns = [
@@ -86,5 +86,3 @@ const MMRAnalysisTable = ({ standings }: Props) => {
 
   return <Table columns={columns} data={standings} />
 }
-
-export default MMRAnalysisTable

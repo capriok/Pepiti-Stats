@@ -1,6 +1,6 @@
 import Api from '~/api'
-import { DesktopTrackList } from './components/DesktopTrackList'
-import { MobileTrackList } from './components/MobileTrackList'
+import DesktopTrackList from './components/DesktopTrackList'
+import MobileTrackList from './components/MobileTrackList'
 
 export const metadata = {
   title: 'Pepiti Stats',

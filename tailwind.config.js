@@ -6,17 +6,27 @@ module.exports = {
   darkMode: ['class', '[data-mode="dark"]'],
   theme: {
     extend: {
-      backgroundImage: {
-        'table-bg': "url('/brand/SVGs/table-bg-15.svg')",
+      animation: {
+        marquee: 'marquee 5s linear infinite',
+        marquee2: 'marquee2 5s linear infinite',
+        'pulsing-bg': 'pulsing-bg 3s ease-in-out infinite',
       },
       keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        marquee2: {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(0%)' },
+        },
         'pulsing-bg': {
           '0%, 100%': { backgroundColor: 'rgb(255,255,255,0.5)' },
           '50%': { backgroundColor: 'rgb(0,0,0,0)' },
         },
       },
-      animation: {
-        'pulsing-bg': 'pulsing-bg 3s ease-in-out infinite',
+      backgroundImage: {
+        'table-bg': "url('/brand/SVGs/table-bg-15.svg')",
       },
     },
   },

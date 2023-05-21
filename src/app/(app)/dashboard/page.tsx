@@ -6,7 +6,7 @@ import TrackRecords from './components/TrackRecords'
 import WorldRecordsTable from '~/components/tables/WorldRecordsTable'
 import MMRRecordsTable from '~/components/tables/MMRRecordsTable'
 import SRRecordsTable from '~/components/tables/SRRecordsTable'
-import DonationMarquee from '~/components/DonationMarquee'
+import DonationMarquee from '~/app/(app)/dashboard/components/DonationMarquee'
 
 export default async function Page() {
   const apiStats = await Api.GetSummaryStats()
@@ -24,27 +24,27 @@ export default async function Page() {
 
         <div className="grid gap-5 md:grid-cols-3">
           <div>
-            <h3 className="pb-2 text-lg font-semibold">Top Records</h3>
+            <div className="pb-2 text-lg font-semibold">Top Records</div>
             <WorldRecordsTable worldRecords={worldRecords} seeMore />
           </div>
           <div>
-            <h3 className="pb-2 text-lg font-semibold">Top MMR</h3>
+            <div className="pb-2 text-lg font-semibold">Top MMR</div>
             <MMRRecordsTable worldMMR={worldMMR} seeMore />
           </div>
           <div>
-            <h3 className="flex items-center gap-2 pb-2">
+            <div className="flex items-center gap-2 pb-2">
               <div className="text-lg font-semibold">Top SR</div>
-              <div className="stat-desc text-sm">(Safety Rating)</div>
-            </h3>
+              <div className="text-sm text-neutral-500">(Safety Rating)</div>
+            </div>
             <SRRecordsTable worldSR={worldSR} seeMore />
           </div>
         </div>
 
         <TrackRecords trackList={trackList.tracks} />
-
+        {/* 
         <div className="mt-10">
           <DonationMarquee />
-        </div>
+        </div> */}
       </div>
     </>
   )
