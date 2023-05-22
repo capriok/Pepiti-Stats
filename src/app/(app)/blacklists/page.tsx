@@ -2,6 +2,11 @@ import Api from '~/api'
 import PageHeader from '~/components/PageHeader'
 import Blacklists from '../admin/blacklists/components/Blacklists'
 
+export const metaData = {
+  title: 'Pepiti | Blacklists',
+  description: 'View and look up riders on the Safety Rating and Global Blacklists',
+}
+
 export default async function Page() {
   const blacklistSR = await Api.GetBlackListSR()
   const blacklistNonSR = await Api.GetBlackListNonSR()

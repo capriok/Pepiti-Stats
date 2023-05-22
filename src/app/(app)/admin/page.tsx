@@ -2,6 +2,11 @@ import { NewspaperIcon } from 'lucide-react'
 import Link from 'next/link'
 import PageHeader from '~/components/PageHeader'
 
+export const metaData = {
+  title: 'Pepiti | Admin Portal',
+  description: 'Admin Portal for managing Pepiti servers',
+}
+
 export default function Page() {
   return (
     <div className="min-h-screen">

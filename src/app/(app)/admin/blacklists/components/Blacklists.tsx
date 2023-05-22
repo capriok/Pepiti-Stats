@@ -1,6 +1,6 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { unbanRider } from '~/api/server-actions'
 import { Pill } from '~/components/pills/Pill'
 import Table from '~/components/Table'
@@ -47,6 +47,9 @@ export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Pro
 }
 
 const BlacklistTable = ({ blacklist, isAdmin }) => {
+  const searchParams = useSearchParams()
+  const guidParam = searchParams.get('guid')
+
   const data = blacklist.map((rider) => ({
     ...rider,
     guid: rider._id,
@@ -112,10 +115,11 @@ const BlacklistTable = ({ blacklist, isAdmin }) => {
     <Table
       data={data}
       columns={columns}
-      rankEnabled={false}
-      paginationEnabled={true}
       searchKey="guid"
       searchEnabled={true}
+      searchTerm={guidParam ?? ''}
+      rankEnabled={false}
+      paginationEnabled={true}
     />
   )
 }

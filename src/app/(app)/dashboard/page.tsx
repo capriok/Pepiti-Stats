@@ -6,7 +6,12 @@ import TrackRecords from './components/TrackRecords'
 import WorldRecordsTable from '~/components/tables/WorldRecordsTable'
 import MMRRecordsTable from '~/components/tables/MMRRecordsTable'
 import SRRecordsTable from '~/components/tables/SRRecordsTable'
-import DonationMarquee from '~/app/(app)/dashboard/components/DonationMarquee'
+
+export const metaData = {
+  title: 'Pepiti | Dashboard',
+  description:
+    'Access race stats in real-time, host and join leagues, connect with fellow races through social integrations, and compete with rivals through global leaderboards',
+}
 
 export default async function Page() {
   const apiStats = await Api.GetSummaryStats()
@@ -41,10 +46,6 @@ export default async function Page() {
         </div>
 
         <TrackRecords trackList={trackList.tracks} />
-        {/* 
-        <div className="mt-10">
-          <DonationMarquee />
-        </div> */}
       </div>
     </>
   )

@@ -1,15 +1,24 @@
 import Api from '~/api'
-import useAuthUser from '~/utils/useAuthUser'
 import PageHeader from '~/components/PageHeader'
-import Table from '~/components/Table'
 import WorldRecordsTable from '~/components/tables/WorldRecordsTable'
 import MMRRecordsTable from '~/components/tables/MMRRecordsTable'
 import SRRecordsTable from '~/components/tables/SRRecordsTable'
 
+export async function generateMetadata({ params }) {
+  const recordMap = {
+    riders: 'World',
+    mmr: 'MMR',
+    sr: 'SR',
+  }
+
+  return {
+    title: `Pepiti | Records`,
+    description: `Top ${recordMap[params.top]} Records`,
+  }
+}
+
 export default async function Page({ params: { top } }) {
   const topRecords = await Api.GetDynamicTopRecords(top, 1000)
-  console.log(top)
-  console.log(topRecords)
 
   const data = () => {
     switch (top) {
@@ -32,9 +41,10 @@ export default async function Page({ params: { top } }) {
           <WorldRecordsTable
             worldRecords={topRecords}
             seeMore={false}
-            centeredEnabled={true}
-            searchEnabled={true}
+            pageSize={25}
             paginationEnabled={true}
+            searchEnabled={true}
+            centeredEnabled={false}
           />
         )
       case 'mmr':
@@ -42,9 +52,10 @@ export default async function Page({ params: { top } }) {
           <MMRRecordsTable
             worldMMR={topRecords}
             seeMore={false}
-            centeredEnabled={true}
-            searchEnabled={true}
+            pageSize={25}
             paginationEnabled={true}
+            searchEnabled={true}
+            centeredEnabled={false}
           />
         )
       case 'sr':
@@ -52,14 +63,14 @@ export default async function Page({ params: { top } }) {
           <SRRecordsTable
             worldSR={topRecords}
             seeMore={false}
-            centeredEnabled={true}
-            searchEnabled={true}
+            pageSize={25}
             paginationEnabled={true}
+            searchEnabled={true}
+            centeredEnabled={false}
           />
         )
       default:
         return <></>
-        break
     }
   }
 
@@ -74,14 +85,6 @@ export default async function Page({ params: { top } }) {
           </div>
         }
       />
-
-      {top === 'contacts' && (
-        <p className="text-center text-red-500">
-          You don&apos;t want to be here, you are at risk of a timeout or even a ban. If you have an
-          SR under 900 you will be banned.
-        </p>
-      )}
-
       <Renderer />
     </div>
   )

@@ -2,23 +2,14 @@
 
 import Link from 'next/link'
 import RiderLink from '../RiderLink'
-import Table from '../Table'
+import Table, { TableOptions } from '../Table'
 
-interface Props {
+interface Props extends TableOptions {
   worldRecords: any
   seeMore?: boolean
-  searchEnabled?: boolean
-  paginationEnabled?: boolean
-  centeredEnabled?: boolean
 }
 
-export default function WorldRecordsTable({
-  worldRecords,
-  seeMore,
-  centeredEnabled = false,
-  searchEnabled = false,
-  paginationEnabled = false,
-}: Props) {
+export default function WorldRecordsTable({ worldRecords, seeMore, ...rest }: Props) {
   const data: any = Object.keys(worldRecords.riders).map((rk) => ({
     ...worldRecords.riders[rk],
   }))
@@ -44,13 +35,7 @@ export default function WorldRecordsTable({
 
   return (
     <div className="flex flex-col items-end">
-      <Table
-        columns={columns}
-        data={data}
-        searchEnabled={searchEnabled}
-        paginationEnabled={paginationEnabled}
-        centeredEnabled={centeredEnabled}
-      />
+      <Table columns={columns} data={data} {...rest} />
       {seeMore && (
         <Link href="/top/riders" className="link pt-2 text-sm text-primary no-underline">
           See More

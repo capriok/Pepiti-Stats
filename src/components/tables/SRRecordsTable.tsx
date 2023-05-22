@@ -2,24 +2,14 @@
 
 import Link from 'next/link'
 import RiderLink from '../RiderLink'
-import Table from '../Table'
+import Table, { TableOptions } from '../Table'
 
-interface Props {
+interface Props extends TableOptions {
   worldSR: any
   seeMore?: boolean
-  searchEnabled?: boolean
-  paginationEnabled?: boolean
-  centeredEnabled?: boolean
 }
 
-export default function SRRecordsTable({
-  worldSR,
-  seeMore,
-
-  centeredEnabled = false,
-  searchEnabled = false,
-  paginationEnabled = false,
-}: Props) {
+export default function SRRecordsTable({ worldSR, seeMore, ...rest }: Props) {
   const columns = [
     {
       key: 'name',
@@ -39,13 +29,7 @@ export default function SRRecordsTable({
 
   return (
     <div className="flex flex-col items-end">
-      <Table
-        columns={columns}
-        data={worldSR.riders}
-        searchEnabled={searchEnabled}
-        paginationEnabled={paginationEnabled}
-        centeredEnabled={centeredEnabled}
-      />
+      <Table columns={columns} data={worldSR.riders} {...rest} />
       {seeMore && (
         <Link href="/top/sr" className="link pt-2 text-sm text-primary no-underline">
           See More

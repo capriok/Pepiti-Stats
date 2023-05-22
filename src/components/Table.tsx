@@ -38,8 +38,10 @@ interface TableColumn {
  */
 export interface TableOptions {
   paginationEnabled?: boolean
+  pageSize?: number
   searchEnabled?: boolean
   searchKey?: string
+  searchTerm?: string
   centeredEnabled?: boolean
   rankEnabled?: boolean
   rankStyle?: boolean
@@ -58,8 +60,10 @@ interface TableProps extends TableOptions {
 const Table: React.FC<TableProps> = (props) => {
   const {
     paginationEnabled = false,
+    pageSize: pageSizeOption = 10,
     searchEnabled = false,
     searchKey = 'name',
+    searchTerm = '',
     centeredEnabled = false,
     rankEnabled = true,
     rankStyle = true,
@@ -86,8 +90,8 @@ const Table: React.FC<TableProps> = (props) => {
   }, [searchEnabled, searchKey, rankEnabled, rankStyle, headerCn, rowCn])
 
   const [page, setPage] = useState(0)
-  const [pageSize, setPageSize] = useState(10)
-  const [term, setTerm] = useState('')
+  const [pageSize, setPageSize] = useState(pageSizeOption)
+  const [term, setTerm] = useState(searchTerm)
 
   /** preps the data for the table to use */
   const manipulatedData = () => {
@@ -235,6 +239,7 @@ const Table: React.FC<TableProps> = (props) => {
             </div>
             <select
               className="input input-sm"
+              value={pageSize}
               onChange={(e) => handlePageSizeChange(e.target.value)}>
               <option value={10}>10</option>
               <option value={25}>25</option>

@@ -2,23 +2,14 @@
 
 import Link from 'next/link'
 import RiderLink from '../RiderLink'
-import Table from '../Table'
+import Table, { TableOptions } from '../Table'
 
-interface Props {
+interface Props extends TableOptions {
   worldMMR: any
   seeMore?: boolean
-  searchEnabled?: boolean
-  paginationEnabled?: boolean
-  centeredEnabled?: boolean
 }
 
-export default function MMRRecordsTable({
-  worldMMR,
-  seeMore,
-  centeredEnabled = false,
-  searchEnabled = false,
-  paginationEnabled = false,
-}: Props) {
+export default function MMRRecordsTable({ worldMMR, seeMore, ...rest }: Props) {
   const columns = [
     {
       key: 'name',
@@ -38,13 +29,7 @@ export default function MMRRecordsTable({
 
   return (
     <div className="flex flex-col items-end">
-      <Table
-        columns={columns}
-        data={worldMMR.riders}
-        searchEnabled={searchEnabled}
-        paginationEnabled={paginationEnabled}
-        centeredEnabled={centeredEnabled}
-      />
+      <Table columns={columns} data={worldMMR.riders} {...rest} />
       {seeMore && (
         <Link href="/top/mmr" className="link pt-2 text-sm text-primary no-underline">
           See More

@@ -2,6 +2,11 @@ import Link from 'next/link'
 import ReportsList from './components/ReportsList'
 import PageHeader from '~/components/PageHeader'
 
+export const metaData = {
+  title: 'Pepiti | Admin Manager',
+  description: 'Manage submitted rider reports',
+}
+
 export default async function Page() {
   return (
     <>

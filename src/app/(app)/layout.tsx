@@ -1,6 +1,4 @@
 export const metadata = {
-  title: 'Pepiti Stats',
-  description: 'MX Bikes Stats',
   keywords: 'Pepiti, MX Bikes Stats, MX Bikes, Stats, MXBikes, MXBikes Stats, MXB Mods',
 }
 

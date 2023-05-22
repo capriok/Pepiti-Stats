@@ -4,6 +4,11 @@ import PageHeader from '~/components/PageHeader'
 import useAuthUser from '~/utils/useAuthUser'
 import Blacklists from './components/Blacklists'
 
+export const metaData = {
+  title: 'Pepiti | Admin Manager',
+  description: 'View and look up riders on the Safety Rating and Global Blacklists',
+}
+
 export default async function Page() {
   const user = await useAuthUser()
   const blacklistSR = await Api.GetBlackListSR()
