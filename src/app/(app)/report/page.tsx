@@ -11,7 +11,7 @@ export const metadata = {
 
 export default async function Page() {
   const recentRaces = await Api.GetRecentRaces()
-  const user = await useAuthUser()
+  const user = useAuthUser()
 
   return (
     <div className="min-h-[90vh]">

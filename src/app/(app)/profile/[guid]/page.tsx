@@ -21,7 +21,7 @@ Contacts: ${rider.contact}
 }
 
 export default async function Page({ params: { guid } }) {
-  const user = await useAuthUser()
+  const user = useAuthUser()
   const rider = await Api.GetRider(guid)
   const mmrHistory = await Api.GetRiderMMRHistory(guid)
 

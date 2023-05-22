@@ -3,7 +3,7 @@
 import { cookies } from 'next/headers'
 import jwt_decode from 'jwt-decode'
 
-async function useAuthUser() {
+function useAuthUser() {
   const cookieStore = cookies()
   const token = cookieStore.get('access_token')?.value
 

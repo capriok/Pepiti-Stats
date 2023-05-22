@@ -10,7 +10,7 @@ export const metadata = {
 }
 
 export default async function Page() {
-  const user = await useAuthUser()
+  const user = useAuthUser()
   const blacklistSR = await Api.GetBlackListSR()
   const blacklistNonSR = await Api.GetBlackListNonSR()
 

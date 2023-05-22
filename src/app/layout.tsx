@@ -15,7 +15,7 @@ import Footer from '~/components/Footer'
 import '~/globals.css'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const user = await useAuthUser()
+  const user = useAuthUser()
 
   return (
     <html lang="en">
