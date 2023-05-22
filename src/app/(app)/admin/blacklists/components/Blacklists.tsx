@@ -13,12 +13,14 @@ interface Props {
 }
 
 export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Props) {
+  const searchParams = useSearchParams()
+  const tabParam = searchParams.get('tab')
   const pathname = usePathname()
   const isAdministrating = pathname.includes('admin') && isAdmin
 
   const tabs = [
     {
-      key: 'blacklist-nonsr',
+      key: 'blacklistNonSr',
       label: 'Global Blacklist',
       children: (
         <div className="p-4 pt-0">
@@ -27,7 +29,7 @@ export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Pro
       ),
     },
     {
-      key: 'blacklist-sr',
+      key: 'blacklistSr',
       label: 'Safety Rating Blacklist',
       children: (
         <div className="p-4 pt-0">
@@ -40,7 +42,7 @@ export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Pro
   return (
     <div className="flex justify-center">
       <div className="card card-body w-full bg-base-200 p-0">
-        <Tabs items={tabs} wide={true} />
+        <Tabs items={tabs} wide={true} defaultActive={tabParam ?? ''} />
       </div>
     </div>
   )
