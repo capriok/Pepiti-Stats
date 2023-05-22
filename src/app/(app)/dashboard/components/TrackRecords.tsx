@@ -25,9 +25,7 @@ export default function TrackRecords({ trackList }: Props) {
       return <div className="flex justify-center text-lg font-semibold">Failed to Load</div>
     if (isLoading) return <SkeletonTable />
 
-    const trackRecords = data?.records.slice(0, 10)
-
-    return <TrackRecordsTable records={trackRecords} />
+    return <TrackRecordsTable records={data.records} />
   }
 
   return (
@@ -44,11 +42,6 @@ export default function TrackRecords({ trackList }: Props) {
         ))}
       </select>
       <Content data={data} error={error} isLoading={isLoading} />
-      <div className="mt-2 w-full text-right">
-        <Link href={`/track/${selectedTrack}`} className="link text-sm text-primary no-underline">
-          See More
-        </Link>
-      </div>
     </div>
   )
 }

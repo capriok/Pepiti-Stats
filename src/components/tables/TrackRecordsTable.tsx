@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const TrackRecordsTable = ({ records }: Props) => {
-  const data = records.slice(0, 250).map((r) => ({
+  const data = records.map((r) => ({
     ...r,
     name: r.rider_name,
   }))
@@ -56,5 +56,5 @@ export const TrackRecordsTable = ({ records }: Props) => {
     },
   ]
 
-  return <Table data={data} columns={columns} />
+  return <Table data={data} columns={columns} searchEnabled={true} paginationEnabled={true} />
 }

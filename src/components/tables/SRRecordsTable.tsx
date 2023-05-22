@@ -7,9 +7,19 @@ import Table from '../Table'
 interface Props {
   worldSR: any
   seeMore?: boolean
+  searchEnabled?: boolean
+  paginationEnabled?: boolean
+  centeredEnabled?: boolean
 }
 
-export default function SRRecordsTable({ worldSR, seeMore }: Props) {
+export default function SRRecordsTable({
+  worldSR,
+  seeMore,
+
+  centeredEnabled = false,
+  searchEnabled = false,
+  paginationEnabled = false,
+}: Props) {
   const columns = [
     {
       key: 'name',
@@ -29,9 +39,15 @@ export default function SRRecordsTable({ worldSR, seeMore }: Props) {
 
   return (
     <div className="flex flex-col items-end">
-      <Table columns={columns} data={worldSR.riders} centeredEnabled={true} />
+      <Table
+        columns={columns}
+        data={worldSR.riders}
+        searchEnabled={searchEnabled}
+        paginationEnabled={paginationEnabled}
+        centeredEnabled={centeredEnabled}
+      />
       {seeMore && (
-        <Link href="/dashboard/top/sr" className="link pt-2 text-sm text-primary no-underline">
+        <Link href="/top/sr" className="link pt-2 text-sm text-primary no-underline">
           See More
         </Link>
       )}

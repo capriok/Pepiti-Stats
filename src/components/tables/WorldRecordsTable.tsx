@@ -7,9 +7,18 @@ import Table from '../Table'
 interface Props {
   worldRecords: any
   seeMore?: boolean
+  searchEnabled?: boolean
+  paginationEnabled?: boolean
+  centeredEnabled?: boolean
 }
 
-export default function WorldRecordsTable({ worldRecords, seeMore }: Props) {
+export default function WorldRecordsTable({
+  worldRecords,
+  seeMore,
+  centeredEnabled = false,
+  searchEnabled = false,
+  paginationEnabled = false,
+}: Props) {
   const data: any = Object.keys(worldRecords.riders).map((rk) => ({
     ...worldRecords.riders[rk],
   }))
@@ -35,9 +44,15 @@ export default function WorldRecordsTable({ worldRecords, seeMore }: Props) {
 
   return (
     <div className="flex flex-col items-end">
-      <Table columns={columns} data={data} centeredEnabled={true} />
+      <Table
+        columns={columns}
+        data={data}
+        searchEnabled={searchEnabled}
+        paginationEnabled={paginationEnabled}
+        centeredEnabled={centeredEnabled}
+      />
       {seeMore && (
-        <Link href="/dashboard/top/riders" className="link pt-2 text-sm text-primary no-underline">
+        <Link href="/top/riders" className="link pt-2 text-sm text-primary no-underline">
           See More
         </Link>
       )}
