@@ -23,7 +23,13 @@ export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Pro
       key: 'blacklistNonSr',
       label: 'Global Blacklist',
       children: (
-        <div className="p-4 pt-0">
+        <div className="p-4">
+          <BlacklistAlert
+            color="red"
+            text={
+              'This is the Global blacklist If youre on this list, you did something worthy of being banned from online racing for the forseeable future'
+            }
+          />
           <BlacklistTable blacklist={blacklistNonSR} isAdmin={isAdministrating} />
         </div>
       ),
@@ -32,7 +38,13 @@ export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Pro
       key: 'blacklistSr',
       label: 'Safety Rating Blacklist',
       children: (
-        <div className="p-4 pt-0">
+        <div className="p-4">
+          <BlacklistAlert
+            color="orange"
+            text={
+              'This is the Safety Rating blacklist If youre on this list, you have a Safety Rating below 900, race in a banned/no-contact server to build your SR back up'
+            }
+          />
           <BlacklistTable blacklist={blacklistSR} isAdmin={isAdministrating} />
         </div>
       ),
@@ -47,6 +59,12 @@ export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Pro
     </div>
   )
 }
+
+const BlacklistAlert = ({ text, color }) => (
+  <div className={`my-4 rounded-xl bg-${color}-800/40 text-white`}>
+    <div className="text-desc grid place-items-center p-4">{text}</div>
+  </div>
+)
 
 const BlacklistTable = ({ blacklist, isAdmin }) => {
   const searchParams = useSearchParams()

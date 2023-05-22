@@ -14,12 +14,7 @@ export default async function Page() {
 
   return (
     <>
-      <PageHeader
-        title="Blacklists"
-        extra={
-          <Pill text={<div className="p-2 ">Be sure to check the Global and SR Blacklist</div>} />
-        }
-      />
+      <PageHeader title="Blacklists" extra="Be sure to check the Global and SR Blacklist" />
       <Blacklists
         isAdmin={false}
         blacklistSR={blacklistSR.riders.filter((r) => r.banned_by === 'SR')}
