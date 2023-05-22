@@ -1,6 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
+import { unbanRider } from '~/api/server-actions'
 import { Pill } from '~/components/pills/Pill'
 import Table from '~/components/Table'
 import Tabs from '~/components/Tabs'
@@ -91,7 +92,17 @@ const BlacklistTable = ({ blacklist, isAdmin }) => {
     key: 'admin',
     label: 'Admin',
     render: (_, row) => {
-      return <button className="btn-outline btn-sm btn mb-2">Unban</button>
+      return (
+        <form action={unbanRider}>
+          <button
+            type="submit"
+            name="guid"
+            value={row.guid}
+            className="btn-outline btn-sm btn mb-2">
+            Unban
+          </button>
+        </form>
+      )
     },
   }
 

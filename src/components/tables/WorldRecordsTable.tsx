@@ -35,7 +35,7 @@ export default function WorldRecordsTable({ worldRecords, seeMore }: Props) {
 
   return (
     <div className="flex flex-col items-end">
-      <Table columns={columns} data={data} />
+      <Table columns={columns} data={data} centeredEnabled={true} />
       {seeMore && (
         <Link href="/dashboard/top/riders" className="link pt-2 text-sm text-primary no-underline">
           See More

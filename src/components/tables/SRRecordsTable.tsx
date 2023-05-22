@@ -29,7 +29,7 @@ export default function SRRecordsTable({ worldSR, seeMore }: Props) {
 
   return (
     <div className="flex flex-col items-end">
-      <Table columns={columns} data={worldSR.riders} />
+      <Table columns={columns} data={worldSR.riders} centeredEnabled={true} />
       {seeMore && (
         <Link href="/dashboard/top/sr" className="link pt-2 text-sm text-primary no-underline">
           See More

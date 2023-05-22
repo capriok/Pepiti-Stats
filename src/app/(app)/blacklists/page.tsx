@@ -1,6 +1,6 @@
 import Api from '~/api'
 import PageHeader from '~/components/PageHeader'
-import Blacklists from '../admin/blacklist/components/Blacklists'
+import Blacklists from '../admin/blacklists/components/Blacklists'
 
 export default async function Page() {
   const blacklistSR = await Api.GetBlackListSR()

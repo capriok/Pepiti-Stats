@@ -17,7 +17,7 @@ const Managers = () => {
       <div className="mr-4 flex flex-col">
         <div className="my-4 text-xl font-semibold">Blacklists</div>
         <Link
-          href="/admin/blacklist"
+          href="/admin/blacklists"
           className="card card-body mb-2 flex w-[300px] cursor-pointer bg-base-200 no-underline hover:bg-neutral-800">
           <div className="flex">
             <NewspaperIcon />

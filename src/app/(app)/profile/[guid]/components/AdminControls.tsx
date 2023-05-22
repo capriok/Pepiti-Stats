@@ -24,23 +24,22 @@ export default function AdminControls({ user, rider }) {
               <div
                 tabIndex={0}
                 className="card dropdown-content card-compact mx-auto mt-2 w-64 border-[1px] border-error bg-neutral-800/70 p-2 shadow-xl backdrop-blur-md">
-                <div className="card-body">
-                  <form action={banRider}>
-                    <input
-                      ref={reasonRef}
-                      name="reason"
-                      placeholder="Reason for ban..."
-                      className="input-bordered input input-sm w-full"
-                    />
-                    <button
-                      type="submit"
-                      name="guid"
-                      value={rider._id}
-                      className="btn-error btn-sm btn">
-                      Ban Rider
-                    </button>
-                  </form>
-                </div>
+                <form action={banRider} className="card-body flex justify-center">
+                  <input
+                    ref={reasonRef}
+                    name="reason"
+                    autoComplete="off"
+                    placeholder="Reason for ban..."
+                    className="input-bordered input input-sm w-full"
+                  />
+                  <button
+                    type="submit"
+                    name="guid"
+                    value={rider._id}
+                    className="btn-error btn-sm btn">
+                    Ban Rider
+                  </button>
+                </form>
               </div>
             </div>
           )}

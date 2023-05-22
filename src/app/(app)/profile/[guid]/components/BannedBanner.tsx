@@ -5,8 +5,6 @@ export default function BannedBanner({ banned, reason }) {
   - "SR" Banned means your safety rating is under 900. Race in a banned/no-contact server to build your SR back up.\n
   - Custom message ban means you should go to the MB Bikes discord and find the #ban-appeal channel under Pepiti-Stats.`
 
-  console.log('BANNER', banned)
-
   return (
     banned && (
       <div className="alert alert-error flex w-fit justify-end gap-2 py-2">

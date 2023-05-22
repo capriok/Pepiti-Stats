@@ -40,6 +40,7 @@ export interface TableOptions {
   paginationEnabled?: boolean
   searchEnabled?: boolean
   searchKey?: string
+  centeredEnabled?: boolean
   rankEnabled?: boolean
   rankStyle?: boolean
   headerCn?: string
@@ -59,6 +60,7 @@ const Table: React.FC<TableProps> = (props) => {
     paginationEnabled = false,
     searchEnabled = false,
     searchKey = 'name',
+    centeredEnabled = false,
     rankEnabled = true,
     rankStyle = true,
     headerCn = '',
@@ -132,7 +134,12 @@ const Table: React.FC<TableProps> = (props) => {
   const tableColumns = columns.map((column) => {
     return (
       <th key={column.key} className={'py-4' + options.cns.header}>
-        <span>{column.label}</span>
+        <div
+          className={
+            'flex max-h-[35px] min-h-[40px] items-center' + centeredEnabled ? ' justify-center' : ''
+          }>
+          {column.label}
+        </div>
       </th>
     )
   })
@@ -148,13 +155,16 @@ const Table: React.FC<TableProps> = (props) => {
         <tr key={row._id}>
           {columns.map((column) => {
             const isOdd = rowIdx % 2 === 0 ? 'bg-base-100' : 'bg-base-200'
+            const centered = centeredEnabled ? ' justify-center' : ''
             const dataKey = column.key
             const renderer = column.render
             const value = row[dataKey]
 
             return (
-              <td key={dataKey} className={`${isOdd} ${options.cns.row} p-[5px]`}>
-                <div>{renderer ? renderer(value, row) : value}</div>
+              <td key={dataKey} className={`${isOdd} ${options.cns.row} p-0`}>
+                <div className={'flex min-h-[45px] items-center' + centered}>
+                  {renderer ? renderer(value, row) : value}
+                </div>
               </td>
             )
           })}

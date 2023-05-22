@@ -29,7 +29,7 @@ export default function MMRRecordsTable({ worldMMR, seeMore }: Props) {
 
   return (
     <div className="flex flex-col items-end">
-      <Table columns={columns} data={worldMMR.riders} />
+      <Table columns={columns} data={worldMMR.riders} centeredEnabled={true} />
       {seeMore && (
         <Link href="/dashboard/top/mmr" className="link pt-2 text-sm text-primary no-underline">
           See More

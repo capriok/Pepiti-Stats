@@ -92,7 +92,6 @@ export default function RiderRecordsTable({ guid }: Props) {
       searchEnabled={true}
       paginationEnabled={true}
       rankEnabled={false}
-      rowCn="py-4"
     />
   )
 }
