@@ -4,7 +4,7 @@ import useAuthUser from '~/utils/useAuthUser'
 import BannedBanner from './components/BannedBanner'
 import { RiderProfile } from './components/RiderProfile'
 
-export async function generateMetadata({ params }) {
+export async function generatemetadata({ params }) {
   const rider = await Api.GetRider(params.guid)
 
   return {

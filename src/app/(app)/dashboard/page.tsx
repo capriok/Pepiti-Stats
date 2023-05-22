@@ -7,7 +7,7 @@ import WorldRecordsTable from '~/components/tables/WorldRecordsTable'
 import MMRRecordsTable from '~/components/tables/MMRRecordsTable'
 import SRRecordsTable from '~/components/tables/SRRecordsTable'
 
-export const metaData = {
+export const metadata = {
   title: 'Pepiti | Dashboard',
   description:
     'Access race stats in real-time, host and join leagues, connect with fellow races through social integrations, and compete with rivals through global leaderboards',

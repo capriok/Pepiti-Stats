@@ -1,6 +1,6 @@
 import PageHeader from '~/components/PageHeader'
 
-export const metaData = {
+export const metadata = {
   title: 'Pepiti | Leagues',
   description: 'Compete in race leagues for real prizes and bragging rights',
 }

@@ -2,7 +2,7 @@ import Api from '~/api'
 import processRaceSession from '~/utils/processRaceSession'
 import Race from './components/Race'
 
-export async function generateMetadata({ params }) {
+export async function generatemetadata({ params }) {
   const raceSession = await Api.GetRace(params.raceId)
   let session = processRaceSession(raceSession) as ProcessedRaceSession
   console.log(session)

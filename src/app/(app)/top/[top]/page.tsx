@@ -4,7 +4,7 @@ import WorldRecordsTable from '~/components/tables/WorldRecordsTable'
 import MMRRecordsTable from '~/components/tables/MMRRecordsTable'
 import SRRecordsTable from '~/components/tables/SRRecordsTable'
 
-export async function generateMetadata({ params }) {
+export async function generatemetadata({ params }) {
   const recordMap = {
     riders: 'World',
     mmr: 'MMR',

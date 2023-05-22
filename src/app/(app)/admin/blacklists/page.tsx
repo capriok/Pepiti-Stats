@@ -4,7 +4,7 @@ import PageHeader from '~/components/PageHeader'
 import useAuthUser from '~/utils/useAuthUser'
 import Blacklists from './components/Blacklists'
 
-export const metaData = {
+export const metadata = {
   title: 'Pepiti | Admin Manager',
   description: 'View and look up riders on the Safety Rating and Global Blacklists',
 }

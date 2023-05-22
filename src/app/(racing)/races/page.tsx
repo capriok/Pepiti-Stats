@@ -1,6 +1,6 @@
 import { BikeIcon } from 'lucide-react'
 
-export const metaData = {
+export const metadata = {
   title: 'Pepiti | Races',
   description: 'Recent Races hosted on Pepiti servers',
 }
