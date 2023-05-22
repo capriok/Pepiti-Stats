@@ -6,6 +6,7 @@ import {
   MenuIcon,
   PackageIcon,
   ScrollTextIcon,
+  ShieldAlertIcon,
   ShieldIcon,
   TrophyIcon,
   UserIcon,
@@ -26,63 +27,91 @@ function NavBar(props: Props) {
 
   const { user } = props
 
-  const profileNavigationContent = (
-    <>
-      {user.guid && (
-        <>
-          <li>
-            <Link href={`/profile/${user.guid}`} className="flex justify-between">
-              Profile
-              <UserIcon />
-            </Link>
-          </li>
-          <li>
-            <Link href={`/report`} className="flex justify-between">
-              Report Rider
-              <FlagIcon />
-            </Link>
-          </li>
-          <li>
-            <Link href={`/blacklists`} className="flex justify-between">
-              Blacklists
-              <FileWarningIcon />
-            </Link>
-          </li>
-          {user.isAdmin && (
-            <li>
-              <Link href={`/admin`} className="flex justify-between">
-                Admin Portal
-                <ShieldIcon />
-              </Link>
-            </li>
-          )}
-        </>
-      )}
-
-      <Link
-        href="https://pepiti.com/stats/api/v0/steam_login"
-        target="_blank"
-        referrerPolicy="origin"
-        className="btn-ghost btn text-error">
-        {user.guid ? 'Change User' : 'Sign In'}
-      </Link>
-    </>
-  )
-
-  const endLinks = [
-    { displayName: 'Dashboard', href: '/dashboard', icon: <LayoutDashboardIcon /> },
-    { displayName: 'Races', href: '/races', icon: <ScrollTextIcon /> },
-    { displayName: 'Leagues', href: '/leagues', icon: <TrophyIcon /> },
+  const secondaryLinks = [
+    {
+      href: `/profile/${user.guid}`,
+      label: 'Profile',
+      icon: <UserIcon />,
+      admin: false,
+    },
+    {
+      href: '/report',
+      label: 'Report Rider',
+      icon: <FlagIcon />,
+      admin: false,
+    },
+    {
+      href: '/blacklists',
+      label: 'Blacklists',
+      icon: <ScrollTextIcon />,
+      admin: false,
+    },
+    {
+      href: '/admin',
+      label: 'Admin Portal',
+      icon: <ShieldAlertIcon />,
+      admin: true,
+    },
+    {
+      label: (
+        <Link
+          href="https://pepiti.com/stats/api/v0/steam_login"
+          target="_blank"
+          referrerPolicy="origin"
+          className={`btn-ghost btn-sm btn mt-[2px] h-full w-full text-error hover:bg-transparent ${
+            user.guid ? 'btn-error' : ''
+          }`}>
+          {user.guid ? 'Change User' : 'Sign In'}
+        </Link>
+      ),
+      admin: false,
+    },
   ]
 
-  const endNavLinks = endLinks.map((link, idx) => {
+  const secondaryNavLinks = secondaryLinks.map((link, idx) => {
+    if (!user.isAdmin && link.admin) return <></>
+    return (
+      <li key={idx}>
+        {link.href ? (
+          <Link href={link.href} className="my-[2px] flex justify-between">
+            <div className="flex w-full items-center justify-between max-md:text-[16px] lg:gap-2">
+              {link.label}
+              {link.icon}
+            </div>
+          </Link>
+        ) : (
+          link.label
+        )}
+      </li>
+    )
+  })
+
+  const primaryLinks = [
+    {
+      href: '/dashboard',
+      label: 'Dashboard',
+      icon: <LayoutDashboardIcon />,
+    },
+    {
+      href: '/races',
+      label: 'Races',
+      icon: <ScrollTextIcon />,
+    },
+    {
+      href: '/leagues',
+      label: 'Leagues',
+      icon: <TrophyIcon />,
+    },
+  ]
+
+  const primaryNavLinks = primaryLinks.map((link, idx) => {
     return (
       <Link
         key={idx}
         href={link.href}
-        className="btn-ghost btn flex justify-between font-normal normal-case lg:mr-2 lg:font-semibold">
-        <div className="flex w-full items-center justify-between max-md:text-[16px] lg:gap-2 ">
-          {link.displayName}
+        className="btn-ghost btn flex justify-between font-normal normal-case hover:bg-secondary/60 lg:mr-2 lg:font-semibold">
+        <div className="flex w-full items-center justify-between max-md:text-[16px] lg:gap-2">
+          {link.label}
           {link.icon}
         </div>
       </Link>
@@ -94,7 +123,7 @@ function NavBar(props: Props) {
       <div className="sticky top-0 z-50 bg-base-200 backdrop-blur-md">
         <div className="navbar mx-auto max-w-[1400px]">
           <div className="navbar-start">
-            <Link href="/dashboard" className="btn-ghost btn">
+            <Link href="/dashboard" className="btn-ghost btn hover:bg-secondary/60">
               <Image
                 priority={true}
                 src="/assets/brand/SVGs/icon-V2.svg"
@@ -108,11 +137,13 @@ function NavBar(props: Props) {
 
           <div className="navbar-end">
             {/* Desktop View */}
-            <div className="hidden lg:flex lg:px-1">{endNavLinks}</div>
+            <div className="hidden lg:flex lg:px-1">{primaryNavLinks}</div>
 
             {/* Mobile View - Dropdown */}
             <div className="dropdown-end dropdown">
-              <label tabIndex={0} className="btn-ghost rounded-btn btn-md btn">
+              <label
+                tabIndex={0}
+                className="btn-ghost rounded-btn btn-md btn hover:bg-secondary/60">
                 <MenuIcon />
               </label>
               <ul
@@ -120,9 +151,9 @@ function NavBar(props: Props) {
                 className="dropdown-content menu rounded-box mt-4 w-52 bg-base-200 p-2 shadow">
                 <div className="bg-base-200 lg:hidden">
                   <div className="stats-desc p-2 font-semibold">Navigation</div>
-                  {endNavLinks}
+                  {primaryNavLinks}
                 </div>
-                {profileNavigationContent}
+                {secondaryNavLinks}
               </ul>
             </div>
           </div>

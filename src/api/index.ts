@@ -160,7 +160,7 @@ class PepitiApi {
   }
 
   public async Logout(): Promise<{ status: boolean }> {
-    return { status: false }
+    return { status: true }
   }
 }
 
