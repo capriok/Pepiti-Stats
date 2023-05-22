@@ -50,9 +50,18 @@ export default async function Page({ params: { guid } }) {
                 className="btn-outline btn-ghost btn-sm btn">
                 Blacklist Info
               </Link>
-              <Link href={`/appeal/${rider._id}`} className="btn-outline btn-ghost btn-sm btn">
-                Ban Appeal
+              <Link
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://discord.com/invite/mx-bikes"
+                className="btn-outline btn-ghost btn-sm btn">
+                Ban Appeal (In MXB Discord)
               </Link>
+              <button disabled={true} className="btn-outline btn-ghost btn-sm btn">
+                {/* <Link href={`/appeal/${rider._id}`} className="btn-outline btn-ghost btn-sm btn"> */}
+                Ban Appeal (On-Site)
+                {/* </Link> */}
+              </button>
             </div>
           </div>
         )}

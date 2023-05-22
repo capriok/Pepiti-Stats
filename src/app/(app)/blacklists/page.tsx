@@ -1,6 +1,5 @@
 import Api from '~/api'
 import PageHeader from '~/components/PageHeader'
-import { Pill } from '~/components/pills/Pill'
 import Blacklists from '../admin/blacklists/components/Blacklists'
 
 export const metadata = {
