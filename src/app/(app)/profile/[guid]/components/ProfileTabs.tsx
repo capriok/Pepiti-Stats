@@ -3,7 +3,6 @@ import RiderWorldRecordsTable from './tabs/RiderWorldRecordsTable'
 import RiderMMRHistoryChart from './tabs/RiderMMRHistoryChart'
 import RiderRacesTable from './tabs/RiderRacesTable'
 import RiderRecordsTable from './tabs/RiderRecordsTable'
-import Api from '~/api'
 
 interface Props {
   rider: RiderProfile
@@ -44,7 +43,7 @@ export default function ProfileTabs({ rider, mmrHistory }: Props) {
     },
   ]
   return (
-    <div className="card-body mt-10 rounded-lg bg-base-200 p-0">
+    <div className="card-body mt-20 rounded-lg bg-base-200 p-0">
       <Tabs items={items} wide={true} />
     </div>
   )
