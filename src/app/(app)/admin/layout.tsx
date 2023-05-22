@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation'
 import { useRouter } from 'next/router'
 import React from 'react'
 import Result from '~/components/Result'
@@ -7,8 +8,7 @@ export default async function AdminLayout({ children }) {
   const user = await useAuthUser()
   const isAdmin = user.isAdmin
 
-  if (!isAdmin)
-    return <Result title="Admin area, fuck off." description="Who do you think you are?" />
+  if (!isAdmin) return redirect('/dashboard')
 
   return children
 }

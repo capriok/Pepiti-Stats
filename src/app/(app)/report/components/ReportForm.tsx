@@ -29,8 +29,11 @@ export function RiderReportForm({ user, events }: Props) {
               <span className="text-red-500">* </span> Choose Event
             </span>
           </label>
-          <select className="input-bordered select w-[400px] max-w-xs" onChange={handleEventSelect}>
-            <option disabled selected />
+          <select
+            className="input-bordered select w-[400px] max-w-xs"
+            onChange={handleEventSelect}
+            value="">
+            <option disabled />
             {events.map((event) => (
               <option key={event._id} value={event._id}>
                 {event.track}
@@ -88,8 +91,11 @@ export function RiderFormPart2({ user, eventId }) {
           <span className="text-red-500">* </span> Rider Name
         </span>
       </label>
-      <select className="input-bordered select w-full max-w-xs" onChange={handleRiderSelect}>
-        <option disabled selected />
+      <select
+        className="input-bordered select w-full max-w-xs"
+        onChange={handleRiderSelect}
+        value="">
+        <option disabled />
         {riders.map((rider) => (
           <option key={rider.id + rider.name + rider.bike_name} value={rider.id}>
             {rider.name}

@@ -32,24 +32,28 @@ function NavBar(props: Props) {
       href: `/profile/${user.guid}`,
       label: 'Profile',
       icon: <UserIcon />,
+      public: false,
       admin: false,
     },
     {
       href: '/report',
       label: 'Report Rider',
       icon: <FlagIcon />,
+      public: true,
       admin: false,
     },
     {
       href: '/blacklists',
       label: 'Blacklists',
       icon: <ScrollTextIcon />,
+      public: true,
       admin: false,
     },
     {
       href: '/admin',
       label: 'Admin Portal',
       icon: <ShieldAlertIcon />,
+      public: false,
       admin: true,
     },
     {
@@ -58,17 +62,19 @@ function NavBar(props: Props) {
           href="https://pepiti.com/stats/api/v0/steam_login"
           target="_blank"
           referrerPolicy="origin"
-          className={`btn-ghost btn-sm btn mt-[2px] h-full w-full text-error hover:bg-transparent ${
+          className={`btn-ghost btn-sm btn mt-[2px] h-full w-full text-error ${
             user.guid ? 'btn-error' : ''
           }`}>
           {user.guid ? 'Change User' : 'Sign In'}
         </Link>
       ),
+      public: true,
       admin: false,
     },
   ]
 
   const secondaryNavLinks = secondaryLinks.map((link, idx) => {
+    if (!user.guid && !link.public) return <></>
     if (!user.isAdmin && link.admin) return <></>
     return (
       <li key={idx}>

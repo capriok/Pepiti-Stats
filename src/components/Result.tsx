@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 interface Props {
   title?: string
@@ -8,28 +11,24 @@ interface Props {
 }
 
 const Result: React.FC<Props> = (props) => {
+  const router = useRouter()
   const defaultTitle = 'Error.'
   const defaultDescription = 'Something went wrong.'
-  const deafaultGoBackText = 'Get me out of here'
 
   return (
-    <div className="flex h-screen items-center justify-center px-2">
-      <div className="flex w-fit flex-col items-center justify-center bg-neutral-700/30 text-neutral-200 md:w-[75%] lg:w-[65%] xl:w-[55%]">
-        <div className="w-4/5 py-40 md:w-[65%]">
+    <div className="flex h-screen items-center justify-center">
+      <div className="card card-body flex w-full max-w-[800px] flex-col items-center justify-center rounded-lg bg-base-200 p-10">
+        <div className="mx-auto w-fit p-4 md:p-10">
           <div className="mb-5 text-2xl">{props.title || defaultTitle}</div>
           <div className="mb-5">{props.description || defaultDescription}</div>
-          <div className="flex items-end">
-            {props.extra}
-            <Link
-              href="/dashboard"
-              className="flex-1 text-neutral-400 hover:text-green-500 hover:opacity-75">
-              <div className="text-md hidden rounded-xl px-2 py-1 hover:bg-neutral-900 md:inline">
-                {props.goBackText || deafaultGoBackText}
-              </div>
-              <div className="text-md rounded-xl px-2 py-1 hover:bg-neutral-900 md:hidden">
-                Go back
-              </div>
-            </Link>
+          <div className="flex flex-col items-start gap-2">
+            <div>{props.extra}</div>
+            <div
+              onClick={() => router.back()}
+              className="btn-outline btn-sm btn flex items-center justify-center rounded-lg">
+              <div className="hidden font-normal md:inline">{props.goBackText || 'Go Back'}</div>
+              <div className="font-normal md:hidden">Go back</div>
+            </div>
           </div>
         </div>
       </div>
