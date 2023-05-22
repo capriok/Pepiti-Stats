@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { unbanRider } from '~/api/server-actions'
 import { Pill } from '~/components/pills/Pill'
@@ -26,10 +27,9 @@ export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Pro
         <div className="p-4">
           <BlacklistAlert
             color="red"
-            text={
-              'This is the Global blacklist If youre on this list, you did something worthy of being banned from online racing for the forseeable future'
-            }
+            text="If youre on this list, you did something worthy of being banned from online racing for the forseeable future"
           />
+          <BanAppealButtons />
           <BlacklistTable blacklist={blacklistNonSR} isAdmin={isAdministrating} />
         </div>
       ),
@@ -41,10 +41,9 @@ export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Pro
         <div className="p-4">
           <BlacklistAlert
             color="orange"
-            text={
-              'This is the Safety Rating blacklist If youre on this list, you have a Safety Rating below 900, race in a banned/no-contact server to build your SR back up'
-            }
+            text="If youre on this list, you have a Safety Rating below 950, race in a banned/no-contact server to build your SR back up"
           />
+          <BanAppealButtons />
           <BlacklistTable blacklist={blacklistSR} isAdmin={isAdministrating} />
         </div>
       ),
@@ -63,6 +62,23 @@ export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Pro
 const BlacklistAlert = ({ text, color }) => (
   <div className={`my-4 rounded-xl bg-${color}-800/40 text-white`}>
     <div className="text-desc grid place-items-center p-4">{text}</div>
+  </div>
+)
+
+const BanAppealButtons = () => (
+  <div className="flex justify-end gap-2">
+    <Link
+      target="_blank"
+      rel="noopener noreferrer"
+      href="https://discord.com/invite/mx-bikes"
+      className="btn-outline btn-ghost btn-sm btn">
+      Ban Appeal (MXB Discord)
+    </Link>
+    <button disabled={true} className="btn-outline btn-ghost btn-sm btn">
+      {/* <Link href={`/appeal/${rider._id}`} className="btn-outline btn-ghost btn-sm btn"> */}
+      Ban Appeal (On-Site)
+      {/* </Link> */}
+    </button>
   </div>
 )
 
