@@ -3,9 +3,11 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  keywords: 'Pepiti, Pepiti Races, Pepiti Leagues, MX Bikes Stats, MX Bikes, Stats, MXB Mods, MX Bikes Mods',
+  keywords:
+    'Pepiti, Pepiti Races, Pepiti Leagues, MX Bikes Stats, MX Bikes, Stats, MXB Mods, MX Bikes Mods',
 }
 
+import { Analytics } from '@vercel/analytics/react'
 import useAuthUser from '~/utils/useAuthUser'
 import NavBar from '~/components/Navbar'
 import Footer from '~/components/Footer'
@@ -21,6 +23,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <NavBar user={user} />
         {children}
         <Footer user={user} />
+        <Analytics />
       </body>
     </html>
   )
