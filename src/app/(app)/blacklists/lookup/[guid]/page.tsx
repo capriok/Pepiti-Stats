@@ -5,11 +5,10 @@ export async function generateMetadata({ params: { guid } }) {
   const rider = await Api.GetRider(guid)
 
   return {
-    title: 'Pepiti | Blacklist Search',
-    description: `Search for ${rider.name} on the blacklist
-\nBanned: ${rider.banned}
-\nReason: ${rider.banned_by}
-`,
+    title: 'Pepiti | Blacklist Lookup',
+    description: `Looking up: ${rider.name}
+Status: ${rider.banned ? 'Banned' : 'Not Banned'}
+${rider.banned ? `Reason: ${rider.banned_by}` : ''}`,
   }
 }
 
@@ -19,7 +18,7 @@ export default async function Page({ params: { guid } }) {
   return (
     <div className="grid min-h-[75vh] w-full place-items-center">
       <div className="grid place-items-center">
-        <div className="mb-4 w-full text-center text-xl">Blacklist Rider Lookup</div>
+        <div className="mb-4 w-full text-center text-xl">Blacklist Lookup</div>
         <div className="stat grid w-[400px] place-items-center justify-center gap-4 rounded-lg bg-base-200">
           <div className="grid place-items-center">
             <div className="stat-title w-full text-center">Ban Status</div>
