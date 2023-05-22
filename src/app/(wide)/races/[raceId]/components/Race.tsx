@@ -36,7 +36,7 @@ export default function Race({ session }: Props) {
   const [tab, setTab] = useState(items[1])
 
   return (
-    <div className="w-full lg:mx-2">
+    <div className="w-full">
       <div className="ml-4 mt-2">
         <Tabs
           items={items}

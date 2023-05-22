@@ -10,9 +10,9 @@ export async function generateMetadata({ params }) {
   return {
     title: `Pepiti | ${rider.name}`,
     description: `Online: ${rider.online}
-    \nMMR: ${rider.MMR}
-    \nSR: ${rider.SR}
-    \nContacts: ${rider.contact}
+MMR: ${rider.MMR}
+SR: ${rider.SR}
+Contacts: ${rider.contact}
     `,
     openGraph: {
       images: [rider.avatar],

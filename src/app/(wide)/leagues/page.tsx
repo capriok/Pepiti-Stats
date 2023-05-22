@@ -8,7 +8,7 @@ export const metadata = {
 export default async function Page() {
   return (
     <>
-      <PageHeader title="Leagues" />
+      <PageHeader title="Leagues" wide={true} />
     </>
   )
 }

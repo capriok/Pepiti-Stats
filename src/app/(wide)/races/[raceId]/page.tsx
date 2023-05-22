@@ -5,7 +5,6 @@ import Race from './components/Race'
 export async function generateMetadata({ params }) {
   const raceSession = await Api.GetRace(params.raceId)
   let session = processRaceSession(raceSession) as ProcessedRaceSession
-  console.log(session)
 
   return {
     title: `Pepiti | ${session.type}`,

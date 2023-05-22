@@ -4,7 +4,7 @@ import PageHeader from '~/components/PageHeader'
 
 export const metadata = {
   title: 'Pepiti | Admin Portal',
-  description: 'Admin Portal for managing Pepiti servers',
+  description: 'Admin Portal for managing Pepiti services',
 }
 
 export default function Page() {
