@@ -1,13 +1,10 @@
 'use client'
 import {
-  FileWarningIcon,
   FlagIcon,
   LayoutDashboardIcon,
   MenuIcon,
-  PackageIcon,
   ScrollTextIcon,
   ShieldAlertIcon,
-  ShieldIcon,
   TrophyIcon,
   UserIcon,
 } from 'lucide-react'

@@ -23,7 +23,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <NavBar user={user} />
         {children}
         <Footer user={user} />
-        <Analytics />
+        {/* <Analytics /> */}
       </body>
     </html>
   )
