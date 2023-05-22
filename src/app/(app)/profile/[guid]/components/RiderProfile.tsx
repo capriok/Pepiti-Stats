@@ -31,7 +31,7 @@ export const RiderProfile = ({ user, rider, mmrHistory }: Props) => {
   )
 }
 
-const RiderStats = ({ rider }) => {
+const RiderStats = ({ rider }: { rider: RiderProfile }) => {
   return (
     <div className="stats mb-10 w-full bg-base-200 shadow-xl">
       <div className="stat">
@@ -72,7 +72,7 @@ const RiderStats = ({ rider }) => {
   )
 }
 
-const RaceStats = ({ rider }) => {
+const RaceStats = ({ rider }: { rider: RiderProfile }) => {
   return (
     <div className="stats w-full bg-base-200 shadow-xl">
       <div className="stat">

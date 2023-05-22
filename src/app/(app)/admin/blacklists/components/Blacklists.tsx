@@ -18,20 +18,20 @@ export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Pro
 
   const tabs = [
     {
+      key: 'blacklist-nonsr',
+      label: 'Global Blacklist',
+      children: (
+        <div className="p-4 pt-0">
+          <BlacklistTable blacklist={blacklistNonSR} isAdmin={isAdministrating} />
+        </div>
+      ),
+    },
+    {
       key: 'blacklist-sr',
       label: 'Safety Rating Blacklist',
       children: (
         <div className="p-4 pt-0">
           <BlacklistTable blacklist={blacklistSR} isAdmin={isAdministrating} />
-        </div>
-      ),
-    },
-    {
-      key: 'blacklist-nonsr',
-      label: 'General Blacklist',
-      children: (
-        <div className="p-4 pt-0">
-          <BlacklistTable blacklist={blacklistNonSR} isAdmin={isAdministrating} />
         </div>
       ),
     },
@@ -129,6 +129,7 @@ const renderBannedBy = (reason) => {
     case 'global':
     case 'perma':
     case 'racism':
+    case 'racist':
       return 'red'
     case 'sr':
       return 'orange'

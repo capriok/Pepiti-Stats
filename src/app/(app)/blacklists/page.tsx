@@ -1,5 +1,6 @@
 import Api from '~/api'
 import PageHeader from '~/components/PageHeader'
+import { Pill } from '~/components/pills/Pill'
 import Blacklists from '../admin/blacklists/components/Blacklists'
 
 export const metadata = {
@@ -13,7 +14,12 @@ export default async function Page() {
 
   return (
     <>
-      <PageHeader title="Blacklists" />
+      <PageHeader
+        title="Blacklists"
+        extra={
+          <Pill text={<div className="p-2 ">Be sure to check the Global and SR Blacklist</div>} />
+        }
+      />
       <Blacklists
         isAdmin={false}
         blacklistSR={blacklistSR.riders.filter((r) => r.banned_by === 'SR')}
