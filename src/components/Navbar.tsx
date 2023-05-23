@@ -1,4 +1,5 @@
 'use client'
+
 import {
   FlagIcon,
   LayoutDashboardIcon,
@@ -6,13 +7,14 @@ import {
   MoonIcon,
   ScrollTextIcon,
   ShieldAlertIcon,
+  SunIcon,
   TrophyIcon,
   UserIcon,
 } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DonationBanner from '~/app/(app)/dashboard/components/DonationBanner'
 
 interface Props {
@@ -22,6 +24,22 @@ interface Props {
 function NavBar({ user }: Props) {
   const pathname = usePathname()
   const atDashboard = pathname === '/dashboard'
+
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light')
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+  }, [theme])
+
+  const handleThemeChange = () => {
+    if (theme === 'light') {
+      setTheme('dark')
+      localStorage.setItem('theme', 'dark')
+    } else {
+      setTheme('light')
+      localStorage.setItem('theme', 'light')
+    }
+  }
 
   const secondaryLinks = [
     {
@@ -51,6 +69,18 @@ function NavBar({ user }: Props) {
       icon: <ShieldAlertIcon />,
       public: false,
       admin: true,
+    },
+    {
+      label: (
+        <div
+          onClick={handleThemeChange}
+          className="flex w-full items-center justify-between max-md:text-[16px] lg:gap-2">
+          <div className="max-md:text-[16px]">{theme === 'light' ? 'Dark Mode' : 'Light Mode'}</div>
+          <div>{theme === 'light' ? <MoonIcon /> : <SunIcon />}</div>
+        </div>
+      ),
+      public: true,
+      admin: false,
     },
     {
       label: (

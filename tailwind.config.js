@@ -4,34 +4,26 @@ const colors = require('tailwindcss/colors')
 module.exports = {
   content: ['./src/**/*.{ts,tsx}'],
   darkMode: ['class', '[data-mode="dark"]'],
-  theme: {
-    extend: {
-      animation: {
-        marquee: 'marquee 5s linear infinite',
-        marquee2: 'marquee2 5s linear infinite',
-        'pulsing-bg': 'pulsing-bg 3s ease-in-out infinite',
-      },
-      keyframes: {
-        marquee: {
-          '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-100%)' },
-        },
-        marquee2: {
-          '0%': { transform: 'translateX(100%)' },
-          '100%': { transform: 'translateX(0%)' },
-        },
-      },
-    },
-  },
   daisyui: {
     themes: [
       {
-        theme: {
+        light: {
           'base-100': '#fafafa',
           'base-200': '#ebebeb',
           primary: '#21af34',
           secondary: '#178626',
           accent: '#101010',
+          info: '#3ABFF8',
+          success: '#36D399',
+          warning: '#FBBD23',
+          error: '#e11d48',
+        },
+        dark: {
+          'base-100': '#181a1b',
+          'base-200': '#141516',
+          primary: '#23bd38',
+          accent: '#101010',
+          secondary: '#1c9b2d',
           info: '#3ABFF8',
           success: '#36D399',
           warning: '#FBBD23',

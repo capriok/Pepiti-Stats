@@ -4,7 +4,6 @@
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--priamry) var(--secondary);
 }
 
 /* Chrome, Edge, and Safari */
@@ -14,18 +13,11 @@
 }
 
 *::-webkit-scrollbar-track {
-  background: var(--secondary);
   border-radius: 5px;
 }
 
 *::-webkit-scrollbar-thumb {
-  background: var(--primary);
   border-radius: 10px;
-}
-
-:root {
-  --primary: hsl(0, 0%, 92%);
-  --secondary: hsl(0, 0%, 80%);
 }
 
 @layer components {
