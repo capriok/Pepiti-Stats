@@ -1,6 +1,5 @@
 import Api from '~/api'
 import PageHeader from '~/components/PageHeader'
-import LeagueSearch from '~/components/searches/LeagueSearch'
 import LeagueList from './components/LeagueList'
 
 export const metadata = {
@@ -14,7 +13,7 @@ export default async function Page() {
 
   return (
     <>
-      <PageHeader title="Leagues" extra={<LeagueSearch />} />
+      <PageHeader title="Leagues" />
       <LeagueList leagues={leaguesData.leagues} />
     </>
   )

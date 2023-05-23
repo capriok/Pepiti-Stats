@@ -8,14 +8,14 @@ export async function generateMetadata({ params }) {
   const rider = await Api.GetRider(params.guid)
 
   return {
-    title: `Pepiti | ${rider.name}`,
-    description: `Online: ${rider.online}
-MMR: ${rider.MMR}
-SR: ${rider.SR}
-Contacts: ${rider.contact}
+    title: `Pepiti | ${rider?.name}`,
+    description: `Online: ${rider?.online}
+MMR: ${rider?.MMR}
+SR: ${rider?.SR}
+Contacts: ${rider?.contact}
     `,
     openGraph: {
-      images: [rider.avatar],
+      images: rider.avatar ? [rider.avatar] : [],
     },
   }
 }

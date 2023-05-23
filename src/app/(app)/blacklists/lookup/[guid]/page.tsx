@@ -6,9 +6,9 @@ export async function generateMetadata({ params: { guid } }) {
 
   return {
     title: 'Pepiti | Blacklist Lookup',
-    description: `Looking up: ${rider.name}
-Status: ${rider.banned ? 'Banned' : 'Not Banned'}
-${rider.banned ? `Reason: ${rider.banned_by}` : ''}`,
+    description: `Looking up: ${rider?.name}
+Status: ${rider?.banned ? 'Banned' : 'Not Banned'}
+${rider?.banned ? `Reason: ${rider?.banned_by}` : ''}`,
   }
 }
 

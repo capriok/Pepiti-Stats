@@ -1,28 +1,31 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
 import Spinner from '~/components/Spinner'
 import { XIcon } from 'lucide-react'
-import Api from '~/api'
 
-export default function RiderSearch() {
-  const [term, setTerm] = useState('')
+interface Props {
+  query: (term: string) => Promise<any>
+  render: (result: any) => JSX.Element
+  placeholder: string
+  defaultTerm?: string
+}
+
+export default function QuerySearch({ query, render, placeholder, defaultTerm = '' }: Props) {
   const [open, setOpen] = useState(false)
+  const [term, setTerm] = useState(defaultTerm)
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState<Array<RiderSearch>>([])
 
-  const fetchPlayerData = async () => {
+  const fetchData = async () => {
     setLoading(true)
-    const data = await Api.SearchForRider(term)
-
-    setResults(data.results)
+    setResults(await query(term))
     setLoading(false)
   }
 
   useEffect(() => {
     if (term.length >= 2) {
-      fetchPlayerData()
+      fetchData()
       setOpen(true)
     } else {
       setResults([])
@@ -38,7 +41,7 @@ export default function RiderSearch() {
       <div className="relative">
         <input
           className="input-bordered input w-full md:w-[400px]"
-          placeholder={`Search for Riders...`}
+          placeholder={placeholder}
           value={term}
           onChange={(e) => setTerm(e.currentTarget.value)}
           onFocus={() => setOpen(true)}
@@ -49,12 +52,12 @@ export default function RiderSearch() {
           </button>
         )}
       </div>
-      <SearchDropdown term={term} open={open} loading={loading} results={results} />
+      <SearchDropdown term={term} open={open} loading={loading} results={results} render={render} />
     </div>
   )
 }
 
-const SearchDropdown = ({ term, open, loading, results }) => {
+const SearchDropdown = ({ term, open, loading, results, render }) => {
   const openCn = open ? 'opacity-100 absolute' : 'opacity-0 hidden'
 
   return (
@@ -64,26 +67,11 @@ const SearchDropdown = ({ term, open, loading, results }) => {
 
       {!results.length && term.length < 2 && (
         <p className="py-4 text-center">
-          <span className="opacity-75 ">Search for rider above!</span> ☝️
+          <span className="opacity-75 ">Search above!</span> ☝️
         </p>
       )}
 
-      {results.map((search) => {
-        return (
-          <Link key={search._id} href={`/profile/${search._id}`} className="z-40 no-underline">
-            <div className="flex w-full justify-between bg-neutral-800/40 px-4 py-2 text-left hover:bg-opacity-60">
-              <div>{search.name}</div>
-              {search.banned && (
-                <div className="flex">
-                  <div className="mr-2 text-sm font-bold text-red-600">
-                    {search.banned_by + ' Ban'}
-                  </div>
-                </div>
-              )}
-            </div>
-          </Link>
-        )
-      })}
+      {results.map(render)}
     </div>
   )
 }

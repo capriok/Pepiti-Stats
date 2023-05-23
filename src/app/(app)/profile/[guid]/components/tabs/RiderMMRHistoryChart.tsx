@@ -19,7 +19,7 @@ interface Props {
 }
 
 export default function RiderMMRHistoryChart({ mmrHistory }: Props) {
-  const [limit, setLimit] = useState(20)
+  const [limit, setLimit] = useState(mmrHistory.length > 20 ? 20 : mmrHistory.length)
 
   const totaledData = mmrHistory
     .reduce((acc: Array<number>, curr, currIdx) => {

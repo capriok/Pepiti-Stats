@@ -4,5 +4,5 @@ export const metadata = {
 }
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
-  return <div className="mx-auto w-full max-w-[1400px] flex-1 px-4 xl:px-0">{children}</div>
+  return <div className="mx-auto w-full max-w-[1400px] px-4 xl:px-0">{children}</div>
 }
