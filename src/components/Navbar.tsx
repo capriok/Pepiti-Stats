@@ -25,7 +25,8 @@ function NavBar({ user }: Props) {
   const pathname = usePathname()
   const atDashboard = pathname === '/dashboard'
 
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light')
+  const lsTheme = localStorage.getItem('theme') ?? 'light'
+  const [theme, setTheme] = useState(lsTheme || 'light')
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)

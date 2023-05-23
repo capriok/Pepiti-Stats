@@ -6,6 +6,8 @@ import Spinner from '~/components/Spinner'
 import { XIcon } from 'lucide-react'
 import Api from '~/api'
 
+// ! user doesnt exist, FF011000011B7595E0 , catch
+
 export default function RiderSearch() {
   const [term, setTerm] = useState('')
   const [open, setOpen] = useState(false)
@@ -59,7 +61,7 @@ const SearchDropdown = ({ term, open, loading, results }) => {
 
   return (
     <div
-      className={`${openCn} scroll absolute top-14 z-20 flex max-h-[300px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-neutral-700/50 ring-2 ring-primary/40 backdrop-blur-lg transition-opacity md:w-[400px]`}>
+      className={`${openCn} scroll absolute top-14 z-20 flex max-h-[300px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-base-200 ring-2 ring-primary/40 backdrop-blur-lg transition-opacity md:w-[400px]`}>
       {loading && <Spinner className="py-4" />}
 
       {!results.length && term.length < 2 && (
