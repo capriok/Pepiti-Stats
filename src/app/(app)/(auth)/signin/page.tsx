@@ -13,7 +13,7 @@ export default function Page() {
           target="_blank"
           referrerPolicy="origin"
           className="btn-outline btn-secondary btn-sm btn ">
-          <div className="font-normal text-white">Login with Steam</div>
+          <div className="font-normal">Login with Steam</div>
         </Link>
       }
     />

@@ -4,16 +4,10 @@ import WorldRecordsTable from '~/components/tables/WorldRecordsTable'
 import MMRRecordsTable from '~/components/tables/MMRRecordsTable'
 import SRRecordsTable from '~/components/tables/SRRecordsTable'
 
-export async function generateMetadata({ params }) {
-  const recordMap = {
-    riders: 'World',
-    mmr: 'MMR',
-    sr: 'SR',
-  }
-
+export async function generateMetadata({ params: { top } }) {
   return {
     title: `Pepiti | Records`,
-    description: `Top ${recordMap[params.top]} Records`,
+    description: `Top ${recordMap[top]}`,
   }
 }
 
@@ -35,40 +29,19 @@ export default async function Page({ params: { top } }) {
   }
 
   const Renderer = () => {
+    const props = {
+      pageSize: 25,
+      paginationEnabled: true,
+      searchEnabled: true,
+    }
+
     switch (top) {
       case 'riders':
-        return (
-          <WorldRecordsTable
-            worldRecords={topRecords}
-            seeMore={false}
-            pageSize={25}
-            paginationEnabled={true}
-            searchEnabled={true}
-            centeredEnabled={false}
-          />
-        )
+        return <WorldRecordsTable worldRecords={topRecords} seeMore={false} {...props} />
       case 'mmr':
-        return (
-          <MMRRecordsTable
-            worldMMR={topRecords}
-            seeMore={false}
-            pageSize={25}
-            paginationEnabled={true}
-            searchEnabled={true}
-            centeredEnabled={false}
-          />
-        )
+        return <MMRRecordsTable worldMMR={topRecords} seeMore={false} {...props} />
       case 'sr':
-        return (
-          <SRRecordsTable
-            worldSR={topRecords}
-            seeMore={false}
-            pageSize={25}
-            paginationEnabled={true}
-            searchEnabled={true}
-            centeredEnabled={false}
-          />
-        )
+        return <SRRecordsTable worldSR={topRecords} seeMore={false} {...props} />
       default:
         return <></>
     }
@@ -79,13 +52,19 @@ export default async function Page({ params: { top } }) {
       <PageHeader
         title="Rider Report"
         extra={
-          <div className="flex gap-2 whitespace-nowrap text-lg">
+          <div className="flex gap-2 whitespace-nowrap font-semibold">
             <div>Top {data()?.length}</div>
-            <div className="uppercase">{top === 'riders' ? 'World Records' : top}</div>
+            <div>{recordMap[top]}</div>
           </div>
         }
       />
       <Renderer />
     </div>
   )
+}
+
+const recordMap = {
+  riders: 'World Records',
+  mmr: 'MMR Standings',
+  sr: 'SR Standings',
 }

@@ -21,7 +21,7 @@ export default function DonationMarquee() {
       <div className="text-semibold mb-2 text-xl">Recent Donations</div>
       <div className=" grid grid-cols-4 gap-5">
         {donators.slice(0, 3).map((donation) => (
-          <div key={donation.id} className=" card card-body bg-base-200 p-4 text-white">
+          <div key={donation.id} className=" card card-body bg-base-200 p-4">
             <div className="flex justify-between">
               <div className="text-lg">{donation.donator}</div>
               <div className="text-sm text-neutral-400">

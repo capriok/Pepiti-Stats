@@ -59,7 +59,7 @@ function NavBar(props: Props) {
           href="https://pepiti.com/stats/api/v0/steam_login"
           target="_blank"
           referrerPolicy="origin"
-          className={`btn-ghost btn-sm btn mt-[2px] h-full w-full text-error ${
+          className={`btn-ghost btn-sm btn mt-[2px] h-full w-full border-none text-error ${
             user.guid ? 'btn-error' : ''
           }`}>
           {user.guid ? 'Change User' : 'Sign In'}
@@ -112,7 +112,7 @@ function NavBar(props: Props) {
       <Link
         key={idx}
         href={link.href}
-        className="btn-ghost btn flex justify-between font-normal normal-case hover:bg-secondary/60 lg:mr-2 lg:font-semibold">
+        className="btn-ghost btn flex  justify-between border-none font-normal normal-case hover:bg-secondary/60 lg:mr-2 lg:font-semibold">
         <div className="flex w-full items-center justify-between max-md:text-[16px] lg:gap-2">
           {link.label}
           {link.icon}
@@ -123,10 +123,10 @@ function NavBar(props: Props) {
 
   return (
     <>
-      <div className="sticky top-0 z-50 bg-base-200 backdrop-blur-md">
+      <div className="sticky top-0 z-50 bg-base-200 backdrop-blur-lg">
         <div className="navbar mx-auto max-w-[1400px]">
           <div className="navbar-start">
-            <Link href="/dashboard" className="btn-ghost btn hover:bg-secondary/60">
+            <Link href="/dashboard" className="btn-ghost btn border-none hover:bg-secondary/80">
               <Image
                 priority={true}
                 src="/assets/brand/SVGs/icon-V2.svg"
@@ -146,12 +146,12 @@ function NavBar(props: Props) {
             <div className="dropdown-end dropdown">
               <label
                 tabIndex={0}
-                className="btn-ghost rounded-btn btn-md btn hover:bg-secondary/60">
+                className="btn-ghost rounded-btn btn-md btn border-none hover:bg-secondary/80">
                 <MenuIcon />
               </label>
               <ul
                 tabIndex={0}
-                className="dropdown-content menu rounded-box mt-4 w-52 bg-base-200 p-2 shadow">
+                className="dropdown-content menu rounded-box mt-4 w-52 bg-base-200 p-2 shadow blur-0">
                 <div className="bg-base-200 lg:hidden">
                   <div className="stats-desc p-2 font-semibold">Navigation</div>
                   {primaryNavLinks}

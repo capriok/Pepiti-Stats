@@ -24,8 +24,8 @@
 }
 
 :root {
-  --primary: #333333;
-  --secondary: #151515;
+  --primary: hsl(0, 0%, 92%);
+  --secondary: hsl(0, 0%, 80%);
 }
 
 @layer components {

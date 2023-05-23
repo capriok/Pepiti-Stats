@@ -1,6 +1,6 @@
 import Api from '~/api'
 import PageHeader from '~/components/PageHeader'
-import RiderSearch from './components/RiderSearch'
+import RiderSearch from '~/components/searches/RiderSearch'
 import SummaryStats from './components/Summary'
 import TrackRecords from './components/TrackRecords'
 import WorldRecordsTable from '~/components/tables/WorldRecordsTable'

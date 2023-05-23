@@ -80,9 +80,11 @@ const RaceContent = ({ race }: { race: Race }) => {
 
 const DataUnavailable = () => {
   return (
-    <div className="my-20 flex flex-col items-center">
-      <div className="title opacity-50">Race data not available</div>
-      <p className="caption mt-2">Check back in a later</p>
+    <div className="grid h-[90vh] w-full place-items-center">
+      <div className="card card-body grid place-items-center bg-base-200">
+        <div className="text-lg opacity-80">Race data not available</div>
+        <p className="mt-2">Check back in a later</p>
+      </div>
     </div>
   )
 }

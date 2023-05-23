@@ -6,7 +6,7 @@ import Spinner from '~/components/Spinner'
 import { XIcon } from 'lucide-react'
 import Api from '~/api'
 
-function RiderSearch() {
+export default function RiderSearch() {
   const [term, setTerm] = useState('')
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -53,8 +53,6 @@ function RiderSearch() {
     </div>
   )
 }
-
-export default RiderSearch
 
 const SearchDropdown = ({ term, open, loading, results }) => {
   const openCn = open ? 'opacity-100 absolute' : 'opacity-0 hidden'

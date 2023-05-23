@@ -4,15 +4,15 @@ export default function MMRPill({ mmr }: { mmr: number }) {
 
   const colorMap = {
     negative: {
-      bg: 'bg-red-500/30',
+      bg: 'bg-red-500/80',
       text: 'text-red-200',
     },
     even: {
-      bg: 'bg-orange-500/30',
+      bg: 'bg-orange-500/80',
       text: 'text-orange-200',
     },
     positive: {
-      bg: 'bg-secondary/30',
+      bg: 'bg-secondary/80',
       text: 'text-green-200',
     },
   }

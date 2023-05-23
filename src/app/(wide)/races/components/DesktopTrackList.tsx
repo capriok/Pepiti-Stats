@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
@@ -32,15 +33,17 @@ export default function DesktopTrackList({ races }: Props) {
         {filteredRaceInfo.map((raceInfo) => {
           const isActive = raceId === raceInfo._id
           return (
-            <button
-              onClick={() => router.push(`/races/${raceInfo._id}`)}
+            <Link
               key={raceInfo._id}
-              className={`flex justify-between rounded-lg px-2 py-2 hover:bg-secondary/40 ${
-                isActive ? 'text-md bg-secondary/60 py-3 text-white ' : 'bg-base-100'
+              href={`/races/${raceInfo._id}`}
+              className={`group flex items-center justify-between rounded-lg px-2 py-2 hover:bg-secondary/80 hover:text-white ${
+                isActive ? 'bg-secondary/80 py-3 text-white ' : 'bg-base-100'
               }`}>
-              <div className="opacity-40">{raceInfo.by === 'pep' ? 'Pepiti' : raceInfo.by}</div>
+              <div className="stat-desc group-hover:text-white">
+                {raceInfo.by === 'pep' ? 'Pepiti' : raceInfo.by}
+              </div>
               <div className="text-right">{raceInfo.track}</div>
-            </button>
+            </Link>
           )
         })}
       </div>

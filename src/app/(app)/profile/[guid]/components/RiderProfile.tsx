@@ -33,7 +33,7 @@ export const RiderProfile = ({ user, rider, mmrHistory }: Props) => {
 
 const RiderStats = ({ rider }: { rider: RiderProfile }) => {
   return (
-    <div className="stats mb-10 w-full bg-base-200 shadow-xl">
+    <div className="stats mb-10 w-full bg-base-200">
       <div className="stat">
         <div className="stat-title">MMR</div>
         <div className="stat-value py-2 text-2xl">{rider.MMR}</div>

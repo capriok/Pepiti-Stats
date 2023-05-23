@@ -10,7 +10,7 @@ export default function Footer({ user }: Props) {
   const date = new Date()
 
   return (
-    <footer className="mt-10 bg-base-200 p-10 text-base-content">
+    <footer className="mt-10 bg-base-200 p-10">
       <div className="footer mx-auto max-w-[1400px]">
         <div>
           <Image
@@ -67,7 +67,7 @@ export default function Footer({ user }: Props) {
         <div>
           <span className="footer-title">Donations</span>
           <div>Help pay for services you enjoy</div>
-          <div className="btn-ghost btn-sm btn bg-secondary/60 normal-case text-white hover:bg-secondary">
+          <div className="btn-ghost btn-sm btn bg-secondary/80 normal-case text-white hover:bg-secondary">
             <a
               target="_blank"
               rel="noreferrer"

@@ -82,23 +82,22 @@ class PepitiApi {
     const data = await publicRequest(`/rider/${guid}/mmr_history`)
     return data
   }
+  public async GetRiderLeagues(token: string): Promise<{ leagues: any[] }> {
+    const data = await privateRequest('/my_leagues', token)
+    return data
+  }
 
   // LEAGUES
 
-  // public async GetAuthLeagues(token: string): Promise<{ leagues: any[] }> {
-  //   const data = await privateRequest('/my_leagues', token)
-  //   return data
-  // }
+  public async GetAllLeagues(): Promise<{ leagues: any }> {
+    const data = await publicRequest('/leagues')
+    return data
+  }
 
-  // public async GetLeagues(): Promise<{ leagues: LeagueData[] }> {
-  //   const data = await publicRequest('/leagues')
-  //   return data
-  // }
-
-  // public async GetLeague(leagueId: string, token: string): Promise<LeagueData> {
-  //   const data = await privateRequest(`/league/${leagueId}`, token)
-  //   return data
-  // }
+  public async GetLeague(leagueId: string, token: string): Promise<{league: any}> {
+    const data = await privateRequest(`/league/${leagueId}`, token)
+    return data
+  }
 
   // league = {
   //   join: async (leagueId: string, body: any, token: string) => {

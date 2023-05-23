@@ -26,10 +26,10 @@ export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Pro
       children: (
         <div className="p-4">
           <BlacklistAlert
-            color="red"
-            text="If youre on this list, you did something worthy of being banned from online racing for the forseeable future"
+            color="bg-red-800/80"
+            text="If youre on this list, you did something worthy of being banned from online racing for the foreseeable future"
           />
-          <BanAppealButtons />
+          {!pathname.includes('admin') && <BanAppealButtons />}
           <BlacklistTable blacklist={blacklistNonSR} isAdmin={isAdministrating} />
         </div>
       ),
@@ -40,10 +40,10 @@ export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Pro
       children: (
         <div className="p-4">
           <BlacklistAlert
-            color="orange"
+            color="bg-orange-800/80"
             text="If youre on this list, you have a Safety Rating below 950, race in a banned/no-contact server to build your SR back up"
           />
-          <BanAppealButtons />
+          {!pathname.includes('admin') && <BanAppealButtons />}
           <BlacklistTable blacklist={blacklistSR} isAdmin={isAdministrating} />
         </div>
       ),
@@ -60,7 +60,7 @@ export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Pro
 }
 
 const BlacklistAlert = ({ text, color }) => (
-  <div className={`my-4 rounded-xl bg-${color}-800/40 text-white`}>
+  <div className={`my-4 rounded-xl ${color} text-white`}>
     <div className="text-desc grid place-items-center p-4">{text}</div>
   </div>
 )

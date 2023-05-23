@@ -4,8 +4,8 @@ interface PillProps {
 }
 
 export const Pill = ({ text, color = 'neutral' }: PillProps) => {
-  const bgColor = color ? `bg-${color}-500/30` : 'bg-neutral-500/30'
-  const textColor = color ? `text-${color}-300` : 'text-neutral-300'
+  const bgColor = color !== 'neutral' ? `bg-${color}-600/80` : 'bg-neutral-600/80'
+  const textColor = color !== 'neutral' ? `text-${color}-400` : 'text-neutral-200'
 
   return (
     <div

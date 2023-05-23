@@ -19,7 +19,7 @@ export function RiderReportForm({ user, events }: Props) {
   }
 
   return (
-    <div className="card card-body mx-auto mt-10 w-fit bg-neutral-800/40">
+    <div className="card card-body mx-auto mt-10 w-fit bg-base-200">
       <div className="flex flex-col justify-center align-middle">
         <div className="form-control w-full max-w-xs">
           {/* Event */}
@@ -32,7 +32,7 @@ export function RiderReportForm({ user, events }: Props) {
           <select
             className="input-bordered select w-[400px] max-w-xs"
             onChange={handleEventSelect}
-            value="">
+            defaultValue="">
             <option disabled />
             {events.map((event) => (
               <option key={event._id} value={event._id}>
@@ -94,7 +94,7 @@ export function RiderFormPart2({ user, eventId }) {
       <select
         className="input-bordered select w-full max-w-xs"
         onChange={handleRiderSelect}
-        value="">
+        defaultValue="">
         <option disabled />
         {riders.map((rider) => (
           <option key={rider.id + rider.name + rider.bike_name} value={rider.id}>
@@ -127,12 +127,7 @@ export function ProofFormPart3({ user, eventId, riderForm }) {
   }
 
   const disabled = !eventId || !riderForm.rider || riderForm.claim.length < 50 || !files.length
-
-  const buttonCns = {
-    active: 'bg-primary rounded-lg py-2 text-white',
-    disabled: 'bg-grey-400 rounded-lg py-2 text-grey-500',
-  }
-  const buttonCn = disabled ? buttonCns.disabled : buttonCns.active
+  const buttonCn = disabled ? '' : 'bg-secondary rounded-lg py-2 font-semibold text-white'
 
   const handleSumbit = () => {
     console.log('Report Form', {

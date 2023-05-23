@@ -36,12 +36,12 @@ export default function Tabs({
   }
 
   function Tab({ item }) {
-    const active = item.key === activeTab.key ? 'bg-secondary/60 text-white' : 'bg-base-200'
-
+    const active = item.key === activeTab.key ? 'bg-secondary/80 text-white' : 'bg-base-200'
+    const wideActive = wide ? 'w-full' : ''
     return (
       <button
         onClick={() => selectTab(item)}
-        className={`tab-lifted tab min-h-[35px] ${wide ? 'w-full' : ''} ${active}`}>
+        className={`tab-lifted tab min-h-[35px] hover:font-semibold ${wideActive} ${active}`}>
         <div className="whitespace-nowrap text-[15px]">{item.label}</div>
       </button>
     )

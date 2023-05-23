@@ -20,13 +20,6 @@ module.exports = {
           '0%': { transform: 'translateX(100%)' },
           '100%': { transform: 'translateX(0%)' },
         },
-        'pulsing-bg': {
-          '0%, 100%': { backgroundColor: 'rgb(255,255,255,0.5)' },
-          '50%': { backgroundColor: 'rgb(0,0,0,0)' },
-        },
-      },
-      backgroundImage: {
-        'table-bg': "url('/brand/SVGs/table-bg-15.svg')",
       },
     },
   },
@@ -34,7 +27,8 @@ module.exports = {
     themes: [
       {
         theme: {
-          'base-100': '#181a1b',
+          'base-100': '#fafafa',
+          'base-200': '#ebebeb',
           primary: '#21af34',
           secondary: '#178626',
           accent: '#101010',

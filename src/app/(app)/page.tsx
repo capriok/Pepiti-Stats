@@ -37,7 +37,7 @@ export default function Page() {
               through social integrations, and compete with rivals through global leaderboards
             </p>
             <Link href="/dashboard" className="btn-outline btn-secondary btn mb-4">
-              <div className="text-white/80">Take me to the dashboard!</div>
+              Take me to the dashboard!
             </Link>
           </div>
         </div>
