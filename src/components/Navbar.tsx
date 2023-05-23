@@ -3,6 +3,7 @@ import {
   FlagIcon,
   LayoutDashboardIcon,
   MenuIcon,
+  MoonIcon,
   ScrollTextIcon,
   ShieldAlertIcon,
   TrophyIcon,
@@ -18,11 +19,9 @@ interface Props {
   user: User
 }
 
-function NavBar(props: Props) {
+function NavBar({ user }: Props) {
   const pathname = usePathname()
   const atDashboard = pathname === '/dashboard'
-
-  const { user } = props
 
   const secondaryLinks = [
     {
