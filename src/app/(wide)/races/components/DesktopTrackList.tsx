@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import React, { useState } from 'react'
 
 interface Props {
@@ -9,7 +9,6 @@ interface Props {
 }
 
 export default function DesktopTrackList({ races }: Props) {
-  const router = useRouter()
   const pathname = usePathname()
   const raceId = pathname.split('/')[2]
   const [search, setSearch] = useState('')
@@ -39,7 +38,7 @@ export default function DesktopTrackList({ races }: Props) {
               className={`group flex items-center justify-between rounded-lg px-2 py-2 hover:bg-secondary/80 hover:text-white ${
                 isActive ? 'bg-secondary/80 py-3 text-white ' : 'bg-base-100'
               }`}>
-              <div className="stat-desc group-hover:text-white">
+              <div className={`stat-desc group-hover:text-white ${isActive ? 'text-white' : ''}`}>
                 {raceInfo.by === 'pep' ? 'Pepiti' : raceInfo.by}
               </div>
               <div className="text-right">{raceInfo.track}</div>

@@ -1,7 +1,6 @@
 'use client'
 
-import { ArrowLeftIcon, VerifiedIcon } from 'lucide-react'
-import Link from 'next/link'
+import { VerifiedIcon } from 'lucide-react'
 import { Pill } from '~/components/pills/Pill'
 import RiderLink from '~/components/RiderLink'
 import Table from '~/components/Table'
@@ -26,61 +25,55 @@ export default function LeagueOverview({ rider, league, host, eligibility }: Pro
             {league.verified && <VerifiedIcon />}
           </div>
         </div>
-        <div className="text-lg text-neutral-500">{league.description}</div>
+        <div className="text-lg text-accent">{league.description}</div>
       </div>
 
-      <LeagueDetails league={league} host={host} />
+      <div className="mb-2 mt-6 text-xl font-semibold md:mb-4 md:mt-10">League Details</div>
+      <LeagueInformation league={league} host={host} />
 
-      <div className="mt-10 text-lg font-semibold">League Requirements</div>
+      <div className="mb-2 mt-6 text-xl font-semibold md:mb-4 md:mt-10">League Requirements</div>
       <LeagueRequirements league={league} eligibility={eligibility} rider={rider} />
 
-      <div className="mt-10 text-lg font-semibold">League Races</div>
+      <div className="mb-2 mt-6 text-xl font-semibold md:mb-4 md:mt-10">League Races</div>
       <LeagueRaces league={league} />
 
-      <div className="mt-10 text-lg font-semibold">League Standings</div>
+      <div className="mb2  mt-6 text-xl font-semibold md:mb-4 md:mt-10">League Standings</div>
       <LeagueStandings league={league} />
     </>
   )
 }
 
-const LeagueDetails = ({ league, host }) => (
-  <div className="card card-body mx-2 bg-base-200">
-    <div className="grid w-full grid-cols-2">
+const LeagueInformation = ({ league, host }) => (
+  <div className="card card-body bg-base-200">
+    <div className="grid w-full grid-cols-1 md:grid-cols-2">
       <div className="flex flex-col">
-        <div className="mb-4 text-lg font-semibold">League Information</div>
+        <div className="mb-4 text-lg font-semibold">Information</div>
         <div className="mb-2 flex items-center gap-2">
-          <div className="text-md text-neutral-500">Verified:</div>
-          <Pill
-            text={league.verified ? 'False' : 'True'}
-            color={league.verified ? 'neutral' : 'secondary'}
-          />
-        </div>
-        <div className="mb-2 flex items-center gap-2">
-          <div className="text-md text-neutral-500">Host:</div>
+          <div className="text-md text-accent">Host:</div>
           <RiderLink href={`/profile/${host._id}`} donator={host.donation > 0}>
             {host.name}
           </RiderLink>
         </div>
         <div className="mb-2 flex items-center gap-2">
-          <div className="text-md text-neutral-500">Riders:</div>
+          <div className="text-md text-accent">Riders:</div>
           {league.total_riders}
         </div>
       </div>
 
       <div className="flex flex-col">
-        <div className="mb-4 text-lg font-semibold">League Configuration</div>
+        <div className="mb-4 text-lg font-semibold">Configuration</div>
         <div className="mb-2 flex items-center gap-2">
-          <div className="text-md text-neutral-500">Lock Bike Choice:</div>
+          <div className="text-md text-accent">Lock Bike Choice:</div>
           <Pill
-            text={league.keep_bike_selection ? 'False' : 'True'}
-            color={league.keep_bike_selection ? 'neutral' : 'red'}
+            text={league.keep_bike_selection ? 'True' : 'False'}
+            color={league.keep_bike_selection ? 'secondary' : 'neutral'}
           />
         </div>
         <div className="mb-2 flex items-center gap-2">
-          <div className="text-md text-neutral-500">Lock Race Number:</div>
+          <div className="text-md text-accent">Lock Race Number:</div>
           <Pill
-            text={league.keep_race_number ? 'False' : 'True'}
-            color={league.keep_race_number ? 'neutral' : 'red'}
+            text={league.keep_race_number ? 'True' : 'False'}
+            color={league.keep_race_number ? 'secondary' : 'neutral'}
           />
         </div>
       </div>
@@ -117,16 +110,16 @@ const LeagueRequirements = ({ league, eligibility, rider }) => {
   ]
 
   return (
-    <div className="stats mt-2 w-full bg-base-200">
+    <div className="stats w-full bg-base-200">
       {requirements.map((requirement) => (
         <div
           key={requirement.label}
-          className={`stat place-items-center ${
-            requirement.eligible ? 'text-secondary' : 'text-error'
-          }`}>
+          className="stat place-items-center">
           <div className="stat-title">{requirement.label}</div>
           <div className="stat-value my-2 text-2xl">{requirement.requiredTotal + '+'}</div>
-          <div className="stat-desc">
+          <div className={`stat-desc ${
+            requirement.eligible ? 'text-secondary' : 'text-error'
+          }`}>
             You have {requirement.riderTotal} {requirement.label}
           </div>
         </div>
@@ -137,26 +130,20 @@ const LeagueRequirements = ({ league, eligibility, rider }) => {
 
 const LeagueRaces = ({ league }) => {
   return (
-    <>
-      soon
-      {/* <div>
-        <h2 className="mt-1">Races</h2>
-        <div className="relative overflow-x-auto scroll-smooth whitespace-nowrap py-3">
-          {league.races.map((race) => (
-            <LeagueRaceCard key={race._id} race={race} />
-          ))}
-        </div>
-      </div> */}
-    </>
+    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      {league.races.map((race) => (
+        <LeagueRaceCard key={race._id} race={race} />
+      ))}
+    </div>
   )
 }
 
 const LeagueStandings = ({ league }) => {
-  const data = Object.keys(league.riders).map((guid) => {
-    const rider = league.riders[guid]
+  const data = Object.keys(league.riders).map((guid) => ({
+    _id: league.riders[guid],
+    ...league.riders[guid],
+  }))
 
-    return { _id: rider.guid, ...rider }
-  })
   const columns = [
     {
       key: 'name',
@@ -168,7 +155,7 @@ const LeagueStandings = ({ league }) => {
       label: 'Race #',
       render: (race_number, row) => (
         <div className="flex gap-2">
-          <div className="text-neutral-500">#</div>
+          <div className="text-accent">#</div>
           <div className="text-secondary">{race_number}</div>
         </div>
       ),

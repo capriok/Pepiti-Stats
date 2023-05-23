@@ -27,13 +27,13 @@ const LeagueCard = ({ league }) => {
     <div key={league._id} className="card card-body bg-base-200 p-0">
       <div className="p-2 md:p-6">
         <div className="flex items-center justify-between">
-          <div className="text-lg font-semibold">{league.name}</div>
+          <div className="text-xl font-semibold">{league.name}</div>
           <div data-tip="Verified League" className="tooltip tooltip-accent text-purple-600">
             {league.verified && <VerifiedIcon />}
           </div>
         </div>
 
-        <div className="max-h-[85px] min-h-[85px] w-full overflow-y-auto text-neutral-500">
+        <div className="max-h-[85px] min-h-[85px] w-full overflow-y-auto text-accent">
           {league.description}
         </div>
 
@@ -41,7 +41,7 @@ const LeagueCard = ({ league }) => {
         <div className="flex w-full justify-around">
           <div className="flex w-full flex-1 flex-col items-center">
             <div className="mb-4 flex flex-col items-center justify-center whitespace-nowrap">
-              <div className="text-md mb-2 font-semibold text-neutral-500">MMR</div>
+              <div className="text-md mb-2 font-semibold text-accent">MMR</div>
               <div className="text-lg">
                 <Pill text={`${league.requirements['MMR']}+`} />
               </div>
@@ -49,7 +49,7 @@ const LeagueCard = ({ league }) => {
           </div>
           <div className="flex w-full flex-1 flex-col items-center">
             <div className="mb-4 flex flex-col items-center justify-center whitespace-nowrap">
-              <div className="text-md mb-2 font-semibold text-neutral-500">SR</div>
+              <div className="text-md mb-2 font-semibold text-accent">SR</div>
               <div className="text-lg">
                 <Pill text={`${league.requirements['SR']}+`} />
               </div>
@@ -59,7 +59,7 @@ const LeagueCard = ({ league }) => {
         <div className="flex w-full justify-around">
           <div className="flex w-full flex-1 flex-col items-center">
             <div className="mb-4 flex flex-col items-center justify-center whitespace-nowrap">
-              <div className="text-md mb-2 font-semibold text-neutral-500">Races</div>
+              <div className="text-md mb-2 font-semibold text-accent">Races</div>
               <div className="text-lg">
                 <Pill text={`${league.requirements['races']}+`} />
               </div>
@@ -67,7 +67,7 @@ const LeagueCard = ({ league }) => {
           </div>
           <div className="flex w-full flex-1 flex-col items-center">
             <div className="mb-4 flex flex-col items-center justify-center whitespace-nowrap">
-              <div className="text-md mb-2 font-semibold text-neutral-500">Laps</div>
+              <div className="text-md mb-2 font-semibold text-accent">Laps</div>
               <div className="text-lg">
                 <Pill text={`${league.requirements['laps']}+`} />
               </div>
@@ -79,14 +79,14 @@ const LeagueCard = ({ league }) => {
       <div className="mt-2 flex w-full rounded-bl-lg rounded-br-lg bg-base-300 p-4">
         <div className="flex w-full justify-around">
           <div className="flex w-full flex-1 flex-col items-center">
-            <div className="text-md pb-2 font-semibold text-neutral-500">Riders Joined</div>
+            <div className="text-md pb-2 font-semibold text-accent">Riders Joined</div>
             <div className="text-lg">{league.total_riders.toLocaleString()}</div>
           </div>
           <div className="flex w-full flex-1 flex-col items-center">
-            <div className="text-md pb-2 font-semibold text-neutral-500">League</div>
+            <div className="text-md pb-2 font-semibold text-accent">League</div>
             <div className="text-lg">
-              <Link href={`/leagues/${league._id}`} className="btn-secondary btn-sm btn text-white">
-                Details
+              <Link href={`/leagues/${league._id}`} className="btn-outline btn-sm btn ">
+                See More
               </Link>
             </div>
           </div>

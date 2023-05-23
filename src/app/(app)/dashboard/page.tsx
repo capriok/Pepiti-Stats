@@ -39,7 +39,7 @@ export default async function Page() {
           <div>
             <div className="flex items-center gap-2 pb-2">
               <div className="text-lg font-semibold">Top SR</div>
-              <div className="text-sm text-neutral-500">(Safety Rating)</div>
+              <div className="text-sm text-accent">(Safety Rating)</div>
             </div>
             <SRRecordsTable worldSR={worldSR} seeMore />
           </div>

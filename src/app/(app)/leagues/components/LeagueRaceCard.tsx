@@ -1,126 +1,108 @@
+import Image from 'next/image'
 import Link from 'next/link'
+import useSWR from 'swr'
+import { privateRequest } from '~/api'
+import { Pill } from '~/components/pills/Pill'
 
 interface Props {
   race: LeagueRace
 }
 
 export default function LeagueRaceCard({ race }: Props) {
-  //  const eventDate = new Date(race.timestamp * 1000)
-  //  const [trackImage, setTrackImage] = useState(race?.track_image_url)
-  //  const status = {
-  //     0: { msg: 'Registration Open', color: 'bg-green-500/75' },
-  //     1: { msg: 'Race in Progress', color: 'bg-orange-500/75' },
-  //     2: { msg: 'Race Finished', color: 'bg-red-500/75' },
-  //  }
-  //  const isRegOpen = race.status === 0
-  //  const {
-  //     data: raceEligibilityData,
-  //     mutate: mutateEligibilityData,
-  //     isLoading,
-  //  } = useSWR(`/api/leagues/race/check/${race._id}`)
+  console.log(race)
 
-  //  if (!raceEligibilityData) {
-  //     return <Loader text="Loading league race..." />
-  //  }
+  const { data, isLoading } = useSWR(`/race/${race._id}/check`, privateRequest)
 
-  //  const isEligibleToRace = Object.keys(raceEligibilityData)
-  //     .filter((key) => key !== 'race_joined')
-  //     .every((key) => raceEligibilityData[key] === true)
+  console.log(data)
 
-  //  async function joinRace() {
-  //     try {
-  //        await axios.post(`/api/leagues/race/${race._id}`)
-
-  //        // refetch leaguedata
-  //        mutateLeagueData()
-  //        // refetch eligibility data
-  //        mutateEligibilityData()
-  //     } catch (error) {
-  //        console.log(error)
-  //     }
-  //  }
-
-  //  async function leaveRace() {
-  //     try {
-  //        await axios.delete(`/api/leagues/race/${race._id}`)
-  //        // refetch leaguedata
-  //        mutateLeagueData()
-  //        // refetch eligibility data
-  //        mutateEligibilityData()
-  //     } catch (error) {
-  //        console.log(error)
-  //     }
-  //  }
+  // const eligibility = isLoading
+  //   ? false
+  //   : Object.keys(data)
+  //       .filter((key) => key !== 'race_joined')
+  //       .every((key) => data[key] === true)
+  // console.log(eligibility)
 
   return (
-    <div className="mr-4 inline-block w-full max-w-[350px] overflow-hidden rounded-lg bg-base-200">
-      <div className="relative overflow-hidden">
-        {/* status banner */}
-        {/* <div
-               className={`${
-                  status[race.status].color
-               } w-3/4 h-8 absolute z-50 flex items-center justify-center rotate-[35deg] -right-16 top-8 backdrop-blur-sm`}>
-               <span>{status[race.status].msg}</span>
-            </div> */}
-
-        {/* track image */}
-        {/* <img
-               src={trackImage}
-               // sets track image to default image
-               onError={() => setTrackImage('/brand/SVGs/icon-V2.svg')}
-               alt=""
-               className="my-0 object-cover"
-            /> */}
+    <div className="card card-body bg-base-200 p-0">
+      <div className="overflow-hidden rounded-lg rounded-bl-none rounded-br-none">
+        <RegistrationStatus status={race.status} />
       </div>
 
-      <div className="px-3">
-        {/* <h4 className="mt-2">{race.config.event.track}</h4>
+      <div className="p-4 pt-0">
+        <div className="my-4 grid place-items-center md:my-10">
+          <Image
+            src="/assets/brand/SVGs/icon-V2.svg"
+            alt="pepiti-brand"
+            width={75}
+            height={75}
+            priority={true}
+          />
+        </div>
 
-            <span className="whitespace-pre-wrap">{eventDate.toLocaleString()}</span>
+        <div className="mt-2">{race.config.event.track}</div>
+        <div className="text-sm text-accent">
+          {new Date(race.timestamp * 1000).toLocaleString()}
+        </div>
 
-            <div>
-               <span className="opacity-50">Categories</span>
-               <div className="flex flex-wrap gap-2 my-2">
-                  {race.config.event.category.map((cat) => {
-                     return (
-                        <span
-                           key={cat}
-                           className="whitespace-nowrap bg-neutral-900 font-semibold px-3 rounded-full text-opacity-50 text-sm">
-                           {cat}
-                        </span>
-                     )
-                  })}
-               </div>
-            </div>
+        <div className="mt-4 text-accent">Categories</div>
+        <div className="my-4 flex w-full flex-wrap justify-center gap-2">
+          {race.config.event.category.map((cat) => {
+            return <Pill key={cat} text={cat} />
+          })}
+        </div>
 
-            <div>
-               <span className="opacity-50">Riders Joined</span>
-               <span className="block font-bold">{race.total_riders}</span>
-            </div>
-
-            <button
-               disabled={!isEligibleToRace || !isRegOpen}
-               onClick={() => {
-                  if (!raceEligibilityData.race_joined) {
-                     joinRace()
-                  } else {
-                     leaveRace()
-                  }
-               }}
-               className={`${
-                  raceEligibilityData.race_joined
-                     ? 'bg-red-500 [&:not(:disabled)]:hover:bg-red-500/50'
-                     : 'bg-green-500 [&:not(:disabled)]:hover:bg-green-500/50'
-               } w-full my-3 rounded-md font-semibold  disabled:opacity-50 flex justify-center gap-4`}>
-               <span>{raceEligibilityData.race_joined ? 'Leave' : 'Join'}</span>
-               {isLoading && <Spinner />}
-            </button> */}
+        <div className=" mt-4 text-accent">Riders Joined</div>
+        <div className="font-semibold">{race.total_riders}</div>
       </div>
-      <Link
-        href={`/leagues/race/${race._id}`}
-        className="link mx-auto my-2 flex w-fit text-sm text-green-500">
-        View Details
-      </Link>
+      <div className="flex w-full justify-between gap-2 rounded-lg rounded-tl-none rounded-tr-none bg-base-300 p-4">
+        <div className="w-full">
+          <Link
+            href={`/leagues/race/${race._id}`}
+            className=" btn-outline btn-sm btn flex justify-center ">
+            View Details
+          </Link>
+        </div>
+        <div className="w-full">
+          <ActionButton race={race} />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const ActionButton = ({ race }) => {
+  const registrationOpen = race.status === 0
+
+  const JoinRaceButton = ({ eligible }) => {
+    return (
+      <button
+        className="btn-secondary btn-sm btn w-full text-white"
+        // onClick={joinRace}
+        disabled={!registrationOpen}
+        // disabled={!isEligibleToRace || !registrationOpen}
+      >
+        Join
+      </button>
+    )
+  }
+
+  return (
+    <>
+      <JoinRaceButton eligible={true} />
+    </>
+  )
+}
+
+const RegistrationStatus = ({ status }) => {
+  const statusMap = {
+    0: { text: 'Registration Open', color: 'bg-secondary/80' },
+    1: { text: 'Race in Progress', color: 'bg-orange-500/80' },
+    2: { text: 'Race Finished', color: 'bg-red-500/80' },
+  }
+
+  return (
+    <div className={statusMap[status].color}>
+      <div className="flex justify-center py-2 text-white">{statusMap[status].text}</div>
     </div>
   )
 }

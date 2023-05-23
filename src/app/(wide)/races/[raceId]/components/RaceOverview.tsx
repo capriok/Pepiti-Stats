@@ -38,11 +38,11 @@ function WinnerCircle({ race }: { race: Race }) {
         <div className="flex w-full justify-around">
           <div className="flex w-full flex-1 flex-col items-center">
             <div className="mb-2 flex flex-col items-center justify-center whitespace-nowrap">
-              <div className="text-md font-semibold text-neutral-500">Race Number</div>
+              <div className="text-md font-semibold text-accent">Race Number</div>
               <div className="flex items-center text-lg text-primary">
                 <div className={`ml-2 mr-4 h-5 w-2 ${handleRankColor(1)}`} />
                 <div className="flex gap-1">
-                  <div className="text-neutral-500"># </div>
+                  <div className="text-accent"># </div>
                   <div>{race.winner.raceNumber}</div>
                 </div>
               </div>
@@ -50,7 +50,7 @@ function WinnerCircle({ race }: { race: Race }) {
           </div>
           <div className="flex w-full flex-1 flex-col items-center">
             <div className="mb-2 flex flex-col items-center justify-center whitespace-nowrap">
-              <div className="text-md font-semibold text-neutral-500">Category</div>
+              <div className="text-md font-semibold text-accent">Category</div>
               <div className="text-lg">{race.winner.category}</div>
             </div>
           </div>
@@ -58,13 +58,13 @@ function WinnerCircle({ race }: { race: Race }) {
         <div className="flex w-full justify-around">
           <div className="flex w-full flex-1 flex-col items-center">
             <div className="mb-2 flex flex-col items-center justify-center whitespace-nowrap">
-              <div className="text-md font-semibold text-neutral-500">Fastest Lap</div>
+              <div className="text-md font-semibold text-accent">Fastest Lap</div>
               <div className="text-lg">{handleLapTimes(parseInt(race.winner.fastestLap))}</div>
             </div>
           </div>
           <div className="flex w-full flex-1 flex-col items-center">
             <div className="mb-2 flex flex-col items-center justify-center whitespace-nowrap">
-              <div className="text-md font-semibold text-neutral-500">Bike</div>
+              <div className="text-md font-semibold text-accent">Bike</div>
               <div className="text-lg">{race.winner.bikeNameShort}</div>
             </div>
           </div>
@@ -73,13 +73,13 @@ function WinnerCircle({ race }: { race: Race }) {
       <div className="mt-5 flex w-full rounded-bl-lg rounded-br-lg bg-base-300 p-4">
         <div className="flex w-full justify-around">
           <div className="flex w-full flex-1 flex-col items-center">
-            <div className="text-md pb-2 font-semibold text-neutral-500">MMR +/-</div>
+            <div className="text-md pb-2 font-semibold text-accent">MMR +/-</div>
             <div className="text-lg">
               <MMRPill mmr={race.winner.mmrGain} />
             </div>
           </div>
           <div className="flex w-full flex-1 flex-col items-center">
-            <div className="text-md pb-2 font-semibold text-neutral-500">New MMR</div>
+            <div className="text-md pb-2 font-semibold text-accent">New MMR</div>
             <div className="text-lg">
               <Pill text={race.winner.newMmr} />
             </div>
@@ -107,15 +107,15 @@ function RaceNotables({ race }: { race: Race }) {
     <div className="card card-body flex w-full flex-col bg-base-200 xl:w-[40%]">
       <div className="flex-1">
         <div className="mb-4 flex justify-center text-xl font-semibold">Podium</div>
-        <div className="mb-4 flex flex-col border-b border-neutral-500/20 pb-2">
-          <div className="text-md mb-2 font-semibold text-neutral-500">Second Place</div>
+        <div className="mb-4 flex flex-col border-b border-accent/20 pb-2">
+          <div className="text-md mb-2 font-semibold text-accent">Second Place</div>
           <div className="flex justify-between">
             <div className="flex gap-2">
               <div className="flex gap-1">
-                <div className="text-neutral-500"># </div>
+                <div className="text-accent"># </div>
                 <div className="text-primary">{riderWithSecondPlace?.raceNumber}</div>
               </div>
-              <div className=" text-neutral-500">|</div>
+              <div className=" text-accent">|</div>
               <div>{riderWithSecondPlace?.name}</div>
             </div>
             <div>
@@ -123,15 +123,15 @@ function RaceNotables({ race }: { race: Race }) {
             </div>
           </div>
         </div>
-        <div className="mb-4 flex flex-col border-b border-neutral-500/20 pb-2">
-          <div className="text-md mb-2 font-semibold text-neutral-500">Third Place</div>
+        <div className="mb-4 flex flex-col border-b border-accent/20 pb-2">
+          <div className="text-md mb-2 font-semibold text-accent">Third Place</div>
           <div className="flex justify-between">
             <div className="flex gap-2">
               <div className="flex gap-1">
-                <div className="text-neutral-500"># </div>
+                <div className="text-accent"># </div>
                 <div className="text-primary">{riderWithThirdPlace?.raceNumber}</div>
               </div>
-              <div className=" text-neutral-500">|</div>
+              <div className=" text-accent">|</div>
               <div>{riderWithThirdPlace?.name}</div>
             </div>
             <div>
@@ -143,29 +143,29 @@ function RaceNotables({ race }: { race: Race }) {
 
       <div className="flex-1">
         <div className="mb-4 flex justify-center text-xl font-semibold">Notable</div>
-        <div className="mb-4 flex flex-col border-b border-neutral-500/20 pb-2">
-          <div className="text-md mb-2 font-semibold text-neutral-500">Fastest Lap</div>
+        <div className="mb-4 flex flex-col border-b border-accent/20 pb-2">
+          <div className="text-md mb-2 font-semibold text-accent">Fastest Lap</div>
           <div className="flex justify-between">
             <div className="flex gap-2">
               <div className="flex gap-1">
-                <div className="text-neutral-500"># </div>
+                <div className="text-accent"># </div>
                 <div className="text-primary">{riderWithFastestLap?.raceNumber}</div>
               </div>
-              <div className=" text-neutral-500">|</div>
+              <div className=" text-accent">|</div>
               <div>{riderWithFastestLap?.name}</div>
             </div>
             <div>{handleLapTimes(parseInt(riderWithFastestLap?.fastestLap))}</div>
           </div>
         </div>
-        <div className="mb-4 flex flex-col border-b border-neutral-500/20 pb-2">
-          <div className="text-md mb-2 font-semibold text-neutral-500">Highest MMR Gainer</div>
+        <div className="mb-4 flex flex-col border-b border-accent/20 pb-2">
+          <div className="text-md mb-2 font-semibold text-accent">Highest MMR Gainer</div>
           <div className="flex justify-between">
             <div className="flex gap-2">
               <div className="flex gap-1">
-                <div className="text-neutral-500"># </div>
+                <div className="text-accent"># </div>
                 <div className="text-primary">{riderWithHighestMmrGain?.raceNumber}</div>
               </div>
-              <div className="text-neutral-500">|</div>
+              <div className="text-accent">|</div>
               <div>{riderWithHighestMmrGain?.name}</div>
             </div>
             <MMRPill mmr={riderWithHighestMmrGain?.mmrGain} />

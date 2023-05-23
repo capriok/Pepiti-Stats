@@ -6,7 +6,7 @@ interface PillProps {
 export const Pill = ({ text, color = 'neutral' }: PillProps) => {
   const colorMap = {
     neutral: {
-      bg: 'bg-neutral-600/80 dark:bg-neutral-600/60',
+      bg: 'bg-accent/40 dark:bg-accent/60',
       text: 'text-neutral-100 dark:text-neutral-200',
     },
     secondary: {
@@ -26,7 +26,7 @@ export const Pill = ({ text, color = 'neutral' }: PillProps) => {
   return (
     <div
       className={`pill ${colorMap[color].bg} ${colorMap[color].text} w-fit rounded-[10px] px-2 py-1 text-center font-semibold`}>
-      <div className="m-0 p-0 text-sm">{text}</div>
+      <div className="m-0 p-0 px-1 text-sm">{text}</div>
     </div>
   )
 }

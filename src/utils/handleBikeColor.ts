@@ -4,7 +4,7 @@ const brandMap: any = {
   Yamaha: 'bg-blue-600/60',
   KTM: 'bg-orange-500/60',
   GASGAS: 'bg-red-600/60',
-  Husqvarna: 'bg-neutral-500/60',
+  Husqvarna: 'bg-accent/60',
   Suzuki: 'bg-yellow-300/60',
   Fantic: 'bg-neutral-700/60',
   Alta: 'bg-neutral-800/60',

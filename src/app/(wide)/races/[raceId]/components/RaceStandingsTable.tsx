@@ -21,7 +21,7 @@ export default function RaceStandingsTable({ standings }: Props) {
       label: 'Race #',
       render: (raceNumber, row) => (
         <div className="flex gap-1">
-          <div className="text-neutral-500"># </div>
+          <div className="text-accent"># </div>
           <div className="text-primary">{raceNumber}</div>
         </div>
       ),
