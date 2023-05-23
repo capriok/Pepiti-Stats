@@ -8,9 +8,10 @@ export const publicRequest = async (url: string) => {
   return res.json()
 }
 
-export const privateRequest = async (url: string, token: string) => {
+export const privateRequest = async (url: string, token: string, options?: {}) => {
   const res = await fetch(ENDPOINT + url, {
     ...nextConfig,
+    ...options,
     headers: {
       authorization: token ? `Bearer ${token}` : '',
     },
@@ -93,9 +94,23 @@ class PepitiApi {
     const data = await publicRequest('/leagues')
     return data
   }
-
-  public async GetLeague(leagueId: string, token: string): Promise<{league: any}> {
+  public async GetLeague(leagueId: string, token: string): Promise<League> {
     const data = await privateRequest(`/league/${leagueId}`, token)
+    return data
+  }
+  public async GetLeagueEligibility(leagueId: string, token: string): Promise<any> {
+    const data = await privateRequest(`/league/${leagueId}/check`, token)
+    return data
+  }
+  public async PostRiderToLeague(
+    leagueId: string,
+    token: string,
+    body: any
+  ): Promise<{ league: any }> {
+    const data = await privateRequest(`/league/${leagueId}/join`, token, {
+      method: 'POST',
+      body: JSON.stringify(body),
+    })
     return data
   }
 

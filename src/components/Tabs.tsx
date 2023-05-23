@@ -41,7 +41,7 @@ export default function Tabs({
     return (
       <button
         onClick={() => selectTab(item)}
-        className={`tab-lifted tab min-h-[35px] hover:font-semibold ${wideActive} ${active}`}>
+        className={`tab-lifted tab min-h-[35px] font-semibold text-neutral-500 ${wideActive} ${active}`}>
         <div className="whitespace-nowrap text-[15px]">{item.label}</div>
       </button>
     )

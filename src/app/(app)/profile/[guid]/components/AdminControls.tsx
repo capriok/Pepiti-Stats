@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { banRider, unbanRider } from '~/api/server-actions'
+import { banRider, unbanRider } from '~/api/actions'
 
 export default function AdminControls({ user, rider }) {
   const reasonRef = useRef<HTMLInputElement>(null)

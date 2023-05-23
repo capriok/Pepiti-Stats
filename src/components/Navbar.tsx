@@ -25,7 +25,7 @@ function NavBar({ user }: Props) {
   const pathname = usePathname()
   const atDashboard = pathname === '/dashboard'
 
-  const lsTheme = localStorage.getItem('theme') ?? 'light'
+  const lsTheme = localStorage?.getItem('theme') ?? 'light'
   const [theme, setTheme] = useState(lsTheme || 'light')
 
   useEffect(() => {
@@ -35,10 +35,10 @@ function NavBar({ user }: Props) {
   const handleThemeChange = () => {
     if (theme === 'light') {
       setTheme('dark')
-      localStorage.setItem('theme', 'dark')
+      localStorage?.setItem('theme', 'dark')
     } else {
       setTheme('light')
-      localStorage.setItem('theme', 'light')
+      localStorage?.setItem('theme', 'light')
     }
   }
 

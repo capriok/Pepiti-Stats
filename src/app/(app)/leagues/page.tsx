@@ -9,7 +9,6 @@ export const metadata = {
 
 export default async function Page() {
   const leaguesData = await Api.GetAllLeagues()
-  console.log(leaguesData)
 
   return (
     <>

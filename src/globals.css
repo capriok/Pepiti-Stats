@@ -10,14 +10,17 @@
 *::-webkit-scrollbar {
   width: 8px;
   height: 8px;
+  scrollbar-color: #b9bdc0 #717479;
 }
 
 *::-webkit-scrollbar-track {
   border-radius: 5px;
+  background: #b9bdc0;
 }
 
 *::-webkit-scrollbar-thumb {
   border-radius: 10px;
+  background: #717479;
 }
 
 @layer components {

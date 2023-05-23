@@ -24,7 +24,7 @@ interface RiderSearch {
   avatar: string
   type: 'user'
   donation: number
-  seasons: LeaguesSeason[]
+  seasons: LeagueSeason[]
   races: {
     first: number
     second: number
@@ -35,7 +35,7 @@ interface RiderSearch {
   }
 }
 
-interface LeaguesSeason {
+interface LeagueSeason {
   name: string
   MMR: number
   position: number
@@ -139,6 +139,7 @@ interface TrackRecord {
   timestamp?: number
   [key: string]: any
 }
+
 interface RaceSession {
   _id: string
   Warmup: {
@@ -196,7 +197,7 @@ interface RaceSession {
   }
 }
 
-type ProcessedRaceSession = {
+interface ProcessedRaceSession {
   name: null
   date: number
   type: string
@@ -208,18 +209,18 @@ type ProcessedRaceSession = {
   }
 }
 
-type Race = {
+interface Race {
   weather: Weather
   standings: Racer[]
   winner: Racer
 }
 
-type Weather = {
+interface Weather {
   conditions: string
   airTemp: number
 }
 
-type Racer = {
+interface Racer {
   _id: string
   name: string
   raceNumber: string
@@ -240,4 +241,56 @@ type Racer = {
   hs: number
   nrb: number
   prb: number
+}
+
+interface League {
+  _id: string
+  by: string
+  logo: string
+  trophy: string
+  name: string
+  description: string
+  verified: boolean
+  hidden: boolean
+  keep_bike_selection: boolean
+  keep_race_number: boolean
+  total_riders: number
+  riders: {
+    [key: string]: LeagueRider
+  }
+  requirements: LeagueRequirements
+  races: Array<LeagueRace>
+}
+
+interface LeagueRace {
+  _id: string
+  timestamp: number
+  config: {
+    event: {
+      category: string[]
+      track: string
+      track_layout: string
+    }
+  }
+  status: number
+  total_riders: number
+  track_image_url: string
+}
+
+interface LeagueRider {
+  guid: string
+  team: string
+  bike_id: string
+  race_number: number
+  name: string
+  points: number
+}
+
+interface LeagueRequirements {
+  [key: string]: number
+  MMR: number
+  SR: number
+  races: number
+  laps: number
+  records: number
 }
