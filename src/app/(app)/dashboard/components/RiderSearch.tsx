@@ -7,12 +7,12 @@ import QuerySearch from '~/components/searches/QuerySearch'
 
 export default function RiderSearch() {
   const searchParams = useSearchParams()
-  const guidParam = searchParams.get('guid')
+  const nameParam = searchParams.get('name')
 
   return (
     <QuerySearch
       placeholder="Search for Riders..."
-      defaultTerm={guidParam ?? ''}
+      defaultTerm={nameParam ?? ''}
       query={(term) => Api.SearchForRider(term).then((res) => res.results)}
       render={(result) => (
         <Link key={result._id} href={`/profile/${result._id}`} className="z-40 no-underline">
