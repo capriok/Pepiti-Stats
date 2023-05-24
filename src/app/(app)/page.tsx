@@ -14,7 +14,7 @@ export default function Page() {
         <div className="hero-content w-full  max-w-full flex-1 flex-col-reverse justify-between p-1 lg:flex-row-reverse">
           <div className="w-full rounded-lg border border-white/20 md:mockup-window">
             <Image
-              src="/screenshots/home.svg"
+              src="/screenshots/dashboard.svg"
               className="my-2 h-full w-full"
               width={1200}
               height={1000}

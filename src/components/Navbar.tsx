@@ -160,7 +160,7 @@ function NavBar({ user }: Props) {
             <Link href="/dashboard" className="btn-ghost btn border-none hover:bg-secondary/80">
               <Image
                 priority={true}
-                src="/assets/brand/SVGs/icon-V2.svg"
+                src="/assets/brand/pepiti-logo.svg"
                 className="w-h-10 h-10"
                 alt="pepiti_brand"
                 width={50}

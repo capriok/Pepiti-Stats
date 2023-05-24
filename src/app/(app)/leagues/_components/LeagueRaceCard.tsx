@@ -18,7 +18,7 @@ export default function LeagueRaceCard({ race }: Props) {
       <div className="p-4 pt-0">
         <div className="my-4 grid place-items-center md:my-10">
           <Image
-            src="/assets/brand/SVGs/icon-V2.svg"
+            src="/assets/brand/pepiti-logo.svg"
             alt="pepiti-brand"
             width={75}
             height={75}

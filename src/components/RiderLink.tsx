@@ -15,7 +15,7 @@ const RiderLink: React.FC<RiderProps> = ({ href, donator, children }) => {
         {children}
         {donator && (
           <Image
-            src="/assets/brand/SVGs/flag.svg"
+            src="/assets/brand/donation-flag.svg"
             alt="donation-flag"
             width={10}
             height={10}

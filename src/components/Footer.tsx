@@ -15,7 +15,7 @@ export default function Footer({ user }: Props) {
         <div>
           <Image
             priority={true}
-            src="/assets/brand/SVGs/icon-V2.svg"
+            src="/assets/brand/pepiti-logo.svg"
             width={120}
             height={120}
             alt="pepiti_brand"
