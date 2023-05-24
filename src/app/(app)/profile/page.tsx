@@ -3,14 +3,14 @@
 import useSWR from 'swr'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Spinner from '~/components/Spinner'
-import { publicRequest } from '~/api'
+import { fetcher } from '~/api'
 
 export default function Page() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const nameParam = searchParams.get('name')
 
-  const { data, isLoading } = useSWR(`/rider/search/${nameParam}`, publicRequest)
+  const { data, isLoading } = useSWR(`/rider/search/${nameParam}`, fetcher)
 
   if (isLoading) {
     return (

@@ -18,7 +18,13 @@ export default async function Page({ params: { leagueId } }) {
   return (
     <>
       <PageHeader title="League" extra={<LeagueActions />} />
-      <LeagueOverview rider={rider} league={league} host={host} eligibility={eligibility} />
+      <LeagueOverview
+        user={user}
+        rider={rider}
+        league={league}
+        host={host}
+        eligibility={eligibility}
+      />
     </>
   )
 }

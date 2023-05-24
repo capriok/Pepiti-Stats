@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { publicRequest } from '~/api'
+import { fetcher } from '~/api'
 import useSWR from 'swr'
 import { AlarmPlusIcon, BikeIcon, HourglassIcon } from 'lucide-react'
 import { handleBikeColor } from '~/utils/handleBikeColor'
@@ -16,7 +16,7 @@ interface Props {
 }
 
 export default function RiderRecordsTable({ guid }: Props) {
-  const { data, isLoading } = useSWR(`/rider/${guid}/records`, publicRequest)
+  const { data, isLoading } = useSWR(`/rider/${guid}/records`, fetcher)
 
   if (isLoading)
     return (

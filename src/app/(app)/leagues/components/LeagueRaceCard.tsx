@@ -1,19 +1,23 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import useSWR from 'swr'
-import { privateRequest } from '~/api'
+import { privateFetcher } from '~/api'
 import { Pill } from '~/components/pills/Pill'
+import { useUserContext } from './LeagueOverview'
 
 interface Props {
   race: LeagueRace
 }
 
-export default function LeagueRaceCard({ race }: Props) {
-  console.log(race)
+export default function LeagueRaceCard({  race }: Props) {
+  const user = useUserContext()
 
-  const { data, isLoading } = useSWR(`/race/${race._id}/check`, privateRequest)
-
-  console.log(data)
+  // const { data, isLoading } = useSWR(`/race/${race._id}/check`, () =>
+  //   privateFetcher(`/race/${race._id}/check`, user.token)
+  // )
+  // console.log(data)
 
   // const eligibility = isLoading
   //   ? false
@@ -54,16 +58,13 @@ export default function LeagueRaceCard({ race }: Props) {
         <div className=" mt-4 text-accent">Riders Joined</div>
         <div className="font-semibold">{race.total_riders}</div>
       </div>
-      <div className="flex w-full justify-between gap-2 rounded-lg rounded-tl-none rounded-tr-none bg-base-300 p-4">
+      <div className="w-full gap-2 rounded-lg rounded-tl-none rounded-tr-none bg-base-300 p-4">
         <div className="w-full">
           <Link
             href={`/leagues/race/${race._id}`}
             className=" btn-outline btn-sm btn flex justify-center ">
-            View Details
+            Go To Enrollment
           </Link>
-        </div>
-        <div className="w-full">
-          <ActionButton race={race} />
         </div>
       </div>
     </div>
@@ -73,12 +74,12 @@ export default function LeagueRaceCard({ race }: Props) {
 const ActionButton = ({ race }) => {
   const registrationOpen = race.status === 0
 
-  const JoinRaceButton = ({ eligible }) => {
+  const JoinRaceButton = () => {
     return (
       <button
         className="btn-secondary btn-sm btn w-full text-white"
         // onClick={joinRace}
-        disabled={!registrationOpen}
+        // disabled={!registrationOpen}
         // disabled={!isEligibleToRace || !registrationOpen}
       >
         Join
@@ -86,9 +87,22 @@ const ActionButton = ({ race }) => {
     )
   }
 
+  const LeaveRaceButton = () => {
+    return (
+      <button
+        className="btn-outline btn-sm btn w-full text-error"
+        // onClick={leaveRace}
+        // disabled={!registrationOpen}
+        // disabled={!isEligibleToRace || !registrationOpen}
+      >
+        Leave
+      </button>
+    )
+  }
+
   return (
     <>
-      <JoinRaceButton eligible={true} />
+      <JoinRaceButton />
     </>
   )
 }

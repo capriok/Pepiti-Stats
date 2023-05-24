@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import useSWR from 'swr'
-import { publicRequest } from '~/api'
+import { fetcher } from '~/api'
 import Spinner from '~/components/Spinner'
 
 interface Props {
@@ -56,7 +56,7 @@ export function RiderFormPart2({ user, eventId }) {
     claim: '',
   })
 
-  const { data, isLoading } = useSWR(`/races/${eventId}`, publicRequest)
+  const { data, isLoading } = useSWR(`/races/${eventId}`, fetcher)
 
   if (isLoading) {
     return <Spinner />

@@ -1,23 +1,28 @@
 'use client'
 
 import { VerifiedIcon } from 'lucide-react'
+import { createContext, useContext } from 'react'
 import { Pill } from '~/components/pills/Pill'
 import RiderLink from '~/components/RiderLink'
 import Table from '~/components/Table'
 import LeagueRaceCard from './LeagueRaceCard'
 
 interface Props {
+  user: User
   rider: RiderProfile
   league: League
   host: RiderProfile
   eligibility: any
 }
 
-export default function LeagueOverview({ rider, league, host, eligibility }: Props) {
+const UserContext = createContext<User>({} as User)
+export const useUserContext = () => useContext(UserContext)
+
+export default function LeagueOverview({ user, rider, league, host, eligibility }: Props) {
   console.log({ rider, league, host, eligibility })
 
   return (
-    <>
+    <UserContext.Provider value={user}>
       <div className="m-5 mx-2 md:mx-10">
         <div className="flex w-full justify-between">
           <div className="text-2xl font-semibold">{league.name}</div>
@@ -39,7 +44,7 @@ export default function LeagueOverview({ rider, league, host, eligibility }: Pro
 
       <div className="mb2  mt-6 text-xl font-semibold md:mb-4 md:mt-10">League Standings</div>
       <LeagueStandings league={league} />
-    </>
+    </UserContext.Provider>
   )
 }
 
@@ -112,14 +117,10 @@ const LeagueRequirements = ({ league, eligibility, rider }) => {
   return (
     <div className="stats w-full bg-base-200">
       {requirements.map((requirement) => (
-        <div
-          key={requirement.label}
-          className="stat place-items-center">
+        <div key={requirement.label} className="stat place-items-center">
           <div className="stat-title">{requirement.label}</div>
           <div className="stat-value my-2 text-2xl">{requirement.requiredTotal + '+'}</div>
-          <div className={`stat-desc ${
-            requirement.eligible ? 'text-secondary' : 'text-error'
-          }`}>
+          <div className={`stat-desc ${requirement.eligible ? 'text-secondary' : 'text-error'}`}>
             You have {requirement.riderTotal} {requirement.label}
           </div>
         </div>

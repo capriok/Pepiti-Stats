@@ -2,7 +2,7 @@ import RiderAvatar from '~/app/(app)/profile/[guid]/components/RiderAvatar'
 import MMRPill from '~/components/pills/MMRPill'
 import { Pill } from '~/components/pills/Pill'
 import useSwr from 'swr'
-import { publicRequest } from '~/api'
+import { fetcher } from '~/api'
 import { handleLapTimes } from '~/utils/handleLapTimes'
 import { handleRankColor } from '~/utils/handleRankColor'
 
@@ -21,7 +21,7 @@ export default function RaceOverview({ race }: Props) {
 }
 
 function WinnerCircle({ race }: { race: Race }) {
-  const { data: winner, isLoading } = useSwr(`/rider/${race.winner.guid}`, publicRequest)
+  const { data: winner, isLoading } = useSwr(`/rider/${race.winner.guid}`, fetcher)
   const loadingWinner = {
     name: race.winner.name,
     avatar: '',

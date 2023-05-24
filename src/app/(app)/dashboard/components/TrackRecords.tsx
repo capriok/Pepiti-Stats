@@ -5,7 +5,7 @@ import Link from 'next/link'
 import useSWR from 'swr'
 import Table from '~/components/Table'
 import { TrackRecordsTable } from '~/components/tables/TrackRecordsTable'
-import { publicRequest } from '~/api'
+import { fetcher } from '~/api'
 
 interface Props {
   trackList: any
@@ -14,7 +14,7 @@ interface Props {
 export default function TrackRecords({ trackList }: Props) {
   const [selectedTrack, setSelectedTrack] = useState('Forest Raceway')
 
-  const { data, error, isLoading } = useSWR(`/records/track/${selectedTrack}`, publicRequest)
+  const { data, error, isLoading } = useSWR(`/records/track/${selectedTrack}`, fetcher)
 
   function handleTrackSelect(e) {
     setSelectedTrack(e.target.value)

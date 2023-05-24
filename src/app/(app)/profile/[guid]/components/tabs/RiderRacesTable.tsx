@@ -7,7 +7,7 @@ import handlePlaceSuffix from '~/utils/handlePlaceSuffix'
 import MMRPill from '~/components/pills/MMRPill'
 import Table from '~/components/Table'
 import { Pill } from '~/components/pills/Pill'
-import { publicRequest } from '~/api'
+import { fetcher } from '~/api'
 import Spinner from '~/components/Spinner'
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function RiderRacesTable({ guid }: Props) {
-  const { data, isLoading } = useSWR(`/rider/${guid}/races`, publicRequest)
+  const { data, isLoading } = useSWR(`/rider/${guid}/races`, fetcher)
 
   if (isLoading)
     return (
