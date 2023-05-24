@@ -19,8 +19,8 @@ module.exports = {
           error: '#e11d48',
         },
         dark: {
-          'base-100': '#181a1b',
-          'base-200': '#141516',
+          'base-100': '#181818',
+          'base-200': '#151515',
           primary: '#23bd38',
           secondary: '#1c9b2d',
           accent: '#707070',
