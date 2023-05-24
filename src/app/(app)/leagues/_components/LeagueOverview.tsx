@@ -42,7 +42,7 @@ export default function LeagueOverview({ user, rider, league, host, eligibility 
       <div className="mb-2 mt-6 text-xl font-semibold md:mb-4 md:mt-10">League Races</div>
       <LeagueRaces league={league} />
 
-      <div className="mb2  mt-6 text-xl font-semibold md:mb-4 md:mt-10">League Standings</div>
+      <div className="mb-2 mt-6 text-xl font-semibold md:mb-4 md:mt-10">League Standings</div>
       <LeagueStandings league={league} />
     </UserContext.Provider>
   )
@@ -154,7 +154,7 @@ const LeagueStandings = ({ league }) => {
     {
       key: 'race_number',
       label: 'Race #',
-      render: (race_number, row) => (
+      render: (race_number) => (
         <div className="flex gap-2">
           <div className="text-accent">#</div>
           <div className="text-secondary">{race_number}</div>
@@ -164,7 +164,7 @@ const LeagueStandings = ({ league }) => {
     {
       key: 'points',
       label: 'Points',
-      render: (points, row) => points ?? '-',
+      render: (points) => points ?? '-',
     },
     {
       key: 'bike_id',

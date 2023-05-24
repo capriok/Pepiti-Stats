@@ -1,7 +1,7 @@
 import Api from '~/api'
 import PageHeader from '~/components/PageHeader'
 import useAuthUser from '~/utils/useAuthUser'
-import LeagueOverview from '../components/LeagueOverview'
+import LeagueOverview from '../_components/LeagueOverview'
 
 export const metadata = {
   title: 'Pepiti | League',

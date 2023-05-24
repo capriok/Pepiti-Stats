@@ -259,10 +259,10 @@ interface League {
     [key: string]: LeagueRider
   }
   requirements: LeagueRequirements
-  races: Array<LeagueRace>
+  races: Array<LeagueRaceCard>
 }
 
-interface LeagueRace {
+interface LeagueRaceCard {
   _id: string
   timestamp: number
   config: {
@@ -293,4 +293,82 @@ interface LeagueRequirements {
   races: number
   laps: number
   records: number
+}
+
+interface LeagueRaceDetails {
+  _id: string
+  by: string
+  league_id: string
+  timestamp: number
+  division_by: string
+  config: LeagueRaceConfig
+  status: number
+  riders_guid: string[]
+  total_riders: number
+  divisions: LeagueRaceDivision[]
+}
+
+interface LeagueRaceConfig {
+  weather: {
+    realistic: number
+    conditions: number
+    temperature: number
+    wind_direction: number
+    wind_speed: number
+    track_conditions: number
+  }
+  connection: {
+    maxclient: number
+  }
+  event: {
+    category: string[]
+    track: string
+    track_layout: string
+  }
+  deformation: {
+    scale: string
+    auto_reset: number
+  }
+  polls: {
+    disable_during_races: string
+  }
+  race: {
+    format: number
+    quick_race: number
+    practice_length: number
+    qualifypractice_length: number
+    warmup_length: number
+    race_length_format: number
+    race_minutes: number
+    race_extralaps: number
+    restart_delay: number
+  }
+}
+interface LeagueRaceDivision {
+  name: string
+  riders: {
+    guid: string
+    team: string
+    bike_id: string
+    race_number: number
+    name: string
+    record: {
+      _id: string
+      category: string
+      rider_guid: string
+      track: string
+      air_temp?: number
+      average_speed?: number
+      bike?: string
+      conditions?: string
+      lap_time: number
+      race_id?: string
+      race_number: number
+      rider_name: string
+      session: string
+      split_1?: number
+      split_2?: number
+      timestamp: number
+    }
+  }[]
 }

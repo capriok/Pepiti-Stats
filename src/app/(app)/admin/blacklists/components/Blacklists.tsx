@@ -103,17 +103,17 @@ const BlacklistTable = ({ blacklist, isAdmin }) => {
     {
       key: 'MMR',
       label: 'MMR',
-      render: (MMR, row) => <Pill text={MMR} />,
+      render: (MMR) => <Pill text={MMR} />,
     },
     {
       key: 'SR',
       label: 'SR',
-      render: (SR, row) => <Pill text={SR} />,
+      render: (SR) => <Pill text={SR} />,
     },
     {
       key: 'contact',
       label: 'Contacts',
-      render: (contact, row) => <Pill text={contact} />,
+      render: (contact) => <Pill text={contact} />,
     },
     {
       key: 'banned_by',
@@ -128,16 +128,12 @@ const BlacklistTable = ({ blacklist, isAdmin }) => {
   ]
 
   const adminColumn = {
-    key: 'admin',
+    key: 'guid',
     label: 'Admin',
-    render: (_, row) => {
+    render: (guid) => {
       return (
         <form action={unbanRider}>
-          <button
-            type="submit"
-            name="guid"
-            value={row.guid}
-            className="btn-outline btn-sm btn mb-2">
+          <button type="submit" name="guid" value={guid} className="btn-outline btn-sm btn mb-2">
             Unban
           </button>
         </form>

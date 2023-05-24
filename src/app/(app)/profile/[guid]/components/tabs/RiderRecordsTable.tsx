@@ -10,6 +10,7 @@ import { handleLapTimes } from '~/utils/handleLapTimes'
 import { METER_TO_MILE } from '~/utils/constants'
 import Table from '~/components/Table'
 import Spinner from '~/components/Spinner'
+import { handleAverageSpeed } from '~/utils/handleAverageSpeed'
 
 interface Props {
   guid: string
@@ -40,39 +41,37 @@ export default function RiderRecordsTable({ guid }: Props) {
     {
       key: 'date',
       label: 'Date',
-      render: (date, row) =>
-        dateIsValid(new Date(date)) ? new Date(date).toLocaleDateString() : '-',
+      render: (date) => (dateIsValid(new Date(date)) ? new Date(date).toLocaleDateString() : '-'),
     },
     {
       key: 'track',
       label: 'Track',
-      render: (track, row) => (track ? track : '-'),
+      render: (track) => (track ? track : '-'),
     },
     {
       key: 'lapTime',
       label: 'Lap Time',
-      render: (lapTime, row) => (lapTime ? handleLapTimes(lapTime) : '-'),
+      render: (lapTime) => (lapTime ? handleLapTimes(lapTime) : '-'),
     },
     {
       key: 'split1',
       label: 'Split 1',
-      render: (split1, row) => (split1 ? handleLapTimes(split1) : '-'),
+      render: (split1) => (split1 ? handleLapTimes(split1) : '-'),
     },
     {
       key: 'split2',
       label: 'Split 2',
-      render: (split2, row) => (split2 ? handleLapTimes(split2) : '-'),
+      render: (split2) => (split2 ? handleLapTimes(split2) : '-'),
     },
     {
       key: 'averageSpeed',
       label: 'Average Speed',
-      render: (averageSpeed, row) =>
-        averageSpeed ? (averageSpeed * METER_TO_MILE).toFixed(2) + ' mph' : '-',
+      render: (averageSpeed) => (averageSpeed ? handleAverageSpeed(averageSpeed) : '-'),
     },
     {
       key: 'bike',
       label: 'Bike',
-      render: (bike, row) => {
+      render: (bike) => {
         const bikeColor = handleBikeColor(bike)
         return (
           <div className="flex">

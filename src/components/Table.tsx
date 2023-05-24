@@ -157,7 +157,7 @@ const Table: React.FC<TableProps> = (props) => {
 
             return (
               <td key={dataKey} className={` ${options.cns.row} p-0`}>
-                <div className={'flex min-h-[45px] items-center pl-2'}>
+                <div className={'flex min-h-[45px] items-center pl-2 font-medium'}>
                   {renderer ? renderer(value, row) : value}
                 </div>
               </td>

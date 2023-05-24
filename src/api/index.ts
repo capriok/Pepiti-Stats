@@ -97,7 +97,7 @@ class PepitiApi {
     const data = await privateFetcher(`/league/${leagueId}`, token)
     return data
   }
-  public async GetLeagueRace(raceId: string, token: string): Promise<RaceSession> {
+  public async GetLeagueRace(raceId: string, token: string): Promise<LeagueRaceDetails> {
     const data = await privateFetcher(`/race/${raceId}`, token)
     return data
   }

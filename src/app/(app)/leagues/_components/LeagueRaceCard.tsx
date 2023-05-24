@@ -8,10 +8,10 @@ import { Pill } from '~/components/pills/Pill'
 import { useUserContext } from './LeagueOverview'
 
 interface Props {
-  race: LeagueRace
+  race: LeagueRaceCard
 }
 
-export default function LeagueRaceCard({  race }: Props) {
+export default function LeagueRaceCard({ race }: Props) {
   const user = useUserContext()
 
   // const { data, isLoading } = useSWR(`/race/${race._id}/check`, () =>
@@ -68,42 +68,6 @@ export default function LeagueRaceCard({  race }: Props) {
         </div>
       </div>
     </div>
-  )
-}
-
-const ActionButton = ({ race }) => {
-  const registrationOpen = race.status === 0
-
-  const JoinRaceButton = () => {
-    return (
-      <button
-        className="btn-secondary btn-sm btn w-full text-white"
-        // onClick={joinRace}
-        // disabled={!registrationOpen}
-        // disabled={!isEligibleToRace || !registrationOpen}
-      >
-        Join
-      </button>
-    )
-  }
-
-  const LeaveRaceButton = () => {
-    return (
-      <button
-        className="btn-outline btn-sm btn w-full text-error"
-        // onClick={leaveRace}
-        // disabled={!registrationOpen}
-        // disabled={!isEligibleToRace || !registrationOpen}
-      >
-        Leave
-      </button>
-    )
-  }
-
-  return (
-    <>
-      <JoinRaceButton />
-    </>
   )
 }
 

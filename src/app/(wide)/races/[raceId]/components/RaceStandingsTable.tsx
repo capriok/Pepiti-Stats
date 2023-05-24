@@ -19,7 +19,7 @@ export default function RaceStandingsTable({ standings }: Props) {
     {
       key: 'raceNumber',
       label: 'Race #',
-      render: (raceNumber, row) => (
+      render: (raceNumber) => (
         <div className="flex gap-1">
           <div className="text-accent"># </div>
           <div className="text-primary">{raceNumber}</div>
@@ -29,33 +29,33 @@ export default function RaceStandingsTable({ standings }: Props) {
     {
       key: 'position',
       label: 'Position',
-      render: (position, row) =>
+      render: (position) =>
         position ? position ? <b>{handlePlaceSuffix(position)}</b> : '-' : '-',
     },
     {
       key: 'gap',
       label: 'Gap',
-      render: (gap, row) => (gap ? handleLapTimes(gap) : '-'),
+      render: (gap) => (gap ? handleLapTimes(gap) : '-'),
     },
     {
       key: 'raceTime',
       label: 'Race Time',
-      render: (raceTime, row) => (raceTime ? handleLapTimes(raceTime) : '-'),
+      render: (raceTime) => (raceTime ? handleLapTimes(raceTime) : '-'),
     },
     {
       key: 'laps',
       label: 'Laps',
-      render: (laps, row) => (laps ? laps : '-'),
+      render: (laps) => (laps ? laps : '-'),
     },
     {
       key: 'penalty',
       label: 'Penalty',
-      render: (penalty, row) => (penalty ? penalty + ' s' : '-'),
+      render: (penalty) => (penalty ? penalty + ' s' : '-'),
     },
     {
       key: 'fastestLap',
       label: 'Fastest Lap',
-      render: (fastestLap, row) => (fastestLap ? handleLapTimes(fastestLap) : '-'),
+      render: (fastestLap) => (fastestLap ? handleLapTimes(fastestLap) : '-'),
     },
   ]
 

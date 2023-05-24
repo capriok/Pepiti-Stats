@@ -40,48 +40,47 @@ export default function RiderRacesTable({ guid }: Props) {
     {
       key: 'date',
       label: 'Date',
-      render: (date, row) =>
-        dateIsValid(new Date(date)) ? new Date(date).toLocaleDateString() : '-',
+      render: (date) => (dateIsValid(new Date(date)) ? new Date(date).toLocaleDateString() : '-'),
     },
     {
       key: 'track',
       label: 'Track',
-      render: (track, row) => (track ? track : '-'),
+      render: (track) => (track ? track : '-'),
     },
     {
       key: 'position',
       label: 'Position',
-      render: (position, row) => (position ? <b>{handlePlaceSuffix(position)}</b> : '-'),
+      render: (position) => (position ? <b>{handlePlaceSuffix(position)}</b> : '-'),
     },
     {
       key: 'gap',
       label: 'Gap',
-      render: (gap, row) => (gap ? handleLapTimes(gap) : '-'),
+      render: (gap) => (gap ? handleLapTimes(gap) : '-'),
     },
     {
       key: 'laps',
       label: 'Laps',
-      render: (laps, row) => (laps ? laps : '-'),
+      render: (laps) => (laps ? laps : '-'),
     },
     {
       key: 'penalties',
       label: 'Penalties',
-      render: (penalties, row) => (penalties ? penalties + ' s' : '-'),
+      render: (penalties) => (penalties ? penalties + ' s' : '-'),
     },
     {
       key: 'fastestLap',
       label: 'Fastest Lap',
-      render: (fastestLap, row) => (fastestLap ? handleLapTimes(fastestLap) : '-'),
+      render: (fastestLap) => (fastestLap ? handleLapTimes(fastestLap) : '-'),
     },
     {
       key: 'mmrGain',
       label: 'MMR +/-',
-      render: (mmrGain, row) => <MMRPill mmr={mmrGain} />,
+      render: (mmrGain) => <MMRPill mmr={mmrGain} />,
     },
     {
       key: 'newMMR',
       label: 'New MMR',
-      render: (newMMR, row) => <Pill text={newMMR} />,
+      render: (newMMR) => <Pill text={newMMR} />,
     },
   ]
 
