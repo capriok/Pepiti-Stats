@@ -1,4 +1,5 @@
 'use client'
+
 import uswSwr from 'swr'
 import { fetcher } from '~/api'
 import Spinner from '~/components/Spinner'

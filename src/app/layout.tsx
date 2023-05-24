@@ -14,14 +14,18 @@ import Footer from '~/components/Footer'
 
 import '~/globals.css'
 
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+interface Props {
+  children: React.ReactNode
+}
+
+export default async function RootLayout(props: Props) {
   const user = getAuthUser()
 
   return (
     <html lang="en" data-theme="light">
       <body className={inter.className}>
         <NavBar user={user} />
-        {children}
+        {props.children}
         <Footer user={user} />
         {/* <Analytics /> */}
       </body>

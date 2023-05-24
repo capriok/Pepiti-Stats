@@ -9,7 +9,10 @@ export const metadata = {
   description: 'Compete in race leagues for real prizes and bragging rights',
 }
 
-export default async function Page({ params: { raceId } }) {
+export default async function Page(props) {
+  const {
+    params: { raceId },
+  } = props
   const user = getAuthUser()
   const race = await Api.GetLeagueRace(raceId, user.token)
 
@@ -64,7 +67,12 @@ const ActionButton = ({ race }) => {
 
   return (
     <div className="flex w-fit">
-      <JoinRaceButton />
+      {/* <JoinRaceButton /> */}
+      <Link
+        href={`/leagues/race/${race._id}/signup`}
+        className="btn-secondary btn-sm btn w-fit text-white">
+        Signup
+      </Link>
     </div>
   )
 }
