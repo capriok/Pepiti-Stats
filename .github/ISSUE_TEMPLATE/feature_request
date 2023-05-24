@@ -1,7 +1,7 @@
-name: Feature Request
+name: 🛠 Feature Request
 description: Create a feature request for the application
 title: 'Feature: '
-labels: ['enhancement']
+labels: ['✨ enhancement']
 body:
   - type: markdown
     attributes:
