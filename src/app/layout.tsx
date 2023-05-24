@@ -18,7 +18,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const user = useAuthUser()
 
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light">
       <body className={inter.className}>
         <NavBar user={user} />
         {children}

@@ -8,7 +8,6 @@ import Table from '~/components/Table'
 import LeagueRaceCard from './LeagueRaceCard'
 
 interface Props {
-  user: User
   rider: RiderProfile
   league: League
   host: RiderProfile
@@ -18,11 +17,11 @@ interface Props {
 const UserContext = createContext<User>({} as User)
 export const useUserContext = () => useContext(UserContext)
 
-export default function LeagueOverview({ user, rider, league, host, eligibility }: Props) {
+export default function LeagueOverview({ rider, league, host, eligibility }: Props) {
   console.log({ rider, league, host, eligibility })
 
   return (
-    <UserContext.Provider value={user}>
+    <>
       <div className="m-5 mx-2 md:mx-10">
         <div className="flex w-full justify-between">
           <div className="text-2xl font-semibold">{league.name}</div>
@@ -44,7 +43,7 @@ export default function LeagueOverview({ user, rider, league, host, eligibility 
 
       <div className="mb-2 mt-6 text-xl font-semibold md:mb-4 md:mt-10">League Standings</div>
       <LeagueStandings league={league} />
-    </UserContext.Provider>
+    </>
   )
 }
 

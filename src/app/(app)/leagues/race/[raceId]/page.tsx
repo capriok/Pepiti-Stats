@@ -19,14 +19,16 @@ export default async function Page({ params: { raceId } }) {
         title="League Race"
         extra={
           <div className="flex gap-2">
-            <Link href={`/leagues/${race.league_id}`} className="btn-outline btn-sm btn">
+            <Link
+              href={`/leagues/${race.league_id}`}
+              className="btn-outline btn-sm btn bg-base-200">
               Go to League
             </Link>
             <ActionButton race={race} />
           </div>
         }
       />
-      <LeagueRaceOverview user={user} race={race} />
+      <LeagueRaceOverview race={race} />
     </>
   )
 }

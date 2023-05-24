@@ -1,24 +1,18 @@
 'use client'
 
-import Link from 'next/link'
-import { createContext, useContext } from 'react'
 import RiderLink from '~/components/RiderLink'
 import Table from '~/components/Table'
 import Tabs from '~/components/Tabs'
-import { METER_TO_MILE } from '~/utils/constants'
 import { handleAverageSpeed } from '~/utils/handleAverageSpeed'
 import { handleBikeColor } from '~/utils/handleBikeColor'
 import { handleLapTimes } from '~/utils/handleLapTimes'
 import { leagueRaceStatusMap } from './constants'
 
 interface Props {
-  user: User
   race: LeagueRaceDetails
 }
 
-export default function LeagueRaceOverview({ user, race }: Props) {
-  console.log({ user, race })
-
+export default function LeagueRaceOverview({ race }: Props) {
   return (
     <>
       <LeagueRaceInformation race={race} />
@@ -36,7 +30,7 @@ const LeagueRaceInformation = ({ race }: { race: LeagueRaceDetails }) => {
   return (
     <div className="card card-body bg-base-200 p-0">
       <div
-        className={`rounded-lg rounded-bl-none rounded-br-none ${
+        className={`rounded-lg rounded-bl-none rounded-br-none text-white ${
           leagueRaceStatusMap[race.status].color
         } p-4`}>
         <div className="flex justify-center text-xl font-semibold">
@@ -143,7 +137,7 @@ const LeagueRaceStandings = ({ division }: { division: LeagueRaceDivision }) => 
   const columns = [
     {
       key: 'raceNumber',
-      label: '#',
+      label: 'Race #',
     },
     {
       key: 'name',

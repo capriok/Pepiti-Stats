@@ -23,14 +23,14 @@ export default function AdminControls({ user, rider }) {
               </label>
               <div
                 tabIndex={0}
-                className="card dropdown-content card-compact mx-auto mt-2 w-64 border-[1px] border-error bg-neutral-800/70 p-2 shadow-xl backdrop-blur-md">
+                className="card dropdown-content card-compact mx-auto mt-2 w-[250px] border-[1px] border-error bg-base-200/80 p-2 shadow-xl backdrop-blur-md">
                 <form action={banRider} className="card-body flex justify-center">
                   <input
                     ref={reasonRef}
                     name="reason"
                     autoComplete="off"
                     placeholder="Reason for ban..."
-                    className="input-bordered input input-sm w-full"
+                    className="input-bordered input input-sm mb-2 w-full"
                   />
                   <button
                     type="submit"

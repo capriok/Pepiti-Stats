@@ -1,7 +1,7 @@
-import { METER_TO_MILE } from '~/utils/constants'
 import RiderAvatar from './RiderAvatar'
 import ProfileTabs from './ProfileTabs'
 import AdminControls from './AdminControls'
+import { handleAverageSpeed } from '~/utils/handleAverageSpeed'
 
 interface Props {
   user: User
@@ -59,7 +59,7 @@ const RiderStats = ({ rider }: { rider: RiderProfile }) => {
       <div className="stat">
         <div className="stat-title">Speed</div>
         <div className="stat-value py-2 text-2xl">
-          {(rider.average_speed * METER_TO_MILE).toFixed(2)}
+          {rider.average_speed ? handleAverageSpeed(rider.average_speed, false) : '-'}
         </div>
         <div className="stat-desc">Miles per Hour</div>
       </div>

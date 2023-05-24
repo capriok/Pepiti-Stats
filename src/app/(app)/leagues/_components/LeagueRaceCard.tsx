@@ -2,30 +2,13 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import useSWR from 'swr'
-import { privateFetcher } from '~/api'
 import { Pill } from '~/components/pills/Pill'
-import { useUserContext } from './LeagueOverview'
 
 interface Props {
   race: LeagueRaceCard
 }
 
 export default function LeagueRaceCard({ race }: Props) {
-  const user = useUserContext()
-
-  // const { data, isLoading } = useSWR(`/race/${race._id}/check`, () =>
-  //   privateFetcher(`/race/${race._id}/check`, user.token)
-  // )
-  // console.log(data)
-
-  // const eligibility = isLoading
-  //   ? false
-  //   : Object.keys(data)
-  //       .filter((key) => key !== 'race_joined')
-  //       .every((key) => data[key] === true)
-  // console.log(eligibility)
-
   return (
     <div className="card card-body bg-base-200 p-0">
       <div className="overflow-hidden rounded-lg rounded-bl-none rounded-br-none">
@@ -59,13 +42,11 @@ export default function LeagueRaceCard({ race }: Props) {
         <div className="font-semibold">{race.total_riders}</div>
       </div>
       <div className="w-full gap-2 rounded-lg rounded-tl-none rounded-tr-none bg-base-300 p-4">
-        <div className="w-full">
-          <Link
-            href={`/leagues/race/${race._id}`}
-            className=" btn-outline btn-sm btn flex justify-center ">
-            Go To Enrollment
-          </Link>
-        </div>
+        <Link
+          href={`/leagues/race/${race._id}`}
+          className="btn-outline btn-sm btn w-full bg-base-200">
+          Go To Enrollment
+        </Link>
       </div>
     </div>
   )

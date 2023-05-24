@@ -85,8 +85,8 @@ const LeagueCard = ({ league }) => {
           <div className="flex w-full flex-1 flex-col items-center">
             <div className="text-md pb-2 font-semibold text-accent">League</div>
             <div className="text-lg">
-              <Link href={`/leagues/${league._id}`} className="btn-outline btn-sm btn ">
-                See More
+              <Link href={`/leagues/${league._id}`} className="btn-outline btn-sm btn bg-base-200">
+                Go To League
               </Link>
             </div>
           </div>
