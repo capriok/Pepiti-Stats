@@ -28,13 +28,3 @@ body:
       description: Please describe the solution you would like to see. Adding example usage is a good way to provide context.
     validations:
       required: true
-  - type: checkboxes
-    id: requirements
-    attributes:
-      label: Requirements
-      description: By checking these boxes, you stand behind code completion of this feature.
-      options:
-        - label: Use Server Actions
-          required: true
-        - label: Revalidate path from Action
-          required: true
