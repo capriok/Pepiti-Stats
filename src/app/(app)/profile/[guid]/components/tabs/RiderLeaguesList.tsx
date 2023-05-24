@@ -1,7 +1,7 @@
 'use client'
 
-import React, { use } from 'react'
-import Api, { fetcher, privateFetcher } from '~/api'
+import React  from 'react'
+import {  privateFetcher } from '~/api'
 import useSWR from 'swr'
 import Spinner from '~/components/Spinner'
 import { useUserContext } from '../RiderProfile'
