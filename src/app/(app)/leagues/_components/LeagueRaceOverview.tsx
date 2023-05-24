@@ -97,7 +97,7 @@ const LeagueRaceConfig = ({ race }: { race: LeagueRaceDetails }) => {
 
   return (
     <div className="grid place-items-center">
-      <div className="stats flex bg-base-200">
+      <div className="stats flex w-full bg-base-200 md:w-fit">
         {configurations.map((configuration) => (
           <div
             key={configuration.label}

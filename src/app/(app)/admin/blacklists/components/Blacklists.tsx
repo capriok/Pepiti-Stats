@@ -66,7 +66,7 @@ const BlacklistAlert = ({ text, color }) => (
 )
 
 const BanAppealButtons = () => (
-  <div className="flex justify-end gap-2">
+  <div className="mb-4 flex w-fit flex-wrap justify-center gap-2 md:mb-0 md:w-full md:justify-end">
     <Link
       target="_blank"
       rel="noopener noreferrer"

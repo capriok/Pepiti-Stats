@@ -11,7 +11,7 @@ interface Props {
 export default function LeagueList({ leagues }: Props) {
   return (
     <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-3">
-      {leagues.map((league) => (
+      {mockleagues.map((league) => (
         <LeagueCard key={league._id} league={league} />
       ))}
     </div>
@@ -31,7 +31,7 @@ const LeagueCard = ({ league }: { league: League }) => {
           </div>
         </div>
 
-        <div className="max-h-[85px] min-h-[85px] w-full overflow-y-auto text-accent">
+        <div className="mt-2 max-h-[85px] min-h-[85px] w-full overflow-y-auto text-accent">
           {league.description}
         </div>
 
