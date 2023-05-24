@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import React, { useState } from 'react'
 
 interface Props {
@@ -9,9 +9,11 @@ interface Props {
 }
 
 export default function DesktopTrackList({ races }: Props) {
+  const searchParams = useSearchParams()
+  const trackParam = searchParams.get('track')
   const pathname = usePathname()
   const raceId = pathname.split('/')[2]
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState(trackParam ?? '')
 
   const filteredRaceInfo = races.filter((raceInfo) =>
     raceInfo.track.toLowerCase().includes(search.toLowerCase())
