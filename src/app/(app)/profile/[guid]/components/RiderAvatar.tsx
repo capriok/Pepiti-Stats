@@ -4,7 +4,10 @@ export default function RiderAvatar({ rider }) {
   return (
     <div className="flex flex-col items-center gap-3">
       <div className="indicator avatar min-h-[128px]">
-        <span className={`badge indicator-item ${rider.online ? 'badge-primary' : 'badge-error'}`}>
+        <span
+          className={`badge indicator-item text-white ${
+            rider.online ? 'badge-secondary' : 'badge-error'
+          }`}>
           {rider.online ? 'Online' : 'Offline'}
         </span>
         {rider.avatar && !rider.avatar.includes(optedOutAvatar) ? (
@@ -19,7 +22,7 @@ export default function RiderAvatar({ rider }) {
         ) : (
           <div className="placeholder avatar">
             <div className="h-[120px] w-[120px] rounded-md bg-neutral-focus text-neutral-content">
-              <span className="text-3xl">{rider.name.slice(0, 2)}</span>
+              <div className="text-3xl">{rider.name.slice(0, 2)}</div>
             </div>
           </div>
         )}

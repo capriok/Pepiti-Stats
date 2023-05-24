@@ -1,7 +1,6 @@
 'use client'
 
 import { VerifiedIcon } from 'lucide-react'
-import { createContext, useContext } from 'react'
 import { Pill } from '~/components/pills/Pill'
 import RiderLink from '~/components/RiderLink'
 import Table from '~/components/Table'
@@ -13,9 +12,6 @@ interface Props {
   host: RiderProfile
   eligibility: any
 }
-
-const UserContext = createContext<User>({} as User)
-export const useUserContext = () => useContext(UserContext)
 
 export default function LeagueOverview({ rider, league, host, eligibility }: Props) {
   console.log({ rider, league, host, eligibility })

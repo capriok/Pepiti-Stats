@@ -1,5 +1,5 @@
 const ENDPOINT = process.env.NEXT_PUBLIC_PEPITI
-const nextConfig = { next: { revalidate: 10 } }
+const nextConfig = { next: { revalidate: 30 } }
 
 export const fetcher = async (url: string) => {
   const res = await fetch(ENDPOINT + url, {
@@ -11,6 +11,7 @@ export const fetcher = async (url: string) => {
 export const privateFetcher = async (url: string, token: string) => {
   const res = await fetch(ENDPOINT + url, {
     ...nextConfig,
+    credentials: 'include',
     headers: {
       authorization: token ? `Bearer ${token}` : '',
     },
@@ -22,8 +23,9 @@ const privatePoster = async (url: string, token: string, body?: any) => {
   const res = await fetch(ENDPOINT + url, {
     method: 'POST',
     body: JSON.stringify(body ?? {}),
+    credentials: 'include',
     headers: {
-      authorization: token ? `${token}` : '',
+      authorization: token ? `Bearer ${token}` : '',
     },
   })
   return res.json()

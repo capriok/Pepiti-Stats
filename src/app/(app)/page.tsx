@@ -23,7 +23,7 @@ export default function Page() {
             />
           </div>
           <div className="min-w-[50%]">
-            <div className="mb-5 mt-5 h-[1px] w-[150px] border border-white/40 md:mb-10" />
+            <div className="mb-5 mt-5 h-[1px] w-[150px] border border-accent md:mb-10" />
 
             <div className="mb-5 text-4xl font-bold leading-relaxed md:text-6xl">
               Competition for <div className="text-5xl md:text-7xl">Everyone.</div>

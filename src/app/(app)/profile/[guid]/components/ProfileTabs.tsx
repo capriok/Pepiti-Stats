@@ -1,8 +1,11 @@
+'use client'
+
 import Tabs from '~/components/Tabs'
 import RiderWorldRecordsTable from './tabs/RiderWorldRecordsTable'
 import RiderMMRHistoryChart from './tabs/RiderMMRHistoryChart'
 import RiderRacesTable from './tabs/RiderRacesTable'
 import RiderRecordsTable from './tabs/RiderRecordsTable'
+import RiderLeaguesList from './tabs/RiderLeaguesList'
 
 interface Props {
   rider: RiderProfile
@@ -38,6 +41,16 @@ export default function ProfileTabs({ rider, mmrHistory }: Props) {
         <div className="p-6 pt-0">
           <div className="my-4 whitespace-nowrap text-xl font-semibold">Personal Records</div>
           <RiderRecordsTable guid={rider._id} />
+        </div>
+      ),
+    },
+    {
+      key: 'leagues',
+      label: 'Leagues',
+      children: (
+        <div className="p-6 pt-0">
+          <div className="my-4 whitespace-nowrap text-xl font-semibold">My Leagues</div>
+          <RiderLeaguesList guid={rider._id} />
         </div>
       ),
     },

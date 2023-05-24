@@ -1,7 +1,10 @@
+'use client'
+
 import RiderAvatar from './RiderAvatar'
 import ProfileTabs from './ProfileTabs'
 import AdminControls from './AdminControls'
 import { handleAverageSpeed } from '~/utils/handleAverageSpeed'
+import { createContext, useContext } from 'react'
 
 interface Props {
   user: User
@@ -9,9 +12,12 @@ interface Props {
   mmrHistory: Array<RiderMMRHistory>
 }
 
+const UserContext = createContext<User>({} as User)
+export const useUserContext = () => useContext(UserContext)
+
 export const RiderProfile = ({ user, rider, mmrHistory }: Props) => {
   return (
-    <>
+    <UserContext.Provider value={user}>
       <div className="w-full">
         <AdminControls user={user} rider={rider} />
         <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:gap-10">
@@ -27,7 +33,7 @@ export const RiderProfile = ({ user, rider, mmrHistory }: Props) => {
         </div>
       </div>
       <ProfileTabs rider={rider} mmrHistory={mmrHistory} />
-    </>
+    </UserContext.Provider>
   )
 }
 

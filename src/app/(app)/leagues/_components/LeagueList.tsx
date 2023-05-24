@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Pill } from '~/components/pills/Pill'
 
 interface Props {
-  leagues: Array<any>
+  leagues: Array<League>
 }
 
 export default function LeagueList({ leagues }: Props) {
@@ -18,7 +18,7 @@ export default function LeagueList({ leagues }: Props) {
   )
 }
 
-const LeagueCard = ({ league }) => {
+const LeagueCard = ({ league }: { league: League }) => {
   if (league.hidden) return <></>
 
   return (
