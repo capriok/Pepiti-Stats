@@ -1,6 +1,6 @@
 import Api from '~/api'
 import PageHeader from '~/components/PageHeader'
-import useAuthUser from '~/utils/useAuthUser'
+import getAuthUser from '~/api/getAuthUser'
 import BannedBanner from './components/BannedBanner'
 import { RiderProfile } from './components/RiderProfile'
 
@@ -21,7 +21,7 @@ Contacts: ${rider?.contact}
 }
 
 export default async function Page({ params: { guid } }) {
-  const user = useAuthUser()
+  const user = getAuthUser()
   const rider = await Api.GetRider(guid)
   const mmrHistory = await Api.GetRiderMMRHistory(guid)
 

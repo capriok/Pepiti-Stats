@@ -14,7 +14,6 @@ export function RiderReportForm({ user, events }: Props) {
   const [eventId, setEventId] = useState(null)
 
   const handleEventSelect = (e) => {
-    console.log(e.target.value)
     setEventId(e.target.value)
   }
 
@@ -63,7 +62,6 @@ export function RiderFormPart2({ user, eventId }) {
   }
 
   const event = data
-  console.log(event)
 
   const riders = Object.values(event.riders).map((r: any) => ({
     ...r,
@@ -71,12 +69,10 @@ export function RiderFormPart2({ user, eventId }) {
   }))
 
   const handleRiderSelect = (e) => {
-    console.log(e.target.value)
     setRiderForm({ ...riderForm, rider: e.target.value })
   }
 
   const handleClaimChange = (e) => {
-    console.log(e.target.value)
     setRiderForm({ ...riderForm, claim: e.target.value })
   }
 
@@ -122,7 +118,6 @@ export function ProofFormPart3({ user, eventId, riderForm }) {
   const [files, setFiles] = useState([])
 
   const handleFileChange = (e) => {
-    console.log(e.target.files)
     setFiles(e.target.files)
   }
 

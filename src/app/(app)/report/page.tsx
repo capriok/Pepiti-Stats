@@ -1,5 +1,5 @@
 import Api from '~/api'
-import useAuthUser from '~/utils/useAuthUser'
+import getAuthUser from '~/api/getAuthUser'
 import PageHeader from '~/components/PageHeader'
 import { Pill } from '~/components/pills/Pill'
 import { RiderReportForm } from './components/ReportForm'
@@ -11,7 +11,7 @@ export const metadata = {
 
 export default async function Page() {
   const recentRaces = await Api.GetRecentRaces()
-  const user = useAuthUser()
+  const user = getAuthUser()
 
   return (
     <div className="min-h-[90vh]">

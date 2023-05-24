@@ -3,7 +3,7 @@
 import { cookies } from 'next/headers'
 import jwt_decode from 'jwt-decode'
 
-function useAuthUser() {
+function getAuthUser() {
   const cookieStore = cookies()
   const token = cookieStore.get('access_token')?.value
 
@@ -16,7 +16,7 @@ function useAuthUser() {
   }
 }
 
-export default useAuthUser
+export default getAuthUser
 
 const makeUser = (u): User => {
   return {

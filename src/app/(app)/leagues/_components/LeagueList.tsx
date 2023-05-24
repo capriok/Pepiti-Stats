@@ -9,8 +9,6 @@ interface Props {
 }
 
 export default function LeagueList({ leagues }: Props) {
-  console.log(leagues)
-
   return (
     <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-3">
       {mockleagues.map((league) => (

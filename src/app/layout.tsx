@@ -8,14 +8,14 @@ export const metadata = {
 }
 
 import { Analytics } from '@vercel/analytics/react'
-import useAuthUser from '~/utils/useAuthUser'
+import getAuthUser from '~/api/getAuthUser'
 import NavBar from '~/components/Navbar'
 import Footer from '~/components/Footer'
 
 import '~/globals.css'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const user = useAuthUser()
+  const user = getAuthUser()
 
   return (
     <html lang="en" data-theme="light">

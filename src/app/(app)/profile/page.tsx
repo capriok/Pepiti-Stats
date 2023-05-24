@@ -19,7 +19,6 @@ export default function Page() {
       </div>
     )
   }
-  console.log(data.results)
 
   const rider = data.results.find((rider) => rider.name.toLowerCase() === nameParam)
 

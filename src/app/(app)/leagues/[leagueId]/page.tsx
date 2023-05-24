@@ -1,6 +1,6 @@
 import Api from '~/api'
 import PageHeader from '~/components/PageHeader'
-import useAuthUser from '~/utils/useAuthUser'
+import getAuthUser from '~/api/getAuthUser'
 import LeagueOverview from '../_components/LeagueOverview'
 
 export const metadata = {
@@ -9,7 +9,7 @@ export const metadata = {
 }
 
 export default async function Page({ params: { leagueId } }) {
-  const user = useAuthUser()
+  const user = getAuthUser()
   const rider = await Api.GetRider(user.guid)
   const league = await Api.GetLeague(leagueId, user.token)
   const host = await Api.GetRider(league.by)

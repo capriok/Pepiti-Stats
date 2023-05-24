@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation'
-import useAuthUser from '~/utils/useAuthUser'
+import getAuthUser from '~/api/getAuthUser'
 
 export default async function AdminLayout({ children }) {
-  const user = useAuthUser()
+  const user = getAuthUser()
   const isAdmin = user.isAdmin
 
   if (!isAdmin) return redirect('/dashboard')

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Api from '~/api'
 import PageHeader from '~/components/PageHeader'
-import useAuthUser from '~/utils/useAuthUser'
+import getAuthUser from '~/api/getAuthUser'
 import LeagueRaceOverview from '../../_components/LeagueRaceOverview'
 
 export const metadata = {
@@ -10,7 +10,7 @@ export const metadata = {
 }
 
 export default async function Page({ params: { raceId } }) {
-  const user = useAuthUser()
+  const user = getAuthUser()
   const race = await Api.GetLeagueRace(raceId, user.token)
 
   return (
