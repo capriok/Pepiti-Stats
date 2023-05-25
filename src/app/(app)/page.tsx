@@ -14,8 +14,8 @@ export default function Page() {
         <div className="hero-content w-full max-w-full flex-1 flex-col-reverse justify-between p-1 lg:flex-row-reverse">
           <div className="w-full rounded-lg border border-accent md:mockup-window">
             <Image
-              src="/assets/screenshots/dashboard.svg"
-              className="my-2 h-full w-full"
+              src="/assets/screenshots/dashboard-d.jpg"
+              className="h-full w-full"
               width={1200}
               height={1000}
               alt="hero-dashboard"
@@ -46,8 +46,8 @@ export default function Page() {
         <div className="hero-content w-full max-w-full flex-1 justify-between p-1">
           <div className="w-full rounded-lg border border-accent md:mockup-window">
             <Image
-              src="/assets/screenshots/profile.svg"
-              className="my-2 h-full w-full"
+              src="/assets/screenshots/profile-d.jpg"
+              className="h-full w-full"
               width={1200}
               height={1000}
               alt="hero-dashboard"
@@ -69,8 +69,8 @@ export default function Page() {
         <div className="hero-content w-full max-w-full flex-1 flex-col-reverse justify-between p-1 lg:flex-row-reverse">
           <div className="w-full rounded-lg border border-accent md:mockup-window">
             <Image
-              src="/assets/screenshots/races.svg"
-              className="my-2 h-full w-full"
+              src="/assets/screenshots/races-d.jpg"
+              className="h-full w-full"
               width={1200}
               height={1000}
               alt="hero-dashboard"
@@ -79,7 +79,7 @@ export default function Page() {
           </div>
           <div className="min-w-[50%]">
             <div className="mb-5 text-4xl font-bold leading-relaxed md:text-6xl">
-              Race stats and analytics
+              Race Statistics and Analytics
             </div>
 
             <p className="my-5 text-neutral-400">We have post race stats..</p>
@@ -91,8 +91,8 @@ export default function Page() {
         <div className="hero-content w-full max-w-full flex-1 justify-between p-1">
           <div className="w-full rounded-lg border border-accent md:mockup-window">
             <Image
-              src="/assets/screenshots/leagues.svg"
-              className="my-2 h-full w-full"
+              src="/assets/screenshots/leagues-d.jpg"
+              className="h-full w-full"
               width={1200}
               height={1000}
               alt="hero-dashboard"
@@ -101,11 +101,11 @@ export default function Page() {
           </div>
           <div className="min-w-[50%] text-right">
             <div className="mb-5 text-4xl font-bold leading-relaxed md:text-6xl">
-              Race stats and analytics
+              Ranked League Racing
             </div>
 
-            <p className="my-5 text-neutral-400">We have post race stats..</p>
-            <p className="my-5">Talk about recent races..</p>
+            <p className="my-5 text-neutral-400">We have ranked league races..</p>
+            <p className="my-5">Talk about ranked league racing..</p>
           </div>
         </div>
       </div>
@@ -114,8 +114,8 @@ export default function Page() {
         <div className="hero-content w-full max-w-full flex-1 flex-col-reverse justify-between p-1 lg:flex-row-reverse">
           <div className="w-full rounded-lg border border-accent md:mockup-window">
             <Image
-              src="/assets/screenshots/blacklists.svg"
-              className="my-2 h-full w-full"
+              src="/assets/screenshots/blacklists-d.jpg"
+              className="h-full w-full"
               width={1200}
               height={1000}
               alt="hero-dashboard"
