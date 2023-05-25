@@ -9,13 +9,8 @@ Competition for Everyone.
 * [Description](#description)
 * [Motivation](#motivation)
 * [Installation](#installation)
-* [Examples](#examples)
-* [Installation](#installation)
 * [FAQ](#faq)
 * [Community](#community)
-* [Quick start](#quick-start)
-* [Packages](#packages)
-* [Changelog](#changelog)
 * [Contribution](#contribution)
 * [License](#license)
 
