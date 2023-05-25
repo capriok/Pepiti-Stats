@@ -83,7 +83,7 @@ const DataUnavailable = () => {
     <div className="grid h-[90vh] w-full place-items-center">
       <div className="card card-body grid place-items-center bg-base-200">
         <div className="text-lg opacity-80">Race data not available</div>
-        <p className="mt-2">Check back in a later</p>
+        <p className="mt-2">Check back in later</p>
       </div>
     </div>
   )
