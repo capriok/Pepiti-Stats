@@ -1,34 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<img align="right" alt="Pepiti Logo" width="150" src="https://i.imgur.com/kVlNdUB.png">
 
-## Getting Started
+# Pepiti Stats 
 
-First, run the development server:
+Competition for Everyone.
+
+## Table of Contents
+
+* [Description](#description)
+* [Motivation](#motivation)
+* [Installation](#installation)
+* [Examples](#examples)
+* [Installation](#installation)
+* [FAQ](#faq)
+* [Community](#community)
+* [Quick start](#quick-start)
+* [Packages](#packages)
+* [Changelog](#changelog)
+* [Contribution](#contribution)
+* [License](#license)
+
+
+## Description
+
+We are a community of racing and statistic enthusiasts
+
+Access race stats in real-time, host and join leagues, connect with fellow races through social integrations, and compete with rivals through global leaderboards
+
+
+## Motivation
+
+Why does this application exists?
+
+- 💡 Analyze post-race statistics
+- 🍻 Compete with friends 
+- 🏁 Race in leagues for prizes
+- 🎈 Maintain a healthy community
+- ⏱️ Motivate players to be competitive
+
+
+## Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## FAQ
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Who is Pepiti?
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Pepiti is the founder of Pepiti.com and brains behind all server side infrastructure that gives life to Pepiti Stats
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+### Who are Tooky and PDR?
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Tooky and PDR are the creators and maintainers of Pepiti Stats Web and Mobile applications that you love and enjoy.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Community:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [Discord](https://discord.com/invite/mx-bikes)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Contribution
+
+See [Contributing Guide](./contributing.md).
+
+
+## License
+
+[MIT](./LICENCE.MD)
