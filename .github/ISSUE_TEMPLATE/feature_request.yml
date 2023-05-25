@@ -11,7 +11,7 @@ body:
     id: location 
     attributes:
       label: Describe the where the feature lives
-      description: Please describe the feature as clear and concise as possible. Remember to stay in the context of a user using the application.
+      description: Please describe where the feature would live or the scope in which it limits/extends to.
     validations:
       required: true
   - type: textarea
@@ -24,8 +24,8 @@ body:
   - type: textarea
     id: solution
     attributes:
-      label: Describe the solution you'd like to see
-      description: Please describe the solution you would like to see. Adding example usage is a good way to provide context.
+      label: Describe the steps toward the solution you see
+      description: Please describe the solution you would like to see. Please add steps to complete the solution.
       value: |
         - [ ]
         - [ ]
