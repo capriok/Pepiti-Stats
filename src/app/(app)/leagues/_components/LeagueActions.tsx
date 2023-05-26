@@ -10,6 +10,7 @@ export default function LeagueActions({ guid, leagueId, eligibility }) {
 
   return isJoined ? (
     <form action={leaveLeague} className="flex w-fit">
+      <input name="leagueId" value={leagueId} readOnly className="hidden" />
       <button className="btn-outline btn-sm btn w-full text-error" disabled={false}>
         Leave League
       </button>

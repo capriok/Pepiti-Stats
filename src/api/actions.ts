@@ -47,7 +47,6 @@ export async function postRiderReport(data: FormData) {
   console.log('%cAction: postRiderReport', 'color: goldenrod', body)
 
   await poster(`/rider/report`, { method: 'POST', body }).catch((err) => console.log(err))
-
   revalidatePath('/')
 }
 
@@ -59,7 +58,7 @@ export async function banRider(data: FormData) {
 
   console.log('%cAction: guid', 'color: goldenrod', { guid, reason })
 
-  await fetcher(`/rider/${guid}/ban/${reason}`)
+  await fetcher(`/rider/${guid}/ban/${reason}`).catch((err) => console.log(err))
   revalidatePath('/')
 }
 
@@ -68,7 +67,7 @@ export async function unbanRider(data: FormData) {
 
   console.log('%cAction: unbanRider', 'color: goldenrod', { guid })
 
-  await fetcher(`/rider/${guid}/unban`)
+  await fetcher(`/rider/${guid}/unban`).catch((err) => console.log(err))
   revalidatePath('/')
 }
 
@@ -88,8 +87,9 @@ export async function joinLeague(data: FormData) {
 
   console.log('%cAction: joinLeague', 'color: goldenrod', { leagueId, body })
 
-  await poster(`/league/${leagueId}/join`, { method: 'POST', body })
-
+  await poster(`/league/${leagueId}/join`, { method: 'POST', body }).catch((err) =>
+    console.log(err)
+  )
   revalidatePath('/')
 }
 export async function leaveLeague(data: FormData) {
@@ -97,7 +97,7 @@ export async function leaveLeague(data: FormData) {
 
   console.log('%cAction: leaveLeague', 'color: goldenrod', { leagueId })
 
-  await poster(`/league/${leagueId}/leave`, { method: 'DELETE' })
+  await poster(`/league/${leagueId}/leave`, { method: 'DELETE' }).catch((err) => console.log(err))
   revalidatePath('/')
 }
 export async function joinLeagueRace(data: FormData) {
@@ -105,7 +105,7 @@ export async function joinLeagueRace(data: FormData) {
 
   console.log('%cAction: joinLeagueRace', 'color: goldenrod', { raceId })
 
-  await poster(`/race/${raceId}/join`, { method: 'POST' })
+  await poster(`/race/${raceId}/join`, { method: 'POST' }).catch((err) => console.log(err))
   revalidatePath('/')
 }
 export async function leaveLeagueRace(data: FormData) {
@@ -113,6 +113,6 @@ export async function leaveLeagueRace(data: FormData) {
 
   console.log('%cAction: leaveLeagueRace', 'color: goldenrod', { raceId })
 
-  await poster(`/race/${raceId}/leave`, { method: 'DELETE' })
+  await poster(`/race/${raceId}/leave`, { method: 'DELETE' }).catch((err) => console.log(err))
   revalidatePath('/')
 }
