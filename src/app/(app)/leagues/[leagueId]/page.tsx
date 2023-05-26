@@ -22,7 +22,13 @@ export default async function Page({ params: { leagueId } }) {
         title="League"
         extra={<LeagueActions guid={user.guid} leagueId={league._id} eligibility={eligibility} />}
       />
-      <LeagueOverview rider={rider} league={league} host={host} eligibility={eligibility} />
+      <LeagueOverview
+        user={user}
+        rider={rider}
+        league={league}
+        host={host}
+        eligibility={eligibility}
+      />
     </>
   )
 }

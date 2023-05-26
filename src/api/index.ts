@@ -63,8 +63,8 @@ export async function GetRiderMMRHistory(guid: string): Promise<RiderMMRUpdates>
   const data = await fetcher(`/rider/${guid}/mmr_history`)
   return data
 }
-export async function GetRiderLeagues(token: string): Promise<{ leagues: any[] }> {
-  const data = await fetcher('/my_leagues')
+export async function GetRiderLeagues(token: string): Promise<{ leagues: Array<League> }> {
+  const data = await fetcher('/my_leagues', token)
   return data
 }
 

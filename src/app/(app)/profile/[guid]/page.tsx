@@ -1,4 +1,4 @@
-import { GetRider, GetRiderMMRHistory } from '~/api'
+import { GetRider, GetRiderLeagues, GetRiderMMRHistory } from '~/api'
 import getAuthUser from '~/api/getAuthUser'
 import PageHeader from '~/components/PageHeader'
 import BannedBanner from './components/BannedBanner'
@@ -25,13 +25,21 @@ export default async function Page({ params: { guid } }) {
   const rider = await GetRider(guid)
   const mmrHistory = await GetRiderMMRHistory(guid)
 
+  // ! this should be removed and moved to swr in the league tab. see there for more
+  const leagueData = await GetRiderLeagues(user.token)
+
   return (
     <>
       <PageHeader
         title="Rider Profile"
         extra={<BannedBanner banned={rider.banned} reason={rider.banned_by} />}
       />
-      <RiderProfile user={user} rider={rider} mmrHistory={mmrHistory.MMR_updates} />
+      <RiderProfile
+        user={user}
+        rider={rider}
+        mmrHistory={mmrHistory.MMR_updates}
+        leagues={leagueData.leagues}
+      />
     </>
   )
 }
