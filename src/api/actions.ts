@@ -6,6 +6,8 @@ import { cookies } from 'next/headers'
 const ENDPOINT = process.env.NEXT_PUBLIC_API
 
 async function fetcher(url: string) {
+  console.log('%cFetcher', 'color: goldenrod', url)
+
   const token = cookies().get('access_token')?.value
 
   return await fetch(ENDPOINT + url, {
@@ -15,16 +17,24 @@ async function fetcher(url: string) {
   })
 }
 
-async function poster(url: string, body = {}) {
+async function poster(
+  url: string,
+  options: { method?: string; body?: any } = { method: 'POST', body: {} }
+) {
+  console.log('%cPoster', 'color: goldenrod', url, options)
+
+  const opts = {
+    method: options.method,
+    body: JSON.stringify(options.body),
+  }
   const token = cookies().get('access_token')?.value
 
   return await fetch(ENDPOINT + url, {
-    method: 'POST',
     credentials: 'include',
     headers: {
       authorization: token ? `Bearer ${token}` : '',
     },
-    body: JSON.stringify(body),
+    ...opts,
   })
 }
 
@@ -59,14 +69,15 @@ export async function joinLeague(data: FormData) {
     server_preference: data.get('serverPreference'),
   }
 
-  await poster(`/league/${leagueId}/join`, body)
+  await poster(`/league/${leagueId}/join`, { body })
 
   revalidatePath('/')
 }
 export async function leaveLeague(data: FormData) {
   const leagueId = data.get('leagueId')
+  console.log(leagueId)
 
-  await poster(`/league/${leagueId}/leave`)
+  await poster(`/league/${leagueId}/leave`, { method: 'DELETE' })
   revalidatePath('/')
 }
 export async function joinLeagueRace(data: FormData) {
@@ -79,6 +90,6 @@ export async function joinLeagueRace(data: FormData) {
 export async function leaveLeagueRace(data: FormData) {
   const raceId = data.get('raceId')
 
-  await poster(`/race/${raceId}/leave`)
+  await poster(`/race/${raceId}/leave`, { method: 'DELETE' })
   revalidatePath('/')
 }

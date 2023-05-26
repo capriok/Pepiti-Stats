@@ -90,7 +90,7 @@ function NavBar({ user }: Props) {
           href="https://pepiti.com/stats/api/v0/steam_login"
           target="_blank"
           referrerPolicy="origin"
-          className={`btn-ghost btn-sm btn mt-[2px] h-full w-full border-none text-error ${
+          className={`btn-ghost btn mt-[2px] h-full w-full border-none text-error ${
             user.guid ? 'btn-error' : ''
           }`}>
           {user.guid ? 'Change User' : 'Sign In'}
@@ -143,7 +143,7 @@ function NavBar({ user }: Props) {
       <Link
         key={idx}
         href={link.href}
-        className="btn-ghost btn flex  justify-between border-none font-normal normal-case hover:bg-secondary/60 lg:mr-2 lg:font-semibold">
+        className="btn-ghost btn flex justify-between border-none font-normal normal-case hover:bg-secondary hover:text-white lg:mr-2 lg:font-semibold">
         <div className="flex w-full items-center justify-between max-md:text-[16px] lg:gap-2">
           {link.label}
           {link.icon}
@@ -157,7 +157,9 @@ function NavBar({ user }: Props) {
       <div className="sticky top-0 z-50 bg-base-200 backdrop-blur-lg">
         <div className="navbar mx-auto max-w-[1400px]">
           <div className="navbar-start">
-            <Link href="/dashboard" className="btn-ghost btn border-none hover:bg-secondary/80">
+            <Link
+              href="/dashboard"
+              className="btn-ghost btn border-none hover:bg-secondary hover:text-white">
               <Image
                 priority={true}
                 src="/assets/brand/pepiti-logo.svg"
@@ -177,7 +179,7 @@ function NavBar({ user }: Props) {
             <div className="dropdown-end dropdown">
               <label
                 tabIndex={0}
-                className="btn-ghost rounded-btn btn-md btn border-none hover:bg-secondary/80">
+                className="btn-ghost rounded-btn btn border-none hover:bg-secondary hover:text-white">
                 <MenuIcon />
               </label>
               <ul

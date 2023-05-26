@@ -1,7 +1,8 @@
 'use client'
 
-import { CheckIcon, VerifiedIcon } from 'lucide-react'
+import { Bike, CheckIcon, VerifiedIcon } from 'lucide-react'
 import React from 'react'
+import BikeWithPrefixColor from '~/components/pills/BikeWithPrefixColor'
 import Pill from '~/components/pills/Pill'
 import RiderLink from '~/components/RiderLink'
 import Table from '~/components/Table'
@@ -12,7 +13,7 @@ interface Props {
   rider: RiderProfile
   league: League
   host: RiderProfile
-  eligibility: any
+  eligibility: LeagueEligibility
 }
 
 const LeagueContext = React.createContext({} as any)
@@ -21,30 +22,75 @@ export const useLeagueContext = () => React.useContext(LeagueContext)
 export default function LeagueOverview({ user, rider, league, host, eligibility }: Props) {
   console.log('%cLeague', 'color: steelblue', { user, rider, league, host, eligibility })
 
+  const isInLeague = eligibility.league_joined === true
+  const leagueRider = league.riders[rider._id] ?? {}
+
   return (
     <LeagueContext.Provider value={{ user, rider, league, host, eligibility }}>
-      <LeagueBanner league={league} eligibility={eligibility} />
+      <LeagueBanner league={league} />
 
-      <div className="mb-2 mt-6 text-xl font-semibold md:mb-4 md:mt-10">League Details</div>
+      <LeagueAlert isInLeague={isInLeague} rider={leagueRider} />
+
+      <div className="mb-2 mt-4 text-xl font-semibold md:mb-4 md:mt-10">League Information</div>
       <LeagueInformation league={league} host={host} />
 
-      <div className="mb-2 mt-6 text-xl font-semibold md:mb-4 md:mt-10">League Requirements</div>
+      <div className="mb-2 mt-4 text-xl font-semibold md:mb-4 md:mt-10">League Requirements</div>
       <LeagueRequirements league={league} eligibility={eligibility} rider={rider} />
 
-      <div className="mb-2 mt-6 text-xl font-semibold md:mb-4 md:mt-10">League Races</div>
+      <div className="mb-2 mt-4 text-xl font-semibold md:mb-4 md:mt-10">League Races</div>
       <LeagueRaces league={league} />
 
-      <div className="mb-2 mt-6 text-xl font-semibold md:mb-4 md:mt-10">League Standings</div>
+      <div className="mb-2 mt-4 text-xl font-semibold md:mb-4 md:mt-10">League Standings</div>
       <LeagueStandings league={league} />
     </LeagueContext.Provider>
   )
 }
 
-const LeagueBanner = ({ league, eligibility }) => {
-  const isInLeague = eligibility.league_joined === true
+const LeagueAlert = ({ isInLeague, rider }: { isInLeague: boolean; rider: LeagueRider }) => {
+  if (!isInLeague) return <></>
 
   return (
-    <div className="m-5 mx-2 md:mx-10">
+    <div className="mb-8 rounded-2xl bg-base-200">
+      <div className="flex w-full justify-stretch">
+        <div
+          data-tip="You are In the League"
+          className="alert rounded-bl-none rounded-br-none bg-secondary">
+          <div className="flex w-full items-center justify-center gap-2">
+            You are in the League <CheckIcon />
+          </div>
+        </div>
+      </div>
+      {rider.guid && (
+        <div className="grid w-full grid-cols-2 place-items-center p-4">
+          <div>
+            <div className="mb-2 flex flex-col items-center justify-center gap-2">
+              <div className="text-md text-accent">Rider Name:</div>
+              <RiderLink href={`/profile/${rider.guid}`}>{rider.name}</RiderLink>
+            </div>
+            <div className="mb-2 flex flex-col items-center justify-center gap-2">
+              <div className="text-md text-accent">Team Name:</div>
+              {rider.team}
+            </div>
+          </div>
+          <div>
+            <div className="mb-2 flex flex-col items-center justify-center gap-2">
+              <div className="text-md text-accent">Race #:</div>
+              {rider.race_number}
+            </div>
+            <div className="mb-2 flex flex-col items-center justify-center gap-2">
+              <div className="text-md text-accent">Bike Choice:</div>
+              <BikeWithPrefixColor bike={rider.bike_id} />
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+const LeagueBanner = ({ league }) => {
+  return (
+    <div className="m-8">
       <div className="flex w-full justify-between">
         <div className="text-2xl font-semibold">{league.name}</div>
         <div data-tip="Verified League" className="tooltip tooltip-accent text-purple-600">
@@ -54,27 +100,6 @@ const LeagueBanner = ({ league, eligibility }) => {
       <div className="flex w-full justify-between">
         <div className="text-lg text-accent">{league.description}</div>
       </div>
-      <div className="flex w-full justify-end">
-        <div
-          data-tip="You are registered for the league"
-          className="tooltip tooltip-accent text-purple-600">
-          {isInLeague && (
-            <Pill
-              text={
-                <>
-                  <div className="hidden gap-2 px-10 py-2  md:flex md:items-center">
-                    Registered for League <CheckIcon />
-                  </div>
-                  <div className="flex items-center gap-2 px-4 py-1 md:hidden">
-                    Registered <CheckIcon />
-                  </div>
-                </>
-              }
-              color="secondary"
-            />
-          )}
-        </div>
-      </div>
     </div>
   )
 }
@@ -82,22 +107,20 @@ const LeagueBanner = ({ league, eligibility }) => {
 const LeagueInformation = ({ league, host }) => (
   <div className="card card-body bg-base-200">
     <div className="grid w-full grid-cols-1 md:grid-cols-2">
-      <div className="flex flex-col">
-        <div className="mb-4 text-lg font-semibold">Information</div>
+      <div className="flex flex-col justify-center">
         <div className="mb-2 flex items-center gap-2">
           <div className="text-md text-accent">Host:</div>
           <RiderLink href={`/profile/${host._id}`} donator={host.donation > 0}>
             {host.name}
           </RiderLink>
         </div>
-        <div className="mb-2 flex items-center gap-2">
+        <div className="flex items-center gap-2">
           <div className="text-md text-accent">Riders:</div>
           {league.total_riders}
         </div>
       </div>
 
-      <div className="flex flex-col">
-        <div className="mb-4 text-lg font-semibold">Configuration</div>
+      <div className="flex flex-col justify-center">
         <div className="mb-2 flex items-center gap-2">
           <div className="text-md text-accent">Lock Bike Choice:</div>
           <Pill
@@ -105,7 +128,7 @@ const LeagueInformation = ({ league, host }) => (
             color={league.keep_bike_selection ? 'secondary' : 'neutral'}
           />
         </div>
-        <div className="mb-2 flex items-center gap-2">
+        <div className="flex items-center gap-2">
           <div className="text-md text-accent">Lock Race Number:</div>
           <Pill
             text={league.keep_race_number ? 'True' : 'False'}
@@ -200,6 +223,7 @@ const LeagueStandings = ({ league }) => {
     {
       key: 'bike_id',
       label: 'Bike',
+      render: (bike) => <BikeWithPrefixColor bike={bike} />,
     },
     {
       key: 'team',

@@ -43,26 +43,26 @@ export default function LeagueSignupForm({ leagueId }) {
           <label className="mb-2 mt-4 text-accent">Bike Choice</label>
           <select
             name="bikePreference"
-            defaultValue="nuremberg-eu-central"
+            defaultValue="Yamaha YZ450F 2023"
             className="select-bordered select w-full">
-            <option value="KTM 450 SX-F 2023">KTM 450 SX-F</option>
-            <option value="Husqvarna FC 450 2023">Husqvarna FC 450</option>
-            <option value="GASGAS MC 450F 2023">GASGAS MC 450F</option>
-            <option value="Yamaha YZ450F 2023">Yamaha YZ450F</option>
-            <option value="Honda CRF 450R 2023">Honda CRF 450R</option>
-            <option value="Kawasaki KX450 2023">Kawasaki KX450</option>
-            <option value="Suzuki RM-Z450 2023">Suzuki RM-Z450</option>
-            <option value="Fantic 450 2023">Fantic 450</option>
-            <option value="TM 450 2023">TM 450</option>
-            <option value="KTM 250 SX-F 2023">KTM 250 SX-F</option>
-            <option value="Husqvarna FC 250 2023">Husqvarna FC 250</option>
-            <option value="GASGAS MC 250F 2023">GASGAS MC 250F</option>
-            <option value="Yamaha YZ250F 2023">Yamaha YZ250F</option>
-            <option value="Honda CRF 250R 2023">Honda CRF 250R</option>
-            <option value="Kawasaki KX250 2023">Kawasaki KX250</option>
-            <option value="Suzuki RM-Z250 2023">Suzuki RM-Z250</option>
-            <option value="Fantic 250 2023">Fantic 250</option>
-            <option value="TM 250 2023">TM 250</option>
+            <option value="KTM 450 SX-F 2023">KTM 450 SX-F 2023</option>
+            <option value="Husqvarna FC 450 2023">Husqvarna FC 450 2023</option>
+            <option value="GASGAS MC 450F 2023">GASGAS MC 450F 2023</option>
+            <option value="Yamaha YZ450F 2023">Yamaha YZ450F 2023</option>
+            <option value="Honda CRF 450R 2023">Honda CRF 450R 2023</option>
+            <option value="Kawasaki KX450 2023">Kawasaki KX450 2023</option>
+            <option value="Suzuki RM-Z450 2023">Suzuki RM-Z450 2023</option>
+            <option value="Fantic 450 2023">Fantic 450 2023</option>
+            <option value="TM 450 2023">TM 450 2023</option>
+            <option value="KTM 250 SX-F 2023">KTM 250 SX-F 2023</option>
+            <option value="Husqvarna FC 250 2023">Husqvarna FC 250 2023</option>
+            <option value="GASGAS MC 250F 2023">GASGAS MC 250F 2023</option>
+            <option value="Yamaha YZ250F 2023">Yamaha YZ250F 2023</option>
+            <option value="Honda CRF 250R 2023">Honda CRF 250R 2023</option>
+            <option value="Kawasaki KX250 2023">Kawasaki KX250 2023</option>
+            <option value="Suzuki RM-Z250 2023">Suzuki RM-Z250 2023</option>
+            <option value="Fantic 250 2023">Fantic 250 2023</option>
+            <option value="TM 250 2023">TM 250 2023</option>
           </select>
         </div>
         <div className="flex flex-col">
@@ -71,11 +71,11 @@ export default function LeagueSignupForm({ leagueId }) {
             name="serverPreference"
             defaultValue="nuremberg-eu-central"
             className="select-bordered select w-full">
-            <option value="nuremberg-eu-central">Nuremberg - EU Central</option>
-            <option value="falkenstein-eu-central">Falkenstein - EU Central</option>
-            <option value="helsinki-eu-central">Helsinki - EU Central</option>
             <option value="or-us-west">Oregon - US West</option>
             <option value="va-us-east">Virginia - US East</option>
+            <option value="helsinki-eu-central">Helsinki - EU Central</option>
+            <option value="nuremberg-eu-central">Nuremberg - EU Central</option>
+            <option value="falkenstein-eu-central">Falkenstein - EU Central</option>
           </select>
         </div>
         <div className="mt-4 flex w-full justify-center">
