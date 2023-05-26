@@ -1,32 +1,29 @@
 'use client'
 
-import { VerifiedIcon } from 'lucide-react'
+import { CheckIcon, VerifiedIcon } from 'lucide-react'
+import React from 'react'
 import Pill from '~/components/pills/Pill'
 import RiderLink from '~/components/RiderLink'
 import Table from '~/components/Table'
 import LeagueRaceCard from './LeagueRaceCard'
 
 interface Props {
+  user: User
   rider: RiderProfile
   league: League
   host: RiderProfile
   eligibility: any
 }
 
-export default function LeagueOverview({ rider, league, host, eligibility }: Props) {
-  console.log('%cLeague', 'color: steelblue', { rider, league, host, eligibility })
+const LeagueContext = React.createContext({} as any)
+export const useLeagueContext = () => React.useContext(LeagueContext)
+
+export default function LeagueOverview({ user, rider, league, host, eligibility }: Props) {
+  console.log('%cLeague', 'color: steelblue', { user, rider, league, host, eligibility })
 
   return (
-    <>
-      <div className="m-5 mx-2 md:mx-10">
-        <div className="flex w-full justify-between">
-          <div className="text-2xl font-semibold">{league.name}</div>
-          <div data-tip="Verified League" className="tooltip tooltip-accent text-purple-600">
-            {league.verified && <VerifiedIcon />}
-          </div>
-        </div>
-        <div className="text-lg text-accent">{league.description}</div>
-      </div>
+    <LeagueContext.Provider value={{ user, rider, league, host, eligibility }}>
+      <LeagueBanner league={league} eligibility={eligibility} />
 
       <div className="mb-2 mt-6 text-xl font-semibold md:mb-4 md:mt-10">League Details</div>
       <LeagueInformation league={league} host={host} />
@@ -39,7 +36,46 @@ export default function LeagueOverview({ rider, league, host, eligibility }: Pro
 
       <div className="mb-2 mt-6 text-xl font-semibold md:mb-4 md:mt-10">League Standings</div>
       <LeagueStandings league={league} />
-    </>
+    </LeagueContext.Provider>
+  )
+}
+
+const LeagueBanner = ({ league, eligibility }) => {
+  const isInLeague = eligibility.league_joined === true
+
+  return (
+    <div className="m-5 mx-2 md:mx-10">
+      <div className="flex w-full justify-between">
+        <div className="text-2xl font-semibold">{league.name}</div>
+        <div data-tip="Verified League" className="tooltip tooltip-accent text-purple-600">
+          {league.verified && <VerifiedIcon />}
+        </div>
+      </div>
+      <div className="flex w-full justify-between">
+        <div className="text-lg text-accent">{league.description}</div>
+      </div>
+      <div className="flex w-full justify-end">
+        <div
+          data-tip="You are registered for the league"
+          className="tooltip tooltip-accent text-purple-600">
+          {isInLeague && (
+            <Pill
+              text={
+                <>
+                  <div className="hidden gap-2 px-10 py-2  md:flex md:items-center">
+                    Registered for League <CheckIcon />
+                  </div>
+                  <div className="flex items-center gap-2 px-4 py-1 md:hidden">
+                    Registered <CheckIcon />
+                  </div>
+                </>
+              }
+              color="secondary"
+            />
+          )}
+        </div>
+      </div>
+    </div>
   )
 }
 

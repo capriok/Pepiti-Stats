@@ -10,9 +10,10 @@ import RiderLeaguesList from './tabs/RiderLeaguesList'
 interface Props {
   rider: RiderProfile
   mmrHistory: Array<RiderMMRHistory>
+  leagues: Array<League>
 }
 
-export default function ProfileTabs({ rider, mmrHistory }: Props) {
+export default function ProfileTabs({ rider, mmrHistory, leagues }: Props) {
   const items = [
     {
       key: 'overview',
@@ -28,7 +29,7 @@ export default function ProfileTabs({ rider, mmrHistory }: Props) {
       key: 'races',
       label: 'Races',
       children: (
-        <div className="p-6 pt-0">
+        <div className="p-4 pt-0">
           <div className="my-4 whitespace-nowrap text-xl font-semibold">Recent Races</div>
           <RiderRacesTable guid={rider._id} />
         </div>
@@ -38,7 +39,7 @@ export default function ProfileTabs({ rider, mmrHistory }: Props) {
       key: 'records',
       label: 'Records',
       children: (
-        <div className="p-6 pt-0">
+        <div className="p-4 pt-0">
           <div className="my-4 whitespace-nowrap text-xl font-semibold">Personal Records</div>
           <RiderRecordsTable guid={rider._id} />
         </div>
@@ -48,9 +49,9 @@ export default function ProfileTabs({ rider, mmrHistory }: Props) {
       key: 'leagues',
       label: 'Leagues',
       children: (
-        <div className="p-6 pt-0">
+        <div className="p-4 pt-0">
           <div className="my-4 whitespace-nowrap text-xl font-semibold">My Leagues</div>
-          <RiderLeaguesList guid={rider._id} />
+          <RiderLeaguesList leagues={leagues} />
         </div>
       ),
     },

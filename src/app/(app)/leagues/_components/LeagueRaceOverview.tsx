@@ -1,5 +1,7 @@
 'use client'
 
+import { CheckIcon } from 'lucide-react'
+import Pill from '~/components/pills/Pill'
 import RiderLink from '~/components/RiderLink'
 import Table from '~/components/Table'
 import Tabs from '~/components/Tabs'
@@ -16,10 +18,15 @@ interface Props {
 
 export default function LeagueRaceOverview({ user, race, eligibility }: Props) {
   console.log('%cLeagueRace', 'color: steelblue', { user, race, eligibility })
+  const isInRace = eligibility.race_joined === true
 
   return (
     <>
-      <LeagueRaceInformation race={race} />
+      <div className="mb-8 flex justify-center">
+        <LeagueRaceBanner isInRace={isInRace} />
+      </div>
+
+      <LeagueRaceInformation race={race} isInRace={isInRace} />
 
       <div className="mb-2 mt-6 text-xl font-semibold md:mb-4 md:mt-10">Race Configurations</div>
       <LeagueRaceConfig race={race} />
@@ -30,12 +37,37 @@ export default function LeagueRaceOverview({ user, race, eligibility }: Props) {
   )
 }
 
-const LeagueRaceInformation = ({ race }: { race: LeagueRaceDetails }) => {
+const LeagueRaceBanner = ({ isInRace }) => {
+  return (
+    <div
+      data-tip="You are registered for the league"
+      className="tooltip tooltip-accent text-purple-600">
+      {isInRace && (
+        <Pill
+          text={
+            <div className="flex items-center gap-2 px-10 py-2">
+              Signed up for the Race <CheckIcon />
+            </div>
+          }
+          color="secondary"
+        />
+      )}
+    </div>
+  )
+}
+
+const LeagueRaceInformation = ({
+  race,
+  isInRace,
+}: {
+  race: LeagueRaceDetails
+  isInRace: boolean
+}) => {
   return (
     <div className="card card-body bg-base-200 p-0">
       <div
         className={`rounded-lg rounded-bl-none rounded-br-none text-white ${
-          leagueRaceStatusMap[race.status].color
+          isInRace ? 'bg-accent' : leagueRaceStatusMap[race.status].color
         } p-4`}>
         <div className="flex justify-center text-xl font-semibold">
           {leagueRaceStatusMap[race.status].msg}

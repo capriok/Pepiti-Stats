@@ -56,7 +56,7 @@ export async function joinLeague(data: FormData) {
     team: data.get('teamName'),
     race_number: data.get('raceNumber'),
     bike_preference: data.get('bikePreference'),
-    // server_preference: data.get('serverPreference'),
+    server_preference: data.get('serverPreference'),
   }
 
   await poster(`/league/${leagueId}/join`, body)
@@ -71,6 +71,7 @@ export async function leaveLeague(data: FormData) {
 }
 export async function joinLeagueRace(data: FormData) {
   const raceId = data.get('raceId')
+  console.log(raceId)
 
   await poster(`/race/${raceId}/join`)
   revalidatePath('/')

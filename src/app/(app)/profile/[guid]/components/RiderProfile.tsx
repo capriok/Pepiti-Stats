@@ -10,12 +10,13 @@ interface Props {
   user: User
   rider: RiderProfile
   mmrHistory: Array<RiderMMRHistory>
+  leagues: Array<League>
 }
 
 const UserContext = createContext<User>({} as User)
 export const useUserContext = () => useContext(UserContext)
 
-export const RiderProfile = ({ user, rider, mmrHistory }: Props) => {
+export const RiderProfile = ({ user, rider, mmrHistory, leagues }: Props) => {
   return (
     <UserContext.Provider value={user}>
       <div className="w-full">
@@ -32,7 +33,7 @@ export const RiderProfile = ({ user, rider, mmrHistory }: Props) => {
           </div>
         </div>
       </div>
-      <ProfileTabs rider={rider} mmrHistory={mmrHistory} />
+      <ProfileTabs rider={rider} mmrHistory={mmrHistory} leagues={leagues} />
     </UserContext.Provider>
   )
 }

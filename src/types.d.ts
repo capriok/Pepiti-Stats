@@ -252,6 +252,7 @@ interface League {
   description: string
   verified: boolean
   hidden: boolean
+  closed?: boolean
   keep_bike_selection: boolean
   keep_race_number: boolean
   total_riders: number
