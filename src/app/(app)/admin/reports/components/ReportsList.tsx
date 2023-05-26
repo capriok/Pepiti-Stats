@@ -4,7 +4,11 @@ import { ArrowRightIcon } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
 
-export default function ReportsList({ reports }) {
+interface Props {
+  reports: Array<RiderReport>
+}
+
+export default function ReportsList({ reports }: Props) {
   const [openId, setOpenId] = useState(null)
 
   const handleIdleControlsClick = (id) => {
@@ -13,7 +17,7 @@ export default function ReportsList({ reports }) {
 
   return (
     <>
-      {reports.map((r) => {
+      {/* {reports.map((r) => {
         const reportActive = r.reportId === openId
         return (
           <div key={r.plaintiff.id} className="card card-body my-4 w-full bg-base-200">
@@ -35,12 +39,12 @@ export default function ReportsList({ reports }) {
             </div>
           </div>
         )
-      })}
+      })} */}
     </>
   )
 }
 
-const ReportControls = ({ active, open, close }) =>
+const ReportControls = ({ active, open }) =>
   active ? <ActiveReportControls /> : <IdleReportControls open={open} />
 
 const IdleReportControls = ({ open }) => {

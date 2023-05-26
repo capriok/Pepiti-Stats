@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import ReportsList from './components/ReportsList'
 import PageHeader from '~/components/PageHeader'
+import { GetAdminRiderReports } from '~/api'
+import getAuthUser from '~/api/getAuthUser'
 
 export const metadata = {
   title: 'Pepiti | Admin Manager',
@@ -8,6 +10,9 @@ export const metadata = {
 }
 
 export default async function Page() {
+  const user = await getAuthUser()
+  const reportsData = await GetAdminRiderReports(user.token)
+
   return (
     <>
       <PageHeader
@@ -18,7 +23,7 @@ export default async function Page() {
           </Link>
         }
       />
-      <ReportsList reports={mockreports} />
+      <ReportsList reports={reportsData.reports} />
     </>
   )
 }

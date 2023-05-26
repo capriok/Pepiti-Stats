@@ -1,7 +1,9 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import useSWR from 'swr'
+import { postRiderReport } from '~/api/actions'
 import { fetcher } from '~/api/fetcher'
 import Spinner from '~/components/Spinner'
 
@@ -10,28 +12,39 @@ interface Props {
   events: Array<RecentRace>
 }
 
-export function RiderReportForm({ user, events }: Props) {
+export default function RiderReportForm({ user, events }: Props) {
+  const router = useRouter()
   const [eventId, setEventId] = useState(null)
 
   const handleEventSelect = (e) => {
     setEventId(e.target.value)
   }
 
+  if (!user.guid) return router.push('/signin')
+  console.log(user.guid)
+
   return (
     <div className="card card-body mx-auto mt-10 w-fit bg-base-200">
       <div className="flex flex-col justify-center align-middle">
-        <div className="form-control w-full max-w-xs">
+        <form action={postRiderReport} className="form-control w-full max-w-xs">
+          {/* User Guid */}
+          <div className="mb-2 text-lg font-semibold">GUID</div>
+          <input readOnly name="userGuid" value={user.guid} className="input-bordered input" />
+          <br />
+
           {/* Event */}
-          <div className="mb-2 text-xl font-semibold">Event</div>
+          <div className="mb-2 text-lg font-semibold">Event</div>
           <label className="label">
             <span className="label-text">
               <span className="text-red-500">* </span> Choose Event
             </span>
           </label>
           <select
+            name="eventId"
+            defaultValue=""
             className="input-bordered select w-[400px] max-w-xs"
             onChange={handleEventSelect}
-            defaultValue="">
+          >
             <option disabled />
             {events.map((event) => (
               <option key={event._id} value={event._id}>
@@ -42,14 +55,14 @@ export function RiderReportForm({ user, events }: Props) {
           <br />
 
           {/* Rider */}
-          {eventId && <RiderFormPart2 user={user} eventId={eventId} />}
-        </div>
+          {eventId && <RiderFormPart2 eventId={eventId} />}
+        </form>
       </div>
     </div>
   )
 }
 
-export function RiderFormPart2({ user, eventId }) {
+export function RiderFormPart2({ eventId }) {
   const [riderForm, setRiderForm] = useState({
     rider: '',
     claim: '',
@@ -76,21 +89,22 @@ export function RiderFormPart2({ user, eventId }) {
     setRiderForm({ ...riderForm, claim: e.target.value })
   }
 
-  const charactersCn =
-    riderForm.claim.length > 50 ? 'text-xs text-green-500' : 'text-xs text-red-500'
+  const charactersCn = riderForm.claim.length > 50 ? 'text-green-500' : 'text-red-500'
 
   return (
     <>
-      <div className="mb-2 text-xl font-semibold">Rider</div>
+      <div className="mb-2 text-lg font-semibold">Rider</div>
       <label className="label">
         <span className="label-text">
           <span className="text-red-500">* </span> Rider Name
         </span>
       </label>
       <select
-        className="input-bordered select w-full max-w-xs"
+        name="riderGuid"
+        defaultValue=""
         onChange={handleRiderSelect}
-        defaultValue="">
+        className="input-bordered select w-full max-w-xs"
+      >
         <option disabled />
         {riders.map((rider) => (
           <option key={rider.id + rider.name + rider.bike_name} value={rider.id}>
@@ -102,55 +116,68 @@ export function RiderFormPart2({ user, eventId }) {
         <span className="label-text">
           <span className="text-red-500">* </span> Claim/Reason
         </span>
-        <span className={charactersCn}>Required: {riderForm.claim.length} / 50</span>
+        <span className={`text-xs ${charactersCn}`}>Required: {riderForm.claim.length} / 50</span>
       </label>
-      <textarea className="textarea-bordered textarea h-24" onChange={handleClaimChange} />
+      <textarea
+        name="reason"
+        className="textarea-bordered textarea h-24"
+        onChange={handleClaimChange}
+      />
       <br />
 
       {riderForm.rider && riderForm.claim.length > 50 && (
-        <ProofFormPart3 user={user} eventId={eventId} riderForm={riderForm} />
+        <ProofFormPart3 eventId={eventId} riderForm={riderForm} />
       )}
     </>
   )
 }
 
-export function ProofFormPart3({ user, eventId, riderForm }) {
-  const [files, setFiles] = useState([])
+export function ProofFormPart3({ eventId, riderForm }) {
+  const [proofsCount, setProofsCount] = useState(0)
 
-  const handleFileChange = (e) => {
-    setFiles(e.target.files)
+  const handleProofChange = (value) => {
+    setProofsCount((c) => (value ? c + 1 : c - 1))
   }
 
-  const disabled = !eventId || !riderForm.rider || riderForm.claim.length < 50 || !files.length
+  const disabled = !eventId || !riderForm.rider || riderForm.claim.length < 50 || proofsCount < 1
   const buttonCn = disabled ? '' : 'bg-secondary rounded-lg py-2 font-semibold text-white'
 
-  const handleSumbit = () => {
-    console.log('Report Form', {
-      plaintiffId: user._id,
-      eventId: eventId,
-      defendantId: riderForm.rider,
-      claim: riderForm.claim,
-      proofs: files,
-    })
-  }
+  const requiredCn = riderForm.claim.length > 50 ? 'text-green-500' : 'text-red-500'
 
   return (
     <>
       <div className="mb-2 text-xl font-semibold">Proof</div>
-      <label className="label">
+      <label className="label flex justify-between">
         <span className="label-text">
-          <div className="text-sm">Photo/Video</div>
+          <span className="text-red-500">* </span> Photo/Video Links
         </span>
+        <span className={`text-xs ${requiredCn}`}>Required: {proofsCount} / 1</span>
       </label>
       <input
-        type="file"
-        multiple={true}
-        className="file-input-bordered file-input w-full max-w-xs"
-        onChange={handleFileChange}
+        name="proof1"
+        type="text"
+        required={true}
+        onChange={(e) => handleProofChange(e.target.value)}
+        className="input input-sm mb-2"
+        placeholder="Proof link..."
+      />
+      <input
+        name="proof2"
+        type="text"
+        onChange={(e) => handleProofChange(e.target.value)}
+        className="input input-sm mb-2"
+        placeholder="Proof link..."
+      />
+      <input
+        name="proof3"
+        type="text"
+        onChange={(e) => handleProofChange(e.target.value)}
+        className="input input-sm mb-2"
+        placeholder="Proof link..."
       />
 
       <br />
-      <button className={buttonCn} disabled={disabled} onClick={handleSumbit}>
+      <button className={buttonCn} disabled={disabled} type="submit">
         Submit
       </button>
     </>
