@@ -1,11 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { unbanRider } from '~/api/actions'
 import Pill from '~/components/pills/Pill'
 import Table from '~/components/Table'
 import Tabs from '~/components/Tabs'
+import UnbanRiderButton from './UnbanRiderButton'
 
 interface Props {
   isAdmin: boolean
@@ -15,7 +16,7 @@ interface Props {
 
 export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Props) {
   const searchParams = useSearchParams()
-  const tabParam = searchParams.get('tab')
+  const tabParam = searchParams.get('tab') ?? ''
   const pathname = usePathname()
   const isAdministrating = pathname.includes('admin') && isAdmin
 
@@ -53,7 +54,7 @@ export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Pro
   return (
     <div className="flex justify-center">
       <div className="card card-body w-full bg-base-200 p-0">
-        <Tabs items={tabs} wide={true} defaultActive={tabParam ?? ''} />
+        <Tabs items={tabs} wide={true} defaultActive={tabParam} />
       </div>
     </div>
   )
@@ -65,22 +66,29 @@ const BlacklistAlert = ({ text, color }) => (
   </div>
 )
 
-const BanAppealButtons = () => (
-  <div className="mb-4 flex w-fit flex-wrap justify-center gap-2 md:mb-0 md:w-full md:justify-end">
-    <Link
-      target="_blank"
-      rel="noopener noreferrer"
-      href="https://discord.com/invite/mx-bikes"
-      className="btn-outline btn-ghost btn-sm btn">
-      Ban Appeal (MXB Discord)
-    </Link>
-    <button disabled={true} className="btn-outline btn-ghost btn-sm btn">
-      {/* <Link href={`/appeal/${rider._id}`} className="btn-outline btn-ghost btn-sm btn"> */}
-      Ban Appeal (On-Site)
-      {/* </Link> */}
-    </button>
-  </div>
-)
+const BanAppealButtons = () => {
+  const router = useRouter()
+
+  return (
+    <div className="mb-4 flex w-fit flex-wrap justify-center gap-2 md:mb-0 md:w-full md:justify-end">
+      <Link
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://discord.com/invite/mx-bikes"
+        className="btn-outline btn-ghost btn-sm btn"
+      >
+        Ban Appeal (MXB Discord)
+      </Link>
+      <button
+        disabled={true}
+        className="btn-outline btn-ghost btn-sm btn"
+        onClick={() => router.push(`/report/appeal`)}
+      >
+        Ban Appeal (On-Site)
+      </button>
+    </div>
+  )
+}
 
 const BlacklistTable = ({ blacklist, isAdmin }) => {
   const searchParams = useSearchParams()
@@ -130,15 +138,7 @@ const BlacklistTable = ({ blacklist, isAdmin }) => {
   const adminColumn = {
     key: 'guid',
     label: 'Admin',
-    render: (guid) => {
-      return (
-        <form action={unbanRider}>
-          <button type="submit" name="guid" value={guid} className="btn-outline btn-sm btn mb-2">
-            Unban
-          </button>
-        </form>
-      )
-    },
+    render: (guid) => <UnbanRiderButton guid={guid} />,
   }
 
   if (isAdmin) columns.push(adminColumn as any)

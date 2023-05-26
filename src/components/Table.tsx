@@ -196,7 +196,7 @@ const Table: React.FC<TableProps> = (props) => {
             value={term}
             placeholder={`Search by ${searchKey}...`}
             onChange={(e) => handleTermChange(e.target.value)}
-            className="input-bordered input input-sm my-2 w-full md:w-[400px]"
+            className="input-bordered input input-sm my-2 w-full bg-base-200 md:w-[400px]"
           />
         )}
       </div>
@@ -218,20 +218,23 @@ const Table: React.FC<TableProps> = (props) => {
               <button
                 className="btn-ghost btn-sm btn bg-base-100"
                 onClick={() => handlePageChange(page > 0 ? page - 1 : page)}
-                disabled={page === 0}>
+                disabled={page === 0}
+              >
                 Prev Page
               </button>
               <button
                 className="btn-ghost btn-sm btn bg-base-100"
                 onClick={() => handlePageChange(paginatedData.length ? page + 1 : page)}
-                disabled={paginatedData.length < pageSize}>
+                disabled={paginatedData.length < pageSize}
+              >
                 Next Page
               </button>
             </div>
             <select
               className="input input-sm"
               value={pageSize}
-              onChange={(e) => handlePageSizeChange(e.target.value)}>
+              onChange={(e) => handlePageSizeChange(e.target.value)}
+            >
               <option value={10}>10</option>
               <option value={25}>25</option>
               <option value={50}>50</option>

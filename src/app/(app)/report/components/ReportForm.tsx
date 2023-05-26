@@ -29,7 +29,12 @@ export default function RiderReportForm({ user, events }: Props) {
         <form action={postRiderReport} className="form-control w-full max-w-xs">
           {/* User Guid */}
           <div className="mb-2 text-lg font-semibold">GUID</div>
-          <input readOnly name="userGuid" value={user.guid} className="input-bordered input" />
+          <input
+            readOnly
+            name="userGuid"
+            value={user.guid}
+            className="input-bordered input bg-base-200"
+          />
           <br />
 
           {/* Event */}
@@ -42,7 +47,7 @@ export default function RiderReportForm({ user, events }: Props) {
           <select
             name="eventId"
             defaultValue=""
-            className="input-bordered select w-[400px] max-w-xs"
+            className="input-bordered select w-[400px] max-w-xs bg-base-200"
             onChange={handleEventSelect}
           >
             <option disabled />
@@ -65,7 +70,7 @@ export default function RiderReportForm({ user, events }: Props) {
 export function RiderFormPart2({ eventId }) {
   const [riderForm, setRiderForm] = useState({
     rider: '',
-    claim: '',
+    reason: '',
   })
 
   const { data, isLoading } = useSWR(`/races/${eventId}`, fetcher)
@@ -74,9 +79,7 @@ export function RiderFormPart2({ eventId }) {
     return <Spinner />
   }
 
-  const event = data
-
-  const riders = Object.values(event.riders).map((r: any) => ({
+  const riders = Object.values(data.riders).map((r: any) => ({
     ...r,
     id: r.guid,
   }))
@@ -85,11 +88,11 @@ export function RiderFormPart2({ eventId }) {
     setRiderForm({ ...riderForm, rider: e.target.value })
   }
 
-  const handleClaimChange = (e) => {
-    setRiderForm({ ...riderForm, claim: e.target.value })
+  const handleReasonChange = (e) => {
+    setRiderForm({ ...riderForm, reason: e.target.value })
   }
 
-  const charactersCn = riderForm.claim.length > 50 ? 'text-green-500' : 'text-red-500'
+  const charactersCn = riderForm.reason.length > 50 ? 'text-green-500' : 'text-red-500'
 
   return (
     <>
@@ -103,7 +106,7 @@ export function RiderFormPart2({ eventId }) {
         name="riderGuid"
         defaultValue=""
         onChange={handleRiderSelect}
-        className="input-bordered select w-full max-w-xs"
+        className="input-bordered select w-full max-w-xs bg-base-200"
       >
         <option disabled />
         {riders.map((rider) => (
@@ -114,18 +117,18 @@ export function RiderFormPart2({ eventId }) {
       </select>
       <label className="label mt-2 flex justify-between">
         <span className="label-text">
-          <span className="text-red-500">* </span> Claim/Reason
+          <span className="text-red-500">* </span> Reason for Report
         </span>
-        <span className={`text-xs ${charactersCn}`}>Required: {riderForm.claim.length} / 50</span>
+        <span className={`text-xs ${charactersCn}`}>Required: {riderForm.reason.length} / 50</span>
       </label>
       <textarea
         name="reason"
-        className="textarea-bordered textarea h-24"
-        onChange={handleClaimChange}
+        className="textarea-bordered textarea h-24 bg-base-200"
+        onChange={handleReasonChange}
       />
       <br />
 
-      {riderForm.rider && riderForm.claim.length > 50 && (
+      {riderForm.rider && riderForm.reason.length > 50 && (
         <ProofFormPart3 eventId={eventId} riderForm={riderForm} />
       )}
     </>
@@ -139,10 +142,10 @@ export function ProofFormPart3({ eventId, riderForm }) {
     setProofsCount((c) => (value ? c + 1 : c - 1))
   }
 
-  const disabled = !eventId || !riderForm.rider || riderForm.claim.length < 50 || proofsCount < 1
+  const disabled = !eventId || !riderForm.rider || riderForm.reason.length < 50 || proofsCount < 1
   const buttonCn = disabled ? '' : 'bg-secondary rounded-lg py-2 font-semibold text-white'
 
-  const requiredCn = riderForm.claim.length > 50 ? 'text-green-500' : 'text-red-500'
+  const requiredCn = proofsCount < 1 ? 'text-red-500' : 'text-green-500'
 
   return (
     <>
@@ -158,21 +161,21 @@ export function ProofFormPart3({ eventId, riderForm }) {
         type="text"
         required={true}
         onChange={(e) => handleProofChange(e.target.value)}
-        className="input input-sm mb-2"
+        className="input input-sm mb-2 bg-base-200"
         placeholder="Proof link..."
       />
       <input
         name="proof2"
         type="text"
         onChange={(e) => handleProofChange(e.target.value)}
-        className="input input-sm mb-2"
+        className="input input-sm mb-2 bg-base-200"
         placeholder="Proof link..."
       />
       <input
         name="proof3"
         type="text"
         onChange={(e) => handleProofChange(e.target.value)}
-        className="input input-sm mb-2"
+        className="input input-sm mb-2 bg-base-200"
         placeholder="Proof link..."
       />
 

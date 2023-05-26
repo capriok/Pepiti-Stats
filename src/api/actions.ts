@@ -2,12 +2,14 @@
 
 import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
+import { NextResponse } from 'next/server'
 
 const ENDPOINT = process.env.NEXT_PUBLIC_API
+const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN
 const token = cookies().get('access_token')?.value
 
 async function fetcher(url: string) {
-  console.log('%cFetcher', 'color: goldenrod', { token })
+  console.log('%cFetcher', 'color: goldenrod', { url, token })
 
   return await fetch(ENDPOINT + url, {
     headers: {
@@ -56,7 +58,7 @@ export async function banRider(data: FormData) {
   const guid = data.get('guid')
   const reason = data.get('reason')
 
-  console.log('%cAction: guid', 'color: goldenrod', { guid, reason })
+  console.log('%cAction: banRider', 'color: goldenrod', { guid, reason })
 
   await fetcher(`/rider/${guid}/ban/${reason}`).catch((err) => console.log(err))
   revalidatePath('/')
