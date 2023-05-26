@@ -11,7 +11,8 @@ export const metadata = {
 
 export default async function Page() {
   const user = await getAuthUser()
-  const reportsData = await GetAdminRiderReports(user.token)
+  const reports = await GetAdminRiderReports(user.token)
+  console.log(reports)
 
   return (
     <>
@@ -23,7 +24,7 @@ export default async function Page() {
           </Link>
         }
       />
-      <ReportsList reports={reportsData.reports} />
+      <ReportsList reports={reports.results} />
     </>
   )
 }
