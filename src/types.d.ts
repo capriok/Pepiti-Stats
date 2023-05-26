@@ -397,6 +397,43 @@ interface LeagueRaceDivision {
   }[]
 }
 
+interface RiderReport {
+  _id: string;
+  race_id: string;
+  guid: string;
+  by: string;
+  reason: string;
+  proofs: string;
+  rider: {
+    _id: string;
+    MMR: number;
+    SR: number;
+    name: string;
+    contact: number;
+    banned: boolean;
+    banned_by: string | null;
+    avatar: string;
+    type: string;
+    online: boolean;
+    server: string | null;
+    donation: number;
+    seasons: LeagueSeason[];
+    races: {
+      first: number;
+      second: number;
+      third: number;
+      total_races: number;
+      fastlap: number;
+      holeshot: number;
+    };
+    bikes: {
+      [key: string]: {
+        laps: number;
+      };
+    };
+  };
+}
+
 interface BlacklistRider {
   _id: string
   MMR: number

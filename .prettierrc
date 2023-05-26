@@ -2,7 +2,7 @@
   "printWidth": 100,
   "singleQuote": true,
   "semi": false,
-  "bracketSameLine": true,
+  "bracketSameLine": false,
   "plugins": ["prettier-plugin-tailwindcss"],
   "pluginSearchDirs": false
 }

@@ -101,9 +101,13 @@ export async function GetBlackListSR(): Promise<{ riders: Array<BlacklistRider> 
   const data = await fetcher('/blacklist.json')
   return data
 }
-
 export async function GetBlackListNonSR(): Promise<{ riders: Array<BlacklistRider> }> {
-  const data = await fetcher('/blacklist_non_sr.json ')
+  const data = await fetcher('/blacklist_non_sr.json')
+  return data
+}
+// prettier-ignore
+export async function GetAdminRiderReports(token: string): Promise<{ reports: Array<RiderReport> }> {
+  const data = await fetcher('/rider/report', token)
   return data
 }
 

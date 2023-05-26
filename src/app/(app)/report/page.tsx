@@ -2,7 +2,7 @@ import { GetRecentRaces } from '~/api'
 import getAuthUser from '~/api/getAuthUser'
 import PageHeader from '~/components/PageHeader'
 import Pill from '~/components/pills/Pill'
-import { RiderReportForm } from './components/ReportForm'
+import RiderReportForm from './components/ReportForm'
 
 export const metadata = {
   title: 'Pepiti | Rider Report',
@@ -10,8 +10,8 @@ export const metadata = {
 }
 
 export default async function Page() {
-  const recentRaces = await GetRecentRaces()
   const user = await getAuthUser()
+  const recentRaces = await GetRecentRaces()
 
   return (
     <div className="min-h-[90vh]">
@@ -24,6 +24,7 @@ export default async function Page() {
           />
         }
       />
+      {/* @ts-expect-error */}
       <RiderReportForm user={user} events={recentRaces.races} />
     </div>
   )
