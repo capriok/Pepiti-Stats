@@ -6,7 +6,7 @@ const nextConfig = {
   },
 
   images: {
-    domains: ['avatars.akamai.steamstatic.com'],
+    domains: ['avatars.akamai.steamstatic.com', 'i.imgur.com'],
   },
 }
 

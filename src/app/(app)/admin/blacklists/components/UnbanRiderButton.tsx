@@ -19,13 +19,11 @@ export default function UnbanRiderButton({ guid }: Props) {
   }
 
   return (
-    <form action={doThings}>
-      <Popover>
-        <PopoverTrigger>
-          <button className="btn-outline btn-sm btn mb-2">Unban</button>
-        </PopoverTrigger>
-        <PopoverContent className="grid place-items-center">
-          <div>Please confirm this action</div>
+    <Popover>
+      <PopoverTrigger className="btn-outline btn-sm btn mb-2">Unban</PopoverTrigger>
+      <PopoverContent className="grid place-items-center">
+        <div>Please confirm this action</div>
+        <form action={doThings}>
           <button
             type="submit"
             name="guid"
@@ -34,8 +32,8 @@ export default function UnbanRiderButton({ guid }: Props) {
           >
             Unban
           </button>
-        </PopoverContent>
-      </Popover>
-    </form>
+        </form>
+      </PopoverContent>
+    </Popover>
   )
 }

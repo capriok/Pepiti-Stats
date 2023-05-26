@@ -106,7 +106,9 @@ export async function GetBlackListNonSR(): Promise<{ riders: Array<BlacklistRide
   return data
 }
 // prettier-ignore
-export async function GetAdminRiderReports(token: string): Promise<{ reports: Array<RiderReport> }> {
+export async function GetAdminRiderReports(
+  token: string
+): Promise<{ results: Array<RiderReport> }> {
   const data = await fetcher('/rider/report', token)
   return data
 }
