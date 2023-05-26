@@ -260,10 +260,20 @@ interface League {
     [key: string]: LeagueRider
   }
   requirements: LeagueRequirements
-  races: Array<LeagueRaceCard>
+  races: Array<LeagueRace>
 }
 
-interface LeagueRaceCard {
+interface LeagueEligibility {
+  not_banned: boolean
+  league_joined: boolean
+  MMR: boolean
+  SR: boolean
+  races: boolean
+  laps: boolean
+  records: boolean
+}
+
+interface LeagueRace {
   _id: string
   timestamp: number
   config: {
@@ -280,11 +290,12 @@ interface LeagueRaceCard {
 
 interface LeagueRider {
   guid: string
+  name: string
   team: string
   bike_id: string
   race_number: number
-  name: string
-  points: number
+  points?: number
+  server_preference?: string
 }
 
 interface LeagueRequirements {
@@ -294,6 +305,17 @@ interface LeagueRequirements {
   races: number
   laps: number
   records: number
+}
+
+interface LeagueRaceEligibility {
+  not_banned: boolean
+  league_joined: boolean
+  MMR: boolean
+  SR: boolean
+  races: boolean
+  laps: boolean
+  records: boolean
+  race_joined: boolean
 }
 
 interface LeagueRaceDetails {
@@ -345,6 +367,7 @@ interface LeagueRaceConfig {
     restart_delay: number
   }
 }
+
 interface LeagueRaceDivision {
   name: string
   riders: {
@@ -372,4 +395,33 @@ interface LeagueRaceDivision {
       timestamp: number
     }
   }[]
+}
+
+interface BlacklistRider {
+  _id: string
+  MMR: number
+  SR: number
+  name: string
+  contact: number
+  banned: boolean
+  banned_by: string
+  avatar: string
+  type: string
+  donation: number
+  online: boolean
+  server: null | string
+  seasons: LeagueSeason[]
+  races: {
+    first: number
+    second: number
+    third: number
+    total_races: number
+    fastlap: number
+    holeshot: number
+  }
+  bikes: {
+    [key: string]: {
+      laps: string
+    }
+  }
 }

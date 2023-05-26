@@ -1,10 +1,9 @@
 'use client'
 
-import Link from 'next/link'
 import Table from '~/components/Table'
-import { handleBikeColor } from '~/utils/handleBikeColor'
-import { handleLapTimes } from '~/utils/handleLapTimes'
 import RiderLink from '../RiderLink'
+import BikeWithPrefixColor from '../pills/BikeWithPrefixColor'
+import { handleLapTimes } from '~/utils/handleLapTimes'
 
 interface Props {
   records: TrackRecord[]
@@ -45,14 +44,7 @@ export const TrackRecordsTable = ({ records }: Props) => {
     {
       key: 'bike',
       label: 'Bike',
-      render: (bike) => (
-        <div className="flex items-center justify-start">
-          <div className={`mr-3 h-5 w-2 ${handleBikeColor(bike)}`} />
-          <div className="py-1">
-            <p>{bike} </p>
-          </div>
-        </div>
-      ),
+      render: (bike) => <BikeWithPrefixColor bike={bike} />,
     },
   ]
 

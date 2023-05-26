@@ -70,7 +70,7 @@ export async function GetRiderLeagues(token: string): Promise<{ leagues: Array<L
 
 // LEAGUES
 
-export async function GetAllLeagues(): Promise<{ leagues: any }> {
+export async function GetAllLeagues(): Promise<{ leagues: Array<League> }> {
   const data = await fetcher('/leagues')
   return data
 }
@@ -82,35 +82,28 @@ export async function GetLeagueRace(raceId: string, token: string): Promise<Leag
   const data = await fetcher(`/race/${raceId}`, token)
   return data
 }
-export async function GetLeagueEligibility(leagueId: string, token: string): Promise<any> {
+export async function GetLeagueEligibility(
+  leagueId: string,
+  token: string
+): Promise<LeagueEligibility> {
   const data = await fetcher(`/league/${leagueId}/check`, token)
   return data
 }
 // prettier-ignore
-export async function GetLeagueRaceEligibility(raceId: string, token: string): Promise<{ rider: any }> {
+export async function GetLeagueRaceEligibility(raceId: string, token: string): Promise<LeagueRaceEligibility> {
   const data = await fetcher(`/race/${raceId}/check`, token)
   return data
 }
 
 // ADMINISTRATION
 
-export async function GetBlackListSR(): Promise<{ riders: any }> {
+export async function GetBlackListSR(): Promise<{ riders: Array<BlacklistRider> }> {
   const data = await fetcher('/blacklist.json')
   return data
 }
 
-export async function GetBlackListNonSR(): Promise<{ riders: any }> {
+export async function GetBlackListNonSR(): Promise<{ riders: Array<BlacklistRider> }> {
   const data = await fetcher('/blacklist_non_sr.json ')
-  return data
-}
-
-export async function BanRider(guid: string, reason: string, token: string): Promise<any> {
-  const data = await fetcher(`/rider/${guid}/ban/${reason}`)
-  return data
-}
-
-export async function UnBanRider(guid: string, token: string): Promise<any> {
-  const data = await fetcher(`/rider/${guid}/unban`)
   return data
 }
 

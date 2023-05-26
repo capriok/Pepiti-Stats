@@ -3,11 +3,11 @@
 import React from 'react'
 import useSWR from 'swr'
 import { fetcher } from '~/api/fetcher'
-import { handleBikeColor } from '~/utils/handleBikeColor'
 import { dateIsValid } from '~/utils/dateIsValid'
 import { handleLapTimes } from '~/utils/handleLapTimes'
 import Table from '~/components/Table'
 import Spinner from '~/components/Spinner'
+import BikeWithPrefixColor from '~/components/pills/BikeWithPrefixColor'
 import { handleAverageSpeed } from '~/utils/handleAverageSpeed'
 
 interface Props {
@@ -69,15 +69,7 @@ export default function RiderRecordsTable({ guid }: Props) {
     {
       key: 'bike',
       label: 'Bike',
-      render: (bike) => {
-        const bikeColor = handleBikeColor(bike)
-        return (
-          <div className="flex">
-            <div className={`mr-3 h-5 w-2 ${bikeColor}`} />
-            {bike ? bike : '-'}
-          </div>
-        )
-      },
+      render: (bike) => <BikeWithPrefixColor bike={bike} />,
     },
   ]
 

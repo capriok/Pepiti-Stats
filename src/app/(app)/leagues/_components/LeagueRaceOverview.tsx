@@ -1,19 +1,18 @@
 'use client'
 
 import { CheckIcon } from 'lucide-react'
-import Pill from '~/components/pills/Pill'
-import RiderLink from '~/components/RiderLink'
 import Table from '~/components/Table'
+import RiderLink from '~/components/RiderLink'
 import Tabs from '~/components/Tabs'
+import BikeWithPrefixColor from '~/components/pills/BikeWithPrefixColor'
 import { handleAverageSpeed } from '~/utils/handleAverageSpeed'
-import { handleBikeColor } from '~/utils/handleBikeColor'
 import { handleLapTimes } from '~/utils/handleLapTimes'
 import { leagueRaceStatusMap } from './constants'
 
 interface Props {
   user: User
   race: LeagueRaceDetails
-  eligibility: any
+  eligibility: LeagueRaceEligibility
 }
 
 export default function LeagueRaceOverview({ user, race, eligibility }: Props) {
@@ -22,9 +21,7 @@ export default function LeagueRaceOverview({ user, race, eligibility }: Props) {
 
   return (
     <>
-      <div className="mb-8 flex justify-center">
-        <LeagueRaceBanner isInRace={isInRace} />
-      </div>
+      <LeagueRaceAlert isInRace={isInRace} />
 
       <LeagueRaceInformation race={race} isInRace={isInRace} />
 
@@ -37,21 +34,16 @@ export default function LeagueRaceOverview({ user, race, eligibility }: Props) {
   )
 }
 
-const LeagueRaceBanner = ({ isInRace }) => {
+const LeagueRaceAlert = ({ isInRace }: { isInRace: boolean }) => {
+  if (!isInRace) return <></>
+
   return (
-    <div
-      data-tip="You are registered for the league"
-      className="tooltip tooltip-accent text-purple-600">
-      {isInRace && (
-        <Pill
-          text={
-            <div className="flex items-center gap-2 px-10 py-2">
-              Signed up for the Race <CheckIcon />
-            </div>
-          }
-          color="secondary"
-        />
-      )}
+    <div className="mb-4 flex w-full justify-stretch">
+      <div data-tip="You are In the League" className="alert bg-secondary text-white">
+        <div className="flex w-full items-center justify-center gap-2">
+          Registered for the Race <CheckIcon />
+        </div>
+      </div>
     </div>
   )
 }
@@ -66,11 +58,11 @@ const LeagueRaceInformation = ({
   return (
     <div className="card card-body bg-base-200 p-0">
       <div
-        className={`rounded-lg rounded-bl-none rounded-br-none text-white ${
+        className={`rounded-lg rounded-bl-none rounded-br-none p-2 text-white ${
           isInRace ? 'bg-accent' : leagueRaceStatusMap[race.status].color
-        } p-4`}>
-        <div className="flex justify-center text-xl font-semibold">
-          {leagueRaceStatusMap[race.status].msg}
+        }`}>
+        <div className="flex justify-center text-lg font-semibold">
+          {leagueRaceStatusMap[race.status].text}
         </div>
       </div>
 
@@ -81,14 +73,14 @@ const LeagueRaceInformation = ({
             <div className="text-md text-accent">Start Time:</div>
             {new Date(race.timestamp * 1000).toLocaleString()}
           </div>
-          <div className="mb-2 flex items-center gap-2">
+          <div className="flex items-center gap-2">
             <div className="text-md text-accent">Track:</div>
             {race.config.event.track}
           </div>
         </div>
 
         <div className="flex flex-col">
-          <div className="mb-4 text-lg font-semibold">Configuration</div>
+          <div className="mb-4 text-lg font-semibold">Session</div>
           <div className="mb-2 flex items-center gap-2">
             <div className="text-md text-accent">Max Riders:</div>
             <div>{race.config.connection.maxclient}</div>
@@ -97,7 +89,7 @@ const LeagueRaceInformation = ({
             <div className="text-md text-accent">Deformation:</div>
             <div>{race.config.deformation.scale}</div>
           </div>
-          <div className="mb-2 flex items-center gap-2">
+          <div className="flex items-center gap-2">
             <div className="text-md text-accent">Restart Delay:</div>
             <div>{race.config.race.restart_delay}</div>
           </div>
@@ -148,7 +140,7 @@ const LeagueRaceConfig = ({ race }: { race: LeagueRaceDetails }) => {
   )
 }
 
-const LeagueRaceTabs = ({ race }) => {
+const LeagueRaceTabs = ({ race }: { race: LeagueRaceDetails }) => {
   const items = race.divisions.map((division) => ({
     key: division.name,
     label: division.name,
@@ -203,15 +195,7 @@ const LeagueRaceStandings = ({ division }: { division: LeagueRaceDivision }) => 
     {
       key: 'bike',
       label: 'Bike',
-      render: (bike) => {
-        const bikeColor = handleBikeColor(bike)
-        return (
-          <div className="flex">
-            <div className={`mr-3 h-5 w-2 ${bikeColor}`} />
-            {bike ? bike : '-'}
-          </div>
-        )
-      },
+      render: (bike) => <BikeWithPrefixColor bike={bike} />,
     },
   ]
 

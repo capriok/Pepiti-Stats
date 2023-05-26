@@ -16,7 +16,7 @@ export default function LeagueList({ leagues }: Props) {
 
   return (
     <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-3">
-      {mockleagues.map((league) => (
+      {leagues.map((league) => (
         <LeagueCard key={league._id} league={league} />
       ))}
     </div>
