@@ -2,7 +2,7 @@
 
 import { VerifiedIcon } from 'lucide-react'
 import Link from 'next/link'
-import { Pill } from '~/components/pills/Pill'
+import Pill from '~/components/pills/Pill'
 
 interface Props {
   leagues: Array<League>

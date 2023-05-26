@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Api from '~/api'
+import { GetBlackListNonSR, GetBlackListSR } from '~/api'
 import PageHeader from '~/components/PageHeader'
 import getAuthUser from '~/api/getAuthUser'
 import Blacklists from './components/Blacklists'
@@ -10,9 +10,9 @@ export const metadata = {
 }
 
 export default async function Page() {
-  const user = getAuthUser()
-  const blacklistSR = await Api.GetBlackListSR()
-  const blacklistNonSR = await Api.GetBlackListNonSR()
+  const user = await getAuthUser()
+  const blacklistSR = await GetBlackListSR()
+  const blacklistNonSR = await GetBlackListNonSR()
 
   return (
     <>

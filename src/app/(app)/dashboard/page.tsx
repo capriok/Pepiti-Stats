@@ -1,4 +1,4 @@
-import Api from '~/api'
+import { GetDynamicTopRecords, GetSummaryStats, GetTrackNames } from '~/api'
 import PageHeader from '~/components/PageHeader'
 import RiderSearch from './components/RiderSearch'
 import SummaryStats from './components/Summary'
@@ -14,11 +14,11 @@ export const metadata = {
 }
 
 export default async function Page() {
-  const apiStats = await Api.GetSummaryStats()
-  const worldRecords = await Api.GetDynamicTopRecords('riders', 10)
-  const worldMMR = await Api.GetDynamicTopRecords('mmr', 10)
-  const worldSR = await Api.GetDynamicTopRecords('sr', 10)
-  const trackList = await Api.GetTrackNames()
+  const apiStats = await GetSummaryStats()
+  const worldRecords = await GetDynamicTopRecords('riders', 10)
+  const worldMMR = await GetDynamicTopRecords('mmr', 10)
+  const worldSR = await GetDynamicTopRecords('sr', 10)
+  const trackList = await GetTrackNames()
 
   return (
     <>

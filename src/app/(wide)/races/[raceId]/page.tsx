@@ -1,10 +1,10 @@
 import { Metadata } from 'next'
-import Api from '~/api'
+import { GetRace } from '~/api'
 import processRaceSession from '~/utils/processRaceSession'
 import Race from './components/Race'
 
 export async function generateMetadata({ params }) {
-  const raceSession = await Api.GetRace(params.raceId)
+  const raceSession = await GetRace(params.raceId)
   let session = processRaceSession(raceSession) as ProcessedRaceSession
 
   return {
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
   } as Metadata
 }
 export default async function Page({ params: { raceId } }) {
-  const raceSession = await Api.GetRace(raceId)
+  const raceSession = await GetRace(raceId)
   let session = processRaceSession(raceSession) as ProcessedRaceSession
 
   return <Race session={session} />

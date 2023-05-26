@@ -1,7 +1,7 @@
 'use client'
 
 import uswSwr from 'swr'
-import { fetcher } from '~/api'
+import { fetcher } from '~/api/fetcher'
 import Spinner from '~/components/Spinner'
 
 export default function DonationMarquee() {
@@ -12,7 +12,7 @@ export default function DonationMarquee() {
   //   { id: '4', donator: 'Other Guy', date: '2023-01-01T00:00:00.000Z', amount: 5, currency: '$' },
   // ]
 
-  //? ... this endpoint sucks for this feature. should have something similar to above data to use this
+  //? ... this endpoint no good for this feature. should have something similar to above data to use this
   const { data, error, isLoading } = uswSwr('/top/donators', fetcher)
   if (isLoading) return <Spinner />
   const donators = data.donators.filter((d) => d.donation > 0)

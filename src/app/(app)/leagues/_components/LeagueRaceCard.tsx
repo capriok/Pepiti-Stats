@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { Pill } from '~/components/pills/Pill'
+import Pill from '~/components/pills/Pill'
 
 interface Props {
   race: LeagueRaceCard

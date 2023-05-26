@@ -1,10 +1,10 @@
 import RiderAvatar from '~/app/(app)/profile/[guid]/components/RiderAvatar'
 import MMRPill from '~/components/pills/MMRPill'
-import { Pill } from '~/components/pills/Pill'
+import Pill from '~/components/pills/Pill'
 import useSwr from 'swr'
-import { fetcher } from '~/api'
 import { handleLapTimes } from '~/utils/handleLapTimes'
 import { handleRankColor } from '~/utils/handleRankColor'
+import { fetcher } from '~/api/fetcher'
 
 interface Props {
   race: Race

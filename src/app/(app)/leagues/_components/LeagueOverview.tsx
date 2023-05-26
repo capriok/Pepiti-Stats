@@ -1,7 +1,7 @@
 'use client'
 
 import { VerifiedIcon } from 'lucide-react'
-import { Pill } from '~/components/pills/Pill'
+import Pill from '~/components/pills/Pill'
 import RiderLink from '~/components/RiderLink'
 import Table from '~/components/Table'
 import LeagueRaceCard from './LeagueRaceCard'
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export default function LeagueOverview({ rider, league, host, eligibility }: Props) {
-  console.log({ rider, league, host, eligibility })
+  console.log('%cLeague', 'color: steelblue', { rider, league, host, eligibility })
 
   return (
     <>

@@ -1,4 +1,4 @@
-import Api from '~/api'
+import { GetBlackListNonSR, GetBlackListSR } from '~/api'
 import PageHeader from '~/components/PageHeader'
 import Blacklists from '../admin/blacklists/components/Blacklists'
 
@@ -8,8 +8,8 @@ export const metadata = {
 }
 
 export default async function Page() {
-  const blacklistSR = await Api.GetBlackListSR()
-  const blacklistNonSR = await Api.GetBlackListNonSR()
+  const blacklistSR = await GetBlackListSR()
+  const blacklistNonSR = await GetBlackListNonSR()
 
   return (
     <>

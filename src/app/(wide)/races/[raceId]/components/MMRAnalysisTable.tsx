@@ -1,7 +1,6 @@
-import Link from 'next/link'
 import React from 'react'
 import MMRPill from '~/components/pills/MMRPill'
-import { Pill } from '~/components/pills/Pill'
+import Pill from '~/components/pills/Pill'
 import RiderLink from '~/components/RiderLink'
 import Table from '~/components/Table'
 import { toFixedIfNecessary } from '~/utils/toFixedIfNecessary'

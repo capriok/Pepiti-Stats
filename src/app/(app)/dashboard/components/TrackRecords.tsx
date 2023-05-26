@@ -1,11 +1,10 @@
 'use client'
 
 import React, { useState } from 'react'
-import Link from 'next/link'
 import useSWR from 'swr'
+import { fetcher } from '~/api/fetcher'
 import Table from '~/components/Table'
 import { TrackRecordsTable } from '~/components/tables/TrackRecordsTable'
-import { fetcher } from '~/api'
 
 interface Props {
   trackList: any
