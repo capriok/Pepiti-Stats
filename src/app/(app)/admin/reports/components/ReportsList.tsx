@@ -96,7 +96,8 @@ const ActiveReportContent = ({ report }) => {
             <a href={report.proofs} target="_blank" rel="noopener noreferrer">
               {report.proofs}
             </a>
-            {/* // ? client side when submitting a rider report, we need to only support a sole proof hosting domain
+            {/* // ? when submitting a rider report, restrict link not to imgur/ gyazo imgs
+            // ? we need to only support a certain proof hosting domains, (imgur, gyazo) 
             // ? next requires img src domains to be configured in next.config.js, also creates ease for security for admins
             <Image src={report.proofs} alt="proof1" priority={true} width={300} height={300} /> */}
             {/* // ? api should return a list of proofs
