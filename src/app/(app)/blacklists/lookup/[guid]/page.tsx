@@ -1,8 +1,8 @@
+import { GetRider } from '~/api'
 import Link from 'next/link'
-import Api from '~/api'
 
 export async function generateMetadata({ params: { guid } }) {
-  const rider = await Api.GetRider(guid)
+  const rider = await GetRider(guid)
 
   return {
     title: 'Pepiti | Blacklist Lookup',
@@ -13,7 +13,7 @@ ${rider?.banned ? `Reason: ${rider?.banned_by}` : ''}`,
 }
 
 export default async function Page({ params: { guid } }) {
-  const rider = await Api.GetRider(guid)
+  const rider = await GetRider(guid)
 
   return (
     <div className="grid min-h-[75vh] w-full place-items-center">

@@ -6,9 +6,9 @@ import { handleLapTimes } from '~/utils/handleLapTimes'
 import handlePlaceSuffix from '~/utils/handlePlaceSuffix'
 import MMRPill from '~/components/pills/MMRPill'
 import Table from '~/components/Table'
-import { Pill } from '~/components/pills/Pill'
-import { fetcher } from '~/api'
+import Pill from '~/components/pills/Pill'
 import Spinner from '~/components/Spinner'
+import { fetcher } from '~/api/fetcher'
 
 interface Props {
   guid: string

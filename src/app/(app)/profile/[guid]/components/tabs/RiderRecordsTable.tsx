@@ -1,8 +1,8 @@
 'use client'
 
 import React from 'react'
-import { fetcher } from '~/api'
 import useSWR from 'swr'
+import { fetcher } from '~/api/fetcher'
 import { handleBikeColor } from '~/utils/handleBikeColor'
 import { dateIsValid } from '~/utils/dateIsValid'
 import { handleLapTimes } from '~/utils/handleLapTimes'

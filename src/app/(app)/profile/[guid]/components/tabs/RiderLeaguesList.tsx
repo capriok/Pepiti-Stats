@@ -1,10 +1,9 @@
 'use client'
 
-import React  from 'react'
-import {  privateFetcher } from '~/api'
+import React from 'react'
 import useSWR from 'swr'
-import Spinner from '~/components/Spinner'
 import { useUserContext } from '../RiderProfile'
+import Spinner from '~/components/Spinner'
 import LeagueList from '~/app/(app)/leagues/_components/LeagueList'
 
 interface Props {
@@ -14,10 +13,7 @@ interface Props {
 export default function RiderLeaguesList({ guid }: Props) {
   const user = useUserContext()
 
-  const { data, error, isLoading } = useSWR(
-    `/my_leagues`,
-    async () => await privateFetcher(`/my_leagues`, user.token)
-  )
+  const { data, error, isLoading } = useSWR([`/my_leagues`, user.token])
 
   if (error) return <>err</>
 
@@ -30,5 +26,9 @@ export default function RiderLeaguesList({ guid }: Props) {
 
   const leagues = data?.leagues
 
-  return <LeagueList leagues={leagues} />
+  return (
+    <div className="-mx-8 -mb-8 bg-base-100 p-4">
+      <LeagueList leagues={leagues} />
+    </div>
+  )
 }

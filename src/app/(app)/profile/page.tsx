@@ -1,9 +1,9 @@
 'use client'
 
-import useSWR from 'swr'
 import { useRouter, useSearchParams } from 'next/navigation'
+import useSWR from 'swr'
+import { fetcher } from '~/api/fetcher'
 import Spinner from '~/components/Spinner'
-import { fetcher } from '~/api'
 
 export default function Page() {
   const router = useRouter()

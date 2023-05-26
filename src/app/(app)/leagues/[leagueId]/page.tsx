@@ -1,7 +1,8 @@
-import Api from '~/api'
+import { GetLeague, GetLeagueEligibility, GetRider } from '~/api'
 import PageHeader from '~/components/PageHeader'
 import getAuthUser from '~/api/getAuthUser'
 import LeagueOverview from '../_components/LeagueOverview'
+import LeagueActions from '../_components/LeagueActions'
 
 export const metadata = {
   title: 'Pepiti | League',
@@ -9,24 +10,19 @@ export const metadata = {
 }
 
 export default async function Page({ params: { leagueId } }) {
-  const user = getAuthUser()
-  const rider = await Api.GetRider(user.guid)
-  const league = await Api.GetLeague(leagueId, user.token)
-  const host = await Api.GetRider(league.by)
-  const eligibility = await Api.GetLeagueEligibility(leagueId, user.token)
+  const user = await getAuthUser()
+  const rider = await GetRider(user.guid)
+  const league = await GetLeague(leagueId, user.token)
+  const host = await GetRider(league.by)
+  const eligibility = await GetLeagueEligibility(leagueId, user.token)
 
   return (
     <>
-      <PageHeader title="League" extra={<LeagueActions />} />
+      <PageHeader
+        title="League"
+        extra={<LeagueActions guid={user.guid} leagueId={league._id} eligibility={eligibility} />}
+      />
       <LeagueOverview rider={rider} league={league} host={host} eligibility={eligibility} />
-    </>
-  )
-}
-
-const LeagueActions = () => {
-  return (
-    <>
-      <div className="btn-secondary btn-sm btn text-white">Join League</div>
     </>
   )
 }

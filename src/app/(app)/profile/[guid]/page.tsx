@@ -1,11 +1,11 @@
-import Api from '~/api'
-import PageHeader from '~/components/PageHeader'
+import { GetRider, GetRiderMMRHistory } from '~/api'
 import getAuthUser from '~/api/getAuthUser'
+import PageHeader from '~/components/PageHeader'
 import BannedBanner from './components/BannedBanner'
 import { RiderProfile } from './components/RiderProfile'
 
 export async function generateMetadata({ params }) {
-  const rider = await Api.GetRider(params.guid)
+  const rider = await GetRider(params.guid)
 
   return {
     title: `Pepiti | ${rider?.name}`,
@@ -21,9 +21,9 @@ Contacts: ${rider?.contact}
 }
 
 export default async function Page({ params: { guid } }) {
-  const user = getAuthUser()
-  const rider = await Api.GetRider(guid)
-  const mmrHistory = await Api.GetRiderMMRHistory(guid)
+  const user = await getAuthUser()
+  const rider = await GetRider(guid)
+  const mmrHistory = await GetRiderMMRHistory(guid)
 
   return (
     <>

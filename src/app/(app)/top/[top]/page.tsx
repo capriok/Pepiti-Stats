@@ -1,4 +1,4 @@
-import Api from '~/api'
+import { GetDynamicTopRecords } from '~/api'
 import PageHeader from '~/components/PageHeader'
 import WorldRecordsTable from '~/components/tables/WorldRecordsTable'
 import MMRRecordsTable from '~/components/tables/MMRRecordsTable'
@@ -12,7 +12,7 @@ export async function generateMetadata({ params: { top } }) {
 }
 
 export default async function Page({ params: { top } }) {
-  const topRecords = await Api.GetDynamicTopRecords(top, 1000)
+  const topRecords = await GetDynamicTopRecords(top, 1000)
 
   const data = () => {
     switch (top) {

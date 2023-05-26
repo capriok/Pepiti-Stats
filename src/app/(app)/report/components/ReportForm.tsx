@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import useSWR from 'swr'
-import { fetcher } from '~/api'
+import { fetcher } from '~/api/fetcher'
 import Spinner from '~/components/Spinner'
 
 interface Props {

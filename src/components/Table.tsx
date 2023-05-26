@@ -2,7 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from 'react'
 import { handleRankColor } from '~/utils/handleRankColor'
-import { Pill } from './pills/Pill'
+import Pill from './pills/Pill'
 
 /**
  *  table data can include any properties but must include a unique _id

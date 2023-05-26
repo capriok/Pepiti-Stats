@@ -1,4 +1,4 @@
-import Api from '~/api'
+import { GetAllLeagues } from '~/api'
 import PageHeader from '~/components/PageHeader'
 import LeagueList from './_components/LeagueList'
 
@@ -8,7 +8,7 @@ export const metadata = {
 }
 
 export default async function Page() {
-  const leaguesData = await Api.GetAllLeagues()
+  const leaguesData = await GetAllLeagues()
 
   return (
     <>

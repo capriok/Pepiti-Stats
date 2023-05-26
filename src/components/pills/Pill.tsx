@@ -3,7 +3,7 @@ interface PillProps {
   color?: string
 }
 
-export const Pill = ({ text, color = 'neutral' }: PillProps) => {
+export default function Pill({ text, color = 'neutral' }: PillProps) {
   const colorMap = {
     neutral: {
       bg: 'bg-accent/40 dark:bg-accent/60',

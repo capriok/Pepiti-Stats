@@ -1,8 +1,9 @@
+import { GetLeagueRace, GetLeagueRaceEligibility } from '~/api'
 import Link from 'next/link'
-import Api from '~/api'
 import PageHeader from '~/components/PageHeader'
 import getAuthUser from '~/api/getAuthUser'
 import LeagueRaceOverview from '../../_components/LeagueRaceOverview'
+import LeagueRaceActions from '../../_components/LeagueRaceActions'
 
 export const metadata = {
   title: 'Pepiti | League Race',
@@ -13,8 +14,9 @@ export default async function Page(props) {
   const {
     params: { raceId },
   } = props
-  const user = getAuthUser()
-  const race = await Api.GetLeagueRace(raceId, user.token)
+  const user = await getAuthUser()
+  const race = await GetLeagueRace(raceId, user.token)
+  const eligibility = await GetLeagueRaceEligibility(raceId, user.token)
 
   return (
     <>
@@ -27,52 +29,11 @@ export default async function Page(props) {
               className="btn-outline btn-sm btn bg-base-200">
               Go to League
             </Link>
-            <ActionButton race={race} />
+            <LeagueRaceActions raceId={race._id} eligibility={eligibility} />
           </div>
         }
       />
-      <LeagueRaceOverview race={race} />
+      <LeagueRaceOverview user={user} race={race} eligibility={eligibility} />
     </>
-  )
-}
-
-const ActionButton = ({ race }) => {
-  const registrationOpen = race.status === 0
-
-  const JoinRaceButton = () => {
-    return (
-      <button
-        className="btn-secondary btn-sm btn w-full text-white"
-        // onClick={joinRace}
-        // disabled={!registrationOpen}
-        // disabled={!isEligibleToRace || !registrationOpen}
-      >
-        Join Race
-      </button>
-    )
-  }
-
-  const LeaveRaceButton = () => {
-    return (
-      <button
-        className="btn-outline btn-sm btn w-full text-error"
-        // onClick={leaveRace}
-        // disabled={!registrationOpen}
-        // disabled={!isEligibleToRace || !registrationOpen}
-      >
-        Leave Race
-      </button>
-    )
-  }
-
-  return (
-    <div className="flex w-fit">
-      {/* <JoinRaceButton /> */}
-      <Link
-        href={`/leagues/race/${race._id}/signup`}
-        className="btn-secondary btn-sm btn w-fit text-white">
-        Signup
-      </Link>
-    </div>
   )
 }

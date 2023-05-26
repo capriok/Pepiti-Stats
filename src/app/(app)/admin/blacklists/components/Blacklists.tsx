@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { unbanRider } from '~/api/actions'
-import { Pill } from '~/components/pills/Pill'
+import Pill from '~/components/pills/Pill'
 import Table from '~/components/Table'
 import Tabs from '~/components/Tabs'
 

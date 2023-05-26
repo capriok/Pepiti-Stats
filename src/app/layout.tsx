@@ -19,7 +19,7 @@ interface Props {
 }
 
 export default async function RootLayout(props: Props) {
-  const user = getAuthUser()
+  const user = await getAuthUser()
 
   return (
     <html lang="en" data-theme="light">

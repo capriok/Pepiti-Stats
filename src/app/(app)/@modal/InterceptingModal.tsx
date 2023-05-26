@@ -2,7 +2,6 @@
 
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
-
 import { Dialog, DialogContent } from '~/components/Dialog'
 
 export default function InterceptingModal(props: {

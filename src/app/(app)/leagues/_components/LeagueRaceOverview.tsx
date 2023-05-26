@@ -9,10 +9,14 @@ import { handleLapTimes } from '~/utils/handleLapTimes'
 import { leagueRaceStatusMap } from './constants'
 
 interface Props {
+  user: User
   race: LeagueRaceDetails
+  eligibility: any
 }
 
-export default function LeagueRaceOverview({ race }: Props) {
+export default function LeagueRaceOverview({ user, race, eligibility }: Props) {
+  console.log('%cLeagueRace', 'color: steelblue', { user, race, eligibility })
+
   return (
     <>
       <LeagueRaceInformation race={race} />
