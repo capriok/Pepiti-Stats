@@ -13,6 +13,7 @@ import NavBar from '~/components/Navbar'
 import Footer from '~/components/Footer'
 
 import '~/globals.css'
+import { Toaster } from '~/components/Toaster'
 
 interface Props {
   children: React.ReactNode
@@ -27,6 +28,7 @@ export default async function RootLayout(props: Props) {
         <NavBar user={user} />
         {props.children}
         <Footer user={user} />
+        <Toaster />
         {/* <Analytics /> */}
       </body>
     </html>
