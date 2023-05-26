@@ -40,7 +40,7 @@ export default function QuerySearch({ query, render, placeholder, defaultTerm = 
     <div className="relative flex justify-center gap-2">
       <div className="relative">
         <input
-          className="input-bordered input w-full md:w-[400px]"
+          className="input-bordered input w-full bg-base-200 md:w-[400px]"
           placeholder={placeholder}
           value={term}
           onChange={(e) => setTerm(e.currentTarget.value)}

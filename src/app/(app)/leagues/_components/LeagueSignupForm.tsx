@@ -3,7 +3,11 @@
 import { useSearchParams } from 'next/navigation'
 import { joinLeague } from '~/api/actions'
 
-export default function LeagueSignupForm({ leagueId }) {
+interface Props {
+  leagueId: string
+}
+
+export default function LeagueSignupForm({ leagueId }: Props) {
   const searchParams = useSearchParams()
   const guid = searchParams.get('guid') ?? ''
 
@@ -15,36 +19,51 @@ export default function LeagueSignupForm({ leagueId }) {
   return (
     <div className="w-full">
       <form action={joinLeague}>
-        <input type="hidden" name="leagueId" value={leagueId ?? ''} />
+        <input name="leagueId" value={leagueId} className="hidden" />
         <div className="flex flex-col">
           <label className="mb-2 mt-4 text-accent">GUID</label>
           <input
             name="guid"
-            type="text"
-            className="input"
+            className="input-bordered input bg-base-200"
             required={true}
             value={guid}
-            disabled={guid ? true : false}
+            readOnly={guid ? true : false}
           />
         </div>
         <div className="flex flex-col">
           <label className="mb-2 mt-4 text-accent">Rider Name</label>
-          <input required={true} name="riderName" type="text" className="input" />
+          <input
+            required={true}
+            name="riderName"
+            type="text"
+            className="input-bordered input bg-base-200"
+          />
         </div>
         <div className="flex flex-col">
           <label className="mb-2 mt-4 text-accent">Team Name</label>
-          <input required={true} name="teamName" type="text" className="input" />
+          <input
+            required={true}
+            name="teamName"
+            type="text"
+            className="input-bordered input bg-base-200"
+          />
         </div>
         <div className="flex flex-col">
           <label className="mb-2 mt-4 text-accent">Race Number</label>
-          <input required={true} name="raceNumber" type="number" className="input" />
+          <input
+            required={true}
+            name="raceNumber"
+            type="number"
+            className="input-bordered input bg-base-200"
+          />
         </div>
         <div className="flex flex-col">
           <label className="mb-2 mt-4 text-accent">Bike Choice</label>
           <select
             name="bikePreference"
             defaultValue="Yamaha YZ450F 2023"
-            className="select-bordered select w-full">
+            className="select-bordered select w-full bg-base-200"
+          >
             <option value="KTM 450 SX-F 2023">KTM 450 SX-F 2023</option>
             <option value="Husqvarna FC 450 2023">Husqvarna FC 450 2023</option>
             <option value="GASGAS MC 450F 2023">GASGAS MC 450F 2023</option>
@@ -70,7 +89,8 @@ export default function LeagueSignupForm({ leagueId }) {
           <select
             name="serverPreference"
             defaultValue="nuremberg-eu-central"
-            className="select-bordered select w-full">
+            className="select-bordered select w-full bg-base-200"
+          >
             <option value="or-us-west">Oregon - US West</option>
             <option value="va-us-east">Virginia - US East</option>
             <option value="helsinki-eu-central">Helsinki - EU Central</option>
