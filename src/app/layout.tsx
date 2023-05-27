@@ -13,6 +13,7 @@ import NavBar from '~/components/Navbar'
 import Footer from '~/components/Footer'
 
 import '~/globals.css'
+import { Providers } from './providers'
 
 interface Props {
   children: React.ReactNode
@@ -22,12 +23,14 @@ export default async function RootLayout(props: Props) {
   const user = await getAuthUser()
 
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en" data-theme="light" suppressHydrationWarning>
       <body className={inter.className}>
-        <NavBar user={user} />
-        {props.children}
-        <Footer user={user} />
-        {/* <Analytics /> */}
+        <Providers>
+          <NavBar user={user} />
+          {props.children}
+          <Footer user={user} />
+          {/* <Analytics /> */}
+        </Providers>
       </body>
     </html>
   )

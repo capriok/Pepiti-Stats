@@ -14,11 +14,13 @@ export default function Footer({ user }: Props) {
       <div className="footer mx-auto max-w-[1400px]">
         <div>
           <Image
-            priority={true}
             src="/assets/brand/pepiti-logo.svg"
+            style={{ width: 'auto', height: 'auto' }}
             width={120}
             height={120}
             alt="pepiti_brand"
+            placeholder='blur'
+            blurDataURL='/assets/brand/pepiti-logo.svg'
           />
           <p>
             Copyright © {date.getFullYear()} Pepiti

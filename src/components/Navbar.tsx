@@ -11,6 +11,7 @@ import {
   TrophyIcon,
   UserIcon,
 } from 'lucide-react'
+import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -24,22 +25,13 @@ interface Props {
 function NavBar({ user }: Props) {
   const pathname = usePathname()
   const atDashboard = pathname === '/dashboard'
-
-  const [theme, setTheme] = useState(
-    typeof window !== 'undefined' ? localStorage.getItem('theme') ?? 'light' : 'light'
-  )
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
-  }, [theme])
+  const { theme, setTheme } = useTheme()
 
   const handleThemeChange = () => {
     if (theme === 'light') {
       setTheme('dark')
-      localStorage?.setItem('theme', 'dark')
     } else {
       setTheme('light')
-      localStorage?.setItem('theme', 'light')
     }
   }
 
@@ -90,9 +82,8 @@ function NavBar({ user }: Props) {
           href="https://pepiti.com/stats/api/v0/steam_login"
           target="_blank"
           referrerPolicy="origin"
-          className={`btn-ghost btn mt-[2px] h-full w-full border-none text-error ${
-            user.guid ? 'btn-error' : ''
-          }`}>
+          className={`btn-ghost btn mt-[2px] h-full w-full border-none text-error ${user.guid ? 'btn-error' : ''
+            }`}>
           {user.guid ? 'Change User' : 'Sign In'}
         </Link>
       ),
@@ -159,14 +150,14 @@ function NavBar({ user }: Props) {
           <div className="navbar-start">
             <Link
               href="/dashboard"
-              className="btn-ghost btn border-none hover:bg-secondary hover:text-white">
+              className="btn-ghost btn border-none hover:bg-secondary hover:text-white relative w-14">
               <Image
                 priority={true}
                 src="/assets/brand/pepiti-logo.svg"
-                className="w-h-10 h-10"
+                fill
                 alt="pepiti_brand"
-                width={50}
-                height={50}
+                placeholder='blur'
+                blurDataURL='/assets/brand/pepiti-logo.svg'
               />
             </Link>
           </div>
