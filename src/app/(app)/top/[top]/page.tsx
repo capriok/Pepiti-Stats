@@ -32,6 +32,11 @@ export default async function Page({ params: { top } }) {
   )
 }
 
+const tableProps = {
+  pageSize: 25,
+  paginationEnabled: true,
+  searchEnabled: true,
+}
 const dynamicDataMap = {
   riders: {
     title: "World Records",
@@ -63,9 +68,4 @@ const dynamicDataMap = {
       return <ContactRecordsTable worldContacts={records} seeMore={false} {...tableProps} />
     },
   },
-}
-const tableProps = {
-  pageSize: 25,
-  paginationEnabled: true,
-  searchEnabled: true,
 }
