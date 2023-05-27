@@ -17,28 +17,6 @@ export default async function Page({ params: { top } }) {
   const topRecords = await GetDynamicTopRecords(top, 1000)
   console.log("%cDynamicTopRecords", "color: steelblue", topRecords)
 
-  const Renderer = () => {
-    const props = {
-      pageSize: 25,
-      paginationEnabled: true,
-      searchEnabled: true,
-    }
-    switch (top) {
-      case "riders":
-        return <WorldRecordsTable worldRecords={topRecords} seeMore={false} {...props} />
-      case "mmr":
-        return <MMRRecordsTable worldMMR={topRecords} seeMore={false} {...props} />
-      case "sr":
-        return <SRRecordsTable worldSR={topRecords} seeMore={false} {...props} />
-      case "bikes":
-        return <BikeRecordsTable worldBikes={topRecords} seeMore={false} {...props} />
-      case "contacts":
-        return <ContactRecordsTable worldContacts={topRecords} seeMore={false} {...props} />
-      default:
-        return <></>
-    }
-  }
-
   return (
     <div className="mx-auto w-full max-w-[1000px]">
       <PageHeader
@@ -49,7 +27,7 @@ export default async function Page({ params: { top } }) {
           </div>
         }
       />
-      <Renderer />
+      {dynamicDataMap[top].render(topRecords)}
     </div>
   )
 }
@@ -57,17 +35,37 @@ export default async function Page({ params: { top } }) {
 const dynamicDataMap = {
   riders: {
     title: "World Records",
+    render: (records) => {
+      return <WorldRecordsTable worldRecords={records} seeMore={false} {...tableProps} />
+    },
   },
   mmr: {
     title: "MMR Standings",
+    render: (records) => {
+      return <MMRRecordsTable worldMMR={records} seeMore={false} {...tableProps} />
+    },
   },
   sr: {
     title: "SR Standings",
+    render: (records) => {
+      return <SRRecordsTable worldSR={records} seeMore={false} {...tableProps} />
+    },
   },
   bikes: {
     title: "Bike Records",
+    render: (records) => {
+      return <BikeRecordsTable worldBikes={records} seeMore={false} {...tableProps} />
+    },
   },
   contacts: {
     title: "Contact Riders",
+    render: (records) => {
+      return <ContactRecordsTable worldContacts={records} seeMore={false} {...tableProps} />
+    },
   },
+}
+const tableProps = {
+  pageSize: 25,
+  paginationEnabled: true,
+  searchEnabled: true,
 }
