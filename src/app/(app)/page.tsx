@@ -19,6 +19,8 @@ export default function Page() {
               width={1200}
               height={1000}
               alt="hero-dashboard"
+              placeholder='blur'
+              blurDataURL='/assets/screenshots/dashboard-d.jpg'
               priority={true}
             />
           </div>
@@ -51,7 +53,6 @@ export default function Page() {
               width={1200}
               height={1000}
               alt="hero-dashboard"
-              priority={true}
             />
           </div>
           <div className="min-w-[50%] text-right">
@@ -74,7 +75,6 @@ export default function Page() {
               width={1200}
               height={1000}
               alt="hero-dashboard"
-              priority={true}
             />
           </div>
           <div className="min-w-[50%]">
@@ -96,7 +96,6 @@ export default function Page() {
               width={1200}
               height={1000}
               alt="hero-dashboard"
-              priority={true}
             />
           </div>
           <div className="min-w-[50%] text-right">
@@ -119,7 +118,6 @@ export default function Page() {
               width={1200}
               height={1000}
               alt="hero-dashboard"
-              priority={true}
             />
           </div>
           <div className="min-w-[50%]">
