@@ -8,6 +8,8 @@ const ENDPOINT = process.env.NEXT_PUBLIC_API
 const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN
 const token = cookies().get('access_token')?.value
 
+// HELPERS
+
 async function fetcher(url: string) {
   console.log('%cFetcher', 'color: goldenrod', { url, token })
 
