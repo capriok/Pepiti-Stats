@@ -6,6 +6,8 @@ import useSWR from 'swr'
 import { postRiderReport } from '~/api/actions'
 import { fetcher } from '~/api/fetcher'
 import Spinner from '~/components/Spinner'
+import { useToast } from '~/hooks/toast'
+import { ToastMessages, handleActionWithToast } from '~/utils/handleActionWithToast'
 
 interface Props {
   user: any
@@ -15,6 +17,11 @@ interface Props {
 export default function RiderReportForm({ user, events }: Props) {
   const router = useRouter()
   const [eventId, setEventId] = useState(null)
+  const { toast } = useToast()
+  const postReportToastMessages: ToastMessages = {
+    title: "Rider Report",
+    msg: "You have successfully sent a rider report for admins to review."
+  }
 
   const handleEventSelect = (e) => {
     setEventId(e.target.value)
@@ -26,7 +33,7 @@ export default function RiderReportForm({ user, events }: Props) {
   return (
     <div className="card card-body mx-auto mt-10 w-fit bg-base-200">
       <div className="flex flex-col justify-center align-middle">
-        <form action={postRiderReport} className="form-control w-full max-w-xs">
+        <form action={(formData) => handleActionWithToast(postRiderReport(formData), postReportToastMessages, toast)} className="form-control w-full max-w-xs">
           {/* User Guid */}
           <div className="mb-2 text-lg font-semibold">GUID</div>
           <input

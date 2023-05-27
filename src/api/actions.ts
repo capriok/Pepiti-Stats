@@ -15,6 +15,8 @@ async function fetcher(url: string) {
     headers: {
       authorization: token ? `Bearer ${token}` : '',
     },
+  }).then(response => {
+    if (!response.ok) throw new Error("Request failed.")
   })
 }
 
@@ -35,6 +37,8 @@ async function poster(url: string, options: { method: string; body?: any }) {
       'Content-Type': 'application/json',
       authorization: token ? `Bearer ${token}` : '',
     },
+  }).then(response => {
+    if (!response.ok) throw new Error("Request failed.")
   })
 }
 
@@ -53,7 +57,7 @@ export async function postRiderReport(data: FormData) {
 
   console.log('Action: postRiderReport', body)
 
-  await poster(`/rider/report`, { method: 'POST', body }).catch((err) => console.log(err))
+  await poster(`/rider/report`, { method: 'POST', body })
   revalidatePath('/')
 }
 
@@ -66,7 +70,7 @@ export async function dismissReport(data: FormData) {
 
   console.log('Action: dismissReport', { reportId })
 
-  await poster(`/rider/report/${reportId}`, { method: 'DELETE' }).catch((err) => console.log(err))
+  await poster(`/rider/report/${reportId}`, { method: 'DELETE' })
   revalidatePath('/')
 }
 
@@ -78,7 +82,7 @@ export async function banRider(data: FormData) {
 
   console.log('Action: banRider', { guid, reason })
 
-  await fetcher(`/rider/${guid}/ban/${reason}`).catch((err) => console.log(err))
+  await fetcher(`/rider/${guid}/ban/${reason}`)
   revalidatePath('/')
 }
 
@@ -87,7 +91,7 @@ export async function unbanRider(data: FormData) {
 
   console.log('Action: unbanRider', { guid })
 
-  await fetcher(`/rider/${guid}/unban`).catch((err) => console.log(err))
+  await fetcher(`/rider/${guid}/unban`)
   revalidatePath('/')
 }
 
@@ -117,7 +121,7 @@ export async function leaveLeague(data: FormData) {
 
   console.log('Action: leaveLeague', { leagueId })
 
-  await poster(`/league/${leagueId}/leave`, { method: 'DELETE' }).catch((err) => console.log(err))
+  await poster(`/league/${leagueId}/leave`, { method: 'DELETE' })
   revalidatePath('/')
 }
 export async function joinLeagueRace(data: FormData) {
@@ -125,7 +129,7 @@ export async function joinLeagueRace(data: FormData) {
 
   console.log('Action: joinLeagueRace', { raceId })
 
-  await poster(`/race/${raceId}/join`, { method: 'POST' }).catch((err) => console.log(err))
+  await poster(`/race/${raceId}/join`, { method: 'POST' })
   revalidatePath('/')
 }
 export async function leaveLeagueRace(data: FormData) {
@@ -133,6 +137,6 @@ export async function leaveLeagueRace(data: FormData) {
 
   console.log('Action: leaveLeagueRace', { raceId })
 
-  await poster(`/race/${raceId}/leave`, { method: 'DELETE' }).catch((err) => console.log(err))
+  await poster(`/race/${raceId}/leave`, { method: 'DELETE' })
   revalidatePath('/')
 }
