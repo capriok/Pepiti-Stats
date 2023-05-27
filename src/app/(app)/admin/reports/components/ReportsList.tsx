@@ -1,51 +1,54 @@
 'use client'
 
-import { ArrowRightIcon } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
+import { ArrowRightIcon } from 'lucide-react'
+import ReportActions from './ReportActions'
 
 interface Props {
   reports: Array<RiderReport>
 }
 
 export default function ReportsList({ reports }: Props) {
-  const [openId, setOpenId] = useState(null)
+  console.log('%cAdmin Reports', 'color: steelblue', { reports })
 
-  const handleIdleControlsClick = (id) => {
-    setOpenId(id)
+  const [openReport, setOpenReport] = useState({} as RiderReport)
+
+  const handleIdleControlsClick = (report) => {
+    setOpenReport(report)
   }
 
   return (
     <>
-      {/* {reports.map((r) => {
-        const reportActive = r.reportId === openId
+      {reports.map((report) => {
+        const reportActive = report._id === openReport._id
         return (
-          <div key={r.plaintiff.id} className="card card-body my-4 w-full bg-base-200">
+          <div key={report._id} className="card card-body my-4 w-full bg-base-200">
             <div className="flex w-full justify-between">
               <div className="flex align-middle text-2xl">
-                {r.plaintiff.name} <ArrowRightIcon className="mx-4 mt-1" />
-                {r.defendant.name}
+                {/* // ? api should return "user" object as rider is but for report.by (the user) */}
+                {report.by} <ArrowRightIcon className="mx-4 mt-1" />
+                {report.rider?.name}
               </div>
               <div className="relative">
                 <ReportControls
                   active={reportActive}
-                  open={() => handleIdleControlsClick(r.reportId)}
-                  close={() => handleIdleControlsClick(null)}
+                  open={() => handleIdleControlsClick(report)}
                 />
               </div>
             </div>
             <div className="w-full">
-              <ReportContent r={r} active={reportActive} />
+              <ReportContent report={report} active={reportActive} />
             </div>
           </div>
         )
-      })} */}
+      })}
     </>
   )
 }
 
 const ReportControls = ({ active, open }) =>
-  active ? <ActiveReportControls /> : <IdleReportControls open={open} />
+  active ? <ReportActions /> : <IdleReportControls open={open} />
 
 const IdleReportControls = ({ open }) => {
   return (
@@ -57,48 +60,48 @@ const IdleReportControls = ({ open }) => {
   )
 }
 
-const ActiveReportControls = () => {
-  return (
-    <div className="absolute right-0 flex w-fit flex-col justify-center align-middle">
-      <button className="btn-error btn-sm btn mb-2">Ban</button>
-      <button className="btn-outline btn-sm btn">Dismiss</button>
-      <button className="btn-outline btn-sm btn mt-8">Abuse</button>
-    </div>
-  )
-}
+const ReportContent = ({ report, active }) =>
+  active ? <ActiveReportContent report={report} /> : <IdleReportContent report={report} />
 
-const ReportContent = ({ r, active }) =>
-  active ? <ActiveReportContent r={r} /> : <IdleReportContent r={r} />
-
-const IdleReportContent = ({ r }) => {
+const IdleReportContent = ({ report }) => {
   return (
     <div className="mt-4 flex w-[500px] justify-between">
+      {/* // ? api should return event information so we dont have to fetch that 
       <div>
-        <div className="mb-2 text-xl font-semibold">Event</div>
-        {r.event.name}
-      </div>
-      <div>
+        <div className="mb-2 text-lg font-semibold">Event</div>
+        {report.event}
+      </div>*/}
+      {/* // ? api should return date report was submitted 
+       <div>
         <div className="mb-2 text-xl font-semibold">Date</div>
-        {new Date(r.event.date).toLocaleString()}
-      </div>
+        {new Date(report.event?.date).toLocaleString()}
+      </div> */}
     </div>
   )
 }
 
-const ActiveReportContent = ({ r }) => {
+const ActiveReportContent = ({ report }) => {
   return (
     <>
-      <IdleReportContent r={r} />
+      <IdleReportContent report={report} />
       <div className="mt-4 flex flex-col">
-        <div className="text-2xl font-semibold">Report</div>
+        <div className="text-xl font-semibold">Report</div>
         <div className="mt-2">
-          <div className="mb-2 text-xl font-semibold">Claim</div>
-          <div>{r.report.claim}</div>
+          <div className="mb-2 text-lg font-semibold">Reason</div>
+          <div>{report.reason}</div>
         </div>
         <div className="mt-2">
           <div className="mb-2 text-xl font-semibold">Proof</div>
           <div className="flex">
-            {r.report.proofs.map((p) => (
+            <a href={report.proofs} target="_blank" rel="noopener noreferrer">
+              {report.proofs}
+            </a>
+            {/* // ? when submitting a rider report, restrict link not to imgur/ gyazo imgs
+            // ? we need to only support a certain proof hosting domains, (imgur, gyazo) 
+            // ? next requires img src domains to be configured in next.config.js, also creates ease for security for admins
+            <Image src={report.proofs} alt="proof1" priority={true} width={300} height={300} /> */}
+            {/* // ? api should return a list of proofs
+            {report.proofs.map((p) => (
               <div key={p.id}>
                 <Image
                   width={100}
@@ -109,7 +112,7 @@ const ActiveReportContent = ({ r }) => {
                 />
                 {p.name}
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
       </div>

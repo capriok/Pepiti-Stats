@@ -2,16 +2,14 @@
 
 import { revalidatePath } from 'next/cache'
 import { cookies } from 'next/headers'
-import { NextResponse } from 'next/server'
 
 const ENDPOINT = process.env.NEXT_PUBLIC_API
-const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN
 const token = cookies().get('access_token')?.value
 
 // HELPERS
 
 async function fetcher(url: string) {
-  console.log('%cFetcher', 'color: goldenrod', { url, token })
+  console.log('Fetcher', { url, token })
 
   return await fetch(ENDPOINT + url, {
     headers: {
@@ -21,18 +19,22 @@ async function fetcher(url: string) {
 }
 
 async function poster(url: string, options: { method: string; body?: any }) {
-  console.log('%cPoster', 'color: goldenrod', { token })
+  console.log('Poster', { token })
 
   const opts = {
     method: options.method ?? 'POST',
     body: JSON.stringify(options.body),
   }
+
+  console.log('Poster', { url, token, opts })
+
   return await fetch(ENDPOINT + url, {
+    ...opts,
     credentials: 'include',
     headers: {
+      'Content-Type': 'application/json',
       authorization: token ? `Bearer ${token}` : '',
     },
-    ...opts,
   })
 }
 
@@ -45,12 +47,26 @@ export async function postRiderReport(data: FormData) {
     guid: data.get('riderGuid'),
     reason: data.get('reason'),
     proofs: data.get('proof1'),
+    // ? we should make this a list of proofs, need api support
     // proofs: [data.get('proof1'), data.get('proof2'), data.get('proof3')],
   }
 
-  console.log('%cAction: postRiderReport', 'color: goldenrod', body)
+  console.log('Action: postRiderReport', body)
 
   await poster(`/rider/report`, { method: 'POST', body }).catch((err) => console.log(err))
+  revalidatePath('/')
+}
+
+// ADMIN REPORTS
+
+// ? need api support for admins to be able to dismiss reports
+// ? should also get dismissReportWithAbuse to track abusers and ban automatically after x dismissed reports
+export async function dismissReport(data: FormData) {
+  const reportId = data.get('reportId')
+
+  console.log('Action: dismissReport', { reportId })
+
+  await poster(`/rider/report/${reportId}`, { method: 'DELETE' }).catch((err) => console.log(err))
   revalidatePath('/')
 }
 
@@ -60,7 +76,7 @@ export async function banRider(data: FormData) {
   const guid = data.get('guid')
   const reason = data.get('reason')
 
-  console.log('%cAction: banRider', 'color: goldenrod', { guid, reason })
+  console.log('Action: banRider', { guid, reason })
 
   await fetcher(`/rider/${guid}/ban/${reason}`).catch((err) => console.log(err))
   revalidatePath('/')
@@ -69,7 +85,7 @@ export async function banRider(data: FormData) {
 export async function unbanRider(data: FormData) {
   const guid = data.get('guid')
 
-  console.log('%cAction: unbanRider', 'color: goldenrod', { guid })
+  console.log('Action: unbanRider', { guid })
 
   await fetcher(`/rider/${guid}/unban`).catch((err) => console.log(err))
   revalidatePath('/')
@@ -89,7 +105,7 @@ export async function joinLeague(data: FormData) {
     server_preference: data.get('serverPreference'),
   }
 
-  console.log('%cAction: joinLeague', 'color: goldenrod', { leagueId, body })
+  console.log('Action: joinLeague', { leagueId, body })
 
   await poster(`/league/${leagueId}/join`, { method: 'POST', body }).catch((err) =>
     console.log(err)
@@ -99,7 +115,7 @@ export async function joinLeague(data: FormData) {
 export async function leaveLeague(data: FormData) {
   const leagueId = data.get('leagueId')
 
-  console.log('%cAction: leaveLeague', 'color: goldenrod', { leagueId })
+  console.log('Action: leaveLeague', { leagueId })
 
   await poster(`/league/${leagueId}/leave`, { method: 'DELETE' }).catch((err) => console.log(err))
   revalidatePath('/')
@@ -107,7 +123,7 @@ export async function leaveLeague(data: FormData) {
 export async function joinLeagueRace(data: FormData) {
   const raceId = data.get('raceId')
 
-  console.log('%cAction: joinLeagueRace', 'color: goldenrod', { raceId })
+  console.log('Action: joinLeagueRace', { raceId })
 
   await poster(`/race/${raceId}/join`, { method: 'POST' }).catch((err) => console.log(err))
   revalidatePath('/')
@@ -115,7 +131,7 @@ export async function joinLeagueRace(data: FormData) {
 export async function leaveLeagueRace(data: FormData) {
   const raceId = data.get('raceId')
 
-  console.log('%cAction: leaveLeagueRace', 'color: goldenrod', { raceId })
+  console.log('Action: leaveLeagueRace', { raceId })
 
   await poster(`/race/${raceId}/leave`, { method: 'DELETE' }).catch((err) => console.log(err))
   revalidatePath('/')

@@ -3,68 +3,69 @@ import PageHeader from '~/components/PageHeader'
 import WorldRecordsTable from '~/components/tables/WorldRecordsTable'
 import MMRRecordsTable from '~/components/tables/MMRRecordsTable'
 import SRRecordsTable from '~/components/tables/SRRecordsTable'
+import BikeRecordsTable from "~/components/tables/BikeRecordsTable"
+import ContactRecordsTable from "~/components/tables/ContactRecordsTable"
 
 export async function generateMetadata({ params: { top } }) {
   return {
     title: `Pepiti | Records`,
-    description: `Top ${recordMap[top]}`,
+    description: `Top ${dynamicDataMap[top].title}`,
   }
 }
 
 export default async function Page({ params: { top } }) {
   const topRecords = await GetDynamicTopRecords(top, 1000)
-
-  const data = () => {
-    switch (top) {
-      case 'riders':
-        return Object.keys(topRecords.riders)
-      case 'mmr':
-        return topRecords.bikes
-      case 'sr':
-        return topRecords.donators.filter((rider) => rider.donation > 0)
-
-      default:
-        return topRecords.riders
-    }
-  }
-
-  const Renderer = () => {
-    const props = {
-      pageSize: 25,
-      paginationEnabled: true,
-      searchEnabled: true,
-    }
-
-    switch (top) {
-      case 'riders':
-        return <WorldRecordsTable worldRecords={topRecords} seeMore={false} {...props} />
-      case 'mmr':
-        return <MMRRecordsTable worldMMR={topRecords} seeMore={false} {...props} />
-      case 'sr':
-        return <SRRecordsTable worldSR={topRecords} seeMore={false} {...props} />
-      default:
-        return <></>
-    }
-  }
+  console.log("%cDynamicTopRecords", "color: steelblue", topRecords)
 
   return (
     <div className="mx-auto w-full max-w-[1000px]">
       <PageHeader
-        title="Rider Report"
+        title="Global Records"
         extra={
           <div className="flex gap-2 whitespace-nowrap font-semibold">
-            <div>Top {data()?.length}</div>
-            <div>{recordMap[top]}</div>
+            <div>Top {dynamicDataMap[top].title}</div>
           </div>
         }
       />
-      <Renderer />
+      {dynamicDataMap[top].render(topRecords)}
     </div>
   )
 }
 
-const recordMap = {
-  riders: 'World Records',
-  mmr: 'MMR Standings',
-  sr: 'SR Standings',
+const tableProps = {
+  pageSize: 25,
+  paginationEnabled: true,
+  searchEnabled: true,
+}
+const dynamicDataMap = {
+  riders: {
+    title: "World Records",
+    render: (records) => {
+      return <WorldRecordsTable worldRecords={records} seeMore={false} {...tableProps} />
+    },
+  },
+  mmr: {
+    title: "MMR Standings",
+    render: (records) => {
+      return <MMRRecordsTable worldMMR={records} seeMore={false} {...tableProps} />
+    },
+  },
+  sr: {
+    title: "SR Standings",
+    render: (records) => {
+      return <SRRecordsTable worldSR={records} seeMore={false} {...tableProps} />
+    },
+  },
+  bikes: {
+    title: "Bike Records",
+    render: (records) => {
+      return <BikeRecordsTable worldBikes={records} seeMore={false} {...tableProps} />
+    },
+  },
+  contacts: {
+    title: "Contact Riders",
+    render: (records) => {
+      return <ContactRecordsTable worldContacts={records} seeMore={false} {...tableProps} />
+    },
+  },
 }
