@@ -1,5 +1,11 @@
 'use client'
 
+import React from "react"
+import { useTheme } from "next-themes"
+import { usePathname } from "next/navigation"
+import Image from "next/image"
+import Link from "next/link"
+import DonationBanner from "~/app/(app)/dashboard/components/DonationBanner"
 import {
   FlagIcon,
   LayoutDashboardIcon,
@@ -10,56 +16,43 @@ import {
   SunIcon,
   TrophyIcon,
   UserIcon,
-} from 'lucide-react'
-import { useTheme } from 'next-themes'
-import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
-import DonationBanner from '~/app/(app)/dashboard/components/DonationBanner'
+} from "lucide-react"
 
 interface Props {
   user: User
 }
 
 function NavBar({ user }: Props) {
-  const pathname = usePathname()
-  const atDashboard = pathname === '/dashboard'
   const { theme, setTheme } = useTheme()
+  const pathname = usePathname()
 
-  const handleThemeChange = () => {
-    if (theme === 'light') {
-      setTheme('dark')
-    } else {
-      setTheme('light')
-    }
-  }
+  const handleThemeChange = () => (theme === "light" ? setTheme("dark") : setTheme("light"))
 
   const secondaryLinks = [
     {
       href: `/profile/${user.guid}`,
-      label: 'Profile',
+      label: "Profile",
       icon: <UserIcon />,
       public: false,
       admin: false,
     },
     {
-      href: '/report',
-      label: 'Report Rider',
+      href: "/report",
+      label: "Report Rider",
       icon: <FlagIcon />,
       public: true,
       admin: false,
     },
     {
-      href: '/blacklists',
-      label: 'Blacklists',
+      href: "/blacklists",
+      label: "Blacklists",
       icon: <ScrollTextIcon />,
       public: true,
       admin: false,
     },
     {
-      href: '/admin',
-      label: 'Admin Portal',
+      href: "/admin",
+      label: "Admin Portal",
       icon: <ShieldAlertIcon />,
       public: false,
       admin: true,
@@ -68,9 +61,10 @@ function NavBar({ user }: Props) {
       label: (
         <div
           onClick={handleThemeChange}
-          className="flex w-full items-center justify-between max-md:text-[16px] lg:gap-2">
-          <div className="max-md:text-[16px]">{theme === 'light' ? 'Dark Mode' : 'Light Mode'}</div>
-          <div>{theme === 'light' ? <MoonIcon /> : <SunIcon />}</div>
+          className="flex w-full items-center justify-between max-md:text-[16px] lg:gap-2"
+        >
+          <div className="max-md:text-[16px]">{theme === "light" ? "Dark Mode" : "Light Mode"}</div>
+          <div>{theme === "light" ? <MoonIcon /> : <SunIcon />}</div>
         </div>
       ),
       public: true,
@@ -82,9 +76,11 @@ function NavBar({ user }: Props) {
           href="https://pepiti.com/stats/api/v0/steam_login"
           target="_blank"
           referrerPolicy="origin"
-          className={`btn-ghost btn mt-[2px] h-full w-full border-none text-error ${user.guid ? 'btn-error' : ''
-            }`}>
-          {user.guid ? 'Change User' : 'Sign In'}
+          className={`btn-ghost btn mt-[2px] h-full w-full border-none text-error ${
+            user.guid ? "btn-error" : ""
+          }`}
+        >
+          {user.guid ? "Change User" : "Sign In"}
         </Link>
       ),
       public: true,
@@ -113,18 +109,18 @@ function NavBar({ user }: Props) {
 
   const primaryLinks = [
     {
-      href: '/dashboard',
-      label: 'Dashboard',
+      href: "/dashboard",
+      label: "Dashboard",
       icon: <LayoutDashboardIcon />,
     },
     {
-      href: '/races',
-      label: 'Races',
+      href: "/races",
+      label: "Races",
       icon: <ScrollTextIcon />,
     },
     {
-      href: '/leagues',
-      label: 'Leagues',
+      href: "/leagues",
+      label: "Leagues",
       icon: <TrophyIcon />,
     },
   ]
@@ -134,7 +130,8 @@ function NavBar({ user }: Props) {
       <Link
         key={idx}
         href={link.href}
-        className="btn-ghost btn flex justify-between border-none font-normal normal-case hover:bg-secondary hover:text-white lg:mr-2 lg:font-semibold">
+        className="btn-ghost btn flex justify-between border-none font-normal normal-case hover:bg-secondary hover:text-white lg:mr-2 lg:font-semibold"
+      >
         <div className="flex w-full items-center justify-between max-md:text-[16px] lg:gap-2">
           {link.label}
           {link.icon}
@@ -150,14 +147,15 @@ function NavBar({ user }: Props) {
           <div className="navbar-start">
             <Link
               href="/dashboard"
-              className="btn-ghost btn border-none hover:bg-secondary hover:text-white relative w-14">
+              className="btn-ghost btn relative w-14 border-none hover:bg-secondary hover:text-white"
+            >
               <Image
                 priority={true}
                 src="/assets/brand/pepiti-logo.svg"
                 fill
                 alt="pepiti_brand"
-                placeholder='blur'
-                blurDataURL='/assets/brand/pepiti-logo.svg'
+                placeholder="blur"
+                blurDataURL="/assets/brand/pepiti-logo.svg"
               />
             </Link>
           </div>
@@ -170,12 +168,14 @@ function NavBar({ user }: Props) {
             <div className="dropdown-end dropdown">
               <label
                 tabIndex={0}
-                className="btn-ghost rounded-btn btn border-none hover:bg-secondary hover:text-white">
+                className="btn-ghost rounded-btn btn border-none hover:bg-secondary hover:text-white"
+              >
                 <MenuIcon />
               </label>
               <ul
                 tabIndex={0}
-                className="dropdown-content menu rounded-box mt-4 w-52 bg-base-200 p-2 shadow blur-0">
+                className="dropdown-content menu rounded-box mt-4 w-52 bg-base-200 p-2 shadow blur-0"
+              >
                 <div className="bg-base-200 lg:hidden">
                   <div className="stats-desc p-2 font-semibold">Navigation</div>
                   {primaryNavLinks}
@@ -186,7 +186,7 @@ function NavBar({ user }: Props) {
           </div>
         </div>
       </div>
-      {atDashboard && <DonationBanner />}
+      {pathname === "/dashboard" && <DonationBanner />}
     </>
   )
 }
