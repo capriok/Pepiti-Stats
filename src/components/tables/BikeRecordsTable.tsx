@@ -9,6 +9,10 @@ interface Props extends TableOptions {
 }
 
 export default function BikeRecordsTable({ worldBikes, seeMore, ...rest }: Props) {
+  const data = worldBikes.bikes.map((bike) => ({
+    _id: bike.name + bike.laps,
+    ...bike,
+  }))
   const columns = [
     {
       key: "name",
@@ -23,7 +27,7 @@ export default function BikeRecordsTable({ worldBikes, seeMore, ...rest }: Props
 
   return (
     <div className="flex flex-col items-end">
-      <Table columns={columns} data={worldBikes.bikes} {...rest} />
+      <Table columns={columns} data={data} {...rest} />
       {seeMore && (
         <Link href="/top/sr" className="link pt-2 text-sm text-primary no-underline">
           See More

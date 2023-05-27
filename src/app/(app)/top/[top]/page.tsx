@@ -23,7 +23,6 @@ export default async function Page({ params: { top } }) {
       paginationEnabled: true,
       searchEnabled: true,
     }
-
     switch (top) {
       case "riders":
         return <WorldRecordsTable worldRecords={topRecords} seeMore={false} {...props} />
@@ -46,8 +45,7 @@ export default async function Page({ params: { top } }) {
         title="Global Records"
         extra={
           <div className="flex gap-2 whitespace-nowrap font-semibold">
-            <div>Top {topRecords[dynamicDataMap[top].dataKey].length}</div>
-            <div>{dynamicDataMap[top].title}</div>
+            <div>Top {dynamicDataMap[top].title}</div>
           </div>
         }
       />
@@ -58,28 +56,18 @@ export default async function Page({ params: { top } }) {
 
 const dynamicDataMap = {
   riders: {
-    dataKey: "riders",
-    label: "Riders",
     title: "World Records",
   },
   mmr: {
-    dataKey: "riders",
-    label: "MMR",
     title: "MMR Standings",
   },
   sr: {
-    dataKey: "riders",
-    label: "SR",
     title: "SR Standings",
   },
   bikes: {
-    dataKey: "bikes",
-    label: "Bikes",
     title: "Bike Records",
   },
   contacts: {
-    dataKey: "riders",
-    label: "Contacts",
     title: "Contact Riders",
   },
 }
