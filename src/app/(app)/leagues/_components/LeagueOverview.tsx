@@ -54,8 +54,9 @@ const LeagueAlert = ({ isInLeague, rider }: { isInLeague: boolean; rider: League
       <div className="flex w-full justify-stretch">
         <div
           data-tip="You are In the League"
-          className="alert rounded-bl-none rounded-br-none bg-secondary">
-          <div className="flex w-full items-center justify-center gap-2">
+          className="alert rounded-bl-none rounded-br-none bg-secondary"
+        >
+          <div className="flex w-full items-center justify-center gap-2 text-white">
             You are in the League <CheckIcon />
           </div>
         </div>
@@ -195,19 +196,19 @@ const LeagueRaces = ({ league }) => {
 
 const LeagueStandings = ({ league }) => {
   const data = Object.keys(league.riders).map((guid) => ({
-    _id: league.riders[guid],
+    _id: league.riders[guid]._id + league.riders[guid].name,
     ...league.riders[guid],
   }))
 
   const columns = [
     {
-      key: 'name',
-      label: 'Rider',
+      key: "name",
+      label: "Rider",
       render: (name, row) => <RiderLink href={`/profile/${row.guid}`}>{name}</RiderLink>,
     },
     {
-      key: 'race_number',
-      label: 'Race #',
+      key: "race_number",
+      label: "Race #",
       render: (race_number) => (
         <div className="flex gap-2">
           <div className="text-accent">#</div>
@@ -216,18 +217,18 @@ const LeagueStandings = ({ league }) => {
       ),
     },
     {
-      key: 'points',
-      label: 'Points',
-      render: (points) => points ?? '-',
+      key: "score",
+      label: "Score",
+      render: (score) => score ?? "-",
     },
     {
-      key: 'bike_id',
-      label: 'Bike',
+      key: "bike_id",
+      label: "Bike",
       render: (bike) => <BikeWithPrefixColor bike={bike} />,
     },
     {
-      key: 'team',
-      label: 'Team',
+      key: "team",
+      label: "Team",
     },
   ]
 

@@ -1,40 +1,43 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
-import { joinLeague } from '~/api/actions'
+import { useRouter, useSearchParams } from "next/navigation"
+import { joinLeague } from "~/api/actions"
 import { useToast, actions } from "~/components/toast"
 
 interface Props {
   leagueId: string
+  bikes: any
+  servers: any
 }
 
-export default function LeagueSignupForm({ leagueId }: Props) {
+export default function LeagueSignupForm({ leagueId, bikes, servers }: Props) {
+  const router = useRouter()
   const searchParams = useSearchParams()
   const guid = searchParams.get("guid") ?? ""
   const { pushToast } = useToast()
 
-  // ? Get bikes in simple list like track_names
-  // const {data, isLoading} = useSWR('/top/bikes')
-  // if (isLoading) return <Spinner />
-  // const bikes = data?.bikes.map(bike => ({_id: bike._id, name: bike.name}))
+  console.log("%cLeagueSignup", "color: steelblue", { bikes, servers })
 
   return (
     <div className="w-full">
       <form
         action={(formData) =>
           joinLeague(formData)
-            .then(() => pushToast(actions.joinLeague))
+            .then(() => {
+              pushToast(actions.joinLeague)
+              router.push(`/leagues/${leagueId}`)
+            })
             .catch(pushToast)
         }
       >
-        <input name="leagueId" value={leagueId} className="hidden" />
+        <input readOnly={true} name="leagueId" value={leagueId} className="hidden" />
         <div className="flex flex-col">
           <label className="mb-2 mt-4 text-accent">GUID</label>
           <input
             name="guid"
             className="input-bordered input bg-base-200"
             required={true}
-            value={guid}
+            defaultValue={guid}
             readOnly={guid ? true : false}
           />
         </div>
@@ -69,10 +72,19 @@ export default function LeagueSignupForm({ leagueId }: Props) {
           <label className="mb-2 mt-4 text-accent">Bike Choice</label>
           <select
             name="bikePreference"
-            defaultValue="Yamaha YZ450F 2023"
+            // defaultValue="Yamaha YZ450F 2023"
             className="select-bordered select w-full bg-base-200"
           >
-            <option value="KTM 450 SX-F 2023">KTM 450 SX-F 2023</option>
+            {bikes.map((category) => (
+              <optgroup key={category.name} label={category.name}>
+                {category.bikes.map((bike) => (
+                  <option key={bike} value={bike}>
+                    {bike}
+                  </option>
+                ))}
+              </optgroup>
+            ))}
+            {/* <option value="KTM 450 SX-F 2023">KTM 450 SX-F 2023</option>
             <option value="Husqvarna FC 450 2023">Husqvarna FC 450 2023</option>
             <option value="GASGAS MC 450F 2023">GASGAS MC 450F 2023</option>
             <option value="Yamaha YZ450F 2023">Yamaha YZ450F 2023</option>
@@ -89,21 +101,26 @@ export default function LeagueSignupForm({ leagueId }: Props) {
             <option value="Kawasaki KX250 2023">Kawasaki KX250 2023</option>
             <option value="Suzuki RM-Z250 2023">Suzuki RM-Z250 2023</option>
             <option value="Fantic 250 2023">Fantic 250 2023</option>
-            <option value="TM 250 2023">TM 250 2023</option>
+            <option value="TM 250 2023">TM 250 2023</option> */}
           </select>
         </div>
         <div className="flex flex-col">
           <label className="mb-2 mt-4 text-accent">Server Preference</label>
           <select
             name="serverPreference"
-            defaultValue="nuremberg-eu-central"
+            // defaultValue="nuremberg-eu-central"
             className="select-bordered select w-full bg-base-200"
           >
-            <option value="or-us-west">Oregon - US West</option>
+            {servers.map((server) => (
+              <option key={server.name + server.location + 1} value={server.name}>
+                {server.description}
+              </option>
+            ))}
+            {/* <option value="or-us-west">Oregon - US West</option>
             <option value="va-us-east">Virginia - US East</option>
             <option value="helsinki-eu-central">Helsinki - EU Central</option>
             <option value="nuremberg-eu-central">Nuremberg - EU Central</option>
-            <option value="falkenstein-eu-central">Falkenstein - EU Central</option>
+            <option value="falkenstein-eu-central">Falkenstein - EU Central</option> */}
           </select>
         </div>
         <div className="mt-4 flex w-full justify-center">

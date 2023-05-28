@@ -10,7 +10,7 @@ interface Props {
   hackit?: boolean
 }
 
-export default function UnbanRiderButton({ guid, name, hackit = true }: Props) {
+export default function UnbanRiderButton({ guid, name, hackit = false }: Props) {
   const { pushToast } = useToast()
 
   function hack() {
@@ -18,7 +18,7 @@ export default function UnbanRiderButton({ guid, name, hackit = true }: Props) {
     // ? The server action works but does want to revalidatePath.. there?
     setTimeout(() => {
       if (typeof window !== "undefined") window.location.reload()
-    }, 2500)
+    }, 1500)
   }
 
   return (
