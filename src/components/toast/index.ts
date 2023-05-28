@@ -23,8 +23,8 @@ function useToast() {
   const pushToast = (action: (args?: any) => Toast, args?: any) => {
     console.log("%cToast", "color: steelblue", { action, args })
 
-    const incomingToast = !action ? actions.error() : action(args)
-    popToast(incomingToast)
+    const cookedToast = !action ? actions.error() : action(args)
+    popToast(cookedToast)
   }
 
   return {

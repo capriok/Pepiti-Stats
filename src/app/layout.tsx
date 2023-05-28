@@ -9,7 +9,7 @@ export const metadata = {
 
 import { Analytics } from "@vercel/analytics/react"
 import { Providers } from "./providers"
-import { Toaster } from "~/components/toast/Toaster"
+import { Toaster } from "~/ui/Toaster"
 import getAuthUser from "~/api/getAuthUser"
 import NavBar from "~/components/Navbar"
 import Footer from "~/components/Footer"
@@ -30,6 +30,7 @@ export default async function RootLayout(props: Props) {
           <NavBar user={user} />
           {props.children}
           <Footer user={user} />
+          <Toaster />
           {/* <Analytics /> */}
         </Providers>
       </body>
