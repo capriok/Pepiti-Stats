@@ -144,28 +144,34 @@ const LeagueInformation = ({ league, host }) => (
 const LeagueRequirements = ({ league, eligibility, rider }) => {
   const requirements = [
     {
-      label: 'MMR',
+      label: "MMR",
       eligible: eligibility.MMR,
       requiredTotal: league.requirements.MMR,
       riderTotal: rider.MMR,
     },
     {
-      label: 'SR',
+      label: "SR",
       eligible: eligibility.SR,
       requiredTotal: league.requirements.SR,
       riderTotal: rider.SR,
     },
     {
-      label: 'Races',
+      label: "Laps",
+      eligible: eligibility.laps,
+      requiredTotal: league.requirements.laps,
+      riderTotal: rider.total_laps,
+    },
+    {
+      label: "Races",
       eligible: eligibility.races,
       requiredTotal: league.requirements.races,
       riderTotal: rider.races.total_races,
     },
     {
-      label: 'Laps',
-      eligible: eligibility.laps,
-      requiredTotal: league.requirements.laps,
-      riderTotal: rider.total_laps,
+      label: "Records",
+      eligible: eligibility.records,
+      requiredTotal: league.requirements.records,
+      riderTotal: rider.world_records.total,
     },
   ]
 
