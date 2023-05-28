@@ -1,6 +1,7 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
+"use client"
+
+import Image from "next/image"
+import Link from "next/link"
 
 interface Props {
   user: User
@@ -61,7 +62,8 @@ export default function Footer({ user }: Props) {
             <Link
               href="https://pepiti.com/stats/api/v0/steam_login"
               target="_blank"
-              referrerPolicy="origin">
+              referrerPolicy="origin"
+            >
               Sign in
             </Link>
           )}
@@ -73,7 +75,8 @@ export default function Footer({ user }: Props) {
             <a
               target="_blank"
               rel="noreferrer"
-              href={`https://paypal.me/pepitisdevs?country.x=US&locale.x=en_US`}>
+              href={`https://paypal.me/pepitisdevs?country.x=US&locale.x=en_US`}
+            >
               Donate to Pepiti.com
             </a>
           </div>

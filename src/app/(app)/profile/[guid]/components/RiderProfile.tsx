@@ -17,6 +17,8 @@ const UserContext = createContext<User>({} as User)
 export const useUserContext = () => useContext(UserContext)
 
 export const RiderProfile = ({ user, rider, mmrHistory, leagues }: Props) => {
+  console.log("%cRider Profile", "color: steelblue", { rider })
+
   return (
     <UserContext.Provider value={user}>
       <div className="w-full">
@@ -48,7 +50,7 @@ const RiderStats = ({ rider }: { rider: RiderProfile }) => {
       </div>
       <div className="stat">
         <div className="stat-title">SR</div>
-        <div className={`stat-value py-2 text-2xl ${rider.banned_by === 'SR' && ' text-error'}`}>
+        <div className={`stat-value py-2 text-2xl ${rider.SR < 950 && " text-error"}`}>
           {rider.SR}
         </div>
         <div className="stat-desc">Safety rating</div>
@@ -66,7 +68,7 @@ const RiderStats = ({ rider }: { rider: RiderProfile }) => {
       <div className="stat">
         <div className="stat-title">Speed</div>
         <div className="stat-value py-2 text-2xl">
-          {rider.average_speed ? handleAverageSpeed(rider.average_speed, false) : '-'}
+          {rider.average_speed ? handleAverageSpeed(rider.average_speed, false) : "-"}
         </div>
         <div className="stat-desc">Miles per Hour</div>
       </div>

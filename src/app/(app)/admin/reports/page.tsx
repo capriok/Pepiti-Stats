@@ -3,16 +3,30 @@ import ReportsList from './components/ReportsList'
 import PageHeader from '~/components/PageHeader'
 import { GetAdminRiderReports } from '~/api'
 import getAuthUser from '~/api/getAuthUser'
+import Tabs from "~/components/Tabs"
 
 export const metadata = {
-  title: 'Pepiti | Admin Manager',
-  description: 'Manage submitted rider reports',
+  title: "Pepiti | Admin Manager",
+  description: "Manage submitted rider reports",
 }
 
 export default async function Page() {
   const user = await getAuthUser()
-  const reports = await GetAdminRiderReports(user.token)
-  console.log(reports)
+  const openReports = await GetAdminRiderReports(user.token, "open")
+  const closedReports = await GetAdminRiderReports(user.token, "closed")
+
+  const items = [
+    {
+      key: "open",
+      label: "Open",
+      children: <ReportsList reports={openReports.results} />,
+    },
+    {
+      key: "closed",
+      label: "Closed",
+      children: <ReportsList reports={closedReports.results} />,
+    },
+  ]
 
   return (
     <>
@@ -24,98 +38,9 @@ export default async function Page() {
           </Link>
         }
       />
-      <ReportsList reports={reports.results} />
+      <div className="card card-body p-0">
+        <Tabs items={items} wide={true} />
+      </div>
     </>
   )
 }
-
-const mockreports = [
-  {
-    reportId: '1',
-    plaintiff: {
-      id: 'FF011000010B6sEBF2',
-      name: 'Tooky',
-    },
-    defendant: {
-      id: 'FF01100001110A0097',
-      name: 'A Guy',
-    },
-    event: {
-      id: '644431b9a7ceb3f1a86e36bh',
-      name: 'Forest',
-      date: '2023-04-22',
-    },
-    report: {
-      claim: 'uh oh, wow this guy is s such a hazard i need him banned',
-      proofs: [
-        {
-          id: '1',
-          name: 'pic1.jpeg',
-          file: '/assets/hero-dashboard.png',
-        },
-        {
-          id: '2',
-          name: 'vid1.jpeg',
-          file: '/assets/hero-dashboard.png',
-        },
-      ],
-    },
-  },
-  {
-    reportId: '2',
-    plaintiff: {
-      id: 'FF011000010B64EBFt',
-      name: 'Pepiti',
-    },
-    defendant: {
-      id: 'FF01100001110AC00e',
-      name: 'That Guy',
-    },
-    event: {
-      id: '644431b9a7ceb3f1a86ec6bu',
-      name: 'Winchester',
-      date: '2023-04-22',
-    },
-    report: {
-      claim: 'uh oh, wow this guy is s such a hazard i need him banned',
-      proofs: [
-        {
-          id: '1',
-          name: 'pic1.jpeg',
-          file: '/assets/hero-dashboard.png',
-        },
-        {
-          id: '2',
-          name: 'vid1.jpeg',
-          file: '/assets/hero-dashboard.png',
-        },
-      ],
-    },
-  },
-  {
-    reportId: '3',
-    plaintiff: {
-      id: 'FF011000010B64EBFa',
-      name: 'PDR',
-    },
-    defendant: {
-      id: 'FF01100001110AC006',
-      name: 'Some Guy',
-    },
-    event: {
-      id: 'b44431b9a7ceb3f1a86ec6b7',
-      name: 'Club',
-      date: '2023-04-22',
-    },
-    report: {
-      claim: 'uh oh, wow this guy is s such a hazard i need him banned',
-      proofs: [
-        {
-          id: '1',
-          name: 'pic1.jpeg',
-          file: '/assets/hero-dashboard.png',
-        },
-      ],
-    },
-  },
-]

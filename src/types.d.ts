@@ -44,8 +44,8 @@ interface LeagueSeason {
 interface RiderProfile {
   _id: string
   avatar: string
-  MMR: string
-  SR: string
+  MMR: number
+  SR: number
   name: string
   contact: number
   world_records: RiderWorldRecords
@@ -57,7 +57,7 @@ interface RiderProfile {
   average_speed: number
   banned: boolean
   banned_by: null | string
-  type: 'admin' | string
+  type: "admin" | string
   online: boolean
   donation: number
   races: {
@@ -72,15 +72,15 @@ interface RiderProfile {
 
 interface RiderWorldRecords {
   [key: string]: number
-  'MX1 OEM': number
-  'MX1-2T OEM': number
-  'MX2 OEM': number
-  'MX2-2T OEM': number
-  'MX3 OEM': number
-  'SM1 OEM': number
-  'SM1-2t OEM': number
-  'SM2 OEM': number
-  'SM2-2t OEM': number
+  "MX1 OEM": number
+  "MX1-2T OEM": number
+  "MX2 OEM": number
+  "MX2-2T OEM": number
+  "MX3 OEM": number
+  "SM1 OEM": number
+  "SM1-2t OEM": number
+  "SM2 OEM": number
+  "SM2-2t OEM": number
   total: number
 }
 
@@ -112,11 +112,11 @@ interface Track {
   name: string
   laps: number
   wr: {
-    'MX2 OEM'?: TrackRecord
-    'MX1 OEM'?: TrackRecord
-    'MX2-2T OEM'?: TrackRecord
-    'MX1-2T OEM'?: TrackRecord
-    'MX3 OEM'?: TrackRecord
+    "MX2 OEM"?: TrackRecord
+    "MX1 OEM"?: TrackRecord
+    "MX2-2T OEM"?: TrackRecord
+    "MX1-2T OEM"?: TrackRecord
+    "MX3 OEM"?: TrackRecord
   }
 }
 
@@ -398,40 +398,87 @@ interface LeagueRaceDivision {
 }
 
 interface RiderReport {
-  _id: string;
-  race_id: string;
-  guid: string;
-  by: string;
-  reason: string;
-  proofs: string;
+  _id: string
+  reason: string
+  proofs: string[]
+  race: {
+    _id: string
+    Warmup: {
+      holeshot: null
+      wheater: {
+        air_temp: number
+        conditions: string
+      }
+      Classification: RaceClassification
+      FastestLap: RaceFastestLap
+    }
+    by: string
+    event: {
+      Type: string
+      Name: null
+      Date: number
+    }
+    riders: {
+      [key: string]: {
+        race_number: number
+        name: string
+        bike_name: string
+        bike_short_name: string
+        category: string
+        guid: string
+        extra_data: string
+        empty: string
+      }
+    }
+    riders_guid: string[]
+    track: string
+    Race2: any
+  }
+  by: {
+    _id: string
+    MMR: number
+    SR: number
+    name: string
+    contact: number
+    banned: boolean
+    banned_by: null
+    avatar: string
+    type: string
+    online: boolean
+    server: null
+    donation: number
+    seasons: RaceSeason[]
+    races: RaceRaces
+    bikes: RaceBikes
+  }
   rider: {
-    _id: string;
-    MMR: number;
-    SR: number;
-    name: string;
-    contact: number;
-    banned: boolean;
-    banned_by: string | null;
-    avatar: string;
-    type: string;
-    online: boolean;
-    server: string | null;
-    donation: number;
-    seasons: LeagueSeason[];
+    _id: string
+    MMR: number
+    SR: number
+    name: string
+    contact: number
+    banned: boolean
+    banned_by: string | null
+    avatar: string
+    type: string
+    online: boolean
+    server: string | null
+    donation: number
+    seasons: LeagueSeason[]
     races: {
-      first: number;
-      second: number;
-      third: number;
-      total_races: number;
-      fastlap: number;
-      holeshot: number;
-    };
+      first: number
+      second: number
+      third: number
+      total_races: number
+      fastlap: number
+      holeshot: number
+    }
     bikes: {
       [key: string]: {
-        laps: number;
-      };
-    };
-  };
+        laps: number
+      }
+    }
+  }
 }
 
 interface BlacklistRider {

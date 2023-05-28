@@ -6,6 +6,7 @@ import useSWR from 'swr'
 import { postRiderReport } from '~/api/actions'
 import { fetcher } from '~/api/fetcher'
 import Spinner from '~/components/Spinner'
+import { useToast, actions } from "~/components/toast"
 
 interface Props {
   user: any
@@ -15,18 +16,26 @@ interface Props {
 export default function RiderReportForm({ user, events }: Props) {
   const router = useRouter()
   const [eventId, setEventId] = useState(null)
+  const { pushToast } = useToast()
 
   const handleEventSelect = (e) => {
     setEventId(e.target.value)
   }
 
-  if (!user.guid) return router.push('/signin')
+  if (!user.guid) return router.push("/signin")
   console.log(user.guid)
 
   return (
     <div className="card card-body mx-auto mt-10 w-fit bg-base-200">
       <div className="flex flex-col justify-center align-middle">
-        <form action={postRiderReport} className="form-control w-full max-w-xs">
+        <form
+          action={(formData) =>
+            postRiderReport(formData)
+              .then(() => pushToast(actions.postRiderReport))
+              .catch(pushToast)
+          }
+          className="form-control w-full max-w-xs"
+        >
           {/* User Guid */}
           <div className="mb-2 text-lg font-semibold">GUID</div>
           <input

@@ -1,12 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { unbanRider } from '~/api/actions'
-import Pill from '~/components/pills/Pill'
-import Table from '~/components/Table'
-import Tabs from '~/components/Tabs'
-import UnbanRiderButton from './UnbanRiderButton'
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import UnbanRiderButton from "~/components/actions/UnbanRiderButton"
+import Pill from "~/components/pills/Pill"
+import Table from "~/components/Table"
+import Tabs from "~/components/Tabs"
 
 interface Props {
   isAdmin: boolean
@@ -16,35 +15,35 @@ interface Props {
 
 export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Props) {
   const searchParams = useSearchParams()
-  const tabParam = searchParams.get('tab') ?? ''
+  const tabParam = searchParams.get("tab") ?? ""
   const pathname = usePathname()
-  const isAdministrating = pathname.includes('admin') && isAdmin
+  const isAdministrating = pathname.includes("admin") && isAdmin
 
   const tabs = [
     {
-      key: 'blacklistNonSr',
-      label: 'Global Blacklist',
+      key: "blacklistNonSr",
+      label: "Global Blacklist",
       children: (
         <div className="p-4">
           <BlacklistAlert
             color="bg-red-800/80"
             text="If youre on this list, you did something worthy of being banned from online racing for the foreseeable future"
           />
-          {!pathname.includes('admin') && <BanAppealButtons />}
+          {!pathname.includes("admin") && <BanAppealButtons />}
           <BlacklistTable blacklist={blacklistNonSR} isAdmin={isAdministrating} />
         </div>
       ),
     },
     {
-      key: 'blacklistSr',
-      label: 'Safety Rating Blacklist',
+      key: "blacklistSr",
+      label: "Safety Rating Blacklist",
       children: (
         <div className="p-4">
           <BlacklistAlert
             color="bg-orange-800/80"
             text="If youre on this list, you have a Safety Rating below 950, race in a banned/no-contact server to build your SR back up"
           />
-          {!pathname.includes('admin') && <BanAppealButtons />}
+          {!pathname.includes("admin") && <BanAppealButtons />}
           <BlacklistTable blacklist={blacklistSR} isAdmin={isAdministrating} />
         </div>
       ),
@@ -92,7 +91,7 @@ const BanAppealButtons = () => {
 
 const BlacklistTable = ({ blacklist, isAdmin }) => {
   const searchParams = useSearchParams()
-  const guidParam = searchParams.get('guid')
+  const guidParam = searchParams.get("guid")
 
   const data = blacklist.map((rider) => ({
     ...rider,
@@ -100,32 +99,32 @@ const BlacklistTable = ({ blacklist, isAdmin }) => {
   }))
   const columns = [
     {
-      key: 'guid',
-      label: 'GUID',
+      key: "guid",
+      label: "GUID",
     },
     {
-      key: 'name',
-      label: 'Name',
-      render: (name) => name.replace(/NIGGER|Nigger|Nigg|nigger|nigg/, '******'),
+      key: "name",
+      label: "Name",
+      render: (name) => name.replace(/NIGGER|Nigger|Nigg|nigger|nigg/, "******"),
     },
     {
-      key: 'MMR',
-      label: 'MMR',
+      key: "MMR",
+      label: "MMR",
       render: (MMR) => <Pill text={MMR} />,
     },
     {
-      key: 'SR',
-      label: 'SR',
+      key: "SR",
+      label: "SR",
       render: (SR) => <Pill text={SR} />,
     },
     {
-      key: 'contact',
-      label: 'Contacts',
+      key: "contact",
+      label: "Contacts",
       render: (contact) => <Pill text={contact} />,
     },
     {
-      key: 'banned_by',
-      label: 'Reason',
+      key: "banned_by",
+      label: "Reason",
       render: (reason) => (
         <Pill
           text={reason.charAt(0).toUpperCase() + reason.slice(1)}
@@ -136,9 +135,9 @@ const BlacklistTable = ({ blacklist, isAdmin }) => {
   ]
 
   const adminColumn = {
-    key: 'guid',
-    label: 'Admin',
-    render: (guid) => <UnbanRiderButton guid={guid} />,
+    key: "guid",
+    label: "Admin",
+    render: (guid, row) => <UnbanRiderButton guid={guid} name={row.name} />,
   }
 
   if (isAdmin) columns.push(adminColumn as any)
@@ -149,7 +148,7 @@ const BlacklistTable = ({ blacklist, isAdmin }) => {
       columns={columns}
       searchKey="guid"
       searchEnabled={true}
-      searchTerm={guidParam ?? ''}
+      searchTerm={guidParam ?? ""}
       rankEnabled={false}
       paginationEnabled={true}
     />
