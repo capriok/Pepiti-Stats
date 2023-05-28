@@ -1,13 +1,14 @@
-import { Inter } from 'next/font/google'
+import { Inter } from "next/font/google"
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
   keywords:
-    'Pepiti, Pepiti Races, Pepiti Leagues, MX Bikes Stats, MX Bikes, Stats, MXB Mods, MX Bikes Mods',
+    "Pepiti, Pepiti Races, Pepiti Leagues, MX Bikes Stats, MX Bikes, Stats, MXB Mods, MX Bikes Mods",
 }
 
-import { Analytics } from '@vercel/analytics/react'
+import { Analytics } from "@vercel/analytics/react"
+import { Providers } from "./providers"
 import { Toaster } from "~/components/toast/Toaster"
 import getAuthUser from "~/api/getAuthUser"
 import NavBar from "~/components/Navbar"
@@ -23,13 +24,14 @@ export default async function RootLayout(props: Props) {
   const user = await getAuthUser()
 
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en" data-theme="light" suppressHydrationWarning>
       <body className={inter.className}>
-        <NavBar user={user} />
-        {props.children}
-        <Footer user={user} />
-        <Toaster />
-        {/* <Analytics /> */}
+        <Providers>
+          <NavBar user={user} />
+          {props.children}
+          <Footer user={user} />
+          {/* <Analytics /> */}
+        </Providers>
       </body>
     </html>
   )
