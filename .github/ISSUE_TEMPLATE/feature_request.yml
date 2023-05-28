@@ -28,7 +28,3 @@ body:
       description: Please describe the solution you would like to see. Please add steps to complete the solution.
       value: |
         - [ ]
-        - [ ]
-        ...
-    validations:
-      required: true
