@@ -202,7 +202,7 @@ const LeagueRaces = ({ league }) => {
 
 const LeagueStandings = ({ league }) => {
   const data = Object.keys(league.riders).map((guid) => ({
-    _id: league.riders[guid]._id + league.riders[guid].name,
+    _id: guid,
     ...league.riders[guid],
   }))
 
