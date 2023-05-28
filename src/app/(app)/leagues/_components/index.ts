@@ -1,6 +1,7 @@
 export const checkRequirements = (eligibility) => {
   if (eligibility.MMR == false) return false
   if (eligibility.SR == false) return false
+  if (eligibility.laps == false) return false
   if (eligibility.races == false) return false
   if (eligibility.records == false) return false
 
