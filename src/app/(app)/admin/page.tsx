@@ -23,7 +23,8 @@ const Managers = () => {
         <div className="my-4 text-xl font-semibold">Blacklists</div>
         <Link
           href="/admin/blacklists"
-          className="card card-body mb-2 flex w-[300px] cursor-pointer bg-base-200 no-underline hover:bg-secondary/60">
+          className="card card-body mb-2 flex w-[300px] cursor-pointer bg-base-200 no-underline hover:bg-secondary"
+        >
           <div className="flex">
             <NewspaperIcon />
             <div className="ml-4">Blacklist</div>
@@ -34,7 +35,8 @@ const Managers = () => {
         <div className="my-4 text-xl font-semibold">Rider Reports</div>
         <Link
           href="/admin/reports"
-          className="card card-body mb-2 flex w-[300px] cursor-pointer bg-base-200 no-underline hover:bg-secondary/60">
+          className="card card-body mb-2 flex w-[300px] cursor-pointer bg-base-200 no-underline hover:bg-secondary"
+        >
           <div className="flex">
             <NewspaperIcon />
             <div className="ml-4">Rider Reports</div>

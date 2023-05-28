@@ -137,7 +137,7 @@ const BlacklistTable = ({ blacklist, isAdmin }) => {
   const adminColumn = {
     key: "guid",
     label: "Admin",
-    render: (guid, row) => <UnbanRiderButton guid={guid} name={row.name} />,
+    render: (guid, row) => <UnbanRiderButton guid={guid} name={row.name} hackit={true} />,
   }
 
   if (isAdmin) columns.push(adminColumn as any)

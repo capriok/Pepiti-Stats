@@ -3,7 +3,7 @@ import { dispatch, listeners, memoryState, State, popToast } from "./toast"
 
 type Toast = {
   title: string
-  description: string
+  description: any
   variant: "default" | "success" | "warning" | "error"
 }
 
@@ -23,7 +23,11 @@ function useToast() {
   const pushToast = (action: (args?: any) => Toast, args?: any) => {
     console.log("%cToast", "color: steelblue", { action, args })
 
-    const cookedToast = !action ? actions.error() : action(args)
+    const cookedToast = !action
+      ? actions.default()
+      : typeof action !== "function"
+      ? actions.error(action)
+      : action(args)
     popToast(cookedToast)
   }
 
@@ -42,9 +46,10 @@ const actions: {
     description: "Something went wrong, try again later",
     variant: "default",
   }),
-  error: () => ({
+  error: (err) => ({
     title: "Oh no!",
     description: "There was an error, please submit a report or contact an admin",
+    data: err.message,
     variant: "error",
   }),
   postRiderReport: () => ({

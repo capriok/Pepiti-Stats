@@ -5,6 +5,7 @@ import { cookies } from 'next/headers'
 
 const ENDPOINT = process.env.NEXT_PUBLIC_API
 const token = cookies().get('access_token')?.value
+const errorMessage = (res) => `Status ${res.status}. Error Message: ${res.statusText}.`
 
 // HELPERS
 
@@ -16,15 +17,11 @@ async function fetcher(url: string) {
       authorization: token ? `Bearer ${token}` : "",
     },
   }).then((res) => {
-    if (!res.ok) {
-      return console.error("Fetcher failed.")
-    }
+    if (!res.ok) throw new Error(errorMessage(res))
   })
 }
 
 async function poster(url: string, options: { method: string; body?: any }) {
-  console.log("Poster", { token })
-
   const opts = {
     method: options.method ?? "POST",
     body: JSON.stringify(options.body),
@@ -40,7 +37,7 @@ async function poster(url: string, options: { method: string; body?: any }) {
       authorization: token ? `Bearer ${token}` : "",
     },
   }).then((res) => {
-    if (!res.ok) return console.error("Poster failed.")
+    if (!res.ok) throw new Error(errorMessage(res))
   })
 }
 
@@ -57,8 +54,7 @@ export async function postRiderReport(data: FormData) {
 
   console.log("Action: postRiderReport", body)
 
-  await poster(`/rider/report`, { method: "POST", body })
-  revalidatePath("/")
+  return await poster(`/rider/report`, { method: "POST", body }).then(() => revalidatePath("/"))
 }
 
 // ADMIN REPORTS
@@ -70,8 +66,9 @@ export async function dismissReport(data: FormData) {
 
   console.log("Action: dismissReport", { reportId })
 
-  await poster(`/rider/report/${reportId}`, { method: "DELETE" })
-  revalidatePath("/")
+  return await poster(`/rider/report/${reportId}`, { method: "DELETE" }).then(() =>
+    revalidatePath("/")
+  )
 }
 
 // RIDER BANS
@@ -82,8 +79,7 @@ export async function banRider(data: FormData) {
 
   console.log("Action: banRider", { guid, reason })
 
-  await fetcher(`/rider/${guid}/ban/${reason}`)
-  revalidatePath("/")
+  return await fetcher(`/rider/${guid}/ban/${reason}`).then(() => revalidatePath("/"))
 }
 
 export async function unbanRider(data: FormData) {
@@ -91,8 +87,7 @@ export async function unbanRider(data: FormData) {
 
   console.log("Action: unbanRider", { guid })
 
-  await fetcher(`/rider/${guid}/unban`)
-  revalidatePath("/")
+  return await fetcher(`/rider/${guid}/unban`).then(() => revalidatePath("/"))
 }
 
 // LEAGUES
@@ -104,17 +99,14 @@ export async function joinLeague(data: FormData) {
     guid: data.get("guid"),
     name: data.get("riderName"),
     team: data.get("teamName"),
-    race_number: data.get("raceNumber"),
-    bike_preference: data.get("bikePreference"),
+    race_number: parseInt(data.get("raceNumber")!.toString()),
+    bike_id: data.get("bikePreference"),
     server_preference: data.get("serverPreference"),
   }
 
   console.log("Action: joinLeague", { leagueId, body })
 
-  await poster(`/league/${leagueId}/join`, { method: "POST", body }).catch((err) =>
-    console.log(err)
-  )
-  revalidatePath("/")
+  // await poster(`/league/${leagueId}/join`, { method: "POST", body }).then(() => revalidatePath("/"))
 }
 
 export async function leaveLeague(data: FormData) {
@@ -122,24 +114,23 @@ export async function leaveLeague(data: FormData) {
 
   console.log("Action: leaveLeague", { leagueId })
 
-  await poster(`/league/${leagueId}/leave`, { method: "DELETE" })
-  revalidatePath("/")
+  return await poster(`/league/${leagueId}/leave`, { method: "DELETE" }).then(() =>
+    revalidatePath("/")
+  )
 }
 
 export async function joinLeagueRace(data: FormData) {
-  const raceId = data.get('raceId')
+  const raceId = data.get("raceId")
 
-  console.log('Action: joinLeagueRace', { raceId })
+  console.log("Action: joinLeagueRace", { raceId })
 
-  await poster(`/race/${raceId}/join`, { method: 'POST' })
-  revalidatePath('/')
+  return await poster(`/race/${raceId}/join`, { method: "POST" }).then(() => revalidatePath("/"))
 }
 
 export async function leaveLeagueRace(data: FormData) {
-  const raceId = data.get('raceId')
+  const raceId = data.get("raceId")
 
-  console.log('Action: leaveLeagueRace', { raceId })
+  console.log("Action: leaveLeagueRace", { raceId })
 
-  await poster(`/race/${raceId}/leave`, { method: 'DELETE' })
-  revalidatePath('/')
+  return await poster(`/race/${raceId}/leave`, { method: "DELETE" }).then(() => revalidatePath("/"))
 }

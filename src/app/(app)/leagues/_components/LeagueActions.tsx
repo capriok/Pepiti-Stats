@@ -19,8 +19,12 @@ export default function LeagueActions({ guid, leagueId, eligibility }) {
       }
       className="flex w-fit"
     >
-      <input name="leagueId" value={leagueId} readOnly className="hidden" />
-      <button className="btn-outline btn-sm btn w-full text-error" disabled={false}>
+      <button
+        className="btn-outline btn-sm btn w-full text-error"
+        name="leagueId"
+        value={leagueId}
+        disabled={false}
+      >
         Leave League
       </button>
     </form>
