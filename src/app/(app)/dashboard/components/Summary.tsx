@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 interface Props {
   stats: SummaryStats

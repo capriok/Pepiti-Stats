@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import { joinLeagueRace, leaveLeagueRace } from '~/api/actions'
+import { joinLeagueRace, leaveLeagueRace } from "~/api/actions"
 import { useToast, actions } from "~/components/toast"
 import { checkRequirements } from "."
 

@@ -52,8 +52,8 @@ export default function processRaceSession(session: RaceSession) {
     track: session.track,
     headCount: session.riders_guid?.length,
     races: {
-      race1: session.Race1 ? formatRace('Race1') : null,
-      race2: session.Race2 ? formatRace('Race2') : null,
+      race1: session.Race1 ? formatRace("Race1") : null,
+      race2: session.Race2 ? formatRace("Race2") : null,
     },
   }
 
@@ -61,14 +61,14 @@ export default function processRaceSession(session: RaceSession) {
 }
 
 const sortByPosition = (a, b) => {
-  if (typeof a.position === 'number' && typeof b.position === 'number') {
+  if (typeof a.position === "number" && typeof b.position === "number") {
     if (a.position === b.position) {
       return a.raceNum - b.raceNum
     }
     return a.position - b.position
-  } else if (typeof a.position === 'number') {
+  } else if (typeof a.position === "number") {
     return -1
-  } else if (typeof b.position === 'number') {
+  } else if (typeof b.position === "number") {
     return 1
   } else {
     return a.raceNum - b.raceNum

@@ -1,17 +1,17 @@
-'use client'
+"use client"
 
-import Table from '~/components/Table'
+import Table from "~/components/Table"
 
 const categories = [
-  'MX1 OEM',
-  'MX1-2T OEM',
-  'MX2 OEM',
-  'MX2-2T OEM',
-  'SM1 OEM',
-  'SM1-2t OEM',
-  'SM2 OEM',
-  'SM2-2t OEM',
-  'MX3 OEM',
+  "MX1 OEM",
+  "MX1-2T OEM",
+  "MX2 OEM",
+  "MX2-2T OEM",
+  "SM1 OEM",
+  "SM1-2t OEM",
+  "SM2 OEM",
+  "SM2-2t OEM",
+  "MX3 OEM",
 ]
 
 interface Props {
@@ -31,12 +31,12 @@ export default function RiderWorldRecordsTable({ worldRecords }: Props) {
 
   const columns = [
     {
-      key: 'category',
-      label: 'Category',
+      key: "category",
+      label: "Category",
     },
     {
-      key: 'records',
-      label: 'Records',
+      key: "records",
+      label: "Records",
       render: (records) => <div className="my-2">{records}</div>,
     },
   ]

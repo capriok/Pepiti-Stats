@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import BanRiderButton from "~/components/actions/BanRiderButton"
 import UnbanRiderButton from "~/components/actions/UnbanRiderButton"
@@ -18,4 +18,3 @@ export default function AdminControls({ user, rider }) {
     </div>
   )
 }
-

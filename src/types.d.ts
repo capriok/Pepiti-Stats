@@ -22,7 +22,7 @@ interface RiderSearch {
   banned: boolean
   banned_by: null | string
   avatar: string
-  type: 'user'
+  type: "user"
   donation: number
   seasons: LeagueSeason[]
   races: {

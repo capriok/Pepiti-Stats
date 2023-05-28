@@ -1,10 +1,10 @@
-'use server'
+"use server"
 
-import { revalidatePath } from 'next/cache'
-import { cookies } from 'next/headers'
+import { revalidatePath } from "next/cache"
+import { cookies } from "next/headers"
 
 const ENDPOINT = process.env.NEXT_PUBLIC_API
-const token = cookies().get('access_token')?.value
+const token = cookies().get("access_token")?.value
 const errorMessage = (res) => `Status ${res.status}. Error Message: ${res.statusText}.`
 
 // HELPERS

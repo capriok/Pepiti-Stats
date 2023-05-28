@@ -1,11 +1,11 @@
-'use client'
+"use client"
 
-import React from 'react'
-import useSWR from 'swr'
-import { useUserContext } from '../RiderProfile'
-import Spinner from '~/components/Spinner'
-import LeagueList from '~/app/(app)/leagues/_components/LeagueList'
-import { fetcher, fetcherWithToken } from '~/api/fetcher'
+import React from "react"
+import useSWR from "swr"
+import { useUserContext } from "../RiderProfile"
+import Spinner from "~/components/Spinner"
+import LeagueList from "~/app/(app)/leagues/_components/LeagueList"
+import { fetcher, fetcherWithToken } from "~/api/fetcher"
 
 interface Props {
   leagues: Array<League>

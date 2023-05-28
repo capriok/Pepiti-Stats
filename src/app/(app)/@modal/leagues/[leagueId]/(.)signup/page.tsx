@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { GetConstantOEMBikes, GetConstantServers } from "~/api"
 import getAuthUser from "~/api/getAuthUser"

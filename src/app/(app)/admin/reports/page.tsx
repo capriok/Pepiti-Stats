@@ -1,8 +1,8 @@
-import Link from 'next/link'
-import ReportsList from './components/ReportsList'
-import PageHeader from '~/components/PageHeader'
-import { GetAdminRiderReports } from '~/api'
-import getAuthUser from '~/api/getAuthUser'
+import Link from "next/link"
+import ReportsList from "./components/ReportsList"
+import PageHeader from "~/components/PageHeader"
+import { GetAdminRiderReports } from "~/api"
+import getAuthUser from "~/api/getAuthUser"
 import Tabs from "~/components/Tabs"
 
 export const metadata = {

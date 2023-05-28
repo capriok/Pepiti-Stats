@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation"
 
 interface Props {
   title?: string
@@ -11,8 +11,8 @@ interface Props {
 
 const Result: React.FC<Props> = (props) => {
   const router = useRouter()
-  const defaultTitle = 'Error.'
-  const defaultDescription = 'Something went wrong.'
+  const defaultTitle = "Error."
+  const defaultDescription = "Something went wrong."
 
   return (
     <div className="flex h-screen items-center justify-center">
@@ -24,8 +24,9 @@ const Result: React.FC<Props> = (props) => {
             <div>{props.extra}</div>
             <div
               onClick={() => router.back()}
-              className="btn-outline btn-sm btn flex items-center justify-center rounded-lg">
-              <div className="hidden font-normal md:inline">{props.goBackText || 'Go Back'}</div>
+              className="btn-outline btn-sm btn flex items-center justify-center rounded-lg"
+            >
+              <div className="hidden font-normal md:inline">{props.goBackText || "Go Back"}</div>
               <div className="font-normal md:hidden">Go back</div>
             </div>
           </div>

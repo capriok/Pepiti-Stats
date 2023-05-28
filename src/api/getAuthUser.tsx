@@ -1,11 +1,11 @@
-'use server'
+"use server"
 
-import { cookies } from 'next/headers'
-import jwt_decode from 'jwt-decode'
+import { cookies } from "next/headers"
+import jwt_decode from "jwt-decode"
 
 async function getAuthUser() {
   const cookieStore = cookies()
-  const token = cookieStore.get('access_token')?.value
+  const token = cookieStore.get("access_token")?.value
 
   try {
     const decode = jwt_decode(token!) ?? {}
@@ -20,10 +20,10 @@ export default getAuthUser
 
 const makeUser = (u): User => {
   return {
-    guid: u?._id ?? '',
-    name: u?.name ?? '',
-    avatar: u?.avatar ?? '',
-    isAdmin: u?.type === 'admin' ?? false,
-    token: u?.token ?? '',
+    guid: u?._id ?? "",
+    name: u?.name ?? "",
+    avatar: u?.avatar ?? "",
+    isAdmin: u?.type === "admin" ?? false,
+    token: u?.token ?? "",
   }
 }

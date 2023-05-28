@@ -1,23 +1,23 @@
-import { GetDynamicTopRecords, GetSummaryStats, GetTrackNames } from '~/api'
-import PageHeader from '~/components/PageHeader'
-import RiderSearch from './components/RiderSearch'
-import SummaryStats from './components/Summary'
-import TrackRecords from './components/TrackRecords'
-import WorldRecordsTable from '~/components/tables/WorldRecordsTable'
-import MMRRecordsTable from '~/components/tables/MMRRecordsTable'
-import SRRecordsTable from '~/components/tables/SRRecordsTable'
+import { GetDynamicTopRecords, GetSummaryStats, GetTrackNames } from "~/api"
+import PageHeader from "~/components/PageHeader"
+import RiderSearch from "./components/RiderSearch"
+import SummaryStats from "./components/Summary"
+import TrackRecords from "./components/TrackRecords"
+import WorldRecordsTable from "~/components/tables/WorldRecordsTable"
+import MMRRecordsTable from "~/components/tables/MMRRecordsTable"
+import SRRecordsTable from "~/components/tables/SRRecordsTable"
 
 export const metadata = {
-  title: 'Pepiti | Dashboard',
+  title: "Pepiti | Dashboard",
   description:
-    'Access race stats in real-time, host and join leagues, connect with fellow races through social integrations, and compete with rivals through global leaderboards',
+    "Access race stats in real-time, host and join leagues, connect with fellow races through social integrations, and compete with rivals through global leaderboards",
 }
 
 export default async function Page() {
   const apiStats = await GetSummaryStats()
-  const worldRecords = await GetDynamicTopRecords('riders', 10)
-  const worldMMR = await GetDynamicTopRecords('mmr', 10)
-  const worldSR = await GetDynamicTopRecords('sr', 10)
+  const worldRecords = await GetDynamicTopRecords("riders", 10)
+  const worldMMR = await GetDynamicTopRecords("mmr", 10)
+  const worldSR = await GetDynamicTopRecords("sr", 10)
   const trackList = await GetTrackNames()
 
   return (

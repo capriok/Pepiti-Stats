@@ -1,4 +1,4 @@
-'use server'
+"use server"
 
 const ENDPOINT = process.env.NEXT_PUBLIC_API
 const nextConfig = { next: { revalidate: 30 } }
@@ -7,7 +7,7 @@ const fetcher = async (url: string, token?: string) => {
   const res = await fetch(ENDPOINT + url, {
     ...nextConfig,
     headers: {
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   })
   return res.json()
@@ -37,7 +37,7 @@ export async function GetTrackRecords(track: string): Promise<Track> {
 // RACES
 
 export async function GetRecentRaces(): Promise<{ races: Array<RecentRace> }> {
-  const data = await fetcher('/races')
+  const data = await fetcher("/races")
   return data
 }
 export async function GetRace(raceId: string): Promise<RaceSession> {
@@ -64,14 +64,14 @@ export async function GetRiderMMRHistory(guid: string): Promise<RiderMMRUpdates>
   return data
 }
 export async function GetRiderLeagues(token: string): Promise<{ leagues: Array<League> }> {
-  const data = await fetcher('/my_leagues', token)
+  const data = await fetcher("/my_leagues", token)
   return data
 }
 
 // LEAGUES
 
 export async function GetAllLeagues(): Promise<{ leagues: Array<League> }> {
-  const data = await fetcher('/leagues')
+  const data = await fetcher("/leagues")
   return data
 }
 export async function GetLeague(leagueId: string, token: string): Promise<League> {
@@ -98,11 +98,11 @@ export async function GetLeagueRaceEligibility(raceId: string, token: string): P
 // ADMINISTRATION
 
 export async function GetBlackListSR(): Promise<{ riders: Array<BlacklistRider> }> {
-  const data = await fetcher('/blacklist.json')
+  const data = await fetcher("/blacklist.json")
   return data
 }
 export async function GetBlackListNonSR(): Promise<{ riders: Array<BlacklistRider> }> {
-  const data = await fetcher('/blacklist_non_sr.json')
+  const data = await fetcher("/blacklist_non_sr.json")
   return data
 }
 // prettier-ignore
@@ -117,7 +117,7 @@ export async function GetAdminRiderReports(
 // AUTHENTICATION
 
 export async function Login(): Promise<string> {
-  const steam_login = 'https://pepiti.com/stats/api/v0/steam_login'
+  const steam_login = "https://pepiti.com/stats/api/v0/steam_login"
   return steam_login
 }
 export async function Logout(): Promise<{ status: boolean }> {
@@ -126,11 +126,11 @@ export async function Logout(): Promise<{ status: boolean }> {
 
 // CONSTANTS
 
-export async function GetConstantOEMBikes(token: string): Promise<{ [key:string]: Array<any> }> {
-  const data = await fetcher('/constants/oem_bikes', token)
+export async function GetConstantOEMBikes(token: string): Promise<{ [key: string]: Array<any> }> {
+  const data = await fetcher("/constants/oem_bikes", token)
   return data
 }
 export async function GetConstantServers(token: string): Promise<{ datacenters: any }> {
-  const data = await fetcher('/constants/server_locations', token)
+  const data = await fetcher("/constants/server_locations", token)
   return data
 }

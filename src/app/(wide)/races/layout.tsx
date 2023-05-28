@@ -1,6 +1,6 @@
-import { GetRecentRaces } from '~/api'
-import DesktopTrackList from './components/DesktopTrackList'
-import MobileTrackList from './components/MobileTrackList'
+import { GetRecentRaces } from "~/api"
+import DesktopTrackList from "./components/DesktopTrackList"
+import MobileTrackList from "./components/MobileTrackList"
 
 export default async function RaceLayout(props) {
   const raceData = await GetRecentRaces()

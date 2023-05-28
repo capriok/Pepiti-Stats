@@ -1,11 +1,11 @@
-'use client'
+"use client"
 
-import Tabs from '~/components/Tabs'
-import RiderWorldRecordsTable from './tabs/RiderWorldRecordsTable'
-import RiderMMRHistoryChart from './tabs/RiderMMRHistoryChart'
-import RiderRacesTable from './tabs/RiderRacesTable'
-import RiderRecordsTable from './tabs/RiderRecordsTable'
-import RiderLeaguesList from './tabs/RiderLeaguesList'
+import Tabs from "~/components/Tabs"
+import RiderWorldRecordsTable from "./tabs/RiderWorldRecordsTable"
+import RiderMMRHistoryChart from "./tabs/RiderMMRHistoryChart"
+import RiderRacesTable from "./tabs/RiderRacesTable"
+import RiderRecordsTable from "./tabs/RiderRecordsTable"
+import RiderLeaguesList from "./tabs/RiderLeaguesList"
 
 interface Props {
   rider: RiderProfile
@@ -16,8 +16,8 @@ interface Props {
 export default function ProfileTabs({ rider, mmrHistory, leagues }: Props) {
   const items = [
     {
-      key: 'overview',
-      label: 'Overview',
+      key: "overview",
+      label: "Overview",
       children: (
         <div className="flex min-h-[420px] flex-col gap-5 md:flex-row">
           <RiderWorldRecordsTable worldRecords={rider.world_records} />
@@ -26,8 +26,8 @@ export default function ProfileTabs({ rider, mmrHistory, leagues }: Props) {
       ),
     },
     {
-      key: 'races',
-      label: 'Races',
+      key: "races",
+      label: "Races",
       children: (
         <div className="p-4 pt-0">
           <div className="my-4 whitespace-nowrap text-xl font-semibold">Recent Races</div>
@@ -36,8 +36,8 @@ export default function ProfileTabs({ rider, mmrHistory, leagues }: Props) {
       ),
     },
     {
-      key: 'records',
-      label: 'Records',
+      key: "records",
+      label: "Records",
       children: (
         <div className="p-4 pt-0">
           <div className="my-4 whitespace-nowrap text-xl font-semibold">Personal Records</div>
@@ -46,8 +46,8 @@ export default function ProfileTabs({ rider, mmrHistory, leagues }: Props) {
       ),
     },
     {
-      key: 'leagues',
-      label: 'Leagues',
+      key: "leagues",
+      label: "Leagues",
       children: (
         <div className="p-4 pt-0">
           <div className="my-4 whitespace-nowrap text-xl font-semibold">My Leagues</div>

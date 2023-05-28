@@ -1,8 +1,8 @@
-'use client'
+"use client"
 
-import React, { useEffect, useMemo, useState } from 'react'
-import { handleRankColor } from '~/utils/handleRankColor'
-import Pill from './pills/Pill'
+import React, { useEffect, useMemo, useState } from "react"
+import { handleRankColor } from "~/utils/handleRankColor"
+import Pill from "./pills/Pill"
 
 /**
  *  table data can include any properties but must include a unique _id
@@ -61,12 +61,12 @@ const Table: React.FC<TableProps> = (props) => {
     paginationEnabled = false,
     pageSize: pageSizeOption = 10,
     searchEnabled = false,
-    searchKey = 'name',
-    searchTerm = '',
+    searchKey = "name",
+    searchTerm = "",
     rankEnabled = true,
     rankStyle = true,
-    headerCn = '',
-    rowCn = '',
+    headerCn = "",
+    rowCn = "",
   } = props
 
   /**
@@ -96,10 +96,10 @@ const Table: React.FC<TableProps> = (props) => {
     if (term) {
       /** * filter data by record[searchKey] search term */
       return props.data.filter((record) => {
-        if (typeof record[searchKey] === 'string') {
+        if (typeof record[searchKey] === "string") {
           return record[searchKey].toLowerCase().includes(term.toLowerCase())
         }
-        if (typeof record[searchKey] === 'number') {
+        if (typeof record[searchKey] === "number") {
           return record[searchKey].toString().includes(term)
         }
         return
@@ -113,8 +113,8 @@ const Table: React.FC<TableProps> = (props) => {
   const manipulatedColumns = (): TableColumn[] => {
     if (rankEnabled) {
       const rankColumn = {
-        key: '_id',
-        label: 'Rank',
+        key: "_id",
+        label: "Rank",
         render: (_id, row) => {
           const index = props.data.findIndex((d) => row._id === d._id)
           const rank = index + 1
@@ -135,8 +135,8 @@ const Table: React.FC<TableProps> = (props) => {
   /** maps prepped columns to header row */
   const tableColumns = columns.map((column) => {
     return (
-      <th key={column.key} className={'py-4' + options.cns.header}>
-        <div className={'flex max-h-[20px] min-h-[20px] items-center'}>{column.label}</div>
+      <th key={column.key} className={"py-4" + options.cns.header}>
+        <div className={"flex max-h-[20px] min-h-[20px] items-center"}>{column.label}</div>
       </th>
     )
   })
@@ -157,7 +157,7 @@ const Table: React.FC<TableProps> = (props) => {
 
             return (
               <td key={dataKey} className={` ${options.cns.row} p-0`}>
-                <div className={'flex min-h-[45px] items-center pl-2 font-medium'}>
+                <div className={"flex min-h-[45px] items-center pl-2 font-medium"}>
                   {renderer ? renderer(value, row) : value}
                 </div>
               </td>

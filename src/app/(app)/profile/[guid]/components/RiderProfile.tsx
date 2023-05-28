@@ -1,10 +1,10 @@
-'use client'
+"use client"
 
-import RiderAvatar from './RiderAvatar'
-import ProfileTabs from './ProfileTabs'
-import AdminControls from './AdminControls'
-import { handleAverageSpeed } from '~/utils/handleAverageSpeed'
-import { createContext, useContext } from 'react'
+import RiderAvatar from "./RiderAvatar"
+import ProfileTabs from "./ProfileTabs"
+import AdminControls from "./AdminControls"
+import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
+import { createContext, useContext } from "react"
 
 interface Props {
   user: User

@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { dismissReport } from "~/api/actions"
 import BanRiderButton from "~/components/actions/BanRiderButton"

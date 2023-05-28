@@ -1,14 +1,14 @@
-'use client'
+"use client"
 
-import { useRouter, useSearchParams } from 'next/navigation'
-import useSWR from 'swr'
-import { fetcher } from '~/api/fetcher'
-import Spinner from '~/components/Spinner'
+import { useRouter, useSearchParams } from "next/navigation"
+import useSWR from "swr"
+import { fetcher } from "~/api/fetcher"
+import Spinner from "~/components/Spinner"
 
 export default function Page() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const nameParam = searchParams.get('name')
+  const nameParam = searchParams.get("name")
 
   const { data, isLoading } = useSWR(`/rider/search/${nameParam}`, fetcher)
 

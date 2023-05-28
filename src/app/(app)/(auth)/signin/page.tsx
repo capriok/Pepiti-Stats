@@ -1,6 +1,6 @@
-import Link from 'next/link'
-import React from 'react'
-import Result from '~/components/Result'
+import Link from "next/link"
+import React from "react"
+import Result from "~/components/Result"
 
 export default function Page() {
   return (
@@ -12,7 +12,8 @@ export default function Page() {
           href="https://pepiti.com/stats/api/v0/steam_login"
           target="_blank"
           referrerPolicy="origin"
-          className="btn-outline btn-secondary btn-sm btn ">
+          className="btn-outline btn-secondary btn-sm btn "
+        >
           <div className="font-normal">Login with Steam</div>
         </Link>
       }

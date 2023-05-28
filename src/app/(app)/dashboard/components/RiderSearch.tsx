@@ -1,18 +1,18 @@
-'use client'
+"use client"
 
-import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
-import { SearchForRider } from '~/api'
-import QuerySearch from '~/components/searches/QuerySearch'
+import Link from "next/link"
+import { useSearchParams } from "next/navigation"
+import { SearchForRider } from "~/api"
+import QuerySearch from "~/components/searches/QuerySearch"
 
 export default function RiderSearch() {
   const searchParams = useSearchParams()
-  const nameParam = searchParams.get('name')
+  const nameParam = searchParams.get("name")
 
   return (
     <QuerySearch
       placeholder="Search for Riders..."
-      defaultTerm={nameParam ?? ''}
+      defaultTerm={nameParam ?? ""}
       query={(term) => SearchForRider(term).then((res) => res.results)}
       render={(result) => (
         <Link key={result._id} href={`/profile/${result._id}`} className="z-40 no-underline">
@@ -21,7 +21,7 @@ export default function RiderSearch() {
             {result.banned && (
               <div className="flex">
                 <div className="mr-2 text-sm font-bold text-red-600">
-                  {result.banned_by + ' Ban'}
+                  {result.banned_by + " Ban"}
                 </div>
               </div>
             )}

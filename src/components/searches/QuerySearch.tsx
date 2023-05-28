@@ -1,8 +1,8 @@
-'use client'
+"use client"
 
-import React, { useEffect, useState } from 'react'
-import Spinner from '~/components/Spinner'
-import { XIcon } from 'lucide-react'
+import React, { useEffect, useState } from "react"
+import Spinner from "~/components/Spinner"
+import { XIcon } from "lucide-react"
 
 interface Props {
   query: (term: string) => Promise<any>
@@ -11,7 +11,7 @@ interface Props {
   defaultTerm?: string
 }
 
-export default function QuerySearch({ query, render, placeholder, defaultTerm = '' }: Props) {
+export default function QuerySearch({ query, render, placeholder, defaultTerm = "" }: Props) {
   const [open, setOpen] = useState(false)
   const [term, setTerm] = useState(defaultTerm)
   const [loading, setLoading] = useState(false)
@@ -58,11 +58,12 @@ export default function QuerySearch({ query, render, placeholder, defaultTerm = 
 }
 
 const SearchDropdown = ({ term, open, loading, results, render }) => {
-  const openCn = open ? 'opacity-100 absolute' : 'opacity-0 hidden'
+  const openCn = open ? "opacity-100 absolute" : "opacity-0 hidden"
 
   return (
     <div
-      className={`${openCn} scroll absolute top-14 z-20 flex max-h-[300px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-base-200 ring-2 ring-primary/40 backdrop-blur-lg transition-opacity md:w-[400px]`}>
+      className={`${openCn} scroll absolute top-14 z-20 flex max-h-[300px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-base-200 ring-2 ring-primary/40 backdrop-blur-lg transition-opacity md:w-[400px]`}
+    >
       {loading && <Spinner className="py-4" />}
 
       {!results.length && term.length < 2 && (

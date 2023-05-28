@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 export default function DonationBanner() {
   return (
@@ -7,7 +7,8 @@ export default function DonationBanner() {
         target="_blank"
         rel="noreferrer"
         href={`https://paypal.me/pepitisdevs?country.x=US&locale.x=en_US`}
-        className="cursor-pointer hover:text-green-200">
+        className="cursor-pointer hover:text-green-200"
+      >
         Help us out with a donation!
       </a>
     </div>
