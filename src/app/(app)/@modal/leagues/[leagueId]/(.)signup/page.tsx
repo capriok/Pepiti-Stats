@@ -7,7 +7,10 @@ import LeagueSignupForm from "~/app/(app)/leagues/_components/LeagueSignupForm"
 
 export const dynamic = "force-dynamic"
 
-export default async function Page({ params: { leagueId } }) {
+export default async function Page({ params }) {
+  console.log(params)
+
+  const leagueId = params?.leagueId ?? ""
   const user = await getAuthUser()
   const oems = await GetConstantOEMBikes(user.token)
   const servers = await GetConstantServers(user.token)

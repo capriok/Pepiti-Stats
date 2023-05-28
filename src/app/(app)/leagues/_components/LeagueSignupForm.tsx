@@ -25,7 +25,7 @@ export default function LeagueSignupForm({ leagueId, bikes, servers }: Props) {
           joinLeague(formData)
             .then(() => {
               pushToast(actions.joinLeague)
-              router.push(`/league/${leagueId}`)
+              router.push(`/leagues/${leagueId}`)
             })
             .catch(pushToast)
         }

@@ -31,6 +31,7 @@ const toastVariants = cva(
         default: "bg-base-300/80 border-base-300 border-2 text-white",
         success: "bg-secondary/80 border-secondary border-2 text-white",
         warning: "bg-warning/80 border-warning border-2 text-white",
+        info: "bg-info/80 border-info border-2 text-white",
         error: "bg-error/80 border-error border-2 text-white",
       },
     },
@@ -111,7 +112,7 @@ const ToastData = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Description>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Description>
 >(({ className, ...props }, ref) => (
-  <code className="mt-2 rounded-md bg-base-200 p-2">
+  <code className="mt-2 rounded-md bg-base-200 p-2 text-accent">
     <ToastPrimitives.Description
       ref={ref}
       className={cn("text-sm opacity-90", className)}

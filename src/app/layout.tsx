@@ -27,11 +27,13 @@ export default async function RootLayout(props: Props) {
     <html lang="en" data-theme="light" suppressHydrationWarning>
       <body className={inter.className}>
         <Providers>
-          <NavBar user={user} />
-          {props.children}
-          <Footer user={user} />
-          <Toaster />
-          {/* <Analytics /> */}
+          <main className="flex h-screen flex-col">
+            <NavBar user={user} />
+            <div className="flex-1">{props.children}</div>
+            <Footer user={user} />
+            <Toaster />
+            {/* <Analytics /> */}
+          </main>
         </Providers>
       </body>
     </html>

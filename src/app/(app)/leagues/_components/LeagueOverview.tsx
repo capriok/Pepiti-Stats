@@ -54,8 +54,9 @@ const LeagueAlert = ({ isInLeague, rider }: { isInLeague: boolean; rider: League
       <div className="flex w-full justify-stretch">
         <div
           data-tip="You are In the League"
-          className="alert rounded-bl-none rounded-br-none bg-secondary">
-          <div className="flex w-full items-center justify-center gap-2">
+          className="alert rounded-bl-none rounded-br-none bg-secondary"
+        >
+          <div className="flex w-full items-center justify-center gap-2 text-white">
             You are in the League <CheckIcon />
           </div>
         </div>

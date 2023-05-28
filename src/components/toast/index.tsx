@@ -4,7 +4,7 @@ import { dispatch, listeners, memoryState, State, popToast } from "./toast"
 type Toast = {
   title: string
   description: any
-  variant: "default" | "success" | "warning" | "error"
+  variant: "default" | "success" | "warning" | "error" | "info"
 }
 
 function useToast() {
@@ -54,12 +54,12 @@ const actions: {
   }),
   postRiderReport: () => ({
     title: "Rider Report",
-    description: "You have successfully sent a rider report for admins to review",
-    variant: "success",
+    description: "You have sent a rider report for admins to review",
+    variant: "info",
   }),
   dismissRiderReport: () => ({
     title: "Rider Report",
-    description: "You have successfully dismissed a rider report",
+    description: "You have dismissed a rider report",
     variant: "warning",
   }),
   banRider: (name) => ({
@@ -72,24 +72,24 @@ const actions: {
     description: `You have unbanned ${name}`,
     variant: "warning",
   }),
-  joinLeague: () => ({
+  joinLeague: (name) => ({
     title: "Join League",
-    description: "You have successfully joined this league",
+    description: `You have joined ${name}`,
     variant: "success",
   }),
-  leaveLeague: () => ({
+  leaveLeague: (name) => ({
     title: "Left League",
-    description: "You have successfully left this league",
+    description: `You have left ${name}`,
     variant: "warning",
   }),
-  joinLeagueRace: () => ({
-    title: "Joined League Race",
-    description: "You have successfully joined the league race",
+  joinLeagueRace: (name) => ({
+    title: "Registered for League Race",
+    description: `You have joined the race at ${name}`,
     variant: "success",
   }),
-  leaveLeagueRace: () => ({
-    title: "Left League Race",
-    description: "You have successfully left the league race",
+  leaveLeagueRace: (name) => ({
+    title: "Unregistered for League Race",
+    description: `You have left the race at ${name}`,
     variant: "warning",
   }),
 }

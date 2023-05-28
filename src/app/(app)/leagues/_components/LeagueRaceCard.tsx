@@ -3,8 +3,8 @@
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import Pill from '~/components/pills/Pill'
-import { leagueRaceStatusMap } from './constants'
-import { useLeagueContext } from './LeagueOverview'
+import { leagueRaceStatusMap } from "."
+import { useLeagueContext } from "./LeagueOverview"
 
 interface Props {
   race: LeagueRace
@@ -36,16 +36,16 @@ export default function LeagueRaceCard({ race }: Props) {
 
   return (
     <div className="card card-body bg-base-200 p-0">
-      <RegistrationBanner status={race.status} isInRace={isInRace} />
+      <RaceCardBanner status={race.status} isInRace={isInRace} />
 
-      <LeagueRaceCardContent race={race} />
+      <RaceCardContent race={race} />
 
-      <LeaguesRaceCardActions race={race} isInLeague={isInLeague} />
+      <RaceCardActions race={race} isInLeague={isInLeague} />
     </div>
   )
 }
 
-const RegistrationBanner = ({ status, isInRace }: { status: number; isInRace: boolean }) => {
+const RaceCardBanner = ({ status, isInRace }: { status: number; isInRace: boolean }) => {
   return (
     <div className="overflow-hidden rounded-lg rounded-bl-none rounded-br-none">
       {isInRace ? (
@@ -63,7 +63,7 @@ const RegistrationBanner = ({ status, isInRace }: { status: number; isInRace: bo
   )
 }
 
-const LeagueRaceCardContent = ({ race }: { race: LeagueRace }) => (
+const RaceCardContent = ({ race }: { race: LeagueRace }) => (
   <div className="p-4 pt-0">
     <div className="my-4 grid place-items-center md:my-8">
       <Image
@@ -92,13 +92,7 @@ const LeagueRaceCardContent = ({ race }: { race: LeagueRace }) => (
   </div>
 )
 
-const LeaguesRaceCardActions = ({
-  race,
-  isInLeague,
-}: {
-  race: LeagueRace
-  isInLeague: boolean
-}) => {
+const RaceCardActions = ({ race, isInLeague }: { race: LeagueRace; isInLeague: boolean }) => {
   const router = useRouter()
 
   return (
@@ -106,7 +100,8 @@ const LeaguesRaceCardActions = ({
       <button
         className="btn-outline btn-sm btn w-full bg-base-200"
         disabled={!isInLeague}
-        onClick={() => router.push(`/leagues/race/${race._id}`)}>
+        onClick={() => router.push(`/leagues/race/${race._id}`)}
+      >
         Go To Race
       </button>
     </div>
