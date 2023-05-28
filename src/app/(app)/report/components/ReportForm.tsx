@@ -26,7 +26,7 @@ export default function RiderReportForm({ user, events }: Props) {
   console.log(user.guid)
 
   return (
-    <div className="card card-body mx-auto mt-10 w-fit bg-base-200">
+    <div className="card card-body mx-auto mt-10 w-[500px] bg-base-200">
       <div className="flex flex-col justify-center align-middle">
         <form
           action={(formData) =>
@@ -34,7 +34,7 @@ export default function RiderReportForm({ user, events }: Props) {
               .then(() => pushToast(actions.postRiderReport))
               .catch(pushToast)
           }
-          className="form-control w-full max-w-xs"
+          className="form-control w-full"
         >
           {/* User Guid */}
           <div className="mb-2 text-lg font-semibold">GUID</div>
@@ -56,7 +56,7 @@ export default function RiderReportForm({ user, events }: Props) {
           <select
             name="eventId"
             defaultValue=""
-            className="input-bordered select w-[400px] max-w-xs bg-base-200"
+            className="input-bordered select bg-base-200"
             onChange={handleEventSelect}
           >
             <option disabled />
@@ -78,8 +78,8 @@ export default function RiderReportForm({ user, events }: Props) {
 
 export function RiderFormPart2({ eventId }) {
   const [riderForm, setRiderForm] = useState({
-    rider: '',
-    reason: '',
+    rider: "",
+    reason: "",
   })
 
   const { data, isLoading } = useSWR(`/races/${eventId}`, fetcher)
@@ -101,7 +101,7 @@ export function RiderFormPart2({ eventId }) {
     setRiderForm({ ...riderForm, reason: e.target.value })
   }
 
-  const charactersCn = riderForm.reason.length > 50 ? 'text-green-500' : 'text-red-500'
+  const charactersCn = riderForm.reason.length > 50 ? "text-green-500" : "text-red-500"
 
   return (
     <>
@@ -115,7 +115,7 @@ export function RiderFormPart2({ eventId }) {
         name="riderGuid"
         defaultValue=""
         onChange={handleRiderSelect}
-        className="input-bordered select w-full max-w-xs bg-base-200"
+        className="input-bordered select w-full bg-base-200"
       >
         <option disabled />
         {riders.map((rider) => (

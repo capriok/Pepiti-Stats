@@ -9,7 +9,7 @@ export default function AdminControls({ user, rider }) {
       {user.isAdmin && (
         <div className="mb-2 flex justify-end">
           {rider.banned ? (
-            <UnbanRiderButton guid={rider._id} name={rider.name} hackit={false} />
+            <UnbanRiderButton guid={rider._id} name={rider.name} />
           ) : (
             <BanRiderButton guid={rider._id} name={rider.name} />
           )}

@@ -120,7 +120,17 @@ export async function Login(): Promise<string> {
   const steam_login = 'https://pepiti.com/stats/api/v0/steam_login'
   return steam_login
 }
-
 export async function Logout(): Promise<{ status: boolean }> {
   return { status: true }
+}
+
+// CONSTANTS
+
+export async function GetConstantOEMBikes(token: string): Promise<{ [key:string]: Array<any> }> {
+  const data = await fetcher('/constants/oem_bikes', token)
+  return data
+}
+export async function GetConstantServers(token: string): Promise<{ datacenters: any }> {
+  const data = await fetcher('/constants/server_locations', token)
+  return data
 }

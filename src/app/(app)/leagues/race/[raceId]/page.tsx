@@ -29,7 +29,7 @@ export default async function Page(props) {
               className="btn-outline btn-sm btn bg-base-200">
               Go to League
             </Link>
-            <LeagueRaceActions raceId={race._id} eligibility={eligibility} />
+            <LeagueRaceActions raceId={race._id} eligibility={eligibility} raceName={race.config.event.track} />
           </div>
         }
       />

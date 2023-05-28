@@ -13,7 +13,7 @@ module.exports = {
           accent: "#202020",
           info: "#005fac",
           warning: "#ac6200",
-          error: "#ac0025",
+          error: "#ac0009",
         },
         dark: {
           "base-100": "#181818",

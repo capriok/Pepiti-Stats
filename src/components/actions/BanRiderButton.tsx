@@ -16,7 +16,7 @@ export default function BanRiderButton({ guid, name }: Props) {
 
   return (
     <Popover>
-      <PopoverTrigger className="btn-outline btn-error btn-sm btn mb-2 whitespace-nowrap">
+      <PopoverTrigger className="btn-outline btn-error btn-sm btn mb-2 whitespace-nowrap border-error text-white">
         Ban Rider
       </PopoverTrigger>
       <PopoverContent className="grid place-items-center">
@@ -27,16 +27,16 @@ export default function BanRiderButton({ guid, name }: Props) {
               .then(() => pushToast(actions.banRider, name))
               .catch(pushToast)
           }
-          className="mt-4 flex flex-col items-center justify-center gap-2"
+          className="mt-4 flex flex-col items-center justify-center gap-4"
         >
           <input
             ref={reasonRef}
             name="reason"
             autoComplete="off"
-            placeholder="Reason for ban..."
+            placeholder="Ramming, Racism, Retard..."
             className="input-bordered input input-sm w-full"
           />
-          <button type="submit" name="guid" value={guid} className="btn-error btn-sm btn">
+          <button type="submit" name="guid" value={guid} className="btn-error btn-sm btn w-full">
             Ban Rider
           </button>
         </form>

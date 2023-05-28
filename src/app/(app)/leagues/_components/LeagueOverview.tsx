@@ -54,8 +54,9 @@ const LeagueAlert = ({ isInLeague, rider }: { isInLeague: boolean; rider: League
       <div className="flex w-full justify-stretch">
         <div
           data-tip="You are In the League"
-          className="alert rounded-bl-none rounded-br-none bg-secondary">
-          <div className="flex w-full items-center justify-center gap-2">
+          className="alert rounded-bl-none rounded-br-none bg-secondary"
+        >
+          <div className="flex w-full items-center justify-center gap-2 text-white">
             You are in the League <CheckIcon />
           </div>
         </div>
@@ -143,28 +144,34 @@ const LeagueInformation = ({ league, host }) => (
 const LeagueRequirements = ({ league, eligibility, rider }) => {
   const requirements = [
     {
-      label: 'MMR',
+      label: "MMR",
       eligible: eligibility.MMR,
       requiredTotal: league.requirements.MMR,
       riderTotal: rider.MMR,
     },
     {
-      label: 'SR',
+      label: "SR",
       eligible: eligibility.SR,
       requiredTotal: league.requirements.SR,
       riderTotal: rider.SR,
     },
     {
-      label: 'Races',
+      label: "Laps",
+      eligible: eligibility.laps,
+      requiredTotal: league.requirements.laps,
+      riderTotal: rider.total_laps,
+    },
+    {
+      label: "Races",
       eligible: eligibility.races,
       requiredTotal: league.requirements.races,
       riderTotal: rider.races.total_races,
     },
     {
-      label: 'Laps',
-      eligible: eligibility.laps,
-      requiredTotal: league.requirements.laps,
-      riderTotal: rider.total_laps,
+      label: "Records",
+      eligible: eligibility.records,
+      requiredTotal: league.requirements.records,
+      riderTotal: rider.world_records.total,
     },
   ]
 
@@ -201,13 +208,13 @@ const LeagueStandings = ({ league }) => {
 
   const columns = [
     {
-      key: 'name',
-      label: 'Rider',
+      key: "name",
+      label: "Rider",
       render: (name, row) => <RiderLink href={`/profile/${row.guid}`}>{name}</RiderLink>,
     },
     {
-      key: 'race_number',
-      label: 'Race #',
+      key: "race_number",
+      label: "Race #",
       render: (race_number) => (
         <div className="flex gap-2">
           <div className="text-accent">#</div>
@@ -216,18 +223,18 @@ const LeagueStandings = ({ league }) => {
       ),
     },
     {
-      key: 'points',
-      label: 'Points',
-      render: (points) => points ?? '-',
+      key: "score",
+      label: "Score",
+      render: (score) => score ?? "-",
     },
     {
-      key: 'bike_id',
-      label: 'Bike',
+      key: "bike_id",
+      label: "Bike",
       render: (bike) => <BikeWithPrefixColor bike={bike} />,
     },
     {
-      key: 'team',
-      label: 'Team',
+      key: "team",
+      label: "Team",
     },
   ]
 

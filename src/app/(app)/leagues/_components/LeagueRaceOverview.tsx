@@ -7,7 +7,7 @@ import Tabs from '~/components/Tabs'
 import BikeWithPrefixColor from '~/components/pills/BikeWithPrefixColor'
 import { handleAverageSpeed } from '~/utils/handleAverageSpeed'
 import { handleLapTimes } from '~/utils/handleLapTimes'
-import { leagueRaceStatusMap } from './constants'
+import { leagueRaceStatusMap } from "."
 
 interface Props {
   user: User
@@ -16,7 +16,7 @@ interface Props {
 }
 
 export default function LeagueRaceOverview({ user, race, eligibility }: Props) {
-  console.log('%cLeagueRace', 'color: steelblue', { user, race, eligibility })
+  console.log("%cLeagueRace", "color: steelblue", { user, race, eligibility })
   const isInRace = eligibility.race_joined === true
 
   return (
@@ -39,7 +39,7 @@ const LeagueRaceAlert = ({ isInRace }: { isInRace: boolean }) => {
 
   return (
     <div className="mb-4 flex w-full justify-stretch">
-      <div data-tip="You are In the League" className="alert bg-secondary text-white">
+      <div data-tip="You are In the League" className="alert rounded-xl bg-secondary text-white">
         <div className="flex w-full items-center justify-center gap-2">
           Registered for the Race <CheckIcon />
         </div>
@@ -57,14 +57,17 @@ const LeagueRaceInformation = ({
 }) => {
   return (
     <div className="card card-body bg-base-200 p-0">
-      <div
-        className={`rounded-lg rounded-bl-none rounded-br-none p-2 text-white ${
-          isInRace ? 'bg-accent' : leagueRaceStatusMap[race.status].color
-        }`}>
-        <div className="flex justify-center text-lg font-semibold">
-          {leagueRaceStatusMap[race.status].text}
+      {!isInRace && (
+        <div
+          className={`rounded-lg rounded-bl-none rounded-br-none p-2 text-white ${
+            isInRace ? "bg-accent" : leagueRaceStatusMap[race.status].color
+          }`}
+        >
+          <div className="flex justify-center text-lg font-semibold">
+            {leagueRaceStatusMap[race.status].text}
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="grid w-full grid-cols-1 p-4 md:grid-cols-2">
         <div className="flex flex-col">
