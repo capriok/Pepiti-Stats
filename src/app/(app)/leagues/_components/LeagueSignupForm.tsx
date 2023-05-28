@@ -2,8 +2,7 @@
 
 import { useSearchParams } from 'next/navigation'
 import { joinLeague } from '~/api/actions'
-import { useToast } from '~/hooks/toast'
-import { ToastMessages, handleActionWithToast } from '~/utils/handleActionWithToast'
+import { useToast, actions } from "~/components/toast"
 
 interface Props {
   leagueId: string
@@ -11,12 +10,8 @@ interface Props {
 
 export default function LeagueSignupForm({ leagueId }: Props) {
   const searchParams = useSearchParams()
-  const guid = searchParams.get('guid') ?? ''
-  const { toast } = useToast()
-  const toastMessages: ToastMessages = {
-    title: "Joined League",
-    msg: "You have successfully joined this league!"
-  }
+  const guid = searchParams.get("guid") ?? ""
+  const { pushToast } = useToast()
 
   // ? Get bikes in simple list like track_names
   // const {data, isLoading} = useSWR('/top/bikes')
@@ -25,7 +20,13 @@ export default function LeagueSignupForm({ leagueId }: Props) {
 
   return (
     <div className="w-full">
-      <form action={(formData) => handleActionWithToast(joinLeague, toastMessages, toast)}>
+      <form
+        action={(formData) =>
+          joinLeague(formData)
+            .then(() => pushToast(actions.joinLeague))
+            .catch(pushToast)
+        }
+      >
         <input name="leagueId" value={leagueId} className="hidden" />
         <div className="flex flex-col">
           <label className="mb-2 mt-4 text-accent">GUID</label>
@@ -111,6 +112,6 @@ export default function LeagueSignupForm({ leagueId }: Props) {
           </button>
         </div>
       </form>
-    </div >
+    </div>
   )
 }

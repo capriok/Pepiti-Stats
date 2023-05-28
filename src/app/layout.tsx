@@ -8,12 +8,12 @@ export const metadata = {
 }
 
 import { Analytics } from '@vercel/analytics/react'
-import getAuthUser from '~/api/getAuthUser'
-import NavBar from '~/components/Navbar'
-import Footer from '~/components/Footer'
+import { Toaster } from "~/components/toast/Toaster"
+import getAuthUser from "~/api/getAuthUser"
+import NavBar from "~/components/Navbar"
+import Footer from "~/components/Footer"
 
-import '~/globals.css'
-import { Toaster } from '~/components/Toaster'
+import "~/globals.css"
 
 interface Props {
   children: React.ReactNode
