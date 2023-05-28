@@ -1,8 +1,8 @@
-'use client'
+"use client"
 
-import Link from 'next/link'
-import RiderLink from '../RiderLink'
-import Table, { TableOptions } from '../Table'
+import Link from "next/link"
+import RiderLink from "../RiderLink"
+import Table, { TableOptions } from "../Table"
 
 interface Props extends TableOptions {
   worldSR: any
@@ -12,8 +12,8 @@ interface Props extends TableOptions {
 export default function SRRecordsTable({ worldSR, seeMore, ...rest }: Props) {
   const columns = [
     {
-      key: 'name',
-      label: 'Rider',
+      key: "name",
+      label: "Rider",
       render: (name, row) => (
         <RiderLink href={`/profile/${row._id}`} donator={row.donation > 0}>
           {name}
@@ -21,9 +21,9 @@ export default function SRRecordsTable({ worldSR, seeMore, ...rest }: Props) {
       ),
     },
     {
-      key: 'SR',
-      label: 'Score',
-      align: 'right',
+      key: "SR",
+      label: "Score",
+      align: "right",
     },
   ]
 

@@ -1,12 +1,12 @@
-import { GetRecentRaces } from '~/api'
-import getAuthUser from '~/api/getAuthUser'
-import PageHeader from '~/components/PageHeader'
-import Pill from '~/components/pills/Pill'
-import RiderReportForm from './components/ReportForm'
+import { GetRecentRaces } from "~/api"
+import getAuthUser from "~/api/getAuthUser"
+import PageHeader from "~/components/PageHeader"
+import Pill from "~/components/pills/Pill"
+import RiderReportForm from "./components/ReportForm"
 
 export const metadata = {
-  title: 'Pepiti | Rider Report',
-  description: 'Report riders from recent events for review by the admin team',
+  title: "Pepiti | Rider Report",
+  description: "Report riders from recent events for review by the admin team",
 }
 
 export default async function Page() {

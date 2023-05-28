@@ -1,11 +1,11 @@
-'use client'
+"use client"
 
-import React, { useState } from 'react'
-import PageHeader from '~/components/PageHeader'
-import Tabs from '~/components/Tabs'
-import MMRAnalysisTable from './MMRAnalysisTable'
-import RaceOverview from './RaceOverview'
-import RaceStandingsTable from './RaceStandingsTable'
+import React, { useState } from "react"
+import PageHeader from "~/components/PageHeader"
+import Tabs from "~/components/Tabs"
+import MMRAnalysisTable from "./MMRAnalysisTable"
+import RaceOverview from "./RaceOverview"
+import RaceStandingsTable from "./RaceStandingsTable"
 
 interface Props {
   session: ProcessedRaceSession
@@ -14,8 +14,8 @@ interface Props {
 export default function Race({ session }: Props) {
   const items = [
     {
-      key: 'race1',
-      label: 'Race 1',
+      key: "race1",
+      label: "Race 1",
       children: !session.races.race1 ? (
         <DataUnavailable />
       ) : (
@@ -23,8 +23,8 @@ export default function Race({ session }: Props) {
       ),
     },
     {
-      key: 'race2',
-      label: 'Race 2',
+      key: "race2",
+      label: "Race 2",
       children: !session.races.race2 ? (
         <DataUnavailable />
       ) : (
@@ -48,7 +48,7 @@ export default function Race({ session }: Props) {
       <PageHeader
         wide={true}
         title={session.track}
-        extra={<div className="text-lg font-semibold">{session.headCount + ' Riders'}</div>}
+        extra={<div className="text-lg font-semibold">{session.headCount + " Riders"}</div>}
         marginTop={false}
       />
       {tab.children}
@@ -59,13 +59,13 @@ export default function Race({ session }: Props) {
 const RaceContent = ({ race }: { race: Race }) => {
   const items = [
     {
-      key: 'raceStandings',
-      label: 'Race Standings',
+      key: "raceStandings",
+      label: "Race Standings",
       children: <RaceStandingsTable standings={race.standings} />,
     },
     {
-      key: 'mmrAnalysis',
-      label: 'MMR Analysis',
+      key: "mmrAnalysis",
+      label: "MMR Analysis",
       children: <MMRAnalysisTable standings={race.standings} />,
     },
   ]

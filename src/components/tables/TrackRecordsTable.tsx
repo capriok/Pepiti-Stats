@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
-import Table from '~/components/Table'
-import RiderLink from '../RiderLink'
-import BikeWithPrefixColor from '../pills/BikeWithPrefixColor'
-import { handleLapTimes } from '~/utils/handleLapTimes'
+import Table from "~/components/Table"
+import RiderLink from "../RiderLink"
+import BikeWithPrefixColor from "../pills/BikeWithPrefixColor"
+import { handleLapTimes } from "~/utils/handleLapTimes"
 
 interface Props {
   records: TrackRecord[]
@@ -17,33 +17,33 @@ export const TrackRecordsTable = ({ records }: Props) => {
 
   const columns = [
     {
-      key: 'name',
-      label: 'Name',
+      key: "name",
+      label: "Name",
       render: (name, row) => <RiderLink href={`/profile/${row.rider_guid}`}>{name}</RiderLink>,
     },
     {
-      key: 'lap_time',
-      label: 'Lap Time',
+      key: "lap_time",
+      label: "Lap Time",
       render: (lapTime) => handleLapTimes(lapTime),
     },
     {
-      key: 'average_speed',
-      label: 'Avg Speed',
-      render: (speed) => (speed ? speed.toFixed(2) : ''),
+      key: "average_speed",
+      label: "Avg Speed",
+      render: (speed) => (speed ? speed.toFixed(2) : ""),
     },
     {
-      key: 'split_1',
-      label: 'Split 1',
+      key: "split_1",
+      label: "Split 1",
       render: (split) => handleLapTimes(split),
     },
     {
-      key: 'split_2',
-      label: 'Split 2',
+      key: "split_2",
+      label: "Split 2",
       render: (split) => handleLapTimes(split),
     },
     {
-      key: 'bike',
-      label: 'Bike',
+      key: "bike",
+      label: "Bike",
       render: (bike) => <BikeWithPrefixColor bike={bike} />,
     },
   ]

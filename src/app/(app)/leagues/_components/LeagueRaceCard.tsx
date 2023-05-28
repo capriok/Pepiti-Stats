@@ -1,8 +1,8 @@
-'use client'
+"use client"
 
-import Image from 'next/image'
-import { useRouter } from 'next/navigation'
-import Pill from '~/components/pills/Pill'
+import Image from "next/image"
+import { useRouter } from "next/navigation"
+import Pill from "~/components/pills/Pill"
 import { leagueRaceStatusMap } from "."
 import { useLeagueContext } from "./LeagueOverview"
 

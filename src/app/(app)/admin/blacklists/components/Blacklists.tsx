@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import Link from 'next/link'
+import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import UnbanRiderButton from "~/components/actions/UnbanRiderButton"
 import Pill from "~/components/pills/Pill"
@@ -157,14 +157,14 @@ const BlacklistTable = ({ blacklist, isAdmin }) => {
 
 const renderBannedBy = (reason) => {
   switch (reason.toLowerCase()) {
-    case 'global':
-    case 'perma':
-    case 'racism':
-    case 'racist':
-      return 'red'
-    case 'sr':
-      return 'orange'
+    case "global":
+    case "perma":
+    case "racism":
+    case "racist":
+      return "red"
+    case "sr":
+      return "orange"
     default:
-      return 'secondary'
+      return "secondary"
   }
 }

@@ -1,8 +1,8 @@
-import { BikeIcon } from 'lucide-react'
+import { BikeIcon } from "lucide-react"
 
 export const metadata = {
-  title: 'Pepiti | Races',
-  description: 'Recent Races hosted on Pepiti servers',
+  title: "Pepiti | Races",
+  description: "Recent Races hosted on Pepiti servers",
 }
 
 export default async function Page() {

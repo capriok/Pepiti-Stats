@@ -1,10 +1,10 @@
-import { NewspaperIcon } from 'lucide-react'
-import Link from 'next/link'
-import PageHeader from '~/components/PageHeader'
+import { NewspaperIcon } from "lucide-react"
+import Link from "next/link"
+import PageHeader from "~/components/PageHeader"
 
 export const metadata = {
-  title: 'Pepiti | Admin Portal',
-  description: 'Admin Portal for managing Pepiti services',
+  title: "Pepiti | Admin Portal",
+  description: "Admin Portal for managing Pepiti services",
 }
 
 export default function Page() {

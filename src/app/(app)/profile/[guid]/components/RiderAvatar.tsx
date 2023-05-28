@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from "next/image"
 
 export default function RiderAvatar({ rider }) {
   return (
@@ -6,9 +6,10 @@ export default function RiderAvatar({ rider }) {
       <div className="indicator avatar min-h-[128px]">
         <span
           className={`badge indicator-item text-white ${
-            rider.online ? 'badge-secondary' : 'badge-error'
-          }`}>
-          {rider.online ? 'Online' : 'Offline'}
+            rider.online ? "badge-secondary" : "badge-error"
+          }`}
+        >
+          {rider.online ? "Online" : "Offline"}
         </span>
         {rider.avatar && !rider.avatar.includes(optedOutAvatar) ? (
           <Image
@@ -43,4 +44,4 @@ export default function RiderAvatar({ rider }) {
   )
 }
 
-const optedOutAvatar = 'fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full'
+const optedOutAvatar = "fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full"

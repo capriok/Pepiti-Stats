@@ -1,15 +1,15 @@
-'use client'
+"use client"
 
-import { VerifiedIcon } from 'lucide-react'
-import Link from 'next/link'
-import Pill from '~/components/pills/Pill'
+import { VerifiedIcon } from "lucide-react"
+import Link from "next/link"
+import Pill from "~/components/pills/Pill"
 
 interface Props {
   leagues: Array<League>
 }
 
 export default function LeagueList({ leagues }: Props) {
-  console.log('%cLeaguesList', 'color: steelblue', leagues)
+  console.log("%cLeaguesList", "color: steelblue", leagues)
 
   if (!leagues || !leagues.length)
     return <div className="flex w-full justify-center">No Results</div>
@@ -46,7 +46,7 @@ const LeagueCard = ({ league }: { league: League }) => {
             <div className="mb-4 flex flex-col items-center justify-center whitespace-nowrap">
               <div className="text-md mb-2 font-semibold text-accent">MMR</div>
               <div className="text-lg">
-                <Pill text={`${league.requirements['MMR']}+`} />
+                <Pill text={`${league.requirements["MMR"]}+`} />
               </div>
             </div>
           </div>
@@ -54,7 +54,7 @@ const LeagueCard = ({ league }: { league: League }) => {
             <div className="mb-4 flex flex-col items-center justify-center whitespace-nowrap">
               <div className="text-md mb-2 font-semibold text-accent">SR</div>
               <div className="text-lg">
-                <Pill text={`${league.requirements['SR']}+`} />
+                <Pill text={`${league.requirements["SR"]}+`} />
               </div>
             </div>
           </div>
@@ -64,7 +64,7 @@ const LeagueCard = ({ league }: { league: League }) => {
             <div className="mb-4 flex flex-col items-center justify-center whitespace-nowrap">
               <div className="text-md mb-2 font-semibold text-accent">Races</div>
               <div className="text-lg">
-                <Pill text={`${league.requirements['races']}+`} />
+                <Pill text={`${league.requirements["races"]}+`} />
               </div>
             </div>
           </div>
@@ -72,7 +72,7 @@ const LeagueCard = ({ league }: { league: League }) => {
             <div className="mb-4 flex flex-col items-center justify-center whitespace-nowrap">
               <div className="text-md mb-2 font-semibold text-accent">Laps</div>
               <div className="text-lg">
-                <Pill text={`${league.requirements['laps']}+`} />
+                <Pill text={`${league.requirements["laps"]}+`} />
               </div>
             </div>
           </div>
@@ -95,7 +95,8 @@ const LeagueCard = ({ league }: { league: League }) => {
               ) : (
                 <Link
                   href={`/leagues/${league._id}`}
-                  className="btn-outline btn-sm btn bg-base-200">
+                  className="btn-outline btn-sm btn bg-base-200"
+                >
                   Go To League
                 </Link>
               )}

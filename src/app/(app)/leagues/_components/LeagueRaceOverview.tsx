@@ -1,12 +1,12 @@
-'use client'
+"use client"
 
-import { CheckIcon } from 'lucide-react'
-import Table from '~/components/Table'
-import RiderLink from '~/components/RiderLink'
-import Tabs from '~/components/Tabs'
-import BikeWithPrefixColor from '~/components/pills/BikeWithPrefixColor'
-import { handleAverageSpeed } from '~/utils/handleAverageSpeed'
-import { handleLapTimes } from '~/utils/handleLapTimes'
+import { CheckIcon } from "lucide-react"
+import Table from "~/components/Table"
+import RiderLink from "~/components/RiderLink"
+import Tabs from "~/components/Tabs"
+import BikeWithPrefixColor from "~/components/pills/BikeWithPrefixColor"
+import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
+import { handleLapTimes } from "~/utils/handleLapTimes"
 import { leagueRaceStatusMap } from "."
 
 interface Props {
@@ -105,22 +105,22 @@ const LeagueRaceInformation = ({
 const LeagueRaceConfig = ({ race }: { race: LeagueRaceDetails }) => {
   const configurations = [
     {
-      label: 'Practice Length',
+      label: "Practice Length",
       value: race.config.race.practice_length,
-      desc: 'Minutes',
+      desc: "Minutes",
     },
     {
-      label: 'Qualify Length',
+      label: "Qualify Length",
       value: race.config.race.qualifypractice_length,
-      desc: 'Minutes',
+      desc: "Minutes",
     },
     {
-      label: 'Race Length',
+      label: "Race Length",
       value: <div>{race.config.race.race_minutes}</div>,
       desc: (
         <div>
-          Minutes{' '}
-          {race.config.race.race_extralaps && '+ ' + race.config.race.race_extralaps + ' Laps'}
+          Minutes{" "}
+          {race.config.race.race_extralaps && "+ " + race.config.race.race_extralaps + " Laps"}
         </div>
       ),
     },
@@ -132,7 +132,8 @@ const LeagueRaceConfig = ({ race }: { race: LeagueRaceDetails }) => {
         {configurations.map((configuration) => (
           <div
             key={configuration.label}
-            className="stat grid w-full place-items-center md:w-[250px]">
+            className="stat grid w-full place-items-center md:w-[250px]"
+          >
             <div className="stat-title">{configuration.label}</div>
             <div className="stat-value my-2 text-lg">{configuration.value}</div>
             <div className="stat-desc">{configuration.desc}</div>
@@ -167,37 +168,37 @@ const LeagueRaceStandings = ({ division }: { division: LeagueRaceDivision }) => 
 
   const columns = [
     {
-      key: 'raceNumber',
-      label: 'Race #',
+      key: "raceNumber",
+      label: "Race #",
     },
     {
-      key: 'name',
-      label: 'Rider',
+      key: "name",
+      label: "Rider",
       render: (name, row) => <RiderLink href={`/profile/${row.guid}`}>{name}</RiderLink>,
     },
     {
-      key: 'lapTime',
-      label: 'Lap Time',
-      render: (lapTime) => (lapTime ? handleLapTimes(lapTime) : '-'),
+      key: "lapTime",
+      label: "Lap Time",
+      render: (lapTime) => (lapTime ? handleLapTimes(lapTime) : "-"),
     },
     {
-      key: 'averageSpeed',
-      label: 'Avg Speed',
-      render: (averageSpeed) => (averageSpeed ? handleAverageSpeed(averageSpeed) : '-'),
+      key: "averageSpeed",
+      label: "Avg Speed",
+      render: (averageSpeed) => (averageSpeed ? handleAverageSpeed(averageSpeed) : "-"),
     },
     {
-      key: 'split1',
-      label: 'Split 1',
-      render: (split1) => (split1 ? handleLapTimes(split1) : '-'),
+      key: "split1",
+      label: "Split 1",
+      render: (split1) => (split1 ? handleLapTimes(split1) : "-"),
     },
     {
-      key: 'split2',
-      label: 'Split 2',
-      render: (split2) => (split2 ? handleLapTimes(split2) : '-'),
+      key: "split2",
+      label: "Split 2",
+      render: (split2) => (split2 ? handleLapTimes(split2) : "-"),
     },
     {
-      key: 'bike',
-      label: 'Bike',
+      key: "bike",
+      label: "Bike",
       render: (bike) => <BikeWithPrefixColor bike={bike} />,
     },
   ]

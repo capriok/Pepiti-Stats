@@ -1,10 +1,10 @@
-import RiderAvatar from '~/app/(app)/profile/[guid]/components/RiderAvatar'
-import MMRPill from '~/components/pills/MMRPill'
-import Pill from '~/components/pills/Pill'
-import useSwr from 'swr'
-import { handleLapTimes } from '~/utils/handleLapTimes'
-import { handleRankColor } from '~/utils/handleRankColor'
-import { fetcher } from '~/api/fetcher'
+import RiderAvatar from "~/app/(app)/profile/[guid]/components/RiderAvatar"
+import MMRPill from "~/components/pills/MMRPill"
+import Pill from "~/components/pills/Pill"
+import useSwr from "swr"
+import { handleLapTimes } from "~/utils/handleLapTimes"
+import { handleRankColor } from "~/utils/handleRankColor"
+import { fetcher } from "~/api/fetcher"
 
 interface Props {
   race: Race
@@ -24,7 +24,7 @@ function WinnerCircle({ race }: { race: Race }) {
   const { data: winner, isLoading } = useSwr(`/rider/${race.winner.guid}`, fetcher)
   const loadingWinner = {
     name: race.winner.name,
-    avatar: '',
+    avatar: "",
     online: false,
     donation: 0,
   }

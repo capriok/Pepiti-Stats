@@ -1,12 +1,12 @@
-'use client'
+"use client"
 
-import { Bike, CheckIcon, VerifiedIcon } from 'lucide-react'
-import React from 'react'
-import BikeWithPrefixColor from '~/components/pills/BikeWithPrefixColor'
-import Pill from '~/components/pills/Pill'
-import RiderLink from '~/components/RiderLink'
-import Table from '~/components/Table'
-import LeagueRaceCard from './LeagueRaceCard'
+import { Bike, CheckIcon, VerifiedIcon } from "lucide-react"
+import React from "react"
+import BikeWithPrefixColor from "~/components/pills/BikeWithPrefixColor"
+import Pill from "~/components/pills/Pill"
+import RiderLink from "~/components/RiderLink"
+import Table from "~/components/Table"
+import LeagueRaceCard from "./LeagueRaceCard"
 
 interface Props {
   user: User
@@ -20,7 +20,7 @@ const LeagueContext = React.createContext({} as any)
 export const useLeagueContext = () => React.useContext(LeagueContext)
 
 export default function LeagueOverview({ user, rider, league, host, eligibility }: Props) {
-  console.log('%cLeague', 'color: steelblue', { user, rider, league, host, eligibility })
+  console.log("%cLeague", "color: steelblue", { user, rider, league, host, eligibility })
 
   const isInLeague = eligibility.league_joined === true
   const leagueRider = league.riders[rider._id] ?? {}
@@ -125,15 +125,15 @@ const LeagueInformation = ({ league, host }) => (
         <div className="mb-2 flex items-center gap-2">
           <div className="text-md text-accent">Lock Bike Choice:</div>
           <Pill
-            text={league.keep_bike_selection ? 'True' : 'False'}
-            color={league.keep_bike_selection ? 'secondary' : 'neutral'}
+            text={league.keep_bike_selection ? "True" : "False"}
+            color={league.keep_bike_selection ? "secondary" : "neutral"}
           />
         </div>
         <div className="flex items-center gap-2">
           <div className="text-md text-accent">Lock Race Number:</div>
           <Pill
-            text={league.keep_race_number ? 'True' : 'False'}
-            color={league.keep_race_number ? 'secondary' : 'neutral'}
+            text={league.keep_race_number ? "True" : "False"}
+            color={league.keep_race_number ? "secondary" : "neutral"}
           />
         </div>
       </div>
@@ -180,8 +180,8 @@ const LeagueRequirements = ({ league, eligibility, rider }) => {
       {requirements.map((requirement) => (
         <div key={requirement.label} className="stat place-items-center">
           <div className="stat-title">{requirement.label}</div>
-          <div className="stat-value my-2 text-2xl">{requirement.requiredTotal + '+'}</div>
-          <div className={`stat-desc ${requirement.eligible ? 'text-secondary' : 'text-error'}`}>
+          <div className="stat-value my-2 text-2xl">{requirement.requiredTotal + "+"}</div>
+          <div className={`stat-desc ${requirement.eligible ? "text-secondary" : "text-error"}`}>
             You have {requirement.riderTotal} {requirement.label}
           </div>
         </div>

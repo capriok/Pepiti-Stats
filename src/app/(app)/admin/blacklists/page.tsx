@@ -1,12 +1,12 @@
-import Link from 'next/link'
-import { GetBlackListNonSR, GetBlackListSR } from '~/api'
-import PageHeader from '~/components/PageHeader'
-import getAuthUser from '~/api/getAuthUser'
-import Blacklists from './components/Blacklists'
+import Link from "next/link"
+import { GetBlackListNonSR, GetBlackListSR } from "~/api"
+import PageHeader from "~/components/PageHeader"
+import getAuthUser from "~/api/getAuthUser"
+import Blacklists from "./components/Blacklists"
 
 export const metadata = {
-  title: 'Pepiti | Admin Manager',
-  description: 'View and look up riders on the Safety Rating and Global Blacklists',
+  title: "Pepiti | Admin Manager",
+  description: "View and look up riders on the Safety Rating and Global Blacklists",
 }
 
 export default async function Page() {
@@ -27,7 +27,7 @@ export default async function Page() {
       <div className="mt-4">
         <Blacklists
           isAdmin={user.isAdmin}
-          blacklistSR={blacklistSR.riders.filter((r) => r.banned_by === 'SR')}
+          blacklistSR={blacklistSR.riders.filter((r) => r.banned_by === "SR")}
           blacklistNonSR={blacklistNonSR.riders}
         />
       </div>

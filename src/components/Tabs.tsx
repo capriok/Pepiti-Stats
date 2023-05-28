@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import { useState, useTransition } from 'react'
+import { useState, useTransition } from "react"
 
 interface Item {
   key: string
@@ -36,12 +36,13 @@ export default function Tabs({
   }
 
   function Tab({ item }) {
-    const active = item.key === activeTab.key ? 'bg-secondary/80 text-white' : 'bg-base-200'
-    const wideActive = wide ? 'w-full' : ''
+    const active = item.key === activeTab.key ? "bg-secondary/80 text-white" : "bg-base-200"
+    const wideActive = wide ? "w-full" : ""
     return (
       <button
         onClick={() => selectTab(item)}
-        className={`tab-lifted tab min-h-[35px] font-semibold text-accent ${wideActive} ${active}`}>
+        className={`tab-lifted tab min-h-[35px] font-semibold text-accent ${wideActive} ${active}`}
+      >
         <div className="whitespace-nowrap text-[15px]">{item.label}</div>
       </button>
     )

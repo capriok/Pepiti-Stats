@@ -1,14 +1,14 @@
-'use client'
+"use client"
 
-import useSWR from 'swr'
-import { dateIsValid } from '~/utils/dateIsValid'
-import { handleLapTimes } from '~/utils/handleLapTimes'
-import handlePlaceSuffix from '~/utils/handlePlaceSuffix'
-import MMRPill from '~/components/pills/MMRPill'
-import Table from '~/components/Table'
-import Pill from '~/components/pills/Pill'
-import Spinner from '~/components/Spinner'
-import { fetcher } from '~/api/fetcher'
+import useSWR from "swr"
+import { dateIsValid } from "~/utils/dateIsValid"
+import { handleLapTimes } from "~/utils/handleLapTimes"
+import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
+import MMRPill from "~/components/pills/MMRPill"
+import Table from "~/components/Table"
+import Pill from "~/components/pills/Pill"
+import Spinner from "~/components/Spinner"
+import { fetcher } from "~/api/fetcher"
 
 interface Props {
   guid: string
@@ -27,10 +27,10 @@ export default function RiderRacesTable({ guid }: Props) {
   const races = data.races.map((race) => ({
     date: parseInt(race._id.slice(0, 8), 16) * 1000,
     track: race.track,
-    position: race?.Classification?.Pos ?? '',
-    laps: race?.Classification?.Laps ?? '',
-    gap: race?.Classification?.Gap ?? '',
-    penalties: race?.Classification?.Penalty ?? '',
+    position: race?.Classification?.Pos ?? "",
+    laps: race?.Classification?.Laps ?? "",
+    gap: race?.Classification?.Gap ?? "",
+    penalties: race?.Classification?.Penalty ?? "",
     fastestLap: race.FastestLap,
     mmrGain: race.MMR.total,
     newMMR: race.MMR.old_MMR + race.MMR.total,
@@ -38,48 +38,48 @@ export default function RiderRacesTable({ guid }: Props) {
 
   const columns = [
     {
-      key: 'date',
-      label: 'Date',
-      render: (date) => (dateIsValid(new Date(date)) ? new Date(date).toLocaleDateString() : '-'),
+      key: "date",
+      label: "Date",
+      render: (date) => (dateIsValid(new Date(date)) ? new Date(date).toLocaleDateString() : "-"),
     },
     {
-      key: 'track',
-      label: 'Track',
-      render: (track) => (track ? track : '-'),
+      key: "track",
+      label: "Track",
+      render: (track) => (track ? track : "-"),
     },
     {
-      key: 'position',
-      label: 'Position',
-      render: (position) => (position ? <b>{handlePlaceSuffix(position)}</b> : '-'),
+      key: "position",
+      label: "Position",
+      render: (position) => (position ? <b>{handlePlaceSuffix(position)}</b> : "-"),
     },
     {
-      key: 'gap',
-      label: 'Gap',
-      render: (gap) => (gap ? handleLapTimes(gap) : '-'),
+      key: "gap",
+      label: "Gap",
+      render: (gap) => (gap ? handleLapTimes(gap) : "-"),
     },
     {
-      key: 'laps',
-      label: 'Laps',
-      render: (laps) => (laps ? laps : '-'),
+      key: "laps",
+      label: "Laps",
+      render: (laps) => (laps ? laps : "-"),
     },
     {
-      key: 'penalties',
-      label: 'Penalties',
-      render: (penalties) => (penalties ? penalties + ' s' : '-'),
+      key: "penalties",
+      label: "Penalties",
+      render: (penalties) => (penalties ? penalties + " s" : "-"),
     },
     {
-      key: 'fastestLap',
-      label: 'Fastest Lap',
-      render: (fastestLap) => (fastestLap ? handleLapTimes(fastestLap) : '-'),
+      key: "fastestLap",
+      label: "Fastest Lap",
+      render: (fastestLap) => (fastestLap ? handleLapTimes(fastestLap) : "-"),
     },
     {
-      key: 'mmrGain',
-      label: 'MMR +/-',
+      key: "mmrGain",
+      label: "MMR +/-",
       render: (mmrGain) => <MMRPill mmr={mmrGain} />,
     },
     {
-      key: 'newMMR',
-      label: 'New MMR',
+      key: "newMMR",
+      label: "New MMR",
       render: (newMMR) => <Pill text={newMMR} />,
     },
   ]

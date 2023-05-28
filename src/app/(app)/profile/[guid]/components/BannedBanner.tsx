@@ -1,4 +1,4 @@
-import { InfoIcon } from 'lucide-react'
+import { InfoIcon } from "lucide-react"
 
 export default function BannedBanner({ banned, reason }) {
   const tipText = `- "Global" ban means you are on the global blacklist. No help for you.\n
@@ -10,7 +10,8 @@ export default function BannedBanner({ banned, reason }) {
       <div className="alert alert-error flex w-fit justify-end gap-2 py-2">
         <div
           className="tooltip tooltip-bottom tooltip-accent whitespace-pre-line text-left md:tooltip-bottom"
-          data-tip={tipText}>
+          data-tip={tipText}
+        >
           <InfoIcon />
         </div>
         <div>Banned - {`"${reason}"`}</div>

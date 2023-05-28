@@ -1,13 +1,13 @@
-import { GetLeagueRace, GetLeagueRaceEligibility } from '~/api'
-import Link from 'next/link'
-import PageHeader from '~/components/PageHeader'
-import getAuthUser from '~/api/getAuthUser'
-import LeagueRaceOverview from '../../_components/LeagueRaceOverview'
-import LeagueRaceActions from '../../_components/LeagueRaceActions'
+import { GetLeagueRace, GetLeagueRaceEligibility } from "~/api"
+import Link from "next/link"
+import PageHeader from "~/components/PageHeader"
+import getAuthUser from "~/api/getAuthUser"
+import LeagueRaceOverview from "../../_components/LeagueRaceOverview"
+import LeagueRaceActions from "../../_components/LeagueRaceActions"
 
 export const metadata = {
-  title: 'Pepiti | League Race',
-  description: 'Compete in race leagues for real prizes and bragging rights',
+  title: "Pepiti | League Race",
+  description: "Compete in race leagues for real prizes and bragging rights",
 }
 
 export default async function Page(props) {
@@ -26,10 +26,15 @@ export default async function Page(props) {
           <div className="flex gap-2">
             <Link
               href={`/leagues/${race.league_id}`}
-              className="btn-outline btn-sm btn bg-base-200">
+              className="btn-outline btn-sm btn bg-base-200"
+            >
               Go to League
             </Link>
-            <LeagueRaceActions raceId={race._id} eligibility={eligibility} raceName={race.config.event.track} />
+            <LeagueRaceActions
+              raceId={race._id}
+              eligibility={eligibility}
+              raceName={race.config.event.track}
+            />
           </div>
         }
       />

@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import { useState } from 'react'
+import { useState } from "react"
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,8 +11,8 @@ import {
   Tooltip,
   Legend,
   BarElement,
-} from 'chart.js'
-import { Line } from 'react-chartjs-2'
+} from "chart.js"
+import { Line } from "react-chartjs-2"
 
 interface Props {
   mmrHistory: Array<RiderMMRHistory>
@@ -37,9 +37,9 @@ export default function RiderMMRHistoryChart({ mmrHistory }: Props) {
   const labels = totaledData
     .map((_, idx) => {
       if (idx + 1 === 1) {
-        return 'Prev race'
+        return "Prev race"
       }
-      return idx + 1 + ' races ago'
+      return idx + 1 + " races ago"
     })
     .reverse()
 
@@ -47,10 +47,10 @@ export default function RiderMMRHistoryChart({ mmrHistory }: Props) {
     labels,
     datasets: [
       {
-        label: 'Total MMR',
+        label: "Total MMR",
         data: totaledData,
-        borderColor: '#37B24D',
-        backgroundColor: 'rgba(55, 178, 77, 0.4)',
+        borderColor: "#37B24D",
+        backgroundColor: "rgba(55, 178, 77, 0.4)",
         lineTension: 0,
       },
     ],
@@ -76,12 +76,14 @@ export default function RiderMMRHistoryChart({ mmrHistory }: Props) {
           <div className="btn-group ">
             <button
               className="btn-outline btn-sm btn rounded-r-none border-none bg-base-300 hover:bg-secondary"
-              onClick={() => setLimit((l) => (l > 5 ? l - 1 : l))}>
+              onClick={() => setLimit((l) => (l > 5 ? l - 1 : l))}
+            >
               -
             </button>
             <button
               className="btn-outline btn-sm btn rounded-r-none border-none bg-base-300 hover:bg-secondary"
-              onClick={() => setLimit((l) => (l < mmrHistory.length ? l + 1 : l))}>
+              onClick={() => setLimit((l) => (l < mmrHistory.length ? l + 1 : l))}
+            >
               +
             </button>
           </div>

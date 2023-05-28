@@ -1,10 +1,10 @@
-import Link from 'next/link'
-import Image from 'next/image'
+import Link from "next/link"
+import Image from "next/image"
 
 export const metadata = {
-  title: 'Pepiti | Home',
+  title: "Pepiti | Home",
   description:
-    'Access race stats in real-time, host and join leagues, connect with fellow races through social integrations, and compete with rivals through global leaderboards',
+    "Access race stats in real-time, host and join leagues, connect with fellow races through social integrations, and compete with rivals through global leaderboards",
 }
 
 export default function Page() {
@@ -19,8 +19,8 @@ export default function Page() {
               width={1200}
               height={1000}
               alt="hero-dashboard"
-              placeholder='blur'
-              blurDataURL='/assets/screenshots/dashboard-d.jpg'
+              placeholder="blur"
+              blurDataURL="/assets/screenshots/dashboard-d.jpg"
               priority={true}
             />
           </div>

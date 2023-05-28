@@ -1,17 +1,17 @@
-'use client'
+"use client"
 
-import React, { useState } from 'react'
-import useSWR from 'swr'
-import { fetcher } from '~/api/fetcher'
-import Table from '~/components/Table'
-import { TrackRecordsTable } from '~/components/tables/TrackRecordsTable'
+import React, { useState } from "react"
+import useSWR from "swr"
+import { fetcher } from "~/api/fetcher"
+import Table from "~/components/Table"
+import { TrackRecordsTable } from "~/components/tables/TrackRecordsTable"
 
 interface Props {
   trackList: any
 }
 
 export default function TrackRecords({ trackList }: Props) {
-  const [selectedTrack, setSelectedTrack] = useState('Forest Raceway')
+  const [selectedTrack, setSelectedTrack] = useState("Forest Raceway")
 
   const { data, error, isLoading } = useSWR(`/records/track/${selectedTrack}`, fetcher)
 
@@ -33,7 +33,8 @@ export default function TrackRecords({ trackList }: Props) {
       <select
         value={selectedTrack}
         className="select select-xs mb-1 w-full border-none bg-base-200 md:select-sm"
-        onChange={handleTrackSelect}>
+        onChange={handleTrackSelect}
+      >
         {trackList.map((track) => (
           <option key={track._id} value={track.name}>
             {track.name}

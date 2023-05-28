@@ -1,10 +1,10 @@
-import { GetAllLeagues } from '~/api'
-import PageHeader from '~/components/PageHeader'
-import LeagueList from './_components/LeagueList'
+import { GetAllLeagues } from "~/api"
+import PageHeader from "~/components/PageHeader"
+import LeagueList from "./_components/LeagueList"
 
 export const metadata = {
-  title: 'Pepiti | Leagues',
-  description: 'Compete in race leagues for real prizes and bragging rights',
+  title: "Pepiti | Leagues",
+  description: "Compete in race leagues for real prizes and bragging rights",
 }
 
 export default async function Page() {

@@ -1,8 +1,8 @@
-import { GetRider, GetRiderLeagues, GetRiderMMRHistory } from '~/api'
-import getAuthUser from '~/api/getAuthUser'
-import PageHeader from '~/components/PageHeader'
-import BannedBanner from './components/BannedBanner'
-import { RiderProfile } from './components/RiderProfile'
+import { GetRider, GetRiderLeagues, GetRiderMMRHistory } from "~/api"
+import getAuthUser from "~/api/getAuthUser"
+import PageHeader from "~/components/PageHeader"
+import BannedBanner from "./components/BannedBanner"
+import { RiderProfile } from "./components/RiderProfile"
 
 export async function generateMetadata({ params }) {
   const rider = await GetRider(params.guid)

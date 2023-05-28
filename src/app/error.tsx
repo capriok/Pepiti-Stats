@@ -1,7 +1,7 @@
-'use client'
+"use client"
 
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 
 interface Props {
   error: Error

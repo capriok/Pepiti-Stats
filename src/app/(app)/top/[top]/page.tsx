@@ -1,8 +1,8 @@
-import { GetDynamicTopRecords } from '~/api'
-import PageHeader from '~/components/PageHeader'
-import WorldRecordsTable from '~/components/tables/WorldRecordsTable'
-import MMRRecordsTable from '~/components/tables/MMRRecordsTable'
-import SRRecordsTable from '~/components/tables/SRRecordsTable'
+import { GetDynamicTopRecords } from "~/api"
+import PageHeader from "~/components/PageHeader"
+import WorldRecordsTable from "~/components/tables/WorldRecordsTable"
+import MMRRecordsTable from "~/components/tables/MMRRecordsTable"
+import SRRecordsTable from "~/components/tables/SRRecordsTable"
 import BikeRecordsTable from "~/components/tables/BikeRecordsTable"
 import ContactRecordsTable from "~/components/tables/ContactRecordsTable"
 

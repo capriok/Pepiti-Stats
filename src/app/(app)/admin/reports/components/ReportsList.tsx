@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
-import Image from 'next/image'
-import { useState } from 'react'
-import { ArrowRightIcon } from 'lucide-react'
-import ReportActions from './ReportActions'
+import Image from "next/image"
+import { useState } from "react"
+import { ArrowRightIcon } from "lucide-react"
+import ReportActions from "./ReportActions"
 
 interface Props {
   reports: Array<RiderReport>

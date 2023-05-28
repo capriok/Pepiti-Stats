@@ -1,11 +1,11 @@
-'use client'
+"use client"
 
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import useSWR from 'swr'
-import { postRiderReport } from '~/api/actions'
-import { fetcher } from '~/api/fetcher'
-import Spinner from '~/components/Spinner'
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+import useSWR from "swr"
+import { postRiderReport } from "~/api/actions"
+import { fetcher } from "~/api/fetcher"
+import Spinner from "~/components/Spinner"
 import { useToast, actions } from "~/components/toast"
 
 interface Props {
@@ -152,9 +152,9 @@ export function ProofFormPart3({ eventId, riderForm }) {
   }
 
   const disabled = !eventId || !riderForm.rider || riderForm.reason.length < 50 || proofsCount < 1
-  const buttonCn = disabled ? '' : 'bg-secondary rounded-lg py-2 font-semibold text-white'
+  const buttonCn = disabled ? "" : "bg-secondary rounded-lg py-2 font-semibold text-white"
 
-  const requiredCn = proofsCount < 1 ? 'text-red-500' : 'text-green-500'
+  const requiredCn = proofsCount < 1 ? "text-red-500" : "text-green-500"
 
   return (
     <>

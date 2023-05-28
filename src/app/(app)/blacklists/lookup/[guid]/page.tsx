@@ -1,14 +1,14 @@
-import { GetRider } from '~/api'
-import Link from 'next/link'
+import { GetRider } from "~/api"
+import Link from "next/link"
 
 export async function generateMetadata({ params: { guid } }) {
   const rider = await GetRider(guid)
 
   return {
-    title: 'Pepiti | Blacklist Lookup',
+    title: "Pepiti | Blacklist Lookup",
     description: `Looking up: ${rider?.name}
-Status: ${rider?.banned ? 'Banned' : 'Not Banned'}
-${rider?.banned ? `Reason: ${rider?.banned_by}` : ''}`,
+Status: ${rider?.banned ? "Banned" : "Not Banned"}
+${rider?.banned ? `Reason: ${rider?.banned_by}` : ""}`,
   }
 }
 
@@ -44,16 +44,18 @@ export default async function Page({ params: { guid } }) {
               <div className="stat-title w-full text-center">Click here for more info</div>
               <Link
                 href={`/blacklists?guid=${rider._id}${
-                  rider.banned_by?.toLowerCase().includes('sr') ? '&tab=blacklistSr' : ''
+                  rider.banned_by?.toLowerCase().includes("sr") ? "&tab=blacklistSr" : ""
                 }`}
-                className="btn-outline btn-ghost btn-sm btn">
+                className="btn-outline btn-ghost btn-sm btn"
+              >
                 Blacklist Info
               </Link>
               <Link
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://discord.com/invite/mx-bikes"
-                className="btn-outline btn-ghost btn-sm btn">
+                className="btn-outline btn-ghost btn-sm btn"
+              >
                 Ban Appeal (MXB Discord)
               </Link>
               <button disabled={true} className="btn-outline btn-ghost btn-sm btn">

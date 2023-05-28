@@ -16,12 +16,12 @@ export default function Footer({ user }: Props) {
         <div>
           <Image
             src="/assets/brand/pepiti-logo.svg"
-            style={{ width: 'auto', height: 'auto' }}
+            style={{ width: "auto", height: "auto" }}
             width={120}
             height={120}
             alt="pepiti_brand"
-            placeholder='blur'
-            blurDataURL='/assets/brand/pepiti-logo.svg'
+            placeholder="blur"
+            blurDataURL="/assets/brand/pepiti-logo.svg"
           />
           <p>
             Copyright © {date.getFullYear()} Pepiti

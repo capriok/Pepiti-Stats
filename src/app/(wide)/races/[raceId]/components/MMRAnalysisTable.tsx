@@ -1,9 +1,9 @@
-import React from 'react'
-import MMRPill from '~/components/pills/MMRPill'
-import Pill from '~/components/pills/Pill'
-import RiderLink from '~/components/RiderLink'
-import Table from '~/components/Table'
-import { toFixedIfNecessary } from '~/utils/toFixedIfNecessary'
+import React from "react"
+import MMRPill from "~/components/pills/MMRPill"
+import Pill from "~/components/pills/Pill"
+import RiderLink from "~/components/RiderLink"
+import Table from "~/components/Table"
+import { toFixedIfNecessary } from "~/utils/toFixedIfNecessary"
 
 interface Props {
   standings: any
@@ -12,12 +12,12 @@ interface Props {
 export default function MMRAnalysisTable({ standings }: Props) {
   const columns = [
     {
-      key: 'name',
-      label: 'Name',
+      key: "name",
+      label: "Name",
       render: (name, row) => <RiderLink href={`/profile/${row._id}`}>{name}</RiderLink>,
     },
     {
-      key: 'mmrGain',
+      key: "mmrGain",
       label: (
         <div className="tooltip tooltip-bottom tooltip-accent" data-tip="MMR Gain +/-">
           MMR +/-
@@ -26,7 +26,7 @@ export default function MMRAnalysisTable({ standings }: Props) {
       render: (mmrGain) => <MMRPill mmr={toFixedIfNecessary(mmrGain)} />,
     },
     {
-      key: 'newMmr',
+      key: "newMmr",
       label: (
         <div className="tooltip tooltip-bottom tooltip-accent" data-tip="Old MMR + MMR Gain">
           New MMR
@@ -35,7 +35,7 @@ export default function MMRAnalysisTable({ standings }: Props) {
       render: (newMmr) => <Pill text={newMmr} />,
     },
     {
-      key: 'bpp',
+      key: "bpp",
       label: (
         <div className="tooltip tooltip-bottom tooltip-accent" data-tip="Position Bonus">
           BPP
@@ -44,7 +44,7 @@ export default function MMRAnalysisTable({ standings }: Props) {
       render: (bpp) => <MMRPill mmr={toFixedIfNecessary(bpp)} />,
     },
     {
-      key: 'prb',
+      key: "prb",
       label: (
         <div className="tooltip tooltip-bottom tooltip-accent" data-tip="Positive Rank Bonus">
           PRB
@@ -53,7 +53,7 @@ export default function MMRAnalysisTable({ standings }: Props) {
       render: (prb) => <MMRPill mmr={toFixedIfNecessary(prb)} />,
     },
     {
-      key: 'nrb',
+      key: "nrb",
       label: (
         <div className="tooltip tooltip-bottom tooltip-accent" data-tip="Negative Rank Bonus">
           NRB
@@ -62,7 +62,7 @@ export default function MMRAnalysisTable({ standings }: Props) {
       render: (nrb) => <MMRPill mmr={toFixedIfNecessary(nrb)} />,
     },
     {
-      key: 'fl',
+      key: "fl",
       label: (
         <div className="tooltip tooltip-bottom tooltip-accent" data-tip="Fastest Lap">
           FL
@@ -71,7 +71,7 @@ export default function MMRAnalysisTable({ standings }: Props) {
       render: (fl) => <MMRPill mmr={toFixedIfNecessary(fl)} />,
     },
     {
-      key: 'hs',
+      key: "hs",
       label: (
         <div className="tooltip tooltip-bottom tooltip-accent" data-tip="Holeshot">
           HS
