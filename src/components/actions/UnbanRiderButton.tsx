@@ -3,6 +3,7 @@
 import { unbanRider } from "~/api/actions"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/Popover"
 import { useToast, actions } from "~/components/toast"
+import { forceRefresh } from "."
 
 interface Props {
   riderId: string
@@ -16,16 +17,8 @@ export default function UnbanRiderButton({ riderId, name, hackit = false }: Prop
   const submit = (formData) =>
     unbanRider(formData)
       .then(() => pushToast(actions.unbanRider, name))
-      .then(() => hackit && hack())
+      .then(() => hackit && forceRefresh())
       .catch(pushToast)
-
-  function hack() {
-    // ? This is a hack to refresh the page at /blacklists after the action
-    // ? The server action works but does want to revalidatePath.. there?
-    setTimeout(() => {
-      if (typeof window !== "undefined") window.location.reload()
-    }, 1500)
-  }
 
   return (
     <Popover>

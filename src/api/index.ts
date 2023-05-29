@@ -110,7 +110,7 @@ export async function GetAdminRiderReports(
   token: string,
   status?: string
 ): Promise<{ results: Array<RiderReport> }> {
-  const data = await fetcher(`/rider/report${status ? `?status=${status}` : ""}`, token)
+  const data = await fetcher(`/rider/report/${status}`, token)
   return data
 }
 

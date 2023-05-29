@@ -20,18 +20,15 @@ export default function LeagueSignupForm({ leagueId, bikes, servers }: Props) {
 
   console.log("%cLeagueSignup", "color: steelblue", { bikes, servers })
 
+  const submit = (formData) =>
+    joinLeague(formData)
+      .then(() => pushToast(actions.joinLeague))
+      .then(() => router.push(`/leagues/${leagueId}`))
+      .catch(pushToast)
+
   return (
     <div className="w-full">
-    <form
-        action={(formData) =>
-          joinLeague(formData)
-            .then(() => {
-              pushToast(actions.joinLeague)
-              router.push(`/leagues/${leagueId}`)
-            })
-            .catch(pushToast)
-        }
-      >
+      <form action={submit}>
         <input readOnly={true} name="leagueId" value={leagueId} className="hidden" />
         <div className="flex flex-col">
           <label className="mb-2 mt-4 text-accent">GUID</label>

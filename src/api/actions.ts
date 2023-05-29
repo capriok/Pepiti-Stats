@@ -14,6 +14,7 @@ async function fetcher(url: string) {
 
   return await fetch(ENDPOINT + url, {
     headers: {
+      "Content-Type": "application/json",
       authorization: token ? `Bearer ${token}` : "",
     },
   }).then((res) => {
@@ -33,6 +34,7 @@ async function poster(url: string, options: { method: string; body?: any }) {
     ...opts,
     credentials: "include",
     headers: {
+      "Content-Type": "application/json",
       authorization: token ? `Bearer ${token}` : "",
     },
   }).then((res) => {
@@ -43,12 +45,19 @@ async function poster(url: string, options: { method: string; body?: any }) {
 // RIDER REPORT
 
 export async function postRiderReport(data: FormData) {
+  const proofs: any = []
+  for (let i = 1; i < 4; i++) {
+    const proof = data.get(`proof${i}`)
+    console.log(proof)
+
+    if (proof) proofs.push(proof)
+  }
   const body = {
     by: data.get("userGuid"),
     race_id: data.get("eventId"),
     guid: data.get("riderGuid"),
     reason: data.get("reason"),
-    proofs: [data.get("proof1"), data.get("proof2"), data.get("proof3")],
+    proofs: proofs,
   }
 
   console.log("Action: postRiderReport", body)
@@ -58,8 +67,16 @@ export async function postRiderReport(data: FormData) {
 
 // ADMIN REPORTS
 
-// ? need api support for admins to be able to dismiss reports
-// ? should also get dismissReportWithAbuse to track abusers and ban automatically after x dismissed reports
+export async function reopenRiderReport(data: FormData) {
+  const reportId = data.get("reportId")
+
+  console.log("Action: reopenReport", { reportId })
+
+  return await new Promise((res, rej) => rej(new Error("Not Supported")))
+  // return await poster(`/rider/report/${reportId}`, { method: "PUT" }).then(() =>
+  //   revalidatePath("/")
+  // )
+}
 export async function dismissRiderReport(data: FormData) {
   const reportId = data.get("reportId")
 

@@ -3,38 +3,38 @@
 import Image from "next/image"
 import { useState } from "react"
 import { ArrowRightIcon } from "lucide-react"
-import ReportActions from "./ReportActions"
+import ReopenRiderReport from '~/components/actions/ReopenRiderReport'
 
 interface Props {
   reports: Array<RiderReport>
 }
 
-export default function ReportsList({ reports }: Props) {
+export default function ClosedReportsList({ reports }: Props) {
   console.log("%cAdmin Reports", "color: steelblue", { reports })
 
   const [openReport, setOpenReport] = useState({} as RiderReport)
 
-  const handleIdleControlsClick = (report) => {
-    setOpenReport(report)
-  }
+  if (!reports.length)
+    return <div className="card card-body mt-4 bg-base-200 text-center">No Results</div>
 
   return (
     <>
       {reports.map((report) => {
         const reportActive = report._id === openReport._id
+
         return (
           <div key={report._id} className="card bg-base-200 p-4 md:p-8">
             <div className="flex w-full justify-between">
               <div className="flex align-middle text-2xl">
                 {report.by.name}
-                {reportActive ? " is reporting " : <ArrowRightIcon className="mx-4 mt-1" />}
+                <ArrowRightIcon className="mx-4 mt-1" />
                 {report.rider.name}
               </div>
               <div className="relative">
-                {reportActive ? (
-                  <ReportActions reportId={report._id} rider={report.rider} user={report.by} />
+                {!reportActive ? (
+                  <IdleReportControls open={() => setOpenReport(report)} />
                 ) : (
-                  <IdleReportControls open={() => handleIdleControlsClick(report)} />
+                  <ReportActions reportId={report._id} />
                 )}
               </div>
             </div>
@@ -51,8 +51,8 @@ export default function ReportsList({ reports }: Props) {
 const IdleReportControls = ({ open }) => {
   return (
     <div className="flex w-fit flex-col justify-center align-middle">
-      <button className="btn-outline btn-secondary btn-ghost btn-sm btn" onClick={open}>
-        Investigate
+      <button className="btn-outline btn-ghost btn-sm btn" onClick={open}>
+        Review
       </button>
     </div>
   )
@@ -78,6 +78,14 @@ const IdleReportContent = ({ report }) => {
   )
 }
 
+const ReportActions = ({ reportId }) => {
+  return (
+    <div className="absolute right-0 flex w-fit flex-col justify-center gap-2 align-middle">
+      <ReopenRiderReport reportId={reportId} hackit={true} />
+    </div>
+  )
+}
+
 const ActiveReportContent = ({ report }) => {
   return (
     <>
@@ -90,22 +98,8 @@ const ActiveReportContent = ({ report }) => {
         <div className="mt-2">
           <div className="mb-2 text-lg font-semibold">Proofs</div>
           <div className="flex flex-col gap-2 indent-4">
-            {/* // ? when submitting a rider report, restrict link not to imgur/ gyazo imgs
-            // ? we need to only support a certain proof hosting domains, (imgur, gyazo) 
-            // ? next requires img src domains to be configured in next.config.js, also creates ease for security for admins
-            <Image src={report.proofs} alt="proof1" priority={true} width={300} height={300} /> */}
             {report.proofs.map((p, i) => (
               <div key={report._id + p + i}>
-                {/* 
-                <Image
-                  width={300}
-                  height={300}
-                  src={p + "as"}
-                  alt={p.name}
-                  className="m-0 mr-4 bg-white"
-                  priority={true}
-                /> */}
-                {/* // ? single proof deprecated */}
                 <div className="flex items-center gap-2">
                   <span>Proof: {i + 1}</span>
                   <a
