@@ -8,8 +8,7 @@ export const metadata = {
   description: "Compete in race leagues for real prizes and bragging rights",
 }
 
-export default async function Page({ params }) {
-  const leagueId = params?.leagueId ?? ""
+export default async function Page({ params: {leagueId} }) {
   const user = await getAuthUser()
   const oems = await GetConstantOEMBikes(user.token)
   const servers = await GetConstantServers(user.token)

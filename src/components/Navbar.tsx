@@ -30,6 +30,7 @@ function NavBar({ user }: Props) {
 
   const secondaryLinks = [
     {
+      key: "profile",
       href: `/profile/${user.guid}`,
       label: "Profile",
       icon: <UserIcon />,
@@ -37,13 +38,7 @@ function NavBar({ user }: Props) {
       admin: false,
     },
     {
-      href: "/report",
-      label: "Report Rider",
-      icon: <FlagIcon />,
-      public: true,
-      admin: false,
-    },
-    {
+      key: "blacklists",
       href: "/blacklists",
       label: "Blacklists",
       icon: <ScrollTextIcon />,
@@ -51,6 +46,15 @@ function NavBar({ user }: Props) {
       admin: false,
     },
     {
+      key: "riderReport",
+      href: "/report",
+      label: "Report Rider",
+      icon: <FlagIcon />,
+      public: true,
+      admin: false,
+    },
+    {
+      key: "adminPortal",
       href: "/admin",
       label: "Admin Portal",
       icon: <ShieldAlertIcon />,
@@ -58,6 +62,7 @@ function NavBar({ user }: Props) {
       admin: true,
     },
     {
+      key: "modeToggle",
       label: (
         <div
           onClick={handleThemeChange}
@@ -69,8 +74,10 @@ function NavBar({ user }: Props) {
       ),
       public: true,
       admin: false,
+      hide: theme === "system" ? true : false,
     },
     {
+      key: "steamSignin",
       label: (
         <Link
           href="https://pepiti.com/stats/api/v0/steam_login"
@@ -88,11 +95,12 @@ function NavBar({ user }: Props) {
     },
   ]
 
-  const secondaryNavLinks = secondaryLinks.map((link, idx) => {
+  const secondaryNavLinks = secondaryLinks.map((link) => {
+    if (link.hide) return <></>
     if (!user.guid && !link.public) return <></>
     if (!user.isAdmin && link.admin) return <></>
     return (
-      <li key={idx}>
+      <li key={link.key}>
         {link.href ? (
           <Link href={link.href} className="my-[2px] flex justify-between">
             <div className="flex w-full items-center justify-between max-md:text-[16px] lg:gap-2">
@@ -109,26 +117,29 @@ function NavBar({ user }: Props) {
 
   const primaryLinks = [
     {
+      key: "dashboard",
       href: "/dashboard",
       label: "Dashboard",
       icon: <LayoutDashboardIcon />,
     },
     {
+      key: "races",
       href: "/races",
       label: "Races",
       icon: <ScrollTextIcon />,
     },
     {
+      key: "leagues",
       href: "/leagues",
       label: "Leagues",
       icon: <TrophyIcon />,
     },
   ]
 
-  const primaryNavLinks = primaryLinks.map((link, idx) => {
+  const primaryNavLinks = primaryLinks.map((link) => {
     return (
       <Link
-        key={idx}
+        key={link.key}
         href={link.href}
         className="btn-ghost btn flex justify-between border-none font-normal normal-case hover:bg-secondary hover:text-white lg:mr-2 lg:font-semibold"
       >
@@ -147,15 +158,14 @@ function NavBar({ user }: Props) {
           <div className="navbar-start">
             <Link
               href="/dashboard"
-              className="btn-ghost btn relative w-14 border-none hover:bg-secondary hover:text-white"
+              className="btn-ghost btn relative border-none hover:bg-secondary hover:text-white"
             >
               <Image
-                priority={true}
                 src="/assets/brand/pepiti-logo.svg"
-                fill
                 alt="pepiti_brand"
-                placeholder="blur"
-                blurDataURL="/assets/brand/pepiti-logo.svg"
+                priority={true}
+                width={60}
+                height={60}
               />
             </Link>
           </div>

@@ -23,10 +23,9 @@ export default function RiderReportForm({ user, events }: Props) {
   }
 
   if (!user.guid) return router.push("/signin")
-  console.log(user.guid)
 
   return (
-    <div className="card card-body mx-auto mt-10 w-[500px] bg-base-200">
+    <div className="card card-body mx-auto mt-10 w-[500px]">
       <div className="flex flex-col justify-center align-middle">
         <form
           action={(formData) =>
@@ -170,21 +169,21 @@ export function ProofFormPart3({ eventId, riderForm }) {
         type="text"
         required={true}
         onChange={(e) => handleProofChange(e.target.value)}
-        className="input input-sm mb-2 bg-base-200"
+        className="input-bordered input mb-2 bg-base-200"
         placeholder="Proof link..."
       />
       <input
         name="proof2"
         type="text"
         onChange={(e) => handleProofChange(e.target.value)}
-        className="input input-sm mb-2 bg-base-200"
+        className="input-bordered input mb-2 bg-base-200"
         placeholder="Proof link..."
       />
       <input
         name="proof3"
         type="text"
         onChange={(e) => handleProofChange(e.target.value)}
-        className="input input-sm mb-2 bg-base-200"
+        className="input-bordered input mb-2 bg-base-200"
         placeholder="Proof link..."
       />
 

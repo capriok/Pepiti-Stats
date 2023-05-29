@@ -89,7 +89,7 @@ const LeagueAlert = ({ isInLeague, rider }: { isInLeague: boolean; rider: League
   )
 }
 
-const LeagueBanner = ({ league }) => {
+const LeagueBanner = ({ league }: { league: League }) => {
   return (
     <div className="m-8">
       <div className="flex w-full justify-between">
@@ -105,7 +105,7 @@ const LeagueBanner = ({ league }) => {
   )
 }
 
-const LeagueInformation = ({ league, host }) => (
+const LeagueInformation = ({ league, host }: { league: League; host: RiderProfile }) => (
   <div className="card card-body bg-base-200">
     <div className="grid w-full grid-cols-1 md:grid-cols-2">
       <div className="flex flex-col justify-center">
@@ -141,7 +141,15 @@ const LeagueInformation = ({ league, host }) => (
   </div>
 )
 
-const LeagueRequirements = ({ league, eligibility, rider }) => {
+const LeagueRequirements = ({
+  league,
+  eligibility,
+  rider,
+}: {
+  league: League
+  eligibility: LeagueEligibility
+  rider: RiderProfile
+}) => {
   const requirements = [
     {
       label: "MMR",
@@ -171,7 +179,8 @@ const LeagueRequirements = ({ league, eligibility, rider }) => {
       label: "Records",
       eligible: eligibility.records,
       requiredTotal: league.requirements.records,
-      riderTotal: rider.world_records.total,
+      riderTotal: "-",
+      // riderTotal: rider.total_personal_records,
     },
   ]
 
@@ -190,7 +199,7 @@ const LeagueRequirements = ({ league, eligibility, rider }) => {
   )
 }
 
-const LeagueRaces = ({ league }) => {
+const LeagueRaces = ({ league }: { league: League }) => {
   return (
     <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {league.races.map((race) => (
@@ -200,7 +209,7 @@ const LeagueRaces = ({ league }) => {
   )
 }
 
-const LeagueStandings = ({ league }) => {
+const LeagueStandings = ({ league }: { league: League }) => {
   const data = Object.keys(league.riders).map((guid) => ({
     _id: guid,
     ...league.riders[guid],
