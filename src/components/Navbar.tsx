@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { useTheme } from "next-themes"
 import { usePathname } from "next/navigation"
 import Image from "next/image"
@@ -22,11 +22,27 @@ interface Props {
   user: User
 }
 
+/** Theme switches that avoids hydration error.
+ * 
+ * Check this PR, shouldn't need this when this PR is merged.
+ * https://github.com/pacocoursey/next-themes/pull/171
+ */
+function useThemeSwitcher(): [string, (theme: string) => void] {
+  const [mode, setMode] = useState("");
+  const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    if (theme) setMode(theme);
+  }, [theme]);
+
+  return [mode, setTheme];
+}
+
 function NavBar({ user }: Props) {
-  const { theme, setTheme } = useTheme()
+  const [theme, setTheme] = useThemeSwitcher()
   const pathname = usePathname()
 
-  const handleThemeChange = () => (theme === "light" ? setTheme("dark") : setTheme("light"))
+  const handleThemeChange = () => theme === "light" ? setTheme("dark") : setTheme("light")
 
   const secondaryLinks = [
     {
@@ -83,9 +99,8 @@ function NavBar({ user }: Props) {
           href="https://pepiti.com/stats/api/v0/steam_login"
           target="_blank"
           referrerPolicy="origin"
-          className={`btn-ghost btn mt-[2px] h-full w-full border-none text-error ${
-            user.guid ? "btn-error" : ""
-          }`}
+          className={`btn-ghost btn mt-[2px] h-full w-full border-none text-error ${user.guid ? "btn-error" : ""
+            }`}
         >
           {user.guid ? "Change User" : "Sign In"}
         </Link>
@@ -96,9 +111,9 @@ function NavBar({ user }: Props) {
   ]
 
   const secondaryNavLinks = secondaryLinks.map((link) => {
-    if (link.hide) return <></>
-    if (!user.guid && !link.public) return <></>
-    if (!user.isAdmin && link.admin) return <></>
+    if (link.hide) return null
+    if (!user.guid && !link.public) return null
+    if (!user.isAdmin && link.admin) return null
     return (
       <li key={link.key}>
         {link.href ? (
