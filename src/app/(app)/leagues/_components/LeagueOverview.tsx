@@ -179,8 +179,7 @@ const LeagueRequirements = ({
       label: "Records",
       eligible: eligibility.records,
       requiredTotal: league.requirements.records,
-      riderTotal: "-",
-      // riderTotal: rider.total_personal_records,
+      riderTotal: rider.personal_records,
     },
   ]
 
