@@ -1,51 +1,23 @@
 "use client"
 
-import { dismissReport } from "~/api/actions"
 import BanRiderButton from "~/components/actions/BanRiderButton"
-import { actions, useToast } from "~/components/toast"
+import DismissRiderReport from "~/components/actions/DismissRiderReport"
+import DismissAbuseRiderReport from "~/components/actions/DismissRiderReportAbuse"
 
 interface Props {
   reportId: string
-  riderGuid: string
-  riderName: string
+  rider: ReportRider
+  user: ReportRider
 }
 
-export default function ReportActions({ reportId, riderGuid, riderName }: Props) {
-  const { pushToast } = useToast()
-
+export default function ReportActions({ reportId, rider, user }: Props) {
   return (
     <div className="absolute right-0 flex w-fit flex-col justify-center gap-2 align-middle">
-      <BanRiderButton guid={riderGuid} name={riderName} />
-      <form
-        action={(formData) =>
-          dismissReport(formData)
-            .then(() => pushToast(actions.dismissReport))
-            .catch(pushToast)
-        }
-      >
-        <button
-          className="btn-outline btn-warning btn-sm btn w-full"
-          type="submit"
-          name="reportId"
-          value={reportId}
-        >
-          Dismiss
-        </button>
-      </form>
+      <BanRiderButton riderId={rider._id} name={rider.name} />
 
-      {/* // ? DismissWithAbuse for the future
-       <form
-        action={(formData) =>
-          dismissReportWithAbuse(formData)
-            .then(() => pushToast(actions.dismissReportWithAbuse))
-            .catch(pushToast)
-        }
-      >
-        <input type="hidden" name="reportId" value={reportId} />
-        <button className="btn-outline btn-sm btn w-full" type="submit">
-          Abuse
-        </button>
-      </form> */}
+      <DismissRiderReport reportId={reportId} />
+
+      <DismissAbuseRiderReport reportId={reportId} userId={user._id} />
     </div>
   )
 }

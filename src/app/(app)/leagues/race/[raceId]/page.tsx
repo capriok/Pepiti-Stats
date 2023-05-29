@@ -33,7 +33,7 @@ export default async function Page(props) {
             <LeagueRaceActions
               raceId={race._id}
               eligibility={eligibility}
-              raceName={race.config.event.track}
+              name={race.config.event.track}
             />
           </div>
         }

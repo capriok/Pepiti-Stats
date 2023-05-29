@@ -1,19 +1,16 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { leaveLeague } from "~/api/actions"
-import { useToast, actions } from "~/components/toast"
+import LeaveLeagueButton from "~/components/actions/LeaveLeagueButton"
 import { checkRequirements } from "."
 
 interface Props {
-  guid: string
-  leagueId: string
+  league: League
+  rider: RiderProfile
   eligibility: LeagueEligibility
-  leagueName: string
 }
 
-export default function LeagueActions({ guid, leagueId, eligibility, leagueName }: Props) {
-  const { pushToast } = useToast()
+export default function LeagueActions({ league, rider, eligibility }: Props) {
   const router = useRouter()
   const meetsRequirements = checkRequirements(eligibility)
   const isJoined = eligibility.league_joined === true
@@ -22,27 +19,11 @@ export default function LeagueActions({ guid, leagueId, eligibility, leagueName 
   const isEligible = !isJoined && !isBanned && meetsRequirements
 
   return isJoined ? (
-    <form
-      action={(formData) =>
-        leaveLeague(formData)
-          .then(() => pushToast(actions.leaveLeague, leagueName))
-          .catch(pushToast)
-      }
-      className="flex w-fit"
-    >
-      <button
-        name="leagueId"
-        value={leagueId}
-        disabled={false}
-        className="btn-outline btn-sm btn w-full text-error"
-      >
-        Leave League
-      </button>
-    </form>
+    <LeaveLeagueButton leagueId={league._id} name={league.name} />
   ) : (
     <button
       disabled={!isEligible}
-      onClick={() => router.push(`/leagues/${leagueId}/signup?guid=${guid}`)}
+      onClick={() => router.push(`/leagues/${league._id}/signup?guid=${rider._id}`)}
       className="btn-secondary btn-sm btn w-fit text-white"
     >
       Join League

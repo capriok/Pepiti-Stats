@@ -12,6 +12,8 @@ interface Props {
 }
 
 export default function RaceOverview({ race }: Props) {
+console.log("%cRace", "color: steelblue", race)
+  
   return (
     <div className="my-5 flex flex-col gap-5 xl:my-6 xl:flex-row">
       <WinnerCircle race={race} />
@@ -28,6 +30,7 @@ function WinnerCircle({ race }: { race: Race }) {
     online: false,
     donation: 0,
   }
+
   return (
     <div className="card card-body w-full bg-base-200 p-0 xl:w-[60%]">
       <div className="my-6 flex w-full justify-center text-3xl font-semibold">Winner Circle</div>

@@ -32,11 +32,7 @@ export default function ReportsList({ reports }: Props) {
               </div>
               <div className="relative">
                 {reportActive ? (
-                  <ReportActions
-                    reportId={report._id}
-                    riderGuid={report.rider?._id}
-                    riderName={report.rider?.name}
-                  />
+                  <ReportActions reportId={report._id} rider={report.rider} user={report.by} />
                 ) : (
                   <IdleReportControls open={() => handleIdleControlsClick(report)} />
                 )}

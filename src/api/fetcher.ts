@@ -15,7 +15,6 @@ export const fetcherWithToken = async (url: string, token: string) => {
 
   const res = await fetch(ENDPOINT + url, {
     ...nextConfig,
-    method: "GET",
     credentials: "include",
     headers: {
       authorization: `Bearer ${token}`,

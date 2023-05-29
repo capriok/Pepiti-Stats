@@ -6,38 +6,41 @@ import { Popover, PopoverContent, PopoverTrigger } from "~/ui/Popover"
 import { useToast, actions } from "~/components/toast"
 
 interface Props {
-  guid: string
+  riderId: string
   name: string
 }
 
-export default function BanRiderButton({ guid, name }: Props) {
+export default function BanRiderButton({ riderId, name }: Props) {
   const reasonRef = useRef<HTMLInputElement>(null)
   const { pushToast } = useToast()
+
+  const submit = (formData) =>
+    banRider(formData)
+      .then(() => pushToast(actions.banRider, name))
+      .catch(pushToast)
 
   return (
     <Popover>
       <PopoverTrigger className="btn-outline btn-error btn-sm btn mb-2 whitespace-nowrap border-error text-white">
         Ban Rider
       </PopoverTrigger>
-      <PopoverContent className="grid place-items-center">
+      <PopoverContent className="flex flex-col items-center justify-center gap-4">
         <div>Please give reason</div>
-        <form
-          action={(formData) =>
-            banRider(formData)
-              .then(() => pushToast(actions.banRider, name))
-              .catch(pushToast)
-          }
-          className="mt-4 flex flex-col items-center justify-center gap-4"
-        >
+        <form action={submit}>
           <input
-            ref={reasonRef}
             name="reason"
+            ref={reasonRef}
             autoComplete="off"
             placeholder="Ramming, Racism, Retard..."
             className="input-bordered input input-sm w-full"
           />
-          <button type="submit" name="guid" value={guid} className="btn-error btn-sm btn w-full">
-            Ban Rider
+          <button
+            name="guid"
+            value={riderId}
+            type="submit"
+            className="btn-error btn-sm btn mt-4 w-full"
+          >
+            Ban
           </button>
         </form>
       </PopoverContent>

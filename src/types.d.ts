@@ -434,49 +434,35 @@ interface RiderReport {
     track: string
     Race2: any
   }
-  by: {
-    _id: string
-    MMR: number
-    SR: number
-    name: string
-    contact: number
-    banned: boolean
-    banned_by: null
-    avatar: string
-    type: string
-    online: boolean
-    server: null
-    donation: number
-    seasons: RaceSeason[]
-    races: RaceRaces
-    bikes: RaceBikes
+  by: ReportRider
+  rider: ReportRider
+}
+
+interface ReportRider {
+  _id: string
+  MMR: number
+  SR: number
+  name: string
+  contact: number
+  banned: boolean
+  banned_by: string | null
+  avatar: string
+  type: string
+  online: boolean
+  server: string | null
+  donation: number
+  seasons: LeagueSeason[]
+  races: {
+    first: number
+    second: number
+    third: number
+    total_races: number
+    fastlap: number
+    holeshot: number
   }
-  rider: {
-    _id: string
-    MMR: number
-    SR: number
-    name: string
-    contact: number
-    banned: boolean
-    banned_by: string | null
-    avatar: string
-    type: string
-    online: boolean
-    server: string | null
-    donation: number
-    seasons: LeagueSeason[]
-    races: {
-      first: number
-      second: number
-      third: number
-      total_races: number
-      fastlap: number
-      holeshot: number
-    }
-    bikes: {
-      [key: string]: {
-        laps: number
-      }
+  bikes: {
+    [key: string]: {
+      laps: number
     }
   }
 }

@@ -2,19 +2,21 @@
 
 import React from "react"
 import useSWR from "swr"
-import { useUserContext } from "../RiderProfile"
+import { fetcherWithToken } from "~/api/fetcher"
 import Spinner from "~/components/Spinner"
 import LeagueList from "~/app/(app)/leagues/_components/LeagueList"
-import { fetcher, fetcherWithToken } from "~/api/fetcher"
 
 interface Props {
+  user: User
   leagues: Array<League>
 }
 
-export default function RiderLeaguesList({ leagues }: Props) {
-  // const user = useUserContext()
-  // const { data, error, isLoading } = useSWR([`/my_leagues`, user.token], ([url, token]) =>
-  //   fetcherWithToken(url, token) // ? ok.. yet i get cors errs
+export default function RiderLeaguesList({ user, leagues }: Props) {
+  // ? this should work but token does not make it to the request going out to pepiti
+  // ? not sure what im missing here?
+  // const { data, error, isLoading } = useSWR(
+  //   `/my_leagues`,
+  //   (url) => fetcherWithToken(url, user.token)
   // )
 
   // if (error) return <center>Error</center>
@@ -25,7 +27,6 @@ export default function RiderLeaguesList({ leagues }: Props) {
   //       <Spinner />
   //     </div>
   //   )
-
   // const leagues = data?.leagues
 
   return (
