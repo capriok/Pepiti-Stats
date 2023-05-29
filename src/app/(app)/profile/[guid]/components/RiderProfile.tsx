@@ -13,14 +13,11 @@ interface Props {
   leagues: Array<League>
 }
 
-const UserContext = createContext<User>({} as User)
-export const useUserContext = () => useContext(UserContext)
-
 export const RiderProfile = ({ user, rider, mmrHistory, leagues }: Props) => {
   console.log("%cRider Profile", "color: steelblue", { rider })
 
   return (
-    <UserContext.Provider value={user}>
+    <>
       <div className="w-full">
         <AdminControls user={user} rider={rider} />
         <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:gap-10">
@@ -35,8 +32,8 @@ export const RiderProfile = ({ user, rider, mmrHistory, leagues }: Props) => {
           </div>
         </div>
       </div>
-      <ProfileTabs rider={rider} mmrHistory={mmrHistory} leagues={leagues} />
-    </UserContext.Provider>
+      <ProfileTabs user={user} rider={rider} mmrHistory={mmrHistory} leagues={leagues} />
+    </>
   )
 }
 

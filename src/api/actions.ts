@@ -5,7 +5,7 @@ import { cookies } from "next/headers"
 
 const ENDPOINT = process.env.NEXT_PUBLIC_API
 const token = cookies().get("access_token")?.value
-const errorMessage = (res) => `Status ${res.status}. Error Message: ${res.statusText}.`
+const errorMessage = (res) => `Status ${res.status}: ${res.statusText}`
 
 // HELPERS
 
@@ -33,7 +33,6 @@ async function poster(url: string, options: { method: string; body?: any }) {
     ...opts,
     credentials: "include",
     headers: {
-      "Content-Type": "application/json",
       authorization: token ? `Bearer ${token}` : "",
     },
   }).then((res) => {
@@ -61,10 +60,20 @@ export async function postRiderReport(data: FormData) {
 
 // ? need api support for admins to be able to dismiss reports
 // ? should also get dismissReportWithAbuse to track abusers and ban automatically after x dismissed reports
-export async function dismissReport(data: FormData) {
+export async function dismissRiderReport(data: FormData) {
   const reportId = data.get("reportId")
 
   console.log("Action: dismissReport", { reportId })
+
+  return await poster(`/rider/report/${reportId}`, { method: "DELETE" }).then(() =>
+    revalidatePath("/")
+  )
+}
+export async function dismissAbuseRiderReport(data: FormData) {
+  const reportId = data.get("reportId")
+  const userId = data.get("userId")
+
+  console.log("Action: dismissAbuseRiderReport", { reportId })
 
   return await poster(`/rider/report/${reportId}`, { method: "DELETE" }).then(() =>
     revalidatePath("/")
@@ -106,7 +115,7 @@ export async function joinLeague(data: FormData) {
 
   console.log("Action: joinLeague", { leagueId, body })
 
-  // await poster(`/league/${leagueId}/join`, { method: "POST", body }).then(() => revalidatePath("/"))
+  await poster(`/league/${leagueId}/join`, { method: "POST", body }).then(() => revalidatePath("/"))
 }
 
 export async function leaveLeague(data: FormData) {
