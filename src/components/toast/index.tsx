@@ -48,7 +48,7 @@ const actions: {
   }),
   error: (err) => ({
     title: "Oh no!",
-    description: "There was an error, please submit a report or contact an admin",
+    description: "There was an error, more information below",
     data: err.message,
     variant: "error",
   }),
@@ -73,12 +73,12 @@ const actions: {
     variant: "warning",
   }),
   joinLeague: (name) => ({
-    title: "Join League",
+    title: "Joined the League",
     description: `You have joined ${name}`,
     variant: "success",
   }),
   leaveLeague: (name) => ({
-    title: "Left League",
+    title: "Left the League",
     description: `You have left ${name}`,
     variant: "warning",
   }),
