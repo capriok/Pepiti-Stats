@@ -7,11 +7,12 @@ import { useToast, actions } from "~/components/toast"
 
 interface Props {
   leagueId: string
+  name: string
   bikes: any
   servers: any
 }
 
-export default function LeagueSignupForm({ leagueId, bikes, servers }: Props) {
+export default function LeagueSignupForm({ leagueId, name, bikes, servers }: Props) {
   const router = useRouter()
   const { pushToast } = useToast()
   const searchParams = useSearchParams()
@@ -22,8 +23,8 @@ export default function LeagueSignupForm({ leagueId, bikes, servers }: Props) {
 
   const submit = (formData) =>
     joinLeague(formData)
-      .then(() => pushToast(actions.joinLeague))
-      .then(() => router.push(`/leagues/${leagueId}`))
+      .then(() => pushToast(actions.joinLeague, name))
+      .then(() => router.push(`/leagues/${leagueId}`, { forceOptimisticNavigation: true }))
       .catch(pushToast)
 
   return (

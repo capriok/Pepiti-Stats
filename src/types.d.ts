@@ -48,6 +48,7 @@ interface RiderProfile {
   SR: number
   name: string
   contact: number
+  personal_records: number
   world_records: RiderWorldRecords
   total_laps: number
   favorite_bike: {
