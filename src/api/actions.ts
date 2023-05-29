@@ -5,21 +5,24 @@ import { cookies } from "next/headers"
 
 const ENDPOINT = process.env.NEXT_PUBLIC_API
 const token = cookies().get("access_token")?.value
-const errorMessage = (res) => `Status ${res.status}: ${res.statusText}`
 
 // HELPERS
 
 async function fetcher(url: string) {
   console.log("Fetcher", { url, token })
 
-  return await fetch(ENDPOINT + url, {
+  const res = await await fetch(ENDPOINT + url, {
     headers: {
       "Content-Type": "application/json",
       authorization: token ? `Bearer ${token}` : "",
     },
-  }).then((res) => {
-    if (!res.ok) throw new Error(errorMessage(res))
   })
+  const status = res.status
+  const data = await res.json()
+
+  if (status !== 200) throw new Error(data.message)
+
+  return data
 }
 
 async function poster(url: string, options: { method: string; body?: any }) {
@@ -30,33 +33,37 @@ async function poster(url: string, options: { method: string; body?: any }) {
 
   console.log("Poster", { url, token, opts })
 
-  return await fetch(ENDPOINT + url, {
+  const res = await fetch(ENDPOINT + url, {
     ...opts,
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
       authorization: token ? `Bearer ${token}` : "",
     },
-  }).then((res) => {
-    if (!res.ok) throw new Error(errorMessage(res))
   })
+  const status = res.status
+  const data = await res.json()
+
+  if (status !== 200) throw new Error(data.message)
+
+  return data
 }
 
 // RIDER REPORT
 
-export async function postRiderReport(data: FormData) {
+export async function postRiderReport(formData: FormData) {
   const proofs: any = []
   for (let i = 1; i < 4; i++) {
-    const proof = data.get(`proof${i}`)
+    const proof = formData.get(`proof${i}`)
     console.log(proof)
 
     if (proof) proofs.push(proof)
   }
   const body = {
-    by: data.get("userGuid"),
-    race_id: data.get("eventId"),
-    guid: data.get("riderGuid"),
-    reason: data.get("reason"),
+    by: formData.get("userGuid"),
+    race_id: formData.get("eventId"),
+    guid: formData.get("riderGuid"),
+    reason: formData.get("reason"),
     proofs: proofs,
   }
 
@@ -67,18 +74,19 @@ export async function postRiderReport(data: FormData) {
 
 // ADMIN REPORTS
 
-export async function reopenRiderReport(data: FormData) {
-  const reportId = data.get("reportId")
+export async function reopenRiderReport(formData: FormData) {
+  const reportId = formData.get("reportId")
 
   console.log("Action: reopenReport", { reportId })
 
   return await new Promise((res, rej) => rej(new Error("Not Supported")))
+  // ! Unsupported (Future feature)
   // return await poster(`/rider/report/${reportId}`, { method: "PUT" }).then(() =>
   //   revalidatePath("/")
   // )
 }
-export async function dismissRiderReport(data: FormData) {
-  const reportId = data.get("reportId")
+export async function dismissRiderReport(formData: FormData) {
+  const reportId = formData.get("reportId")
 
   console.log("Action: dismissReport", { reportId })
 
@@ -86,30 +94,32 @@ export async function dismissRiderReport(data: FormData) {
     revalidatePath("/")
   )
 }
-export async function dismissAbuseRiderReport(data: FormData) {
-  const reportId = data.get("reportId")
-  const userId = data.get("userId")
+export async function dismissAbuseRiderReport(formData: FormData) {
+  const reportId = formData.get("reportId")
+  const userId = formData.get("userId")
 
   console.log("Action: dismissAbuseRiderReport", { reportId })
 
-  return await poster(`/rider/report/${reportId}`, { method: "DELETE" }).then(() =>
-    revalidatePath("/")
-  )
+  return await new Promise((res, rej) => rej(new Error("Not Supported")))
+  // ! Unsupported (Future feature)
+  // return await poster(`/rider/report/${reportId}${userId}`, { method: "DELETE" }).then(() =>
+  //   revalidatePath("/")
+  // )
 }
 
 // RIDER BANS
 
-export async function banRider(data: FormData) {
-  const guid = data.get("guid")
-  const reason = data.get("reason")
+export async function banRider(formData: FormData) {
+  const guid = formData.get("guid")
+  const reason = formData.get("reason")
 
   console.log("Action: banRider", { guid, reason })
 
   return await fetcher(`/rider/${guid}/ban/${reason}`).then(() => revalidatePath("/"))
 }
 
-export async function unbanRider(data: FormData) {
-  const guid = data.get("guid")
+export async function unbanRider(formData: FormData) {
+  const guid = formData.get("guid")
 
   console.log("Action: unbanRider", { guid })
 
@@ -118,25 +128,27 @@ export async function unbanRider(data: FormData) {
 
 // LEAGUES
 
-export async function joinLeague(data: FormData) {
-  const leagueId = data.get("leagueId")
+export async function joinLeague(formData: FormData) {
+  const leagueId = formData.get("leagueId")
 
   const body = {
-    guid: data.get("guid"),
-    name: data.get("riderName"),
-    team: data.get("teamName"),
-    race_number: parseInt(data.get("raceNumber")!.toString()),
-    bike_id: data.get("bikePreference"),
-    server_preference: data.get("serverPreference"),
+    guid: formData.get("guid"),
+    name: formData.get("riderName"),
+    team: formData.get("teamName"),
+    race_number: parseInt(formData.get("raceNumber")!.toString()),
+    bike_id: formData.get("bikePreference"),
+    server_preference: formData.get("serverPreference"),
   }
 
   console.log("Action: joinLeague", { leagueId, body })
 
-  await poster(`/league/${leagueId}/join`, { method: "POST", body }).then(() => revalidatePath("/"))
+  return await poster(`/league/${leagueId}/join`, { method: "POST", body }).then(() =>
+    revalidatePath("/")
+  )
 }
 
-export async function leaveLeague(data: FormData) {
-  const leagueId = data.get("leagueId")
+export async function leaveLeague(formData: FormData) {
+  const leagueId = formData.get("leagueId")
 
   console.log("Action: leaveLeague", { leagueId })
 
@@ -145,16 +157,16 @@ export async function leaveLeague(data: FormData) {
   )
 }
 
-export async function joinLeagueRace(data: FormData) {
-  const raceId = data.get("raceId")
+export async function joinLeagueRace(formData: FormData) {
+  const raceId = formData.get("raceId")
 
   console.log("Action: joinLeagueRace", { raceId })
 
   return await poster(`/race/${raceId}/join`, { method: "POST" }).then(() => revalidatePath("/"))
 }
 
-export async function leaveLeagueRace(data: FormData) {
-  const raceId = data.get("raceId")
+export async function leaveLeagueRace(formData: FormData) {
+  const raceId = formData.get("raceId")
 
   console.log("Action: leaveLeagueRace", { raceId })
 
