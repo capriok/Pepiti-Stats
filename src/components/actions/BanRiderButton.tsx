@@ -4,19 +4,23 @@ import { useRef } from "react"
 import { banRider } from "~/api/actions"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/Popover"
 import { useToast, actions } from "~/components/toast"
+import { forceRefresh } from "."
 
 interface Props {
   riderId: string
   name: string
+  hackit?: boolean
 }
 
-export default function BanRiderButton({ riderId, name }: Props) {
+export default function BanRiderButton({ riderId, name
+, hackit = false }: Props) {
   const reasonRef = useRef<HTMLInputElement>(null)
   const { pushToast } = useToast()
 
   const submit = (formData) =>
     banRider(formData)
       .then(() => pushToast(actions.banRider, name))
+            .then(() => hackit && forceRefresh())
       .catch(pushToast)
 
   return (

@@ -1,9 +1,10 @@
 import Link from "next/link"
-import ReportsList from "./components/ReportsList"
-import PageHeader from "~/components/PageHeader"
 import { GetAdminRiderReports } from "~/api"
 import getAuthUser from "~/api/getAuthUser"
+import PageHeader from "~/components/PageHeader"
 import Tabs from "~/components/Tabs"
+import OpenReportsList from "./components/OpenReportsList"
+import ClosedReportsList from "./components/ClosedReportsList"
 
 export const metadata = {
   title: "Pepiti | Admin Manager",
@@ -19,12 +20,12 @@ export default async function Page() {
     {
       key: "open",
       label: "Open",
-      children: <ReportsList reports={openReports.results} />,
+      children: <OpenReportsList reports={openReports.results} />,
     },
     {
       key: "closed",
       label: "Closed",
-      children: <ReportsList reports={closedReports.results} />,
+      children: <ClosedReportsList reports={closedReports.results.sort(sortByDateDescending)} />,
     },
   ]
 
@@ -43,4 +44,10 @@ export default async function Page() {
       </div>
     </>
   )
+}
+
+const sortByDateDescending = (a, b) => {
+  const dateA = new Date(parseInt(a._id.slice(0, 8), 16) * 1000)
+  const dateB = new Date(parseInt(b._id.slice(0, 8), 16) * 1000)
+  return dateB.getTime() - dateA.getTime()
 }

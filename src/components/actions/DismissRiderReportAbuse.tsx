@@ -3,23 +3,29 @@
 import { dismissAbuseRiderReport } from "~/api/actions"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/Popover"
 import { useToast, actions } from "~/components/toast"
+import { forceRefresh } from "."
 
 interface Props {
   reportId: string
   userId: string
+  hackit?: boolean
 }
 
-export default function DismissAbuseRiderReport({ reportId, userId }: Props) {
+export default function DismissAbuseRiderReport({ reportId, userId, hackit = false }: Props) {
   const { pushToast } = useToast()
 
   const submit = (formData) =>
     dismissAbuseRiderReport(formData)
       .then(() => pushToast(actions.dismissAbuseRiderReport))
+      .then(() => hackit && forceRefresh())
       .catch(pushToast)
 
   return (
     <Popover>
-      <PopoverTrigger className="btn-outline btn-info btn-sm btn mb-2 whitespace-nowrap border-info text-white">
+      <PopoverTrigger
+        className="btn-outline btn-info btn-sm btn mb-2 whitespace-nowrap border-info text-white"
+        disabled={true}
+      >
         Report Abuse
       </PopoverTrigger>
       <PopoverContent className="grid place-items-center">

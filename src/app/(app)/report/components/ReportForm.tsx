@@ -24,17 +24,16 @@ export default function RiderReportForm({ user, events }: Props) {
 
   if (!user.guid) return router.push("/signin")
 
+  const submit = (formData) =>
+    postRiderReport(formData)
+      .then(() => pushToast(actions.postRiderReport))
+      .then(() => router.push(`/dashboard`))
+      .catch(pushToast)
+
   return (
     <div className="card card-body mx-auto mt-10 w-[500px]">
       <div className="flex flex-col justify-center align-middle">
-        <form
-          action={(formData) =>
-            postRiderReport(formData)
-              .then(() => pushToast(actions.postRiderReport))
-              .catch(pushToast)
-          }
-          className="form-control w-full"
-        >
+        <form action={submit} className="form-control w-full">
           {/* User Guid */}
           <div className="mb-2 text-lg font-semibold">GUID</div>
           <input
@@ -144,15 +143,28 @@ export function RiderFormPart2({ eventId }) {
 }
 
 export function ProofFormPart3({ eventId, riderForm }) {
-  const [proofsCount, setProofsCount] = useState(0)
+  const [proofs, setProofsList] = useState({
+    1: "",
+    2: "",
+    3: "",
+  })
+  const validateDomain = (idx, url) => {
+    const imgurRegex = /^https?:\/\/(i\.)?imgur\.com\/([a-zA-Z0-9]+)(.png|.jpg)?$/i
+    const gyazoRegex = /^https?:\/\/gyazo\.com\/[a-zA-Z0-9]+$/i
 
-  const handleProofChange = (value) => {
-    setProofsCount((c) => (value ? c + 1 : c - 1))
+    const ok = url.match(imgurRegex) || url.match(gyazoRegex)
+    if (ok) {
+      setProofsList({ ...proofs, [idx]: url })
+    } else {
+      setProofsList({ ...proofs, [idx]: "" })
+    }
   }
 
+  const proofsCount = Object.keys(proofs).reduce((acc, key) => (proofs[key] ? acc + 1 : acc), 0)
   const disabled = !eventId || !riderForm.rider || riderForm.reason.length < 50 || proofsCount < 1
   const buttonCn = disabled ? "" : "bg-secondary rounded-lg py-2 font-semibold text-white"
 
+  console.log(proofs, proofsCount)
   const requiredCn = proofsCount < 1 ? "text-red-500" : "text-green-500"
 
   return (
@@ -164,25 +176,49 @@ export function ProofFormPart3({ eventId, riderForm }) {
         </span>
         <span className={`text-xs ${requiredCn}`}>Required: {proofsCount} / 1</span>
       </label>
+      <span className="mb-2 text-center text-sm text-accent">
+        Supported:{" "}
+        <span>
+          <a
+            href="https://imgur.com/upload"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-secondary"
+          >
+            Imgur
+          </a>
+        </span>
+        <span>
+          ,{" "}
+          <a
+            href="https://gyazo.com/en"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-secondary"
+          >
+            Gyazo
+          </a>
+        </span>
+      </span>
       <input
         name="proof1"
         type="text"
         required={true}
-        onChange={(e) => handleProofChange(e.target.value)}
+        onChange={(e) => validateDomain(1, e.target.value)}
         className="input-bordered input mb-2 bg-base-200"
         placeholder="Proof link..."
       />
       <input
         name="proof2"
         type="text"
-        onChange={(e) => handleProofChange(e.target.value)}
+        onChange={(e) => validateDomain(2, e.target.value)}
         className="input-bordered input mb-2 bg-base-200"
         placeholder="Proof link..."
       />
       <input
         name="proof3"
         type="text"
-        onChange={(e) => handleProofChange(e.target.value)}
+        onChange={(e) => validateDomain(3, e.target.value)}
         className="input-bordered input mb-2 bg-base-200"
         placeholder="Proof link..."
       />

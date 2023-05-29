@@ -399,6 +399,7 @@ interface LeagueRaceDivision {
 
 interface RiderReport {
   _id: string
+  status: string
   reason: string
   proofs: string[]
   race: {
