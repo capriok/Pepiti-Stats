@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache"
 import { cookies } from "next/headers"
 
 const ENDPOINT = process.env.NEXT_PUBLIC_API
+const nextConfig = { next: { revalidate: 60 } }
 const token = cookies().get("access_token")?.value
 
 // HELPERS
@@ -12,17 +13,23 @@ async function fetcher(url: string) {
   console.log("Fetcher", { url, token })
 
   const res = await await fetch(ENDPOINT + url, {
+    ...nextConfig,
     headers: {
       "Content-Type": "application/json",
       authorization: token ? `Bearer ${token}` : "",
     },
   })
   const status = res.status
-  const data = await res.json()
+  console.log("%cFetcher", "color: steelblue", { status })
 
-  if (status !== 200) throw new Error(data.message)
+  try {
+    const data = await res.json()
+    if (status !== 200) throw new Error(data.message)
 
-  return data
+    return data
+  } catch (error) {
+    throw new Error("An unknown error occurred")
+  }
 }
 
 async function poster(url: string, options: { method: string; body?: any }) {
@@ -34,6 +41,7 @@ async function poster(url: string, options: { method: string; body?: any }) {
   console.log("Poster", { url, token, opts })
 
   const res = await fetch(ENDPOINT + url, {
+    ...nextConfig,
     ...opts,
     credentials: "include",
     headers: {
@@ -42,11 +50,15 @@ async function poster(url: string, options: { method: string; body?: any }) {
     },
   })
   const status = res.status
-  const data = await res.json()
+  console.log("%cPoster", "color: steelblue", { status })
+  try {
+    const data = await res.json()
+    if (status !== 200) throw new Error(data.message)
 
-  if (status !== 200) throw new Error(data.message)
-
-  return data
+    return data
+  } catch (error) {
+    throw new Error("An unknown error occurred")
+  }
 }
 
 // RIDER REPORT

@@ -1,7 +1,7 @@
 "use server"
 
 const ENDPOINT = process.env.NEXT_PUBLIC_API
-const nextConfig = { next: { revalidate: 30 } }
+const nextConfig = { next: { revalidate: 60 } }
 
 const fetcher = async (url: string, token?: string) => {
   const res = await fetch(ENDPOINT + url, {

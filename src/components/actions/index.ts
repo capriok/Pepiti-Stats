@@ -3,5 +3,5 @@ export function forceRefresh() {
   // ? The server action works but wont revalidatePath..?
   setTimeout(() => {
     if (typeof window !== "undefined") window.location.reload()
-  }, 1500)
+  }, 250)
 }

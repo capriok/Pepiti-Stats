@@ -12,20 +12,19 @@ interface Props {
   hackit?: boolean
 }
 
-export default function BanRiderButton({ riderId, name
-, hackit = false }: Props) {
+export default function BanRiderButton({ riderId, name, hackit = false }: Props) {
   const reasonRef = useRef<HTMLInputElement>(null)
   const { pushToast } = useToast()
 
   const submit = (formData) =>
     banRider(formData)
       .then(() => pushToast(actions.banRider, name))
-            .then(() => hackit && forceRefresh())
+      .then(() => hackit && forceRefresh())
       .catch(pushToast)
 
   return (
     <Popover>
-      <PopoverTrigger className="btn-outline btn-error btn-sm btn mb-2 whitespace-nowrap border-error text-white">
+      <PopoverTrigger className="btn-outline btn-error btn-sm btn whitespace-nowrap border-error text-white">
         Ban Rider
       </PopoverTrigger>
       <PopoverContent className="flex flex-col items-center justify-center gap-4">

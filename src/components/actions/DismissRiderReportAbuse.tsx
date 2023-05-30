@@ -23,7 +23,7 @@ export default function DismissAbuseRiderReport({ reportId, userId, hackit = fal
   return (
     <Popover>
       <PopoverTrigger
-        className="btn-outline btn-info btn-sm btn mb-2 whitespace-nowrap border-info text-white"
+        className="btn-outline btn-info btn-sm btn whitespace-nowrap border-info text-white"
         disabled={true}
       >
         Report Abuse

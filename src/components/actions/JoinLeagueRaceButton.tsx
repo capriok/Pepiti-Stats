@@ -1,7 +1,6 @@
 "use client"
 
 import { joinLeagueRace } from "~/api/actions"
-import { Popover, PopoverContent, PopoverTrigger } from "~/ui/Popover"
 import { useToast, actions } from "~/components/toast"
 
 interface Props {
