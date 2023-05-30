@@ -20,13 +20,7 @@ export default async function Page({ params: { leagueId } }) {
     <>
       <PageHeader
         title="League"
-        extra={
-          <LeagueActions
-            league={league}
-            rider={rider}
-            eligibility={eligibility}
-          />
-        }
+        extra={<LeagueActions league={league} rider={rider} eligibility={eligibility} />}
       />
       <LeagueOverview
         user={user}

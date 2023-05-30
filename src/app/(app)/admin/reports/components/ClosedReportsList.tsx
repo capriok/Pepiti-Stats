@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { useState } from "react"
 import { ArrowRightIcon } from "lucide-react"
-import ReopenRiderReport from '~/components/actions/ReopenRiderReport'
+import ReopenRiderReport from "~/components/actions/ReopenRiderReport"
 
 interface Props {
   reports: Array<RiderReport>
