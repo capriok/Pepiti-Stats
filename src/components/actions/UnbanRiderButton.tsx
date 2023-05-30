@@ -22,16 +22,13 @@ export default function UnbanRiderButton({ riderId, name, hackit = false }: Prop
 
   return (
     <Popover>
-      <PopoverTrigger className="btn-outline btn-sm btn mb-2">Unban Rider</PopoverTrigger>
+      <PopoverTrigger className="btn-outline btn-warning btn-sm btn whitespace-nowrap border-warning text-white">
+        Unban Rider
+      </PopoverTrigger>
       <PopoverContent className="grid place-items-center">
         <div>Please confirm</div>
         <form action={submit}>
-          <button
-            name="guid"
-            value={riderId}
-            type="submit"
-            className="btn-error btn-sm btn mt-2"
-          >
+          <button name="guid" value={riderId} type="submit" className="btn-error btn-sm btn mt-2">
             Unban
           </button>
         </form>

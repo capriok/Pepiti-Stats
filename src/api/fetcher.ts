@@ -1,5 +1,5 @@
 const ENDPOINT = process.env.NEXT_PUBLIC_API
-const nextConfig = { next: { revalidate: 30 } }
+const nextConfig = { next: { revalidate: 60 } }
 
 export const fetcher = async (url: string) => {
   console.log("%cFetcher", "color: goldenrod", { url })

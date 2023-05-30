@@ -21,7 +21,7 @@ export default function DismissRiderReport({ reportId, hackit = false }: Props) 
 
   return (
     <Popover>
-      <PopoverTrigger className="btn-outline btn-warning btn-sm btn mb-2 whitespace-nowrap border-warning text-white">
+      <PopoverTrigger className="btn-outline btn-warning btn-sm btn whitespace-nowrap border-warning text-white">
         Dismiss Report
       </PopoverTrigger>
       <PopoverContent className="grid place-items-center">
