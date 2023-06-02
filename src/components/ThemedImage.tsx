@@ -5,10 +5,10 @@ import Image, { ImageProps } from "next/image"
 import { useEffect, useMemo, useState } from "react"
 
 export function ThemedImage(props: ImageProps & { alt: string }) {
-  const { theme } = useTheme()
+  const { theme, systemTheme } = useTheme()
   const [imageSrc, setImageSrc] = useState(props.src)
 
-  const isLight = theme === "light"
+  const isLight = theme === "light" || systemTheme === "light"
   const dotIdx = props.src.toString().indexOf(".")
   const baseUrl = props.src.toString().slice(0, dotIdx - 2)
   const urlExtension = props.src.toString().slice(dotIdx)
