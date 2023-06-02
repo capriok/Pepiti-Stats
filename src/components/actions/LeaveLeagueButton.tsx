@@ -19,13 +19,13 @@ export default function LeaveLeagueButton({ leagueId, name }: Props) {
 
   return (
     <Popover>
-      <PopoverTrigger className="btn-outline btn-error btn-sm btn mb-2 whitespace-nowrap border-error text-white">
+      <PopoverTrigger className="btn-outline btn-error btn-sm btn whitespace-nowrap border-error text-white">
         Leave League
       </PopoverTrigger>
       <PopoverContent className="grid place-items-center">
-        <div>Please confirm</div>
+        <div>Confirm</div>
         <div className="py-2 text-center text-sm text-accent">
-          This will remove you from the league and unregister you from all races
+          This will remove you from the league
         </div>
         <form action={submit}>
           <button

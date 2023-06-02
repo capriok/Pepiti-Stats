@@ -19,7 +19,7 @@ export default function LeaveLeagueRaceButton({ raceId, name }: Props) {
 
   return (
     <Popover>
-      <PopoverTrigger className="btn-outline btn-warning btn-sm btn mb-2 whitespace-nowrap border-warning text-white">
+      <PopoverTrigger className="btn-outline btn-warning btn-sm btn whitespace-nowrap border-warning text-white">
         Unregister
       </PopoverTrigger>
       <PopoverContent className="grid place-items-center">

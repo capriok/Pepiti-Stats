@@ -23,26 +23,26 @@ interface Props {
 }
 
 /** Theme switches that avoids hydration error.
- * 
+ *
  * Check this PR, shouldn't need this when this PR is merged.
  * https://github.com/pacocoursey/next-themes/pull/171
  */
 function useThemeSwitcher(): [string, (theme: string) => void] {
-  const [mode, setMode] = useState("");
-  const { theme, setTheme } = useTheme();
+  const [mode, setMode] = useState("")
+  const { theme, setTheme } = useTheme()
 
   useEffect(() => {
-    if (theme) setMode(theme);
-  }, [theme]);
+    if (theme) setMode(theme)
+  }, [theme])
 
-  return [mode, setTheme];
+  return [mode, setTheme]
 }
 
 function NavBar({ user }: Props) {
   const [theme, setTheme] = useThemeSwitcher()
   const pathname = usePathname()
 
-  const handleThemeChange = () => theme === "light" ? setTheme("dark") : setTheme("light")
+  const handleThemeChange = () => (theme === "light" ? setTheme("dark") : setTheme("light"))
 
   const secondaryLinks = [
     {
@@ -99,8 +99,9 @@ function NavBar({ user }: Props) {
           href="https://pepiti.com/stats/api/v0/steam_login"
           target="_blank"
           referrerPolicy="origin"
-          className={`btn-ghost btn mt-[2px] h-full w-full border-none text-error ${user.guid ? "btn-error" : ""
-            }`}
+          className={`btn-ghost btn mt-[2px] h-full w-full border-none text-error ${
+            user.guid ? "btn-error" : ""
+          }`}
         >
           {user.guid ? "Change User" : "Sign In"}
         </Link>

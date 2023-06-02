@@ -6,7 +6,7 @@ module.exports = {
     themes: [
       {
         light: {
-          "base-100": "#fafafa",
+          "base-100": "#ffffff",
           "base-200": "#e0e0e0",
           primary: "#21af34",
           secondary: "#178626",
@@ -16,8 +16,8 @@ module.exports = {
           error: "#ac0009",
         },
         dark: {
-          "base-100": "#181818",
-          "base-200": "#151515",
+          "base-100": "#181a1b",
+          "base-200": "#101112",
           primary: "#23bd38",
           secondary: "#1c9b2d",
           accent: "#707070",
