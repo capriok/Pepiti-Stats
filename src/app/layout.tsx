@@ -27,7 +27,7 @@ export default async function RootLayout(props: Props) {
     <html lang="en" data-theme="light" suppressHydrationWarning>
       <body className={inter.className}>
         <Providers>
-          <main className="flex h-screen flex-col">
+          <main className="flex min-h-screen flex-col">
             <NavBar user={user} />
             <div className="flex-1">{props.children}</div>
             <Footer user={user} />
