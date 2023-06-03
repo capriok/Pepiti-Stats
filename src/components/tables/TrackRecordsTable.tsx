@@ -1,6 +1,6 @@
 "use client"
 
-import Table from "~/components/Table"
+import Table from "~/components/Table/Table"
 import RiderLink from "../RiderLink"
 import BikeWithPrefixColor from "../pills/BikeWithPrefixColor"
 import { handleLapTimes } from "~/utils/handleLapTimes"
@@ -15,7 +15,7 @@ export const TrackRecordsTable = ({ records }: Props) => {
     ...r,
     name: r.rider_name,
   }))
-  console.log('%cTrackRecordsTable', 'color: steelblue', data);
+  console.log("%cTrackRecordsTable", "color: steelblue", { records: data })
 
   const columns = [
     {

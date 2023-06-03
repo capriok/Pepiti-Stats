@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import useSWR from "swr"
 import { fetcher } from "~/api/fetcher"
-import Table from "~/components/Table"
+import Table from "~/components/Table/Table"
 import { TrackRecordsTable } from "~/components/tables/TrackRecordsTable"
 
 interface Props {

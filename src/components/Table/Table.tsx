@@ -1,13 +1,14 @@
 "use client"
 
-import { ChevronsUpDown, ChevronUp, ChevronDown } from "lucide-react"
 import React, { useState } from "react"
+import { ChevronsUpDown, ChevronUp, ChevronDown } from "lucide-react"
 import { handleRankColor } from "~/utils/handleRankColor"
+import { cycleSortingDirection, sortDataByColumn, SortDirection } from "."
 
 /**
  *  table data can include any properties but must include unique _id
  */
-interface TableData {
+export interface TableData {
   _id: string
   [key: string]: any
 }
@@ -23,13 +24,13 @@ interface TableData {
  *     row: the full row data
  */
 
-interface TableColumn {
+export interface TableColumn {
   key: string
   label: string | JSX.Element
   render?: (value: any, row: TableData) => any
 }
 
-interface TableProps extends TableOptions {
+export interface TableProps extends TableOptions {
   data: Array<TableData>
   columns: Array<TableColumn>
 }
@@ -43,6 +44,7 @@ export interface TableOptions {
   paginationEnabled?: boolean
   jumpToEnabled?: boolean
   defaultPageSize?: number
+  sortingEnabled?: boolean
   searchEnabled?: boolean
   searchKey?: string
   searchTerm?: string
@@ -57,6 +59,7 @@ const Table: React.FC<TableProps> = (props) => {
     paginationEnabled = false,
     jumpToEnabled = true,
     defaultPageSize = 10,
+    sortingEnabled = true,
     searchEnabled = false,
     searchKey = "name",
     searchTerm = "",
@@ -120,7 +123,7 @@ const Table: React.FC<TableProps> = (props) => {
     const handleHeaderClick = (key) => {
       const sortDirection =
         sorting.key === key ? cycleSortingDirection(sorting.dir) : SortDirection.Ascending
-      const sortData = sortByColumn(data, key, sortDirection)
+      const sortData = sortDataByColumn(data, key, sortDirection)
 
       const sort = {
         data: sortData,
@@ -131,24 +134,32 @@ const Table: React.FC<TableProps> = (props) => {
       console.log("%cTable: Sorting", "color: goldenrod", { sort })
       setSorting(sort)
     }
-    const isColumnSorting = sorting.key === column.key
+
+    const SortingControls = () => {
+      const isColumnSorting = sorting.key === column.key
+
+      return (
+        <div className={isColumnSorting ? "text-secondary group-hover:scale-125" : "text-accent"}>
+          {!isColumnSorting || sorting.dir === SortDirection.None ? (
+            <ChevronsUpDown size={16} />
+          ) : sorting.dir === SortDirection.Descending ? (
+            <ChevronUp size={14} />
+          ) : (
+            <ChevronDown size={14} />
+          )}
+        </div>
+      )
+    }
 
     return (
-      <th key={column.key} className="group py-4" onClick={() => handleHeaderClick(column.key)}>
-        <div className="flex max-h-[20px] min-h-[20px] cursor-pointer select-none items-center gap-4">
+      <th
+        key={column.key}
+        className={`group py-4 ${sortingEnabled ? "cursor-pointer" : ""}`}
+        onClick={() => sortingEnabled && handleHeaderClick(column.key)}
+      >
+        <div className={"flex select-none items-center gap-4"}>
           {column.label}
-          <span
-            className={isColumnSorting ? "text-secondary group-hover:scale-125" : "text-accent"}
-          >
-            {!isColumnSorting || sorting.dir === SortDirection.None ? (
-              <ChevronsUpDown size={16} />
-            ) : sorting.dir === SortDirection.Descending ? (
-              // <ArrowUp size={16} />
-              <ChevronUp size={14} />
-            ) : (
-              <ChevronDown size={14} />
-            )}
-          </span>
+          {sortingEnabled && <SortingControls />}
         </div>
       </th>
     )
@@ -264,57 +275,3 @@ const Table: React.FC<TableProps> = (props) => {
 }
 
 export default Table
-
-const cycleSortingDirection = (dir: SortDirection): SortDirection => {
-  switch (dir) {
-    case "off":
-      return SortDirection.Ascending
-    case "asc":
-      return SortDirection.Descending
-    case "desc":
-      return SortDirection.None
-    default:
-      return SortDirection.None
-  }
-}
-
-enum SortDirection {
-  None = "off",
-  Ascending = "asc",
-  Descending = "desc",
-}
-
-function sortByColumn(
-  data: Array<TableData>,
-  column: string,
-  sortDirection: SortDirection
-): Array<TableData> {
-  return data.sort((a, b) => {
-    let compareResult: number
-
-    // Compare the values based on the column
-    if (typeof a[column] === "string") {
-      compareResult = a[column].localeCompare(b[column])
-    } else if (typeof a[column] === "number") {
-      compareResult = a[column] - b[column]
-    } else if (typeof a[column] === "boolean") {
-      const aValue = a[column] ? 1 : 0
-      const bValue = b[column] ? 1 : 0
-      compareResult = aValue - bValue
-    } else {
-      throw new Error("Invalid column type")
-    }
-
-    // If the values are the same, sort based on the index in the original source
-    if (compareResult === 0) {
-      compareResult = data.indexOf(b) - data.indexOf(a) // Adjusted the order here
-    }
-
-    // Apply the sort direction
-    if (sortDirection === "desc") {
-      compareResult = -compareResult
-    }
-
-    return compareResult
-  })
-}

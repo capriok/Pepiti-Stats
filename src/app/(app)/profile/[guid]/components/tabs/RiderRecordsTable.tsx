@@ -5,7 +5,7 @@ import useSWR from "swr"
 import { fetcher } from "~/api/fetcher"
 import { dateIsValid } from "~/utils/dateIsValid"
 import { handleLapTimes } from "~/utils/handleLapTimes"
-import Table from "~/components/Table"
+import Table from "~/components/Table/Table"
 import Spinner from "~/components/Spinner"
 import BikeWithPrefixColor from "~/components/pills/BikeWithPrefixColor"
 import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
@@ -23,18 +23,18 @@ export default function RiderRecordsTable({ guid }: Props) {
         <Spinner />
       </div>
     )
-  console.log("%cRiderRecordsTable", "color: steelblue", recordsData.races)
+  console.log("%cRiderRecordsTable", "color: steelblue", { records: recordsData.races })
 
-    const records = recordsData.records.map((record) => ({
-      _id: record._id,
-      date: parseInt(record._id.slice(0, 8), 16) * 1000,
-      track: record.track,
-      bike: record.bike,
-      averageSpeed: record.average_speed,
-      split1: record.split_1,
-      split2: record.split_2,
-      lapTime: record.lap_time,
-    }))
+  const records = recordsData.records.map((record) => ({
+    _id: record._id,
+    date: parseInt(record._id.slice(0, 8), 16) * 1000,
+    track: record.track,
+    bike: record.bike,
+    averageSpeed: record.average_speed,
+    split1: record.split_1,
+    split2: record.split_2,
+    lapTime: record.lap_time,
+  }))
 
   const columns = [
     {

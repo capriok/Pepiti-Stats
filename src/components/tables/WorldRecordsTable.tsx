@@ -1,7 +1,7 @@
 "use client"
 
 import RiderLink from "../RiderLink"
-import Table, { TableOptions } from "../Table"
+import Table, { TableOptions } from "../Table/Table"
 
 interface Props extends TableOptions {
   worldRecords: any
@@ -13,7 +13,7 @@ export default function WorldRecordsTable({ worldRecords, ...rest }: Props) {
     name: worldRecords.riders[guid].name,
     records: worldRecords.riders[guid].total,
   }))
-  console.log("%cWorldRecordsTable", "color: steelblue", data)
+  console.log("%cWorldRecordsTable", "color: steelblue", { records: data })
 
   const columns = [
     {

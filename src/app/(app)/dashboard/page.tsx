@@ -30,18 +30,18 @@ export default async function Page() {
         <div className="grid gap-5 lg:grid-cols-3">
           <div>
             <div className="pb-2 text-lg font-semibold">Top Records</div>
-            <WorldRecordsTable worldRecords={worldRecords} />
+            <WorldRecordsTable worldRecords={worldRecords} sortingEnabled={false} />
           </div>
           <div>
             <div className="pb-2 text-lg font-semibold">Top MMR</div>
-            <MMRRecordsTable worldMMR={worldMMR} />
+            <MMRRecordsTable worldMMR={worldMMR} sortingEnabled={false} />
           </div>
           <div>
             <div className="flex items-center gap-2 pb-2">
               <div className="text-lg font-semibold">Top SR</div>
               <div className="text-sm text-accent">(Safety Rating)</div>
             </div>
-            <SRRecordsTable worldSR={worldSR} />
+            <SRRecordsTable worldSR={worldSR} sortingEnabled={false} />
           </div>
         </div>
 

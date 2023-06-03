@@ -5,7 +5,7 @@ import { dateIsValid } from "~/utils/dateIsValid"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
 import MMRPill from "~/components/pills/MMRPill"
-import Table from "~/components/Table"
+import Table from "~/components/Table/Table"
 import Pill from "~/components/pills/Pill"
 import Spinner from "~/components/Spinner"
 import { fetcher } from "~/api/fetcher"
@@ -23,7 +23,7 @@ export default function RiderRacesTable({ guid }: Props) {
         <Spinner />
       </div>
     )
-  console.log("%cRiderRacesTable", "color: steelblue", raceData.races)
+  console.log("%cRiderRacesTable", "color: steelblue", { records: raceData.races })
 
   const data = raceData.races.map((race) => ({
     date: parseInt(race._id.slice(0, 8), 16) * 1000,

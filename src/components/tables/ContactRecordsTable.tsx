@@ -1,6 +1,6 @@
 "use client"
 
-import Table, { TableOptions } from "../Table"
+import Table, { TableOptions } from "../Table/Table"
 import RiderLink from "../RiderLink"
 
 interface Props extends TableOptions {
@@ -13,7 +13,7 @@ export default function ContactRecordsTable({ worldContacts, ...rest }: Props) {
     name: r.name,
     score: r.contact,
   }))
-  console.log("%cContactRecordsTable", "color: steelblue", data)
+  console.log("%cContactRecordsTable", "color: steelblue", { records: data })
 
   const columns = [
     {

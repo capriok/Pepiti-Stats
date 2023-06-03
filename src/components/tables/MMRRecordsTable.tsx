@@ -1,7 +1,7 @@
 "use client"
 
 import RiderLink from "../RiderLink"
-import Table, { TableOptions } from "../Table"
+import Table, { TableOptions } from "../Table/Table"
 
 interface Props extends TableOptions {
   worldMMR: any
@@ -13,7 +13,7 @@ export default function MMRRecordsTable({ worldMMR, ...rest }: Props) {
     name: r.name,
     score: r.MMR,
   }))
-  console.log("%cMMRRecordsTable", "color: steelblue", data)
+  console.log("%cMMRRecordsTable", "color: steelblue", { records: data })
 
   const columns = [
     {

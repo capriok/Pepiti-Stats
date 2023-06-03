@@ -1,6 +1,6 @@
 "use client"
 
-import Table from "~/components/Table"
+import Table from "~/components/Table/Table"
 
 const categories = [
   "MX1 OEM",
@@ -28,7 +28,7 @@ export default function RiderWorldRecordsTable({ worldRecords }: Props) {
       records: worldRecords[category],
     }))
     .sort((a, b) => b.records - a.records)
-  console.log("%cRiderWorldRecordsTable", "color: steelblue", data)
+  console.log("%cRiderWorldRecordsTable", "color: steelblue", { records: data })
 
   const columns = [
     {

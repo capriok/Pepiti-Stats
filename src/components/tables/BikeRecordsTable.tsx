@@ -1,7 +1,7 @@
 "use client"
 
 import BikeWithPrefixColor from "../pills/BikeWithPrefixColor"
-import Table, { TableOptions } from "../Table"
+import Table, { TableOptions } from "../Table/Table"
 
 interface Props extends TableOptions {
   worldBikes: any
@@ -15,7 +15,7 @@ export default function BikeRecordsTable({ worldBikes, ...rest }: Props) {
     name: bike.name,
     laps: bike.laps,
   }))
-  console.log('%cBikeRecordsTable', 'color: steelblue', data);
+  console.log("%cBikeRecordsTable", "color: steelblue", { records: data })
 
   const columns = [
     {

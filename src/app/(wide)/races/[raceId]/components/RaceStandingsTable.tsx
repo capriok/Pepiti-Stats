@@ -1,7 +1,7 @@
 import Link from "next/link"
 import React, { useState } from "react"
 import RiderLink from "~/components/RiderLink"
-import Table from "~/components/Table"
+import Table from "~/components/Table/Table"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
 
