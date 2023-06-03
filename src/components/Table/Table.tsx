@@ -36,6 +36,7 @@ export interface TableColumn {
  */
 export interface TableOptions {
   paginationEnabled?: boolean
+  miniControls?: boolean
   jumpToEnabled?: boolean
   defaultPageSize?: number
   sortingKeys?: Array<string>
@@ -57,6 +58,7 @@ interface TableProps extends TableOptions {
 const Table: React.FC<TableProps> = (props) => {
   const {
     paginationEnabled = false,
+    miniControls = false,
     jumpToEnabled = true,
     defaultPageSize = 10,
     sortingKeys = [],
@@ -242,7 +244,7 @@ const Table: React.FC<TableProps> = (props) => {
       {paginationEnabled && (
         <div className="mt-4 flex flex-col items-center justify-between px-3 text-sm md:flex-row">
           <div className="mb-2 mr-5 md:mb-0">
-            Page: {page + 1} / {Math.floor(data.length / pageSize) + 1}
+            Page: {page + 1} / {Math.ceil(data.length / pageSize)}
           </div>
           <div className="flex items-center gap-2">
             <div className="btn-group">
@@ -251,14 +253,14 @@ const Table: React.FC<TableProps> = (props) => {
                 onClick={() => handlePageChange(page > 0 ? page - 1 : page)}
                 disabled={page === 0}
               >
-                Prev Page
+                {miniControls ? "-" : "Prev Page"}
               </button>
               <button
                 className="btn-ghost btn-xs btn bg-base-100"
                 onClick={() => handlePageChange(paginatedData.length ? page + 1 : page)}
-                disabled={paginatedData.length < pageSize}
+                disabled={(page + 1) * pageSize >= data.length}
               >
-                Next Page
+                {miniControls ? "+" : "Next Page"}
               </button>
             </div>
             {jumpToEnabled && (

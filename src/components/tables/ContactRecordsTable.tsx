@@ -13,7 +13,7 @@ export default function ContactRecordsTable({ worldContacts, ...rest }: Props) {
     name: r.name,
     score: r.contact,
   }))
-  console.log("%cContactRecordsTable", "color: steelblue", { records: data })
+  console.log("%cContactRecordsTable", "color: steelblue", { worldContacts: data })
 
   const columns = [
     {
