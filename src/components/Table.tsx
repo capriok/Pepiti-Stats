@@ -1,11 +1,11 @@
 "use client"
 
-import React, { useEffect, useMemo, useState } from "react"
+import { ChevronsUpDown, ChevronUp, ChevronDown } from "lucide-react"
+import React, { useState } from "react"
 import { handleRankColor } from "~/utils/handleRankColor"
-import Pill from "./pills/Pill"
 
 /**
- *  table data can include any properties but must include a unique _id
+ *  table data can include any properties but must include unique _id
  */
 interface TableData {
   _id: string
@@ -13,8 +13,6 @@ interface TableData {
 }
 
 /**
- *  the columns are where most the configuration for the table come from
- *  table columns are mapped to display the header and rows
  *  columns are simple; key used under the hood | label for header text | render for custom styling
  *
  *  ? key: when the table maps data to columns, this is used to match data keys to columns by column keys
@@ -31,15 +29,20 @@ interface TableColumn {
   render?: (value: any, row: TableData) => any
 }
 
+interface TableProps extends TableOptions {
+  data: Array<TableData>
+  columns: Array<TableColumn>
+}
+
 /**
- *  table options are contols that apply conditaional logic within the table
+ *  table options are controls that apply conditional logic within the table
  *  ? this interface is used to control key configurations within the rendering of the table
  *  ? if searchEnabled, pass searchKey prop to search on a  specific data key, default: name
  */
 export interface TableOptions {
   paginationEnabled?: boolean
-  hidePerPage?: boolean
-  pageSize?: number
+  jumpToEnabled?: boolean
+  defaultPageSize?: number
   searchEnabled?: boolean
   searchKey?: string
   searchTerm?: string
@@ -49,49 +52,28 @@ export interface TableOptions {
   rowCn?: string
 }
 
-/**
- *  table props, non-optionals
- */
-interface TableProps extends TableOptions {
-  data: Array<TableData>
-  columns: Array<TableColumn>
-}
-
 const Table: React.FC<TableProps> = (props) => {
   const {
-    hidePerPage = false,
     paginationEnabled = false,
-    pageSize: pageSizeOption = 10,
+    jumpToEnabled = true,
+    defaultPageSize = 10,
     searchEnabled = false,
     searchKey = "name",
     searchTerm = "",
     rankEnabled = true,
     rankStyle = true,
-    headerCn = "",
-    rowCn = "",
   } = props
 
-  /**
-   * options: aggregation and composition of default and passed prop options
-   *    establishes a structured object for the inner table logic to interface with
-   *    the idea is for the table not to touch props, similary as data and columns
-   */
-  const options = useMemo(() => {
-    return {
-      rank: rankEnabled,
-      search: searchEnabled,
-      searchKey,
-      rankStyle: rankStyle,
-      cns: {
-        header: headerCn,
-        row: rowCn,
-      },
-    }
-  }, [searchEnabled, searchKey, rankEnabled, rankStyle, headerCn, rowCn])
-
   const [page, setPage] = useState(0)
-  const [pageSize, setPageSize] = useState(pageSizeOption)
+  const [pageSize, setPageSize] = useState(defaultPageSize)
   const [term, setTerm] = useState(searchTerm)
+  const [sorting, setSorting] = useState({
+    data: props.data,
+    dir: SortDirection.None,
+    key: null,
+  })
+
+  console.log("%cTable: Original", "color: steelblue", { data: props.data })
 
   /** preps the data for the table to use */
   const manipulatedData = () => {
@@ -107,7 +89,7 @@ const Table: React.FC<TableProps> = (props) => {
         return
       })
     }
-    return props.data
+    return props.data.map((d, i) => ({ ...d, rank: i + 1 }))
   }
   const data = manipulatedData()
 
@@ -115,11 +97,10 @@ const Table: React.FC<TableProps> = (props) => {
   const manipulatedColumns = (): TableColumn[] => {
     if (rankEnabled) {
       const rankColumn = {
-        key: "_id",
+        key: "rank",
         label: "Rank",
         render: (_id, row) => {
-          const index = props.data.findIndex((d) => row._id === d._id)
-          const rank = index + 1
+          const rank = data.find((d) => row._id === d._id)!.rank
           return (
             <div className="flex items-center justify-start text-base font-medium">
               <div className={`ml-2 mr-4 h-5 w-2 ${rankStyle && handleRankColor(rank)}`} />
@@ -136,20 +117,51 @@ const Table: React.FC<TableProps> = (props) => {
 
   /** maps prepped columns to header row */
   const tableColumns = columns.map((column) => {
+    const handleHeaderClick = (key) => {
+      const sortDirection =
+        sorting.key === key ? cycleSortingDirection(sorting.dir) : SortDirection.Ascending
+      const sortData = sortByColumn(data, key, sortDirection)
+
+      const sort = {
+        data: sortData,
+        dir: sortDirection as SortDirection,
+        key: sortDirection === SortDirection.None ? null : key,
+      }
+
+      console.log("%cTable: Sorting", "color: goldenrod", { sort })
+      setSorting(sort)
+    }
+    const isColumnSorting = sorting.key === column.key
+
     return (
-      <th key={column.key} className={"py-4" + options.cns.header}>
-        <div className={"flex max-h-[20px] min-h-[20px] items-center"}>{column.label}</div>
+      <th key={column.key} className="group py-4" onClick={() => handleHeaderClick(column.key)}>
+        <div className="flex max-h-[20px] min-h-[20px] cursor-pointer select-none items-center gap-4">
+          {column.label}
+          <span
+            className={isColumnSorting ? "text-secondary group-hover:scale-125" : "text-accent"}
+          >
+            {!isColumnSorting || sorting.dir === SortDirection.None ? (
+              <ChevronsUpDown size={16} />
+            ) : sorting.dir === SortDirection.Descending ? (
+              // <ArrowUp size={16} />
+              <ChevronUp size={14} />
+            ) : (
+              <ChevronDown size={14} />
+            )}
+          </span>
+        </div>
       </th>
     )
   })
 
   const startIndex = page * pageSize
   const endIndex = startIndex + pageSize
-  const paginatedData = paginationEnabled ? data.slice(startIndex, endIndex) : data
+  const sortedData = sorting.dir !== SortDirection.None ? sorting.data : data
+  const paginatedData = paginationEnabled ? sortedData.slice(startIndex, endIndex) : sortedData
 
   /** maps prepped data to table rows in respective column */
   const tableBodyData = paginatedData.length ? (
-    paginatedData.map((row, rowIdx) => {
+    paginatedData.map((row) => {
       return (
         <tr key={row._id}>
           {columns.map((column) => {
@@ -158,7 +170,7 @@ const Table: React.FC<TableProps> = (props) => {
             const value = row[dataKey]
 
             return (
-              <td key={dataKey} className={` ${options.cns.row} p-0`}>
+              <td key={dataKey} className="p-0">
                 <div className={"flex min-h-[45px] items-center pl-2 font-medium"}>
                   {renderer ? renderer(value, row) : value}
                 </div>
@@ -185,7 +197,7 @@ const Table: React.FC<TableProps> = (props) => {
     setPage(page)
   }
 
-  const handlePageSizeChange = (pageSize) => {
+  const handleJumpToChange = (pageSize) => {
     setPageSize(parseInt(pageSize))
     setPage(0)
   }
@@ -213,7 +225,7 @@ const Table: React.FC<TableProps> = (props) => {
       {paginationEnabled && (
         <div className="mt-4 flex flex-col items-center justify-between px-3 text-sm md:flex-row">
           <div className="mb-2 mr-5 md:mb-0">
-            Page: {page + 1} / {Math.floor(data.length / pageSize)}
+            Page: {page + 1} / {Math.floor(data.length / pageSize) + 1}
           </div>
           <div className="flex items-center gap-2">
             <div className="btn-group">
@@ -227,16 +239,16 @@ const Table: React.FC<TableProps> = (props) => {
               <button
                 className="btn-ghost btn-xs btn bg-base-100"
                 onClick={() => handlePageChange(paginatedData.length ? page + 1 : page)}
-                disabled={page + 1 === Math.floor(data.length / pageSize)}
+                disabled={paginatedData.length < pageSize}
               >
                 Next Page
               </button>
             </div>
-            {!hidePerPage && (
+            {jumpToEnabled && (
               <select
                 className="input input-sm"
                 value={pageSize}
-                onChange={(e) => handlePageSizeChange(e.target.value)}
+                onChange={(e) => handleJumpToChange(e.target.value)}
               >
                 <option value={10}>10</option>
                 <option value={25}>25</option>
@@ -252,3 +264,57 @@ const Table: React.FC<TableProps> = (props) => {
 }
 
 export default Table
+
+const cycleSortingDirection = (dir: SortDirection): SortDirection => {
+  switch (dir) {
+    case "off":
+      return SortDirection.Ascending
+    case "asc":
+      return SortDirection.Descending
+    case "desc":
+      return SortDirection.None
+    default:
+      return SortDirection.None
+  }
+}
+
+enum SortDirection {
+  None = "off",
+  Ascending = "asc",
+  Descending = "desc",
+}
+
+function sortByColumn(
+  data: Array<TableData>,
+  column: string,
+  sortDirection: SortDirection
+): Array<TableData> {
+  return data.sort((a, b) => {
+    let compareResult: number
+
+    // Compare the values based on the column
+    if (typeof a[column] === "string") {
+      compareResult = a[column].localeCompare(b[column])
+    } else if (typeof a[column] === "number") {
+      compareResult = a[column] - b[column]
+    } else if (typeof a[column] === "boolean") {
+      const aValue = a[column] ? 1 : 0
+      const bValue = b[column] ? 1 : 0
+      compareResult = aValue - bValue
+    } else {
+      throw new Error("Invalid column type")
+    }
+
+    // If the values are the same, sort based on the index in the original source
+    if (compareResult === 0) {
+      compareResult = data.indexOf(b) - data.indexOf(a) // Adjusted the order here
+    }
+
+    // Apply the sort direction
+    if (sortDirection === "desc") {
+      compareResult = -compareResult
+    }
+
+    return compareResult
+  })
+}

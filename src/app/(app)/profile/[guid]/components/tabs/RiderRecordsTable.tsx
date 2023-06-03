@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function RiderRecordsTable({ guid }: Props) {
-  const { data, isLoading } = useSWR(`/rider/${guid}/records`, fetcher)
+  const { data: recordsData, isLoading } = useSWR(`/rider/${guid}/records`, fetcher)
 
   if (isLoading)
     return (
@@ -23,17 +23,18 @@ export default function RiderRecordsTable({ guid }: Props) {
         <Spinner />
       </div>
     )
+  console.log("%cRiderRecordsTable", "color: steelblue", recordsData.races)
 
-  const records = data.records.map((record) => ({
-    _id: record._id,
-    date: parseInt(record._id.slice(0, 8), 16) * 1000,
-    track: record.track,
-    bike: record.bike,
-    averageSpeed: record.average_speed,
-    split1: record.split_1,
-    split2: record.split_2,
-    lapTime: record.lap_time,
-  }))
+    const records = recordsData.records.map((record) => ({
+      _id: record._id,
+      date: parseInt(record._id.slice(0, 8), 16) * 1000,
+      track: record.track,
+      bike: record.bike,
+      averageSpeed: record.average_speed,
+      split1: record.split_1,
+      split2: record.split_2,
+      lapTime: record.lap_time,
+    }))
 
   const columns = [
     {

@@ -4,6 +4,7 @@ import Table from "~/components/Table"
 import RiderLink from "../RiderLink"
 import BikeWithPrefixColor from "../pills/BikeWithPrefixColor"
 import { handleLapTimes } from "~/utils/handleLapTimes"
+import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
 
 interface Props {
   records: TrackRecord[]
@@ -14,6 +15,7 @@ export const TrackRecordsTable = ({ records }: Props) => {
     ...r,
     name: r.rider_name,
   }))
+  console.log('%cTrackRecordsTable', 'color: steelblue', data);
 
   const columns = [
     {
@@ -29,7 +31,7 @@ export const TrackRecordsTable = ({ records }: Props) => {
     {
       key: "average_speed",
       label: "Avg Speed",
-      render: (speed) => (speed ? speed.toFixed(2) : ""),
+      render: (averageSpeed) => handleAverageSpeed(averageSpeed),
     },
     {
       key: "split_1",

@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function RiderRacesTable({ guid }: Props) {
-  const { data, isLoading } = useSWR(`/rider/${guid}/races`, fetcher)
+  const { data: raceData, isLoading } = useSWR(`/rider/${guid}/races`, fetcher)
 
   if (isLoading)
     return (
@@ -23,8 +23,9 @@ export default function RiderRacesTable({ guid }: Props) {
         <Spinner />
       </div>
     )
+  console.log("%cRiderRacesTable", "color: steelblue", raceData.races)
 
-  const races = data.races.map((race) => ({
+  const data = raceData.races.map((race) => ({
     date: parseInt(race._id.slice(0, 8), 16) * 1000,
     track: race.track,
     position: race?.Classification?.Pos ?? "",
@@ -87,7 +88,7 @@ export default function RiderRacesTable({ guid }: Props) {
   return (
     <Table
       columns={columns}
-      data={races}
+      data={data}
       searchKey="track"
       searchEnabled={true}
       paginationEnabled={true}

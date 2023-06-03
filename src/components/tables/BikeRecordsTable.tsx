@@ -1,38 +1,39 @@
 "use client"
 
-import Link from "next/link"
+import BikeWithPrefixColor from "../pills/BikeWithPrefixColor"
 import Table, { TableOptions } from "../Table"
 
 interface Props extends TableOptions {
   worldBikes: any
-  seeMore?: boolean
 }
 
-export default function BikeRecordsTable({ worldBikes, seeMore, ...rest }: Props) {
+export default function BikeRecordsTable({ worldBikes, ...rest }: Props) {
+  console.log(worldBikes.bikes)
+
   const data = worldBikes.bikes.map((bike) => ({
     _id: bike.name + bike.laps,
-    ...bike,
+    name: bike.name,
+    laps: bike.laps,
   }))
+  console.log('%cBikeRecordsTable', 'color: steelblue', data);
+
   const columns = [
     {
       key: "name",
-      label: "Rider",
+      label: "Bike",
+      render: (name) => <BikeWithPrefixColor bike={name} />,
     },
     {
       key: "laps",
       label: "Laps",
       align: "right",
+      render: (laps) => (laps ? laps.toLocaleString() : "-"),
     },
   ]
 
   return (
     <div className="flex flex-col items-end">
-      <Table columns={columns} data={data} {...rest} />
-      {seeMore && (
-        <Link href="/top/sr" className="link pt-2 text-sm text-primary no-underline">
-          See More
-        </Link>
-      )}
+      <Table data={data} columns={columns} {...rest} />
     </div>
   )
 }

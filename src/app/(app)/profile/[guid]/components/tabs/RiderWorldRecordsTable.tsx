@@ -8,9 +8,9 @@ const categories = [
   "MX2 OEM",
   "MX2-2T OEM",
   "SM1 OEM",
-  "SM1-2t OEM",
+  "SM1-2T OEM",
   "SM2 OEM",
-  "SM2-2t OEM",
+  "SM2-2T OEM",
   "MX3 OEM",
 ]
 
@@ -28,6 +28,7 @@ export default function RiderWorldRecordsTable({ worldRecords }: Props) {
       records: worldRecords[category],
     }))
     .sort((a, b) => b.records - a.records)
+  console.log("%cRiderWorldRecordsTable", "color: steelblue", data)
 
   const columns = [
     {
