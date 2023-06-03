@@ -1,15 +1,20 @@
 "use client"
 
-import Link from "next/link"
 import RiderLink from "../RiderLink"
-import Table, { TableOptions } from "../Table"
+import Table, { TableOptions } from "../Table/Table"
 
 interface Props extends TableOptions {
   worldSR: any
-  seeMore?: boolean
 }
 
-export default function SRRecordsTable({ worldSR, seeMore, ...rest }: Props) {
+export default function SRRecordsTable({ worldSR, ...rest }: Props) {
+  const data: any = worldSR.riders.map((r) => ({
+    _id: r._id,
+    name: r.name,
+    score: r.SR,
+  }))
+  console.log("%cSRRecordsTable", "color: steelblue", { records: data })
+
   const columns = [
     {
       key: "name",
@@ -21,7 +26,7 @@ export default function SRRecordsTable({ worldSR, seeMore, ...rest }: Props) {
       ),
     },
     {
-      key: "SR",
+      key: "score",
       label: "Score",
       align: "right",
     },
@@ -29,12 +34,13 @@ export default function SRRecordsTable({ worldSR, seeMore, ...rest }: Props) {
 
   return (
     <div className="flex flex-col items-end">
-      <Table columns={columns} paginationEnabled hidePerPage data={worldSR.riders} {...rest} />
-      {/* {seeMore && (
-        <Link href="/top/sr" className="link pt-2 text-sm text-primary no-underline">
-          See More
-        </Link>
-      )} */}
+      <Table
+        data={data}
+        columns={columns}
+        paginationEnabled={true}
+        jumpToEnabled={false}
+        {...rest}
+      />
     </div>
   )
 }

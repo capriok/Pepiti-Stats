@@ -5,7 +5,7 @@ import { dateIsValid } from "~/utils/dateIsValid"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
 import MMRPill from "~/components/pills/MMRPill"
-import Table from "~/components/Table"
+import Table from "~/components/Table/Table"
 import Pill from "~/components/pills/Pill"
 import Spinner from "~/components/Spinner"
 import { fetcher } from "~/api/fetcher"
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function RiderRacesTable({ guid }: Props) {
-  const { data, isLoading } = useSWR(`/rider/${guid}/races`, fetcher)
+  const { data: raceData, isLoading } = useSWR(`/rider/${guid}/races`, fetcher)
 
   if (isLoading)
     return (
@@ -23,8 +23,9 @@ export default function RiderRacesTable({ guid }: Props) {
         <Spinner />
       </div>
     )
+  console.log("%cRiderRacesTable", "color: steelblue", { records: raceData.races })
 
-  const races = data.races.map((race) => ({
+  const data = raceData.races.map((race) => ({
     date: parseInt(race._id.slice(0, 8), 16) * 1000,
     track: race.track,
     position: race?.Classification?.Pos ?? "",
@@ -87,11 +88,12 @@ export default function RiderRacesTable({ guid }: Props) {
   return (
     <Table
       columns={columns}
-      data={races}
+      data={data}
       searchKey="track"
+      rankEnabled={false}
       searchEnabled={true}
       paginationEnabled={true}
-      rankEnabled={false}
+      sortingEnabled={true}
     />
   )
 }

@@ -1,18 +1,19 @@
 "use client"
 
-import Link from "next/link"
 import RiderLink from "../RiderLink"
-import Table, { TableOptions } from "../Table"
+import Table, { TableOptions } from "../Table/Table"
 
 interface Props extends TableOptions {
   worldRecords: any
-  seeMore?: boolean
 }
 
-export default function WorldRecordsTable({ worldRecords, seeMore, ...rest }: Props) {
-  const data: any = Object.keys(worldRecords.riders).map((rk) => ({
-    ...worldRecords.riders[rk],
+export default function WorldRecordsTable({ worldRecords, ...rest }: Props) {
+  const data: any = Object.keys(worldRecords.riders).map((guid) => ({
+    _id: worldRecords.riders[guid]._id,
+    name: worldRecords.riders[guid].name,
+    records: worldRecords.riders[guid].total,
   }))
+  console.log("%cWorldRecordsTable", "color: steelblue", { records: data })
 
   const columns = [
     {
@@ -27,7 +28,7 @@ export default function WorldRecordsTable({ worldRecords, seeMore, ...rest }: Pr
       },
     },
     {
-      key: "total",
+      key: "records",
       label: "Records",
       align: "right",
     },
@@ -35,12 +36,13 @@ export default function WorldRecordsTable({ worldRecords, seeMore, ...rest }: Pr
 
   return (
     <div className="flex flex-col items-end">
-      <Table columns={columns} paginationEnabled hidePerPage data={data} {...rest} />
-      {/* {seeMore && (
-        <Link href="/top/riders" className="link pt-2 text-sm text-primary no-underline">
-          See More
-        </Link>
-      )} */}
+      <Table
+        data={data}
+        columns={columns}
+        paginationEnabled={true}
+        jumpToEnabled={false}
+        {...rest}
+      />
     </div>
   )
 }

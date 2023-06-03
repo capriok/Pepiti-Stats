@@ -2,7 +2,7 @@ import React from "react"
 import MMRPill from "~/components/pills/MMRPill"
 import Pill from "~/components/pills/Pill"
 import RiderLink from "~/components/RiderLink"
-import Table from "~/components/Table"
+import Table from "~/components/Table/Table"
 import { toFixedIfNecessary } from "~/utils/toFixedIfNecessary"
 
 interface Props {
@@ -81,5 +81,5 @@ export default function MMRAnalysisTable({ standings }: Props) {
     },
   ]
 
-  return <Table columns={columns} data={standings} />
+  return <Table columns={columns} data={standings} sortingEnabled={true} />
 }

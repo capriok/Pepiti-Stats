@@ -5,17 +5,19 @@ import MMRRecordsTable from "~/components/tables/MMRRecordsTable"
 import SRRecordsTable from "~/components/tables/SRRecordsTable"
 import BikeRecordsTable from "~/components/tables/BikeRecordsTable"
 import ContactRecordsTable from "~/components/tables/ContactRecordsTable"
+import Result from "~/components/Result"
 
 export async function generateMetadata({ params: { top } }) {
   return {
     title: `Pepiti | Records`,
-    description: `Top ${dynamicDataMap[top].title}`,
+    description: dynamicDataMap[top] ? `Top ${dynamicDataMap[top].title}` : "",
   }
 }
 
 export default async function Page({ params: { top } }) {
   const topRecords = await GetDynamicTopRecords(top, 1000)
-  console.log("%cDynamicTopRecords", "color: steelblue", topRecords)
+
+  if (!dynamicDataMap[top]) return <Result title="Not Found" description="No records found" />
 
   return (
     <div className="mx-auto w-full max-w-[1000px]">
@@ -33,39 +35,40 @@ export default async function Page({ params: { top } }) {
 }
 
 const tableProps = {
-  pageSize: 25,
-  paginationEnabled: true,
+  defaultPageSize: 25,
   searchEnabled: true,
+  paginationEnabled: true,
+  jumpToEnabled: true,
 }
 const dynamicDataMap = {
   riders: {
     title: "World Records",
     render: (records) => {
-      return <WorldRecordsTable worldRecords={records} seeMore={false} {...tableProps} />
+      return <WorldRecordsTable worldRecords={records} {...tableProps} />
     },
   },
   mmr: {
     title: "MMR Standings",
     render: (records) => {
-      return <MMRRecordsTable worldMMR={records} seeMore={false} {...tableProps} />
+      return <MMRRecordsTable worldMMR={records} {...tableProps} />
     },
   },
   sr: {
     title: "SR Standings",
     render: (records) => {
-      return <SRRecordsTable worldSR={records} seeMore={false} {...tableProps} />
+      return <SRRecordsTable worldSR={records} {...tableProps} />
     },
   },
   bikes: {
     title: "Bike Records",
     render: (records) => {
-      return <BikeRecordsTable worldBikes={records} seeMore={false} {...tableProps} />
+      return <BikeRecordsTable worldBikes={records} {...tableProps} />
     },
   },
   contacts: {
     title: "Contact Riders",
     render: (records) => {
-      return <ContactRecordsTable worldContacts={records} seeMore={false} {...tableProps} />
+      return <ContactRecordsTable worldContacts={records} {...tableProps} />
     },
   },
 }

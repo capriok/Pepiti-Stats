@@ -1,7 +1,7 @@
 "use client"
 
 import { CheckIcon } from "lucide-react"
-import Table from "~/components/Table"
+import Table from "~/components/Table/Table"
 import RiderLink from "~/components/RiderLink"
 import Tabs from "~/components/Tabs"
 import BikeWithPrefixColor from "~/components/pills/BikeWithPrefixColor"

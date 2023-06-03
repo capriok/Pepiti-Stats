@@ -11,8 +11,8 @@ interface Props {
 
 const Result: React.FC<Props> = (props) => {
   const router = useRouter()
-  const defaultTitle = "Error."
-  const defaultDescription = "Something went wrong."
+  const defaultTitle = "Error"
+  const defaultDescription = "Something went wrong"
 
   return (
     <div className="flex h-screen items-center justify-center">

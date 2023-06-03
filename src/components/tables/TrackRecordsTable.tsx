@@ -1,9 +1,10 @@
 "use client"
 
-import Table from "~/components/Table"
+import Table from "~/components/Table/Table"
 import RiderLink from "../RiderLink"
 import BikeWithPrefixColor from "../pills/BikeWithPrefixColor"
 import { handleLapTimes } from "~/utils/handleLapTimes"
+import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
 
 interface Props {
   records: TrackRecord[]
@@ -14,6 +15,7 @@ export const TrackRecordsTable = ({ records }: Props) => {
     ...r,
     name: r.rider_name,
   }))
+  console.log("%cTrackRecordsTable", "color: steelblue", { records: data })
 
   const columns = [
     {
@@ -29,7 +31,7 @@ export const TrackRecordsTable = ({ records }: Props) => {
     {
       key: "average_speed",
       label: "Avg Speed",
-      render: (speed) => (speed ? speed.toFixed(2) : ""),
+      render: (averageSpeed) => handleAverageSpeed(averageSpeed),
     },
     {
       key: "split_1",
@@ -48,5 +50,13 @@ export const TrackRecordsTable = ({ records }: Props) => {
     },
   ]
 
-  return <Table data={data} columns={columns} searchEnabled={true} paginationEnabled={true} />
+  return (
+    <Table
+      data={data}
+      columns={columns}
+      searchEnabled={true}
+      paginationEnabled={true}
+      sortingEnabled={true}
+    />
+  )
 }

@@ -4,7 +4,7 @@ import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import UnbanRiderButton from "~/components/actions/UnbanRiderButton"
 import Pill from "~/components/pills/Pill"
-import Table from "~/components/Table"
+import Table from "~/components/Table/Table"
 import Tabs from "~/components/Tabs"
 
 interface Props {

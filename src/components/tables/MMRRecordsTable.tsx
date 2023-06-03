@@ -1,15 +1,20 @@
 "use client"
 
-import Link from "next/link"
 import RiderLink from "../RiderLink"
-import Table, { TableOptions } from "../Table"
+import Table, { TableOptions } from "../Table/Table"
 
 interface Props extends TableOptions {
   worldMMR: any
-  seeMore?: boolean
 }
 
-export default function MMRRecordsTable({ worldMMR, seeMore, ...rest }: Props) {
+export default function MMRRecordsTable({ worldMMR, ...rest }: Props) {
+  const data: any = worldMMR.riders.map((r) => ({
+    _id: r._id,
+    name: r.name,
+    score: r.MMR,
+  }))
+  console.log("%cMMRRecordsTable", "color: steelblue", { records: data })
+
   const columns = [
     {
       key: "name",
@@ -21,7 +26,7 @@ export default function MMRRecordsTable({ worldMMR, seeMore, ...rest }: Props) {
       ),
     },
     {
-      key: "MMR",
+      key: "score",
       label: "Score",
       align: "right",
     },
@@ -29,12 +34,13 @@ export default function MMRRecordsTable({ worldMMR, seeMore, ...rest }: Props) {
 
   return (
     <div className="flex flex-col items-end">
-      <Table columns={columns} data={worldMMR.riders} paginationEnabled hidePerPage {...rest} />
-      {/* {seeMore && (
-        <Link href="/top/mmr" className="link pt-2 text-sm text-primary no-underline">
-          See More
-        </Link>
-      )} */}
+      <Table
+        data={data}
+        columns={columns}
+        paginationEnabled={true}
+        jumpToEnabled={false}
+        {...rest}
+      />
     </div>
   )
 }
