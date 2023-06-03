@@ -90,9 +90,10 @@ export default function RiderRacesTable({ guid }: Props) {
       columns={columns}
       data={data}
       searchKey="track"
+      rankEnabled={false}
       searchEnabled={true}
       paginationEnabled={true}
-      rankEnabled={false}
+      sortingEnabled={true}
     />
   )
 }

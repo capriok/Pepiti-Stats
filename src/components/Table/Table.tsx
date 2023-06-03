@@ -23,16 +23,10 @@ export interface TableData {
  *     value: the rows data key value
  *     row: the full row data
  */
-
 export interface TableColumn {
   key: string
   label: string | JSX.Element
   render?: (value: any, row: TableData) => any
-}
-
-export interface TableProps extends TableOptions {
-  data: Array<TableData>
-  columns: Array<TableColumn>
 }
 
 /**
@@ -54,19 +48,23 @@ export interface TableOptions {
   rowCn?: string
 }
 
+interface TableProps extends TableOptions {
+  data: Array<TableData>
+  columns: Array<TableColumn>
+}
+
 const Table: React.FC<TableProps> = (props) => {
   const {
     paginationEnabled = false,
     jumpToEnabled = true,
     defaultPageSize = 10,
-    sortingEnabled = true,
+    sortingEnabled = false,
     searchEnabled = false,
     searchKey = "name",
     searchTerm = "",
     rankEnabled = true,
     rankStyle = true,
   } = props
-
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(defaultPageSize)
   const [term, setTerm] = useState(searchTerm)
@@ -75,8 +73,6 @@ const Table: React.FC<TableProps> = (props) => {
     dir: SortDirection.None,
     key: null,
   })
-
-  console.log("%cTable: Original", "color: steelblue", { data: props.data })
 
   /** preps the data for the table to use */
   const manipulatedData = () => {
@@ -131,7 +127,7 @@ const Table: React.FC<TableProps> = (props) => {
         key: sortDirection === SortDirection.None ? null : key,
       }
 
-      console.log("%cTable: Sorting", "color: goldenrod", { sort })
+      console.log("%cTable: Sorting", "color: goldenrod", sort)
       setSorting(sort)
     }
 

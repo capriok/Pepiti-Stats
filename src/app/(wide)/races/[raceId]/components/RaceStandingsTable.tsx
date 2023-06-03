@@ -61,7 +61,7 @@ export default function RaceStandingsTable({ standings }: Props) {
 
   return (
     <>
-      <Table columns={tableColumns} data={standings} />
+      <Table columns={tableColumns} data={standings} sortingEnabled={true} />
     </>
   )
 }

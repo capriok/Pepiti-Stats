@@ -27,14 +27,12 @@ export const sortDataByColumn = (
   return data.sort((a, b) => {
     let res: number =
       typeof a[key] === "string"
-        ? stringCompare(a[key], b[key])
+        ? stringCompare(a[key] ?? "", b[key] ?? "")
         : typeof a[key] === "number"
-        ? numberCompare(a[key], b[key])
+        ? numberCompare(a[key] ?? 0, b[key] ?? 0)
         : typeof a[key] === "boolean"
-        ? booleanCompare(a[key], b[key])
-        : (() => {
-            throw new Error("Invalid column type")
-          })()
+        ? booleanCompare(a[key] ?? false, b[key] ?? false)
+        : -1
 
     if (res === 0) res = data.indexOf(a) - data.indexOf(b)
     if (dir === "desc") res = -res

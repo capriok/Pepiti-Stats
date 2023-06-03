@@ -79,9 +79,10 @@ export default function RiderRecordsTable({ guid }: Props) {
       columns={columns}
       data={records}
       searchKey="track"
+      rankEnabled={false}
       searchEnabled={true}
       paginationEnabled={true}
-      rankEnabled={false}
+      sortingEnabled={true}
     />
   )
 }

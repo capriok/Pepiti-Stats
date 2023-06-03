@@ -81,5 +81,5 @@ export default function MMRAnalysisTable({ standings }: Props) {
     },
   ]
 
-  return <Table columns={columns} data={standings} />
+  return <Table columns={columns} data={standings} sortingEnabled={true} />
 }
