@@ -39,6 +39,7 @@ export default function SRRecordsTable({ worldSR, ...rest }: Props) {
         columns={columns}
         paginationEnabled={true}
         jumpToEnabled={false}
+        sortingKeys={["score"]}
         {...rest}
       />
     </div>

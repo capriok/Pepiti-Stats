@@ -57,6 +57,7 @@ export const TrackRecordsTable = ({ records }: Props) => {
       searchEnabled={true}
       paginationEnabled={true}
       sortingEnabled={true}
+      sortingKeys={["lap_time", "average_speed", "split_1", "split_2"]}
     />
   )
 }

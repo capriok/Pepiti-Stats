@@ -203,5 +203,12 @@ const LeagueRaceStandings = ({ division }: { division: LeagueRaceDivision }) => 
     },
   ]
 
-  return <Table data={data} columns={columns} />
+  return (
+    <Table
+      data={data}
+      columns={columns}
+      sortingEnabled={true}
+      sortingKeys={["lapTime", "averageSpeed", "split1", "split2"]}
+    />
+  )
 }

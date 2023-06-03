@@ -216,11 +216,6 @@ const LeagueStandings = ({ league }: { league: League }) => {
 
   const columns = [
     {
-      key: "name",
-      label: "Rider",
-      render: (name, row) => <RiderLink href={`/profile/${row.guid}`}>{name}</RiderLink>,
-    },
-    {
       key: "race_number",
       label: "Race #",
       render: (race_number) => (
@@ -229,6 +224,11 @@ const LeagueStandings = ({ league }: { league: League }) => {
           <div className="text-secondary">{race_number}</div>
         </div>
       ),
+    },
+    {
+      key: "name",
+      label: "Rider",
+      render: (name, row) => <RiderLink href={`/profile/${row.guid}`}>{name}</RiderLink>,
     },
     {
       key: "score",
@@ -246,5 +246,12 @@ const LeagueStandings = ({ league }: { league: League }) => {
     },
   ]
 
-  return <Table data={data} columns={columns} />
+  return (
+    <Table
+      data={data}
+      columns={columns}
+      sortingEnabled={true}
+      sortingKeys={["name", "score", "bike_id", "team"]}
+    />
+  )
 }

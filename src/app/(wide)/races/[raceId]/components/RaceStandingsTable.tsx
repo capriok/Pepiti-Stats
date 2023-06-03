@@ -12,11 +12,6 @@ interface Props {
 export default function RaceStandingsTable({ standings }: Props) {
   const tableColumns = [
     {
-      key: "name",
-      label: "Name",
-      render: (name, row) => <RiderLink href={`/profile/${row._id}`}>{name}</RiderLink>,
-    },
-    {
       key: "raceNumber",
       label: "Race #",
       render: (raceNumber) => (
@@ -25,6 +20,11 @@ export default function RaceStandingsTable({ standings }: Props) {
           <div className="text-primary">{raceNumber}</div>
         </div>
       ),
+    },
+    {
+      key: "name",
+      label: "Name",
+      render: (name, row) => <RiderLink href={`/profile/${row._id}`}>{name}</RiderLink>,
     },
     {
       key: "position",
@@ -61,7 +61,12 @@ export default function RaceStandingsTable({ standings }: Props) {
 
   return (
     <>
-      <Table columns={tableColumns} data={standings} sortingEnabled={true} />
+      <Table
+        columns={tableColumns}
+        data={standings}
+        sortingEnabled={true}
+        sortingKeys={["position", "gap", "raceTime", "laps", "penalty", "fastestLap"]}
+      />
     </>
   )
 }

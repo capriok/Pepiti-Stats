@@ -81,5 +81,12 @@ export default function MMRAnalysisTable({ standings }: Props) {
     },
   ]
 
-  return <Table columns={columns} data={standings} sortingEnabled={true} />
+  return (
+    <Table
+      columns={columns}
+      data={standings}
+      sortingEnabled={true}
+      sortingKeys={["mmrGain", "newMmr", "bpp", "prb", "nrb", "fl", "hs"]}
+    />
+  )
 }

@@ -8,9 +8,11 @@ import ContactRecordsTable from "~/components/tables/ContactRecordsTable"
 import Result from "~/components/Result"
 
 export async function generateMetadata({ params: { top } }) {
+  if (!dynamicDataMap[top]) return { title: "Not Found" }
+
   return {
-    title: `Pepiti | Records`,
-    description: dynamicDataMap[top] ? `Top ${dynamicDataMap[top].title}` : "",
+    title: `Pepiti | Top Records`,
+    description: `Top ${dynamicDataMap[top].title}`,
   }
 }
 
@@ -39,6 +41,7 @@ const tableProps = {
   searchEnabled: true,
   paginationEnabled: true,
   jumpToEnabled: true,
+  sortingEnabled: true,
 }
 const dynamicDataMap = {
   riders: {
