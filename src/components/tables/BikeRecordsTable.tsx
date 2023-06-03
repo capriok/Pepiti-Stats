@@ -15,7 +15,7 @@ export default function BikeRecordsTable({ worldBikes, ...rest }: Props) {
     name: bike.name,
     laps: bike.laps,
   }))
-  console.log("%cBikeRecordsTable", "color: steelblue", { records: data })
+  console.log("%cBikeRecordsTable", "color: steelblue", { worldBikes: data })
 
   const columns = [
     {

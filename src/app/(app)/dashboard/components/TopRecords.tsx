@@ -28,20 +28,24 @@ export default function TopRecords({ worldRecords, worldMMR, worldSR }) {
           <Link href="/records/top/riders">
             <div className="mb-2 text-lg font-semibold">Top Records</div>
           </Link>
-          <WorldRecordsTable worldRecords={worldRecords} sortingEnabled={false} />
+          <WorldRecordsTable
+            worldRecords={worldRecords}
+            sortingEnabled={false}
+            miniControls={true}
+          />
         </div>
         <div>
           <Link href="/records/top/mmr">
             <div className="mb-2 text-lg font-semibold">Top MMR</div>
           </Link>
-          <MMRRecordsTable worldMMR={worldMMR} sortingEnabled={false} />
+          <MMRRecordsTable worldMMR={worldMMR} sortingEnabled={false} miniControls={true} />
         </div>
         <div>
           <Link href="/records/top/sr" className=" flex items-start gap-2">
             <div className="mb-2 text-lg font-semibold">Top SR</div>
             <div className="text-sm text-accent">(Safety Rating)</div>
           </Link>
-          <SRRecordsTable worldSR={worldSR} sortingEnabled={false} />
+          <SRRecordsTable worldSR={worldSR} sortingEnabled={false} miniControls={true} />
         </div>
       </div>
     </div>

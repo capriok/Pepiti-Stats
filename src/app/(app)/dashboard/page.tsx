@@ -13,7 +13,7 @@ export const metadata = {
 
 export default async function Page() {
   const apiStats = await GetSummaryStats()
-  const worldRecords = await GetDynamicTopRecords("riders", 30)
+  const worldRecords = await GetDynamicTopRecords("riders", 100)
   const worldMMR = await GetDynamicTopRecords("mmr", 100)
   const worldSR = await GetDynamicTopRecords("sr", 100)
   const trackList = await GetTrackNames()
