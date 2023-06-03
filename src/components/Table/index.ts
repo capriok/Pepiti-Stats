@@ -25,20 +25,24 @@ export const sortDataByColumn = (
   dir: SortDirection
 ): Array<TableData> => {
   return data.sort((a, b) => {
-    let res: number =
-      typeof a[key] === "string"
-        ? stringCompare(a[key] ?? "", b[key] ?? "")
-        : typeof a[key] === "number"
-        ? numberCompare(a[key] ?? 0, b[key] ?? 0)
-        : typeof a[key] === "boolean"
-        ? booleanCompare(a[key] ?? false, b[key] ?? false)
-        : -1
+    let res: number
 
-    if (res === 0) res = data.indexOf(a) - data.indexOf(b)
+    if (typeof a[key] === "string") {
+      res = stringCompare(a[key] ?? "", b[key] ?? "")
+    } else if (typeof a[key] === "number") {
+      res = numberCompare(a[key] ?? 0, b[key] ?? 0)
+    } else if (typeof a[key] === "boolean") {
+      res = booleanCompare(a[key] ?? false, b[key] ?? false)
+    } else {
+      throw new Error("Invalid column type")
+    }
+
+    if (res === 0) res = data.indexOf(b) - data.indexOf(a)
     if (dir === "desc") res = -res
 
     return res
   })
+  
 }
 
 const stringCompare = (a: string, b: string): number => a.localeCompare(b)

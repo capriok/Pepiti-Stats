@@ -38,6 +38,7 @@ export interface TableOptions {
   paginationEnabled?: boolean
   jumpToEnabled?: boolean
   defaultPageSize?: number
+  sortingKeys?: Array<string>
   sortingEnabled?: boolean
   searchEnabled?: boolean
   searchKey?: string
@@ -58,6 +59,7 @@ const Table: React.FC<TableProps> = (props) => {
     paginationEnabled = false,
     jumpToEnabled = true,
     defaultPageSize = 10,
+    sortingKeys = [],
     sortingEnabled = false,
     searchEnabled = false,
     searchKey = "name",
@@ -116,7 +118,13 @@ const Table: React.FC<TableProps> = (props) => {
 
   /** maps prepped columns to header row */
   const tableColumns = columns.map((column) => {
+    const isRankColumn = column.key === "rank"
+    const columnIsSortable =
+      sortingKeys.some((k) => k === column.key) && !isRankColumn && sortingEnabled
+
     const handleHeaderClick = (key) => {
+      if (!columnIsSortable) return
+
       const sortDirection =
         sorting.key === key ? cycleSortingDirection(sorting.dir) : SortDirection.Ascending
       const sortData = sortDataByColumn(data, key, sortDirection)
@@ -132,6 +140,8 @@ const Table: React.FC<TableProps> = (props) => {
     }
 
     const SortingControls = () => {
+      if (!columnIsSortable) return <></>
+
       const isColumnSorting = sorting.key === column.key
 
       return (
@@ -150,12 +160,12 @@ const Table: React.FC<TableProps> = (props) => {
     return (
       <th
         key={column.key}
-        className={`group py-4 ${sortingEnabled ? "cursor-pointer" : ""}`}
-        onClick={() => sortingEnabled && handleHeaderClick(column.key)}
+        className={`group py-4 ${columnIsSortable ? "cursor-pointer" : ""}`}
+        onClick={() => handleHeaderClick(column.key)}
       >
         <div className={"flex select-none items-center gap-4"}>
           {column.label}
-          {sortingEnabled && <SortingControls />}
+          <SortingControls />
         </div>
       </th>
     )

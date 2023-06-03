@@ -94,6 +94,17 @@ export default function RiderRacesTable({ guid }: Props) {
       searchEnabled={true}
       paginationEnabled={true}
       sortingEnabled={true}
+      sortingKeys={[
+        "date",
+        "track",
+        "position",
+        "gap",
+        "laps",
+        "penalties",
+        "fastestLap",
+        "mmrGain",
+        "newMMR",
+      ]}
     />
   )
 }

@@ -41,6 +41,7 @@ export default function WorldRecordsTable({ worldRecords, ...rest }: Props) {
         columns={columns}
         paginationEnabled={true}
         jumpToEnabled={false}
+        sortingKeys={["records"]}
         {...rest}
       />
     </div>
