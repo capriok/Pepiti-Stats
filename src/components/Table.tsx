@@ -38,6 +38,7 @@ interface TableColumn {
  */
 export interface TableOptions {
   paginationEnabled?: boolean
+  hidePerPage?: boolean
   pageSize?: number
   searchEnabled?: boolean
   searchKey?: string
@@ -58,6 +59,7 @@ interface TableProps extends TableOptions {
 
 const Table: React.FC<TableProps> = (props) => {
   const {
+    hidePerPage = false,
     paginationEnabled = false,
     pageSize: pageSizeOption = 10,
     searchEnabled = false,
@@ -209,37 +211,39 @@ const Table: React.FC<TableProps> = (props) => {
         </table>
       </div>
       {paginationEnabled && (
-        <div className="mt-4 flex flex-col items-center justify-between md:flex-row">
+        <div className="mt-4 flex flex-col items-center justify-between px-3 text-sm md:flex-row">
           <div className="mb-2 mr-5 md:mb-0">
-            Page: {page + 1} / {Math.floor(data.length / pageSize) + 1}
+            Page: {page + 1} / {Math.floor(data.length / pageSize)}
           </div>
-          <div className="flex gap-2">
+          <div className="flex items-center gap-2">
             <div className="btn-group">
               <button
-                className="btn-ghost btn-sm btn bg-base-100"
+                className="btn-ghost btn-xs btn bg-base-100"
                 onClick={() => handlePageChange(page > 0 ? page - 1 : page)}
                 disabled={page === 0}
               >
                 Prev Page
               </button>
               <button
-                className="btn-ghost btn-sm btn bg-base-100"
+                className="btn-ghost btn-xs btn bg-base-100"
                 onClick={() => handlePageChange(paginatedData.length ? page + 1 : page)}
-                disabled={paginatedData.length < pageSize}
+                disabled={page + 1 === Math.floor(data.length / pageSize)}
               >
                 Next Page
               </button>
             </div>
-            <select
-              className="input input-sm"
-              value={pageSize}
-              onChange={(e) => handlePageSizeChange(e.target.value)}
-            >
-              <option value={10}>10</option>
-              <option value={25}>25</option>
-              <option value={50}>50</option>
-              <option value={100}>100</option>
-            </select>
+            {!hidePerPage && (
+              <select
+                className="input input-sm"
+                value={pageSize}
+                onChange={(e) => handlePageSizeChange(e.target.value)}
+              >
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={100}>100</option>
+              </select>
+            )}
           </div>
         </div>
       )}

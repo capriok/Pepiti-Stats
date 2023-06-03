@@ -29,12 +29,12 @@ export default function MMRRecordsTable({ worldMMR, seeMore, ...rest }: Props) {
 
   return (
     <div className="flex flex-col items-end">
-      <Table columns={columns} data={worldMMR.riders} {...rest} />
-      {seeMore && (
+      <Table columns={columns} data={worldMMR.riders} paginationEnabled hidePerPage {...rest} />
+      {/* {seeMore && (
         <Link href="/top/mmr" className="link pt-2 text-sm text-primary no-underline">
           See More
         </Link>
-      )}
+      )} */}
     </div>
   )
 }

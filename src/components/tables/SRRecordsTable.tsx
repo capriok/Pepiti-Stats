@@ -29,12 +29,12 @@ export default function SRRecordsTable({ worldSR, seeMore, ...rest }: Props) {
 
   return (
     <div className="flex flex-col items-end">
-      <Table columns={columns} data={worldSR.riders} {...rest} />
-      {seeMore && (
+      <Table columns={columns} paginationEnabled hidePerPage data={worldSR.riders} {...rest} />
+      {/* {seeMore && (
         <Link href="/top/sr" className="link pt-2 text-sm text-primary no-underline">
           See More
         </Link>
-      )}
+      )} */}
     </div>
   )
 }

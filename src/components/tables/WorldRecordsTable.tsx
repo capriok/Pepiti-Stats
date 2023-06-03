@@ -35,12 +35,12 @@ export default function WorldRecordsTable({ worldRecords, seeMore, ...rest }: Pr
 
   return (
     <div className="flex flex-col items-end">
-      <Table columns={columns} data={data} {...rest} />
-      {seeMore && (
+      <Table columns={columns} paginationEnabled hidePerPage data={data} {...rest} />
+      {/* {seeMore && (
         <Link href="/top/riders" className="link pt-2 text-sm text-primary no-underline">
           See More
         </Link>
-      )}
+      )} */}
     </div>
   )
 }
