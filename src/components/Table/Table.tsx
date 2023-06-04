@@ -45,6 +45,7 @@ export interface TableOptions {
   searchKey?: string
   searchTerm?: string
   rankEnabled?: boolean
+  resultsEnabled?: boolean
   expandable?: {
     render: (record: TableData) => JSX.Element
     filter?: (record: TableData) => boolean
@@ -68,6 +69,7 @@ const Table: React.FC<TableProps> = (props) => {
     searchKey = "name",
     searchTerm = "",
     rankEnabled = true,
+    resultsEnabled = true,
     expandable = null,
   } = props
   const [page, setPage] = useState(0)
@@ -187,9 +189,7 @@ const Table: React.FC<TableProps> = (props) => {
           return (
             <th
               key={column.key}
-              className={`group rounded-none bg-base-200 p-0 py-4 ${
-                columnIsSortable ? "cursor-pointer" : ""
-              }`}
+              className={`group bg-base-200 p-0 py-4 ${columnIsSortable ? "cursor-pointer" : ""}`}
               onClick={() => handleHeaderClick(column.key)}
             >
               <div className={`flex select-none items-center gap-4 ${idx === 0 ? "pl-4" : ""}`}>
@@ -241,7 +241,7 @@ const Table: React.FC<TableProps> = (props) => {
 
                 return (
                   <td key={dataKey} className={`rounded-none p-0 ${idx === 0 ? "pl-4" : ""}`}>
-                    <div className={"flex min-h-[45px] w-full items-center font-medium"}>
+                    <div className={"flex min-h-[45px] items-center font-medium"}>
                       {renderer ? renderer(value, row) : value}
                     </div>
                   </td>
@@ -283,7 +283,7 @@ const Table: React.FC<TableProps> = (props) => {
       </div>
       <div className="w-full overflow-x-auto">
         <table className="table-zebra table-compact my-0 table w-full">
-          <thead className="rounded-tl-lg rounded-tr-lg bg-base-200 text-xs uppercase">
+          <thead className="bg-base-200 text-xs uppercase">
             <TableColumns />
           </thead>
           <tbody>
@@ -293,8 +293,17 @@ const Table: React.FC<TableProps> = (props) => {
       </div>
       {paginationEnabled && (
         <div className="mt-4 flex flex-col items-center justify-between px-3 text-sm md:flex-row">
-          <div className="mb-2 mr-5 md:mb-0">
-            Page: {page + 1} / {Math.ceil(data.length / pageSize)}
+          <div className="flex gap-2">
+            <div>
+              Page: {page + 1} / {Math.ceil(data.length / pageSize)}
+            </div>
+            {resultsEnabled && (
+              <div className="flex gap-[2px]">
+                <span className="text-secondary">(</span>
+                {`${data.length} Results`}
+                <span className="text-secondary">)</span>
+              </div>
+            )}
           </div>
           <div className="flex items-center gap-2">
             <div className="btn-group">

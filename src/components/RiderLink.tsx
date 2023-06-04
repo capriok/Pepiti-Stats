@@ -1,18 +1,19 @@
 import Image from "next/image"
 import Link from "next/link"
 import React from "react"
+import { handleRacismSanitization } from '~/utils/handleRacismSanitization'
 
 interface RiderProps {
   href: string
-  children: string | React.ReactNode
+  name: string
   donator?: boolean
 }
 
-const RiderLink: React.FC<RiderProps> = ({ href, donator, children }) => {
+const RiderLink: React.FC<RiderProps> = ({ href, name, donator }) => {
   return (
     <Link href={href} prefetch={false} className="text-primary">
       <div className="flex gap-2">
-        {children}
+        {handleRacismSanitization(name)}
         {donator && (
           <Image
             src="/assets/brand/donation-flag.svg"

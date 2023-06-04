@@ -174,7 +174,7 @@ const LeagueRaceStandings = ({ division }: { division: LeagueRaceDivision }) => 
     {
       key: "name",
       label: "Rider",
-      render: (name, row) => <RiderLink href={`/profile/${row.guid}`}>{name}</RiderLink>,
+      render: (name, row) => <RiderLink href={`/profile/${row.guid}`} name={name} />,
     },
     {
       key: "lapTime",

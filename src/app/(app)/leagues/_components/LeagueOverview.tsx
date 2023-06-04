@@ -66,7 +66,7 @@ const LeagueAlert = ({ isInLeague, rider }: { isInLeague: boolean; rider: League
           <div>
             <div className="mb-2 flex flex-col items-center justify-center gap-2">
               <div className="text-md text-accent">Rider Name:</div>
-              <RiderLink href={`/profile/${rider.guid}`}>{rider.name}</RiderLink>
+              <RiderLink href={`/profile/${rider.guid}`} name={rider.name} />
             </div>
             <div className="mb-2 flex flex-col items-center justify-center gap-2">
               <div className="text-md text-accent">Team Name:</div>
@@ -111,9 +111,7 @@ const LeagueInformation = ({ league, host }: { league: League; host: RiderProfil
       <div className="flex flex-col justify-center">
         <div className="mb-2 flex items-center gap-2">
           <div className="text-md text-accent">Host:</div>
-          <RiderLink href={`/profile/${host._id}`} donator={host.donation > 0}>
-            {host.name}
-          </RiderLink>
+          <RiderLink href={`/profile/${host._id}`} name={host.name} donator={host.donation > 0} />
         </div>
         <div className="flex items-center gap-2">
           <div className="text-md text-accent">Riders:</div>
@@ -228,7 +226,7 @@ const LeagueStandings = ({ league }: { league: League }) => {
     {
       key: "name",
       label: "Rider",
-      render: (name, row) => <RiderLink href={`/profile/${row.guid}`}>{name}</RiderLink>,
+      render: (name, row) => <RiderLink href={`/profile/${row.guid}`} name={name} />,
     },
     {
       key: "score",

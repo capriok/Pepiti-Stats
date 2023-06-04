@@ -20,11 +20,7 @@ export default function WorldRecordsTable({ worldRecords, ...rest }: Props) {
       key: "name",
       label: "Rider",
       render: (name, row) => {
-        return (
-          <RiderLink href={`/profile/${row._id}`} donator={row.donation > 0}>
-            {name}
-          </RiderLink>
-        )
+        return <RiderLink href={`/profile/${row._id}`} donator={row.donation > 0} name={name} />
       },
     },
     {
