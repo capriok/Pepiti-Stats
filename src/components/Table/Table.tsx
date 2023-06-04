@@ -186,13 +186,16 @@ const Table: React.FC<TableProps> = (props) => {
             )
           }
 
+          const firstColCn = idx === 0 ? "pl-4" : ""
+          const columnCn = `flex select-none items-center gap-4 ${firstColCn}`
+
           return (
             <th
               key={column.key}
               className={`group bg-base-200 p-0 py-4 ${columnIsSortable ? "cursor-pointer" : ""}`}
               onClick={() => handleHeaderClick(column.key)}
             >
-              <div className={`flex select-none items-center gap-4 ${idx === 0 ? "pl-4" : ""}`}>
+              <div className={columnCn}>
                 {column.label}
                 <SortingControls />
               </div>
@@ -222,7 +225,10 @@ const Table: React.FC<TableProps> = (props) => {
     const ExpandedRow = ({ row }) => (
       <>
         {expandable && expandedRow?._id === row._id && (
-          <td colSpan={columns.length} className="w-full whitespace-break-spaces p-0 py-4 pl-4">
+          <td
+            colSpan={columns.length}
+            className="w-full whitespace-break-spaces bg-base-200 p-4 pl-8"
+          >
             {expandable && expandable?.render(row)}
           </td>
         )}
@@ -239,8 +245,12 @@ const Table: React.FC<TableProps> = (props) => {
                 const renderer = column.render
                 const value = row[dataKey]
 
+                const firstColCn = idx === 0 ? "pl-4" : ""
+                const isOdCn = row.rank % 2 === 0 ? "bg-base-200" : "bg-base-100"
+                const rowCn = `rounded-none p-0 ${firstColCn} ${isOdCn}`
+
                 return (
-                  <td key={dataKey} className={`rounded-none p-0 ${idx === 0 ? "pl-4" : ""}`}>
+                  <td key={dataKey} className={rowCn}>
                     <div className={"flex min-h-[45px] items-center font-medium"}>
                       {renderer ? renderer(value, row) : value}
                     </div>
@@ -277,12 +287,12 @@ const Table: React.FC<TableProps> = (props) => {
             value={term}
             placeholder={`Search by ${searchKey}...`}
             onChange={(e) => handleTermChange(e.target.value)}
-            className="input-bordered input input-sm my-2 w-full bg-base-200 md:w-[400px]"
+            className="input-bordered input input-sm my-2 w-full border-2 bg-base-100 md:w-[400px]"
           />
         )}
       </div>
       <div className="w-full overflow-x-auto">
-        <table className="table-zebra table-compact my-0 table w-full">
+        <table className="table-compact my-0 table w-full">
           <thead className="bg-base-200 text-xs uppercase">
             <TableColumns />
           </thead>

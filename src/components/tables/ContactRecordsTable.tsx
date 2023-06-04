@@ -11,7 +11,7 @@ export default function ContactRecordsTable({ worldContacts, ...rest }: Props) {
   const data: any = worldContacts.riders.map((r) => ({
     _id: r._id,
     name: r.name,
-    score: r.contact,
+    contacts: r.contact,
   }))
   console.log("%cContactRecordsTable", "color: steelblue", { worldContacts: data })
 
@@ -24,7 +24,7 @@ export default function ContactRecordsTable({ worldContacts, ...rest }: Props) {
       ),
     },
     {
-      key: "score",
+      key: "contacts",
       label: "Contacts",
       align: "right",
     },
@@ -32,7 +32,7 @@ export default function ContactRecordsTable({ worldContacts, ...rest }: Props) {
 
   return (
     <div className="flex flex-col items-end">
-      <Table data={data} columns={columns} sortingKeys={["score"]} {...rest} />
+      <Table data={data} columns={columns} sortingKeys={["contacts"]} {...rest} />
     </div>
   )
 }

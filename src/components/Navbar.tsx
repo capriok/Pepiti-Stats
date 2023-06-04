@@ -90,7 +90,7 @@ function NavBar({ user }: Props) {
       ),
       public: true,
       admin: false,
-      hide: theme === "system" ? true : false,
+      hide: false,
     },
     {
       key: "steamSignin",

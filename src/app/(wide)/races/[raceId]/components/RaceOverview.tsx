@@ -33,7 +33,7 @@ function WinnerCircle({ race }: { race: Race }) {
   }
 
   return (
-    <div className="card card-body w-full bg-base-200 p-0 xl:w-[60%]">
+    <div className="card card-body w-full bg-base-200 p-0 shadow-md xl:w-[60%]">
       <div className="my-6 flex w-full justify-center text-3xl font-semibold">Winner Circle</div>
       <div className="min-h-[200px]">
         <RiderAvatar rider={isLoading ? loadingWinner : winner} />
@@ -108,7 +108,7 @@ function RaceNotables({ race }: { race: Race }) {
   )
 
   return (
-    <div className="card card-body flex w-full flex-col bg-base-200 xl:w-[40%]">
+    <div className="card card-body flex w-full flex-col bg-base-200 shadow-md xl:w-[40%]">
       <div className="flex-1">
         <div className="mb-4 flex justify-center text-xl font-semibold">Podium</div>
         <div className="mb-4 flex flex-col border-b border-accent/20 pb-2">
