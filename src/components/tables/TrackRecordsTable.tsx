@@ -1,16 +1,16 @@
 "use client"
 
-import Table from "~/components/Table/Table"
+import Table, { TableOptions } from "~/components/Table/Table"
 import RiderLink from "../RiderLink"
 import BikeWithPrefixColor from "../pills/BikeWithPrefixColor"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
 
-interface Props {
+interface Props extends TableOptions {
   trackRecords: TrackRecord[]
 }
 
-export const TrackRecordsTable = ({ trackRecords }: Props) => {
+export const TrackRecordsTable = ({ trackRecords, ...rest }: Props) => {
   const data = trackRecords.map((r) => ({
     ...r,
     name: r.rider_name,
@@ -21,7 +21,7 @@ export const TrackRecordsTable = ({ trackRecords }: Props) => {
     {
       key: "name",
       label: "Name",
-      render: (name, row) => <RiderLink href={`/profile/${row.rider_guid}`}>{name}</RiderLink>,
+      render: (name, row) => <RiderLink href={`/profile/${row.rider_guid}`} name={name} />,
     },
     {
       key: "lap_time",
@@ -58,6 +58,7 @@ export const TrackRecordsTable = ({ trackRecords }: Props) => {
       paginationEnabled={true}
       sortingEnabled={true}
       sortingKeys={["lap_time", "average_speed", "split_1", "split_2"]}
+      {...rest}
     />
   )
 }

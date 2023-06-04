@@ -20,9 +20,7 @@ export default function ContactRecordsTable({ worldContacts, ...rest }: Props) {
       key: "name",
       label: "Rider",
       render: (name, row) => (
-        <RiderLink href={`/profile/${row._id}`} donator={row.donation > 0}>
-          {name}
-        </RiderLink>
+        <RiderLink href={`/profile/${row._id}`} donator={row.donation > 0} name={name} />
       ),
     },
     {

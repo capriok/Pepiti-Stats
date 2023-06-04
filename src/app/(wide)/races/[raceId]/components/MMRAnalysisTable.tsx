@@ -14,7 +14,7 @@ export default function MMRAnalysisTable({ standings }: Props) {
     {
       key: "name",
       label: "Name",
-      render: (name, row) => <RiderLink href={`/profile/${row._id}`}>{name}</RiderLink>,
+      render: (name, row) => <RiderLink href={`/profile/${row._id}`} name={name} />,
     },
     {
       key: "mmrGain",

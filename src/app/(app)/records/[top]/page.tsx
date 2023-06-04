@@ -1,77 +1,58 @@
+import Link from "next/link"
 import { GetDynamicTopRecords } from "~/api"
 import PageHeader from "~/components/PageHeader"
-import WorldRecordsTable from "~/components/tables/WorldRecordsTable"
-import MMRRecordsTable from "~/components/tables/MMRRecordsTable"
-import SRRecordsTable from "~/components/tables/SRRecordsTable"
-import BikeRecordsTable from "~/components/tables/BikeRecordsTable"
-import ContactRecordsTable from "~/components/tables/ContactRecordsTable"
 import Result from "~/components/Result"
+import DynamicTableRenderer from "./components/DynamicTableRenderer"
 
 export async function generateMetadata({ params: { top } }) {
-  if (!dynamicDataMap[top]) return { title: "Not Found" }
+  if (!dynamicTitleMap[top]) return { title: "Not Found" }
 
   return {
     title: `Pepiti | Top Records`,
-    description: `Top ${dynamicDataMap[top].title}`,
+    description: `Top ${dynamicTitleMap[top].title}`,
   }
 }
 
 export default async function Page({ params: { top } }) {
   const topRecords = await GetDynamicTopRecords(top, 1000)
+  console.log(top)
 
-  if (!dynamicDataMap[top]) return <Result title="Not Found" description="No records found" />
+  if (!dynamicTitleMap[top]) return <Result title="Not Found" description="No records found" />
 
   return (
     <div className="mx-auto w-full max-w-[1000px]">
       <PageHeader
-        title="Global Records"
+        title={`Top ${dynamicTitleMap[top].title}`}
         extra={
-          <div className="flex gap-2 whitespace-nowrap font-semibold">
-            <div>Top {dynamicDataMap[top].title}</div>
-          </div>
+          <Link href="/records" className="no-underline">
+            Go back
+          </Link>
         }
       />
-      {dynamicDataMap[top].render(topRecords)}
+      <DynamicTableRenderer top={top} records={topRecords} />
     </div>
   )
 }
 
-const tableProps = {
-  defaultPageSize: 25,
-  searchEnabled: true,
-  paginationEnabled: true,
-  jumpToEnabled: true,
-  sortingEnabled: true,
-}
-const dynamicDataMap = {
+const dynamicTitleMap = {
   riders: {
+    dataKey: "riders",
     title: "World Records",
-    render: (records) => {
-      return <WorldRecordsTable worldRecords={records} {...tableProps} />
-    },
   },
   mmr: {
-    title: "MMR Standings",
-    render: (records) => {
-      return <MMRRecordsTable worldMMR={records} {...tableProps} />
-    },
+    dataKey: "riders",
+    title: "MMR Rankings",
   },
   sr: {
-    title: "SR Standings",
-    render: (records) => {
-      return <SRRecordsTable worldSR={records} {...tableProps} />
-    },
+    dataKey: "riders",
+    title: "SR Rankings",
   },
   bikes: {
+    dataKey: "bikes",
     title: "Bike Records",
-    render: (records) => {
-      return <BikeRecordsTable worldBikes={records} {...tableProps} />
-    },
   },
   contacts: {
+    dataKey: "riders",
     title: "Contact Riders",
-    render: (records) => {
-      return <ContactRecordsTable worldContacts={records} {...tableProps} />
-    },
   },
 }

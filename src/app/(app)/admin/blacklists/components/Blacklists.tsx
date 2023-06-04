@@ -4,8 +4,10 @@ import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import UnbanRiderButton from "~/components/actions/UnbanRiderButton"
 import Pill from "~/components/pills/Pill"
+import RiderLink from "~/components/RiderLink"
 import Table from "~/components/Table/Table"
 import Tabs from "~/components/Tabs"
+import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 
 interface Props {
   isAdmin: boolean
@@ -105,7 +107,7 @@ const BlacklistTable = ({ blacklist, isAdmin }) => {
     {
       key: "name",
       label: "Name",
-      render: (name) => name.replace(/NIGGER|Nigger|Nigg|nigger|nigg/, "******"),
+      render: (name, row) => <RiderLink href={`/profile/${row._id}`} name={name} />,
     },
     {
       key: "MMR",

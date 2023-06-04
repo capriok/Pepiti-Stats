@@ -24,7 +24,7 @@ export default function TrackRecords({ trackList }: Props) {
       return <div className="flex justify-center text-lg font-semibold">Failed to Load</div>
     if (isLoading) return <SkeletonTable />
 
-    return <TrackRecordsTable trackRecords={data.records} />
+    return <TrackRecordsTable trackRecords={data.records} resultsEnabled={false} />
   }
 
   return (
