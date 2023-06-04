@@ -32,8 +32,8 @@ const Records = () => {
         <div className="my-4 text-xl font-semibold">World Records</div>
         <Link href="/records/riders">
           <div className="btn-outline btn-secondary btn flex w-[300px] justify-between">
-            <Timer className="text-white" />
-            <div className="ml-4 text-white">Record Holders</div>
+            <Timer className="text-accent dark:text-white" />
+            <div className="ml-4 text-accent dark:text-white">Record Holders</div>
           </div>
         </Link>
       </div>
@@ -42,8 +42,8 @@ const Records = () => {
         <div className="my-4 text-xl font-semibold">MMR</div>
         <Link href="/records/mmr">
           <div className="btn-outline btn-secondary btn flex w-[300px] justify-between">
-            <Crown className="text-white" />
-            <div className="ml-4 text-white">Top MMR Rankings</div>
+            <Crown className="text-accent dark:text-white" />
+            <div className="ml-4 text-accent dark:text-white">Top MMR Rankings</div>
           </div>
         </Link>
       </div>
@@ -52,8 +52,8 @@ const Records = () => {
         <div className="my-4 text-xl font-semibold">SR</div>
         <Link href="/records/sr">
           <div className="btn-outline btn-secondary btn flex w-[300px] justify-between">
-            <HardHat className="text-white" />
-            <div className="ml-4 text-white">Top SR Rankings</div>
+            <HardHat className="text-accent dark:text-white" />
+            <div className="ml-4 text-accent dark:text-white">Top SR Rankings</div>
           </div>
         </Link>
       </div>
@@ -62,8 +62,8 @@ const Records = () => {
         <div className="my-4 text-xl font-semibold">Bikes</div>
         <Link href="/records/bikes">
           <div className="btn-outline btn-secondary btn flex w-[300px] justify-between">
-            <Bike className="text-white" />
-            <div className="ml-4 text-white">Bike Lap Totals</div>
+            <Bike className="text-accent dark:text-white" />
+            <div className="ml-4 text-accent dark:text-white">Bike Lap Totals</div>
           </div>
         </Link>
       </div>
@@ -72,8 +72,8 @@ const Records = () => {
         <div className="my-4 text-xl font-semibold">Contacts</div>
         <Link href="/records/contacts">
           <div className="btn-outline btn-secondary btn flex w-[300px] justify-between">
-            <Crosshair className="text-white" />
-            <div className="ml-4 text-white">Most Unaware Riders</div>
+            <Crosshair className="text-accent dark:text-white" />
+            <div className="ml-4 text-accent dark:text-white">Most Unaware Riders</div>
           </div>
         </Link>
       </div>

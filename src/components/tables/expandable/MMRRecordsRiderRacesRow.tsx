@@ -69,9 +69,9 @@ export default function MMRRecordsRiderRacesRow({ row }) {
   ]
 
   return (
-    <div className="card card-body bg-base-200 p-4">
-      <div className="mb-2 text-lg font-semibold">{row.name}s Last Ten Races</div>
+    <>
+      <div className="mb-2 text-lg font-semibold">{row.name}&apos;s Last Ten Races</div>
       <Table data={data} columns={columns} rankEnabled={false} />
-    </div>
+    </>
   )
 }

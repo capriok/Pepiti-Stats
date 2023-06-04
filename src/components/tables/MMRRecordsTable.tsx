@@ -11,7 +11,7 @@ export default function MMRRecordsTable({ worldMMR, ...rest }: Props) {
   const data: any = worldMMR.riders.map((r) => ({
     _id: r._id,
     name: r.name,
-    score: r.MMR,
+    rating: r.MMR,
   }))
   console.log("%cMMRRecordsTable", "color: steelblue", { worldMMR: data })
 
@@ -24,8 +24,8 @@ export default function MMRRecordsTable({ worldMMR, ...rest }: Props) {
       ),
     },
     {
-      key: "score",
-      label: "Score",
+      key: "rating",
+      label: "Rating",
       align: "right",
     },
   ]
@@ -37,7 +37,7 @@ export default function MMRRecordsTable({ worldMMR, ...rest }: Props) {
         columns={columns}
         paginationEnabled={true}
         jumpToEnabled={false}
-        sortingKeys={["score"]}
+        sortingKeys={["rating"]}
         {...rest}
       />
     </div>

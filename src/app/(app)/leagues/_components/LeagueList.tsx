@@ -15,7 +15,7 @@ export default function LeagueList({ leagues }: Props) {
     return <div className="flex w-full justify-center">No Results</div>
 
   return (
-    <div className="grid w-full grid-cols-1 gap-5 md:grid-cols-3">
+    <div className="mt-4 grid w-full grid-cols-1 gap-5 md:grid-cols-3">
       {leagues.map((league) => (
         <LeagueCard key={league._id} league={league} />
       ))}
@@ -27,7 +27,7 @@ const LeagueCard = ({ league }: { league: League }) => {
   if (league.hidden) return <></>
 
   return (
-    <div key={league._id} className="card card-body bg-base-200 p-0 shadow-lg">
+    <div key={league._id} className="card card-body bg-base-200 p-0 shadow-md">
       <div className="p-2 md:p-6">
         <div className="flex items-center justify-between">
           <div className="text-xl font-semibold">{league.name}</div>

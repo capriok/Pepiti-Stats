@@ -60,9 +60,9 @@ export default function WorldRecordsRiderRecordsRow({ row }) {
   ]
 
   return (
-    <div className="card card-body bg-base-200 p-4">
-      <div className="mb-2 font-semibold">{row.name}s World Records</div>
+    <>
+      <div className="mb-2 font-semibold">{row.name}&apos;s World Records</div>
       <Table data={data} columns={columns} searchKey="track" rankEnabled={false} />
-    </div>
+    </>
   )
 }

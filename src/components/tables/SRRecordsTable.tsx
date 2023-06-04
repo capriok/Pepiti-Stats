@@ -11,7 +11,7 @@ export default function SRRecordsTable({ worldSR, ...rest }: Props) {
   const data: any = worldSR.riders.map((r) => ({
     _id: r._id,
     name: r.name,
-    score: r.SR,
+    rating: r.SR,
   }))
   console.log("%cSRRecordsTable", "color: steelblue", { worldSR: data })
 
@@ -24,8 +24,8 @@ export default function SRRecordsTable({ worldSR, ...rest }: Props) {
       ),
     },
     {
-      key: "score",
-      label: "Score",
+      key: "rating",
+      label: "Rating",
       align: "right",
     },
   ]
@@ -37,7 +37,7 @@ export default function SRRecordsTable({ worldSR, ...rest }: Props) {
         columns={columns}
         paginationEnabled={true}
         jumpToEnabled={false}
-        sortingKeys={["score"]}
+        sortingKeys={["rating"]}
         {...rest}
       />
     </div>

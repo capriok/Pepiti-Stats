@@ -7,6 +7,7 @@ import MMRRecordsRiderRacesRow from "~/components/tables/expandable/MMRRecordsRi
 import SRRecordsTable from "~/components/tables/SRRecordsTable"
 import BikeRecordsTable from "~/components/tables/BikeRecordsTable"
 import ContactRecordsTable from "~/components/tables/ContactRecordsTable"
+import SRRecordsRiderRacesRow from "~/components/tables/expandable/SRRecordsRiderRacesRow"
 
 export default function DynamicTableRenderer({ top, records }) {
   return dynamicDataMap[top].render(records)
@@ -49,7 +50,15 @@ const dynamicDataMap = {
   },
   sr: {
     render: (records) => {
-      return <SRRecordsTable worldSR={records} {...tableProps} />
+      return (
+        <SRRecordsTable
+          worldSR={records}
+          expandable={{
+            render: (row) => <SRRecordsRiderRacesRow row={row} />,
+          }}
+          {...tableProps}
+        />
+      )
     },
   },
   bikes: {
