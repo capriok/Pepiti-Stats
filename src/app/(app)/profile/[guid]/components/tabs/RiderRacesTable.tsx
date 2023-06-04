@@ -9,6 +9,7 @@ import Table from "~/components/Table/Table"
 import Pill from "~/components/pills/Pill"
 import Spinner from "~/components/Spinner"
 import { fetcher } from "~/api/fetcher"
+import Link from "next/link"
 
 interface Props {
   guid: string
@@ -27,6 +28,7 @@ export default function RiderRacesTable({ guid }: Props) {
 
   const data = raceData.races.map((race) => ({
     date: parseInt(race._id.slice(0, 8), 16) * 1000,
+    _id: race._id,
     track: race.track,
     position: race?.Classification?.Pos ?? "",
     laps: race?.Classification?.Laps ?? "",
@@ -46,7 +48,11 @@ export default function RiderRacesTable({ guid }: Props) {
     {
       key: "track",
       label: "Track",
-      render: (track) => (track ? track : "-"),
+      render: (track, row) => (
+        <Link href={`/races/${row._id}`} className="font-semibold text-primary/80">
+          {track ? track : "-"}
+        </Link>
+      ),
     },
     {
       key: "position",
@@ -94,17 +100,7 @@ export default function RiderRacesTable({ guid }: Props) {
       searchEnabled={true}
       paginationEnabled={true}
       sortingEnabled={true}
-      sortingKeys={[
-        "date",
-        "track",
-        "position",
-        "gap",
-        "laps",
-        "penalties",
-        "fastestLap",
-        "mmrGain",
-        "newMMR",
-      ]}
+      sortingKeys={["date", "track", "position", "gap", "laps", "penalties", "mmrGain", "newMMR"]}
     />
   )
 }
