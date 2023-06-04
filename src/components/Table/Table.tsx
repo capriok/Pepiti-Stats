@@ -48,7 +48,7 @@ export interface TableOptions {
   resultsEnabled?: boolean
   expandable?: {
     render: (record: TableData) => JSX.Element
-    filter?: (record: TableData) => boolean
+    filter?: (record: TableData) => boolean // ! not implemented yet, all rows will be expandable for now
   }
 }
 
