@@ -1,9 +1,9 @@
 "use client"
 
 import React, { useState } from "react"
-import { ChevronsUpDown, ChevronUp, ChevronDown } from "lucide-react"
 import { handleRankColor } from "~/utils/handleRankColor"
 import { cycleSortingDirection, sortDataByColumn, SortDirection } from "."
+import { ChevronsUpDown, ChevronUp, ChevronDown, Plus, Minus } from "lucide-react"
 
 /**
  *  table data can include any properties but must include unique _id
@@ -45,9 +45,10 @@ export interface TableOptions {
   searchKey?: string
   searchTerm?: string
   rankEnabled?: boolean
-  rankStyle?: boolean
-  headerCn?: string
-  rowCn?: string
+  expandable?: {
+    render: (record: TableData) => JSX.Element
+    filter?: (record: TableData) => boolean
+  }
 }
 
 interface TableProps extends TableOptions {
@@ -67,7 +68,7 @@ const Table: React.FC<TableProps> = (props) => {
     searchKey = "name",
     searchTerm = "",
     rankEnabled = true,
-    rankStyle = true,
+    expandable = null,
   } = props
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(defaultPageSize)
@@ -77,6 +78,7 @@ const Table: React.FC<TableProps> = (props) => {
     dir: SortDirection.None,
     key: null,
   })
+  const [expandedRow, setExpandedRow] = useState<any>(null)
 
   /** preps the data for the table to use */
   const manipulatedData = () => {
@@ -98,80 +100,108 @@ const Table: React.FC<TableProps> = (props) => {
 
   /** preps the columns for the table by applying options and props */
   const manipulatedColumns = (): TableColumn[] => {
+    const cols: any = []
+
+    if (expandable) {
+      const expandableColumn = {
+        key: "_expandable",
+        label: "",
+        render: (_, row) => (
+          <button
+            className="btn-ghost btn-xs btn cursor-pointer bg-base-200/60"
+            onClick={() => setExpandedRow(expandedRow?._id === row._id ? null : row)}
+          >
+            {expandedRow?._id !== row._id ? <Plus size={14} /> : <Minus size={14} />}
+          </button>
+        ),
+      }
+      cols.push(expandableColumn)
+    }
     if (rankEnabled) {
       const rankColumn = {
-        key: "rank",
+        key: "_rank",
         label: "Rank",
-        render: (_id, row) => {
+        render: (_, row) => {
           const rank = data.find((d) => row._id === d._id)!.rank
           return (
             <div className="flex items-center justify-start text-base font-medium">
-              <div className={`ml-2 mr-4 h-5 w-2 ${rankStyle && handleRankColor(rank)}`} />
+              <div className={`ml-2 mr-4 h-5 w-2 ${handleRankColor(rank)}`} />
               <div className="py-1">{rank}</div>
             </div>
           )
         },
       }
-      return [rankColumn, ...props.columns]
+      cols.push(rankColumn)
     }
-    return [...props.columns]
+
+    return [...cols, ...props.columns]
   }
   const columns = manipulatedColumns()
 
   /** maps prepped columns to header row */
-  const tableColumns = columns.map((column) => {
-    const isRankColumn = column.key === "rank"
-    const columnIsSortable =
-      sortingKeys.some((k) => k === column.key) && !isRankColumn && sortingEnabled
-
-    const handleHeaderClick = (key) => {
-      if (!columnIsSortable) return
-
-      const sortDirection =
-        sorting.key === key ? cycleSortingDirection(sorting.dir) : SortDirection.Ascending
-      const sortData = sortDataByColumn(data, key, sortDirection)
-
-      const sort = {
-        data: sortData,
-        dir: sortDirection as SortDirection,
-        key: sortDirection === SortDirection.None ? null : key,
-      }
-
-      console.log("%cTable: Sorting", "color: goldenrod", sort)
-      setSorting(sort)
-    }
-
-    const SortingControls = () => {
-      if (!columnIsSortable) return <></>
-
-      const isColumnSorting = sorting.key === column.key
-
-      return (
-        <div className={isColumnSorting ? "text-secondary group-hover:scale-125" : "text-accent"}>
-          {!isColumnSorting || sorting.dir === SortDirection.None ? (
-            <ChevronsUpDown size={16} />
-          ) : sorting.dir === SortDirection.Descending ? (
-            <ChevronUp size={14} />
-          ) : (
-            <ChevronDown size={14} />
-          )}
-        </div>
-      )
-    }
-
+  const TableColumns = () => {
     return (
-      <th
-        key={column.key}
-        className={`group py-4 ${columnIsSortable ? "cursor-pointer" : ""}`}
-        onClick={() => handleHeaderClick(column.key)}
-      >
-        <div className={"flex select-none items-center gap-4"}>
-          {column.label}
-          <SortingControls />
-        </div>
-      </th>
+      <tr>
+        {columns.map((column, idx) => {
+          const isRankColumn = column.key === "_rank"
+          const columnIsSortable =
+            sortingKeys.some((k) => k === column.key) && !isRankColumn && sortingEnabled
+
+          const handleHeaderClick = (key) => {
+            if (!columnIsSortable) return
+
+            const sortDirection =
+              sorting.key === key ? cycleSortingDirection(sorting.dir) : SortDirection.Ascending
+            const sortData = sortDataByColumn(data, key, sortDirection)
+
+            const sort = {
+              data: sortData,
+              dir: sortDirection as SortDirection,
+              key: sortDirection === SortDirection.None ? null : key,
+            }
+
+            console.log("%cTable: Sorting", "color: goldenrod", sort)
+            setSorting(sort)
+          }
+
+          const SortingControls = () => {
+            if (!columnIsSortable) return <></>
+
+            const isColumnSorting = sorting.key === column.key
+
+            return (
+              <div
+                className={isColumnSorting ? "text-secondary group-hover:scale-125" : "text-accent"}
+              >
+                {!isColumnSorting || sorting.dir === SortDirection.None ? (
+                  <ChevronsUpDown size={16} />
+                ) : sorting.dir === SortDirection.Descending ? (
+                  <ChevronUp size={14} />
+                ) : (
+                  <ChevronDown size={14} />
+                )}
+              </div>
+            )
+          }
+
+          return (
+            <th
+              key={column.key}
+              className={`group rounded-none bg-base-200 p-0 py-4 ${
+                columnIsSortable ? "cursor-pointer" : ""
+              }`}
+              onClick={() => handleHeaderClick(column.key)}
+            >
+              <div className={`flex select-none items-center gap-4 ${idx === 0 ? "pl-4" : ""}`}>
+                {column.label}
+                <SortingControls />
+              </div>
+            </th>
+          )
+        })}
+      </tr>
     )
-  })
+  }
 
   const startIndex = page * pageSize
   const endIndex = startIndex + pageSize
@@ -179,33 +209,51 @@ const Table: React.FC<TableProps> = (props) => {
   const paginatedData = paginationEnabled ? sortedData.slice(startIndex, endIndex) : sortedData
 
   /** maps prepped data to table rows in respective column */
-  const tableBodyData = paginatedData.length ? (
-    paginatedData.map((row) => {
+  const TableRows = () => {
+    if (!paginatedData.length)
       return (
-        <tr key={row._id}>
-          {columns.map((column) => {
-            const dataKey = column.key
-            const renderer = column.render
-            const value = row[dataKey]
-
-            return (
-              <td key={dataKey} className="p-0">
-                <div className={"flex min-h-[45px] items-center pl-2 font-medium"}>
-                  {renderer ? renderer(value, row) : value}
-                </div>
-              </td>
-            )
-          })}
+        <tr>
+          <td className="text-center" colSpan={columns.length}>
+            No Results
+          </td>
         </tr>
       )
-    })
-  ) : (
-    <tr>
-      <td className="text-center" colSpan={columns.length}>
-        No Results
-      </td>
-    </tr>
-  )
+
+    const ExpandedRow = ({ row }) => (
+      <>
+        {expandable && expandedRow?._id === row._id && (
+          <td colSpan={columns.length} className="w-full whitespace-break-spaces p-0 py-4 pl-4">
+            {expandable && expandable?.render(row)}
+          </td>
+        )}
+      </>
+    )
+
+    return (
+      <>
+        {paginatedData.map((row) => (
+          <>
+            <tr key={row._id} className="w-full">
+              {columns.map((column, idx) => {
+                const dataKey = column.key
+                const renderer = column.render
+                const value = row[dataKey]
+
+                return (
+                  <td key={dataKey} className={`rounded-none p-0 ${idx === 0 ? "pl-4" : ""}`}>
+                    <div className={"flex min-h-[45px] w-full items-center font-medium"}>
+                      {renderer ? renderer(value, row) : value}
+                    </div>
+                  </td>
+                )
+              })}
+            </tr>
+            <ExpandedRow row={row} />
+          </>
+        ))}
+      </>
+    )
+  }
 
   const handleTermChange = (term) => {
     setTerm(term)
@@ -235,10 +283,12 @@ const Table: React.FC<TableProps> = (props) => {
       </div>
       <div className="w-full overflow-x-auto">
         <table className="table-zebra table-compact my-0 table w-full">
-          <thead className="bg-base-200 text-xs uppercase">
-            <tr>{tableColumns}</tr>
+          <thead className="rounded-tl-lg rounded-tr-lg bg-base-200 text-xs uppercase">
+            <TableColumns />
           </thead>
-          <tbody>{tableBodyData}</tbody>
+          <tbody>
+            <TableRows />
+          </tbody>
         </table>
       </div>
       {paginationEnabled && (

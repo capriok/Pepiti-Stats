@@ -1,6 +1,6 @@
-import PageHeader from "~/components/PageHeader"
-import { NewspaperIcon } from "lucide-react"
 import Link from "next/link"
+import PageHeader from "~/components/PageHeader"
+import { Bike, Crosshair, Crown, HardHat, Timer } from "lucide-react"
 
 export async function generateMetadata() {
   return {
@@ -27,68 +27,53 @@ export default async function Page() {
 
 const Records = () => {
   return (
-    <div className="md: mt-6 grid grid-cols-1 md:grid-cols-3 md:px-4">
-      <div className="mr-4 flex flex-col">
+    <div className="grid place-items-center gap-2 md:mt-6 md:px-4">
+      <div>
         <div className="my-4 text-xl font-semibold">World Records</div>
-        <Link
-          href="/records/riders"
-          className="card card-body mb-2 flex w-[300px] cursor-pointer bg-base-200 no-underline hover:bg-secondary"
-        >
-          <div className="flex">
-            <NewspaperIcon />
-            <div className="ml-4">Record Holders</div>
+        <Link href="/records/riders">
+          <div className="btn-outline btn-secondary btn flex w-[300px] justify-between">
+            <Timer className="text-white" />
+            <div className="ml-4 text-white">Record Holders</div>
           </div>
         </Link>
       </div>
 
-      <div className="mr-4 flex flex-col">
+      <div>
         <div className="my-4 text-xl font-semibold">MMR</div>
-        <Link
-          href="/records/mmr"
-          className="card card-body mb-2 flex w-[300px] cursor-pointer bg-base-200 no-underline hover:bg-secondary"
-        >
-          <div className="flex">
-            <NewspaperIcon />
-            <div className="ml-4">Top MMR Rankings</div>
+        <Link href="/records/mmr">
+          <div className="btn-outline btn-secondary btn flex w-[300px] justify-between">
+            <Crown className="text-white" />
+            <div className="ml-4 text-white">Top MMR Rankings</div>
           </div>
         </Link>
       </div>
 
-      <div className="mr-4 flex flex-col">
+      <div>
         <div className="my-4 text-xl font-semibold">SR</div>
-        <Link
-          href="/records/sr"
-          className="card card-body mb-2 flex w-[300px] cursor-pointer bg-base-200 no-underline hover:bg-secondary"
-        >
-          <div className="flex">
-            <NewspaperIcon />
-            <div className="ml-4">Top MMR Rankings</div>
+        <Link href="/records/sr">
+          <div className="btn-outline btn-secondary btn flex w-[300px] justify-between">
+            <HardHat className="text-white" />
+            <div className="ml-4 text-white">Top SR Rankings</div>
           </div>
         </Link>
       </div>
 
-      <div className="mr-4 flex flex-col">
+      <div>
         <div className="my-4 text-xl font-semibold">Bikes</div>
-        <Link
-          href="/records/bikes"
-          className="card card-body mb-2 flex w-[300px] cursor-pointer bg-base-200 no-underline hover:bg-secondary"
-        >
-          <div className="flex">
-            <NewspaperIcon />
-            <div className="ml-4">Bike Lap Totals</div>
+        <Link href="/records/bikes">
+          <div className="btn-outline btn-secondary btn flex w-[300px] justify-between">
+            <Bike className="text-white" />
+            <div className="ml-4 text-white">Bike Lap Totals</div>
           </div>
         </Link>
       </div>
 
-      <div className="mr-4 flex flex-col">
+      <div>
         <div className="my-4 text-xl font-semibold">Contacts</div>
-        <Link
-          href="/records/contacts"
-          className="card card-body mb-2 flex w-[300px] cursor-pointer bg-base-200 no-underline hover:bg-secondary"
-        >
-          <div className="flex">
-            <NewspaperIcon />
-            <div className="ml-4">Most Unaware Riders</div>
+        <Link href="/records/contacts">
+          <div className="btn-outline btn-secondary btn flex w-[300px] justify-between">
+            <Crosshair className="text-white" />
+            <div className="ml-4 text-white">Most Unaware Riders</div>
           </div>
         </Link>
       </div>
