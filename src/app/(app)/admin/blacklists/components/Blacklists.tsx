@@ -8,6 +8,7 @@ import RiderLink from "~/components/RiderLink"
 import Table from "~/components/Table/Table"
 import Tabs from "~/components/Tabs"
 import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
+import BlacklistTable from "./BlacklistTable"
 
 interface Props {
   isAdmin: boolean
@@ -27,12 +28,16 @@ export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Pro
       label: "Global Blacklist",
       children: (
         <div className="p-4">
-          <BlacklistAlert
-            color="bg-red-800/80"
-            text="If youre on this list, you did something worthy of being banned from online racing for the foreseeable future"
-          />
-          {!pathname.includes("admin") && <BanAppealButtons />}
-          <BlacklistTable blacklist={blacklistNonSR} isAdmin={isAdministrating} />
+          {!isAdministrating && (
+            <>
+              <BlacklistAlert
+                color="bg-red-800/80"
+                text="If youre on this list, you did something worthy of being banned from online racing for the foreseeable future"
+              />
+              <BanAppealButtons />
+            </>
+          )}
+          <BlacklistTable blacklist={blacklistNonSR} isAdministrating={isAdministrating} />
         </div>
       ),
     },
@@ -41,12 +46,16 @@ export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Pro
       label: "Safety Rating Blacklist",
       children: (
         <div className="p-4">
-          <BlacklistAlert
-            color="bg-orange-800/80"
-            text="If youre on this list, you have a Safety Rating below 950, race in a banned/no-contact server to build your SR back up"
-          />
-          {!pathname.includes("admin") && <BanAppealButtons />}
-          <BlacklistTable blacklist={blacklistSR} isAdmin={isAdministrating} />
+          {!isAdministrating && (
+            <>
+              <BlacklistAlert
+                color="bg-orange-800/80"
+                text="If youre on this list, you have a Safety Rating below 950, race in a banned/no-contact server to build your SR back up"
+              />
+              <BanAppealButtons />
+            </>
+          )}
+          <BlacklistTable blacklist={blacklistSR} isAdministrating={isAdministrating} />
         </div>
       ),
     },
@@ -89,84 +98,4 @@ const BanAppealButtons = () => {
       </button>
     </div>
   )
-}
-
-const BlacklistTable = ({ blacklist, isAdmin }) => {
-  const searchParams = useSearchParams()
-  const guidParam = searchParams.get("guid")
-
-  const data = blacklist.map((rider) => ({
-    ...rider,
-    guid: rider._id,
-  }))
-  const columns = [
-    {
-      key: "guid",
-      label: "GUID",
-    },
-    {
-      key: "name",
-      label: "Name",
-      render: (name, row) => <RiderLink href={`/profile/${row._id}`} name={name} />,
-    },
-    {
-      key: "MMR",
-      label: "MMR",
-      render: (MMR) => <Pill text={MMR} />,
-    },
-    {
-      key: "SR",
-      label: "SR",
-      render: (SR) => <Pill text={SR} />,
-    },
-    {
-      key: "contact",
-      label: "Contacts",
-      render: (contact) => <Pill text={contact} />,
-    },
-    {
-      key: "banned_by",
-      label: "Reason",
-      render: (reason) => (
-        <Pill
-          text={reason.charAt(0).toUpperCase() + reason.slice(1)}
-          color={renderBannedBy(reason)}
-        />
-      ),
-    },
-  ]
-
-  const adminColumn = {
-    key: "guid",
-    label: "Admin",
-    render: (guid, row) => <UnbanRiderButton riderId={guid} name={row.name} hackit={true} />,
-  }
-
-  if (isAdmin) columns.push(adminColumn as any)
-
-  return (
-    <Table
-      data={data}
-      columns={columns}
-      searchKey="guid"
-      searchEnabled={true}
-      searchTerm={guidParam ?? ""}
-      rankEnabled={false}
-      paginationEnabled={true}
-    />
-  )
-}
-
-const renderBannedBy = (reason) => {
-  switch (reason.toLowerCase()) {
-    case "global":
-    case "perma":
-    case "racism":
-    case "racist":
-      return "red"
-    case "sr":
-      return "orange"
-    default:
-      return "secondary"
-  }
 }

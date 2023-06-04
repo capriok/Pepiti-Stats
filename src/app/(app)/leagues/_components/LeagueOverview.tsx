@@ -106,7 +106,7 @@ const LeagueBanner = ({ league }: { league: League }) => {
 }
 
 const LeagueInformation = ({ league, host }: { league: League; host: RiderProfile }) => (
-  <div className="card card-body bg-base-200">
+  <div className="card card-body bg-base-200 shadow-md">
     <div className="grid w-full grid-cols-1 md:grid-cols-2">
       <div className="flex flex-col justify-center">
         <div className="mb-2 flex items-center gap-2">
@@ -182,7 +182,7 @@ const LeagueRequirements = ({
   ]
 
   return (
-    <div className="stats w-full bg-base-200">
+    <div className="stats w-full bg-base-200 shadow-md">
       {requirements.map((requirement) => (
         <div key={requirement.label} className="stat place-items-center">
           <div className="stat-title">{requirement.label}</div>

@@ -38,8 +38,8 @@ const LeagueRaceAlert = ({ isInRace }: { isInRace: boolean }) => {
   if (!isInRace) return <></>
 
   return (
-    <div className="mb-4 flex w-full justify-stretch">
-      <div data-tip="You are In the League" className="alert rounded-xl bg-secondary text-white">
+    <div className="mb-4 flex w-full justify-stretch shadow-md">
+      <div className="alert rounded-xl bg-secondary text-white">
         <div className="flex w-full items-center justify-center gap-2">
           Registered for the Race <CheckIcon />
         </div>
@@ -56,7 +56,7 @@ const LeagueRaceInformation = ({
   isInRace: boolean
 }) => {
   return (
-    <div className="card card-body bg-base-200 p-0">
+    <div className="card card-body bg-base-200 p-0 shadow-md">
       {!isInRace && (
         <div
           className={`rounded-lg rounded-bl-none rounded-br-none p-2 text-white ${
@@ -128,7 +128,7 @@ const LeagueRaceConfig = ({ race }: { race: LeagueRaceDetails }) => {
 
   return (
     <div className="grid place-items-center">
-      <div className="stats flex w-full bg-base-200 md:w-fit">
+      <div className="stats flex w-full bg-base-200 shadow-md md:w-fit">
         {configurations.map((configuration) => (
           <div
             key={configuration.label}
