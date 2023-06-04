@@ -27,6 +27,7 @@ export interface TableColumn {
   key: string
   label: string | JSX.Element
   render?: (value: any, row: TableData) => any
+  width?: string
 }
 
 /**
@@ -187,7 +188,7 @@ const Table: React.FC<TableProps> = (props) => {
           }
 
           const firstColCn = idx === 0 ? "pl-4" : ""
-          const columnCn = `flex select-none items-center gap-4 ${firstColCn}`
+          const columnCn = `flex select-none items-center gap-4 px-2 max-w-[40%] ${firstColCn} ${column.width}`
 
           return (
             <th
@@ -227,7 +228,7 @@ const Table: React.FC<TableProps> = (props) => {
         {expandable && expandedRow?._id === row._id && (
           <td
             colSpan={columns.length}
-            className="w-full whitespace-break-spaces bg-base-200 p-4 pl-8"
+            className="w-full whitespace-break-spaces bg-base-200 p-4 px-4 pr-0"
           >
             {expandable && expandable?.render(row)}
           </td>
@@ -245,9 +246,9 @@ const Table: React.FC<TableProps> = (props) => {
                 const renderer = column.render
                 const value = row[dataKey]
 
-                const firstColCn = idx === 0 ? "pl-4" : ""
-                const isOdCn = row.rank % 2 === 0 ? "bg-base-200" : "bg-base-100"
-                const rowCn = `rounded-none p-0 ${firstColCn} ${isOdCn}`
+                const firstColCn = idx === 0 ? "pl-4 w-fit" : ""
+                const isOddCn = row.rank % 2 === 0 ? "bg-base-200" : "bg-base-100"
+                const rowCn = `rounded-none p-0 px-2 max-w-[40%] ${isOddCn} ${firstColCn} ${column.width}`
 
                 return (
                   <td key={dataKey} className={rowCn}>

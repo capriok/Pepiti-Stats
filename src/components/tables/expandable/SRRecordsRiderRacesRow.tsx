@@ -17,20 +17,20 @@ export default function SRRecordsRiderRacesRow({ row }) {
   console.log("%cSRRecordsRiderRacesRow", "color: goldenrod", { races: rider })
 
   return (
-    <div>
+    <div className="pr-4">
       <div className="mb-2 text-lg font-semibold">{row.name}&apos;s Stats</div>
-      <div className="stats flex w-full bg-base-100/60 shadow-lg dark:bg-base-100">
-        <div className="stat flex flex-col items-center">
+      <div className="stats flex w-full bg-base-100/60 text-center shadow-lg dark:bg-base-100">
+        <div className="stat w-full text-center">
           <div className="stat-title">Laps</div>
           <div className="stat-value py-2 text-2xl">{rider.total_laps}</div>
           <div className="stat-description">Total Laps</div>
         </div>
-        <div className="stat flex flex-col items-center">
+        <div className="stat w-full text-center">
           <div className="stat-title">SR</div>
           <div className="stat-value py-2 text-2xl">{rider.SR}</div>
           <div className="stat-description">Safety Rating</div>
         </div>
-        <div className="stat flex flex-col items-center">
+        <div className="stat w-full text-center">
           <div className="stat-title">Contacts</div>
           <div className="stat-value py-2 text-2xl">{rider.contact}</div>
           <div className="stat-description">Contact with others</div>

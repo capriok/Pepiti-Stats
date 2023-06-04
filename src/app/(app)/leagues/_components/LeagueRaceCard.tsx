@@ -35,7 +35,7 @@ export default function LeagueRaceCard({ race }: Props) {
   const isInRace = raceEligibility.race_joined === true
 
   return (
-    <div className="card card-body bg-base-200 p-0">
+    <div className="card card-body bg-base-200 p-0 shadow-md">
       <RaceCardBanner status={race.status} isInRace={isInRace} />
 
       <RaceCardContent race={race} />
