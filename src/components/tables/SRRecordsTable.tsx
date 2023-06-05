@@ -30,6 +30,8 @@ export default function SRRecordsTable({ worldSR, ...rest }: Props) {
     },
   ]
 
+  const sortKeys = ["rating"]
+
   return (
     <div className="flex flex-col items-end">
       <Table
@@ -37,7 +39,7 @@ export default function SRRecordsTable({ worldSR, ...rest }: Props) {
         columns={columns}
         paginationEnabled={true}
         jumpToEnabled={false}
-        sortingKeys={["rating"]}
+        sortingKeys={sortKeys}
         {...rest}
       />
     </div>

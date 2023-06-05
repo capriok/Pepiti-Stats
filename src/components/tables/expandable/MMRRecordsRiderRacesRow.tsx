@@ -22,14 +22,10 @@ export default function MMRRecordsRiderRacesRow({ row }) {
   const lastRaces = raceData.races.slice(0, 10)
 
   const data = lastRaces.map((race) => ({
-    date: parseInt(race._id.slice(0, 8), 16) * 1000,
     _id: race._id,
+    date: parseInt(race._id.slice(0, 8), 16) * 1000,
     track: race.track,
     position: race?.Classification?.Pos ?? "",
-    laps: race?.Classification?.Laps ?? "",
-    gap: race?.Classification?.Gap ?? "",
-    penalties: race?.Classification?.Penalty ?? "",
-    fastestLap: race.FastestLap,
     mmrGain: race.MMR.total,
     newMMR: race.MMR.old_MMR + race.MMR.total,
   }))
@@ -55,7 +51,6 @@ export default function MMRRecordsRiderRacesRow({ row }) {
       label: "Position",
       render: (position) => (position ? <b>{handlePlaceSuffix(position)}</b> : "-"),
     },
-
     {
       key: "mmrGain",
       label: "MMR +/-",

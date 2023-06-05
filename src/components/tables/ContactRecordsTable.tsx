@@ -30,9 +30,11 @@ export default function ContactRecordsTable({ worldContacts, ...rest }: Props) {
     },
   ]
 
+  const sortKeys = ["contacts"]
+
   return (
     <div className="flex flex-col items-end">
-      <Table data={data} columns={columns} sortingKeys={["contacts"]} {...rest} />
+      <Table data={data} columns={columns} sortingKeys={sortKeys} {...rest} />
     </div>
   )
 }

@@ -4,7 +4,7 @@ import useSWR from "swr"
 import { fetcher } from "~/api/fetcher"
 import Spinner from "~/components/Spinner"
 
-export default function SRRecordsRiderRacesRow({ row }) {
+export default function SRRecordsRiderStatsRow({ row }) {
   const { data: rider, isLoading } = useSWR(`/rider/${row._id}`, fetcher)
 
   if (isLoading)
@@ -14,7 +14,7 @@ export default function SRRecordsRiderRacesRow({ row }) {
       </div>
     )
 
-  console.log("%cSRRecordsRiderRacesRow", "color: goldenrod", { races: rider })
+  console.log("%cSRRecordsRiderStatsRow", "color: goldenrod", { rider: rider })
 
   return (
     <div className="pr-4">
@@ -23,7 +23,7 @@ export default function SRRecordsRiderRacesRow({ row }) {
         <div className="stat w-full text-center">
           <div className="stat-title">Laps</div>
           <div className="stat-value py-2 text-2xl">{rider.total_laps}</div>
-          <div className="stat-description">Total Laps</div>
+          <div className="stat-description">Total</div>
         </div>
         <div className="stat w-full text-center">
           <div className="stat-title">SR</div>
@@ -33,7 +33,7 @@ export default function SRRecordsRiderRacesRow({ row }) {
         <div className="stat w-full text-center">
           <div className="stat-title">Contacts</div>
           <div className="stat-value py-2 text-2xl">{rider.contact}</div>
-          <div className="stat-description">Contact with others</div>
+          <div className="stat-description">Total</div>
         </div>
       </div>
     </div>

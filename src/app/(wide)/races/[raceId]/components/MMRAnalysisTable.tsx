@@ -3,6 +3,7 @@ import MMRPill from "~/components/pills/MMRPill"
 import Pill from "~/components/pills/Pill"
 import RiderLink from "~/components/RiderLink"
 import Table from "~/components/Table/Table"
+import MMRRecordsRiderRacesRow from "~/components/tables/expandable/MMRRecordsRiderRacesRow"
 import { toFixedIfNecessary } from "~/utils/toFixedIfNecessary"
 
 interface Props {
@@ -81,12 +82,17 @@ export default function MMRAnalysisTable({ standings }: Props) {
     },
   ]
 
+  const sortKeys = ["mmrGain", "newMmr", "bpp", "prb", "nrb", "fl", "hs"]
+
   return (
     <Table
       columns={columns}
       data={standings}
       sortingEnabled={true}
-      sortingKeys={["mmrGain", "newMmr", "bpp", "prb", "nrb", "fl", "hs"]}
+      sortingKeys={sortKeys}
+      expandable={{
+        render: (row) => <MMRRecordsRiderRacesRow row={row} />,
+      }}
     />
   )
 }

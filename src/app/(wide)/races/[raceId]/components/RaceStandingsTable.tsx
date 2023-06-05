@@ -2,6 +2,7 @@ import Link from "next/link"
 import React, { useState } from "react"
 import RiderLink from "~/components/RiderLink"
 import Table from "~/components/Table/Table"
+import RecentRacesRiderStatsRow from "~/components/tables/expandable/RecentRacesAnalysisStatsRow"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
 
@@ -59,13 +60,18 @@ export default function RaceStandingsTable({ standings }: Props) {
     },
   ]
 
+  const sortKeys = ["position", "gap", "raceTime", "laps", "penalty", "fastestLap"]
+
   return (
     <>
       <Table
         columns={tableColumns}
         data={standings}
         sortingEnabled={true}
-        sortingKeys={["position", "gap", "raceTime", "laps", "penalty", "fastestLap"]}
+        sortingKeys={sortKeys}
+        expandable={{
+          render: (row) => <RecentRacesRiderStatsRow row={row} />,
+        }}
       />
     </>
   )

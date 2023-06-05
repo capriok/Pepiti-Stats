@@ -73,6 +73,8 @@ export default function RiderRecordsTable({ guid }: Props) {
       render: (bike) => <BikeWithPrefixColor bike={bike} />,
     },
   ]
+  
+  const sortKeys = ["date", "track", "lapTime", "split1", "split2", "averageSpeed"]
 
   return (
     <Table
@@ -83,7 +85,7 @@ export default function RiderRecordsTable({ guid }: Props) {
       searchEnabled={true}
       paginationEnabled={true}
       sortingEnabled={true}
-      sortingKeys={["date", "track", "lapTime", "split1", "split2", "averageSpeed"]}
+      sortingKeys={sortKeys}
     />
   )
 }

@@ -244,12 +244,14 @@ const LeagueStandings = ({ league }: { league: League }) => {
     },
   ]
 
+  const sortKeys = ["name", "score", "bike_id", "team"]
+
   return (
     <Table
       data={data}
       columns={columns}
       sortingEnabled={true}
-      sortingKeys={["name", "score", "bike_id", "team"]}
+      sortingKeys={sortKeys}
     />
   )
 }

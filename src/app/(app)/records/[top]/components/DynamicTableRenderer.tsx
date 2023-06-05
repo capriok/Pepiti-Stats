@@ -5,9 +5,9 @@ import WorldRecordsRiderRecordsRow from "~/components/tables/expandable/WorldRec
 import MMRRecordsTable from "~/components/tables/MMRRecordsTable"
 import MMRRecordsRiderRacesRow from "~/components/tables/expandable/MMRRecordsRiderRacesRow"
 import SRRecordsTable from "~/components/tables/SRRecordsTable"
+import SRRecordsRiderRacesRow from "~/components/tables/expandable/SRRecordsRiderStatsRow"
 import BikeRecordsTable from "~/components/tables/BikeRecordsTable"
 import ContactRecordsTable from "~/components/tables/ContactRecordsTable"
-import SRRecordsRiderRacesRow from "~/components/tables/expandable/SRRecordsRiderRacesRow"
 
 export default function DynamicTableRenderer({ top, records }) {
   return dynamicDataMap[top].render(records)
