@@ -7,7 +7,6 @@ export const metadata = {
     "Pepiti, Pepiti Races, Pepiti Leagues, MX Bikes Stats, MX Bikes, Stats, MXB Mods, MX Bikes Mods",
 }
 
-import { Analytics } from "@vercel/analytics/react"
 import { Providers } from "./providers"
 import { Toaster } from "~/ui/Toaster"
 import getAuthUser from "~/api/getAuthUser"
@@ -32,7 +31,6 @@ export default async function RootLayout(props: Props) {
             <div className="flex-1">{props.children}</div>
             <Footer user={user} />
             <Toaster />
-            {/* <Analytics /> */}
           </main>
         </Providers>
       </body>
