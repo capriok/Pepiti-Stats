@@ -11,7 +11,7 @@ import { dateIsValid } from "~/utils/dateIsValid"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
 import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 
-export default function MMRRecordsRiderRacesRow({ row }) {
+export default function RiderRecentRacesTable({ row }) {
   const { data: raceData, isLoading } = useSWR(`/rider/${row._id}/races`, fetcher)
 
   if (isLoading)
@@ -30,7 +30,7 @@ export default function MMRRecordsRiderRacesRow({ row }) {
     mmrGain: race.MMR.total,
     newMMR: race.MMR.old_MMR + race.MMR.total,
   }))
-  console.log("%cMMRRecordsRiderRacesRow", "color: goldenrod", { races: data })
+  console.log("%cRiderRecentRacesTable", "color: goldenrod", { races: data })
 
   const columns = [
     {

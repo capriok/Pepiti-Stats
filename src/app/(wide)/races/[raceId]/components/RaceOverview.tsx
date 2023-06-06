@@ -1,3 +1,4 @@
+import Link from "next/link"
 import useSwr from "swr"
 import { fetcher } from "~/api/fetcher"
 import RiderAvatar from "~/app/(app)/profile/[guid]/components/RiderAvatar"
@@ -120,7 +121,9 @@ function RaceNotables({ race }: { race: Race }) {
                 <div className="text-primary">{riderWithSecondPlace?.raceNumber}</div>
               </div>
               <div className=" text-accent">|</div>
-              <div>{handleRacismSanitization(riderWithSecondPlace?.name ?? "")}</div>
+              <Link href={`/profile/${riderWithSecondPlace?._id}`}>
+                {handleRacismSanitization(riderWithSecondPlace?.name ?? "")}
+              </Link>
             </div>
             <div>
               <div className={`ml-2 mr-4 h-5 w-2 ${handleRankColor(2)}`} />
@@ -136,7 +139,9 @@ function RaceNotables({ race }: { race: Race }) {
                 <div className="text-primary">{riderWithThirdPlace?.raceNumber}</div>
               </div>
               <div className=" text-accent">|</div>
-              <div>{handleRacismSanitization(riderWithThirdPlace?.name ?? "")}</div>
+              <Link href={`/profile/${riderWithThirdPlace?._id}`}>
+                {handleRacismSanitization(riderWithThirdPlace?.name ?? "")}
+              </Link>
             </div>
             <div>
               <div className={`ml-2 mr-4 h-5 w-2 ${handleRankColor(3)}`} />
@@ -155,7 +160,9 @@ function RaceNotables({ race }: { race: Race }) {
                 <div className="text-primary">{riderWithFastestLap?.raceNumber}</div>
               </div>
               <div className=" text-accent">|</div>
-              <div>{handleRacismSanitization(riderWithFastestLap?.name ?? "")}</div>
+              <Link href={`/profile/${riderWithFastestLap?._id}`}>
+                {handleRacismSanitization(riderWithFastestLap?.name ?? "")}
+              </Link>
             </div>
             <div>{handleLapTimes(parseInt(riderWithFastestLap?.fastestLap))}</div>
           </div>
@@ -169,7 +176,9 @@ function RaceNotables({ race }: { race: Race }) {
                 <div className="text-primary">{riderWithHighestMmrGain?.raceNumber}</div>
               </div>
               <div className="text-accent">|</div>
-              <div>{handleRacismSanitization(riderWithHighestMmrGain?.name ?? "")}</div>
+              <Link href={`/profile/${riderWithHighestMmrGain?._id}`}>
+                {handleRacismSanitization(riderWithHighestMmrGain?.name ?? "")}
+              </Link>
             </div>
             <MMRPill mmr={riderWithHighestMmrGain?.mmrGain} />
           </div>
