@@ -32,7 +32,7 @@ export default function RiderAvatar({ rider }) {
         <div className="flex gap-2 font-semibold md:text-2xl">{rider.name}</div>
         {rider.donation > 0 && (
           <Image
-            src="/assets/brand/donator-flag.svg"
+            src="/assets/brand/donation-flag.svg"
             className="h-6 w-6"
             alt=""
             width={10}
