@@ -35,7 +35,7 @@ export default function RiderAvatar({ rider }) {
         </div>
         {rider.donation > 0 && (
           <Image
-            src="/assets/brand/donator-flag.svg"
+            src="/assets/brand/donation-flag.svg"
             className="h-6 w-6"
             alt=""
             width={10}
