@@ -4,6 +4,7 @@ import useSWR from "swr"
 import { fetcher } from "~/api/fetcher"
 import Spinner from "~/components/Spinner"
 import UnbanRiderButton from "~/components/actions/UnbanRiderButton"
+import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 
 export default function BlacklistRiderStatsRow({ row, isAdministrating }) {
   const { data: rider, isLoading } = useSWR(`/rider/${row._id}`, fetcher)
@@ -20,7 +21,9 @@ export default function BlacklistRiderStatsRow({ row, isAdministrating }) {
   return (
     <div className="pr-4">
       <div className="mb-2 flex w-full justify-between">
-        <div className="text-lg font-semibold">{row.name}&apos;s Stats</div>
+        <div className="text-lg font-semibold">
+          {handleRacismSanitization(row.name)}&apos;s Stats
+        </div>
         {isAdministrating && (
           <div className="text-lg font-semibold">
             <UnbanRiderButton riderId={rider._id} name={rider.name} hackit={true} />

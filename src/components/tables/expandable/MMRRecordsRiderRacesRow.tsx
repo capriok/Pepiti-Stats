@@ -9,6 +9,7 @@ import Spinner from "~/components/Spinner"
 import Table from "~/components/Table/Table"
 import { dateIsValid } from "~/utils/dateIsValid"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
+import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 
 export default function MMRRecordsRiderRacesRow({ row }) {
   const { data: raceData, isLoading } = useSWR(`/rider/${row._id}/races`, fetcher)
@@ -65,7 +66,9 @@ export default function MMRRecordsRiderRacesRow({ row }) {
 
   return (
     <>
-      <div className="mb-2 text-lg font-semibold">{row.name}&apos;s Last Ten Races</div>
+      <div className="mb-2 text-lg font-semibold">
+        {handleRacismSanitization(row.name)}&apos;s Last Ten Races
+      </div>
       <Table data={data} columns={columns} rankEnabled={false} />
     </>
   )

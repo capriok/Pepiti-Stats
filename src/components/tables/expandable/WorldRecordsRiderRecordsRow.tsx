@@ -9,6 +9,7 @@ import Spinner from "~/components/Spinner"
 import Table from "~/components/Table/Table"
 import { dateIsValid } from "~/utils/dateIsValid"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
+import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 
 const categories = [
   "MX1 OEM",
@@ -61,7 +62,9 @@ export default function WorldRecordsRiderRecordsRow({ row }) {
 
   return (
     <>
-      <div className="mb-2 font-semibold">{row.name}&apos;s World Records</div>
+      <div className="mb-2 font-semibold">
+        {handleRacismSanitization(row.name)}&apos;s World Records
+      </div>
       <Table data={data} columns={columns} searchKey="track" rankEnabled={false} />
     </>
   )

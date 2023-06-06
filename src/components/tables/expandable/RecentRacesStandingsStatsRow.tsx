@@ -3,6 +3,7 @@
 import useSWR from "swr"
 import { fetcher } from "~/api/fetcher"
 import Spinner from "~/components/Spinner"
+import { handleRacismSanitization } from '~/utils/handleRacismSanitization'
 
 export default function RecentRacesStandingsStatsRow({ row }) {
   const { data: rider, isLoading } = useSWR(`/rider/${row._id}`, fetcher)
@@ -18,7 +19,7 @@ export default function RecentRacesStandingsStatsRow({ row }) {
 
   return (
     <div className="pr-4">
-      <div className="mb-2 text-lg font-semibold">{row.name}&apos;s Race Stats</div>
+      <div className="mb-2 text-lg font-semibold">{handleRacismSanitization(row.name)}&apos;s Race Stats</div>
       <div className="stats flex w-full bg-base-100/60 text-center shadow-lg dark:bg-base-100">
         <div className="stat w-full text-center">
           <div className="stat-title">First</div>

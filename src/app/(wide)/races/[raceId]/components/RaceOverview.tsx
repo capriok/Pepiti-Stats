@@ -95,8 +95,8 @@ function WinnerCircle({ race }: { race: Race }) {
 }
 
 function RaceNotables({ race }: { race: Race }) {
-  const riderWithSecondPlace = race.standings.find((racer) => racer.position === 2)!
-  const riderWithThirdPlace = race.standings.find((racer) => racer.position === 3)!
+  const riderWithSecondPlace = race.standings.find((racer) => racer.position === 2)
+  const riderWithThirdPlace = race.standings.find((racer) => racer.position === 3)
   const riderWithFastestLap = race.standings.reduce(
     (fastest: any, item: any) =>
       item.fl > 0 && (!fastest || item.fl < fastest.fl) ? item : fastest,
@@ -117,10 +117,10 @@ function RaceNotables({ race }: { race: Race }) {
             <div className="flex gap-2">
               <div className="flex gap-1">
                 <div className="text-accent"># </div>
-                <div className="text-primary">{riderWithSecondPlace.raceNumber}</div>
+                <div className="text-primary">{riderWithSecondPlace?.raceNumber}</div>
               </div>
               <div className=" text-accent">|</div>
-              <div>{handleRacismSanitization(riderWithSecondPlace.name)}</div>
+              <div>{handleRacismSanitization(riderWithSecondPlace?.name ?? "")}</div>
             </div>
             <div>
               <div className={`ml-2 mr-4 h-5 w-2 ${handleRankColor(2)}`} />
@@ -133,10 +133,10 @@ function RaceNotables({ race }: { race: Race }) {
             <div className="flex gap-2">
               <div className="flex gap-1">
                 <div className="text-accent"># </div>
-                <div className="text-primary">{riderWithThirdPlace.raceNumber}</div>
+                <div className="text-primary">{riderWithThirdPlace?.raceNumber}</div>
               </div>
               <div className=" text-accent">|</div>
-              <div>{handleRacismSanitization(riderWithThirdPlace.name)}</div>
+              <div>{handleRacismSanitization(riderWithThirdPlace?.name ?? "")}</div>
             </div>
             <div>
               <div className={`ml-2 mr-4 h-5 w-2 ${handleRankColor(3)}`} />
@@ -144,7 +144,6 @@ function RaceNotables({ race }: { race: Race }) {
           </div>
         </div>
       </div>
-
       <div className="flex-1">
         <div className="mb-4 flex justify-center text-xl font-semibold">Notable</div>
         <div className="mb-4 flex flex-col border-b border-accent/20 pb-2">
@@ -156,7 +155,7 @@ function RaceNotables({ race }: { race: Race }) {
                 <div className="text-primary">{riderWithFastestLap?.raceNumber}</div>
               </div>
               <div className=" text-accent">|</div>
-              <div>{handleRacismSanitization(riderWithFastestLap?.name)}</div>
+              <div>{handleRacismSanitization(riderWithFastestLap?.name ?? "")}</div>
             </div>
             <div>{handleLapTimes(parseInt(riderWithFastestLap?.fastestLap))}</div>
           </div>
@@ -170,7 +169,7 @@ function RaceNotables({ race }: { race: Race }) {
                 <div className="text-primary">{riderWithHighestMmrGain?.raceNumber}</div>
               </div>
               <div className="text-accent">|</div>
-              <div>{handleRacismSanitization(riderWithHighestMmrGain?.name)}</div>
+              <div>{handleRacismSanitization(riderWithHighestMmrGain?.name ?? "")}</div>
             </div>
             <MMRPill mmr={riderWithHighestMmrGain?.mmrGain} />
           </div>
