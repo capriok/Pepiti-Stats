@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import RiderLink from "./RiderLink"
 
 interface Props {
   user: User
@@ -15,14 +16,18 @@ export default function Footer({ user }: Props) {
       <div className="footer mx-auto max-w-[1400px]">
         <div>
           <Image src="/assets/brand/pepiti-logo.svg" width={120} height={120} alt="pepiti_brand" />
-          <p>
-            Copyright © {date.getFullYear()} Pepiti
+          <div>
+            <div className="flex gap-2">
+              Copyright © {date.getFullYear()}{" "}
+              <RiderLink href={`/profile/FF01100001013A65F0`} name="Pepiti" />
+            </div>
+            <div className="my-1">All rights reserved</div>
+            <div className="flex gap-2">
+              Powered by <RiderLink href={`/profile/FF011000010B64EBF5`} name="Tooky" /> and{" "}
+              <RiderLink href={`/profile/FF011000010513D5FF`} name="PDR" />
+            </div>
             <br />
-            All rights reserved
-            <br />
-            Powered by Tooky and PDR
-            <br />
-          </p>
+          </div>
         </div>
         <div>
           <span className="footer-title">Services</span>

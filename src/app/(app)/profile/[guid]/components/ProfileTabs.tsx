@@ -6,6 +6,7 @@ import RiderMMRHistoryChart from "./tabs/RiderMMRHistoryChart"
 import RiderRacesTable from "./tabs/RiderRacesTable"
 import RiderRecordsTable from "./tabs/RiderRecordsTable"
 import RiderLeaguesList from "./tabs/RiderLeaguesList"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 interface Props {
   user: User
@@ -15,6 +16,10 @@ interface Props {
 }
 
 export default function ProfileTabs({ user, rider, mmrHistory, leagues }: Props) {
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const tabParam = searchParams.get("tab")!
   const isUserProfile = user.guid === rider._id
 
   const items = [
@@ -64,7 +69,12 @@ export default function ProfileTabs({ user, rider, mmrHistory, leagues }: Props)
 
   return (
     <div className="card-body mt-20 rounded-lg bg-base-200 p-0">
-      <Tabs items={items} wide={true} />
+      <Tabs
+        items={items}
+        wide={true}
+        defaultActive={tabParam}
+        onChange={(item) => router.push(`${pathname}?tab=${item.key}`)}
+      />
     </div>
   )
 }

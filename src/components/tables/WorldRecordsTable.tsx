@@ -30,6 +30,8 @@ export default function WorldRecordsTable({ worldRecords, ...rest }: Props) {
     },
   ]
 
+  const sortKeys = ["records"]
+
   return (
     <div className="flex flex-col items-end">
       <Table
@@ -37,7 +39,7 @@ export default function WorldRecordsTable({ worldRecords, ...rest }: Props) {
         columns={columns}
         paginationEnabled={true}
         jumpToEnabled={false}
-        sortingKeys={["records"]}
+        sortingKeys={sortKeys}
         {...rest}
       />
     </div>

@@ -31,9 +31,11 @@ export default function BikeRecordsTable({ worldBikes, ...rest }: Props) {
     },
   ]
 
+  const sortKeys = ["laps"]
+
   return (
     <div className="flex flex-col items-end">
-      <Table data={data} columns={columns} sortingKeys={["laps"]} {...rest} />
+      <Table data={data} columns={columns} sortingKeys={sortKeys} {...rest} />
     </div>
   )
 }

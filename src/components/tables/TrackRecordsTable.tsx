@@ -50,6 +50,8 @@ export const TrackRecordsTable = ({ trackRecords, ...rest }: Props) => {
     },
   ]
 
+  const sortKeys = ["lap_time", "average_speed", "split_1", "split_2"]
+
   return (
     <Table
       data={data}
@@ -57,7 +59,7 @@ export const TrackRecordsTable = ({ trackRecords, ...rest }: Props) => {
       searchEnabled={true}
       paginationEnabled={true}
       sortingEnabled={true}
-      sortingKeys={["lap_time", "average_speed", "split_1", "split_2"]}
+      sortingKeys={sortKeys}
       {...rest}
     />
   )

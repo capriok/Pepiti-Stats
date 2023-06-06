@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation"
 import Table from "~/components/Table/Table"
 import RiderLink from "~/components/RiderLink"
 import Pill from "~/components/pills/Pill"
-import UnbanRiderButton from "~/components/actions/UnbanRiderButton"
+import BlacklistRiderStatsRow from "../../../../../components/tables/expandable/BlacklistRiderStatsRow"
 
 interface Props {
   blacklist: any
@@ -56,7 +56,7 @@ export default function BlacklistTable({ blacklist, isAdministrating }: Props) {
       sortingEnabled={true}
       sortingKeys={sortKeys}
       expandable={{
-        render: (row) => <BlacklistRiderRow row={row} isAdministrating={isAdministrating} />,
+        render: (row) => <BlacklistRiderStatsRow row={row} isAdministrating={isAdministrating} />,
       }}
     />
   )
@@ -74,37 +74,4 @@ const renderBannedBy = (reason) => {
     default:
       return "secondary"
   }
-}
-
-function BlacklistRiderRow({ row, isAdministrating }) {
-  const columns: any = []
-  const adminColumn = {
-    key: "guid",
-    label: "Admin",
-    width: "w-full",
-    render: (guid, row) => <UnbanRiderButton riderId={guid} name={row.name} hackit={true} />,
-  }
-
-  if (isAdministrating) columns.push(adminColumn)
-
-  const riderColumns = [
-    {
-      key: "MMR",
-      label: "MMR",
-      render: (MMR) => <Pill text={MMR} />,
-    },
-    {
-      key: "SR",
-      label: "SR",
-      render: (SR) => <Pill text={SR} />,
-    },
-    {
-      key: "contact",
-      label: "Contacts",
-      render: (contact) => <Pill text={contact} />,
-    },
-  ]
-  columns.push(...riderColumns)
-
-  return <Table data={[row]} columns={columns} rankEnabled={false} />
 }
