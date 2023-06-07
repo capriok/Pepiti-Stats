@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation"
 import Table from "~/components/Table/Table"
 import RiderLink from "~/components/RiderLink"
 import Pill from "~/components/pills/Pill"
-import BlacklistRiderStatsRow from "../../../../../components/tables/expandable/BlacklistRiderStatsRow"
+import BlacklistRiderStatsRow from "../../../../../components/tables/expandable/AdminRiderSafetyStats"
 
 interface Props {
   blacklist: any

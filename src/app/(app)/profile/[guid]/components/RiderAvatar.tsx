@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 
 export default function RiderAvatar({ rider }) {
@@ -31,7 +32,7 @@ export default function RiderAvatar({ rider }) {
       </div>
       <div className="flex gap-2">
         <div className="flex gap-2 font-semibold md:text-2xl">
-          {handleRacismSanitization(rider.name)}
+          <Link href={`/profile/${rider._id}`}>{handleRacismSanitization(rider.name)}</Link>
         </div>
         {rider.donation > 0 && (
           <Image

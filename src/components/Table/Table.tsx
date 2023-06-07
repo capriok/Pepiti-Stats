@@ -253,7 +253,7 @@ const Table: React.FC<TableProps> = (props) => {
                 return (
                   <td key={dataKey} className={rowCn}>
                     <div className={"flex min-h-[45px] items-center font-medium"}>
-                      {renderer ? renderer(value, row) : value}
+                      {renderer ? renderer(value, row) : value.toLocaleString()}
                     </div>
                   </td>
                 )
