@@ -5,10 +5,9 @@ import { dateIsValid } from "~/utils/dateIsValid"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
 import MMRPill from "~/components/pills/MMRPill"
-import Table from "~/components/Table/Table"
+import Table from "~/ui/Table"
 import Pill from "~/components/pills/Pill"
 import Spinner from "~/components/Spinner"
-import { fetcher } from "~/api/fetcher"
 import Link from "next/link"
 
 interface Props {

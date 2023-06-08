@@ -2,7 +2,6 @@
 
 import { useRouter, useSearchParams } from "next/navigation"
 import useSWR from "swr"
-import { fetcher } from "~/api/fetcher"
 import Spinner from "~/components/Spinner"
 
 export default function Page() {

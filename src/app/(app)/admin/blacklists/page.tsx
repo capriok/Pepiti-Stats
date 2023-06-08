@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { GetBlackListNonSR, GetBlackListSR } from "~/api"
 import PageHeader from "~/components/PageHeader"
-import getAuthUser from "~/api/getAuthUser"
 import Blacklists from "./components/Blacklists"
 
 export const metadata = {
@@ -10,7 +9,6 @@ export const metadata = {
 }
 
 export default async function Page() {
-  const user = await getAuthUser()
   const blacklistSR = await GetBlackListSR()
   const blacklistNonSR = await GetBlackListNonSR()
 
@@ -26,7 +24,6 @@ export default async function Page() {
       />
       <div className="mt-4">
         <Blacklists
-          isAdmin={user.isAdmin}
           blacklistSR={blacklistSR.riders.filter((r) => r.banned_by === "SR")}
           blacklistNonSR={blacklistNonSR.riders}
         />

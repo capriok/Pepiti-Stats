@@ -4,16 +4,16 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import useSWR from "swr"
 import { postRiderReport } from "~/api/actions"
-import { fetcher } from "~/api/fetcher"
+import { useUserContext } from "~/app/providers"
 import Spinner from "~/components/Spinner"
 import { useToast, actions } from "~/components/toast"
 
 interface Props {
-  user: any
   events: Array<RecentRace>
 }
 
-export default function RiderReportForm({ user, events }: Props) {
+export default function RiderReportForm({ events }: Props) {
+  const user = useUserContext()
   const router = useRouter()
   const [eventId, setEventId] = useState(null)
   const { pushToast } = useToast()

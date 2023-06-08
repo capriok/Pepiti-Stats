@@ -2,8 +2,8 @@ import React from "react"
 import MMRPill from "~/components/pills/MMRPill"
 import Pill from "~/components/pills/Pill"
 import RiderLink from "~/components/RiderLink"
-import Table from "~/components/Table/Table"
-import RiderRecentRacesTable from "~/components/tables/expandable/RiderRecentRacesTable"
+import Table from "~/ui/Table"
+import RiderRecentRacesTableRow from "~/components/tables/expandable/RiderRecentRacesTable"
 import { toFixedIfNecessary } from "~/utils/toFixedIfNecessary"
 
 interface Props {
@@ -91,7 +91,7 @@ export default function MMRAnalysisTable({ standings }: Props) {
       sortingEnabled={true}
       sortingKeys={sortKeys}
       expandable={{
-        render: (row) => <RiderRecentRacesTable row={row} />,
+        render: (row) => <RiderRecentRacesTableRow row={row} />,
       }}
     />
   )

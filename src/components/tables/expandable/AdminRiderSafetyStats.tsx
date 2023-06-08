@@ -1,7 +1,6 @@
 "use client"
 
 import useSWR from "swr"
-import { fetcher } from "~/api/fetcher"
 import Spinner from "~/components/Spinner"
 import UnbanRiderButton from "~/components/actions/UnbanRiderButton"
 import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
@@ -30,7 +29,7 @@ export default function BlacklistRiderStatsRow({ row, isAdministrating }) {
           </div>
         )}
       </div>
-      <div className="stats flex w-full bg-base-100/60 text-center shadow-lg dark:bg-base-100">
+      <div className="stats flex w-full bg-base-100/60 text-center shadow-md dark:bg-base-100">
         <div className="stat w-full text-center">
           <div className="stat-title">Laps</div>
           <div className="stat-value pt-2 text-2xl">{rider.total_laps.toLocaleString()}</div>

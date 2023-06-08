@@ -2,10 +2,9 @@
 
 import React from "react"
 import useSWR from "swr"
-import { fetcher } from "~/api/fetcher"
 import { dateIsValid } from "~/utils/dateIsValid"
 import { handleLapTimes } from "~/utils/handleLapTimes"
-import Table from "~/components/Table/Table"
+import Table from "~/ui/Table"
 import Spinner from "~/components/Spinner"
 import BikeWithPrefixColor from "~/components/pills/BikeWithPrefixColor"
 import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
@@ -23,7 +22,7 @@ export default function RiderRecordsTable({ guid }: Props) {
         <Spinner />
       </div>
     )
-  console.log("%cRiderRecordsTable", "color: steelblue", { records: recordsData.races })
+  console.log("%cRiderRecordsTable", "color: steelblue", { records: recordsData.records })
 
   const records = recordsData.records.map((record) => ({
     _id: record._id,
@@ -73,7 +72,7 @@ export default function RiderRecordsTable({ guid }: Props) {
       render: (bike) => <BikeWithPrefixColor bike={bike} />,
     },
   ]
-  
+
   const sortKeys = ["date", "track", "lapTime", "split1", "split2", "averageSpeed"]
 
   return (

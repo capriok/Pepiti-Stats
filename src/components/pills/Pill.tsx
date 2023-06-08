@@ -6,20 +6,24 @@ interface PillProps {
 export default function Pill({ text, color = "neutral" }: PillProps) {
   const colorMap = {
     neutral: {
-      bg: "bg-accent/40 dark:bg-accent/60",
+      bg: "bg-accent/60 dark:bg-accent/40",
       text: "text-neutral-100 dark:text-neutral-200",
     },
     secondary: {
-      bg: "bg-secondary/80 dark:bg-secondary/60",
+      bg: "bg-secondary/80 dark:bg-secondary/40",
       text: "text-green-100 dark:text-green-200",
     },
+    info: {
+      bg: "bg-info/80 dark:bg-info/40",
+      text: "text-neutral-100 dark:text-info-200",
+    },
     red: {
-      bg: "bg-red-500/80 dark:bg-red-500/60",
-      text: "text-red-100 dark:text-red-200",
+      bg: "bg-red-500/80 dark:bg-red-500/40",
+      text: "text-neutral-100 dark:text-red-200",
     },
     orange: {
-      bg: "bg-orange-500/80 dark:bg-orange-500/60",
-      text: "text-orange-100 dark:text-orange-200",
+      bg: "bg-orange-500/80 dark:bg-orange-500/40",
+      text: "text-neutral-100 dark:text-orange-200",
     },
   }
 

@@ -1,6 +1,6 @@
 "use client"
 
-import Table from "~/components/Table/Table"
+import Table from "~/ui/Table"
 
 const categories = [
   "MX1 OEM",

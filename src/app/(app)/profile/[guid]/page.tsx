@@ -21,7 +21,6 @@ Contacts: ${rider?.contact}
 }
 
 export default async function Page({ params: { guid } }) {
-  const user = await getAuthUser()
   const rider = await GetRider(guid)
   const mmrHistory = await GetRiderMMRHistory(guid)
 
@@ -32,7 +31,6 @@ export default async function Page({ params: { guid } }) {
         extra={<BannedBanner banned={rider.banned} reason={rider.banned_by} />}
       />
       <RiderProfile
-        user={user}
         rider={rider}
         mmrHistory={mmrHistory.MMR_updates}
       />

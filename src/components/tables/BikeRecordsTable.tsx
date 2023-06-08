@@ -1,7 +1,7 @@
 "use client"
 
 import BikeWithPrefixColor from "../pills/BikeWithPrefixColor"
-import Table, { TableOptions } from "../Table/Table"
+import Table, { TableOptions } from "~/ui/Table"
 
 interface Props extends TableOptions {
   worldBikes: any
