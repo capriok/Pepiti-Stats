@@ -2,16 +2,15 @@
 
 import Link from "next/link"
 import useSWR from "swr"
-import { fetcher } from "~/api/fetcher"
 import MMRPill from "~/components/pills/MMRPill"
 import Pill from "~/components/pills/Pill"
 import Spinner from "~/components/Spinner"
-import Table from "~/components/Table/Table"
+import Table from "~/ui/Table"
 import { dateIsValid } from "~/utils/dateIsValid"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
 import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 
-export default function RiderRecentRacesTable({ row }) {
+export default function RiderRecentRacesTableRow({ row }) {
   const { data: raceData, isLoading } = useSWR(`/rider/${row._id}/races`)
 
   if (isLoading)
@@ -20,7 +19,19 @@ export default function RiderRecentRacesTable({ row }) {
         <Spinner />
       </div>
     )
-  const lastRaces = raceData.races.slice(0, 10)
+
+  return (
+    <>
+      <div className="mb-2 text-lg font-semibold">
+        {handleRacismSanitization(row.name)}&apos;s Last Ten Races
+      </div>
+      <RiderRecentRacesTable races={raceData.races} />
+    </>
+  )
+}
+
+export const RiderRecentRacesTable = ({ races }) => {
+  const lastRaces = races.slice(0, 10)
 
   const data = lastRaces.map((race) => ({
     _id: race._id,
@@ -30,7 +41,7 @@ export default function RiderRecentRacesTable({ row }) {
     mmrGain: race.MMR.total,
     newMMR: race.MMR.old_MMR + race.MMR.total,
   }))
-  console.log("%cRiderRecentRacesTable", "color: goldenrod", { races: data })
+  console.log("%cRiderRecentRacesTableRow", "color: goldenrod", { races: data })
 
   const columns = [
     {
@@ -63,13 +74,5 @@ export default function RiderRecentRacesTable({ row }) {
       render: (newMMR) => <Pill text={newMMR} />,
     },
   ]
-
-  return (
-    <>
-      <div className="mb-2 text-lg font-semibold">
-        {handleRacismSanitization(row.name)}&apos;s Last Ten Races
-      </div>
-      <Table data={data} columns={columns} rankEnabled={false} />
-    </>
-  )
+  return <Table data={data} columns={columns} rankEnabled={false} />
 }

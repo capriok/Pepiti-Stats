@@ -55,6 +55,7 @@ interface RiderProfile {
     name: string
     laps: number
   }
+  seasons: LeagueSeason[]
   average_speed: number
   banned: boolean
   banned_by: null | string

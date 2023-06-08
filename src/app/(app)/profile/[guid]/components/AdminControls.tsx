@@ -1,14 +1,15 @@
 "use client"
 
+import { useUserContext } from '~/app/providers'
 import BanRiderButton from "~/components/actions/BanRiderButton"
 import UnbanRiderButton from "~/components/actions/UnbanRiderButton"
 
 interface Props {
-  user: User
   rider: RiderProfile
 }
 
-export default function AdminControls({ user, rider }: Props) {
+export default function AdminControls({  rider }: Props) {
+  const user = useUserContext()
   if (!user.isAdmin) return <></>
 
   return (

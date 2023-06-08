@@ -1,11 +1,11 @@
 "use client"
 
 import WorldRecordsTable from "~/components/tables/WorldRecordsTable"
-import RiderWorldRecordsStats from "~/components/tables/expandable/RiderWorldRecordsStats"
+import RiderWorldRecordsStatsRow from "~/components/tables/expandable/RiderWorldRecordsStats"
 import MMRRecordsTable from "~/components/tables/MMRRecordsTable"
-import RiderRecentRacesTable from "~/components/tables/expandable/RiderRecentRacesTable"
+import RiderRecentRacesTableRow from "~/components/tables/expandable/RiderRecentRacesTable"
 import SRRecordsTable from "~/components/tables/SRRecordsTable"
-import RiderSafetyStats from "~/components/tables/expandable/RiderSafetyStats"
+import RiderSafetyStatsRow from "~/components/tables/expandable/RiderSafetyStats"
 import BikeRecordsTable from "~/components/tables/BikeRecordsTable"
 import ContactRecordsTable from "~/components/tables/ContactRecordsTable"
 
@@ -28,7 +28,7 @@ const dynamicDataMap = {
         <WorldRecordsTable
           worldRecords={records}
           expandable={{
-            render: (row) => <RiderWorldRecordsStats row={row} />,
+            render: (row) => <RiderWorldRecordsStatsRow row={row} />,
           }}
           {...tableProps}
         />
@@ -41,7 +41,7 @@ const dynamicDataMap = {
         <MMRRecordsTable
           worldMMR={records}
           expandable={{
-            render: (row) => <RiderRecentRacesTable row={row} />,
+            render: (row) => <RiderRecentRacesTableRow row={row} />,
           }}
           {...tableProps}
         />
@@ -54,7 +54,7 @@ const dynamicDataMap = {
         <SRRecordsTable
           worldSR={records}
           expandable={{
-            render: (row) => <RiderSafetyStats row={row} />,
+            render: (row) => <RiderSafetyStatsRow row={row} />,
           }}
           {...tableProps}
         />

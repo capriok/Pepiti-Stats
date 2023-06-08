@@ -1,57 +1,16 @@
 "use client"
 
 import React, { useState } from "react"
+import {
+  cycleSortingDirection,
+  sortDataByColumn,
+  SortDirection,
+  TableColumn,
+  TableData,
+  TableOptions,
+} from "."
 import { handleRankColor } from "~/utils/handleRankColor"
-import { cycleSortingDirection, sortDataByColumn, SortDirection } from "."
 import { ChevronsUpDown, ChevronUp, ChevronDown, Plus, Minus } from "lucide-react"
-
-/**
- *  table data can include any properties but must include unique _id
- */
-export interface TableData {
-  _id: string
-  [key: string]: any
-}
-
-/**
- *  columns are simple; key used under the hood | label for header text | render for custom styling
- *
- *  ? key: when the table maps data to columns, this is used to match data keys to columns by column keys
- *  ? label: when the table maps the columns, this is used as the header label text for the column
- *  ? render?:(optional) custom column style, fn called when rendering the table data rows
- *     if passed the table will return
- *     value: the rows data key value
- *     row: the full row data
- */
-export interface TableColumn {
-  key: string
-  label: string | JSX.Element
-  render?: (value: any, row: TableData) => any
-  width?: string
-}
-
-/**
- *  table options are controls that apply conditional logic within the table
- *  ? this interface is used to control key configurations within the rendering of the table
- *  ? if searchEnabled, pass searchKey prop to search on a  specific data key, default: name
- */
-export interface TableOptions {
-  paginationEnabled?: boolean
-  miniControls?: boolean
-  jumpToEnabled?: boolean
-  defaultPageSize?: number
-  sortingKeys?: Array<string>
-  sortingEnabled?: boolean
-  searchEnabled?: boolean
-  searchKey?: string
-  searchTerm?: string
-  rankEnabled?: boolean
-  resultsEnabled?: boolean
-  expandable?: {
-    render: (record: TableData) => JSX.Element
-    filter?: (record: TableData) => boolean // ! not implemented yet, all rows will be expandable for now
-  }
-}
 
 interface TableProps extends TableOptions {
   data: Array<TableData>

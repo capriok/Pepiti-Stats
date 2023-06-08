@@ -1,8 +1,8 @@
 import Link from "next/link"
 import React, { useState } from "react"
 import RiderLink from "~/components/RiderLink"
-import Table from "~/components/Table/Table"
-import RiderSafetyStats from "~/components/tables/expandable/RiderSafetyStats"
+import Table from "~/ui/Table"
+import RiderSafetyStatsRow from "~/components/tables/expandable/RiderSafetyStats"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
 
@@ -70,7 +70,7 @@ export default function RaceStandingsTable({ standings }: Props) {
         sortingEnabled={true}
         sortingKeys={sortKeys}
         expandable={{
-          render: (row) => <RiderSafetyStats row={row} />,
+          render: (row) => <RiderSafetyStatsRow row={row} />,
         }}
       />
     </>

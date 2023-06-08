@@ -52,7 +52,7 @@ export default function Tabs({
 
   return (
     <>
-      <div className="tabs flex-nowrap">{tabs}</div>
+      <div className="tabs flex-nowrap overflow-x-auto">{tabs}</div>
       {renderChildren && activeTab.children}
     </>
   )

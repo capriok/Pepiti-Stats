@@ -1,10 +1,10 @@
 "use client"
 
 import { useSearchParams } from "next/navigation"
-import Table from "~/components/Table/Table"
+import Table from "~/ui/Table"
 import RiderLink from "~/components/RiderLink"
 import Pill from "~/components/pills/Pill"
-import BlacklistRiderStatsRow from "../../../../../components/tables/expandable/AdminRiderSafetyStats"
+import BlacklistRiderStatsRow from "~/components/tables/expandable/AdminRiderSafetyStats"
 
 interface Props {
   blacklist: any

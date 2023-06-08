@@ -1,6 +1,6 @@
 "use client"
 
-import Table, { TableOptions } from "~/components/Table/Table"
+import Table, { TableOptions } from "~/ui/Table"
 import RiderLink from "../RiderLink"
 import BikeWithPrefixColor from "../pills/BikeWithPrefixColor"
 import { handleLapTimes } from "~/utils/handleLapTimes"

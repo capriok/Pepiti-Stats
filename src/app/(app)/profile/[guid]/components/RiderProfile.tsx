@@ -5,20 +5,20 @@ import ProfileTabs from "./ProfileTabs"
 import AdminControls from "./AdminControls"
 import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
 import { createContext, useContext } from "react"
+import { useUserContext } from "~/app/providers"
 
 interface Props {
-  user: User
   rider: RiderProfile
   mmrHistory: Array<RiderMMRHistory>
 }
 
-export const RiderProfile = ({ user, rider, mmrHistory }: Props) => {
+export const RiderProfile = ({ rider, mmrHistory }: Props) => {
   console.log("%cRider Profile", "color: steelblue", { rider })
 
   return (
     <>
       <div className="w-full">
-        <AdminControls user={user} rider={rider} />
+        <AdminControls  rider={rider} />
         <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:gap-10">
           <div className="md:mt-0flex mt-10 w-full flex-1 justify-center">
             <RiderAvatar rider={rider} />
@@ -31,7 +31,7 @@ export const RiderProfile = ({ user, rider, mmrHistory }: Props) => {
           </div>
         </div>
       </div>
-      <ProfileTabs user={user} rider={rider} mmrHistory={mmrHistory} />
+      <ProfileTabs  rider={rider} mmrHistory={mmrHistory} />
     </>
   )
 }

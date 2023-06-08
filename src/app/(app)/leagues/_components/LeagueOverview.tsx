@@ -5,7 +5,7 @@ import React from "react"
 import BikeWithPrefixColor from "~/components/pills/BikeWithPrefixColor"
 import Pill from "~/components/pills/Pill"
 import RiderLink from "~/components/RiderLink"
-import Table from "~/components/Table/Table"
+import Table from "~/ui/Table"
 import LeagueRaceCard from "./LeagueRaceCard"
 
 interface Props {

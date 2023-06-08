@@ -15,7 +15,6 @@ export default async function Page() {
     <>
       <PageHeader title="Blacklists" extra="Be sure to check the Global and SR Blacklist" />
       <Blacklists
-        isAdmin={false}
         blacklistSR={blacklistSR.riders.filter((r) => r.banned_by === "SR")}
         blacklistNonSR={blacklistNonSR.riders}
       />

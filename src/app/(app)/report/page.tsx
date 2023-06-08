@@ -10,7 +10,6 @@ export const metadata = {
 }
 
 export default async function Page() {
-  const user = await getAuthUser()
   const recentRaces = await GetRecentRaces()
 
   return (
@@ -25,7 +24,7 @@ export default async function Page() {
         }
       />
       {/* @ts-expect-error */}
-      <RiderReportForm user={user} events={recentRaces.races} />
+      <RiderReportForm  events={recentRaces.races} />
     </div>
   )
 }

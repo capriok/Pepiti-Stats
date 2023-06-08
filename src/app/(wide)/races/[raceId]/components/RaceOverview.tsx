@@ -1,6 +1,5 @@
 import Link from "next/link"
 import useSwr from "swr"
-import { fetcher } from "~/api/fetcher"
 import RiderAvatar from "~/app/(app)/profile/[guid]/components/RiderAvatar"
 import MMRPill from "~/components/pills/MMRPill"
 import Pill from "~/components/pills/Pill"

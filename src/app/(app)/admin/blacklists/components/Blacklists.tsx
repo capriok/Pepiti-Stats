@@ -2,25 +2,21 @@
 
 import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import UnbanRiderButton from "~/components/actions/UnbanRiderButton"
-import Pill from "~/components/pills/Pill"
-import RiderLink from "~/components/RiderLink"
-import Table from "~/components/Table/Table"
+import { useUserContext } from '~/app/providers'
 import Tabs from "~/components/Tabs"
-import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 import BlacklistTable from "./BlacklistTable"
 
 interface Props {
-  isAdmin: boolean
   blacklistSR: any
   blacklistNonSR: any
 }
 
-export default function Blacklists({ isAdmin, blacklistSR, blacklistNonSR }: Props) {
+export default function Blacklists({  blacklistSR, blacklistNonSR }: Props) {
+  const user = useUserContext()
   const searchParams = useSearchParams()
   const tabParam = searchParams.get("tab") ?? ""
   const pathname = usePathname()
-  const isAdministrating = pathname.includes("admin") && isAdmin
+  const isAdministrating = pathname.includes("admin") && user.isAdmin
 
   const tabs = [
     {

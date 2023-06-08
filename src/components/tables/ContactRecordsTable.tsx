@@ -1,6 +1,6 @@
 "use client"
 
-import Table, { TableOptions } from "../Table/Table"
+import Table, { TableOptions } from "~/ui/Table"
 import RiderLink from "../RiderLink"
 
 interface Props extends TableOptions {
