@@ -13,7 +13,7 @@ interface Props {
 export default function TrackRecords({ trackList }: Props) {
   const [selectedTrack, setSelectedTrack] = useState("Forest Raceway")
 
-  const { data, error, isLoading } = useSWR(`/records/track/${selectedTrack}`, fetcher)
+  const { data, error, isLoading } = useSWR(`/records/track/${selectedTrack}`)
 
   function handleTrackSelect(e) {
     setSelectedTrack(e.target.value)

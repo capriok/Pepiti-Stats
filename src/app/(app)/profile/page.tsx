@@ -10,7 +10,7 @@ export default function Page() {
   const searchParams = useSearchParams()
   const nameParam = searchParams.get("name")
 
-  const { data, isLoading } = useSWR(`/rider/search/${nameParam}`, fetcher)
+  const { data, isLoading } = useSWR(`/rider/search/${nameParam}`)
 
   if (isLoading) {
     return (

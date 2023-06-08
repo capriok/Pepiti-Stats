@@ -10,10 +10,9 @@ interface Props {
   user: User
   rider: RiderProfile
   mmrHistory: Array<RiderMMRHistory>
-  leagues: Array<League>
 }
 
-export const RiderProfile = ({ user, rider, mmrHistory, leagues }: Props) => {
+export const RiderProfile = ({ user, rider, mmrHistory }: Props) => {
   console.log("%cRider Profile", "color: steelblue", { rider })
 
   return (
@@ -32,7 +31,7 @@ export const RiderProfile = ({ user, rider, mmrHistory, leagues }: Props) => {
           </div>
         </div>
       </div>
-      <ProfileTabs user={user} rider={rider} mmrHistory={mmrHistory} leagues={leagues} />
+      <ProfileTabs user={user} rider={rider} mmrHistory={mmrHistory} />
     </>
   )
 }

@@ -25,7 +25,7 @@ export default function RaceOverview({ race }: Props) {
 }
 
 function WinnerCircle({ race }: { race: Race }) {
-  const { data: winner, isLoading } = useSwr(`/rider/${race.winner.guid}`, fetcher)
+  const { data: winner, isLoading } = useSwr(`/rider/${race.winner.guid}`)
   const loadingWinner = {
     name: race.winner.name,
     avatar: "",

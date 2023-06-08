@@ -6,7 +6,7 @@ import Spinner from "~/components/Spinner"
 import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 
 export default function RiderRaceStats({ row }) {
-  const { data: rider, isLoading } = useSWR(`/rider/${row._id}`, fetcher)
+  const { data: rider, isLoading } = useSWR(`/rider/${row._id}`)
 
   if (isLoading)
     return (

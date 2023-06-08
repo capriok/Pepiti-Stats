@@ -7,7 +7,7 @@ import UnbanRiderButton from "~/components/actions/UnbanRiderButton"
 import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 
 export default function BlacklistRiderStatsRow({ row, isAdministrating }) {
-  const { data: rider, isLoading } = useSWR(`/rider/${row._id}`, fetcher)
+  const { data: rider, isLoading } = useSWR(`/rider/${row._id}`)
 
   if (isLoading)
     return (

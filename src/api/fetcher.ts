@@ -7,7 +7,16 @@ export const fetcher = async (url: string) => {
   const res = await fetch(ENDPOINT + url, {
     ...nextConfig,
   })
-  return res.json()
+
+  try {
+    const status = res.status
+    const data = await res.json()
+    if (status !== 200) throw new Error(data.message)
+
+    return data
+  } catch (error) {
+    throw new Error("An unknown error occurred")
+  }
 }
 
 export const fetcherWithToken = async (url: string, token: string) => {
@@ -16,9 +25,15 @@ export const fetcherWithToken = async (url: string, token: string) => {
   const res = await fetch(ENDPOINT + url, {
     ...nextConfig,
     credentials: "include",
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
   })
-  return res.json()
+
+  try {
+    const status = res.status
+    const data = await res.json()
+    if (status !== 200) throw new Error(data.message)
+
+    return data
+  } catch (error) {
+    throw new Error("An unknown error occurred")
+  }
 }

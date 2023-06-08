@@ -1,7 +1,6 @@
 "use client"
 
 import uswSwr from "swr"
-import { fetcher } from "~/api/fetcher"
 import Spinner from "~/components/Spinner"
 
 export default function DonationMarquee() {
@@ -13,7 +12,7 @@ export default function DonationMarquee() {
   // ]
 
   //? ... this endpoint no good for this feature. should have something similar to above data to use this
-  const { data, error, isLoading } = uswSwr("/top/donators", fetcher)
+  const { data, error, isLoading } = uswSwr("/top/donators")
   if (isLoading) return <Spinner />
   const donators = data.donators.filter((d) => d.donation > 0)
 

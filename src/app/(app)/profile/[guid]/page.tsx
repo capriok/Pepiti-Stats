@@ -25,9 +25,6 @@ export default async function Page({ params: { guid } }) {
   const rider = await GetRider(guid)
   const mmrHistory = await GetRiderMMRHistory(guid)
 
-  // ! this should be removed and moved to swr in the league tab. see there for more
-  const leagueData = await GetRiderLeagues(user.token)
-
   return (
     <>
       <PageHeader
@@ -38,7 +35,6 @@ export default async function Page({ params: { guid } }) {
         user={user}
         rider={rider}
         mmrHistory={mmrHistory.MMR_updates}
-        leagues={leagueData.leagues}
       />
     </>
   )
