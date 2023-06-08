@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname, useSearchParams } from "next/navigation"
 import React, { useState } from "react"
@@ -38,18 +39,22 @@ export default function DesktopTrackList({ races }: Props) {
               <Link
                 key={raceInfo._id}
                 href={`/races/${raceInfo._id}`}
-                className={`group flex items-center justify-between rounded-lg px-2 py-2 hover:bg-secondary/80 hover:text-white ${
+                className={`group flex flex-col items-center justify-between rounded-lg px-2 py-2 hover:bg-secondary/80 hover:text-white ${
                   isActive ? "bg-secondary/80 py-3 text-white " : "bg-base-200"
                 }`}
               >
                 <div
-                  className={`stat-desc text-accent group-hover:text-white ${
+                  className={`stat-desc flex w-full justify-end text-accent group-hover:text-white ${
                     isActive ? "text-white" : ""
                   }`}
                 >
-                  {raceInfo.by === "pep" ? "Pepiti" : raceInfo.by}
+                  {raceInfo.by === "pep" ? (
+                    <Image width={26} height={26} alt="by" src="/assets/brand/pepiti-p.svg" />
+                  ) : (
+                    raceInfo.by
+                  )}
                 </div>
-                <div className="text-right">{raceInfo.track}</div>
+                <div className="flex w-full">{raceInfo.track}</div>
               </Link>
             )
           })}
