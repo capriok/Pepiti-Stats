@@ -399,6 +399,12 @@ interface LeagueRaceDivision {
   }[]
 }
 
+interface BanAppeal {
+  _id: string
+  appeal: string
+  by: RiderProfile | any
+}
+
 interface RiderReport {
   _id: string
   status: string

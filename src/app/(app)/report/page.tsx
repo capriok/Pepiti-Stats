@@ -1,5 +1,4 @@
 import { GetRecentRaces } from "~/api"
-import getAuthUser from "~/api/getAuthUser"
 import PageHeader from "~/components/PageHeader"
 import Pill from "~/components/pills/Pill"
 import RiderReportForm from "./components/ReportForm"
@@ -19,12 +18,12 @@ export default async function Page() {
         extra={
           <Pill
             color="red"
-            text={<div className="text-sm">Report Abuse and False Claims will get your banned</div>}
+            text={<div className="text-sm">Report Abuse and False Claims will get you banned</div>}
           />
         }
       />
       {/* @ts-expect-error */}
-      <RiderReportForm  events={recentRaces.races} />
+      <RiderReportForm events={recentRaces.races} />
     </div>
   )
 }

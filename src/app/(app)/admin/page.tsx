@@ -1,4 +1,4 @@
-import { NewspaperIcon } from "lucide-react"
+import { Hammer, NewspaperIcon, ScrollText, ShieldAlert } from "lucide-react"
 import Link from "next/link"
 import PageHeader from "~/components/PageHeader"
 
@@ -26,11 +26,12 @@ const Managers = () => {
           className="card card-body mb-2 flex w-[300px] cursor-pointer bg-base-200 no-underline hover:bg-secondary"
         >
           <div className="flex">
-            <NewspaperIcon />
-            <div className="ml-4">Blacklist</div>
+            <ScrollText />
+            <div className="ml-4">Blacklists</div>
           </div>
         </Link>
       </div>
+
       <div className="mr-4 flex flex-col">
         <div className="my-4 text-xl font-semibold">Rider Reports</div>
         <Link
@@ -38,8 +39,21 @@ const Managers = () => {
           className="card card-body mb-2 flex w-[300px] cursor-pointer bg-base-200 no-underline hover:bg-secondary"
         >
           <div className="flex">
-            <NewspaperIcon />
+            <ShieldAlert />
             <div className="ml-4">Rider Reports</div>
+          </div>
+        </Link>
+      </div>
+
+      <div className="mr-4 flex flex-col">
+        <div className="my-4 text-xl font-semibold">Ban Appeals</div>
+        <Link
+          href="/admin/appeals"
+          className="card card-body mb-2 flex w-[300px] cursor-pointer bg-base-200 no-underline hover:bg-secondary"
+        >
+          <div className="flex">
+            <Hammer />
+            <div className="ml-4">Ban Appeals</div>
           </div>
         </Link>
       </div>

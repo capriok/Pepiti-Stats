@@ -61,6 +61,23 @@ async function poster(url: string, options: { method: string; body?: any }) {
   }
 }
 
+// BAN APPEAL
+
+export async function postBanAppeal(formData: FormData) {
+  const body = {
+    by: formData.get("userGuid"),
+    appeal: formData.get("appeal"),
+  }
+
+  console.log("Action: postBanAppeal", body)
+
+  return await new Promise((res, rej) => rej(new Error("Not Supported")))
+  // ! Unsupported (Future feature)
+  // return await poster(`/appeal`, { method: "POST", body }).then(() => 
+  //   revalidatePath("/")
+  // )
+}
+
 // RIDER REPORT
 
 export async function postRiderReport(formData: FormData) {
@@ -115,6 +132,17 @@ export async function dismissAbuseRiderReport(formData: FormData) {
   return await new Promise((res, rej) => rej(new Error("Not Supported")))
   // ! Unsupported (Future feature)
   // return await poster(`/rider/report/${reportId}${userId}`, { method: "DELETE" }).then(() =>
+  //   revalidatePath("/")
+  // )
+}
+export async function dismissRiderAppeal(formData: FormData) {
+  const appealId = formData.get("appealId")
+
+  console.log("Action: dismissAppeal", { appealId })
+
+  return await new Promise((res, rej) => rej(new Error("Not Supported")))
+  // ! Unsupported (Future feature)
+  // return await poster(`/rider/appeal/${appealId}`, { method: "DELETE" }).then(() =>
   //   revalidatePath("/")
   // )
 }

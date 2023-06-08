@@ -113,6 +113,14 @@ export async function GetAdminRiderReports(
   const data = await fetcher(`/rider/report/${status}`, token)
   return data
 }
+// prettier-ignore
+export async function GetAdminRiderAppeals(
+  token: string,
+  status?: string
+): Promise<{ results: Array<BanAppeal> }> {
+  const data = await fetcher(`/rider/appeal/${status}`, token)
+  return data
+}
 
 // AUTHENTICATION
 

@@ -27,10 +27,18 @@ export default function OpenReportsList({ reports }: Props) {
         return (
           <div key={report._id} className="card bg-base-200 p-4 md:p-8">
             <div className="flex w-full justify-between">
-              <div className="flex align-middle text-2xl">
-                {report.by.name}
-                <ArrowRightIcon className="mx-4 mt-1" />
-                {report.rider.name}
+              <div>
+                {" "}
+                <div className="flex items-center text-2xl">
+                  {report.by.name}
+                  <ArrowRightIcon className="mx-4 mt-1" />
+                  {report.rider.name}
+                </div>
+                <div className="text-md mt-2 flex items-center text-accent">
+                  {report.by._id}
+                  <ArrowRightIcon className="mx-2" />
+                  {report.rider._id}
+                </div>
               </div>
               <div className="relative">
                 {!reportActive ? (

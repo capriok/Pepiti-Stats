@@ -62,7 +62,7 @@ export default function BlacklistTable({ blacklist, isAdministrating }: Props) {
   )
 }
 
-const renderBannedBy = (reason) => {
+export const renderBannedBy = (reason) => {
   switch (reason.toLowerCase()) {
     case "global":
     case "perma":
