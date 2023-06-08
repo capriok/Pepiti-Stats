@@ -12,7 +12,7 @@ import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
 import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 
 export default function RiderRecentRacesTable({ row }) {
-  const { data: raceData, isLoading } = useSWR(`/rider/${row._id}/races`, fetcher)
+  const { data: raceData, isLoading } = useSWR(`/rider/${row._id}/races`)
 
   if (isLoading)
     return (

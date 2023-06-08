@@ -12,10 +12,9 @@ interface Props {
   user: User
   rider: RiderProfile
   mmrHistory: Array<RiderMMRHistory>
-  leagues: Array<League>
 }
 
-export default function ProfileTabs({ user, rider, mmrHistory, leagues }: Props) {
+export default function ProfileTabs({ user, rider, mmrHistory }: Props) {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -62,7 +61,7 @@ export default function ProfileTabs({ user, rider, mmrHistory, leagues }: Props)
       children: (
         <div className="p-4 pt-0">
           <div className="my-4 whitespace-nowrap text-xl font-semibold">My Leagues</div>
-          <RiderLeaguesList user={user} leagues={leagues} />
+          <RiderLeaguesList user={user} />
         </div>
       ),
     })

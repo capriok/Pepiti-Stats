@@ -80,7 +80,7 @@ export function RiderFormPart2({ eventId }) {
     reason: "",
   })
 
-  const { data, isLoading } = useSWR(`/races/${eventId}`, fetcher)
+  const { data, isLoading } = useSWR(`/races/${eventId}`)
 
   if (isLoading) {
     return <Spinner />

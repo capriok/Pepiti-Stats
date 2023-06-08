@@ -2,10 +2,16 @@
 
 import { ThemeProvider } from "next-themes"
 import { Analytics } from '@vercel/analytics/react'
+import { SWRConfig } from "swr"
+import { fetcher } from "~/api/fetcher"
 
-export function Providers({ children }) {
-  return <ThemeProvider>
-    {children}
-            <Analytics />
-  </ThemeProvider>
+export function Providers({ user, children }) {
+  return (
+    <SWRConfig value={{ fetcher }}>
+      <ThemeProvider>
+        {children}
+        <Analytics />
+      </ThemeProvider>
+    </SWRConfig>
+  )
 }

@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function RiderRecordsTable({ guid }: Props) {
-  const { data: recordsData, isLoading } = useSWR(`/rider/${guid}/records`, fetcher)
+  const { data: recordsData, isLoading } = useSWR(`/rider/${guid}/records`)
 
   if (isLoading)
     return (
