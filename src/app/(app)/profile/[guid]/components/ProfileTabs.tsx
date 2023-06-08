@@ -29,7 +29,7 @@ export default function ProfileTabs({ rider, mmrHistory }: Props) {
       label: "Overview",
       children: (
         <div className="flex flex-col gap-5 md:flex-row">
-          <div className="flex w-full flex-col">
+          <div className="flex w-full flex-col md:max-h-[420px]">
             <RiderSeasonStats seasons={rider.seasons} />
           </div>
           <div className="w-full gap-5 md:min-h-[420px] md:min-w-[40%]">
