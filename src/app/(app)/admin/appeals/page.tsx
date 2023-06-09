@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { GetAdminRiderAppeals } from "~/api"
-import getAuthUser from "~/api/getAuthUser"
+import GetAuthUser from "~/api"
 import PageHeader from "~/components/PageHeader"
 import Tabs from "~/components/Tabs"
 import ClosedAppealsList from "./components/ClosedAppealsList"
@@ -12,7 +12,7 @@ export const metadata = {
 }
 
 export default async function Page() {
-  const user = await getAuthUser()
+  const user = await GetAuthUser()
   const openAppeals = await GetAdminRiderAppeals(user.token, "open")
   const closedAppeals = await GetAdminRiderAppeals(user.token, "closed")
 

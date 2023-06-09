@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import DismissRiderAppeal from "~/components/actions/DismissRiderAppeal"
+import DismissBanAppeal from "~/components/actions/DismissBanAppeal"
 import UnbanRiderButton from "~/components/actions/UnbanRiderButton"
 
 interface Props {
@@ -61,7 +61,7 @@ const AppealActions = ({ appealId, rider }) => {
     <div className="absolute right-0 flex w-fit flex-col justify-center gap-2 align-middle">
       <UnbanRiderButton riderId={rider._id} name={rider.name} hackit={true} />
 
-      <DismissRiderAppeal appealId={appealId} hackit={true} />
+      <DismissBanAppeal appealId={appealId} hackit={true} />
     </div>
   )
 }

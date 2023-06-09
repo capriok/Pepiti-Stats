@@ -1,6 +1,6 @@
 "use client"
 
-import { dismissRiderAppeal } from "~/api/actions"
+import { dismissBanAppeal } from "~/api/actions"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/Popover"
 import { useToast, actions } from "~/components/toast"
 import { forceRefresh } from "."
@@ -10,11 +10,11 @@ interface Props {
   hackit?: boolean
 }
 
-export default function DismissRiderAppeal({ appealId, hackit = false }: Props) {
+export default function DismissBanAppeal({ appealId, hackit = false }: Props) {
   const { pushToast } = useToast()
 
   const submit = (formData) =>
-    dismissRiderAppeal(formData)
+    dismissBanAppeal(formData)
       .then(() => pushToast(actions.dismissRiderAppeal))
       .then(() => hackit && forceRefresh())
       .catch(pushToast)

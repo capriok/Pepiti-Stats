@@ -1,6 +1,5 @@
 import Link from "next/link"
-import Image from "next/image"
-import getAuthUser from "~/api/getAuthUser"
+import GetAuthUser from "~/api"
 import { ChevronsDownIcon } from "lucide-react"
 import { ThemedImage } from "~/components/ThemedImage"
 
@@ -11,8 +10,8 @@ export const metadata = {
 }
 
 export default async function Page() {
-  // TODO: change images to light when light mode is set.
-  const user = await getAuthUser()
+  const user = await GetAuthUser()
+
   const ctaLink = user.guid
     ? `/profile/${user.guid}`
     : "https://pepiti.com/stats/api/v0/steam_login"

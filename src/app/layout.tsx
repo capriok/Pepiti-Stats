@@ -9,7 +9,7 @@ export const metadata = {
 
 import { Providers } from "./providers"
 import { Toaster } from "~/ui/Toaster"
-import getAuthUser from "~/api/getAuthUser"
+import GetAuthUser from "~/api"
 import NavBar from "~/components/Navbar"
 import Footer from "~/components/Footer"
 
@@ -20,7 +20,7 @@ interface Props {
 }
 
 export default async function RootLayout(props: Props) {
-  const user = await getAuthUser()
+  const user = await GetAuthUser()
 
   return (
     <html lang="en" data-theme="light" suppressHydrationWarning>

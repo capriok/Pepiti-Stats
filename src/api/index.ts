@@ -1,7 +1,10 @@
 "use server"
 
+import { cookies } from "next/headers"
+import jwt_decode from "jwt-decode"
+
 const ENDPOINT = process.env.NEXT_PUBLIC_API
-const nextConfig = { next: { revalidate: 60 } }
+const nextConfig = { next: { revalidate: 30 } }
 
 const fetcher = async (url: string, token?: string) => {
   const res = await fetch(ENDPOINT + url, {
@@ -11,6 +14,22 @@ const fetcher = async (url: string, token?: string) => {
     },
   })
   return res.json()
+}
+
+export default async function GetAuthUser() {
+  const cookieStore = cookies()
+  const token = cookieStore.get("access_token")?.value
+
+  try {
+    const decode: SteamUser = jwt_decode(token!) ?? {}
+    const user = await fetcher(`/rider/${decode._id}`)
+
+    if (decode._id !== user._id) return makeUser({})
+
+    return makeUser({ ...user, token: token })
+  } catch (error) {
+    return makeUser({})
+  }
 }
 
 export async function GetSummaryStats(): Promise<SummaryStats> {
@@ -141,4 +160,23 @@ export async function GetConstantOEMBikes(token: string): Promise<{ [key: string
 export async function GetConstantServers(token: string): Promise<{ datacenters: any }> {
   const data = await fetcher("/constants/server_locations", token)
   return data
+}
+
+interface SteamUser {
+  _id?: string
+  name?: string
+  avatar?: string
+  type?: string
+  token?: string
+  exp?: number
+}
+
+const makeUser = (u): User => {
+  return {
+    token: u?.token ?? "",
+    guid: u?._id ?? "",
+    name: u?.name ?? "",
+    avatar: u?.avatar ?? "",
+    isAdmin: u?.type === "admin" ?? false,
+  }
 }
