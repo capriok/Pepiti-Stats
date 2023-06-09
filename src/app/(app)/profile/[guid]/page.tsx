@@ -1,5 +1,5 @@
 import { GetRider, GetRiderLeagues, GetRiderMMRHistory } from "~/api"
-import getAuthUser from "~/api/getAuthUser"
+import GetAuthUser from "~/api"
 import PageHeader from "~/components/PageHeader"
 import BannedBanner from "./components/BannedBanner"
 import { RiderProfile } from "./components/RiderProfile"

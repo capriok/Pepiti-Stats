@@ -1,6 +1,6 @@
 import { GetLeague, GetLeagueEligibility, GetRider } from "~/api"
 import PageHeader from "~/components/PageHeader"
-import getAuthUser from "~/api/getAuthUser"
+import GetAuthUser from "~/api"
 import LeagueOverview from "../_components/LeagueOverview"
 import LeagueActions from "../_components/LeagueActions"
 
@@ -10,7 +10,7 @@ export const metadata = {
 }
 
 export default async function Page({ params: { leagueId } }) {
-  const user = await getAuthUser()
+  const user = await GetAuthUser()
   const rider = await GetRider(user.guid)
   const league = await GetLeague(leagueId, user.token)
   const host = await GetRider(league.by)

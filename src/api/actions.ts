@@ -4,10 +4,8 @@ import { revalidatePath } from "next/cache"
 import { cookies } from "next/headers"
 
 const ENDPOINT = process.env.NEXT_PUBLIC_API
-const nextConfig = { next: { revalidate: 60 } }
+const nextConfig = { next: { revalidate: 30 } }
 const token = cookies().get("access_token")?.value
-
-// HELPERS
 
 async function fetcher(url: string) {
   console.log("Fetcher", { url, token })
@@ -51,6 +49,7 @@ async function poster(url: string, options: { method: string; body?: any }) {
   })
   const status = res.status
   console.log("%cPoster", "color: steelblue", { status })
+
   try {
     const data = await res.json()
     if (status !== 200) throw new Error(data.message)
@@ -61,7 +60,37 @@ async function poster(url: string, options: { method: string; body?: any }) {
   }
 }
 
-// RIDER REPORT
+// --
+// ? BAN APPEAL
+
+export async function postBanAppeal(formData: FormData) {
+  const body = {
+    by: formData.get("userGuid"),
+    appeal: formData.get("appeal"),
+  }
+
+  console.log("Action: postBanAppeal", body)
+
+  // ! Unsupported (Future feature)
+  return await new Promise((res, rej) => rej(new Error("Not Supported")))
+  // return await poster(`/appeal`, { method: "POST", body }).then(() => revalidatePath("/"))
+}
+
+// --
+// ? ADMIN APPEALS
+
+export async function dismissBanAppeal(formData: FormData) {
+  const appealId = formData.get("appealId")
+
+  console.log("Action: dismissAppeal", { appealId })
+
+  // ! Unsupported (Future feature)
+  return await new Promise((res, rej) => rej(new Error("Not Supported")))
+  // return await poster(`/appeal/${appealId}`, { method: "DELETE" }).then(() => revalidatePath("/"))
+}
+
+// --
+// ? RIDER REPORT
 
 export async function postRiderReport(formData: FormData) {
   const proofs: any = []
@@ -84,19 +113,9 @@ export async function postRiderReport(formData: FormData) {
   return await poster(`/rider/report`, { method: "POST", body }).then(() => revalidatePath("/"))
 }
 
-// ADMIN REPORTS
+// --
+// ? ADMIN REPORTS
 
-export async function reopenRiderReport(formData: FormData) {
-  const reportId = formData.get("reportId")
-
-  console.log("Action: reopenReport", { reportId })
-
-  return await new Promise((res, rej) => rej(new Error("Not Supported")))
-  // ! Unsupported (Future feature)
-  // return await poster(`/rider/report/${reportId}`, { method: "PUT" }).then(() =>
-  //   revalidatePath("/")
-  // )
-}
 export async function dismissRiderReport(formData: FormData) {
   const reportId = formData.get("reportId")
 
@@ -112,14 +131,13 @@ export async function dismissAbuseRiderReport(formData: FormData) {
 
   console.log("Action: dismissAbuseRiderReport", { reportId })
 
-  return await new Promise((res, rej) => rej(new Error("Not Supported")))
   // ! Unsupported (Future feature)
-  // return await poster(`/rider/report/${reportId}${userId}`, { method: "DELETE" }).then(() =>
-  //   revalidatePath("/")
-  // )
+  return await new Promise((res, rej) => rej(new Error("Not Supported")))
+  // return await poster(`/rider/report/${reportId}${userId}`, { method: "DELETE" }).then(() => revalidatePath("/"))
 }
 
-// RIDER BANS
+// --
+// ? RIDER BANS
 
 export async function banRider(formData: FormData) {
   const guid = formData.get("guid")
@@ -138,7 +156,8 @@ export async function unbanRider(formData: FormData) {
   return await fetcher(`/rider/${guid}/unban`).then(() => revalidatePath("/"))
 }
 
-// LEAGUES
+// --
+// ? LEAGUES
 
 export async function joinLeague(formData: FormData) {
   const leagueId = formData.get("leagueId")

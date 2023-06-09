@@ -77,21 +77,21 @@ const BanAppealButtons = () => {
 
   return (
     <div className="mb-4 flex w-fit flex-wrap justify-center gap-2 md:mb-0 md:w-full md:justify-end">
+      <button
+        disabled={true}
+        className="btn-outline btn-ghost btn-sm btn"
+        onClick={() => router.push(`/appeal`)}
+      >
+        On-Site Appeal
+      </button>
       <Link
         target="_blank"
         rel="noopener noreferrer"
         href="https://discord.com/invite/mx-bikes"
         className="btn-outline btn-ghost btn-sm btn"
       >
-        Ban Appeal (MXB Discord)
+        Discord Appeal
       </Link>
-      <button
-        disabled={true}
-        className="btn-outline btn-ghost btn-sm btn"
-        onClick={() => router.push(`/report/appeal`)}
-      >
-        Ban Appeal (On-Site)
-      </button>
     </div>
   )
 }

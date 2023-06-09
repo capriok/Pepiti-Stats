@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { GetAdminRiderReports } from "~/api"
-import getAuthUser from "~/api/getAuthUser"
+import GetAuthUser from "~/api"
 import PageHeader from "~/components/PageHeader"
 import Tabs from "~/components/Tabs"
 import OpenReportsList from "./components/OpenReportsList"
@@ -12,7 +12,7 @@ export const metadata = {
 }
 
 export default async function Page() {
-  const user = await getAuthUser()
+  const user = await GetAuthUser()
   const openReports = await GetAdminRiderReports(user.token, "open")
   const closedReports = await GetAdminRiderReports(user.token, "closed")
 

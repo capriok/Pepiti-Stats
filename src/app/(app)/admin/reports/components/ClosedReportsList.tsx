@@ -1,9 +1,7 @@
 "use client"
 
-import Image from "next/image"
 import { useState } from "react"
 import { ArrowRightIcon } from "lucide-react"
-import ReopenRiderReport from "~/components/actions/ReopenRiderReport"
 
 interface Props {
   reports: Array<RiderReport>
@@ -25,17 +23,20 @@ export default function ClosedReportsList({ reports }: Props) {
         return (
           <div key={report._id} className="card bg-base-200 p-4 md:p-8">
             <div className="flex w-full justify-between">
-              <div className="flex align-middle text-2xl">
-                {report.by.name}
-                <ArrowRightIcon className="mx-4 mt-1" />
-                {report.rider.name}
+              <div>
+                <div className="flex align-middle text-2xl">
+                  {report.by.name}
+                  <ArrowRightIcon className="mx-4 mt-1" />
+                  {report.rider.name}
+                </div>
+                <div className="text-md mt-2 flex align-middle text-accent">
+                  {report.by._id}
+                  <ArrowRightIcon className="mx-2" />
+                  {report.rider._id}
+                </div>
               </div>
               <div className="relative">
-                {!reportActive ? (
-                  <IdleReportControls open={() => setOpenReport(report)} />
-                ) : (
-                  <ReportActions reportId={report._id} />
-                )}
+                {!reportActive && <IdleReportControls open={() => setOpenReport(report)} />}
               </div>
             </div>
             <div className="w-full">
@@ -74,14 +75,6 @@ const IdleReportContent = ({ report }) => {
           {new Date(parseInt(report.race._id.slice(0, 8), 16) * 1000).toLocaleString()}
         </div>
       </div>
-    </div>
-  )
-}
-
-const ReportActions = ({ reportId }) => {
-  return (
-    <div className="absolute right-0 flex w-fit flex-col justify-center gap-2 align-middle">
-      <ReopenRiderReport reportId={reportId} hackit={true} />
     </div>
   )
 }

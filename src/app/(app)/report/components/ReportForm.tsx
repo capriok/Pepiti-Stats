@@ -12,17 +12,19 @@ interface Props {
   events: Array<RecentRace>
 }
 
+const ReasonLength = 50
+
 export default function RiderReportForm({ events }: Props) {
   const user = useUserContext()
   const router = useRouter()
   const [eventId, setEventId] = useState(null)
   const { pushToast } = useToast()
 
+  if (!user.guid) return router.push("/signin")
+
   const handleEventSelect = (e) => {
     setEventId(e.target.value)
   }
-
-  if (!user.guid) return router.push("/signin")
 
   const submit = (formData) =>
     postRiderReport(formData)
@@ -99,7 +101,7 @@ export function RiderFormPart2({ eventId }) {
     setRiderForm({ ...riderForm, reason: e.target.value })
   }
 
-  const charactersCn = riderForm.reason.length > 50 ? "text-green-500" : "text-red-500"
+  const charactersCn = riderForm.reason.length >= ReasonLength ? "text-green-500" : "text-red-500"
 
   return (
     <>
@@ -126,7 +128,9 @@ export function RiderFormPart2({ eventId }) {
         <span className="label-text">
           <span className="text-red-500">* </span> Reason for Report
         </span>
-        <span className={`text-xs ${charactersCn}`}>Required: {riderForm.reason.length} / 50</span>
+        <span className={`text-xs ${charactersCn}`}>
+          Required: {riderForm.reason.length} / {ReasonLength}
+        </span>
       </label>
       <textarea
         name="reason"
@@ -135,7 +139,7 @@ export function RiderFormPart2({ eventId }) {
       />
       <br />
 
-      {riderForm.rider && riderForm.reason.length > 50 && (
+      {riderForm.rider && riderForm.reason.length >= ReasonLength && (
         <ProofFormPart3 eventId={eventId} riderForm={riderForm} />
       )}
     </>
@@ -161,7 +165,8 @@ export function ProofFormPart3({ eventId, riderForm }) {
   }
 
   const proofsCount = Object.keys(proofs).reduce((acc, key) => (proofs[key] ? acc + 1 : acc), 0)
-  const disabled = !eventId || !riderForm.rider || riderForm.reason.length < 50 || proofsCount < 1
+  const disabled =
+    !eventId || !riderForm.rider || riderForm.reason.length <= ReasonLength || proofsCount < 1
   const buttonCn = disabled ? "" : "bg-secondary rounded-lg py-2 font-semibold text-white"
 
   console.log(proofs, proofsCount)

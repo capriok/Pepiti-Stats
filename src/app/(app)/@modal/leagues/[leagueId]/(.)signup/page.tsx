@@ -1,12 +1,12 @@
 import { GetConstantOEMBikes, GetConstantServers, GetLeague } from "~/api"
-import getAuthUser from "~/api/getAuthUser"
+import GetAuthUser from "~/api"
 import InterceptingModal from "../../../InterceptingModal"
 import LeagueSignupForm from "~/app/(app)/leagues/_components/LeagueSignupForm"
 
 export const dynamic = "force-dynamic"
 
 export default async function Page({ params: { leagueId } }) {
-  const user = await getAuthUser()
+  const user = await GetAuthUser()
   const league = await GetLeague(leagueId, user.token)
   const oems = await GetConstantOEMBikes(user.token)
   const servers = await GetConstantServers(user.token)

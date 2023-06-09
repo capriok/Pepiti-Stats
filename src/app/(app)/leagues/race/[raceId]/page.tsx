@@ -1,7 +1,7 @@
 import { GetLeagueRace, GetLeagueRaceEligibility } from "~/api"
 import Link from "next/link"
 import PageHeader from "~/components/PageHeader"
-import getAuthUser from "~/api/getAuthUser"
+import GetAuthUser from "~/api"
 import LeagueRaceOverview from "../../_components/LeagueRaceOverview"
 import LeagueRaceActions from "../../_components/LeagueRaceActions"
 
@@ -14,7 +14,7 @@ export default async function Page(props) {
   const {
     params: { raceId },
   } = props
-  const user = await getAuthUser()
+  const user = await GetAuthUser()
   const race = await GetLeagueRace(raceId, user.token)
   const eligibility = await GetLeagueRaceEligibility(raceId, user.token)
 
