@@ -4,12 +4,14 @@ import { revalidatePath } from "next/cache"
 import { cookies } from "next/headers"
 
 const ENDPOINT = process.env.NEXT_PUBLIC_API
+const nextConfig = { next: { revalidate: 30 } }
 const token = cookies().get("access_token")?.value
 
 async function fetcher(url: string) {
   console.log("Fetcher", { url, token })
 
   const res = await await fetch(ENDPOINT + url, {
+    ...nextConfig,
     headers: {
       "Content-Type": "application/json",
       authorization: token ? `Bearer ${token}` : "",
@@ -37,6 +39,7 @@ async function poster(url: string, options: { method: string; body?: any }) {
   console.log("Poster", { url, token, opts })
 
   const res = await fetch(ENDPOINT + url, {
+    ...nextConfig,
     ...opts,
     credentials: "include",
     headers: {
