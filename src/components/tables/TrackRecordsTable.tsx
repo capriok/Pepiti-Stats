@@ -2,7 +2,7 @@
 
 import Table, { TableOptions } from "~/ui/Table"
 import RiderLink from "../RiderLink"
-import BikeWithPrefixColor from "../pills/BikeWithPrefixColor"
+import BikeTicTac from "../pills/BikeTicTac"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
 
@@ -46,7 +46,7 @@ export const TrackRecordsTable = ({ trackRecords, ...rest }: Props) => {
     {
       key: "bike",
       label: "Bike",
-      render: (bike) => <BikeWithPrefixColor bike={bike} />,
+      render: (bike) => <BikeTicTac bike={bike} />,
     },
   ]
 

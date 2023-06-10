@@ -3,8 +3,8 @@ import useSwr from "swr"
 import RiderAvatar from "~/app/(app)/profile/[guid]/components/RiderAvatar"
 import MMRPill from "~/components/pills/MMRPill"
 import Pill from "~/components/pills/Pill"
+import RankTicTac from "~/components/pills/RankTicTac"
 import { handleLapTimes } from "~/utils/handleLapTimes"
-import { handleRankColor } from "~/utils/handleRankColor"
 import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 
 interface Props {
@@ -44,7 +44,7 @@ function WinnerCircle({ race }: { race: Race }) {
             <div className="mb-2 flex flex-col items-center justify-center whitespace-nowrap">
               <div className="text-md font-semibold text-accent">Race Number</div>
               <div className="flex items-center text-lg text-primary">
-                <div className={`ml-2 mr-4 h-5 w-2 ${handleRankColor(1)}`} />
+                <RankTicTac rank={1} />
                 <div className="flex gap-1">
                   <div className="text-accent"># </div>
                   <div>{race.winner.raceNumber}</div>
@@ -125,7 +125,7 @@ function RaceNotables({ race }: { race: Race }) {
               </Link>
             </div>
             <div>
-              <div className={`ml-2 mr-4 h-5 w-2 ${handleRankColor(2)}`} />
+              <RankTicTac rank={2} />
             </div>
           </div>
         </div>
@@ -143,7 +143,7 @@ function RaceNotables({ race }: { race: Race }) {
               </Link>
             </div>
             <div>
-              <div className={`ml-2 mr-4 h-5 w-2 ${handleRankColor(3)}`} />
+              <RankTicTac rank={3} />
             </div>
           </div>
         </div>

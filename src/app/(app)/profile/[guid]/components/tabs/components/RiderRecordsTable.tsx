@@ -6,7 +6,7 @@ import { dateIsValid } from "~/utils/dateIsValid"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 import Table from "~/ui/Table"
 import Spinner from "~/components/Spinner"
-import BikeWithPrefixColor from "~/components/pills/BikeWithPrefixColor"
+import BikeTicTac from "~/components/pills/BikeTicTac"
 import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
 
 interface Props {
@@ -69,7 +69,7 @@ export default function RiderRecordsTable({ guid }: Props) {
     {
       key: "bike",
       label: "Bike",
-      render: (bike) => <BikeWithPrefixColor bike={bike} />,
+      render: (bike) => <BikeTicTac bike={bike} />,
     },
   ]
 

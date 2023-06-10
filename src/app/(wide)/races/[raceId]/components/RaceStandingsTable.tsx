@@ -30,8 +30,7 @@ export default function RaceStandingsTable({ standings }: Props) {
     {
       key: "position",
       label: "Position",
-      render: (position) =>
-        position ? position ? <b>{handlePlaceSuffix(position)}</b> : "-" : "-",
+      render: (position) => (position ? <b>{handlePlaceSuffix(position)}</b> : "-"),
     },
     {
       key: "gap",
