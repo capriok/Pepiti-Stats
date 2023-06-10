@@ -68,7 +68,7 @@ export default function RiderMMRHistoryChart({ mmrHistory }: Props) {
   }
 
   return (
-    <div className="w-full p-4 pt-0">
+    <div className="w-full p-4">
       <div className="m-4 mx-auto flex w-full justify-between">
         <div className="text-lg font-semibold">
           <div>MMR History</div>

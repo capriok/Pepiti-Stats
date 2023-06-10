@@ -27,6 +27,8 @@ export default function RiderSeasonStats({ seasons }: Props) {
 
   console.log("%cRiderSeasonStats", "color: steelblue", { seasons })
 
+  if (!seasons?.length) return <></>
+
   return (
     <>
       <div className="grid w-full place-items-center">
