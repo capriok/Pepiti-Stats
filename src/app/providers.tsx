@@ -12,12 +12,12 @@ export const useUserContext = () => useContext(UserContext)
 export function Providers({ user, children }) {
   return (
     <SWRConfig value={{ fetcher }}>
-      <UserContext.Provider value={user}>
-        <ThemeProvider>
+      <ThemeProvider>
+        <UserContext.Provider value={user}>
           {children}
           <Analytics />
-        </ThemeProvider>
-      </UserContext.Provider>
+        </UserContext.Provider>
+      </ThemeProvider>
     </SWRConfig>
   )
 }

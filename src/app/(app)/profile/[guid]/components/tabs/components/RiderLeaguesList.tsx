@@ -4,12 +4,11 @@ import React, { useEffect, useState } from "react"
 import Spinner from "~/components/Spinner"
 import LeagueList from "~/app/(app)/leagues/_components/LeagueList"
 import { GetRiderLeagues } from "~/api"
+import { useUserContext } from "~/app/providers"
 
-interface Props {
-  user: User
-}
+export default function RiderLeaguesList() {
+  const user = useUserContext()
 
-export default function RiderLeaguesList({ user }: Props) {
   // ! In order to show the correct card state we need this to work
   // ? this should work but token does not make it to the request
   // ? not sure whats missing here?

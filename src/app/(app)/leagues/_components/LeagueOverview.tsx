@@ -2,7 +2,7 @@
 
 import { Bike, CheckIcon, VerifiedIcon } from "lucide-react"
 import React from "react"
-import BikeWithPrefixColor from "~/components/pills/BikeWithPrefixColor"
+import BikeTicTac from "~/components/pills/BikeTicTac"
 import Pill from "~/components/pills/Pill"
 import RiderLink from "~/components/RiderLink"
 import Table from "~/ui/Table"
@@ -80,7 +80,7 @@ const LeagueAlert = ({ isInLeague, rider }: { isInLeague: boolean; rider: League
             </div>
             <div className="mb-2 flex flex-col items-center justify-center gap-2">
               <div className="text-md text-accent">Bike Choice:</div>
-              <BikeWithPrefixColor bike={rider.bike_id} />
+              <BikeTicTac bike={rider.bike_id} />
             </div>
           </div>
         </div>
@@ -236,7 +236,7 @@ const LeagueStandings = ({ league }: { league: League }) => {
     {
       key: "bike_id",
       label: "Bike",
-      render: (bike) => <BikeWithPrefixColor bike={bike} />,
+      render: (bike) => <BikeTicTac bike={bike} />,
     },
     {
       key: "team",
@@ -246,12 +246,5 @@ const LeagueStandings = ({ league }: { league: League }) => {
 
   const sortKeys = ["name", "score", "bike_id", "team"]
 
-  return (
-    <Table
-      data={data}
-      columns={columns}
-      sortingEnabled={true}
-      sortingKeys={sortKeys}
-    />
-  )
+  return <Table data={data} columns={columns} sortingEnabled={true} sortingKeys={sortKeys} />
 }

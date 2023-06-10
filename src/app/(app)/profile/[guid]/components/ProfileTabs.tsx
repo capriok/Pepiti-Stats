@@ -3,12 +3,10 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useUserContext } from "~/app/providers"
 import Tabs from "~/components/Tabs"
-import RiderMMRHistoryChart from "./tabs/RiderMMRHistoryChart"
-import RiderRacesTable from "./tabs/RiderRacesTable"
-import RiderRecordsTable from "./tabs/RiderRecordsTable"
-import RiderLeaguesList from "./tabs/RiderLeaguesList"
-import RiderSeasonStats from "./tabs/RiderSeasonStats"
-import { RiderWorldRecordsStats } from "~/components/tables/expandable/RiderWorldRecordsStats"
+import OverviewTab from "./tabs/OverviewTab"
+import RacesTab from "./tabs/RacesTab"
+import RecordsTab from "./tabs/RecordsTab"
+import LeaguesTab from "./tabs/LeaguesTab"
 
 interface Props {
   rider: RiderProfile
@@ -27,40 +25,17 @@ export default function ProfileTabs({ rider, mmrHistory }: Props) {
     {
       key: "overview",
       label: "Overview",
-      children: (
-        <div className="flex flex-col gap-5 md:flex-row">
-          <div className="flex w-full flex-col md:max-h-[420px]">
-            <RiderSeasonStats seasons={rider.seasons} />
-          </div>
-          <div className="w-full gap-5 md:min-h-[420px] md:min-w-[40%]">
-            <RiderMMRHistoryChart mmrHistory={mmrHistory} />
-          </div>
-        </div>
-      ),
+      children: <OverviewTab riderId={rider._id} seasons={rider.seasons} mmrHistory={mmrHistory} />,
     },
     {
       key: "races",
       label: "Races",
-      children: (
-        <div className="p-4 pt-0">
-          <div className="my-4 whitespace-nowrap text-xl font-semibold">Recent Races</div>
-          <RiderRacesTable guid={rider._id} />
-        </div>
-      ),
+      children: <RacesTab rider={rider} />,
     },
     {
       key: "records",
       label: "Records",
-      children: (
-        <div className="p-4 pt-0">
-          <div className="my-4 whitespace-nowrap text-xl font-semibold">World Record Stats</div>
-          <div className="mb-4">
-            <RiderWorldRecordsStats rider={rider} />
-          </div>
-          <div className="my-4 whitespace-nowrap text-xl font-semibold">Personal Records</div>
-          <RiderRecordsTable guid={rider._id} />
-        </div>
-      ),
+      children: <RecordsTab rider={rider} />,
     },
   ]
 
@@ -68,12 +43,7 @@ export default function ProfileTabs({ rider, mmrHistory }: Props) {
     items.push({
       key: "leagues",
       label: "Leagues",
-      children: (
-        <div className="p-4 pt-0">
-          <div className="my-4 whitespace-nowrap text-xl font-semibold">My Leagues</div>
-          <RiderLeaguesList user={user} />
-        </div>
-      ),
+      children: <LeaguesTab />,
     })
 
   return (

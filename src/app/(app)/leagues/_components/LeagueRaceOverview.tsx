@@ -4,7 +4,7 @@ import { CheckIcon } from "lucide-react"
 import Table from "~/ui/Table"
 import RiderLink from "~/components/RiderLink"
 import Tabs from "~/components/Tabs"
-import BikeWithPrefixColor from "~/components/pills/BikeWithPrefixColor"
+import BikeTicTac from "~/components/pills/BikeTicTac"
 import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 import { leagueRaceStatusMap } from "."
@@ -199,18 +199,11 @@ const LeagueRaceStandings = ({ division }: { division: LeagueRaceDivision }) => 
     {
       key: "bike",
       label: "Bike",
-      render: (bike) => <BikeWithPrefixColor bike={bike} />,
+      render: (bike) => <BikeTicTac bike={bike} />,
     },
   ]
 
   const sortKeys = ["lapTime", "averageSpeed", "split1", "split2"]
 
-  return (
-    <Table
-      data={data}
-      columns={columns}
-      sortingEnabled={true}
-      sortingKeys={sortKeys}
-    />
-  )
+  return <Table data={data} columns={columns} sortingEnabled={true} sortingKeys={sortKeys} />
 }

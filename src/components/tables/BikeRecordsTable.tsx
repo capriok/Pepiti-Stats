@@ -1,6 +1,6 @@
 "use client"
 
-import BikeWithPrefixColor from "../pills/BikeWithPrefixColor"
+import BikeTicTac from "../pills/BikeTicTac"
 import Table, { TableOptions } from "~/ui/Table"
 
 interface Props extends TableOptions {
@@ -21,7 +21,7 @@ export default function BikeRecordsTable({ worldBikes, ...rest }: Props) {
     {
       key: "name",
       label: "Bike",
-      render: (name) => <BikeWithPrefixColor bike={name} />,
+      render: (name) => <BikeTicTac bike={name} />,
     },
     {
       key: "laps",

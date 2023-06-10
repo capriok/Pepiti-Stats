@@ -9,8 +9,8 @@ import {
   TableData,
   TableOptions,
 } from "."
-import { handleRankColor } from "~/utils/handleRankColor"
-import { ChevronsUpDown, ChevronUp, ChevronDown, Plus, Minus } from "lucide-react"
+import { ChevronsUpDown, ChevronUp, ChevronDown, Plus, Minus, Trophy } from "lucide-react"
+import RankTicTac from "~/components/pills/RankTicTac"
 
 interface TableProps extends TableOptions {
   data: Array<TableData>
@@ -82,12 +82,12 @@ const Table: React.FC<TableProps> = (props) => {
     if (rankEnabled) {
       const rankColumn = {
         key: "_rank",
-        label: "Rank",
+        label: "",
         render: (_, row) => {
           const rank = data.find((d) => row._id === d._id)!.rank
           return (
             <div className="flex items-center justify-start text-base font-medium">
-              <div className={`ml-2 mr-4 h-5 w-2 ${handleRankColor(rank)}`} />
+              <RankTicTac rank={rank} />
               <div className="py-1">{rank}</div>
             </div>
           )
