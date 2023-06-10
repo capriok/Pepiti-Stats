@@ -9,6 +9,8 @@ interface Props {
 export default function RiderSeasonStats({ seasons }: Props) {
   console.log("%cRiderSeasonStats", "color: steelblue", { seasons })
 
+  if (!seasons?.length) return <></>
+
   return (
     <div className="w-full overflow-y-auto p-4 pt-0">
       <div className="my-4 whitespace-nowrap text-xl font-semibold">Seasonal Standings</div>
