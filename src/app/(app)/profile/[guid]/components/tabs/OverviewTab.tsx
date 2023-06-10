@@ -2,7 +2,7 @@ import useSWR from "swr"
 import Spinner from "~/components/Spinner"
 import RiderSeasonStats from "./components/RiderSeasonStats"
 import RiderMMRHistoryChart from "./components/RiderMMRHistoryChart"
-import RiderPodiumHistoryChart from "./components/RiderPodiumHistoryChart"
+import RiderPositionHistoryChart from "./components/RiderPositionHistoryChart"
 
 interface Props {
   riderId: string
@@ -14,8 +14,8 @@ export default function OverviewTab({ riderId, seasons, mmrHistory }: Props) {
   const { data: raceData, isLoading } = useSWR(`/rider/${riderId}/races`)
 
   return (
-    <div className="flex flex-col gap-10">
-      <div className=" w-full">
+    <div className="flex flex-col">
+      <div className="my-10 w-full px-0">
         <RiderSeasonStats seasons={seasons} />
       </div>
       <Charts mmrHistory={mmrHistory} races={raceData?.races} loading={isLoading} />
@@ -26,15 +26,15 @@ export default function OverviewTab({ riderId, seasons, mmrHistory }: Props) {
 const Charts = ({ mmrHistory, races, loading }) => {
   if (loading)
     return (
-      <div className="py-4">
+      <div className="py-4 pb-10">
         <Spinner />
       </div>
     )
 
   return (
-    <div className="flex w-full">
+    <div className="flex w-full flex-col max-lg:flex-wrap lg:flex-row">
       <RiderMMRHistoryChart mmrHistory={mmrHistory} />
-      <RiderPodiumHistoryChart races={races} />
+      <RiderPositionHistoryChart races={races} />
     </div>
   )
 }
