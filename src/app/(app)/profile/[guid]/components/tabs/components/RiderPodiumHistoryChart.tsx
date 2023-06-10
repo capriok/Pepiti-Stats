@@ -62,10 +62,7 @@ export default function RiderPodiumHistoryChart({ races }: Props) {
         data: races.reduce(
           (acc, curr) => {
             const date = parseInt(curr._id.slice(0, 8), 16) * 1000
-            const isinGap = inLastMonth(date)
-            console.log(isinGap, new Date(date))
-
-            if (!isinGap) return acc
+            if (!inLastMonth(date)) return acc
 
             const pos = curr?.Classification?.Pos ?? 0
             pos === 1 && acc[0]++
