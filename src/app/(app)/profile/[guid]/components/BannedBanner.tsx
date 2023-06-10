@@ -1,9 +1,9 @@
 import { InfoIcon } from "lucide-react"
 
 export default function BannedBanner({ banned, reason }) {
-  const tipText = `- "Global" ban means you are on the global blacklist. No help for you.\n
-  - "SR" Banned means your safety rating is under 950. Race in a banned/no-contact server to build your SR back up.\n
-  - Custom message ban means you should go to the MB Bikes discord and find the #ban-appeal channel under Pepiti-Stats.`
+  const tipText = `- "Global" ban means you did something to be banned from online racing for the foreseeable future, submit a ban appeal.\n
+  - "SR" ban means your safety rating is under 950. Race in a banned/no-contact server to raise SR above 950 to be automatically unbanned.\n
+  - Custom message ban means you were banned by an admin for a specific reason, submit a ban appeal.`
 
   return (
     banned && (
