@@ -14,8 +14,8 @@ export default function OverviewTab({ riderId, seasons, mmrHistory }: Props) {
   const { data: raceData, isLoading } = useSWR(`/rider/${riderId}/races`)
 
   return (
-    <div className="flex flex-col gap-10">
-      <div className=" w-full">
+    <div className="flex flex-col">
+      <div className="mb-10 w-full px-0">
         <RiderSeasonStats seasons={seasons} />
       </div>
       <Charts mmrHistory={mmrHistory} races={raceData?.races} loading={isLoading} />

@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import Pill from "~/components/pills/Pill"
 
 interface Props {
@@ -7,18 +8,44 @@ interface Props {
 }
 
 export default function RiderSeasonStats({ seasons }: Props) {
+  const [season, setSeason] = useState(seasons?.length ? seasons[0] : ({} as LeagueSeason))
+
+  const seasonMocks = [
+    {
+      name: "Summer 2023",
+      MMR: seasons[0].MMR,
+      position: seasons[0].position,
+    },
+    {
+      name: "Fall 2023",
+      MMR: 0,
+      position: 0,
+    },
+  ]
+
+  if (!seasons?.length) return <></>
+
   console.log("%cRiderSeasonStats", "color: steelblue", { seasons })
 
   return (
-    <div className="w-full overflow-y-auto p-4 pt-0">
-      <div className="my-4 whitespace-nowrap text-xl font-semibold">Seasonal Standings</div>
-      {seasons.map((season, i) => (
-        <div
-          key={season.name + i}
-          className={`flex flex-col justify-center gap-2 ${
-            i > 0 ? "mt-8 border-t-2 border-accent/10 pt-8" : ""
-          }`}
-        >
+    <>
+      <div className="grid w-full place-items-center">
+        <div className="my-4 whitespace-nowrap text-xl font-semibold">Seasons</div>
+        <div className="flex w-full justify-center gap-2">
+          {seasonMocks.map((season) => (
+            <div
+              key={season.name}
+              className="cursor-pointer select-none"
+              onClick={() => setSeason(season)}
+            >
+              <Pill text={season.name} color="secondary" />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="divider m-10" />
+      <div className="w-full overflow-y-auto">
+        <div className="flex flex-col justify-center gap-2">
           <div className="flex flex-col items-center">
             <div className="stat-title">Season</div>
             <div className="stat-value text-2xl">{season.name}</div>
@@ -38,35 +65,7 @@ export default function RiderSeasonStats({ seasons }: Props) {
             </div>
           </div>
         </div>
-      ))}
-    </div>
+      </div>
+    </>
   )
 }
-
-const seasonMocks = [
-  {
-    name: "First summer",
-    MMR: 1304,
-    position: 2239,
-  },
-  {
-    name: "Second summer",
-    MMR: 1604,
-    position: 2039,
-  },
-  {
-    name: "Third summer",
-    MMR: 1904,
-    position: 1839,
-  },
-  {
-    name: "Fourth summer",
-    MMR: 1904,
-    position: 1839,
-  },
-  {
-    name: "Fifth summer",
-    MMR: 1904,
-    position: 1839,
-  },
-]

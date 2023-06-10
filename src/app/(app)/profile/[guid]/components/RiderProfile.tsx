@@ -57,16 +57,11 @@ const RiderStats = ({ rider }: { rider: RiderProfile }) => {
         <div className="stat-desc">Stay in your lane</div>
       </div>
       <div className="stat">
-        <div className="stat-title">Laps</div>
-        <div className="stat-value py-2 text-2xl">{rider.total_laps}</div>
-        <div className="stat-desc">Finish lines jumped</div>
-      </div>
-      <div className="stat">
         <div className="stat-title">Speed</div>
         <div className="stat-value py-2 text-2xl">
           {rider.average_speed ? handleAverageSpeed(rider.average_speed, false) : "-"}
         </div>
-        <div className="stat-desc">Miles per Hour</div>
+        <div className="stat-desc">Average MPH</div>
       </div>
       <div className="stat">
         <div className="stat-title">Favorite Bike</div>
@@ -81,24 +76,19 @@ const RaceStats = ({ rider }: { rider: RiderProfile }) => {
   return (
     <div className="stats w-full bg-base-200 shadow-md">
       <div className="stat">
-        <div className="stat-title">First</div>
-        <div className="stat-value py-2 text-2xl">{rider.races.first}</div>
-        <div className="stat-desc">The winner circle</div>
-      </div>
-      <div className="stat">
-        <div className="stat-title">Second</div>
-        <div className={`stat-value py-2 text-2xl`}>{rider.races.second}</div>
-        <div className="stat-desc">The second best</div>
-      </div>
-      <div className="stat">
-        <div className="stat-title">Third</div>
-        <div className="stat-value py-2 text-2xl">{rider.races.third}</div>
-        <div className="stat-desc">Best of the rest</div>
+        <div className="stat-title">Records</div>
+        <div className="stat-value py-2 text-2xl">{rider.world_records.total}</div>
+        <div className="stat-desc">World Records</div>
       </div>
       <div className="stat">
         <div className="stat-title">Races</div>
         <div className="stat-value py-2 text-2xl">{rider.races.total_races}</div>
-        <div className="stat-desc">Total gate drops</div>
+        <div className="stat-desc">Gate drops</div>
+      </div>
+      <div className="stat">
+        <div className="stat-title">Laps</div>
+        <div className="stat-value py-2 text-2xl">{rider.total_laps}</div>
+        <div className="stat-desc">Finish lines jumped</div>
       </div>
       <div className="stat">
         <div className="stat-title">Fastest Laps</div>
