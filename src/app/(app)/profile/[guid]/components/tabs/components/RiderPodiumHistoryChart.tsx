@@ -19,7 +19,7 @@ interface Props {
 export default function RiderPodiumHistoryChart({ races }: Props) {
   console.log(races)
 
-  const colorConfig = {
+  const styles = {
     backgroundColor: [
       "rgba(255, 220, 65, 0.2)",
       "rgba(201, 203, 207, 0.2)",
@@ -55,14 +55,17 @@ export default function RiderPodiumHistoryChart({ races }: Props) {
           },
           [0, 0, 0, 0, 0]
         ),
-        ...colorConfig,
+        ...styles,
       },
       {
-        label: "Monthly",
+        label: "Last Month",
         data: races.reduce(
           (acc, curr) => {
             const date = parseInt(curr._id.slice(0, 8), 16) * 1000
-            if (isWithinDaysAgo(30, date)) return acc
+            const isinGap = inLastMonth(date)
+            console.log(isinGap, new Date(date))
+
+            if (!isinGap) return acc
 
             const pos = curr?.Classification?.Pos ?? 0
             pos === 1 && acc[0]++
@@ -74,7 +77,7 @@ export default function RiderPodiumHistoryChart({ races }: Props) {
           },
           [0, 0, 0, 0, 0]
         ),
-        ...colorConfig,
+        ...styles,
       },
     ],
   }
@@ -104,9 +107,9 @@ export default function RiderPodiumHistoryChart({ races }: Props) {
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, BarElement, Title, Tooltip, Legend)
 
-function isWithinDaysAgo(gap, date) {
+function inLastMonth(date) {
   var currentDate = new Date()
   var daysAgo = new Date()
-  daysAgo.setDate(currentDate.getDate() - gap)
+  daysAgo.setDate(currentDate.getDate() - 30)
   return date >= daysAgo && date <= currentDate
 }

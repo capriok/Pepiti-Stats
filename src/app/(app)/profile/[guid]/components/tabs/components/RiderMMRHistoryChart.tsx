@@ -76,13 +76,13 @@ export default function RiderMMRHistoryChart({ mmrHistory }: Props) {
           <div className="btn-group ">
             <button
               className="btn-outline btn-sm btn rounded-r-none border-none bg-base-300 hover:bg-secondary"
-              onClick={() => setLimit((l) => (l > 5 ? l - 1 : l))}
+              onClick={() => setLimit((l) => (l > 5 ? l - 5 : l))}
             >
               -
             </button>
             <button
               className="btn-outline btn-sm btn rounded-r-none border-none bg-base-300 hover:bg-secondary"
-              onClick={() => setLimit((l) => (l < mmrHistory.length ? l + 1 : l))}
+              onClick={() => setLimit((l) => (l < mmrHistory.length ? l + 5 : l))}
             >
               +
             </button>
