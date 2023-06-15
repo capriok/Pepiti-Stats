@@ -18,7 +18,7 @@ export default function BlacklistRiderStatsRow({ row, isAdministrating }) {
   console.log("%cBlacklistRiderStatsRow", "color: goldenrod", { rider: rider })
 
   return (
-    <div className="pr-4">
+    <>
       <div className="mb-2 flex w-full justify-between">
         <div className="text-lg font-semibold">
           {handleRacismSanitization(row.name)}&apos;s Stats
@@ -45,6 +45,6 @@ export default function BlacklistRiderStatsRow({ row, isAdministrating }) {
           <div className="stat-value pt-2 text-2xl">{rider.contact.toLocaleString()}</div>
         </div>
       </div>
-    </div>
+    </>
   )
 }

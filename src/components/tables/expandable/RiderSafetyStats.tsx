@@ -17,12 +17,12 @@ export default function RiderSafetyStatsRow({ row }) {
   console.log("%cRiderSafetyStatsRow", "color: goldenrod", { rider: rider })
 
   return (
-    <div className="pr-4">
+    <>
       <div className="mb-2 text-lg font-semibold">
         {handleRacismSanitization(row.name)}&apos;s Stats
       </div>
       <RiderSafetyStats rider={rider} />
-    </div>
+    </>
   )
 }
 

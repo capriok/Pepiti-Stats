@@ -187,7 +187,7 @@ const Table: React.FC<TableProps> = (props) => {
         {expandable && expandedRow?._id === row._id && (
           <td
             colSpan={columns.length}
-            className="w-full whitespace-break-spaces bg-base-200 p-4 px-4 pr-0"
+            className="w-full whitespace-break-spaces bg-base-200 p-4 px-4"
           >
             {expandable && expandable?.render(row)}
           </td>
@@ -206,8 +206,7 @@ const Table: React.FC<TableProps> = (props) => {
                 const value = row[dataKey]
 
                 const firstColCn = idx === 0 ? "pl-4 w-fit" : ""
-                const isOddCn = row.rank % 2 === 0 ? "bg-base-200" : "bg-base-100"
-                const rowCn = `rounded-none p-0 px-2 max-w-[40%] ${isOddCn} ${firstColCn} ${column.width}`
+                const rowCn = `rounded-none p-0 px-2 max-w-[40%] ${firstColCn} ${column.width}`
 
                 return (
                   <td key={dataKey} className={rowCn}>
@@ -252,7 +251,7 @@ const Table: React.FC<TableProps> = (props) => {
         )}
       </div>
       <div className="w-full overflow-x-auto">
-        <table className="table-compact my-0 table w-full">
+        <table className="table-zebra table-compact my-0 table w-full">
           <thead className="bg-base-200 text-xs uppercase">
             <TableColumns />
           </thead>

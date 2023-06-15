@@ -17,12 +17,12 @@ export default function RiderWorldRecordsStatsRow({ row }) {
   console.log("%cRiderWorldRecordsStatsRow", "color: goldenrod", { rider: rider })
 
   return (
-    <div className="pr-4">
+    <>
       <div className="mb-2 text-lg font-semibold">
         {handleRacismSanitization(row.name)}&apos;s Stats
       </div>
       <RiderWorldRecordsStats rider={rider} />
-    </div>
+    </>
   )
 }
 
@@ -35,27 +35,29 @@ export const RiderWorldRecordsStats = ({ rider }) => (
       </div>
     </div>
     <div className="stat w-full text-center">
-      <div className="stat-title">MX1 OEM</div>
+      <div className="stat-title">450 Class</div>
       <div className="stat-value mt-2 text-xl">
-        {rider.world_records["MX1 OEM"].toLocaleString()}
+        {(
+          rider.world_records["MX1 OEM"] +
+          rider.world_records["FACTORY 450"] +
+          rider.world_records["MX1-2T OEM"]
+        ).toLocaleString()}
       </div>
     </div>
     <div className="stat w-full text-center">
-      <div className="stat-title">MX1-2T OEM</div>
+      <div className="stat-title">250 Class</div>
       <div className="stat-value mt-2 text-xl">
-        {rider.world_records["MX1-2T OEM"].toLocaleString()}
+        {(rider.world_records["MX2 OEM"] + rider.world_records["FACTORY 250"]).toLocaleString()}
       </div>
     </div>
     <div className="stat w-full text-center">
-      <div className="stat-title">MX2 OEM</div>
+      <div className="stat-title">Lights</div>
       <div className="stat-value mt-2 text-xl">
-        {rider.world_records["MX2 OEM"].toLocaleString()}
-      </div>
-    </div>
-    <div className="stat w-full text-center">
-      <div className="stat-title">MX2-2T OEM</div>
-      <div className="stat-value mt-2 text-xl">
-        {rider.world_records["MX2-2T OEM"].toLocaleString()}
+        {(
+          rider.world_records["MX2-2T OEM"] +
+          rider.world_records["FACTORY 125"] +
+          rider.world_records["FACTORY 150"]
+        ).toLocaleString()}
       </div>
     </div>
   </div>
