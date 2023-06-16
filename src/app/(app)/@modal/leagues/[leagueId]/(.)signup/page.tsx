@@ -16,7 +16,9 @@ export default async function Page({ params: { leagueId } }) {
       <LeagueSignupForm
         leagueId={leagueId}
         name={league.name}
-        bikes={Object.keys(oems).map((key) => ({ name: key, bikes: oems[key] }))}
+        bikes={Object.keys(oems)
+          .filter((key) => league.category.includes(key))
+          .map((key) => ({ name: key, bikes: oems[key] }))}
         servers={servers.datacenters}
       />
     </InterceptingModal>
