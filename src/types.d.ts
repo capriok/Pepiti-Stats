@@ -252,6 +252,7 @@ interface League {
   trophy: string
   name: string
   description: string
+  category: string[]
   verified: boolean
   hidden: boolean
   closed?: boolean
