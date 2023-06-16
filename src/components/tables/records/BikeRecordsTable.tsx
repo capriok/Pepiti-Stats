@@ -1,6 +1,6 @@
 "use client"
 
-import BikeTicTac from "../pills/BikeTicTac"
+import BikeTicTac from "~/components/pills/BikeTicTac"
 import Table, { TableOptions } from "~/ui/Table"
 
 interface Props extends TableOptions {

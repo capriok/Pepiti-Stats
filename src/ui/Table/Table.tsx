@@ -3,6 +3,7 @@
 import React, { useState } from "react"
 import {
   cycleSortingDirection,
+  genId,
   sortDataByColumn,
   SortDirection,
   TableColumn,
@@ -199,7 +200,7 @@ const Table: React.FC<TableProps> = (props) => {
       <>
         {paginatedData.map((row) => (
           <>
-            <tr key={row._id} className="w-full">
+            <tr key={genId(row._id)} className="w-full">
               {columns.map((column, idx) => {
                 const dataKey = column.key
                 const renderer = column.render

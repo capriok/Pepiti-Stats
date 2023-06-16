@@ -3,7 +3,7 @@ import MMRPill from "~/components/pills/MMRPill"
 import Pill from "~/components/pills/Pill"
 import RiderLink from "~/components/RiderLink"
 import Table from "~/ui/Table"
-import RiderRecentRacesTableRow from "~/components/tables/expandable/RiderRecentRacesTable"
+import RiderRecentRacesTableRow from "~/components/tables/expandable/RiderRecentRacesTableRow"
 import { toFixedIfNecessary } from "~/utils/toFixedIfNecessary"
 
 interface Props {

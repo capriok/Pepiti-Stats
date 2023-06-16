@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation"
 import Table from "~/ui/Table"
 import RiderLink from "~/components/RiderLink"
 import Pill from "~/components/pills/Pill"
-import BlacklistRiderStatsRow from "~/components/tables/expandable/AdminRiderSafetyStats"
+import AdminRiderSafetyStatsRow from "~/components/tables/expandable/AdminRiderSafetyStatsRow"
 
 interface Props {
   blacklist: any
@@ -56,7 +56,7 @@ export default function BlacklistTable({ blacklist, isAdministrating }: Props) {
       sortingEnabled={true}
       sortingKeys={sortKeys}
       expandable={{
-        render: (row) => <BlacklistRiderStatsRow row={row} isAdministrating={isAdministrating} />,
+        render: (row) => <AdminRiderSafetyStatsRow row={row} isAdministrating={isAdministrating} />,
       }}
     />
   )

@@ -2,16 +2,16 @@
 
 import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { useUserContext } from '~/app/providers'
+import { useUserContext } from "~/app/providers"
+import BlacklistTable from "~/components/tables/BlacklistTable"
 import Tabs from "~/components/Tabs"
-import BlacklistTable from "./BlacklistTable"
 
 interface Props {
   blacklistSR: any
   blacklistNonSR: any
 }
 
-export default function Blacklists({  blacklistSR, blacklistNonSR }: Props) {
+export default function Blacklists({ blacklistSR, blacklistNonSR }: Props) {
   const user = useUserContext()
   const searchParams = useSearchParams()
   const tabParam = searchParams.get("tab") ?? ""

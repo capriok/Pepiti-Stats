@@ -6,7 +6,7 @@ import { postBanAppeal } from "~/api/actions"
 import { useUserContext } from "~/app/providers"
 import Pill from "~/components/pills/Pill"
 import { useToast, actions } from "~/components/toast"
-import { renderBannedBy } from "../../admin/blacklists/components/BlacklistTable"
+import { renderBannedBy } from "../../../../components/tables/BlacklistTable"
 
 interface Props {
   reason: string

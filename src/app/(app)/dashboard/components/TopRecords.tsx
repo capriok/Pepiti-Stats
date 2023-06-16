@@ -1,7 +1,7 @@
 import Link from "next/link"
-import WorldRecordsTable from "~/components/tables/WorldRecordsTable"
-import MMRRecordsTable from "~/components/tables/MMRRecordsTable"
-import SRRecordsTable from "~/components/tables/SRRecordsTable"
+import WorldRecordsTable from "~/components/tables/records/WorldRecordsTable"
+import MMRRecordsTable from "~/components/tables/records/MMRRecordsTable"
+import SRRecordsTable from "~/components/tables/records/SRRecordsTable"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/Popover"
 import { MoreHorizontal } from "lucide-react"
 

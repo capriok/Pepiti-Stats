@@ -20,7 +20,7 @@ export default async function Page({ params: { top } }) {
   if (!dynamicTitleMap[top]) return <Result title="Not Found" description="No records found" />
 
   return (
-    <div className="mx-auto w-full max-w-[1000px]">
+    <div className="mx-auto w-full max-w-[1200px]">
       <PageHeader
         title={`Top ${dynamicTitleMap[top].title}`}
         extra={

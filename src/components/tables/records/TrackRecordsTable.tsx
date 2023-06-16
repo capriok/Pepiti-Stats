@@ -1,8 +1,8 @@
 "use client"
 
 import Table, { TableOptions } from "~/ui/Table"
-import RiderLink from "../RiderLink"
-import BikeTicTac from "../pills/BikeTicTac"
+import RiderLink from "~/components/RiderLink"
+import BikeTicTac from "~/components/pills/BikeTicTac"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
 

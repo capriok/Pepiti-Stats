@@ -79,11 +79,13 @@ interface RiderWorldRecords {
   "MX2 OEM": number
   "MX2-2T OEM": number
   "MX3 OEM": number
-  "SM1 OEM": number
-  "SM1-2t OEM": number
-  "SM2 OEM": number
-  "SM2-2t OEM": number
+  "FACTORY 450": number
+  "FACTORY 250": number
+  "FACTORY 150": number
+  "FACTORY 125": number
   total: number
+  name?: string
+  records: RiderWorldRecords
 }
 
 interface RiderMMRUpdates {

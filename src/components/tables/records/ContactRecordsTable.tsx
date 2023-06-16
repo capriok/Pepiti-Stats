@@ -1,7 +1,7 @@
 "use client"
 
+import RiderLink from "~/components/RiderLink"
 import Table, { TableOptions } from "~/ui/Table"
-import RiderLink from "../RiderLink"
 
 interface Props extends TableOptions {
   worldContacts: any

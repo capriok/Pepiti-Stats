@@ -1,13 +1,13 @@
 "use client"
 
-import WorldRecordsTable from "~/components/tables/WorldRecordsTable"
-import RiderWorldRecordsStatsRow from "~/components/tables/expandable/RiderWorldRecordsStats"
-import MMRRecordsTable from "~/components/tables/MMRRecordsTable"
-import RiderRecentRacesTableRow from "~/components/tables/expandable/RiderRecentRacesTable"
-import SRRecordsTable from "~/components/tables/SRRecordsTable"
-import RiderSafetyStatsRow from "~/components/tables/expandable/RiderSafetyStats"
-import BikeRecordsTable from "~/components/tables/BikeRecordsTable"
-import ContactRecordsTable from "~/components/tables/ContactRecordsTable"
+import WorldRecordsTable from "~/components/tables/records/WorldRecordsTable"
+import RiderWorldRecordsTableRow from "~/components/tables/expandable/RiderWorldRecordsTableRow"
+import MMRRecordsTable from "~/components/tables/records/MMRRecordsTable"
+import RiderRecentRacesTableRow from "~/components/tables/expandable/RiderRecentRacesTableRow"
+import SRRecordsTable from "~/components/tables/records/SRRecordsTable"
+import RiderSafetyStatsRow from "~/components/tables/expandable/RiderSafetyStatsRow"
+import BikeRecordsTable from "~/components/tables/records/BikeRecordsTable"
+import ContactRecordsTable from "~/components/tables/records/ContactRecordsTable"
 
 export default function DynamicTableRenderer({ top, records }) {
   return dynamicDataMap[top].render(records)
@@ -28,7 +28,7 @@ const dynamicDataMap = {
         <WorldRecordsTable
           worldRecords={records}
           expandable={{
-            render: (row) => <RiderWorldRecordsStatsRow row={row} />,
+            render: (row) => <RiderWorldRecordsTableRow row={row} />,
           }}
           {...tableProps}
         />

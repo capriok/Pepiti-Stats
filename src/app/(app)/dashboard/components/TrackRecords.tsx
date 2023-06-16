@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import useSWR from "swr"
 import Table from "~/ui/Table"
-import { TrackRecordsTable } from "~/components/tables/TrackRecordsTable"
+import { TrackRecordsTable } from "~/components/tables/records/TrackRecordsTable"
 
 interface Props {
   trackList: any

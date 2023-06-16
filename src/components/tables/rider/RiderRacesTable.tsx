@@ -1,31 +1,19 @@
 "use client"
 
-import useSWR from "swr"
 import { dateIsValid } from "~/utils/dateIsValid"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
 import MMRPill from "~/components/pills/MMRPill"
 import Table from "~/ui/Table"
 import Pill from "~/components/pills/Pill"
-import Spinner from "~/components/Spinner"
 import Link from "next/link"
 
 interface Props {
-  guid: string
+  races: Array<any>
 }
 
-export default function RiderRacesTable({ guid }: Props) {
-  const { data: raceData, isLoading } = useSWR(`/rider/${guid}/races`)
-
-  if (isLoading)
-    return (
-      <div className="my-5">
-        <Spinner />
-      </div>
-    )
-  console.log("%cRiderRacesTable", "color: steelblue", { records: raceData.races })
-
-  const data = raceData.races.map((race) => ({
+export default function RiderRacesTable({ races }: Props) {
+  const data = races.map((race) => ({
     date: parseInt(race._id.slice(0, 8), 16) * 1000,
     _id: race._id,
     track: race.track,
@@ -37,6 +25,8 @@ export default function RiderRacesTable({ guid }: Props) {
     mmrGain: race.MMR.total,
     newMMR: race.MMR.old_MMR + race.MMR.total,
   }))
+
+  console.log("%cRiderRacesTable", "color: steelblue", { records: data })
 
   const columns = [
     {
