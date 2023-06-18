@@ -2,7 +2,7 @@
 
 export default function DonationBanner() {
   return (
-    <div className="bg-secondary/80 py-1 text-center text-black text-white">
+    <div className="bg-secondary/40 py-1 text-center text-black text-white">
       <a
         target="_blank"
         rel="noreferrer"

@@ -86,14 +86,14 @@ function AppNavigation({ user }) {
       description: "Explore top records statistics and analyze intuitive data.",
     },
     {
-      href: "/report",
-      title: "Report Rider",
-      description: "Report riders with image/video proof for administrative review.",
-    },
-    {
       href: "/blacklists",
       title: "Blacklists",
       description: "View Global and SR Blacklist, dont end up on these lists.",
+    },
+    {
+      href: "/report",
+      title: "Report Rider",
+      description: "Report riders with image/video proof for administrative review.",
     },
   ]
 
