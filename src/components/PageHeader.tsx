@@ -13,7 +13,7 @@ const PageHeader: React.FC<Props> = ({ title, extra, wide, marginTop = true }) =
   return (
     <div className={headerCn}>
       <div className=" flex w-full flex-col items-center justify-between p-5 md:flex-row">
-        <div className="mb-2 text-3xl font-bold md:mb-0">{title}</div>
+        <div className="mb-2 text-2xl font-bold md:mb-0 md:text-3xl">{title}</div>
         {extra}
       </div>
     </div>

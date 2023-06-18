@@ -60,6 +60,15 @@ async function poster(url: string, options: { method: string; body?: any }) {
   }
 }
 
+export async function deleteCookie() {
+  cookies().set({
+    name: "access_token",
+    value: "",
+    expires: new Date("1970-01-01"),
+    path: "/",
+  })
+}
+
 // --
 // ? BAN APPEAL
 
