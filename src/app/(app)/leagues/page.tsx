@@ -4,7 +4,7 @@ import LeagueList from "./_components/LeagueList"
 
 export const metadata = {
   title: "Pepiti | Leagues",
-  description: "Compete in race leagues for real prizes and bragging rights",
+  description: "Compete in race leagues for real prizes and profile accolades",
 }
 
 export default async function Page() {

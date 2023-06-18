@@ -7,8 +7,9 @@ export async function generateMetadata({ params }) {
   const rider = await GetRider(params.guid)
 
   return {
-    title: `Pepiti | ${rider?.name}`,
-    description: `Online: ${rider?.online}
+    title: `Pepiti | Profile`,
+    description: `Rider: ${rider?.name}
+Online: ${rider?.online}
 MMR: ${rider?.MMR}
 SR: ${rider?.SR}
 Contacts: ${rider?.contact}

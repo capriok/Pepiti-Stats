@@ -5,7 +5,7 @@ import { Bike, Crosshair, Crown, HardHat, Timer } from "lucide-react"
 export async function generateMetadata() {
   return {
     title: `Pepiti | Records`,
-    description: "Records with an in depth view",
+    description: "Top Records for Pepiti servers",
   }
 }
 

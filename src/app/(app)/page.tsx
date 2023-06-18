@@ -5,8 +5,7 @@ import { ThemedImage } from "~/components/ThemedImage"
 
 export const metadata = {
   title: "Pepiti | Home",
-  description:
-    "Access race stats in real-time, host and join leagues, connect with fellow races through social integrations, and compete with rivals through global leaderboards",
+  description: "A community of racing and statistic enthusiasts",
 }
 
 export default async function Page() {
@@ -31,8 +30,8 @@ export default async function Page() {
               We are a community of racing and statistic enthusiasts
             </p>
             <p className="my-5">
-              Access race stats in real-time, host and join leagues, connect with fellow races
-              through social integrations, and compete with rivals through global leaderboards
+              Access race stats in real-time, compete in race leagues, track fellow racers through
+              feature packed profiles, and compete with rivals through global leaderboards
             </p>
             <Link href="/dashboard" className="btn-outline btn-secondary btn mb-4">
               Take me to the dashboard!

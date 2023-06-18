@@ -8,7 +8,6 @@ import OpenAppealsList from "./components/OpenAppealList"
 
 export const metadata = {
   title: "Pepiti | Admin Manager",
-  description: "Manage submitted rider appeals",
 }
 
 export default async function Page() {
