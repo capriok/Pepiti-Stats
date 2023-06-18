@@ -23,7 +23,7 @@ export default function TopRecords({ worldRecords, worldMMR, worldSR }) {
           </PopoverContent>
         </Popover>
       </div>
-      <div className="grid gap-5 lg:grid-cols-3">
+      <div className="grid gap-10 md:gap-5 lg:grid-cols-3">
         <div>
           <Link href="/records/riders">
             <div className="mb-2 text-lg font-semibold">Top Records</div>

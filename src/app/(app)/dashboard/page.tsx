@@ -22,7 +22,7 @@ export default async function Page() {
     <>
       <PageHeader title="Dashboard" extra={<RiderSearch />} />
 
-      <div className="mx-auto flex w-full flex-col gap-16">
+      <div className="mx-auto flex w-full flex-col gap-6 md:gap-12">
         <SummaryStats stats={apiStats} />
 
         <TopRecords worldRecords={worldRecords} worldMMR={worldMMR} worldSR={worldSR} />

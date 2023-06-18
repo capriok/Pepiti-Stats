@@ -1,7 +1,7 @@
 import type { ToastActionElement, ToastProps } from "~/ui/Toast"
 
 const TOAST_LIMIT = 4
-const TOAST_REMOVE_DELAY = 20000
+const TOAST_REMOVE_DELAY = 10000
 
 type ToasterToast = ToastProps & {
   id: string

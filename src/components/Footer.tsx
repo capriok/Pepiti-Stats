@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import RiderLink from "./RiderLink"
+import ThemeSwitch from "./ThemeSwitch"
 
 interface Props {
   user: User
@@ -30,29 +31,41 @@ export default function Footer({ user }: Props) {
           </div>
         </div>
         <div>
+          <span className="footer-title">Theme</span>
+          <div className="flex gap-2">
+            <ThemeSwitch withLabel />
+          </div>
+        </div>
+        <div>
           <span className="footer-title">Services</span>
           <Link href="/dashboard" className="link-hover link">
             Dashboard
           </Link>
+          <Link href="/records" className="link-hover link">
+            Records
+          </Link>
           <Link href="/races" className="link-hover link">
-            Recent Races
+            Races
           </Link>
           <Link href="/leagues" className="link-hover link">
             Leagues
           </Link>
         </div>
         <div>
-          <span className="footer-title">User</span>
+          <span className="footer-title">Profile</span>
           {user.guid ? (
             <>
               <Link href={`/profile/${user.guid}`} className="link-hover link">
                 Profile
               </Link>
-              <Link href={`/profile/${user.guid}/#races`} className="link-hover link">
-                Races
+              <Link href={`/profile/${user.guid}?tab=races`} className="link-hover link">
+                Recent Races
               </Link>
-              <Link href={`/profile/${user.guid}/#records`} className="link-hover link">
-                Records
+              <Link href={`/profile/${user.guid}/?tab=records`} className="link-hover link">
+                My Records
+              </Link>
+              <Link href={`/profile/${user.guid}/?tab=leagues`} className="link-hover link">
+                My Leagues
               </Link>
             </>
           ) : (
