@@ -73,7 +73,7 @@ const Records = () => {
         <Link href="/records/contacts">
           <div className="group btn flex w-[300px] justify-between border-none bg-base-200 text-accent shadow-md hover:border-secondary hover:bg-base-200">
             <Crosshair className="group-hover:text-secondary" />
-            <div className="ml-4 text-accent dark:text-white">Top Contacts Riders</div>
+            <div className="ml-4 text-accent dark:text-white">Top Contact Riders</div>
           </div>
         </Link>
       </div>
