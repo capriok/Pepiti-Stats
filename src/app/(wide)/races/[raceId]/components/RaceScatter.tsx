@@ -18,6 +18,7 @@ export const options = {
     },
     x: {
       title: { display: true, text: "Race Time" },
+      beginAtZero: false,
       ticks: {
         callback: (val, idx, ticks) => {
           return `${handleLapTimes(val)}`
@@ -44,14 +45,17 @@ export const options = {
 export function RaceScatter({ standings }) {
   const data = {
     labels: standings.map((stat) => `${handlePlaceSuffix(stat.position)} - ${stat.name}`),
-    tooltipText: standings.map((stat) => [0, 1]),
     datasets: [
       {
         label: "Race Time vs. Fastest Lap",
-        data: standings.map((stat) => ({
-          x: stat.raceTime,
-          y: stat.fastestLap,
-        })),
+        data: standings
+          .filter((stat) => stat.raceTime > 0 && stat.raceTime !== "-" && stat.fastestLap > 0)
+          .map((stat) => {
+            return {
+              x: stat.raceTime,
+              y: stat.fastestLap,
+            }
+          }),
         backgroundColor: "#23bd38",
       },
     ],
