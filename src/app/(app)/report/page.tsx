@@ -5,7 +5,7 @@ import RiderReportForm from "./components/ReportForm"
 
 export const metadata = {
   title: "Pepiti | Rider Report",
-  description: "Report riders from recent events for review by the admin team",
+  description: "Report riders from recent events for administrative review",
 }
 
 export default async function Page() {

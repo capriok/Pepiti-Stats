@@ -3,6 +3,7 @@
 import React, { useState } from "react"
 import {
   cycleSortingDirection,
+  genId,
   sortDataByColumn,
   SortDirection,
   TableColumn,
@@ -199,7 +200,7 @@ const Table: React.FC<TableProps> = (props) => {
       <>
         {paginatedData.map((row) => (
           <>
-            <tr key={row._id} className="w-full">
+            <tr key={genId(row._id)} className="w-full">
               {columns.map((column, idx) => {
                 const dataKey = column.key
                 const renderer = column.render
@@ -261,20 +262,20 @@ const Table: React.FC<TableProps> = (props) => {
         </table>
       </div>
       {paginationEnabled && (
-        <div className="mt-4 flex flex-col items-center justify-between px-3 text-sm md:flex-row">
-          <div className="flex gap-2">
-            <div>
+        <div className="mt-4 flex items-center justify-between gap-2 px-3 text-sm">
+          <div className="flex flex-col gap-2 md:flex-row">
+            <div className="whitespace-nowrap">
               Page: {page + 1} / {Math.ceil(data.length / pageSize)}
             </div>
             {resultsEnabled && (
-              <div className="flex gap-[2px]">
+              <div className="flex flex-nowrap gap-[2px]">
                 <span className="text-secondary">(</span>
-                {`${data.length} Results`}
+                <span className="whitespace-nowrap">{`${data.length} Results`}</span>
                 <span className="text-secondary">)</span>
               </div>
             )}
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center justify-end gap-2">
             <div className="btn-group">
               <button
                 className="btn-ghost btn-xs btn bg-base-100"

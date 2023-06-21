@@ -5,7 +5,6 @@ import Blacklists from "./components/Blacklists"
 
 export const metadata = {
   title: "Pepiti | Admin Manager",
-  description: "View and look up riders on the Safety Rating and Global Blacklists",
 }
 
 export default async function Page() {

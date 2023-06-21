@@ -2,7 +2,7 @@ import Link from "next/link"
 import React, { useState } from "react"
 import RiderLink from "~/components/RiderLink"
 import Table from "~/ui/Table"
-import RiderSafetyStatsRow from "~/components/tables/expandable/RiderSafetyStats"
+import RiderSafetyStatsRow from "~/components/tables/expandable/RiderSafetyStatsRow"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
 

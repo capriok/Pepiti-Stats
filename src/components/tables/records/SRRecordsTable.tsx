@@ -1,19 +1,19 @@
 "use client"
 
-import RiderLink from "../RiderLink"
+import RiderLink from "~/components/RiderLink"
 import Table, { TableOptions } from "~/ui/Table"
 
 interface Props extends TableOptions {
-  worldMMR: any
+  worldSR: any
 }
 
-export default function MMRRecordsTable({ worldMMR, ...rest }: Props) {
-  const data: any = worldMMR.riders.map((r) => ({
+export default function SRRecordsTable({ worldSR, ...rest }: Props) {
+  const data: any = worldSR.riders.map((r) => ({
     _id: r._id,
     name: r.name,
-    rating: r.MMR,
+    rating: r.SR,
   }))
-  console.log("%cMMRRecordsTable", "color: steelblue", { worldMMR: data })
+  console.log("%cSRRecordsTable", "color: steelblue", { worldSR: data })
 
   const columns = [
     {

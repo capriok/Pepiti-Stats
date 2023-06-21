@@ -1,7 +1,7 @@
 import Link from "next/link"
-import WorldRecordsTable from "~/components/tables/WorldRecordsTable"
-import MMRRecordsTable from "~/components/tables/MMRRecordsTable"
-import SRRecordsTable from "~/components/tables/SRRecordsTable"
+import WorldRecordsTable from "~/components/tables/records/WorldRecordsTable"
+import MMRRecordsTable from "~/components/tables/records/MMRRecordsTable"
+import SRRecordsTable from "~/components/tables/records/SRRecordsTable"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/Popover"
 import { MoreHorizontal } from "lucide-react"
 
@@ -23,7 +23,7 @@ export default function TopRecords({ worldRecords, worldMMR, worldSR }) {
           </PopoverContent>
         </Popover>
       </div>
-      <div className="grid gap-5 lg:grid-cols-3">
+      <div className="grid gap-10 md:gap-5 lg:grid-cols-3">
         <div>
           <Link href="/records/riders">
             <div className="mb-2 text-lg font-semibold">Top Records</div>

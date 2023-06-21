@@ -8,7 +8,6 @@ import ClosedReportsList from "./components/ClosedReportsList"
 
 export const metadata = {
   title: "Pepiti | Admin Manager",
-  description: "Manage submitted rider reports",
 }
 
 export default async function Page() {

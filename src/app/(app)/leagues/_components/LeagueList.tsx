@@ -2,6 +2,7 @@
 
 import { VerifiedIcon } from "lucide-react"
 import Link from "next/link"
+import { useUserContext } from "~/app/providers"
 import Pill from "~/components/pills/Pill"
 
 interface Props {
@@ -10,6 +11,14 @@ interface Props {
 
 export default function LeagueList({ leagues }: Props) {
   console.log("%cLeaguesList", "color: steelblue", leagues)
+  const user = useUserContext()
+
+  if (!user.isAdmin)
+    return (
+      <div>
+        <center className="text-sm text-secondary-content">Admin Only, Coming Soon</center>
+      </div>
+    )
 
   if (!leagues || !leagues.length)
     return <div className="flex w-full justify-center">No Results</div>

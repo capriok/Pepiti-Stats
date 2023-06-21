@@ -8,7 +8,7 @@ import TrackRecords from "./components/TrackRecords"
 export const metadata = {
   title: "Pepiti | Dashboard",
   description:
-    "Access race stats in real-time, host and join leagues, connect with fellow races through social integrations, and compete with rivals through global leaderboards",
+    "Access race stats in real-time, compete in race leagues, track fellow racers through feature packed profiles, and compete with rivals through global leaderboards",
 }
 
 export default async function Page() {
@@ -22,7 +22,7 @@ export default async function Page() {
     <>
       <PageHeader title="Dashboard" extra={<RiderSearch />} />
 
-      <div className="mx-auto flex w-full flex-col gap-16">
+      <div className="mx-auto flex w-full flex-col gap-6 md:gap-12">
         <SummaryStats stats={apiStats} />
 
         <TopRecords worldRecords={worldRecords} worldMMR={worldMMR} worldSR={worldSR} />

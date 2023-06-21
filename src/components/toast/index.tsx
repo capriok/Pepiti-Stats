@@ -52,6 +52,11 @@ const actions: {
     data: err.message,
     variant: "error",
   }),
+  signedOut: () => ({
+    title: "User",
+    description: "You have been signed out",
+    variant: "info",
+  }),
   postRiderReport: () => ({
     title: "Rider Report",
     description: "You have sent a rider report for admins to review",

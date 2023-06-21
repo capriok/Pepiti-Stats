@@ -55,6 +55,10 @@ const stringCompare = (a: string, b: string): number => a.localeCompare(b)
 const numberCompare = (a: number, b: number): number => a - b
 const booleanCompare = (a: boolean, b: boolean): number => (a ? 1 : 0) - (b ? 1 : 0)
 
+export const genId = (id: string): string => {
+  return id + Math.random().toString(36).substr(2, 12)
+}
+
 export const cycleSortingDirection = (dir: SortDirection): SortDirection => {
   switch (dir) {
     case "off":

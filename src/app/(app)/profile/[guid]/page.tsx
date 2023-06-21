@@ -1,5 +1,4 @@
-import { GetRider, GetRiderLeagues, GetRiderMMRHistory } from "~/api"
-import GetAuthUser from "~/api"
+import { GetRider, GetRiderMMRHistory } from "~/api"
 import PageHeader from "~/components/PageHeader"
 import BannedBanner from "./components/BannedBanner"
 import { RiderProfile } from "./components/RiderProfile"
@@ -8,8 +7,9 @@ export async function generateMetadata({ params }) {
   const rider = await GetRider(params.guid)
 
   return {
-    title: `Pepiti | ${rider?.name}`,
-    description: `Online: ${rider?.online}
+    title: `Pepiti | Profile`,
+    description: `Rider: ${rider?.name}
+Online: ${rider?.online}
 MMR: ${rider?.MMR}
 SR: ${rider?.SR}
 Contacts: ${rider?.contact}
@@ -30,10 +30,7 @@ export default async function Page({ params: { guid } }) {
         title="Rider Profile"
         extra={<BannedBanner banned={rider.banned} reason={rider.banned_by} />}
       />
-      <RiderProfile
-        rider={rider}
-        mmrHistory={mmrHistory.MMR_updates}
-      />
+      <RiderProfile rider={rider} mmrHistory={mmrHistory.MMR_updates} />
     </>
   )
 }

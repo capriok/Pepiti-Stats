@@ -1,36 +1,13 @@
 "use client"
 
 import Link from "next/link"
-import useSWR from "swr"
 import MMRPill from "~/components/pills/MMRPill"
 import Pill from "~/components/pills/Pill"
-import Spinner from "~/components/Spinner"
 import Table from "~/ui/Table"
 import { dateIsValid } from "~/utils/dateIsValid"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
-import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 
-export default function RiderRecentRacesTableRow({ row }) {
-  const { data: raceData, isLoading } = useSWR(`/rider/${row._id}/races`)
-
-  if (isLoading)
-    return (
-      <div className="py-4">
-        <Spinner />
-      </div>
-    )
-
-  return (
-    <>
-      <div className="mb-2 text-lg font-semibold">
-        {handleRacismSanitization(row.name)}&apos;s Last Ten Races
-      </div>
-      <RiderRecentRacesTable races={raceData.races} />
-    </>
-  )
-}
-
-export const RiderRecentRacesTable = ({ races }) => {
+export default function RiderRecentRacesTable({ races }) {
   const lastRaces = races.slice(0, 10)
 
   const data = lastRaces.map((race) => ({
@@ -41,7 +18,7 @@ export const RiderRecentRacesTable = ({ races }) => {
     mmrGain: race.MMR.total,
     newMMR: race.MMR.old_MMR + race.MMR.total,
   }))
-  console.log("%cRiderRecentRacesTableRow", "color: goldenrod", { races: data })
+  console.log("%cRiderRecentRacesTable", "color: goldenrod", { races: data })
 
   const columns = [
     {
