@@ -122,7 +122,7 @@ export function RaceScatter({ standings }) {
 
   return (
     <div className="rounded-b-lg bg-base-200 px-5 py-3">
-      <div className="flex justify-center gap-5 py-4">{chartButtons}</div>
+      <div className="flex flex-wrap justify-center gap-2 py-4 md:gap-5">{chartButtons}</div>
       <Scatter options={options} data={data} />
     </div>
   )
