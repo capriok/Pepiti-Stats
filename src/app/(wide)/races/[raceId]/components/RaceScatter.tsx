@@ -23,7 +23,7 @@ type Comparables = {
   [key: string]: Comparable
 }
 
-// To add a new data set, create a new key in COMPARABLES. The key needs to be in standings obj.
+// To add a new data set, create a new key in COMPARABLES. titles[idx].key needs to be in standings.
 const COMPARABLES: Comparables = {
   rtfl: {
     titles: [
