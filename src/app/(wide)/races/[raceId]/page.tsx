@@ -2,6 +2,7 @@ import { Metadata } from "next"
 import { GetRace } from "~/api"
 import processRaceSession from "~/utils/processRaceSession"
 import Race from "./components/Race"
+import { ProcessedRaceSession } from "~/types"
 
 export async function generateMetadata({ params }) {
   const raceSession = await GetRace(params.raceId)
