@@ -6,6 +6,7 @@ import Tabs from "~/components/Tabs"
 import MMRAnalysisTable from "./MMRAnalysisTable"
 import RaceOverview from "./RaceOverview"
 import RaceStandingsTable from "./RaceStandingsTable"
+import { RaceScatter } from "./RaceScatter"
 
 interface Props {
   session: ProcessedRaceSession
@@ -67,6 +68,11 @@ const RaceContent = ({ race }: { race: Race }) => {
       key: "mmrAnalysis",
       label: "MMR Analysis",
       children: <MMRAnalysisTable standings={race.standings} />,
+    },
+    {
+      key: "raceScatter",
+      label: "Scatter Analysis",
+      children: <RaceScatter standings={race.standings} />,
     },
   ]
 

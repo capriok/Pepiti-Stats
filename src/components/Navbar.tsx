@@ -128,6 +128,8 @@ function AppNavigation({ user }) {
     },
   ]
 
+  const menuContentCn = "flex flex-col justify-center gap-2 p-4 lg:w-[300px]"
+
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -136,7 +138,7 @@ function AppNavigation({ user }) {
           <NavigationMenuItem>
             <NavigationMenuTrigger>Racing</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className="flex flex-col justify-center gap-2 p-4 md:w-[300px] lg:w-[400px]">
+              <ul className={menuContentCn}>
                 {racingItems.map((item) => (
                   <LinkItem key={item.title} title={item.title} href={item.href}>
                     {item.description}
@@ -149,7 +151,7 @@ function AppNavigation({ user }) {
           <NavigationMenuItem>
             <NavigationMenuTrigger>Explore</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className="flex flex-col justify-center gap-2 p-4 md:w-[300px] lg:w-[400px]">
+              <ul className={menuContentCn}>
                 {featureItems.map((item) => (
                   <LinkItem key={item.title} title={item.title} href={item.href}>
                     {item.description}
@@ -165,7 +167,7 @@ function AppNavigation({ user }) {
           <NavigationMenuItem>
             <NavigationMenuTrigger>Explore</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className="flex flex-col justify-center gap-2 p-4 md:w-[300px] lg:w-[400px]">
+              <ul className={menuContentCn}>
                 {racingItems.map((item) => (
                   <LinkItem key={item.title} title={item.title} href={item.href}>
                     {item.description}
