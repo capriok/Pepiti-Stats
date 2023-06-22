@@ -81,7 +81,7 @@ export default function RiderPositionHistoryChart({ races }: Props) {
         </div>
         <div className="flex items-center justify-center">
           <div className="pr-4 text-accent">{days} Days</div>
-          <div className="btn-group ">
+          <div className="join">
             <button
               className="btn-outline btn-sm btn rounded-r-none border-none bg-base-300 hover:bg-secondary"
               onClick={() => setDays((days) => (days > 30 ? days - 30 : days))}

@@ -252,7 +252,7 @@ const Table: React.FC<TableProps> = (props) => {
         )}
       </div>
       <div className="w-full overflow-x-auto">
-        <table className="table-zebra table-compact my-0 table w-full">
+        <table className="table-compact table-zebra my-0 table w-full">
           <thead className="bg-base-200 text-xs uppercase">
             <TableColumns />
           </thead>
@@ -276,7 +276,7 @@ const Table: React.FC<TableProps> = (props) => {
             )}
           </div>
           <div className="flex flex-wrap items-center justify-end gap-2">
-            <div className="btn-group">
+            <div className="join">
               <button
                 className="btn-ghost btn-xs btn bg-base-100"
                 onClick={() => handlePageChange(page > 0 ? page - 1 : page)}
