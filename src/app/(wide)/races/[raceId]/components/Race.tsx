@@ -6,7 +6,6 @@ import Tabs from "~/components/Tabs"
 import MMRAnalysisTable from "./MMRAnalysisTable"
 import RaceOverview from "./RaceOverview"
 import RaceStandingsTable from "./RaceStandingsTable"
-import { ProcessedRaceSession, Race } from "~/types"
 import RaceScatter from "./RaceScatter"
 
 interface Props {
