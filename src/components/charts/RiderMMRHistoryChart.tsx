@@ -75,7 +75,7 @@ export default function RiderMMRHistoryChart({ mmrHistory }: Props) {
         </div>
         <div className="flex items-center justify-center">
           <div className="pr-4 text-accent">{limit} Races</div>
-          <div className="btn-group ">
+          <div className="join">
             <button
               className="btn-outline btn-sm btn rounded-r-none border-none bg-base-300 hover:bg-secondary"
               onClick={() => setLimit((l) => (l > 5 ? l - 5 : l))}

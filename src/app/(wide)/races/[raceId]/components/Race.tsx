@@ -80,7 +80,9 @@ const RaceContent = ({ race }: { race: Race }) => {
   return (
     <>
       <RaceOverview race={race} winner={race.winner} />
-      <Tabs items={items} wide={true} />
+      <div className="card card-body bg-base-200 p-0">
+        <Tabs items={items} wide={true} />
+      </div>
     </>
   )
 }

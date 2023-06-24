@@ -1,4 +1,4 @@
-import { Hammer, NewspaperIcon, ScrollText, ShieldAlert } from "lucide-react"
+import { Hammer, ScrollText, Shield } from "lucide-react"
 import Link from "next/link"
 import PageHeader from "~/components/PageHeader"
 
@@ -18,42 +18,33 @@ export default function Page() {
 
 const Managers = () => {
   return (
-    <div className="md: mt-6 flex w-full flex-col px-0 md:flex-row md:px-4">
-      <div className="mr-4 flex flex-col">
+    <div className="grid place-items-center gap-2 md:mt-6 md:px-4">
+      <div>
         <div className="my-4 text-xl font-semibold">Blacklists</div>
-        <Link
-          href="/admin/blacklists"
-          className="card card-body mb-2 flex w-[300px] cursor-pointer bg-base-200 no-underline hover:bg-secondary"
-        >
-          <div className="flex">
-            <ScrollText />
-            <div className="ml-4">Blacklists</div>
+        <Link href="/admin/blacklists">
+          <div className="group btn flex min-h-[75px] w-[300px] items-center justify-between border-none bg-base-200 text-accent shadow-md hover:border-secondary hover:bg-base-200">
+            <div className="dark:text-white">Blacklists</div>
+            <ScrollText className="group-hover:text-secondary" />
           </div>
         </Link>
       </div>
 
-      <div className="mr-4 flex flex-col">
-        <div className="my-4 text-xl font-semibold">Rider Reports</div>
-        <Link
-          href="/admin/reports"
-          className="card card-body mb-2 flex w-[300px] cursor-pointer bg-base-200 no-underline hover:bg-secondary"
-        >
-          <div className="flex">
-            <ShieldAlert />
-            <div className="ml-4">Rider Reports</div>
+      <div>
+        <div className="my-4 text-xl font-semibold">Reports</div>
+        <Link href="/admin/reports">
+          <div className="group btn flex min-h-[75px] w-[300px] items-center justify-between border-none bg-base-200 text-accent shadow-md hover:border-secondary hover:bg-base-200">
+            <div className="dark:text-white">Rider Reports</div>
+            <Shield className="group-hover:text-secondary" />
           </div>
         </Link>
       </div>
 
-      <div className="mr-4 flex flex-col">
-        <div className="my-4 text-xl font-semibold">Ban Appeals</div>
-        <Link
-          href="/admin/appeals"
-          className="card card-body mb-2 flex w-[300px] cursor-pointer bg-base-200 no-underline hover:bg-secondary"
-        >
-          <div className="flex">
-            <Hammer />
-            <div className="ml-4">Ban Appeals</div>
+      <div>
+        <div className="my-4 text-xl font-semibold">Bans</div>
+        <Link href="/admin/appeals">
+          <div className="group btn flex min-h-[75px] w-[300px] items-center justify-between border-none bg-base-200 text-accent shadow-md hover:border-secondary hover:bg-base-200">
+            <div className="dark:text-white">Ban Appeals</div>
+            <Hammer className="group-hover:text-secondary" />
           </div>
         </Link>
       </div>

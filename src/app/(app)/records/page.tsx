@@ -32,8 +32,8 @@ const Records = () => {
         <div className="my-4 text-xl font-semibold">World Records</div>
         <Link href="/records/riders">
           <div className="group btn flex w-[300px] justify-between border-none bg-base-200 text-accent shadow-md hover:border-secondary hover:bg-base-200">
+            <div className="dark:text-white">Record Holders</div>
             <Timer className="group-hover:text-secondary" />
-            <div className="ml-4 text-accent dark:text-white">Record Holders</div>
           </div>
         </Link>
       </div>
@@ -42,8 +42,8 @@ const Records = () => {
         <div className="my-4 text-xl font-semibold">MMR</div>
         <Link href="/records/mmr">
           <div className="group btn flex w-[300px] justify-between border-none bg-base-200 text-accent shadow-md hover:border-secondary hover:bg-base-200">
+            <div className="dark:text-white">Top MMR Rankings</div>
             <Crown className="group-hover:text-secondary" />
-            <div className="ml-4 text-accent dark:text-white">Top MMR Rankings</div>
           </div>
         </Link>
       </div>
@@ -52,8 +52,8 @@ const Records = () => {
         <div className="my-4 text-xl font-semibold">SR</div>
         <Link href="/records/sr">
           <div className="group btn flex w-[300px] justify-between border-none bg-base-200 text-accent shadow-md hover:border-secondary hover:bg-base-200">
+            <div className="dark:text-white">Top SR Rankings</div>
             <HardHat className="group-hover:text-secondary" />
-            <div className="ml-4 text-accent dark:text-white">Top SR Rankings</div>
           </div>
         </Link>
       </div>
@@ -62,8 +62,8 @@ const Records = () => {
         <div className="my-4 text-xl font-semibold">Bikes</div>
         <Link href="/records/bikes">
           <div className="group btn flex w-[300px] justify-between border-none bg-base-200 text-accent shadow-md hover:border-secondary hover:bg-base-200">
+            <div className="dark:text-white">Bike Lap Totals</div>
             <Bike className="group-hover:text-secondary" />
-            <div>Bike Lap Totals</div>
           </div>
         </Link>
       </div>
@@ -72,8 +72,8 @@ const Records = () => {
         <div className="my-4 text-xl font-semibold">Contacts</div>
         <Link href="/records/contacts">
           <div className="group btn flex w-[300px] justify-between border-none bg-base-200 text-accent shadow-md hover:border-secondary hover:bg-base-200">
+            <div className="dark:text-white">Top Contact Riders</div>
             <Crosshair className="group-hover:text-secondary" />
-            <div className="ml-4 text-accent dark:text-white">Top Contact Riders</div>
           </div>
         </Link>
       </div>
