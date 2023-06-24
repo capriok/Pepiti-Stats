@@ -1,6 +1,5 @@
 import React from "react"
 import { ScatterChart } from "~/components/charts/ScatterChart"
-import { Comparables } from "~/types"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 
 // To add a new data set, create a new key in COMPARABLES. titles[idx].key needs to be in standings.
