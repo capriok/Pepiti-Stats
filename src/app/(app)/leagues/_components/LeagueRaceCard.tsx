@@ -76,7 +76,7 @@ const RaceCardBanner = ({
   return (
     <div className="overflow-hidden rounded-lg rounded-bl-none rounded-br-none">
       {isInRace ? (
-        <div className="bg-accent">
+        <div className="bg-accent ">
           <div className="flex justify-center py-2 text-white">You are Registered</div>
         </div>
       ) : (

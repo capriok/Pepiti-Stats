@@ -15,7 +15,7 @@ import {
   navigationMenuTriggerStyle,
 } from "~/ui/NavigationMenu"
 import cn from "~/utils/cn"
-import { LogOut, ShieldAlert, User } from "lucide-react"
+import { LogOut, ShieldAlert, User, User2 } from "lucide-react"
 import ThemeSwitch from "./ThemeSwitch"
 
 interface Props {
@@ -101,9 +101,18 @@ function AppNavigation({ user }) {
     {
       href: `/profile/${user.guid}`,
       title: (
-        <div className="flex w-full justify-between gap-4">
-          <div>Profile</div>
-          <User size={20} />
+        <div className="-m-3 flex flex-col rounded-lg bg-base-100 p-4">
+          <div className="flex w-full items-center justify-between">
+            <div>Profile</div>
+            <Image src={user.avatar} alt="avatar" width={28} height={28} className="rounded-full" />
+          </div>
+          <div className="flex text-xs">
+            {user.isAdmin ? (
+              <div className="text-secondary dark:text-secondary-content">Admin</div>
+            ) : (
+              <div className="text-accent/60">User</div>
+            )}
+          </div>
         </div>
       ),
     },
@@ -111,7 +120,7 @@ function AppNavigation({ user }) {
       href: `/admin`,
       title: (
         <div className="flex w-full justify-between gap-4">
-          <div>Admin</div>
+          <div>Administration</div>
           <ShieldAlert size={20} />
         </div>
       ),
@@ -127,6 +136,34 @@ function AppNavigation({ user }) {
       ),
     },
   ]
+
+  const ProfileDropdown = ({ label }) => {
+    if (user.guid)
+      return (
+        <NavigationMenuItem>
+          <NavigationMenuTrigger>
+            {label}
+            {/* <Image src={user.avatar} alt="avatar" width={24} height={24} className="rounded-full" /> */}
+          </NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <ul className="flex flex-col justify-center gap-2 p-2 sm:w-[300px] lg:w-[300px]">
+              {profileItems.map((item) => {
+                if (item.admin && !user.isAdmin) return <></>
+                return <LinkItem key={item.title} title={item.title} href={item.href} />
+              })}
+            </ul>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+      )
+
+    return (
+      <NavigationMenuItem>
+        <Link href="https://pepiti.com/stats/api/v0/steam_login" legacyBehavior passHref>
+          <NavigationMenuLink className={navigationMenuTriggerStyle()}>Sign In</NavigationMenuLink>
+        </Link>
+      </NavigationMenuItem>
+    )
+  }
 
   const menuContentCn = "flex flex-col justify-center gap-2 p-4 lg:w-[300px]"
 
@@ -160,6 +197,7 @@ function AppNavigation({ user }) {
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
+          <ProfileDropdown label={user.name.slice(0, 12)} />
         </div>
 
         {/* MOBILE */}
@@ -181,29 +219,8 @@ function AppNavigation({ user }) {
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
+          <ProfileDropdown label={<User2 size={20} />} />
         </div>
-
-        {user.guid ? (
-          <NavigationMenuItem>
-            <NavigationMenuTrigger>{user.name.slice(0, 12)}</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="flex flex-col justify-center gap-2 p-2 sm:w-[300px] lg:w-[300px]">
-                {profileItems.map((item) => {
-                  if (item.admin && !user.isAdmin) return <></>
-                  return <LinkItem key={item.title} title={item.title} href={item.href} />
-                })}
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-        ) : (
-          <NavigationMenuItem>
-            <Link href="https://pepiti.com/stats/api/v0/steam_login" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Sign In
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-        )}
       </NavigationMenuList>
     </NavigationMenu>
   )
