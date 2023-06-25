@@ -44,13 +44,15 @@ export default function Race({ session }: Props) {
         extra: (
           <div className="flex flex-col items-end gap-2">
             <div className="text-lg font-semibold">{session.headCount + " Riders"}</div>
-            <Tabs
-              items={items}
-              defaultActive="race2"
-              onChange={(tab) => setTab(tab)}
-              renderChildren={false}
-            />
           </div>
+        ),
+        tabs: (
+          <Tabs
+            items={items}
+            defaultActive="race2"
+            onChange={(tab) => setTab(tab)}
+            renderChildren={false}
+          />
         ),
       }}
     >
@@ -79,12 +81,12 @@ const RaceContent = ({ race }: { race: Race }) => {
   ]
 
   return (
-    <>
+    <div className="md:mx-4">
       <RaceOverview race={race} winner={race.winner} />
       <div className="card card-body bg-base-200 p-0">
         <Tabs items={items} wide={true} />
       </div>
-    </>
+    </div>
   )
 }
 

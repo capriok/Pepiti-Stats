@@ -11,6 +11,7 @@ interface Props {
   header?: {
     title: string
     extra?: React.ReactNode
+    tabs?: React.ReactNode
   }
   children: React.ReactNode
 }
@@ -27,7 +28,12 @@ export default function PageLayout(props: Props) {
   return (
     <>
       {props.header && (
-        <PageHeader title={props.header.title} extra={props.header.extra} width={width} />
+        <PageHeader
+          title={props.header.title}
+          extra={props.header.extra}
+          tabs={props.header.tabs}
+          width={width}
+        />
       )}
       <div className={layoutCn}>{props.children}</div>
     </>

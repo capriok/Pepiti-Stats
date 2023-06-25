@@ -36,7 +36,7 @@ export const RiderProfile = ({ rider, mmrHistory }: Props) => {
 
 const RiderStats = ({ rider }: { rider: RiderProfile }) => {
   return (
-    <div className="stats mb-10 w-full border border-accent/40 bg-base-200 shadow-md">
+    <div className="stats mb-10 w-full rounded-md border border-accent/40 bg-base-200 shadow-md">
       <div className="stat">
         <div className="stat-title">MMR</div>
         <div className="stat-value py-1 text-2xl">{rider.MMR}</div>
@@ -72,7 +72,7 @@ const RiderStats = ({ rider }: { rider: RiderProfile }) => {
 
 const OverallStats = ({ rider }: { rider: RiderProfile }) => {
   return (
-    <div className="stats w-full  border border-accent/40 bg-base-200 shadow-md">
+    <div className="stats w-full rounded-md border border-accent/40 bg-base-200 shadow-md">
       <div className="stat">
         <div className="stat-title">Records</div>
         <div className="stat-value py-1 text-2xl">{rider.world_records.total}</div>

@@ -16,7 +16,7 @@ export default function RaceOverview({ race }: Props) {
   console.log("%cRace", "color: steelblue", race)
 
   return (
-    <div className="my-5 flex flex-col gap-5 xl:my-6 xl:flex-row">
+    <div className="my-5 flex flex-col gap-5 xl:flex-row">
       <WinnerCircle race={race} />
       <RaceNotables race={race} />
     </div>

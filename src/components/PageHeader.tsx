@@ -7,23 +7,27 @@ interface Props {
   title: string
   width: string
   extra?: React.ReactNode
+  tabs?: React.ReactNode
 }
 
-const PageHeader: React.FC<Props> = ({ title, extra, width }) => {
+const PageHeader: React.FC<Props> = ({ title, extra, width, tabs }) => {
   const pathname = usePathname()
 
   const isAtDashboard = pathname === "/dashboard"
   const marginBottom = isAtDashboard ? "mb-0" : "mb-10"
-  const headerCn = `bg-base-200 py-10 flex md:justify-center shadow-md border-b border-accent/40 ${marginBottom}`
+  const headerCn = `bg-base-200 px-4 flex md:justify-center shadow-md border-b border-accent/40 ${marginBottom}`
 
   return (
     <>
       <div className={headerCn}>
         <div
-          className={`flex w-full flex-col p-5 md:flex-row md:items-center md:justify-between ${width}`}
+          className={`relative flex w-full flex-col py-14 md:flex-row md:items-center md:justify-between ${width}`}
         >
           <div className="mb-2 flex-1 text-2xl font-bold md:mb-0 md:text-3xl">{title}</div>
-          {extra}
+          <div className="flex justify-start">
+            {extra}
+            <div className="absolute bottom-0 right-0">{tabs}</div>
+          </div>
         </div>
       </div>
       {isAtDashboard && <DonationBanner />}
