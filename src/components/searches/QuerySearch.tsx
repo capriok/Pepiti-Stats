@@ -40,7 +40,7 @@ export default function QuerySearch({ query, render, placeholder, defaultTerm = 
     <div className="relative flex justify-center gap-2">
       <div className="relative">
         <input
-          className="input-bordered input w-full bg-base-100 md:w-[400px]"
+          className="input w-full  border border-accent/40 bg-base-100 md:w-[400px]"
           placeholder={placeholder}
           value={term}
           onChange={(e) => setTerm(e.currentTarget.value)}
@@ -62,13 +62,13 @@ const SearchDropdown = ({ term, open, loading, results, render }) => {
 
   return (
     <div
-      className={`${openCn} scroll absolute top-14 z-20 flex max-h-[300px] w-full flex-col gap-1 overflow-y-auto rounded-lg bg-base-100 ring-2 ring-primary/40 backdrop-blur-lg transition-opacity md:w-[400px]`}
+      className={`${openCn} scroll absolute top-14 z-20 flex max-h-[300px] w-full flex-col overflow-y-auto rounded-lg border border-secondary/40 bg-base-100 backdrop-blur-lg transition-opacity md:w-[400px]`}
     >
       {loading && <Spinner className="py-4" />}
 
       {!results.length && term.length < 2 && (
         <p className="py-4 text-center">
-          <span className="opacity-75 ">Search above!</span> ☝️
+          <span className="text-accent ">Search above!</span> ☝️
         </p>
       )}
 

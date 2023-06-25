@@ -16,7 +16,7 @@ export default function ThemeSwitch({ withLabel = false }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <div className="flex items-center justify-center gap-2 rounded-md px-4 py-2 hover:bg-base-100">
+        <div className="flex items-center justify-center gap-2 rounded-lg px-4 py-2 hover:bg-base-100">
           {theme === "light" ? <Sun size={18} /> : <Moon size={18} />}
           {withLabel && <>{theme === "light" ? "Light" : theme === "dark" ? "Dark" : "System"}</>}
         </div>

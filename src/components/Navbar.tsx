@@ -4,7 +4,6 @@ import React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import DonationBanner from "~/app/(app)/dashboard/components/DonationBanner"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -27,8 +26,8 @@ function NavBar({ user }: Props) {
 
   return (
     <>
-      <div className="sticky top-0 z-50 bg-base-200 backdrop-blur-lg">
-        <div className="navbar mx-auto max-w-[1400px]">
+      <div className="sticky top-0 z-50 h-[65px] max-h-[65px] min-h-[65px] border-b border-accent/40 bg-base-200 backdrop-blur-lg">
+        <div className="navbar">
           <div className="flex w-full justify-between">
             <Link
               href={pathname === "/dashboard" ? "/" : "/dashboard"}
@@ -51,7 +50,6 @@ function NavBar({ user }: Props) {
           </div>
         </div>
       </div>
-      {pathname === "/dashboard" && <DonationBanner />}
     </>
   )
 }
@@ -260,11 +258,11 @@ function LandingNavigation() {
           <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-              <li className="row-span-3 rounded-md bg-base-100">
+              <li className="row-span-3 rounded-lg bg-base-100">
                 <NavigationMenuLink asChild>
                   <a
                     href="/dashboard"
-                    className="from-muted/50 to-muted flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b p-6 no-underline outline-none focus:shadow-md"
+                    className="from-muted/50 to-muted flex h-full w-full select-none flex-col justify-end rounded-lg bg-gradient-to-b p-6 no-underline outline-none focus:shadow-md"
                   >
                     <Image
                       src="/assets/brand/pepiti-flag.svg"
@@ -302,7 +300,7 @@ const LinkItem = React.forwardRef<React.ElementRef<"a">, React.ComponentPropsWit
             ref={ref}
             href={href!}
             className={cn(
-              "hover:text-base-100-foreground focus:text-base-100-foreground block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-base-100 focus:bg-base-100",
+              "hover:text-base-100-foreground focus:text-base-100-foreground block select-none space-y-1 rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-base-100 focus:bg-base-100",
               className
             )}
             {...props}
