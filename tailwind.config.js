@@ -8,6 +8,7 @@ module.exports = {
         light: {
           "base-100": "#ffffff",
           "base-200": "#eeeeee",
+          "base-300": "#dddddd",
           primary: "#21af34",
           secondary: "#178626",
           accent: "#202020",

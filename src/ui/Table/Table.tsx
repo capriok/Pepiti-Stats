@@ -198,7 +198,7 @@ const Table: React.FC<TableProps> = (props) => {
 
     return (
       <>
-        {paginatedData.map((row) => (
+        {paginatedData.map((row, i) => (
           <>
             <tr key={genId(row._id)} className="w-full">
               {columns.map((column, idx) => {
@@ -207,7 +207,8 @@ const Table: React.FC<TableProps> = (props) => {
                 const value = row[dataKey]
 
                 const firstColCn = idx === 0 ? "pl-4 w-fit" : ""
-                const rowCn = `rounded-none p-0 px-2 max-w-[40%] ${firstColCn} ${column.width}`
+                const isLightRow = i % 2 === 0 ? "bg-base-100" : "bg-base-200"
+                const rowCn = `rounded-none p-0 px-2 max-w-[40%] ${firstColCn} ${isLightRow} ${column.width}`
 
                 return (
                   <td key={dataKey} className={rowCn}>
@@ -247,12 +248,12 @@ const Table: React.FC<TableProps> = (props) => {
             value={term}
             placeholder={`Search by ${searchKey}...`}
             onChange={(e) => handleTermChange(e.target.value)}
-            className="input-bordered input input-sm my-2 w-full border-2 bg-base-100 md:w-[400px]"
+            className="input input-sm my-2 w-full  border border-accent/40 bg-base-100 md:w-[400px]"
           />
         )}
       </div>
-      <div className="w-full overflow-x-auto">
-        <table className="table-compact table-zebra my-0 table w-full">
+      <div className="w-full overflow-x-auto rounded-lg">
+        <table className="my-0 table w-full">
           <thead className="bg-base-200 text-xs uppercase">
             <TableColumns />
           </thead>

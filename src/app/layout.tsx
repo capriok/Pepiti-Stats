@@ -17,6 +17,7 @@ import "~/globals.css"
 
 interface Props {
   children: React.ReactNode
+  modal: React.ReactNode
 }
 
 export default async function RootLayout(props: Props) {
@@ -28,7 +29,10 @@ export default async function RootLayout(props: Props) {
         <Providers user={user}>
           <main className="flex min-h-screen flex-col">
             <NavBar user={user} />
-            <div className="flex-1">{props.children}</div>
+            <div className="flex-1">
+              {props.children}
+              {props.modal}
+            </div>
             <Footer user={user} />
             <Toaster />
           </main>
