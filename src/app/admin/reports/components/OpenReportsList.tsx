@@ -61,7 +61,7 @@ export default function OpenReportsList({ reports }: Props) {
 const IdleReportControls = ({ open }) => {
   return (
     <div className="flex w-fit flex-col justify-center align-middle">
-      <button className="btn-outline btn-secondary btn-ghost btn-sm btn" onClick={open}>
+      <button className="btn-ghost btn-secondary btn-outline btn-sm btn" onClick={open}>
         Review
       </button>
     </div>

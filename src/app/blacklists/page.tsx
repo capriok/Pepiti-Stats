@@ -1,5 +1,4 @@
 import { GetBlackListNonSR, GetBlackListSR } from "~/api"
-import PageHeader from "~/components/PageHeader"
 import PageLayout from "~/components/PageLayout"
 import Blacklists from "../admin/blacklists/components/Blacklists"
 

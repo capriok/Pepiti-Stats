@@ -75,7 +75,7 @@ const BlacklistAlert = ({ text, type }) => {
   }
 
   return (
-    <Alert className={`mb-4 ${map[type]}`}>
+    <Alert className={`mb-4 bg-base-100 ${map[type]}`}>
       <Hammer size={20} />
       <AlertTitle>Disclaimer.</AlertTitle>
       <AlertDescription>{text}</AlertDescription>
