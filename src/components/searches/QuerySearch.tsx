@@ -64,7 +64,11 @@ const SearchDropdown = ({ term, open, loading, results, render }) => {
     <div
       className={`${openCn} scroll absolute top-14 z-20 flex max-h-[300px] w-full flex-col overflow-y-auto rounded-lg border border-secondary/40 bg-base-100 backdrop-blur-lg transition-opacity md:w-[400px]`}
     >
-      {loading && <Spinner className="py-4" />}
+      {loading && (
+        <div className="py-4">
+          <Spinner />
+        </div>
+      )}
 
       {!results.length && term.length < 2 && (
         <p className="py-4 text-center">

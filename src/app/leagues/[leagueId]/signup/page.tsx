@@ -2,6 +2,7 @@ import { GetConstantOEMBikes, GetConstantServers, GetLeague } from "~/api"
 import GetAuthUser from "~/api"
 import PageHeader from "~/components/PageHeader"
 import LeagueSignupForm from "../../_components/LeagueSignupForm"
+import PageLayout from "~/components/PageLayout"
 
 export const metadata = {
   title: "Pepiti | Leagues",
@@ -15,8 +16,12 @@ export default async function Page({ params: { leagueId } }) {
   const servers = await GetConstantServers(user.token)
 
   return (
-    <>
-      <PageHeader title="League  Signup" />
+    <PageLayout
+      width="app"
+      header={{
+        title: "League Signup",
+      }}
+    >
       <div className="mx-auto w-full md:w-[500px]">
         <div className="grid place-items-center">
           <LeagueSignupForm
@@ -29,6 +34,6 @@ export default async function Page({ params: { leagueId } }) {
           />
         </div>
       </div>
-    </>
+    </PageLayout>
   )
 }
