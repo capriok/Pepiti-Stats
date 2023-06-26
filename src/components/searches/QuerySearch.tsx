@@ -40,7 +40,7 @@ export default function QuerySearch({ query, render, placeholder, defaultTerm = 
     <div className="relative flex justify-center gap-2">
       <div className="relative">
         <input
-          className="input w-full  border border-accent/40 bg-base-100 md:w-[400px]"
+          className="input input-sm w-full border border-accent/40 bg-base-100 p-4 md:w-[400px]"
           placeholder={placeholder}
           value={term}
           onChange={(e) => setTerm(e.currentTarget.value)}
@@ -48,7 +48,7 @@ export default function QuerySearch({ query, render, placeholder, defaultTerm = 
         />
         {open && (
           <button className="absolute right-[10px] z-10 h-full" onClick={() => setOpen(false)}>
-            <XIcon />
+            <XIcon size={20} />
           </button>
         )}
       </div>
@@ -62,7 +62,7 @@ const SearchDropdown = ({ term, open, loading, results, render }) => {
 
   return (
     <div
-      className={`${openCn} scroll absolute top-14 z-20 flex max-h-[300px] w-full flex-col overflow-y-auto rounded-lg border border-secondary/40 bg-base-100 backdrop-blur-lg transition-opacity md:w-[400px]`}
+      className={`${openCn} scroll absolute top-10 z-20 flex max-h-[300px] w-full flex-col overflow-y-auto rounded-lg border border-secondary/40 bg-base-100 backdrop-blur-lg transition-opacity md:w-[400px]`}
     >
       {loading && (
         <div className="py-4">

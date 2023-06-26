@@ -1,7 +1,7 @@
 "use client"
 
 import { ThemeProvider } from "next-themes"
-import { Analytics } from '@vercel/analytics/react'
+import { Analytics } from "@vercel/analytics/react"
 import { SWRConfig } from "swr"
 import { fetcher } from "~/api/fetcher"
 import { createContext, useContext } from "react"
