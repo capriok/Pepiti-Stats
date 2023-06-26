@@ -9,7 +9,7 @@ export default function BannedBanner({ banned, reason }) {
     banned && (
       <Alert className="mb-8 border-error">
         <Hammer size={20} />
-        <AlertTitle>You are Banned.</AlertTitle>
+        <AlertTitle>Rider Banned.</AlertTitle>
         <AlertDescription className="mb-4">
           <div className="flex">Reason: {`${reason}`}</div>
         </AlertDescription>
