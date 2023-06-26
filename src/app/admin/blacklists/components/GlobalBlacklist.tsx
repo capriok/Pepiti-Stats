@@ -8,9 +8,10 @@ import { Hammer } from "lucide-react"
 
 interface Props {
   blacklist: any
+  withAlert?: boolean
 }
 
-export default function GlobalBlacklist({ blacklist }: Props) {
+export default function GlobalBlacklist({ blacklist, withAlert = true }: Props) {
   const user = useUserContext()
   const pathname = usePathname()
   const isAdministrating = pathname.includes("admin") && user.isAdmin
@@ -19,14 +20,16 @@ export default function GlobalBlacklist({ blacklist }: Props) {
 
   return (
     <>
-      <Alert className="mb-4 border-error">
-        <Hammer size={20} />
-        <AlertTitle>Global</AlertTitle>
-        <AlertDescription>
-          If youre on this list, you did something worthy of being banned from online racing for the
-          foreseeable future
-        </AlertDescription>
-      </Alert>
+      {withAlert && (
+        <Alert className="mb-4 border-error">
+          <Hammer size={20} />
+          <AlertTitle>Global</AlertTitle>
+          <AlertDescription>
+            If youre on this list, you did something worthy of being banned from online racing for
+            the foreseeable future
+          </AlertDescription>
+        </Alert>
+      )}
       <div className="card card-body w-full overflow-hidden border border-accent/40 bg-base-200 p-4">
         <BlacklistTable blacklist={blacklist} isAdministrating={isAdministrating} />
       </div>

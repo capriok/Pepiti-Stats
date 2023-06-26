@@ -21,16 +21,16 @@ export default function AdminBlacklistsPage({ blacklistSR, blacklistNonSR }: Pro
     {
       key: "blacklistNonSr",
       label: "Global Blacklist",
-      children: <GlobalBlacklist blacklist={blacklistNonSR} />,
+      children: <GlobalBlacklist blacklist={blacklistNonSR} withAlert={false} />,
     },
     {
       key: "blacklistSr",
       label: "Safety Rating Blacklist",
-      children: <SRBlacklist blacklist={blacklistSR} />,
+      children: <SRBlacklist blacklist={blacklistSR} withAlert={false} />,
     },
   ]
 
-  const [tab, setTab] = useState(items[1])
+  const [tab, setTab] = useState(items[0])
 
   return (
     <PageLayout

@@ -2,9 +2,8 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import PageLayout from "~/components/PageLayout"
-import { useUserContext } from "~/app/providers"
 import { Alert, AlertDescription, AlertTitle } from "~/ui/Alert"
 import BlacklistTable from "~/components/tables/BlacklistTable"
 import Tabs from "~/components/Tabs"
@@ -16,52 +15,47 @@ interface Props {
 }
 
 export default function Blacklists({ blacklistSR, blacklistNonSR }: Props) {
-  const user = useUserContext()
   const searchParams = useSearchParams()
   const tabParam = searchParams.get("tab") ?? ""
-  const pathname = usePathname()
-  const isAdministrating = pathname.includes("admin") && user.isAdmin
 
   const items = [
     {
       key: "blacklistNonSr",
       label: "Global Blacklist",
       children: (
-        <div className="p-4">
-          {!isAdministrating && (
-            <>
-              <BlacklistAlert
-                type="error"
-                title="Global"
-                text="If youre on this list, you did something worthy of being banned from online racing for the foreseeable future"
-              />
-            </>
-          )}
-          <BlacklistTable blacklist={blacklistNonSR} isAdministrating={isAdministrating} />
-        </div>
+        <>
+          <BlacklistAlert
+            type="error"
+            title="Global"
+            text="If youre on this list, you did something worthy of being banned from online racing for the foreseeable future"
+          />
+          <div className="card card-body w-full overflow-hidden border border-accent/40 bg-base-200 p-4">
+            <BanAppealButtons />
+            <BlacklistTable blacklist={blacklistNonSR} isAdministrating={false} />
+          </div>
+        </>
       ),
     },
     {
       key: "blacklistSr",
       label: "Safety Rating Blacklist",
       children: (
-        <div className="p-4">
-          {!isAdministrating && (
-            <>
-              <BlacklistAlert
-                type="warning"
-                title="Safety Rating"
-                text="If youre on this list, you have a Safety Rating below 950, race in a banned/no-contact server to build your SR back up"
-              />
-            </>
-          )}
-          <BlacklistTable blacklist={blacklistSR} isAdministrating={isAdministrating} />
-        </div>
+        <>
+          <BlacklistAlert
+            type="warning"
+            title="Safety Rating"
+            text="If youre on this list, you have a Safety Rating below 950, race in a banned/no-contact server to build your SR back up"
+          />
+          <div className="card card-body w-full overflow-hidden border border-accent/40 bg-base-200 p-4">
+            <BanAppealButtons />
+            <BlacklistTable blacklist={blacklistSR} isAdministrating={false} />
+          </div>
+        </>
       ),
     },
   ]
 
-  const [tab, setTab] = useState(items[1])
+  const [tab, setTab] = useState(items[0])
 
   return (
     <PageLayout
@@ -81,7 +75,6 @@ export default function Blacklists({ blacklistSR, blacklistNonSR }: Props) {
         ),
       }}
     >
-      <BanAppealButtons />
       {tab.children}
     </PageLayout>
   )
