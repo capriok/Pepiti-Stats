@@ -21,7 +21,7 @@ const PageHeader: React.FC<Props> = ({ title, extra, width, subExtra }) => {
     <>
       <div className={headerCn}>
         <div
-          className={`relative flex w-full flex-col py-18 md:py-20 md:flex-row md:items-center md:justify-between ${width}`}
+          className={`md:py-18 relative flex w-full flex-col py-16 md:flex-row md:items-center md:justify-between ${width}`}
         >
           <div className="mb-2 flex-1 text-2xl font-bold md:mb-0 md:text-3xl">{title}</div>
           <div className="flex justify-start">{extra}</div>
