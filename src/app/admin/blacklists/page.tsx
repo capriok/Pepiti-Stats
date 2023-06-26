@@ -1,7 +1,5 @@
-import Link from "next/link"
 import { GetBlackListNonSR, GetBlackListSR } from "~/api"
-import PageLayout from "~/components/PageLayout"
-import Blacklists from "./components/Blacklists"
+import AdminBlacklistsPage from "./AdminBlacklistsPage"
 
 export const metadata = {
   title: "Pepiti | Admin Manager",
@@ -12,23 +10,9 @@ export default async function Page() {
   const blacklistNonSR = await GetBlackListNonSR()
 
   return (
-    <PageLayout
-      width="app"
-      header={{
-        title: "Blacklists",
-        extra: (
-          <Link href="/admin" className="no-underline">
-            Go back
-          </Link>
-        ),
-      }}
-    >
-      <div className="mt-4">
-        <Blacklists
-          blacklistSR={blacklistSR.riders.filter((r) => r.banned_by === "SR")}
-          blacklistNonSR={blacklistNonSR.riders}
-        />
-      </div>
-    </PageLayout>
+    <AdminBlacklistsPage
+      blacklistSR={blacklistSR.riders.filter((r) => r.banned_by === "SR")}
+      blacklistNonSR={blacklistNonSR.riders}
+    />
   )
 }

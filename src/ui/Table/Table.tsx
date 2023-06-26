@@ -248,7 +248,7 @@ const Table: React.FC<TableProps> = (props) => {
             value={term}
             placeholder={`Search by ${searchKey}...`}
             onChange={(e) => handleTermChange(e.target.value)}
-            className="input input-sm my-2 w-full  border border-accent/40 bg-base-100 md:w-[400px]"
+            className="input input-sm mb-2 w-full border border-accent/40 bg-base-100 md:w-[400px]"
           />
         )}
       </div>

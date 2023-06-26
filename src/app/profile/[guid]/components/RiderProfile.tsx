@@ -16,7 +16,6 @@ export const RiderProfile = ({ rider, mmrHistory }: Props) => {
   return (
     <>
       <div className="w-full">
-        <AdminControls rider={rider} />
         <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:gap-10">
           <div className="mt-10 flex w-full flex-1 justify-center md:mt-0">
             <RiderAvatar rider={rider} />

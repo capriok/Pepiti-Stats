@@ -1,11 +1,13 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import PageLayout from "~/components/PageLayout"
 import { useUserContext } from "~/app/providers"
+import { Alert, AlertDescription, AlertTitle } from "~/ui/Alert"
 import BlacklistTable from "~/components/tables/BlacklistTable"
 import Tabs from "~/components/Tabs"
-import { Alert, AlertDescription, AlertTitle } from "~/ui/Alert"
 import { Hammer } from "lucide-react"
 
 interface Props {
@@ -20,7 +22,7 @@ export default function Blacklists({ blacklistSR, blacklistNonSR }: Props) {
   const pathname = usePathname()
   const isAdministrating = pathname.includes("admin") && user.isAdmin
 
-  const tabs = [
+  const items = [
     {
       key: "blacklistNonSr",
       label: "Global Blacklist",
@@ -30,9 +32,9 @@ export default function Blacklists({ blacklistSR, blacklistNonSR }: Props) {
             <>
               <BlacklistAlert
                 type="error"
+                title="Global"
                 text="If youre on this list, you did something worthy of being banned from online racing for the foreseeable future"
               />
-              <BanAppealButtons />
             </>
           )}
           <BlacklistTable blacklist={blacklistNonSR} isAdministrating={isAdministrating} />
@@ -48,9 +50,9 @@ export default function Blacklists({ blacklistSR, blacklistNonSR }: Props) {
             <>
               <BlacklistAlert
                 type="warning"
+                title="Safety Rating"
                 text="If youre on this list, you have a Safety Rating below 950, race in a banned/no-contact server to build your SR back up"
               />
-              <BanAppealButtons />
             </>
           )}
           <BlacklistTable blacklist={blacklistSR} isAdministrating={isAdministrating} />
@@ -59,25 +61,42 @@ export default function Blacklists({ blacklistSR, blacklistNonSR }: Props) {
     },
   ]
 
+  const [tab, setTab] = useState(items[1])
+
   return (
-    <div className="flex justify-center">
-      <div className="card card-body w-full overflow-hidden  border border-accent/40 bg-base-200 p-0">
-        <Tabs items={tabs} wide={true} defaultActive={tabParam} />
-      </div>
-    </div>
+    <PageLayout
+      width="app"
+      header={{
+        title: "Blacklists",
+        extra: (
+          <div className="text-sm text-accent">Be sure to check the Global and SR blacklists</div>
+        ),
+        subExtra: (
+          <Tabs
+            items={items}
+            defaultActive={tabParam}
+            onChange={(tab) => setTab(tab)}
+            renderChildren={false}
+          />
+        ),
+      }}
+    >
+      <BanAppealButtons />
+      {tab.children}
+    </PageLayout>
   )
 }
 
-const BlacklistAlert = ({ text, type }) => {
+const BlacklistAlert = ({ type, text, title }) => {
   const map = {
     warning: "border-warning",
     error: "border-error",
   }
 
   return (
-    <Alert className={`mb-4 bg-base-100 ${map[type]}`}>
+    <Alert className={`mb-4 ${map[type]}`}>
       <Hammer size={20} />
-      <AlertTitle>Disclaimer.</AlertTitle>
+      <AlertTitle>{title}</AlertTitle>
       <AlertDescription>{text}</AlertDescription>
     </Alert>
   )

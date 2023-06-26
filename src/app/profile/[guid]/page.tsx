@@ -1,5 +1,6 @@
 import { GetRider, GetRiderMMRHistory } from "~/api"
 import PageLayout from "~/components/PageLayout"
+import AdminControls from "./components/AdminControls"
 import BannedBanner from "./components/BannedBanner"
 import { RiderProfile } from "./components/RiderProfile"
 
@@ -29,6 +30,7 @@ export default async function Page({ params: { guid } }) {
       width="app"
       header={{
         title: "Rider Profile",
+        extra: <AdminControls rider={rider} />,
       }}
     >
       <BannedBanner banned={rider.banned} reason={rider.banned_by} />

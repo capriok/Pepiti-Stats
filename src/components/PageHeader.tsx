@@ -7,10 +7,10 @@ interface Props {
   title: string
   width: string
   extra?: React.ReactNode
-  tabs?: React.ReactNode
+  subExtra?: React.ReactNode // this is temp until i have a better idea of what to do extend on
 }
 
-const PageHeader: React.FC<Props> = ({ title, extra, width, tabs }) => {
+const PageHeader: React.FC<Props> = ({ title, extra, width, subExtra }) => {
   const pathname = usePathname()
 
   const isAtDashboard = pathname === "/dashboard"
@@ -21,13 +21,11 @@ const PageHeader: React.FC<Props> = ({ title, extra, width, tabs }) => {
     <>
       <div className={headerCn}>
         <div
-          className={`relative flex w-full flex-col py-14 md:flex-row md:items-center md:justify-between ${width}`}
+          className={`relative flex w-full flex-col py-18 md:py-20 md:flex-row md:items-center md:justify-between ${width}`}
         >
           <div className="mb-2 flex-1 text-2xl font-bold md:mb-0 md:text-3xl">{title}</div>
-          <div className="flex justify-start">
-            {extra}
-            <div className="absolute bottom-0 right-0">{tabs}</div>
-          </div>
+          <div className="flex justify-start">{extra}</div>
+          <div className="absolute bottom-0 right-0 flex w-full justify-end">{subExtra}</div>
         </div>
       </div>
       {isAtDashboard && <DonationBanner />}

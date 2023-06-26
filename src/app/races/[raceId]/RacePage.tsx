@@ -3,10 +3,10 @@
 import React, { useState } from "react"
 import PageLayout from "~/components/PageLayout"
 import Tabs from "~/components/Tabs"
-import RaceOverview from "./RaceOverview"
-import RaceStandings from "./RaceStandings"
-import RaceMMRAnalysis from "./RaceMMRAnalysis"
-import RaceScatter from "./RaceScatter"
+import RaceOverview from "./components/RaceOverview"
+import RaceStandings from "./components/RaceStandings"
+import RaceMMRAnalysis from "./components/RaceMMRAnalysis"
+import RaceScatter from "./components/RaceScatter"
 
 interface Props {
   session: ProcessedRaceSession
@@ -46,7 +46,7 @@ export default function Race({ session }: Props) {
             <div className="text-lg font-semibold">{session.headCount + " Riders"}</div>
           </div>
         ),
-        tabs: (
+        subExtra: (
           <Tabs
             items={items}
             defaultActive="race2"

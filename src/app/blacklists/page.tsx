@@ -1,6 +1,5 @@
 import { GetBlackListNonSR, GetBlackListSR } from "~/api"
-import PageLayout from "~/components/PageLayout"
-import Blacklists from "../admin/blacklists/components/Blacklists"
+import BlacklistsPage from ".//BlacklistsPage"
 
 export const metadata = {
   title: "Pepiti | Blacklists",
@@ -12,17 +11,9 @@ export default async function Page() {
   const blacklistNonSR = await GetBlackListNonSR()
 
   return (
-    <PageLayout
-      width="app"
-      header={{
-        title: "Blacklists",
-        extra: "Be sure to check the Global and SR Blacklist",
-      }}
-    >
-      <Blacklists
-        blacklistSR={blacklistSR.riders.filter((r) => r.banned_by === "SR")}
-        blacklistNonSR={blacklistNonSR.riders}
-      />
-    </PageLayout>
+    <BlacklistsPage
+      blacklistSR={blacklistSR.riders.filter((r) => r.banned_by === "SR")}
+      blacklistNonSR={blacklistNonSR.riders}
+    />
   )
 }

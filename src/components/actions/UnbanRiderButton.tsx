@@ -22,7 +22,7 @@ export default function UnbanRiderButton({ riderId, name, hackit = false }: Prop
 
   return (
     <Popover>
-      <PopoverTrigger className="btn-outline btn-warning btn-sm btn whitespace-nowrap border-warning text-white">
+      <PopoverTrigger className="btn-outline btn-error btn-sm btn whitespace-nowrap border-error text-white">
         Unban Rider
       </PopoverTrigger>
       <PopoverContent className="grid place-items-center">
