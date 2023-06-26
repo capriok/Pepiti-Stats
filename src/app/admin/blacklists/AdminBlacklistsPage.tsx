@@ -3,10 +3,10 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
+import { Card, CardContent } from "~/ui/Card"
 import PageLayout from "~/components/PageLayout"
 import Tabs from "~/components/Tabs"
-import GlobalBlacklist from "./components/GlobalBlacklist"
-import SRBlacklist from "./components/SRBlacklist"
+import BlacklistTable from "~/components/tables/BlacklistTable"
 
 interface Props {
   blacklistSR: any
@@ -21,12 +21,26 @@ export default function AdminBlacklistsPage({ blacklistSR, blacklistNonSR }: Pro
     {
       key: "blacklistNonSr",
       label: "Global Blacklist",
-      children: <GlobalBlacklist blacklist={blacklistNonSR} withAlert={false} />,
+      children: (
+        <>
+          <Card>
+            <CardContent className="pt-4">
+              <BlacklistTable blacklist={blacklistNonSR} />
+            </CardContent>
+          </Card>
+        </>
+      ),
     },
     {
       key: "blacklistSr",
       label: "Safety Rating Blacklist",
-      children: <SRBlacklist blacklist={blacklistSR} withAlert={false} />,
+      children: (
+        <Card>
+          <CardContent className="pt-4">
+            <BlacklistTable blacklist={blacklistSR} />
+          </CardContent>
+        </Card>
+      ),
     },
   ]
 

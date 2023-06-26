@@ -3,10 +3,11 @@
 import React, { useState } from "react"
 import PageLayout from "~/components/PageLayout"
 import Tabs from "~/components/Tabs"
-import RaceOverview from "./components/RaceOverview"
+import WinnerCircle from "./components/WinnerCircle"
 import RaceStandings from "./components/RaceStandings"
 import RaceMMRAnalysis from "./components/RaceMMRAnalysis"
 import RaceScatter from "./components/RaceScatter"
+import RaceNotables from "./components/RaceNotables"
 
 interface Props {
   session: ProcessedRaceSession
@@ -82,8 +83,11 @@ const RaceContent = ({ race }: { race: Race }) => {
 
   return (
     <div className="md:mx-4">
-      <RaceOverview race={race} winner={race.winner} />
-      <div className="card card-body bg-base-200 p-0">
+      <div className="my-5 flex flex-col gap-5 xl:flex-row">
+        <WinnerCircle race={race} />
+        <RaceNotables race={race} />
+      </div>
+      <div className="card card-body rounded-lg bg-base-200 p-0">
         <Tabs items={items} wide={true} />
       </div>
     </div>

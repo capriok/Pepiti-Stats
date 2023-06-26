@@ -2,7 +2,7 @@
 
 import useSWR from "swr"
 import Spinner from "~/components/Spinner"
-import RiderSafetyStats from '~/components/stats/RiderSafetyStats'
+import RiderSafetyStats from "~/components/stats/RiderSafetyStats"
 import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 
 export default function RiderSafetyStatsRow({ row }) {

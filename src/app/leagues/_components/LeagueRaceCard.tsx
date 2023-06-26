@@ -73,19 +73,15 @@ const RaceCardBanner = ({
   isInRace: boolean
   loading: boolean
 }) => {
-  return (
-    <div className="overflow-hidden rounded-lg rounded-bl-none rounded-br-none">
-      {isInRace ? (
-        <div className="bg-secondary/80">
-          <div className="flex justify-center py-2 text-white">You are Registered</div>
-        </div>
-      ) : (
-        <div className={!loading ? leagueRaceStatusMap[status].color : "bg-accent"}>
-          <div className="flex justify-center py-2 text-white">
-            {!loading ? leagueRaceStatusMap[status].text : <div className="opacity-0">Loading</div>}
-          </div>
-        </div>
-      )}
+  return isInRace ? (
+    <div className="bg-secondary/80">
+      <div className="flex justify-center py-2 text-white">You are Registered</div>
+    </div>
+  ) : (
+    <div className={!loading ? leagueRaceStatusMap[status].color : "bg-accent"}>
+      <div className="flex justify-center py-2 text-white">
+        {!loading ? leagueRaceStatusMap[status].text : <div className="opacity-0">Loading</div>}
+      </div>
     </div>
   )
 }
@@ -131,7 +127,7 @@ const RaceCardActions = ({
   const router = useRouter()
 
   return (
-    <div className="w-full gap-2 rounded-lg rounded-tl-none rounded-tr-none bg-base-300 p-4">
+    <div className="w-full gap-2 bg-base-300 p-4">
       {loading ? (
         <button className="btn-outline btn-sm btn w-full bg-base-200" disabled={true}>
           {

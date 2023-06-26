@@ -3,11 +3,12 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
+import { Card, CardContent } from "~/ui/Card"
 import PageLayout from "~/components/PageLayout"
-import { Alert, AlertDescription, AlertTitle } from "~/ui/Alert"
-import BlacklistTable from "~/components/tables/BlacklistTable"
 import Tabs from "~/components/Tabs"
-import { Hammer } from "lucide-react"
+import GlobalBlacklistAlert from "~/components/alerts/GlobalBlacklistAlert"
+import SafetyBlacklistAlert from "~/components/alerts/SafetyBlacklistAlert"
+import BlacklistTable from "~/components/tables/BlacklistTable"
 
 interface Props {
   blacklistSR: any
@@ -24,15 +25,13 @@ export default function Blacklists({ blacklistSR, blacklistNonSR }: Props) {
       label: "Global Blacklist",
       children: (
         <>
-          <BlacklistAlert
-            type="error"
-            title="Global"
-            text="If youre on this list, you did something worthy of being banned from online racing for the foreseeable future"
-          />
-          <div className="card card-body w-full overflow-hidden border border-accent/40 bg-base-200 p-4">
-            <BanAppealButtons />
-            <BlacklistTable blacklist={blacklistNonSR} isAdministrating={false} />
-          </div>
+          <GlobalBlacklistAlert />
+          <BanAppealButtons />
+          <Card>
+            <CardContent className="pt-4">
+              <BlacklistTable blacklist={blacklistNonSR} />
+            </CardContent>
+          </Card>
         </>
       ),
     },
@@ -41,15 +40,13 @@ export default function Blacklists({ blacklistSR, blacklistNonSR }: Props) {
       label: "Safety Rating Blacklist",
       children: (
         <>
-          <BlacklistAlert
-            type="warning"
-            title="Safety Rating"
-            text="If youre on this list, you have a Safety Rating below 950, race in a banned/no-contact server to build your SR back up"
-          />
-          <div className="card card-body w-full overflow-hidden border border-accent/40 bg-base-200 p-4">
-            <BanAppealButtons />
-            <BlacklistTable blacklist={blacklistSR} isAdministrating={false} />
-          </div>
+          <SafetyBlacklistAlert />
+          <BanAppealButtons />
+          <Card>
+            <CardContent className="pt-4">
+              <BlacklistTable blacklist={blacklistSR} />
+            </CardContent>
+          </Card>
         </>
       ),
     },
@@ -80,26 +77,11 @@ export default function Blacklists({ blacklistSR, blacklistNonSR }: Props) {
   )
 }
 
-const BlacklistAlert = ({ type, text, title }) => {
-  const map = {
-    warning: "border-warning",
-    error: "border-error",
-  }
-
-  return (
-    <Alert className={`mb-4 ${map[type]}`}>
-      <Hammer size={20} />
-      <AlertTitle>{title}</AlertTitle>
-      <AlertDescription>{text}</AlertDescription>
-    </Alert>
-  )
-}
-
 const BanAppealButtons = () => {
   const router = useRouter()
 
   return (
-    <div className="mb-4 flex w-fit flex-wrap justify-center gap-2 md:mb-0 md:w-full md:justify-end">
+    <div className="mb-4 flex w-fit flex-wrap justify-center gap-2 md:w-full md:justify-end">
       <button
         disabled={true}
         className="btn-ghost btn-outline btn-sm btn"

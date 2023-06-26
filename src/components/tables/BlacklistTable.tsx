@@ -1,19 +1,25 @@
 "use client"
 
-import { useSearchParams } from "next/navigation"
+import { usePathname, useSearchParams } from "next/navigation"
+import { useUserContext } from "~/app/providers"
+import { Popover, PopoverContent, PopoverTrigger } from "~/ui/Popover"
+import UnbanRiderButton from "../actions/UnbanRiderButton"
 import Table from "~/ui/Table"
 import RiderLink from "~/components/RiderLink"
 import Pill from "~/components/pills/Pill"
-import AdminRiderSafetyStatsRow from "~/components/tables/expandable/AdminRiderSafetyStatsRow"
+import RiderSafetyStatsRow from "./expandable/RiderSafetyStatsRow"
+import { MoreHorizontal } from "lucide-react"
 
 interface Props {
   blacklist: any
-  isAdministrating: boolean
 }
 
-export default function BlacklistTable({ blacklist, isAdministrating }: Props) {
+export default function BlacklistTable({ blacklist }: Props) {
+  const user = useUserContext()
+  const pathname = usePathname()
   const searchParams = useSearchParams()
   const guidParam = searchParams.get("guid")
+  const isAdministrating = pathname.includes("admin") && user.isAdmin
 
   const data = blacklist.map((rider) => ({
     ...rider,
@@ -42,6 +48,24 @@ export default function BlacklistTable({ blacklist, isAdministrating }: Props) {
     },
   ]
 
+  const adminAction = {
+    key: "guid",
+    label: "Action",
+    align: "right",
+    render: (guid, row) => (
+      <Popover>
+        <PopoverTrigger>
+          <MoreHorizontal />
+        </PopoverTrigger>
+        <PopoverContent className="flex flex-col items-center justify-center gap-4">
+          <UnbanRiderButton riderId={guid} name={row.name} />
+        </PopoverContent>
+      </Popover>
+    ),
+  }
+
+  if (isAdministrating) columns.push(adminAction as any)
+
   const sortKeys = ["name", "banned_by"]
 
   return (
@@ -56,7 +80,7 @@ export default function BlacklistTable({ blacklist, isAdministrating }: Props) {
       sortingEnabled={true}
       sortingKeys={sortKeys}
       expandable={{
-        render: (row) => <AdminRiderSafetyStatsRow row={row} isAdministrating={isAdministrating} />,
+        render: (row) => <RiderSafetyStatsRow row={row} />,
       }}
     />
   )

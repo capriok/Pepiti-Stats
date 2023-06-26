@@ -38,7 +38,7 @@ const LeagueCard = ({ league }: { league: League }) => {
   return (
     <div
       key={league._id}
-      className="card card-body overflow-hidden border border-accent/40 bg-base-200 p-0 shadow-md"
+      className="card card-body overflow-hidden rounded-lg border border-accent/40 bg-base-200 p-0 shadow-md"
     >
       <div className="p-4 md:p-6">
         <div className="flex items-center justify-between">
