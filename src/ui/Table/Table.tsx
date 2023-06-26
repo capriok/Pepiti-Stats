@@ -242,17 +242,17 @@ const Table: React.FC<TableProps> = (props) => {
 
   return (
     <div className="w-full">
-      <div className="flex justify-between">
-        {searchEnabled && (
-          <input
-            value={term}
-            placeholder={`Search by ${searchKey}...`}
-            onChange={(e) => handleTermChange(e.target.value)}
-            className="input input-sm mb-2 w-full border border-accent/40 bg-base-100 md:w-[400px]"
-          />
-        )}
-      </div>
       <div className="w-full overflow-x-auto rounded-lg">
+        {searchEnabled && (
+          <div className="flex justify-between bg-base-200 pl-4 pt-4">
+            <input
+              value={term}
+              placeholder={`Search by ${searchKey}...`}
+              onChange={(e) => handleTermChange(e.target.value)}
+              className=" input input-sm mb-2 w-full border border-accent/40 bg-base-100 md:w-[400px]"
+            />
+          </div>
+        )}
         <table className="my-0 table w-full">
           <thead className="bg-base-200 text-xs uppercase">
             <TableColumns />

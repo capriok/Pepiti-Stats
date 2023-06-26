@@ -31,7 +31,7 @@ export default function TrackRecords({ trackList }: Props) {
       <div className="mb-2 text-lg font-semibold">Track Records</div>
       <select
         value={selectedTrack}
-        className="select select-xs mb-1 w-full border-none bg-base-200 md:select-sm"
+        className="select select-xs mb-2 w-full border-none bg-base-200 md:select-sm"
         onChange={handleTrackSelect}
       >
         {trackList.map((track) => (
@@ -61,14 +61,15 @@ const SkeletonTable = () => (
     {_id: '0', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
   ]}
     // prettier-ignore
+    searchEnabled={true}
     columns={[
-      { key: 'rank', label: 'Rank' },
-      { key: 'name', label: 'Name' },
-      { key: 'lapTime', label: 'Lap Time' },
-      { key: 'averageSpeed', label: 'Average Speed' },
-      { key: 'split1', label: 'Split 1' },
-      { key: 'split2', label: 'Split 2' },
-      { key: 'bike', label: 'Bike' },
+      { key: "rank", label: "Rank" },
+      { key: "name", label: "Name" },
+      { key: "lapTime", label: "Lap Time" },
+      { key: "averageSpeed", label: "Average Speed" },
+      { key: "split1", label: "Split 1" },
+      { key: "split2", label: "Split 2" },
+      { key: "bike", label: "Bike" },
     ]}
   />
 )
