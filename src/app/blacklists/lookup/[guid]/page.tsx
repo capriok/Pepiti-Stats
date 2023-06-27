@@ -41,24 +41,26 @@ export default async function Page({ params: { guid } }) {
 
         {rider.banned && (
           <div className="stat mt-4 grid w-[400px] place-items-center justify-center gap-4 rounded-lg bg-base-200">
-            <div className="grid place-items-center gap-4">
+            <div className="grid place-items-center gap-2">
               <div className="stat-title w-full text-center">Click here for more info</div>
-              <Link
-                href={`/blacklists?guid=${rider._id}${
-                  rider.banned_by?.toLowerCase().includes("sr") ? "&tab=blacklistSr" : ""
-                }`}
-                className="btn-ghost btn-outline btn-sm btn"
-              >
-                Blacklist Info
-              </Link>
-              <Link
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://discord.com/invite/mx-bikes"
-                className="btn-ghost btn-outline btn-sm btn"
-              >
-                Ban Appeal (MXB Discord)
-              </Link>
+              <Button variant="outline">
+                <Link
+                  href={`/blacklists?guid=${rider._id}${
+                    rider.banned_by?.toLowerCase().includes("sr") ? "&tab=blacklistSr" : ""
+                  }`}
+                >
+                  Blacklist Info
+                </Link>
+              </Button>
+              <Button variant="outline">
+                <Link
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://discord.com/invite/mx-bikes"
+                >
+                  Ban Appeal (MXB Discord)
+                </Link>
+              </Button>
               <Button variant="outline" disabled={true}>
                 {/* <Link href={`/appeal/${rider._id}`}> */}
                 Ban Appeal (On-Site)

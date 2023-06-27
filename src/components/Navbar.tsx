@@ -31,7 +31,7 @@ function NavBar({ user }: Props) {
           <div className="flex w-full justify-between">
             <Link
               href={pathname === "/dashboard" ? "/" : "/dashboard"}
-              className="btn-ghost btn relative border-none hover:bg-base-100 hover:text-white"
+              className="btn-ghost btn hover:bg-base-100"
             >
               <Image
                 src="/assets/brand/pepiti-logo.svg"

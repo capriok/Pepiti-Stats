@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { Button } from "~/ui/Button"
 import RiderLink from "./RiderLink"
 import ThemeSwitch from "./ThemeSwitch"
 
@@ -81,15 +82,15 @@ export default function Footer({ user }: Props) {
         <div>
           <span className="footer-title">Donations</span>
           <div>Help pay for services you enjoy</div>
-          <div className="btn-ghost btn-sm btn bg-primary/80 normal-case text-white hover:bg-primary">
+          <Button variant="primary">
             <a
               target="_blank"
               rel="noreferrer"
-              href={`https://paypal.me/pepitisdevs?country.x=US&locale.x=en_US`}
+              href="https://paypal.me/pepitisdevs?country.x=US&locale.x=en_US"
             >
               Donate to Pepiti.com
             </a>
-          </div>
+          </Button>
         </div>
       </div>
     </footer>

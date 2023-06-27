@@ -83,12 +83,7 @@ const BanAppealButtons = () => {
 
   return (
     <div className="mb-4 flex w-fit flex-wrap justify-center gap-2 md:w-full md:justify-end">
-      <Button
-        variant="outline"
-        disabled={true}
-        className="btn-ghost btn-outline btn-sm btn"
-        onClick={() => router.push(`/appeal`)}
-      >
+      <Button variant="outline" disabled={true} onClick={() => router.push(`/appeal`)}>
         On-Site Appeal
       </Button>
       <Button variant="outline">

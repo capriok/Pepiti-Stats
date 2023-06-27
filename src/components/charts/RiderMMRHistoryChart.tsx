@@ -76,22 +76,16 @@ export default function RiderMMRHistoryChart({ mmrHistory }: Props) {
         </div>
         <div className="flex items-center justify-center">
           <div className="pr-4 text-accent">{limit} Races</div>
-          <div className="btn-group">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setLimit((l) => (l > 5 ? l - 5 : l))}
-            >
-              -
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setLimit((l) => (l < mmrHistory.length ? l + 5 : l))}
-            >
-              +
-            </Button>
-          </div>
+          <Button variant="ghost" size="icon" onClick={() => setLimit((l) => (l > 5 ? l - 5 : l))}>
+            -
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setLimit((l) => (l < mmrHistory.length ? l + 5 : l))}
+          >
+            +
+          </Button>
         </div>
       </div>
       <Line options={options} data={chartData} />

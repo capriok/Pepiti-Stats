@@ -64,7 +64,7 @@ export function RiderComboScatterChart({ data, comparables }) {
     return (
       <Button
         key={comparableKey}
-        className={`btn-ghost btn-sm btn bg-base-100 text-xs ${isActive ? "btn-active" : ""}`}
+        className={`text-xs ${isActive ? "bg-base-primary" : ""}`}
         onClick={() => setDataSet(comparableKey)}
       >
         {comparables[comparableKey].titles[0].label} vs.{" "}

@@ -25,7 +25,6 @@ export default function JoinLeagueRaceButton({ isEligible, raceId, name }: Props
         name="raceId"
         value={raceId}
         type="submit"
-        className="btn-primary btn-sm btn"
         disabled={!isEligible}
       >
         Register
