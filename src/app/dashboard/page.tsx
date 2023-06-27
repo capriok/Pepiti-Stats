@@ -1,5 +1,4 @@
 import { GetDynamicTopRecords, GetSummaryStats, GetTrackNames } from "~/api"
-import PageHeader from "~/components/PageHeader"
 import PageLayout from "~/components/PageLayout"
 import RiderSearch from "./components/RiderSearch"
 import SummaryStats from "./components/Summary"

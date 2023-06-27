@@ -5,7 +5,7 @@ export default function RiderWorldRecordStats({ rider }) {
     <div className="stats flex w-full bg-base-100/60 text-center shadow-md dark:bg-base-100">
       <div className="stat w-full text-center">
         <div className="stat-title">Total</div>
-        <div className="stat-value mt-2 text-xl text-secondary">
+        <div className="stat-value mt-2 text-xl text-primary">
           {rider.world_records["total"].toLocaleString()}
         </div>
       </div>

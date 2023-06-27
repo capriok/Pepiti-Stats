@@ -8,6 +8,7 @@ import { GetLeagueRaceEligibility } from "~/api"
 import Pill from "~/components/pills/Pill"
 import { leagueRaceStatusMap } from "."
 import Spinner from "~/components/Spinner"
+import { Button } from "~/ui/Button"
 
 interface Props {
   race: LeagueRace
@@ -74,7 +75,7 @@ const RaceCardBanner = ({
   loading: boolean
 }) => {
   return isInRace ? (
-    <div className="bg-secondary/80">
+    <div className="bg-primary/80">
       <div className="flex justify-center py-2 text-white">You are Registered</div>
     </div>
   ) : (
@@ -129,21 +130,18 @@ const RaceCardActions = ({
   return (
     <div className="w-full gap-2 bg-base-300 p-4">
       {loading ? (
-        <button className="btn-outline btn-sm btn w-full bg-base-200" disabled={true}>
-          {
-            <div className="">
-              <Spinner />
-            </div>
-          }
-        </button>
+        <Button variant="outline" className="w-full" disabled={true}>
+          <Spinner />
+        </Button>
       ) : (
-        <button
-          className="btn-outline btn-sm btn w-full bg-base-200"
+        <Button
+          variant="outline"
           disabled={!isInLeague}
           onClick={() => router.push(`/leagues/race/${race._id}`)}
+          className="w-full"
         >
           Go To Race
-        </button>
+        </Button>
       )}
     </div>
   )

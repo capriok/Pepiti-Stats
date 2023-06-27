@@ -4,6 +4,7 @@ import { GetLeagueRace, GetLeagueRaceEligibility } from "~/api"
 import PageLayout from "~/components/PageLayout"
 import LeagueRaceOverview from "../../_components/LeagueRaceOverview"
 import LeagueRaceActions from "../../_components/LeagueRaceActions"
+import { Button } from "~/ui/Button"
 
 export const metadata = {
   title: "Pepiti | League Race",
@@ -25,11 +26,8 @@ export default async function Page(props) {
         title: "League Race",
         extra: (
           <div className="flex gap-2">
-            <Link
-              href={`/leagues/${race.league_id}`}
-              className="btn-outline btn-sm btn bg-base-200"
-            >
-              Go to League
+            <Link href={`/leagues/${race.league_id}`}>
+              <Button variant="outline">Go to League</Button>
             </Link>
             <LeagueRaceActions
               raceId={race._id}

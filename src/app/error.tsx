@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
+import { Button } from "~/ui/Button"
 
 interface Props {
   error: Error
@@ -21,12 +22,12 @@ export default function Error({ error, reset }: Props) {
         <p className="mb-2 text-center text-xl">Thats not right</p>
         <p className="text-md mb-6">The page was unable to load</p>
         <div className="flex justify-center gap-4">
-          <button className="btn-ghost btn-sm btn" onClick={() => router.back()}>
+          <Button variant="ghost" onClick={() => router.back()}>
             Go back
-          </button>
-          <button className="btn-ghost btn-sm btn" onClick={() => reset()}>
+          </Button>
+          <Button variant="ghost" onClick={() => reset()}>
             Retry
-          </button>
+          </Button>
         </div>
       </div>
     </main>

@@ -13,6 +13,7 @@ import {
   BarElement,
 } from "chart.js"
 import { Line } from "react-chartjs-2"
+import { Button } from "~/ui/Button"
 
 interface Props {
   mmrHistory: Array<RiderMMRHistory>
@@ -75,20 +76,16 @@ export default function RiderMMRHistoryChart({ mmrHistory }: Props) {
         </div>
         <div className="flex items-center justify-center">
           <div className="pr-4 text-accent">{limit} Races</div>
-          <div className="btn-group">
-            <button
-              className="btn-outline btn-sm btn rounded-r-none border-none bg-base-300 hover:bg-secondary"
-              onClick={() => setLimit((l) => (l > 5 ? l - 5 : l))}
-            >
-              -
-            </button>
-            <button
-              className="btn-outline btn-sm btn rounded-r-none border-none bg-base-300 hover:bg-secondary"
-              onClick={() => setLimit((l) => (l < mmrHistory.length ? l + 5 : l))}
-            >
-              +
-            </button>
-          </div>
+          <Button variant="ghost" size="icon" onClick={() => setLimit((l) => (l > 5 ? l - 5 : l))}>
+            -
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setLimit((l) => (l < mmrHistory.length ? l + 5 : l))}
+          >
+            +
+          </Button>
         </div>
       </div>
       <Line options={options} data={chartData} />

@@ -29,7 +29,7 @@ export default function DonationMarquee() {
               </div>
             </div>
             <div className="flex justify-end gap-1 text-lg">
-              <div className="text-secondary">{donation.currency}</div>
+              <div className="text-primary">{donation.currency}</div>
               <div>{donation.amount}</div>
             </div>
           </div>

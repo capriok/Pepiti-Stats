@@ -13,6 +13,7 @@ import {
   Legend,
 } from "chart.js"
 import { Bar, Line } from "react-chartjs-2"
+import { Button } from "~/ui/Button"
 
 interface Props {
   races: Array<any>
@@ -82,20 +83,22 @@ export default function RiderPositionHistoryChart({ races }: Props) {
         <div className="flex items-center justify-center">
           <div className="pr-4 text-accent">{days} Days</div>
           <div className="join">
-            <button
-              className="btn-outline btn-sm btn rounded-r-none border-none bg-base-300 hover:bg-secondary"
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={() => setDays((days) => (days > 30 ? days - 30 : days))}
               disabled={days === 30}
             >
               -
-            </button>
-            <button
-              className="btn-outline btn-sm btn rounded-r-none border-none bg-base-300 hover:bg-secondary"
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={() => setDays((days) => (days < 180 ? days + 30 : days))}
               disabled={days === 180}
             >
               +
-            </button>
+            </Button>
           </div>
         </div>
       </div>

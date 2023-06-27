@@ -7,6 +7,7 @@ import { postRiderReport } from "~/api/actions"
 import { useUserContext } from "~/app/providers"
 import Spinner from "~/components/Spinner"
 import { useToast, actions } from "~/components/toast"
+import { Button } from "~/ui/Button"
 
 interface Props {
   events: Array<RecentRace>
@@ -167,7 +168,7 @@ export function ProofFormPart3({ eventId, riderForm }) {
   const proofsCount = Object.keys(proofs).reduce((acc, key) => (proofs[key] ? acc + 1 : acc), 0)
   const disabled =
     !eventId || !riderForm.rider || riderForm.reason.length <= ReasonLength || proofsCount < 1
-  const buttonCn = disabled ? "" : "bg-secondary rounded-lg py-2 font-semibold text-white"
+  const buttonCn = disabled ? "" : "bg-primary rounded-lg py-2 font-semibold text-white"
 
   console.log(proofs, proofsCount)
   const requiredCn = proofsCount < 1 ? "text-red-500" : "text-green-500"
@@ -188,7 +189,7 @@ export function ProofFormPart3({ eventId, riderForm }) {
             href="https://imgur.com/upload"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-secondary"
+            className="text-primary"
           >
             Imgur
           </a>
@@ -199,7 +200,7 @@ export function ProofFormPart3({ eventId, riderForm }) {
             href="https://gyazo.com/en"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-secondary"
+            className="text-primary"
           >
             Gyazo
           </a>
@@ -229,9 +230,9 @@ export function ProofFormPart3({ eventId, riderForm }) {
       />
 
       <br />
-      <button className={buttonCn} disabled={disabled} type="submit">
+      <Button variant="primary" className={buttonCn} disabled={disabled} type="submit">
         Submit
-      </button>
+      </Button>
     </>
   )
 }

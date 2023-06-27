@@ -124,14 +124,14 @@ const LeagueInformation = ({ league, host }: { league: League; host: RiderProfil
           <div className="text-md text-accent">Lock Bike Choice:</div>
           <Pill
             text={league.keep_bike_selection ? "True" : "False"}
-            color={league.keep_bike_selection ? "secondary" : "neutral"}
+            color={league.keep_bike_selection ? "primary" : "neutral"}
           />
         </div>
         <div className="flex items-center gap-2">
           <div className="text-md text-accent">Lock Race Number:</div>
           <Pill
             text={league.keep_race_number ? "True" : "False"}
-            color={league.keep_race_number ? "secondary" : "neutral"}
+            color={league.keep_race_number ? "primary" : "neutral"}
           />
         </div>
       </div>
@@ -187,7 +187,7 @@ const LeagueRequirements = ({
         <div key={requirement.label} className="stat place-items-center">
           <div className="stat-title">{requirement.label}</div>
           <div className="stat-value my-2 text-2xl">{requirement.requiredTotal + "+"}</div>
-          <div className={`stat-desc ${requirement.eligible ? "text-secondary" : "text-error"}`}>
+          <div className={`stat-desc ${requirement.eligible ? "text-primary" : "text-error"}`}>
             You have {requirement.riderTotal} {requirement.label}
           </div>
         </div>
@@ -219,7 +219,7 @@ const LeagueStandings = ({ league }: { league: League }) => {
       render: (race_number) => (
         <div className="flex gap-2">
           <div className="text-accent">#</div>
-          <div className="text-secondary">{race_number}</div>
+          <div className="text-primary">{race_number}</div>
         </div>
       ),
     },

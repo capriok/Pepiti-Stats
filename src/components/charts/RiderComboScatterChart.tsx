@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import { Chart as ChartJS, LinearScale, PointElement, LineElement, Tooltip, Legend } from "chart.js"
 import { Scatter } from "react-chartjs-2"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
+import { Button } from "~/ui/Button"
 
 export function RiderComboScatterChart({ data, comparables }) {
   const initialComparable = Object.keys(comparables)[0]
@@ -61,14 +62,14 @@ export function RiderComboScatterChart({ data, comparables }) {
   const chartButtons = Object.keys(comparables).map((comparableKey) => {
     const isActive = comparableKey === dataSet
     return (
-      <button
+      <Button
         key={comparableKey}
-        className={`btn-ghost btn-sm btn bg-base-100 text-xs ${isActive ? "btn-active" : ""}`}
+        className={`text-xs ${isActive ? "bg-base-primary" : ""}`}
         onClick={() => setDataSet(comparableKey)}
       >
         {comparables[comparableKey].titles[0].label} vs.{" "}
         {comparables[comparableKey].titles[1].label}
-      </button>
+      </Button>
     )
   })
 

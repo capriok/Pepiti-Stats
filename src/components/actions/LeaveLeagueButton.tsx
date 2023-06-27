@@ -3,6 +3,7 @@
 import { leaveLeague } from "~/api/actions"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/Popover"
 import { useToast, actions } from "~/components/toast"
+import { Button } from "~/ui/Button"
 
 interface Props {
   leagueId: string
@@ -19,8 +20,8 @@ export default function LeaveLeagueButton({ leagueId, name }: Props) {
 
   return (
     <Popover>
-      <PopoverTrigger className="btn-outline btn-error btn-sm btn whitespace-nowrap border-error text-white">
-        Leave League
+      <PopoverTrigger>
+        <Button variant="error">Leave League</Button>
       </PopoverTrigger>
       <PopoverContent className="grid place-items-center">
         <div>Confirm</div>
@@ -28,14 +29,9 @@ export default function LeaveLeagueButton({ leagueId, name }: Props) {
           This will remove you from the league
         </div>
         <form action={submit}>
-          <button
-            name="leagueId"
-            value={leagueId}
-            type="submit"
-            className="btn-error btn-sm btn mt-2"
-          >
+          <Button variant="error" value={leagueId} name="leagueId" type="submit">
             Leave
-          </button>
+          </Button>
         </form>
       </PopoverContent>
     </Popover>

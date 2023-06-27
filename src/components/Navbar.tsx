@@ -31,7 +31,7 @@ function NavBar({ user }: Props) {
           <div className="flex w-full justify-between">
             <Link
               href={pathname === "/dashboard" ? "/" : "/dashboard"}
-              className="btn-ghost btn relative border-none hover:bg-base-100 hover:text-white"
+              className="btn-ghost btn hover:bg-base-100"
             >
               <Image
                 src="/assets/brand/pepiti-logo.svg"
@@ -106,7 +106,7 @@ function AppNavigation({ user }) {
           </div>
           <div className="flex text-xs">
             {user.isAdmin ? (
-              <div className="text-secondary dark:text-secondary-content">Admin</div>
+              <div className="text-primary dark:text-primary-content">Admin</div>
             ) : (
               <div className="text-accent/60">User</div>
             )}

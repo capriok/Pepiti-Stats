@@ -1,6 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { Button } from "~/ui/Button"
 
 interface Props {
   title?: string
@@ -22,13 +23,10 @@ const Result: React.FC<Props> = (props) => {
           <div className="mb-5">{props.description || defaultDescription}</div>
           <div className="flex flex-col items-start gap-2">
             <div>{props.extra}</div>
-            <div
-              onClick={() => router.back()}
-              className="btn-outline btn-sm btn flex items-center justify-center rounded-lg"
-            >
+            <Button variant="outline" onClick={() => router.back()}>
               <div className="hidden font-normal md:inline">{props.goBackText || "Go Back"}</div>
               <div className="font-normal md:hidden">Go back</div>
-            </div>
+            </Button>
           </div>
         </div>
       </div>

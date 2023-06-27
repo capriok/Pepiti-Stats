@@ -4,6 +4,7 @@ import { VerifiedIcon } from "lucide-react"
 import Link from "next/link"
 import { useUserContext } from "~/app/providers"
 import Pill from "~/components/pills/Pill"
+import { Button } from "~/ui/Button"
 
 interface Props {
   leagues: Array<League>
@@ -16,7 +17,7 @@ export default function LeagueList({ leagues }: Props) {
   if (!user.isAdmin)
     return (
       <div>
-        <center className="text-sm text-secondary-content">Admin Only, Coming Soon</center>
+        <center className="text-sm text-primary-content">Admin Only, Coming Soon</center>
       </div>
     )
 
@@ -101,15 +102,12 @@ const LeagueCard = ({ league }: { league: League }) => {
             <div className="text-md pb-2 font-semibold text-accent">League</div>
             <div className="text-lg">
               {league.closed ? (
-                <button disabled={true} className="btn-outline btn-sm btn bg-base-200">
-                  League CLosed
-                </button>
+                <Button variant="outline" disabled={true}>
+                  League Closed
+                </Button>
               ) : (
-                <Link
-                  href={`/leagues/${league._id}`}
-                  className="btn-outline btn-sm btn bg-base-200"
-                >
-                  Go To League
+                <Link href={`/leagues/${league._id}`}>
+                  <Button variant="outline">Go To League</Button>
                 </Link>
               )}
             </div>

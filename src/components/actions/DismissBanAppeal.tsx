@@ -4,6 +4,7 @@ import { dismissBanAppeal } from "~/api/actions"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/Popover"
 import { useToast, actions } from "~/components/toast"
 import { forceRefresh } from "."
+import { Button } from "~/ui/Button"
 
 interface Props {
   appealId: string
@@ -21,21 +22,18 @@ export default function DismissBanAppeal({ appealId, hackit = false }: Props) {
 
   return (
     <Popover>
-      <PopoverTrigger className="btn-outline btn-warning btn-sm btn whitespace-nowrap border-warning text-white">
-        Dismiss Appeal
+      <PopoverTrigger>
+        <Button variant="warning" className="w-full">
+          Dismiss Appeal
+        </Button>
       </PopoverTrigger>
-      <PopoverContent className="grid place-items-center">
+      <PopoverContent className="grid place-items-center gap-2">
         <div>Please confirm</div>
         <div className="py-2 text-center text-sm text-accent">This will close the appeal</div>
         <form action={submit}>
-          <button
-            name="appealId"
-            value={appealId}
-            type="submit"
-            className="btn-warning btn-sm btn mt-2"
-          >
+          <Button variant="warning" name="appealId" value={appealId} type="submit">
             Dismiss
-          </button>
+          </Button>
         </form>
       </PopoverContent>
     </Popover>

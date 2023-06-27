@@ -12,7 +12,7 @@ export default function MMRPill({ mmr }: { mmr: number }) {
       text: "text-orange-100 dark:text-orange-200",
     },
     positive: {
-      bg: "bg-secondary/80 dark:bg-secondary/40",
+      bg: "bg-primary/80 dark:bg-primary/40",
       text: "text-green-100 dark:text-green-200",
     },
   }

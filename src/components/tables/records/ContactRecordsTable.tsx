@@ -69,6 +69,6 @@ function handleHPLColor(n: number) {
   } else if (n >= 0.5) {
     return "info"
   } else {
-    return "secondary"
+    return "primary"
   }
 }

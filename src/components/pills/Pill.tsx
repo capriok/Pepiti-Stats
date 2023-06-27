@@ -9,9 +9,9 @@ export default function Pill({ text, color = "neutral" }: PillProps) {
       bg: "bg-accent/60 dark:bg-accent/40",
       text: "text-neutral-100 dark:text-accent-content",
     },
-    secondary: {
-      bg: "bg-secondary/80 dark:bg-secondary/40",
-      text: "text-neutral-100 dark:text-secondary-content",
+    primary: {
+      bg: "bg-primary/80 dark:bg-primary/40",
+      text: "text-neutral-100 dark:text-primary-content",
     },
     info: {
       bg: "bg-info/80 dark:bg-info/40",

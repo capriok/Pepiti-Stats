@@ -7,6 +7,7 @@ import { useUserContext } from "~/app/providers"
 import Pill from "~/components/pills/Pill"
 import { renderBannedBy } from "~/components/tables/BlacklistTable"
 import { useToast, actions } from "~/components/toast"
+import { Button } from "~/ui/Button"
 
 interface Props {
   reason: string
@@ -31,7 +32,7 @@ export default function BanAppealForm({ reason }: Props) {
   const charactersCn = appeal.length >= AppealLength ? "text-green-500" : "text-red-500"
 
   const disabled = appeal.length < AppealLength
-  const buttonCn = disabled ? "" : "bg-secondary rounded-lg py-2 font-semibold text-white"
+  const buttonCn = disabled ? "" : "bg-primary rounded-lg py-2 font-semibold text-white"
 
   return (
     <div className="card card-body mx-auto mt-10 w-[500px]">
@@ -76,12 +77,12 @@ export default function BanAppealForm({ reason }: Props) {
               />
 
               <br />
-              <button className={buttonCn} disabled={disabled} type="submit">
+              <Button variant="primary" className={buttonCn} disabled={disabled} type="submit">
                 Submit
-              </button>
+              </Button>
             </>
           ) : (
-            <div className="flex justify-center text-secondary">You are not banned</div>
+            <div className="flex justify-center text-primary">You are not banned</div>
           )}
         </form>
       </div>

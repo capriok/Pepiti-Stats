@@ -6,6 +6,7 @@ import { ArrowRightIcon } from "lucide-react"
 import BanRiderButton from "~/components/actions/BanRiderButton"
 import DismissRiderReport from "~/components/actions/DismissRiderReport"
 import DismissAbuseRiderReport from "~/components/actions/DismissRiderReportAbuse"
+import { Button } from "~/ui/Button"
 
 interface Props {
   reports: Array<RiderReport>
@@ -61,9 +62,9 @@ export default function OpenReportsList({ reports }: Props) {
 const IdleReportControls = ({ open }) => {
   return (
     <div className="flex w-fit flex-col justify-center align-middle">
-      <button className="btn-ghost btn-secondary btn-outline btn-sm btn" onClick={open}>
+      <Button variant="outline" onClick={open}>
         Review
-      </button>
+      </Button>
     </div>
   )
 }

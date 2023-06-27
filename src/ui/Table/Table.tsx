@@ -12,6 +12,7 @@ import {
 } from "."
 import { ChevronsUpDown, ChevronUp, ChevronDown, Plus, Minus, Trophy } from "lucide-react"
 import RankTicTac from "~/components/pills/RankTicTac"
+import { Button } from "../Button"
 
 interface TableProps extends TableOptions {
   data: Array<TableData>
@@ -70,12 +71,13 @@ const Table: React.FC<TableProps> = (props) => {
         key: "_expandable",
         label: "",
         render: (_, row) => (
-          <button
-            className="btn-ghost btn-xs btn cursor-pointer bg-base-200/60"
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={() => setExpandedRow(expandedRow?._id === row._id ? null : row)}
           >
             {expandedRow?._id !== row._id ? <Plus size={14} /> : <Minus size={14} />}
-          </button>
+          </Button>
         ),
       }
       cols.push(expandableColumn)
@@ -134,7 +136,7 @@ const Table: React.FC<TableProps> = (props) => {
 
             return (
               <div
-                className={isColumnSorting ? "text-secondary group-hover:scale-125" : "text-accent"}
+                className={isColumnSorting ? "text-primary group-hover:scale-125" : "text-accent"}
               >
                 {!isColumnSorting || sorting.dir === SortDirection.None ? (
                   <ChevronsUpDown size={16} />
@@ -270,28 +272,28 @@ const Table: React.FC<TableProps> = (props) => {
             </div>
             {resultsEnabled && (
               <div className="flex flex-nowrap gap-[2px]">
-                <span className="text-secondary">(</span>
+                <span className="text-primary">(</span>
                 <span className="whitespace-nowrap">{`${data.length} Results`}</span>
-                <span className="text-secondary">)</span>
+                <span className="text-primary">)</span>
               </div>
             )}
           </div>
           <div className="flex flex-wrap items-center justify-end gap-2">
             <div className="join">
-              <button
-                className="btn-ghost btn-xs btn bg-base-100"
+              <Button
+                variant="ghost"
                 onClick={() => handlePageChange(page > 0 ? page - 1 : page)}
                 disabled={page === 0}
               >
                 {miniControls ? "-" : "Prev Page"}
-              </button>
-              <button
-                className="btn-ghost btn-xs btn bg-base-100"
+              </Button>
+              <Button
+                variant="ghost"
                 onClick={() => handlePageChange(paginatedData.length ? page + 1 : page)}
                 disabled={(page + 1) * pageSize >= data.length}
               >
                 {miniControls ? "+" : "Next Page"}
-              </button>
+              </Button>
             </div>
             {jumpToEnabled && (
               <select

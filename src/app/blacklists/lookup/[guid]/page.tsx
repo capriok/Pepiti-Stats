@@ -1,5 +1,6 @@
 import { GetRider } from "~/api"
 import Link from "next/link"
+import { Button } from "~/ui/Button"
 
 export async function generateMetadata({ params: { guid } }) {
   const rider = await GetRider(guid)
@@ -25,7 +26,7 @@ export default async function Page({ params: { guid } }) {
             {rider.banned ? (
               <div className="text-lg font-semibold text-error">Banned</div>
             ) : (
-              <div className="text-lg font-semibold text-secondary">Not Banned</div>
+              <div className="text-lg font-semibold text-primary">Not Banned</div>
             )}
           </div>
           {rider.banned && (
@@ -40,29 +41,27 @@ export default async function Page({ params: { guid } }) {
 
         {rider.banned && (
           <div className="stat mt-4 grid w-[400px] place-items-center justify-center gap-4 rounded-lg bg-base-200">
-            <div className="grid place-items-center gap-4">
+            <div className="grid place-items-center gap-2">
               <div className="stat-title w-full text-center">Click here for more info</div>
               <Link
                 href={`/blacklists?guid=${rider._id}${
                   rider.banned_by?.toLowerCase().includes("sr") ? "&tab=blacklistSr" : ""
                 }`}
-                className="btn-ghost btn-outline btn-sm btn"
               >
-                Blacklist Info
+                <Button variant="outline">Blacklist Info</Button>
               </Link>
               <Link
                 target="_blank"
                 rel="noopener noreferrer"
                 href="https://discord.com/invite/mx-bikes"
-                className="btn-ghost btn-outline btn-sm btn"
               >
-                Ban Appeal (MXB Discord)
+                <Button variant="outline">Ban Appeal (MXB Discord)</Button>
               </Link>
-              <button disabled={true} className="btn-ghost btn-outline btn-sm btn">
-                {/* <Link href={`/appeal/${rider._id}`} className="btn-outline btn-ghost btn-sm btn"> */}
+              {/* <Link href={`/appeal/${rider._id}`}> */}
+              <Button variant="outline" disabled={true}>
                 Ban Appeal (On-Site)
-                {/* </Link> */}
-              </button>
+              </Button>
+              {/* </Link> */}
             </div>
           </div>
         )}
