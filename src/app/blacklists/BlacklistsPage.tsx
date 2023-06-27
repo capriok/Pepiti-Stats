@@ -9,6 +9,7 @@ import Tabs from "~/components/Tabs"
 import GlobalBlacklistAlert from "~/components/alerts/GlobalBlacklistAlert"
 import SafetyBlacklistAlert from "~/components/alerts/SafetyBlacklistAlert"
 import BlacklistTable from "~/components/tables/BlacklistTable"
+import { Button } from "~/ui/Button"
 
 interface Props {
   blacklistSR: any
@@ -82,21 +83,19 @@ const BanAppealButtons = () => {
 
   return (
     <div className="mb-4 flex w-fit flex-wrap justify-center gap-2 md:w-full md:justify-end">
-      <button
+      <Button
+        variant="outline"
         disabled={true}
         className="btn-ghost btn-outline btn-sm btn"
         onClick={() => router.push(`/appeal`)}
       >
         On-Site Appeal
-      </button>
-      <Link
-        target="_blank"
-        rel="noopener noreferrer"
-        href="https://discord.com/invite/mx-bikes"
-        className="btn-ghost btn-outline btn-sm btn"
-      >
-        Discord Appeal
-      </Link>
+      </Button>
+      <Button variant="outline">
+        <Link target="_blank" rel="noopener noreferrer" href="https://discord.com/invite/mx-bikes">
+          Discord Appeal
+        </Link>
+      </Button>
     </div>
   )
 }

@@ -5,6 +5,7 @@ import { banRider } from "~/api/actions"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/Popover"
 import { useToast, actions } from "~/components/toast"
 import { forceRefresh } from "."
+import { Button } from "~/ui/Button"
 
 interface Props {
   riderId: string
@@ -24,8 +25,10 @@ export default function BanRiderButton({ riderId, name, hackit = false }: Props)
 
   return (
     <Popover>
-      <PopoverTrigger className="btn-outline btn-error btn-sm btn whitespace-nowrap border-error text-white">
-        Ban Rider
+      <PopoverTrigger>
+        <Button variant="error" className="w-full">
+          Ban Rider
+        </Button>
       </PopoverTrigger>
       <PopoverContent className="flex flex-col items-center justify-center gap-4">
         <div>Please give reason</div>
@@ -37,14 +40,9 @@ export default function BanRiderButton({ riderId, name, hackit = false }: Props)
             placeholder="Ramming, Racism, Retard..."
             className="input-bordered input input-sm w-full"
           />
-          <button
-            name="guid"
-            value={riderId}
-            type="submit"
-            className="btn-error btn-sm btn mt-4 w-full"
-          >
+          <Button variant="error" name="guid" value={riderId} type="submit" className="mt-4 w-full">
             Ban
-          </button>
+          </Button>
         </form>
       </PopoverContent>
     </Popover>

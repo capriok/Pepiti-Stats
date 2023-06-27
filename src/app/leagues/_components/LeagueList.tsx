@@ -4,6 +4,7 @@ import { VerifiedIcon } from "lucide-react"
 import Link from "next/link"
 import { useUserContext } from "~/app/providers"
 import Pill from "~/components/pills/Pill"
+import { Button } from "~/ui/Button"
 
 interface Props {
   leagues: Array<League>
@@ -101,16 +102,13 @@ const LeagueCard = ({ league }: { league: League }) => {
             <div className="text-md pb-2 font-semibold text-accent">League</div>
             <div className="text-lg">
               {league.closed ? (
-                <button disabled={true} className="btn-outline btn-sm btn bg-base-200">
+                <Button variant="outline" disabled={true}>
                   League CLosed
-                </button>
+                </Button>
               ) : (
-                <Link
-                  href={`/leagues/${league._id}`}
-                  className="btn-outline btn-sm btn bg-base-200"
-                >
-                  Go To League
-                </Link>
+                <Button variant="outline">
+                  <Link href={`/leagues/${league._id}`}>Go To League</Link>
+                </Button>
               )}
             </div>
           </div>

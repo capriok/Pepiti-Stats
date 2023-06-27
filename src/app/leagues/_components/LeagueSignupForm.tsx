@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
 import { joinLeague } from "~/api/actions"
 import { useToast, actions } from "~/components/toast"
+import { Button } from "~/ui/Button"
 
 interface Props {
   leagueId: string
@@ -106,9 +107,9 @@ export default function LeagueSignupForm({ leagueId, name, bikes, servers }: Pro
               </select>
             </div>
             <div className="mt-4 flex w-full justify-center">
-              <button type="submit" className="btn-secondary btn-sm btn" disabled={false}>
+              <Button variant="secondary" type="submit" disabled={false}>
                 Submit
-              </button>
+              </Button>
             </div>
           </>
         )}

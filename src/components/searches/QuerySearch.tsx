@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react"
 import Spinner from "~/components/Spinner"
 import { XIcon } from "lucide-react"
+import { Button } from "~/ui/Button"
 
 interface Props {
   query: (term: string) => Promise<any>
@@ -47,9 +48,9 @@ export default function QuerySearch({ query, render, placeholder, defaultTerm = 
           onFocus={() => setOpen(true)}
         />
         {open && (
-          <button className="absolute right-[10px] z-10 h-full" onClick={() => setOpen(false)}>
+          <div className="absolute right-[10px] z-10 h-full" onClick={() => setOpen(false)}>
             <XIcon size={20} />
-          </button>
+          </div>
         )}
       </div>
       <SearchDropdown term={term} open={open} loading={loading} results={results} render={render} />

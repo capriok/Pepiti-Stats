@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { Button } from "~/ui/Button"
 
 interface Props {
   appeals: Array<BanAppeal>
@@ -43,9 +44,9 @@ export default function ClosedAppealsList({ appeals }: Props) {
 const IdleAppealControls = ({ open }) => {
   return (
     <div className="flex w-fit flex-col justify-center align-middle">
-      <button className="btn-outline btn-ghost btn-sm btn" onClick={open}>
+      <Button variant="outline" onClick={open}>
         Review
-      </button>
+      </Button>
     </div>
   )
 }

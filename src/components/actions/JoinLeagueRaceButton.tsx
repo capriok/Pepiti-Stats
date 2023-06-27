@@ -2,6 +2,7 @@
 
 import { joinLeagueRace } from "~/api/actions"
 import { useToast, actions } from "~/components/toast"
+import { Button } from "~/ui/Button"
 
 interface Props {
   isEligible: boolean
@@ -19,7 +20,8 @@ export default function JoinLeagueRaceButton({ isEligible, raceId, name }: Props
 
   return (
     <form action={submit}>
-      <button
+      <Button
+        variant="secondary"
         name="raceId"
         value={raceId}
         type="submit"
@@ -27,7 +29,7 @@ export default function JoinLeagueRaceButton({ isEligible, raceId, name }: Props
         disabled={!isEligible}
       >
         Register
-      </button>
+      </Button>
     </form>
   )
 }

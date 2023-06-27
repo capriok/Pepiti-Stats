@@ -3,6 +3,7 @@
 import { useState } from "react"
 import DismissBanAppeal from "~/components/actions/DismissBanAppeal"
 import UnbanRiderButton from "~/components/actions/UnbanRiderButton"
+import { Button } from "~/ui/Button"
 
 interface Props {
   appeals: Array<BanAppeal>
@@ -49,9 +50,9 @@ export default function OpenAppealList({ appeals }: Props) {
 const IdleAppealControls = ({ open }) => {
   return (
     <div className="flex w-fit flex-col justify-center align-middle">
-      <button className="btn-outline btn-secondary btn-ghost btn-sm btn" onClick={open}>
+      <Button variant="outline" onClick={open}>
         Review
-      </button>
+      </Button>
     </div>
   )
 }

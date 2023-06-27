@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { ArrowRightIcon } from "lucide-react"
+import { Button } from "~/ui/Button"
 
 interface Props {
   reports: Array<RiderReport>
@@ -52,9 +53,9 @@ export default function ClosedReportsList({ reports }: Props) {
 const IdleReportControls = ({ open }) => {
   return (
     <div className="flex w-fit flex-col justify-center align-middle">
-      <button className="btn-outline btn-ghost btn-sm btn" onClick={open}>
+      <Button variant="outline" onClick={open}>
         Review
-      </button>
+      </Button>
     </div>
   )
 }

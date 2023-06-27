@@ -7,6 +7,7 @@ import { useUserContext } from "~/app/providers"
 import Pill from "~/components/pills/Pill"
 import { renderBannedBy } from "~/components/tables/BlacklistTable"
 import { useToast, actions } from "~/components/toast"
+import { Button } from "~/ui/Button"
 
 interface Props {
   reason: string
@@ -76,9 +77,9 @@ export default function BanAppealForm({ reason }: Props) {
               />
 
               <br />
-              <button className={buttonCn} disabled={disabled} type="submit">
+              <Button variant="secondary" className={buttonCn} disabled={disabled} type="submit">
                 Submit
-              </button>
+              </Button>
             </>
           ) : (
             <div className="flex justify-center text-secondary">You are not banned</div>

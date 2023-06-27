@@ -3,6 +3,7 @@ import GetAuthUser from "~/api"
 import { ChevronsDownIcon } from "lucide-react"
 import { ThemedImage } from "~/components/ThemedImage"
 import PageLayout from "~/components/PageLayout"
+import { Button } from "~/ui/Button"
 
 export const metadata = {
   title: "Pepiti | Home",
@@ -34,9 +35,9 @@ export default async function Page() {
               Access race stats in real-time, compete in race leagues, track fellow racers through
               feature packed profiles, and compete with rivals through global leaderboards
             </p>
-            <Link href="/dashboard" className="btn-secondary btn-outline btn mb-4">
-              Take me to the dashboard!
-            </Link>
+            <Button variant="secondary">
+              <Link href="/dashboard">Take me to the dashboard</Link>
+            </Button>
           </div>
 
           <ThemedImage
@@ -66,9 +67,9 @@ export default async function Page() {
             servers.
           </p>
 
-          <Link href={ctaLink} className="btn-secondary btn-outline btn-block btn md:basis-1/5">
-            show me my profile
-          </Link>
+          <Button variant="secondary">
+            <Link href={ctaLink}>Show me my profile</Link>
+          </Button>
         </div>
 
         <div className="my-20 flex flex-row gap-10 md:px-10">
@@ -145,9 +146,9 @@ export default async function Page() {
                 displayed proudly at the top and just below will be the leaderboards as well as a
                 analysis of how the MMR was calculated.
               </p>
-              <Link href="/races" className="btn-secondary btn-outline btn">
-                Let&apos;s see the analytics
-              </Link>
+              <Button variant="secondary">
+                <Link href="/races">Let&apos;s see the analytics</Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -167,9 +168,9 @@ export default async function Page() {
                 are going up against. Trophies will be added to your profile, for you to show off.
                 The league organizer might even provide a monetary prize for the winner!
               </p>
-              <Link href="/leagues" className="btn-secondary btn-outline btn">
-                Sign me up!
-              </Link>
+              <Button variant="secondary">
+                <Link href="/leagues">Sign me up</Link>
+              </Button>
             </div>
 
             <div>
@@ -220,13 +221,13 @@ export default async function Page() {
               <p className="py-6 text-neutral-400">
                 You <span className="text-error">don&apos;t</span> want to end up here but,
                 inevitably, some of you will. You can find out why you are banned along with some
-                details about the rider&apos;s profile. For example, an SR ban would be interersted
+                details about the rider&apos;s profile. For example, an SR ban would be interested
                 in where their SR level is at, if it is under 900 you will have to race in
                 no-contact servers to get it back above 950.
               </p>
-              <Link href="/blacklists" className="btn-secondary btn-outline btn">
-                I wanna see who I can shame
-              </Link>
+              <Button variant="secondary">
+                <Link href="/blacklists">Let me take a look</Link>
+              </Button>
             </div>
           </div>
         </div>

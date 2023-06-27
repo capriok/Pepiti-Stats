@@ -4,6 +4,7 @@ import { unbanRider } from "~/api/actions"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/Popover"
 import { useToast, actions } from "~/components/toast"
 import { forceRefresh } from "."
+import { Button } from "~/ui/Button"
 
 interface Props {
   riderId: string
@@ -22,15 +23,15 @@ export default function UnbanRiderButton({ riderId, name, hackit = false }: Prop
 
   return (
     <Popover>
-      <PopoverTrigger className="btn-outline btn-error btn-sm btn whitespace-nowrap border-error text-white">
-        Unban Rider
+      <PopoverTrigger>
+        <Button variant="error">Unban Rider</Button>
       </PopoverTrigger>
-      <PopoverContent className="grid place-items-center">
+      <PopoverContent className="grid place-items-center gap-2">
         <div>Please confirm</div>
         <form action={submit}>
-          <button name="guid" value={riderId} type="submit" className="btn-error btn-sm btn mt-2">
+          <Button variant="error" name="guid" value={riderId} type="submit">
             Unban
-          </button>
+          </Button>
         </form>
       </PopoverContent>
     </Popover>

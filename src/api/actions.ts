@@ -10,7 +10,7 @@ const token = cookies().get("access_token")?.value
 async function fetcher(url: string) {
   console.log("Fetcher", { url, token })
 
-  const res = await await fetch(ENDPOINT + url, {
+  const res = await fetch(ENDPOINT + url, {
     ...nextConfig,
     headers: {
       "Content-Type": "application/json",

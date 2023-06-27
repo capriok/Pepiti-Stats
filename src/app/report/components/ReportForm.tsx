@@ -7,6 +7,7 @@ import { postRiderReport } from "~/api/actions"
 import { useUserContext } from "~/app/providers"
 import Spinner from "~/components/Spinner"
 import { useToast, actions } from "~/components/toast"
+import { Button } from "~/ui/Button"
 
 interface Props {
   events: Array<RecentRace>
@@ -229,9 +230,9 @@ export function ProofFormPart3({ eventId, riderForm }) {
       />
 
       <br />
-      <button className={buttonCn} disabled={disabled} type="submit">
+      <Button variant="secondary" className={buttonCn} disabled={disabled} type="submit">
         Submit
-      </button>
+      </Button>
     </>
   )
 }

@@ -1,5 +1,6 @@
 import { GetRider } from "~/api"
 import Link from "next/link"
+import { Button } from "~/ui/Button"
 
 export async function generateMetadata({ params: { guid } }) {
   const rider = await GetRider(guid)
@@ -58,11 +59,11 @@ export default async function Page({ params: { guid } }) {
               >
                 Ban Appeal (MXB Discord)
               </Link>
-              <button disabled={true} className="btn-ghost btn-outline btn-sm btn">
-                {/* <Link href={`/appeal/${rider._id}`} className="btn-outline btn-ghost btn-sm btn"> */}
+              <Button variant="outline" disabled={true}>
+                {/* <Link href={`/appeal/${rider._id}`}> */}
                 Ban Appeal (On-Site)
                 {/* </Link> */}
-              </button>
+              </Button>
             </div>
           </div>
         )}

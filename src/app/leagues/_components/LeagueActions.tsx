@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import LeaveLeagueButton from "~/components/actions/LeaveLeagueButton"
+import { Button } from "~/ui/Button"
 import { checkRequirements } from "."
 
 interface Props {
@@ -21,12 +22,13 @@ export default function LeagueActions({ league, rider, eligibility }: Props) {
   return isJoined ? (
     <LeaveLeagueButton leagueId={league._id} name={league.name} />
   ) : (
-    <button
+    <Button
+      variant="error"
       disabled={!isEligible}
       onClick={() => router.push(`/leagues/${league._id}/signup?guid=${rider._id}`)}
-      className="btn-secondary btn-sm btn w-fit text-white"
+      className="w-full"
     >
       Join League
-    </button>
+    </Button>
   )
 }
