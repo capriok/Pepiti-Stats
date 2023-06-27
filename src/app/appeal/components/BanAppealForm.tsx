@@ -32,7 +32,7 @@ export default function BanAppealForm({ reason }: Props) {
   const charactersCn = appeal.length >= AppealLength ? "text-green-500" : "text-red-500"
 
   const disabled = appeal.length < AppealLength
-  const buttonCn = disabled ? "" : "bg-secondary rounded-lg py-2 font-semibold text-white"
+  const buttonCn = disabled ? "" : "bg-primary rounded-lg py-2 font-semibold text-white"
 
   return (
     <div className="card card-body mx-auto mt-10 w-[500px]">
@@ -77,12 +77,12 @@ export default function BanAppealForm({ reason }: Props) {
               />
 
               <br />
-              <Button variant="secondary" className={buttonCn} disabled={disabled} type="submit">
+              <Button variant="primary" className={buttonCn} disabled={disabled} type="submit">
                 Submit
               </Button>
             </>
           ) : (
-            <div className="flex justify-center text-secondary">You are not banned</div>
+            <div className="flex justify-center text-primary">You are not banned</div>
           )}
         </form>
       </div>

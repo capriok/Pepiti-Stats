@@ -21,11 +21,11 @@ export default function JoinLeagueRaceButton({ isEligible, raceId, name }: Props
   return (
     <form action={submit}>
       <Button
-        variant="secondary"
+        variant="primary"
         name="raceId"
         value={raceId}
         type="submit"
-        className="btn-secondary btn-sm btn"
+        className="btn-primary btn-sm btn"
         disabled={!isEligible}
       >
         Register

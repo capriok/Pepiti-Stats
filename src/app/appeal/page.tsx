@@ -20,7 +20,7 @@ export default async function Page() {
         title: "Ban Appeal",
         extra: (
           <Pill
-            color="secondary"
+            color="primary"
             text={
               <div className="text-sm">Plead your ban appeal, An admin will review it soon</div>
             }

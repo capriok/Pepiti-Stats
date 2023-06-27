@@ -96,6 +96,6 @@ export const renderBannedBy = (reason) => {
     case "sr":
       return "orange"
     default:
-      return "secondary"
+      return "primary"
   }
 }

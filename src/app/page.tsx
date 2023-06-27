@@ -35,7 +35,7 @@ export default async function Page() {
               Access race stats in real-time, compete in race leagues, track fellow racers through
               feature packed profiles, and compete with rivals through global leaderboards
             </p>
-            <Button variant="secondary">
+            <Button variant="primary">
               <Link href="/dashboard">Take me to the dashboard</Link>
             </Button>
           </div>
@@ -67,7 +67,7 @@ export default async function Page() {
             servers.
           </p>
 
-          <Button variant="secondary">
+          <Button variant="primary">
             <Link href={ctaLink}>Show me my profile</Link>
           </Button>
         </div>
@@ -146,7 +146,7 @@ export default async function Page() {
                 displayed proudly at the top and just below will be the leaderboards as well as a
                 analysis of how the MMR was calculated.
               </p>
-              <Button variant="secondary">
+              <Button variant="primary">
                 <Link href="/races">Let&apos;s see the analytics</Link>
               </Button>
             </div>
@@ -168,7 +168,7 @@ export default async function Page() {
                 are going up against. Trophies will be added to your profile, for you to show off.
                 The league organizer might even provide a monetary prize for the winner!
               </p>
-              <Button variant="secondary">
+              <Button variant="primary">
                 <Link href="/leagues">Sign me up</Link>
               </Button>
             </div>
@@ -225,7 +225,7 @@ export default async function Page() {
                 in where their SR level is at, if it is under 900 you will have to race in
                 no-contact servers to get it back above 950.
               </p>
-              <Button variant="secondary">
+              <Button variant="primary">
                 <Link href="/blacklists">Let me take a look</Link>
               </Button>
             </div>
@@ -237,7 +237,7 @@ export default async function Page() {
       <section>
         <Link
           href="/dashboard"
-          className="relative mx-auto mt-10 block w-full overflow-hidden rounded-lg bg-secondary p-10 outline outline-0 outline-offset-2 outline-secondary  hover:bg-secondary/70 hover:outline-1 lg:mt-0 lg:w-3/4"
+          className="relative mx-auto mt-10 block w-full overflow-hidden rounded-lg bg-primary p-10 outline outline-0 outline-offset-2 outline-primary  hover:bg-primary/70 hover:outline-1 lg:mt-0 lg:w-3/4"
         >
           <span className="mb-3 block text-3xl font-extrabold leading-relaxed text-base-200 lg:text-4xl">
             Ready to join the

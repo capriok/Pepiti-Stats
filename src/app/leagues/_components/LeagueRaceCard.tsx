@@ -75,7 +75,7 @@ const RaceCardBanner = ({
   loading: boolean
 }) => {
   return isInRace ? (
-    <div className="bg-secondary/80">
+    <div className="bg-primary/80">
       <div className="flex justify-center py-2 text-white">You are Registered</div>
     </div>
   ) : (

@@ -10,7 +10,7 @@ export default function RiderAvatar({ rider }) {
       <div className="indicator avatar min-h-[128px]">
         <span
           className={`badge indicator-item text-white ${
-            rider.online ? "badge-secondary" : "badge-error"
+            rider.online ? "badge-primary" : "badge-error"
           }`}
         >
           {rider.online ? "Online" : "Offline"}

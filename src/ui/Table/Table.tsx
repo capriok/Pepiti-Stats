@@ -136,7 +136,7 @@ const Table: React.FC<TableProps> = (props) => {
 
             return (
               <div
-                className={isColumnSorting ? "text-secondary group-hover:scale-125" : "text-accent"}
+                className={isColumnSorting ? "text-primary group-hover:scale-125" : "text-accent"}
               >
                 {!isColumnSorting || sorting.dir === SortDirection.None ? (
                   <ChevronsUpDown size={16} />
@@ -272,9 +272,9 @@ const Table: React.FC<TableProps> = (props) => {
             </div>
             {resultsEnabled && (
               <div className="flex flex-nowrap gap-[2px]">
-                <span className="text-secondary">(</span>
+                <span className="text-primary">(</span>
                 <span className="whitespace-nowrap">{`${data.length} Results`}</span>
-                <span className="text-secondary">)</span>
+                <span className="text-primary">)</span>
               </div>
             )}
           </div>

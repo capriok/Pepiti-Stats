@@ -39,7 +39,7 @@ const LeagueRaceAlert = ({ isInRace }: { isInRace: boolean }) => {
   if (!isInRace) return <></>
 
   return (
-    <Alert className="mb-4 border-secondary/80">
+    <Alert className="mb-4 border-primary/80">
       <CheckIcon size={20} />
       <AlertTitle>Heads Up!</AlertTitle>
       <AlertDescription>

@@ -36,7 +36,7 @@ export default function Tabs({
   }
 
   function Tab({ item }) {
-    const active = item.key === activeTab.key ? "bg-secondary/80 text-white" : "bg-base-200"
+    const active = item.key === activeTab.key ? "bg-primary/80 text-white" : "bg-base-200"
     const wideActive = wide ? "w-full" : ""
     return (
       <button

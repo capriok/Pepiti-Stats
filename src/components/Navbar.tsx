@@ -106,7 +106,7 @@ function AppNavigation({ user }) {
           </div>
           <div className="flex text-xs">
             {user.isAdmin ? (
-              <div className="text-secondary dark:text-secondary-content">Admin</div>
+              <div className="text-primary dark:text-primary-content">Admin</div>
             ) : (
               <div className="text-accent/60">User</div>
             )}

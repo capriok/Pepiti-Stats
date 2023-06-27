@@ -81,7 +81,7 @@ export default function Footer({ user }: Props) {
         <div>
           <span className="footer-title">Donations</span>
           <div>Help pay for services you enjoy</div>
-          <div className="btn-ghost btn-sm btn bg-secondary/80 normal-case text-white hover:bg-secondary">
+          <div className="btn-ghost btn-sm btn bg-primary/80 normal-case text-white hover:bg-primary">
             <a
               target="_blank"
               rel="noreferrer"

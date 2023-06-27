@@ -29,7 +29,7 @@ const toastVariants = cva(
     variants: {
       variant: {
         default: "bg-base-300/80 border-base-300 border-2 text-white",
-        success: "bg-secondary/80 border-secondary border-2 text-white",
+        success: "bg-primary/80 border-primary border-2 text-white",
         warning: "bg-warning/80 border-warning border-2 text-white",
         info: "bg-info/80 border-info border-2 text-white",
         error: "bg-error/80 border-error border-2 text-white",
@@ -62,7 +62,7 @@ const ToastAction = React.forwardRef<
   <ToastPrimitives.Action
     ref={ref}
     className={cn(
-      "ring-offset-background focus:ring-ring group-[.destructive]:border-destructive/30 group-[.destructive]:hover:border-destructive/30 group-[.destructive]:hover:bg-destructive group-[.destructive]:hover:text-destructive-foreground group-[.destructive]:focus:ring-destructive inline-flex h-8 shrink-0 items-center justify-center rounded-lg border bg-transparent px-3 text-sm font-medium transition-colors hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+      "ring-offset-background focus:ring-ring group-[.destructive]:border-destructive/30 group-[.destructive]:hover:border-destructive/30 group-[.destructive]:hover:bg-destructive group-[.destructive]:hover:text-destructive-foreground group-[.destructive]:focus:ring-destructive inline-flex h-8 shrink-0 items-center justify-center rounded-lg border bg-transparent px-3 text-sm font-medium transition-colors hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
       className
     )}
     {...props}

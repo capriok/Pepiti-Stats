@@ -26,7 +26,7 @@ export default async function Page({ params: { guid } }) {
             {rider.banned ? (
               <div className="text-lg font-semibold text-error">Banned</div>
             ) : (
-              <div className="text-lg font-semibold text-secondary">Not Banned</div>
+              <div className="text-lg font-semibold text-primary">Not Banned</div>
             )}
           </div>
           {rider.banned && (

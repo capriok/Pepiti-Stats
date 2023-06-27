@@ -12,7 +12,7 @@ export default function Page() {
           href="https://pepiti.com/stats/api/v0/steam_login"
           target="_blank"
           referrerPolicy="origin"
-          className="btn-outline btn-secondary btn-sm btn "
+          className="btn-primary btn-outline btn-sm btn "
         >
           <div className="font-normal">Login with Steam</div>
         </Link>

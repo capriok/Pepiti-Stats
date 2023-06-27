@@ -107,7 +107,7 @@ export default function LeagueSignupForm({ leagueId, name, bikes, servers }: Pro
               </select>
             </div>
             <div className="mt-4 flex w-full justify-center">
-              <Button variant="secondary" type="submit" disabled={false}>
+              <Button variant="primary" type="submit" disabled={false}>
                 Submit
               </Button>
             </div>

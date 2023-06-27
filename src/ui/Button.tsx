@@ -9,7 +9,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-base-200 text-base-200-content shadow hover:bg-base-300",
-        secondary: "bg-secondary text-white shadow-sm hover:bg-secondary/80 ",
+        primary: "bg-primary text-white shadow-sm hover:bg-primary/80 ",
         warning: "bg-warning text-white shadow-sm hover:bg-warning/80",
         info: "bg-info text-white shadow-sm hover:bg-info/80",
         error: "bg-error text-white shadow-sm hover:bg-error/80",
