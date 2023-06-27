@@ -82,15 +82,13 @@ export default function Footer({ user }: Props) {
         <div>
           <span className="footer-title">Donations</span>
           <div>Help pay for services you enjoy</div>
-          <Button variant="primary">
-            <a
-              target="_blank"
-              rel="noreferrer"
-              href="https://paypal.me/pepitisdevs?country.x=US&locale.x=en_US"
-            >
-              Donate to Pepiti.com
-            </a>
-          </Button>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://paypal.me/pepitisdevs?country.x=US&locale.x=en_US"
+          >
+            <Button variant="primary">Donate to Pepiti.com</Button>
+          </a>
         </div>
       </div>
     </footer>

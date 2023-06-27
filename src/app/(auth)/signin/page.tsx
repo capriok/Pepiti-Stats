@@ -9,15 +9,13 @@ export default function Page() {
       title="Access Denied."
       description="Sign in with Steam to view this page."
       extra={
-        <Button variant="outline">
-          <Link
-            target="_blank"
-            referrerPolicy="origin"
-            href="https://pepiti.com/stats/api/v0/steam_login"
-          >
-            Login with Steam
-          </Link>
-        </Button>
+        <Link
+          target="_blank"
+          referrerPolicy="origin"
+          href="https://pepiti.com/stats/api/v0/steam_login"
+        >
+          <Button variant="outline">Login with Steam</Button>
+        </Link>
       }
     />
   )

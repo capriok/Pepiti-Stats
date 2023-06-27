@@ -103,12 +103,12 @@ const LeagueCard = ({ league }: { league: League }) => {
             <div className="text-lg">
               {league.closed ? (
                 <Button variant="outline" disabled={true}>
-                  League CLosed
+                  League Closed
                 </Button>
               ) : (
-                <Button variant="outline">
-                  <Link href={`/leagues/${league._id}`}>Go To League</Link>
-                </Button>
+                <Link href={`/leagues/${league._id}`}>
+                  <Button variant="outline">Go To League</Button>
+                </Link>
               )}
             </div>
           </div>

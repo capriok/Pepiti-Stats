@@ -35,9 +35,9 @@ export default async function Page() {
               Access race stats in real-time, compete in race leagues, track fellow racers through
               feature packed profiles, and compete with rivals through global leaderboards
             </p>
-            <Button variant="primary">
-              <Link href="/dashboard">Take me to the dashboard</Link>
-            </Button>
+            <Link href="/dashboard">
+              <Button variant="primary">Take me to the dashboard</Button>
+            </Link>
           </div>
 
           <ThemedImage
@@ -67,9 +67,9 @@ export default async function Page() {
             servers.
           </p>
 
-          <Button variant="primary">
-            <Link href={ctaLink}>Show me my profile</Link>
-          </Button>
+          <Link href={ctaLink}>
+            <Button variant="primary">Show me my profile</Button>
+          </Link>
         </div>
 
         <div className="my-20 flex flex-row gap-10 md:px-10">
@@ -146,9 +146,9 @@ export default async function Page() {
                 displayed proudly at the top and just below will be the leaderboards as well as a
                 analysis of how the MMR was calculated.
               </p>
-              <Button variant="primary">
-                <Link href="/races">Let&apos;s see the analytics</Link>
-              </Button>
+              <Link href="/races">
+                <Button variant="primary">Let&apos;s see the analytics</Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -168,9 +168,9 @@ export default async function Page() {
                 are going up against. Trophies will be added to your profile, for you to show off.
                 The league organizer might even provide a monetary prize for the winner!
               </p>
-              <Button variant="primary">
-                <Link href="/leagues">Sign me up</Link>
-              </Button>
+              <Link href="/leagues">
+                <Button variant="primary">Sign me up</Button>
+              </Link>
             </div>
 
             <div>
@@ -225,9 +225,9 @@ export default async function Page() {
                 in where their SR level is at, if it is under 900 you will have to race in
                 no-contact servers to get it back above 950.
               </p>
-              <Button variant="primary">
-                <Link href="/blacklists">Let me take a look</Link>
-              </Button>
+              <Link href="/blacklists">
+                <Button variant="primary">Let me take a look</Button>
+              </Link>
             </div>
           </div>
         </div>

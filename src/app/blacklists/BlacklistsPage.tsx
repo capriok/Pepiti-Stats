@@ -86,11 +86,9 @@ const BanAppealButtons = () => {
       <Button variant="outline" disabled={true} onClick={() => router.push(`/appeal`)}>
         On-Site Appeal
       </Button>
-      <Button variant="outline">
-        <Link target="_blank" rel="noopener noreferrer" href="https://discord.com/invite/mx-bikes">
-          Discord Appeal
-        </Link>
-      </Button>
+      <Link target="_blank" rel="noopener noreferrer" href="https://discord.com/invite/mx-bikes">
+        <Button variant="outline">Discord Appeal</Button>
+      </Link>
     </div>
   )
 }

@@ -26,9 +26,9 @@ export default async function Page(props) {
         title: "League Race",
         extra: (
           <div className="flex gap-2">
-            <Button variant="outline">
-              <Link href={`/leagues/${race.league_id}`}>Go to League</Link>
-            </Button>
+            <Link href={`/leagues/${race.league_id}`}>
+              <Button variant="outline">Go to League</Button>
+            </Link>
             <LeagueRaceActions
               raceId={race._id}
               eligibility={eligibility}
