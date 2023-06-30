@@ -8,6 +8,7 @@ import RaceMMRAnalysis from "./components/RaceMMRAnalysis"
 import RaceScatter from "./components/RaceScatter"
 import RaceNotables from "./components/RaceNotables"
 import Tabs from "~/ui/Tabs"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/ui/Card"
 
 interface Props {
   session: ProcessedRaceSession
@@ -87,9 +88,9 @@ const RaceContent = ({ race }: { race: Race }) => {
         <WinnerCircle race={race} />
         <RaceNotables race={race} />
       </div>
-      <div className="card card-body rounded-lg bg-base-200 p-0">
+      <Card>
         <Tabs items={items} wide={true} />
-      </div>
+      </Card>
     </div>
   )
 }
@@ -97,10 +98,14 @@ const RaceContent = ({ race }: { race: Race }) => {
 const DataUnavailable = () => {
   return (
     <div className="grid h-[90vh] w-full place-items-center">
-      <div className="card card-body grid place-items-center bg-base-200">
-        <div className="text-lg opacity-80">Race data not available</div>
-        <p className="mt-2">Check back in later</p>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle>Race data not available</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <CardDescription>Check back in later</CardDescription>
+        </CardContent>
+      </Card>
     </div>
   )
 }

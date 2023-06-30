@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useUserContext } from "~/app/providers"
 import Pill from "~/components/pills/Pill"
 import { Button } from "~/ui/Button"
+import { Card } from "~/ui/Card"
 
 interface Props {
   leagues: Array<League>
@@ -37,10 +38,7 @@ const LeagueCard = ({ league }: { league: League }) => {
   if (league.hidden) return <></>
 
   return (
-    <div
-      key={league._id}
-      className="card card-body overflow-hidden rounded-lg border border-accent/40 bg-base-200 p-0 shadow-md"
-    >
+    <Card key={league._id}>
       <div className="p-4 md:p-6">
         <div className="flex items-center justify-between">
           <div className="text-xl font-semibold">{league.name}</div>
@@ -114,6 +112,6 @@ const LeagueCard = ({ league }: { league: League }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   )
 }

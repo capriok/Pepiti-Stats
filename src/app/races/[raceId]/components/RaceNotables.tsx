@@ -1,6 +1,7 @@
 import Link from "next/link"
 import MMRPill from "~/components/pills/MMRPill"
 import RankTicTac from "~/components/pills/RankTicTac"
+import { Card, CardContent } from "~/ui/Card"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 
@@ -22,9 +23,9 @@ export default function RaceNotables({ race }: Props) {
   )
 
   return (
-    <div className="card card-body flex w-full flex-col rounded-lg bg-base-200 shadow-md xl:w-[40%]">
-      <div className="flex-1">
-        <div className="mb-4 flex justify-center text-xl font-semibold">Podium</div>
+    <Card className="xl:w-[40%]">
+      <CardContent>
+        <div className="my-4 flex justify-center text-xl font-semibold">Podium</div>
         <div className="mb-4 flex flex-col border-b border-accent/20 pb-2">
           <div className="text-md mb-2 font-semibold text-accent">Second Place</div>
           <div className="flex justify-between">
@@ -61,8 +62,8 @@ export default function RaceNotables({ race }: Props) {
             </div>
           </div>
         </div>
-      </div>
-      <div className="flex-1">
+      </CardContent>
+      <CardContent>
         <div className="mb-4 flex justify-center text-xl font-semibold">Notable</div>
         <div className="mb-4 flex flex-col border-b border-accent/20 pb-2">
           <div className="text-md mb-2 font-semibold text-accent">Fastest Lap</div>
@@ -96,7 +97,7 @@ export default function RaceNotables({ race }: Props) {
             <MMRPill mmr={riderWithHighestMmrGain?.mmrGain} />
           </div>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   )
 }

@@ -9,6 +9,7 @@ import Pill from "~/components/pills/Pill"
 import { leagueRaceStatusMap } from "."
 import Spinner from "~/components/Spinner"
 import { Button } from "~/ui/Button"
+import { Card } from "~/ui/Card"
 
 interface Props {
   race: LeagueRace
@@ -55,13 +56,13 @@ export default function LeagueRaceCard({ race }: Props) {
   const isInRace = raceEligibility.race_joined === true
 
   return (
-    <div className="card card-body overflow-hidden rounded-lg border border-accent/40 bg-base-200 p-0 shadow-md">
+    <Card>
       <RaceCardBanner status={race.status} isInRace={isInRace} loading={eligibilityLoading} />
 
       <RaceCardContent race={race} />
 
       <RaceCardActions race={race} isInLeague={isInLeague} loading={eligibilityLoading} />
-    </div>
+    </Card>
   )
 }
 
@@ -75,11 +76,11 @@ const RaceCardBanner = ({
   loading: boolean
 }) => {
   return isInRace ? (
-    <div className="bg-primary/80">
+    <div className="rounded-tl-lg rounded-tr-lg bg-primary/80">
       <div className="flex justify-center py-2 text-white">You are Registered</div>
     </div>
   ) : (
-    <div className={!loading ? leagueRaceStatusMap[status].color : "bg-accent"}>
+    <div className={!loading ? leagueRaceStatusMap[status].color : "bg-base-300"}>
       <div className="flex justify-center py-2 text-white">
         {!loading ? leagueRaceStatusMap[status].text : <div className="opacity-0">Loading</div>}
       </div>
@@ -128,7 +129,7 @@ const RaceCardActions = ({
   const router = useRouter()
 
   return (
-    <div className="w-full gap-2 bg-base-300 p-4">
+    <div className="w-full gap-2 rounded-bl-lg rounded-br-lg bg-base-300 p-4 ">
       {loading ? (
         <Button variant="outline" className="w-full" disabled={true}>
           <Spinner />

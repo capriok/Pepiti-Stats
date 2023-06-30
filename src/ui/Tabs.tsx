@@ -70,7 +70,7 @@ export default function Tabs({
   onChange = function () {},
   renderChildren = true,
 }: Props) {
-  const tabs = items.map((item) => (
+  const children = items.map((item) => (
     <TabsContent key={item.key} value={item.key}>
       {item.children}
     </TabsContent>
@@ -89,7 +89,7 @@ export default function Tabs({
             </TabsTrigger>
           ))}
         </TabsList>
-        {renderChildren && tabs}
+        {renderChildren && children}
       </TabsPrimitive.Tabs>
     </>
   )

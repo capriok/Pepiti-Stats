@@ -1,14 +1,14 @@
 "use client"
 
-import { CheckIcon, RocketIcon } from "lucide-react"
+import { CheckIcon, Rocket, RocketIcon } from "lucide-react"
 import Table from "~/ui/Table"
 import RiderLink from "~/components/RiderLink"
 import Tabs from "~/ui/Tabs"
 import BikeTicTac from "~/components/pills/BikeTicTac"
 import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
 import { handleLapTimes } from "~/utils/handleLapTimes"
-import { leagueRaceStatusMap } from "."
 import { Alert, AlertDescription, AlertTitle } from "~/ui/Alert"
+import { Card } from "~/ui/Card"
 
 interface Props {
   user: User
@@ -24,7 +24,7 @@ export default function LeagueRaceOverview({ user, race, eligibility }: Props) {
     <>
       <LeagueRaceAlert isInRace={isInRace} />
 
-      <LeagueRaceInformation race={race} isInRace={isInRace} />
+      <LeagueRaceInformation race={race} />
 
       <div className="mb-2 mt-6 text-xl font-semibold md:mb-4 md:mt-10">Race Configurations</div>
       <LeagueRaceConfig race={race} />
@@ -36,7 +36,18 @@ export default function LeagueRaceOverview({ user, race, eligibility }: Props) {
 }
 
 const LeagueRaceAlert = ({ isInRace }: { isInRace: boolean }) => {
-  if (!isInRace) return <></>
+  if (!isInRace)
+    return (
+      <Alert className="mb-4">
+        <Rocket size={20} />
+        <AlertTitle>Attention!</AlertTitle>
+        <AlertDescription>
+          <div className="flex">
+            The Race is Open for Registration, click the button above to Register
+          </div>
+        </AlertDescription>
+      </Alert>
+    )
 
   return (
     <Alert className="mb-4 border-primary/80">
@@ -49,27 +60,9 @@ const LeagueRaceAlert = ({ isInRace }: { isInRace: boolean }) => {
   )
 }
 
-const LeagueRaceInformation = ({
-  race,
-  isInRace,
-}: {
-  race: LeagueRaceDetails
-  isInRace: boolean
-}) => {
+const LeagueRaceInformation = ({ race }: { race: LeagueRaceDetails }) => {
   return (
-    <div className="card card-body rounded-lg border border-accent/40 bg-base-200 p-0 shadow-md">
-      {!isInRace && (
-        <div
-          className={`rounded-sm rounded-bl-none rounded-br-none p-2 text-white ${
-            isInRace ? "bg-accent" : leagueRaceStatusMap[race.status].color
-          }`}
-        >
-          <div className="flex justify-center text-lg font-semibold">
-            {leagueRaceStatusMap[race.status].text}
-          </div>
-        </div>
-      )}
-
+    <Card>
       <div className="grid w-full grid-cols-1 p-4 md:grid-cols-2">
         <div className="flex flex-col">
           <div className="mb-4 text-lg font-semibold">Information</div>
@@ -99,7 +92,7 @@ const LeagueRaceInformation = ({
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   )
 }
 
@@ -152,7 +145,11 @@ const LeagueRaceTabs = ({ race }: { race: LeagueRaceDetails }) => {
     children: <LeagueRaceStandings division={division} />,
   }))
 
-  return <Tabs items={items} />
+  return (
+    <Card>
+      <Tabs items={items} wide={true} />
+    </Card>
+  )
 }
 
 const LeagueRaceStandings = ({ division }: { division: LeagueRaceDivision }) => {

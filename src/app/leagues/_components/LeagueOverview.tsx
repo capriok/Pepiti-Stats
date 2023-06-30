@@ -6,6 +6,7 @@ import BikeTicTac from "~/components/pills/BikeTicTac"
 import Pill from "~/components/pills/Pill"
 import RiderLink from "~/components/RiderLink"
 import { Alert, AlertDescription, AlertTitle } from "~/ui/Alert"
+import { Card, CardContent } from "~/ui/Card"
 import Table from "~/ui/Table"
 import LeagueRaceCard from "./LeagueRaceCard"
 
@@ -106,8 +107,8 @@ const LeagueBanner = ({ league }: { league: League }) => {
 }
 
 const LeagueInformation = ({ league, host }: { league: League; host: RiderProfile }) => (
-  <div className="card card-body rounded-lg border border-accent/40 bg-base-200 shadow-md">
-    <div className="grid w-full grid-cols-1 md:grid-cols-2">
+  <Card>
+    <CardContent className="mt-4 grid w-full grid-cols-1 md:grid-cols-2">
       <div className="flex flex-col justify-center">
         <div className="mb-2 flex items-center gap-2">
           <div className="text-md text-accent">Host:</div>
@@ -135,8 +136,8 @@ const LeagueInformation = ({ league, host }: { league: League; host: RiderProfil
           />
         </div>
       </div>
-    </div>
-  </div>
+    </CardContent>
+  </Card>
 )
 
 const LeagueRequirements = ({

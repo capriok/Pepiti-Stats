@@ -5,6 +5,7 @@ import PageLayout from "~/components/PageLayout"
 import Tabs from "~/ui/Tabs"
 import OpenReportsList from "./components/OpenReportsList"
 import ClosedReportsList from "./components/ClosedReportsList"
+import { Card } from "~/ui/Card"
 
 export const metadata = {
   title: "Pepiti | Admin Manager",
@@ -40,9 +41,9 @@ export default async function Page() {
         ),
       }}
     >
-      <div className="card card-body overflow-hidden  border border-accent/40 bg-base-200 p-0">
+      <Card>
         <Tabs items={items} wide={true} />
-      </div>
+      </Card>
     </PageLayout>
   )
 }

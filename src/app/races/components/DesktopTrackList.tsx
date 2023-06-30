@@ -39,7 +39,7 @@ export default function DesktopTrackList({ races }: Props) {
               <Link
                 key={raceInfo._id}
                 href={`/races/${raceInfo._id}`}
-                className={`group flex flex-col items-center justify-between rounded-lg px-2 py-2 hover:bg-primary/80 hover:text-white ${
+                className={`group flex flex-col items-center justify-between rounded-lg border border-accent/20 px-2 py-2 hover:bg-primary/80 hover:text-white ${
                   isActive ? "bg-primary/80 py-3 text-white " : "bg-base-200"
                 }`}
               >
@@ -49,7 +49,17 @@ export default function DesktopTrackList({ races }: Props) {
                   }`}
                 >
                   {raceInfo.by === "pep" ? (
-                    <Image width={26} height={26} alt="by" src="/assets/brand/pepiti-p.svg" />
+                    isActive ? (
+                      <Image
+                        width={20}
+                        height={20}
+                        alt="by"
+                        src="/assets/brand/white-flag.svg"
+                        className="pr-1"
+                      />
+                    ) : (
+                      <Image width={26} height={26} alt="by" src="/assets/brand/pepiti-p.svg" />
+                    )
                   ) : (
                     raceInfo.by
                   )}
