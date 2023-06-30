@@ -5,7 +5,7 @@ import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { Card, CardContent } from "~/ui/Card"
 import PageLayout from "~/components/PageLayout"
-import Tabs from "~/components/Tabs"
+import Tabs from "~/ui/Tabs"
 import BlacklistTable from "~/components/tables/BlacklistTable"
 
 interface Props {

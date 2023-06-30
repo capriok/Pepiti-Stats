@@ -2,7 +2,7 @@ import Link from "next/link"
 import { GetAdminRiderReports } from "~/api"
 import GetAuthUser from "~/api"
 import PageLayout from "~/components/PageLayout"
-import Tabs from "~/components/Tabs"
+import Tabs from "~/ui/Tabs"
 import OpenReportsList from "./components/OpenReportsList"
 import ClosedReportsList from "./components/ClosedReportsList"
 

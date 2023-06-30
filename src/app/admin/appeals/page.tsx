@@ -2,9 +2,10 @@ import Link from "next/link"
 import { GetAdminRiderAppeals } from "~/api"
 import GetAuthUser from "~/api"
 import PageLayout from "~/components/PageLayout"
-import Tabs from "~/components/Tabs"
+import Tabs from "~/ui/Tabs"
 import ClosedAppealsList from "./components/ClosedAppealsList"
 import OpenAppealsList from "./components/OpenAppealList"
+import { Card } from "~/ui/Card"
 
 export const metadata = {
   title: "Pepiti | Admin Manager",
@@ -42,9 +43,9 @@ export default async function Page() {
         ),
       }}
     >
-      <div className="card card-body overflow-hidden  border border-accent/40 bg-base-200 p-0 ">
+      <Card>
         <Tabs items={items} wide={true} />
-      </div>
+      </Card>
     </PageLayout>
   )
 }

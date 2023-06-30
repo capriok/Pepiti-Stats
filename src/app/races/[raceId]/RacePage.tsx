@@ -2,12 +2,12 @@
 
 import React, { useState } from "react"
 import PageLayout from "~/components/PageLayout"
-import Tabs from "~/components/Tabs"
 import WinnerCircle from "./components/WinnerCircle"
 import RaceStandings from "./components/RaceStandings"
 import RaceMMRAnalysis from "./components/RaceMMRAnalysis"
 import RaceScatter from "./components/RaceScatter"
 import RaceNotables from "./components/RaceNotables"
+import Tabs from "~/ui/Tabs"
 
 interface Props {
   session: ProcessedRaceSession

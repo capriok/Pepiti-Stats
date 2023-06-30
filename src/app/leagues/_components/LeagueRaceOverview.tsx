@@ -3,7 +3,7 @@
 import { CheckIcon, RocketIcon } from "lucide-react"
 import Table from "~/ui/Table"
 import RiderLink from "~/components/RiderLink"
-import Tabs from "~/components/Tabs"
+import Tabs from "~/ui/Tabs"
 import BikeTicTac from "~/components/pills/BikeTicTac"
 import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
 import { handleLapTimes } from "~/utils/handleLapTimes"
@@ -151,6 +151,7 @@ const LeagueRaceTabs = ({ race }: { race: LeagueRaceDetails }) => {
     label: division.name,
     children: <LeagueRaceStandings division={division} />,
   }))
+
   return <Tabs items={items} />
 }
 

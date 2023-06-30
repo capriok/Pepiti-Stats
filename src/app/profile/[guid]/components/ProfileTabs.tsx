@@ -1,11 +1,12 @@
 "use client"
 
 import { useUserContext } from "~/app/providers"
-import Tabs from "~/components/Tabs"
+import Tabs from "~/ui/Tabs"
 import OverviewTab from "./tabs/OverviewTab"
 import RacesTab from "./tabs/RacesTab"
 import RecordsTab from "./tabs/RecordsTab"
 import LeaguesTab from "./tabs/LeaguesTab"
+import { Card } from "~/ui/Card"
 
 interface Props {
   rider: RiderProfile
@@ -42,8 +43,8 @@ export default function ProfileTabs({ rider, mmrHistory }: Props) {
     })
 
   return (
-    <div className="card-body mt-20 rounded-lg  border border-accent/40 bg-base-200 p-0">
+    <Card className="mt-20">
       <Tabs items={items} wide={true} />
-    </div>
+    </Card>
   )
 }
