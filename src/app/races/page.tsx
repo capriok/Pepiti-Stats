@@ -8,13 +8,13 @@ export const metadata = {
 
 export default async function Page() {
   return (
-    <div className="grid min-h-screen w-full place-items-center">
-      <Card>
+    <div className="grid h-[40vh] place-items-center lg:h-[90vh]">
+      <Card className="w-[250px]">
         <CardHeader>
-          <CardTitle>Choose a Race</CardTitle>
+          <CardTitle className="flex justify-center">Choose a Race</CardTitle>
         </CardHeader>
         <CardContent>
-          <CardDescription>
+          <CardDescription className="flex justify-center">
             <BikeIcon />
           </CardDescription>
         </CardContent>

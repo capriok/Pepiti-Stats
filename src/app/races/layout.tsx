@@ -11,7 +11,7 @@ export default async function RaceLayout(props) {
       <div className="-mb-10 flex flex-col lg:flex-row">
         <MobileTrackList races={raceData.races} />
         <DesktopTrackList races={raceData.races} />
-        <div className="mb-10 w-full lg:min-h-screen">{props.children}</div>
+        <div className="mb-10 w-full lg:min-h-[90vh]">{props.children}</div>
       </div>
     </>
   )

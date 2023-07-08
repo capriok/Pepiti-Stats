@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/ui/Dropdown"
-import { Moon, Sun } from "lucide-react"
+import { Sun, Moon, MoonStar } from "lucide-react"
 
 export default function ThemeSwitch({ withLabel = false }) {
   const [theme, setTheme] = useThemeSwitcher()
@@ -17,7 +17,13 @@ export default function ThemeSwitch({ withLabel = false }) {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <div className="flex items-center justify-center gap-2 rounded-lg px-4 py-2 hover:bg-base-100">
-          {theme === "light" ? <Sun size={18} /> : <Moon size={18} />}
+          {theme === "light" ? (
+            <Sun size={18} />
+          ) : theme === "dark" ? (
+            <Moon size={18} />
+          ) : (
+            <MoonStar size={18} />
+          )}
           {withLabel && <>{theme === "light" ? "Light" : theme === "dark" ? "Dark" : "System"}</>}
         </div>
       </DropdownMenuTrigger>

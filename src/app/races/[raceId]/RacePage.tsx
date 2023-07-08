@@ -97,13 +97,13 @@ const RaceContent = ({ race }: { race: Race }) => {
 
 const DataUnavailable = () => {
   return (
-    <div className="grid h-[90vh] w-full place-items-center">
-      <Card>
+    <div className="grid h-[40vh] place-items-center lg:h-[80vh]">
+      <Card className="w-[250px]">
         <CardHeader>
-          <CardTitle>Race data not available</CardTitle>
+          <CardTitle className="flex justify-center">Race data not available</CardTitle>
         </CardHeader>
         <CardContent>
-          <CardDescription>Check back in later</CardDescription>
+          <CardDescription className="flex justify-center">Check back in later</CardDescription>
         </CardContent>
       </Card>
     </div>

@@ -22,7 +22,7 @@ export default function DesktopTrackList({ races }: Props) {
 
   return (
     <>
-      <div className="sticky top-[65px] hidden max-h-screen w-full min-w-[320px] max-w-[320px] flex-col gap-2 overflow-y-auto lg:flex">
+      <div className="sticky top-[65px] hidden max-h-[95vh] w-full min-w-[320px] max-w-[320px] flex-col gap-2 overflow-y-auto lg:flex">
         <div className="flex flex-col bg-base-200 px-2 py-4">
           <p className="my-2 text-lg">{races.length} Recent Races</p>
           <input

@@ -9,10 +9,10 @@ interface Props {
 export default function MobileTrackList({ races }: Props) {
   const router = useRouter()
   return (
-    <div className="my-2 flex items-center justify-center py-2 lg:hidden">
+    <div className="my-4 flex justify-center lg:hidden">
       <select
         onChange={(e) => router.push(`/races/${e.currentTarget.value}`)}
-        className="select-bordered select"
+        className="select-bordered select mx-4 w-full bg-base-200"
       >
         {races.map((raceInfo) => (
           <option key={raceInfo._id} value={raceInfo._id}>
