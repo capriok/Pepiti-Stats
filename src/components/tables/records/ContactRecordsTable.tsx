@@ -21,7 +21,7 @@ export default function ContactRecordsTable({ worldContacts, ...rest }: Props) {
       aware: laps,
     }
   })
-  console.log("%cContactRecordsTable", "color: steelblue", { worldContacts: data })
+  // console.log("%cContactRecordsTable", "color: steelblue", { worldContacts: data })
 
   const columns = [
     {

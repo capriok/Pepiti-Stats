@@ -14,7 +14,7 @@ import {
   navigationMenuTriggerStyle,
 } from "~/ui/NavigationMenu"
 import cn from "~/utils/cn"
-import { LogOut, ShieldAlert, User, User2 } from "lucide-react"
+import { LogOut, ShieldAlert, User2 } from "lucide-react"
 import ThemeSwitch from "./ThemeSwitch"
 
 interface Props {
@@ -24,28 +24,27 @@ interface Props {
 function NavBar({ user }: Props) {
   const pathname = usePathname()
 
+  const innerCn = `navbar flex w-full justify-between ${pathname === "/" ? "max-w-[1400px]" : ""}`
   return (
     <>
-      <div className="sticky top-0 z-50 h-[65px] max-h-[65px] min-h-[65px] border-b border-accent/40 bg-base-200 backdrop-blur-lg">
-        <div className="navbar">
-          <div className="flex w-full justify-between">
-            <Link
-              href={pathname === "/dashboard" ? "/" : "/dashboard"}
-              className="btn-ghost btn hover:bg-base-100"
-            >
-              <Image
-                src="/assets/brand/pepiti-logo.svg"
-                alt="pepiti_brand"
-                priority={true}
-                width={60}
-                height={60}
-              />
-            </Link>
-            <div className="mr-2 flex w-fit justify-end gap-2 md:mr-0">
-              {pathname === "/" ? <LandingNavigation /> : <AppNavigation user={user} />}
-              <div className="hidden md:flex">
-                <ThemeSwitch />
-              </div>
+      <div className="sticky top-0 z-50 flex h-[65px] max-h-[65px] min-h-[65px] justify-center border-b border-accent/40 bg-base-200 backdrop-blur-lg">
+        <div className={innerCn}>
+          <Link
+            href={pathname === "/dashboard" ? "/" : "/dashboard"}
+            className="btn-ghost btn hover:bg-base-100"
+          >
+            <Image
+              src="/assets/brand/pepiti-logo.svg"
+              alt="pepiti_brand"
+              priority={true}
+              width={60}
+              height={60}
+            />
+          </Link>
+          <div className="mr-2 flex w-fit justify-end gap-2 md:mr-0">
+            {pathname === "/" ? <LandingNavigation /> : <AppNavigation user={user} />}
+            <div className="hidden md:flex">
+              <ThemeSwitch />
             </div>
           </div>
         </div>
@@ -255,9 +254,9 @@ function LandingNavigation() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Show me the Stats</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+            <ul className="grid gap-3 p-6 md:w-[300px] lg:w-[300px] lg:grid-cols-[.75fr_1fr] xl:w-[500px]">
               <li className="row-span-3 rounded-lg bg-base-100">
                 <NavigationMenuLink asChild>
                   <a

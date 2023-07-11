@@ -2,8 +2,21 @@ import React from "react"
 import { RiderComboScatterChart } from "~/components/charts/RiderComboScatterChart"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 
-// To add a new data set, create a new key in COMPARABLES. titles[idx].key needs to be in standings.
-const comparables: Comparables = {
+type Label = {
+  titles: {
+    label: string
+    key: string
+  }[]
+  tickLabel: (val: any) => string
+  toolTipLabel: (val: any) => string[]
+  dataFilter: (stat: any) => boolean
+}
+
+type Labels = {
+  [key: string]: Label
+}
+
+const labels: Labels = {
   rtfl: {
     titles: [
       { label: "Fastest Lap", key: "fastestLap" },
@@ -43,7 +56,7 @@ const comparables: Comparables = {
 }
 
 function RaceScatter({ standings }) {
-  return <RiderComboScatterChart data={standings} comparables={comparables} />
+  return <RiderComboScatterChart standings={standings} labels={labels} />
 }
 
 export default RaceScatter

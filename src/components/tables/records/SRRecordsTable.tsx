@@ -13,7 +13,7 @@ export default function SRRecordsTable({ worldSR, ...rest }: Props) {
     name: r.name,
     rating: r.SR,
   }))
-  console.log("%cSRRecordsTable", "color: steelblue", { worldSR: data })
+  // console.log("%cSRRecordsTable", "color: steelblue", { worldSR: data })
 
   const columns = [
     {

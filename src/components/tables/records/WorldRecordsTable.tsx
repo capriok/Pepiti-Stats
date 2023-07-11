@@ -13,7 +13,7 @@ export default function WorldRecordsTable({ worldRecords, ...rest }: Props) {
     name: worldRecords.riders[guid].name,
     records: worldRecords.riders[guid].total,
   }))
-  console.log("%cWorldRecordsTable", "color: steelblue", { worldRecords: data })
+  // console.log("%cWorldRecordsTable", "color: steelblue", { worldRecords: data })
 
   const columns = [
     {

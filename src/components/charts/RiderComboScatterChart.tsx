@@ -6,13 +6,19 @@ import { Scatter } from "react-chartjs-2"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
 import { Button } from "~/ui/Button"
 
-export function RiderComboScatterChart({ data, comparables }) {
-  const initialComparable = Object.keys(comparables)[0]
-  const [dataSet, setDataSet] = useState(initialComparable)
-  const yTitle = comparables[dataSet].titles[0].label
-  const xTitle = comparables[dataSet].titles[1].label
-  const tickLabel = comparables[dataSet].tickLabel
-  const tooltipLabel = comparables[dataSet].toolTipLabel
+interface Props {
+  standings: Array<any>
+  labels: any
+}
+
+export function RiderComboScatterChart({ standings, labels }: Props) {
+  const initialLabel = Object.keys(labels)[0]
+  const [labelData, setLabelData] = useState(initialLabel)
+
+  const yTitle = labels[labelData].titles[0].label
+  const xTitle = labels[labelData].titles[1].label
+  const tickLabel = labels[labelData].tickLabel
+  const tooltipLabel = labels[labelData].toolTipLabel
   const options = {
     scales: {
       y: {
@@ -44,31 +50,31 @@ export function RiderComboScatterChart({ data, comparables }) {
     },
   }
 
-  const dataSetFilter = comparables[dataSet].dataFilter
   const chartData = (stat) => ({
-    x: stat[comparables[dataSet].titles[1].key],
-    y: stat[comparables[dataSet].titles[0].key],
+    x: stat[labels[labelData].titles[1].key],
+    y: stat[labels[labelData].titles[0].key],
   })
+
   const scatterData = {
-    labels: data.map((stat) => `${handlePlaceSuffix(stat.position)} - ${stat.name}`),
+    labels: standings.map((stat) => `${handlePlaceSuffix(stat.position)} - ${stat.name}`),
     datasets: [
       {
         label: `${yTitle} vs. ${xTitle}`,
-        data: data.filter(dataSetFilter).map(chartData),
+        data: standings.filter(labels[labelData].dataFilter).map(chartData),
         backgroundColor: "#23bd38",
       },
     ],
   }
-  const chartButtons = Object.keys(comparables).map((comparableKey) => {
-    const isActive = comparableKey === dataSet
+
+  const chartButtons = Object.keys(labels).map((labelKey) => {
+    const isActive = labelKey === labelData
     return (
       <Button
-        key={comparableKey}
+        key={labelKey}
         className={`border border-accent/20 text-xs ${isActive ? "bg-base-primary" : ""}`}
-        onClick={() => setDataSet(comparableKey)}
+        onClick={() => setLabelData(labelKey)}
       >
-        {comparables[comparableKey].titles[0].label} vs.{" "}
-        {comparables[comparableKey].titles[1].label}
+        {labels[labelKey].titles[0].label} vs. {labels[labelKey].titles[1].label}
       </Button>
     )
   })

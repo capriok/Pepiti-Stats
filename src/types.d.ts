@@ -507,19 +507,3 @@ interface BlacklistRider {
     }
   }
 }
-
-type Title = {
-  label: string
-  key: string
-}
-
-type Comparable = {
-  titles: Title[]
-  tickLabel: (val: any) => string
-  toolTipLabel: (val: any) => string[]
-  dataFilter: (stat: any) => boolean
-}
-
-type Comparables = {
-  [key: string]: Comparable
-}

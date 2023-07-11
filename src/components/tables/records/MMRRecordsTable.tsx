@@ -13,7 +13,7 @@ export default function MMRRecordsTable({ worldMMR, ...rest }: Props) {
     name: r.name,
     rating: r.MMR,
   }))
-  console.log("%cMMRRecordsTable", "color: steelblue", { worldMMR: data })
+  // console.log("%cMMRRecordsTable", "color: steelblue", { worldMMR: data })
 
   const columns = [
     {

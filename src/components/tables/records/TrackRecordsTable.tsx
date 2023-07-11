@@ -15,7 +15,7 @@ export const TrackRecordsTable = ({ trackRecords, ...rest }: Props) => {
     ...r,
     name: r.rider_name,
   }))
-  console.log("%cTrackRecordsTable", "color: steelblue", { trackRecords: data })
+  // console.log("%cTrackRecordsTable", "color: steelblue", { trackRecords: data })
 
   const columns = [
     {

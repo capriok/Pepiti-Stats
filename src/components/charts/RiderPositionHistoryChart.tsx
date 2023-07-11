@@ -12,18 +12,18 @@ import {
   Tooltip,
   Legend,
 } from "chart.js"
-import { Bar, Line } from "react-chartjs-2"
+import { Bar } from "react-chartjs-2"
 import { Button } from "~/ui/Button"
 
 interface Props {
   races: Array<any>
 }
 
-const labels = ["First", "Second", "Third", "Top 5", "Top 10"]
-
 export default function RiderPositionHistoryChart({ races }: Props) {
   const theme = useTheme()
   const [days, setDays] = useState(30)
+
+  const labels = ["First", "Second", "Third", "Top 5", "Top 10"]
 
   const reducePosition = (acc, curr) => {
     const pos = curr?.Classification?.Pos ?? 0
@@ -40,7 +40,10 @@ export default function RiderPositionHistoryChart({ races }: Props) {
     datasets: [
       {
         label: "Career",
-        data: races.reduce(reducePosition, [0, 0, 0, 0, 0]),
+        data: races.reduce(
+          reducePosition,
+          labels.map((_) => 0)
+        ),
         backgroundColor:
           theme.theme === "light" ? ["rgba(140, 140, 140, 0.2)"] : ["rgba(200, 200, 205, 0.2)"],
         borderColor: theme.theme === "light" ? ["rgb(140, 140, 140)"] : ["rgb(200, 200, 205)"],
@@ -54,7 +57,7 @@ export default function RiderPositionHistoryChart({ races }: Props) {
             if (!inLastXDays(days, date)) return acc
             return reducePosition(acc, curr)
           },
-          [0, 0, 0, 0, 0]
+          labels.map((_) => 0)
         ),
         backgroundColor: ["rgba(54, 162, 80, 0.2)"],
         borderColor: ["rgb(54, 162, 80)"],
