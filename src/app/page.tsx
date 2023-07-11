@@ -181,13 +181,6 @@ export default async function Page() {
               <ThemedImage
                 height="450"
                 width="450"
-                src="/assets/screenshots/leagues-d.jpg"
-                alt="leagues"
-                className="relative rounded-lg border border-neutral-500 shadow-2xl md:right-20 md:top-10"
-              />
-              <ThemedImage
-                height="450"
-                width="450"
                 src="/assets/screenshots/league-d.jpg"
                 alt="league"
                 className="relative my-4 rounded-lg border border-neutral-500 shadow-2xl md:my-0"
