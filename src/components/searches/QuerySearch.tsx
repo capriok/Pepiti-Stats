@@ -6,12 +6,19 @@ import { XIcon } from "lucide-react"
 
 interface Props {
   query: (term: string) => Promise<any>
+  backUpQuery?: (term: string) => Promise<any>
   render: (result: any) => JSX.Element
   placeholder: string
   defaultTerm?: string
 }
 
-export default function QuerySearch({ query, render, placeholder, defaultTerm = "" }: Props) {
+export default function QuerySearch({
+  query,
+  backUpQuery,
+  render,
+  placeholder,
+  defaultTerm = "",
+}: Props) {
   const [open, setOpen] = useState(false)
   const [term, setTerm] = useState(defaultTerm)
   const [loading, setLoading] = useState(false)
@@ -19,7 +26,12 @@ export default function QuerySearch({ query, render, placeholder, defaultTerm = 
 
   const fetchData = async () => {
     setLoading(true)
-    setResults(await query(term))
+    let results = await query(term)
+    if (!results.length && backUpQuery) {
+      const backupResults = await backUpQuery(term)
+      results = backupResults
+    }
+    setResults(results)
     setLoading(false)
   }
 
