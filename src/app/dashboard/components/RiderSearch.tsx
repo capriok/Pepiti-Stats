@@ -7,12 +7,12 @@ import QuerySearch from "~/components/searches/QuerySearch"
 
 export default function RiderSearch() {
   const searchParams = useSearchParams()
-  const nameParam = searchParams.get("name")
+  const searchParam = searchParams.get("search")
 
   return (
     <QuerySearch
       placeholder="Search for Riders..."
-      defaultTerm={nameParam ?? ""}
+      defaultTerm={searchParam ?? ""}
       query={(term) => SearchForRider(term).then((res) => res.results)}
       backUpQuery={(term) => GetRider(term).then((res) => (res ? [res] : []))}
       render={(result) => (
