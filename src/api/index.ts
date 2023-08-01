@@ -143,10 +143,6 @@ export async function GetAdminRiderAppeals(
 
 // AUTHENTICATION
 
-export async function Login(): Promise<string> {
-  const steam_login = "https://pepiti.com/stats/api/v0/steam_login"
-  return steam_login
-}
 export async function Logout(): Promise<{ status: boolean }> {
   return { status: true }
 }
