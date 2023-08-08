@@ -11,7 +11,7 @@ export default function RiderSearch() {
 
   return (
     <QuerySearch
-      placeholder="Search for Riders..."
+      placeholder="Search Name or GUID"
       defaultTerm={searchParam ?? ""}
       query={(term) => SearchForRider(term).then((res) => res.results)}
       backUpQuery={(term) => GetRider(term).then((res) => (res ? [res] : []))}
