@@ -29,6 +29,11 @@ export default function Footer({ user }: Props) {
               <RiderLink href={`/profile/FF011000010513D5FF`} name="PDR" />
             </div>
             <br />
+            <div className="flex gap-2">
+              <Link href="/devlogs" className="link-hover link text-sm">
+                Dev Updates
+              </Link>
+            </div>
           </div>
         </div>
         <div>

@@ -1,0 +1,18 @@
+{
+  "alerts": [
+    {
+      "meta": {
+        "date": "",
+        "expires": "",
+        "action": {
+          "url": ""
+        }
+      },
+      "content": {
+        "title": "",
+        "description": "",
+        "icon": ""
+      }
+    }
+  ]
+}

@@ -7,7 +7,7 @@ export const metadata = {
     "Pepiti, Pepiti Races, Pepiti Leagues, MX Bikes Stats, MX Bikes, Stats, MXB Mods, MX Bikes Mods",
 }
 interface Props {
-  width: "app" | "wide"
+  width: "feed" | "app" | "wide"
   header?: {
     title: string
     extra?: React.ReactNode
@@ -17,6 +17,7 @@ interface Props {
 }
 
 export const layoutWidthMap = {
+  feed: "w-full max-w-[800px]",
   app: "w-full max-w-[1400px]",
   wide: "w-full max-w-[2560px]",
 }
