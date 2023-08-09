@@ -8,8 +8,6 @@ interface Props extends TableOptions {
 }
 
 export default function BikeRecordsTable({ worldBikes, ...rest }: Props) {
-  console.log(worldBikes.bikes)
-
   const data = worldBikes.bikes.map((bike) => ({
     _id: bike.name + bike.laps,
     name: bike.name,

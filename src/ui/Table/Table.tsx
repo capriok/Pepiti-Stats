@@ -186,7 +186,7 @@ const Table: React.FC<TableProps> = (props) => {
       )
 
     const ExpandedRow = ({ row }) => (
-      <>
+      <tr>
         {expandable && expandedRow?._id === row._id && (
           <td
             colSpan={columns.length}
@@ -195,14 +195,14 @@ const Table: React.FC<TableProps> = (props) => {
             {expandable && expandable?.render(row)}
           </td>
         )}
-      </>
+      </tr>
     )
 
     return (
       <>
         {paginatedData.map((row, i) => (
-          <>
-            <tr key={genId(row._id)} className="w-full">
+          <React.Fragment key={genId(row._id)}>
+            <tr className="w-full">
               {columns.map((column, idx) => {
                 const dataKey = column.key
                 const renderer = column.render
@@ -222,7 +222,7 @@ const Table: React.FC<TableProps> = (props) => {
               })}
             </tr>
             <ExpandedRow row={row} />
-          </>
+          </React.Fragment>
         ))}
       </>
     )

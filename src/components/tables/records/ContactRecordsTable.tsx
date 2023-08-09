@@ -9,8 +9,6 @@ interface Props extends TableOptions {
 }
 
 export default function ContactRecordsTable({ worldContacts, ...rest }: Props) {
-  console.log(worldContacts)
-
   const data: any = worldContacts.riders.map((r) => {
     const laps = Object.keys(r.bikes).reduce((acc, curr) => acc + r.bikes[curr].laps, 0)
     return {
