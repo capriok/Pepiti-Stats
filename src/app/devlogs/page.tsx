@@ -25,22 +25,22 @@ export default function Page() {
         ),
       }}
     >
-      <div className="flex w-full lg:min-w-[400px] flex-col justify-center gap-10">
+      <div className="flex w-full flex-col justify-center gap-10">
         {devUpdates.logs.map((entry, i) => (
           <Card key={i} className="w-full">
             <CardHeader className="rounded-md bg-base-300 pb-4">
               <div className="flex w-full flex-row justify-between">
                 <div className="flex flex-col">
                   <div className="mb-2 font-semibold text-accent">Scope</div>
-                  <code className="text-green-400/80">{entry.meta.scope}</code>
+                  <code>{entry.meta.scope}</code>
                 </div>
                 <div className="flex flex-col">
                   <div className="mb-2 font-semibold text-accent">Type</div>
-                  <code className="text-green-400/80">{entry.meta.type}</code>
+                  <code>{entry.meta.type}</code>
                 </div>
                 <div className="flex flex-col">
                   <div className="mb-2 font-semibold text-accent">Location</div>
-                  <code className="text-green-400/80">{entry.meta.page}</code>
+                  <code>{entry.meta.page}</code>
                 </div>
               </div>
             </CardHeader>

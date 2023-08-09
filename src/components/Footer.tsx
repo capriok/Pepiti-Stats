@@ -17,7 +17,13 @@ export default function Footer({ user }: Props) {
     <footer className="mt-10 border-t border-accent/40 bg-base-200 p-10">
       <div className="footer mx-auto max-w-[1400px]">
         <div>
-          <Image src="/assets/brand/pepiti-logo.svg" width={120} height={120} alt="pepiti_brand" />
+          <Image
+            src="/assets/brand/pepiti-logo.svg"
+            alt="pepiti_brand"
+            priority={true}
+            width={100}
+            height={100}
+          />
           <div>
             <div className="flex gap-2">
               Copyright © {date.getFullYear()}{" "}
@@ -31,7 +37,7 @@ export default function Footer({ user }: Props) {
             <br />
             <div className="flex gap-2">
               <Link href="/devlogs" className="link-hover link text-sm">
-                Dev Updates
+                Development Updates
               </Link>
             </div>
           </div>
