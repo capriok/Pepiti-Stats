@@ -1,7 +1,7 @@
 import Link from "next/link"
 import GetAuthUser from "~/api"
 import { ChevronsDown } from "lucide-react"
-import { ThemedImage } from "~/components/ThemedImage"
+import ThemedImage from "~/components/ThemedImage"
 import PageLayout from "~/components/PageLayout"
 import { Button } from "~/ui/Button"
 
@@ -43,18 +43,15 @@ export default async function Page() {
           </div>
 
           <ThemedImage
-            src="/assets/screenshots/dashboard-d.jpg"
-            className="rounded-lg border border-neutral-500"
-            width={600}
-            height={600}
+            src="/assets/screenshots/dashboard-l.jpg"
             alt="hero-dashboard"
-            placeholder="blur"
-            blurDataURL="/assets/screenshots/dashboard-d.jpg"
-            priority={true}
+            width={1440}
+            height={1440}
+            className="w-full rounded-lg border border-neutral-500 dark:hidden lg:w-[600px]"
           />
         </div>
         <div className="mt-10 lg:mt-0">
-          <ChevronsDown size="50" className="animate-bounce opacity-40" />
+          <ChevronsDown size={50} className="animate-bounce opacity-40" />
         </div>
       </div>
 
@@ -79,11 +76,11 @@ export default async function Page() {
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-3">
             <figure>
               <ThemedImage
-                className="rounded-lg border border-neutral-500"
-                src="/assets/screenshots/profile-overview-cut-d.jpg"
-                width="1000"
-                height="1000"
-                alt="stats"
+                src="/assets/screenshots/profile-overview-cut-l.jpg"
+                alt="hero-profile-overview"
+                width={1440}
+                height={1440}
+                className="w-[1000px] rounded-lg border border-neutral-500"
               />
             </figure>
             <div className="rounded-lg bg-base-200 p-5 lg:order-4">
@@ -96,11 +93,11 @@ export default async function Page() {
 
             <figure>
               <ThemedImage
-                className="rounded-lg border border-neutral-500"
-                src="/assets/screenshots/profile-races-cut-d.jpg"
-                width="1000"
-                height="1000"
-                alt="mmr history"
+                src="/assets/screenshots/profile-races-cut-l.jpg"
+                alt="hero-profile-races"
+                width={1440}
+                height={1440}
+                className="w-[1000px] rounded-lg border border-neutral-500"
               />
             </figure>
             <div className="rounded-lg bg-base-200 p-5 lg:order-5">
@@ -113,11 +110,11 @@ export default async function Page() {
 
             <figure>
               <ThemedImage
-                className="rounded-lg border border-neutral-500"
-                src="/assets/screenshots/profile-records-cut-d.jpg"
-                width="1000"
-                height="1000"
-                alt="breakdowns"
+                src="/assets/screenshots/profile-records-cut-l.jpg"
+                alt="hero-profile-records"
+                width={1440}
+                height={1440}
+                className="w-[1000px] rounded-lg border border-neutral-500"
               />
             </figure>
             <div className="rounded-lg bg-base-200 p-5 lg:order-6">
@@ -137,11 +134,11 @@ export default async function Page() {
         <div className="hero min-h-[60vh]">
           <div className="hero-content flex-col lg:flex-row-reverse">
             <ThemedImage
-              className="rounded-lg border border-neutral-500"
-              height="600"
-              width="600"
-              src="/assets/screenshots/race-d.jpg"
-              alt="race analytics"
+              src="/assets/screenshots/race-l.jpg"
+              alt="hero-race-analytics"
+              height={1440}
+              width={1440}
+              className="w-[600px] rounded-lg border border-neutral-500"
             />
             <div className="basis-1/3">
               <h1 className="mt-4 text-5xl font-bold">Race Statistics and Analytics</h1>
@@ -179,18 +176,18 @@ export default async function Page() {
 
             <div>
               <ThemedImage
-                height="450"
-                width="450"
-                src="/assets/screenshots/league-d.jpg"
-                alt="league"
-                className="relative my-4 rounded-lg border border-neutral-500 shadow-2xl md:my-0"
+                src="/assets/screenshots/league-l.jpg"
+                alt="hero-league"
+                height={1440}
+                width={1440}
+                className="relative my-4 w-[450px] rounded-lg border border-neutral-500 shadow-2xl md:my-0"
               />
               <ThemedImage
-                height="450"
-                width="450"
-                src="/assets/screenshots/leaguerace-d.jpg"
-                alt="league race"
-                className="relative rounded-lg border border-neutral-500 shadow-2xl md:bottom-10 md:right-10"
+                src="/assets/screenshots/leaguerace-l.jpg"
+                alt="hero-league-race"
+                height={1440}
+                width={1440}
+                className="relative w-[450px] rounded-lg border border-neutral-500 shadow-2xl md:bottom-10 md:right-10"
               />
             </div>
           </div>
@@ -205,11 +202,11 @@ export default async function Page() {
           <div className="hero-content flex-col lg:flex-row-reverse lg:justify-evenly">
             <div>
               <ThemedImage
-                height="600"
-                width="600"
-                src="/assets/screenshots/blacklists-d.jpg"
-                alt="leagues"
-                className="rounded-lg border border-neutral-500 shadow-2xl"
+                src="/assets/screenshots/blacklists-l.jpg"
+                alt="hero-blacklists"
+                height={1440}
+                width={1440}
+                className="w-[600px] rounded-lg border border-neutral-500 shadow-2xl"
               />
             </div>
 
@@ -243,10 +240,10 @@ export default async function Page() {
           <span className="text-2xl font-light lg:text-3xl">Click Here</span>
 
           <ThemedImage
-            src="/assets/brand/pepiti-logo-d.svg"
-            height="150"
-            width="150"
-            alt="logo"
+            src="/assets/brand/pepiti-logo-l.svg"
+            alt="hero-cta-pepiti-logo"
+            height={150}
+            width={150}
             className="absolute -bottom-4 -right-6"
           />
         </Link>

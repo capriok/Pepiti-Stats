@@ -93,10 +93,10 @@ const RaceCardContent = ({ race }: { race: LeagueRace }) => (
     <div className="my-4 grid place-items-center md:my-8">
       <Image
         src="/assets/brand/pepiti-logo.svg"
-        alt="pepiti-brand"
+        alt="pepiti_brand"
+        priority={true}
         width={100}
         height={100}
-        priority={true}
       />
     </div>
 
