@@ -25,7 +25,7 @@ export default function Page() {
         ),
       }}
     >
-      <div className="flex min-w-[400px] flex-col justify-center gap-10">
+      <div className="flex w-full lg:min-w-[400px] flex-col justify-center gap-10">
         {devUpdates.logs.map((entry, i) => (
           <Card key={i} className="w-full">
             <CardHeader className="rounded-md bg-base-300 pb-4">
