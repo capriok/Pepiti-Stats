@@ -21,7 +21,7 @@ export default function ExpandableImage(props: ImageProps) {
         title="Click to expand"
       />
       {overlay && (
-        <div className="z-100 fixed left-0 top-0 hidden lg:flex">
+        <div className="fixed left-0 top-0 z-50 hidden lg:flex">
           <div className="bg-black/60" onClick={() => setOverlay(false)}>
             <div className="grid h-[100vh] w-[100vw] place-items-center">
               <Card>
