@@ -15,7 +15,6 @@ export async function generateMetadata({ params: { top } }) {
 
 export default async function Page({ params: { top } }) {
   const topRecords = await GetDynamicTopRecords(top, 1000)
-  console.log(top)
 
   if (!dynamicTitleMap[top]) return <Result title="Not Found" description="No records found" />
 

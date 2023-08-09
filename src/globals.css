@@ -23,6 +23,15 @@
   background: #717479;
 }
 
+code {
+  margin: 0;
+  padding: 0;
+}
+
+code {
+  @apply overflow-auto rounded-md border border-accent/20 bg-base-100 px-2 py-1 text-sm text-neutral-200/80;
+}
+
 @layer components {
   .table th:first-child {
     position: unset;

@@ -1,0 +1,64 @@
+{
+  "logs": [
+    {
+      "meta": {
+        "author": "Tooky",
+        "date": "08/08/2023",
+        "scope": "Component",
+        "type": "Addition",
+        "page": "Global"
+      },
+      "content": {
+        "reference": "",
+        "description": "Added ExpandableImage component to expand key images into an overlay",
+        "attachments": []
+      }
+    },
+    {
+      "meta": {
+        "author": "Tooky",
+        "date": "08/08/2023",
+        "scope": "Component",
+        "type": "Update",
+        "page": "/dashboard"
+      },
+      "content": {
+        "description": "Dashboard Header's Rider Search input now allows searching by MXB GUID",
+        "attachments": [
+          "https://cdn.discordapp.com/attachments/1138590709545443409/1138625916143145030/image.png",
+          "https://cdn.discordapp.com/attachments/1138590709545443409/1138593662805225492/image.png"
+        ]
+      }
+    },
+    {
+      "meta": {
+        "author": "PDR",
+        "date": "06/22/2023",
+        "scope": "Feature",
+        "type": "Addition",
+        "page": "/races/<raceId>"
+      },
+      "content": {
+        "description": "Added Scatter Analysis Chart to a new Recent Race Analysis tab",
+        "attachments": [
+          "https://cdn.discordapp.com/attachments/1138590709545443409/1138600818816335912/image.png"
+        ]
+      }
+    },
+    {
+      "meta": {
+        "author": "Tooky",
+        "date": "06/04/2023",
+        "scope": "Feature",
+        "type": "Addition",
+        "page": "Global"
+      },
+      "content": {
+        "description": "Added ExpandableRows to Tables showing additional relevant content",
+        "attachments": [
+          "https://cdn.discordapp.com/attachments/1138590709545443409/1138622393749876766/image.png"
+        ]
+      }
+    }
+  ]
+}
