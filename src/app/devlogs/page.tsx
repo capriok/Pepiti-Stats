@@ -1,6 +1,6 @@
 import Link from "next/link"
 import PageLayout from "~/components/PageLayout"
-import ExpandableImage from "~/components/ExpandableImage"
+import OverlayableImage from "~/components/OverlayableImage"
 import { Card, CardContent, CardFooter, CardHeader } from "~/ui/Card"
 
 import devUpdates from "@/data/development-updates.json"
@@ -58,7 +58,7 @@ export default function Page() {
               )}
               {entry.content.attachments.map((img, i) => (
                 <div key={i}>
-                  <ExpandableImage
+                  <OverlayableImage
                     src={img}
                     alt={`attachment_${i + 1}`}
                     loading="eager"

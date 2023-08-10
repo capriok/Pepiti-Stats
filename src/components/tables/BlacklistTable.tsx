@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname, useSearchParams } from "next/navigation"
-import { useUserContext } from "~/app/providers"
+import { useUserContext } from "~/providers/UserProvider"
 import { Popover, PopoverContent, PopoverTrigger } from "~/ui/Popover"
 import UnbanRiderButton from "../actions/UnbanRiderButton"
 import Table from "~/ui/Table"

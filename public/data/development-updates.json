@@ -10,7 +10,7 @@
       },
       "content": {
         "reference": "",
-        "description": "Added ExpandableImage component to expand key images into an overlay",
+        "description": "Added OverlayableImage component to allow expanding key images",
         "attachments": []
       }
     },

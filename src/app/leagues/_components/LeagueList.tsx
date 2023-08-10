@@ -2,7 +2,7 @@
 
 import { VerifiedIcon } from "lucide-react"
 import Link from "next/link"
-import { useUserContext } from "~/app/providers"
+import { useUserContext } from "~/providers/UserProvider"
 import Pill from "~/components/pills/Pill"
 import { Button } from "~/ui/Button"
 import { Card } from "~/ui/Card"

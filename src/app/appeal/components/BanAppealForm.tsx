@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { postBanAppeal } from "~/api/actions"
-import { useUserContext } from "~/app/providers"
+import { useUserContext } from "~/providers/UserProvider"
 import Pill from "~/components/pills/Pill"
 import { renderBannedBy } from "~/components/tables/BlacklistTable"
 import { useToast, actions } from "~/components/toast"

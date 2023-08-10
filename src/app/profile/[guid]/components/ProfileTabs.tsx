@@ -1,6 +1,6 @@
 "use client"
 
-import { useUserContext } from "~/app/providers"
+import { useUserContext } from "~/providers/UserProvider"
 import Tabs from "~/ui/Tabs"
 import OverviewTab from "./tabs/OverviewTab"
 import RacesTab from "./tabs/RacesTab"

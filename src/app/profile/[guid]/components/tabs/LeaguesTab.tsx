@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react"
 import Spinner from "~/components/Spinner"
 import LeagueList from "~/app/leagues/_components/LeagueList"
 import { GetRiderLeagues } from "~/api"
-import { useUserContext } from "~/app/providers"
+import { useUserContext } from "~/providers/UserProvider"
 
 export default function LeaguesTab() {
   return (

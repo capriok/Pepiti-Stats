@@ -4,19 +4,19 @@ import { ThemeProvider } from "next-themes"
 import { Analytics } from "@vercel/analytics/react"
 import { SWRConfig } from "swr"
 import { fetcher } from "~/api/fetcher"
-import { createContext, useContext } from "react"
-
-const UserContext = createContext({} as User)
-export const useUserContext = () => useContext(UserContext)
+import UserProvider from "../providers/UserProvider"
+import OverlayProvider from "../providers/OverlayProvider"
 
 export function Providers({ user, children }) {
   return (
     <SWRConfig value={{ fetcher }}>
       <ThemeProvider>
-        <UserContext.Provider value={user}>
-          {children}
-          <Analytics />
-        </UserContext.Provider>
+        <UserProvider user={user}>
+          <OverlayProvider>
+            {children}
+            <Analytics />
+          </OverlayProvider>
+        </UserProvider>
       </ThemeProvider>
     </SWRConfig>
   )

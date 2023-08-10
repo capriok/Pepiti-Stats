@@ -1,9 +1,10 @@
 import Link from "next/link"
 import GetAuthUser from "~/api"
 import { ChevronsDown } from "lucide-react"
-import ThemedImage from "~/components/ThemedImage"
 import PageLayout from "~/components/PageLayout"
+import OverlayableImage from "~/components/OverlayableImage"
 import { Button } from "~/ui/Button"
+import ThemedImage from "~/components/ThemedImage"
 
 export const metadata = {
   title: "Pepiti | Home",
@@ -42,13 +43,15 @@ export default async function Page() {
             </Link>
           </div>
 
-          <ThemedImage
-            src="/assets/screenshots/dashboard-l.jpg"
-            alt="hero-dashboard"
-            width={1440}
-            height={1440}
-            className="w-full rounded-lg border border-neutral-500 dark:hidden lg:w-[600px]"
-          />
+          <div className="rounded-lg border border-neutral-500">
+            <OverlayableImage
+              src="/assets/screenshots/dashboard-l.jpg"
+              alt="hero-dashboard"
+              width={1440}
+              height={1440}
+              className="w-[1000px]"
+            />
+          </div>
         </div>
         <div className="mt-10 lg:mt-0">
           <ChevronsDown size={50} className="animate-bounce opacity-40" />
@@ -75,13 +78,14 @@ export default async function Page() {
         <div className="my-20 flex flex-row gap-10 md:px-10">
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-3">
             <figure>
-              <ThemedImage
-                src="/assets/screenshots/profile-overview-cut-l.jpg"
-                alt="hero-profile-overview"
-                width={1440}
-                height={1440}
-                className="w-[1000px] rounded-lg border border-neutral-500"
-              />
+              <div className="rounded-lg border border-neutral-500">
+                <OverlayableImage
+                  src="/assets/screenshots/profile-overview-cut-l.jpg"
+                  alt="hero-profile-overview"
+                  width={1440}
+                  height={1440}
+                />
+              </div>
             </figure>
             <div className="rounded-lg bg-base-200 p-5 lg:order-4">
               <h2 className="card-title">Personal Overview</h2>
@@ -92,13 +96,14 @@ export default async function Page() {
             </div>
 
             <figure>
-              <ThemedImage
-                src="/assets/screenshots/profile-races-cut-l.jpg"
-                alt="hero-profile-races"
-                width={1440}
-                height={1440}
-                className="w-[1000px] rounded-lg border border-neutral-500"
-              />
+              <div className="rounded-lg border border-neutral-500">
+                <OverlayableImage
+                  src="/assets/screenshots/profile-races-cut-l.jpg"
+                  alt="hero-profile-races"
+                  width={1440}
+                  height={1440}
+                />
+              </div>
             </figure>
             <div className="rounded-lg bg-base-200 p-5 lg:order-5">
               <h2 className="card-title">Race History</h2>
@@ -109,13 +114,14 @@ export default async function Page() {
             </div>
 
             <figure>
-              <ThemedImage
-                src="/assets/screenshots/profile-records-cut-l.jpg"
-                alt="hero-profile-records"
-                width={1440}
-                height={1440}
-                className="w-[1000px] rounded-lg border border-neutral-500"
-              />
+              <div className="rounded-lg border border-neutral-500">
+                <OverlayableImage
+                  src="/assets/screenshots/profile-records-cut-l.jpg"
+                  alt="hero-profile-records"
+                  width={1440}
+                  height={1440}
+                />
+              </div>
             </figure>
             <div className="rounded-lg bg-base-200 p-5 lg:order-6">
               <h2 className="card-title">Lap Time Records</h2>
@@ -133,13 +139,15 @@ export default async function Page() {
       <section>
         <div className="hero min-h-[60vh]">
           <div className="hero-content flex-col lg:flex-row-reverse">
-            <ThemedImage
-              src="/assets/screenshots/race-l.jpg"
-              alt="hero-race-analytics"
-              height={1440}
-              width={1440}
-              className="w-[600px] rounded-lg border border-neutral-500"
-            />
+            <div className="rounded-lg border border-neutral-500">
+              <OverlayableImage
+                src="/assets/screenshots/race-l.jpg"
+                alt="hero-race-analytics"
+                height={1440}
+                width={1440}
+                className="w-[600px]"
+              />
+            </div>
             <div className="basis-1/3">
               <h1 className="mt-4 text-5xl font-bold">Race Statistics and Analytics</h1>
               <p className="py-6 text-neutral-400">
@@ -175,20 +183,24 @@ export default async function Page() {
             </div>
 
             <div>
-              <ThemedImage
-                src="/assets/screenshots/league-l.jpg"
-                alt="hero-league"
-                height={1440}
-                width={1440}
-                className="relative my-4 w-[450px] rounded-lg border border-neutral-500 shadow-2xl md:my-0"
-              />
-              <ThemedImage
-                src="/assets/screenshots/leaguerace-l.jpg"
-                alt="hero-league-race"
-                height={1440}
-                width={1440}
-                className="relative w-[450px] rounded-lg border border-neutral-500 shadow-2xl md:bottom-10 md:right-10"
-              />
+              <div className="relative my-4 rounded-lg border border-neutral-500 shadow-2xl md:my-0">
+                <OverlayableImage
+                  src="/assets/screenshots/league-l.jpg"
+                  alt="hero-league"
+                  height={1440}
+                  width={1440}
+                  className="w-[450px]"
+                />
+              </div>
+              <div className="relative rounded-lg border border-neutral-500 shadow-2xl md:bottom-10 md:right-10">
+                <OverlayableImage
+                  src="/assets/screenshots/leaguerace-l.jpg"
+                  alt="hero-league-race"
+                  height={1440}
+                  width={1440}
+                  className="w-[450px]"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -201,13 +213,15 @@ export default async function Page() {
         <div className="hero min-h-[60vh]">
           <div className="hero-content flex-col lg:flex-row-reverse lg:justify-evenly">
             <div>
-              <ThemedImage
-                src="/assets/screenshots/blacklists-l.jpg"
-                alt="hero-blacklists"
-                height={1440}
-                width={1440}
-                className="w-[600px] rounded-lg border border-neutral-500 shadow-2xl"
-              />
+              <div className="rounded-lg border border-neutral-500">
+                <OverlayableImage
+                  src="/assets/screenshots/blacklists-l.jpg"
+                  alt="hero-blacklists"
+                  height={1440}
+                  width={1440}
+                  className="w-[600px]"
+                />
+              </div>
             </div>
 
             <div className="basis-1/3">
