@@ -18,7 +18,7 @@ interface Props {
 
 export const layoutWidthMap = {
   feed: "w-full max-w-[800px]",
-  app: "w-full max-w-[1400px]",
+  app: "w-full max-w-[1500px]",
   wide: "w-full max-w-[2560px]",
 }
 

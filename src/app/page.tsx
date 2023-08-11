@@ -20,9 +20,9 @@ export default async function Page() {
 
   return (
     <PageLayout width="app">
-      <div className="flex min-h-screen flex-col items-center lg:justify-evenly">
+      <div className="flex min-h-screen flex-col items-center px-4 lg:justify-evenly">
         <div className="flex w-full max-w-full flex-col lg:flex-row">
-          <div className="">
+          <div>
             <div className="mb-5 mt-5 h-[1px] w-[200px] border border-accent md:mb-10 md:w-[300px]" />
 
             <div className="mb-5 text-4xl font-bold leading-relaxed md:text-6xl">
@@ -42,7 +42,6 @@ export default async function Page() {
               </Button>
             </Link>
           </div>
-
           <div className="rounded-lg border border-neutral-500">
             <OverlayableImage
               src="/assets/screenshots/dashboard-l.jpg"
@@ -60,7 +59,7 @@ export default async function Page() {
 
       {/* Profile Features */}
       <section className="flex min-h-[60vh] flex-col items-center">
-        <div className="flex flex-col gap-10 md:mx-10 md:flex-row">
+        <div className="flex flex-col gap-10 md:mx-4 md:flex-row">
           <div>
             <h1 className="mb-4 text-5xl font-bold">Your Profile</h1>
             <p className="text-neutral-400 md:w-[60%]">
@@ -75,7 +74,7 @@ export default async function Page() {
           </Link>
         </div>
 
-        <div className="my-20 flex flex-row gap-10 md:px-10">
+        <div className="my-20 flex flex-row gap-10 md:px-4">
           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-3">
             <figure>
               <div className="rounded-lg border border-neutral-500">
@@ -242,7 +241,7 @@ export default async function Page() {
       </section>
 
       {/* CTA */}
-      <section>
+      <section className="mt-10">
         <Link
           href="/dashboard"
           className="relative mx-auto mt-10 block w-full overflow-hidden rounded-lg bg-primary p-10 outline outline-0 outline-offset-2 outline-primary  hover:bg-primary/70 hover:outline-1 lg:mt-0 lg:w-3/4"
