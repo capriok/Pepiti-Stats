@@ -24,7 +24,7 @@ export default function OverlayProvider({ children }) {
         <div className="fixed left-0 top-0 z-50 hidden lg:flex">
           <div className="bg-black/60" onClick={close}>
             <div className="grid h-[100vh] w-[100vw] place-items-center">
-              <Card>
+              <Card className="overflow-hidden rounded-md">
                 <div className="my-2 flex justify-end">
                   <Button onClick={close}>
                     <X />
