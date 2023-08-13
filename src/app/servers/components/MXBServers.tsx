@@ -65,11 +65,9 @@ const Header = ({ filter, setFilter, refresh }) => {
   const [percent, setPercent] = useState(0)
   const [step, setStep] = useState(0)
 
-  useEffect(() => {}, [])
-
   useEffect(() => {
-    const interval = 30000
-    const numSteps = 100
+    const interval = 15000
+    const numSteps = 1000
 
     const timer = setInterval(() => {
       setStep((step + 1) % (numSteps + 1))
@@ -99,6 +97,7 @@ const Header = ({ filter, setFilter, refresh }) => {
     setFilter(!filter)
     onRefresh()
   }
+
   return (
     <CardHeader className="pb-0">
       <div className="flex items-center justify-between gap-2">
@@ -120,8 +119,8 @@ const Header = ({ filter, setFilter, refresh }) => {
         </Button>
       </div>
       <div className="flex flex-col items-end justify-center gap-2">
-        <div className="my-1 h-1 w-full rounded-full bg-base-100">
-          <div className="h-1 rounded-full bg-primary" style={{ width: `${percent}%` }} />
+        <div className="my-1 h-[3px] w-full rounded-full bg-base-100">
+          <div className="h-full rounded-full bg-primary" style={{ width: `${percent}%` }} />
         </div>
         <div>
           <Button onClick={onRefresh} className="bg-base-100">
