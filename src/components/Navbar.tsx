@@ -75,6 +75,11 @@ function AppNavigation({ user }) {
       title: "Leagues",
       description: "Compete in race leagues to win real prizes and profile badges.",
     },
+    {
+      href: "/servers",
+      title: "Servers",
+      description: "See a List of all Pepiti servers available to participate in.",
+    },
   ]
 
   const featureItems: Array<Item> = [
@@ -86,7 +91,7 @@ function AppNavigation({ user }) {
     {
       href: "/blacklists",
       title: "Blacklists",
-      description: "View Global and SR Blacklist, dont end up on these lists.",
+      description: "View Global and SR blacklist, dont end up on these lists.",
     },
     {
       href: "/report",

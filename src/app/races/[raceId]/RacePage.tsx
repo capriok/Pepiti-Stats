@@ -15,6 +15,8 @@ interface Props {
 }
 
 export default function Race({ session }: Props) {
+  console.log("%cRaceSession", "color: steelblue", { session })
+
   const items = [
     {
       key: "race1",

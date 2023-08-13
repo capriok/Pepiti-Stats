@@ -32,6 +32,8 @@ export default async function GetAuthUser() {
   }
 }
 
+// COMMON
+
 export async function GetSummaryStats(): Promise<SummaryStats> {
   const data = await fetcher(`/summary`)
   return data
@@ -156,6 +158,30 @@ export async function GetConstantOEMBikes(token: string): Promise<{ [key: string
 export async function GetConstantServers(token: string): Promise<{ datacenters: any }> {
   const data = await fetcher("/constants/server_locations", token)
   return data
+}
+
+// THIRD PARTY
+
+export async function GetAllMXBServers(): Promise<{ [key: string]: Array<any> }> {
+  const data = await fetch(
+    "https://projects.mxb-mods.com/mxbjson/servers/?sortby=num_clients",
+    nextConfig
+  )
+  return data.json()
+}
+export async function GetAllPepitiServers(): Promise<{ [key: string]: Array<any> }> {
+  const data = await fetch(
+    "https://projects.mxb-mods.com/mxbjson/servers/?search=pepiti&server_type=pepiti&sortby=num_clients",
+    nextConfig
+  )
+  return data.json()
+}
+export async function GetMXBServerDetails(slug: string): Promise<{ [key: string]: Array<any> }> {
+  const data = await fetch(
+    `https://projects.mxb-mods.com/mxbjson/tracks/get.php?track=${slug}`,
+    nextConfig
+  )
+  return data.json()
 }
 
 interface SteamUser {
