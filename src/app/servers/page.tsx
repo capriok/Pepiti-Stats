@@ -2,7 +2,6 @@ import Link from "next/link"
 import { GetAllPepitiServers } from "~/api"
 import PageLayout from "~/components/PageLayout"
 import MXBServers from "./components/MXBServers"
-import { Checkbox } from "~/ui/Checkbox"
 
 export const metadata = {
   title: "Pepiti | Leagues",
@@ -18,7 +17,6 @@ export default async function Page() {
       header={{
         title: "MXB Servers",
         extra: <Link href="/dashboard">Go back</Link>,
-       
       }}
     >
       <MXBServers servers={Object.keys(serverList.servers).map((s) => serverList.servers[s])} />
