@@ -39,6 +39,7 @@ export default function MXBServersTable(props: Props) {
     {
       key: "track",
       label: "Track",
+      render: (track) => <span className="whitespace-nowrap">{track.replaceAll("*", "")}</span>,
     },
     {
       key: "status",
