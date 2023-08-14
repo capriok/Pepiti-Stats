@@ -2,11 +2,12 @@ import Image from "next/image"
 import Link from "next/link"
 import useSWR from "swr"
 import Spinner from "~/components/Spinner"
+import Pill from "~/components/pills/Pill"
 import { Button } from "~/ui/Button"
 import { Card, CardContent, CardHeader } from "~/ui/Card"
 import Table from "~/ui/Table"
 
-export default function MXBServerExpandableRow({ row }) {
+export default function MXBServerExpandableRow({ row, pepitiRoster = true }) {
   const { data: trackData, isLoading: isLoadingTrack } = useSWR(
     `https://projects.mxb-mods.com/mxbjson/tracks/get.php?track=${row.track.replace("*", "")}`,
     (url) => fetch(url).then((res) => res.json()),
@@ -50,7 +51,7 @@ export default function MXBServerExpandableRow({ row }) {
       <CardHeader>
         <div className="flex justify-between">
           <div className="w-[50%]">
-            <div className="font-semi-bold pb-2">Server</div>
+            <div className="font-semi-bold pb-2 text-[16px]">Server</div>
             <Stat label="Server ID" text={server.id} />
             <Stat label="Address" text={server.address} />
             <Stat label="Private Address" text={server["private address"]} />
@@ -66,7 +67,7 @@ export default function MXBServerExpandableRow({ row }) {
             />
           </div>
           <div className="w-[50%]">
-            <div className="font-semi-bold pb-2">Event</div>
+            <div className="font-semi-bold pb-2 text-[16px]">Event</div>
             <Stat label="Type" text={server.event.type} />
             {server.race_length && <Stat label="Length" text={server.race_length} />}
             {server.event.race_type && <Stat label="Format" text={server.event.race_type} />}
@@ -95,8 +96,8 @@ export default function MXBServerExpandableRow({ row }) {
       </CardHeader>
       {server.clients && server.clients.length > 0 ? (
         <CardContent>
-          <div className="font-semi-bold pb-2">Riders</div>
-          <ServerRoster server={server} />
+          <div className="font-semi-bold pb-2 text-[16px]">Riders</div>
+          <ServerRoster server={server} pepitiRoster={pepitiRoster} />
         </CardContent>
       ) : (
         <></>
@@ -126,18 +127,71 @@ function getDownloadLocation(url: string): string {
   return `Track Download | ${loc}`
 }
 
-const ServerRoster = ({ server }) => {
+const ServerRoster = ({ server, pepitiRoster }) => {
+  const DynamicCol = ({
+    id,
+    dataKey,
+    render,
+  }: {
+    id: string
+    dataKey: string
+    render?: (val: any) => JSX.Element
+  }) => {
+    const { data: riderData, isLoading } = useSWR(
+      `${process.env.NEXT_PUBLIC_API}/rider/${id}`,
+      (url) => fetch(url).then((res) => res.json()),
+      { refreshInterval: 5000 }
+    )
+
+    if (isLoading) return <Spinner />
+
+    return render ? render(riderData[dataKey]) : riderData[dataKey]
+  }
+
+  const columns = [
+    {
+      key: "id",
+      label: "Name",
+      render: (_, row) => (pepitiRoster ? <DynamicCol id={row.id} dataKey="name" /> : row.name),
+    },
+    {
+      key: "id",
+      label: "MMR",
+      render: (_, row) =>
+        pepitiRoster ? (
+          <DynamicCol id={row.id} dataKey="MMR" render={(val) => <Pill text={val} />} />
+        ) : (
+          ""
+        ),
+    },
+    {
+      key: "id",
+      label: "SR",
+      render: (_, row) =>
+        pepitiRoster ? (
+          <DynamicCol id={row.id} dataKey="SR" render={(val) => <Pill text={val} />} />
+        ) : (
+          ""
+        ),
+    },
+    {
+      key: "id",
+      label: "Contacts",
+      render: (_, row) => (pepitiRoster ? <DynamicCol id={row.id} dataKey="contact" /> : ""),
+    },
+    {
+      key: "id",
+      label: "Total Laps",
+      render: (_, row) => (pepitiRoster ? <DynamicCol id={row.id} dataKey="total_laps" /> : ""),
+    },
+  ]
+
   return (
     <>
       {server.clients && server.clients?.length > 0 ? (
         <Table
-          data={server.clients.map((c) => ({ ...c, id: c.id }))}
-          columns={[
-            {
-              key: "name",
-              label: "Name",
-            },
-          ]}
+          data={server.clients.map((c) => ({ ...c, _id: c.id }))}
+          columns={columns}
           rankEnabled={false}
         />
       ) : (

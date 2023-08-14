@@ -8,6 +8,7 @@ import { useEffect, useState } from "react"
 import useSWR from "swr"
 import Spinner from "~/components/Spinner"
 import MXBServersTable from "~/components/tables/MXBServersTable"
+import MXBServerExpandableRow from "~/components/tables/expandable/MXBServerExpandableRow"
 import { Button } from "~/ui/Button"
 import { Card, CardContent, CardHeader } from "~/ui/Card"
 
@@ -100,6 +101,7 @@ const ServerList = ({ global, servers }) => {
           expandable={{
             onExpand,
             defaultExpandedId: expandedRowId,
+            render: (row) => <MXBServerExpandableRow row={row} />,
           }}
         />
       ) : (
@@ -107,6 +109,7 @@ const ServerList = ({ global, servers }) => {
           expandable={{
             onExpand,
             defaultExpandedId: expandedRowId,
+            render: (row) => <MXBServerExpandableRow row={row} pepitiRoster={false} />,
           }}
         />
       )}

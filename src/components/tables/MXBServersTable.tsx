@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default function MXBServersTable(props: Props) {
-  const { servers, ...rest } = props
+  const { servers, expandable, ...rest } = props
 
   const data = servers.map((s) => ({
     ...s,
@@ -74,8 +74,7 @@ export default function MXBServersTable(props: Props) {
       searchEnabled={true}
       {...rest}
       expandable={{
-        render: (row) => <MXBServerExpandableRow row={row} />,
-        ...rest.expandable,
+        ...expandable,
       }}
     />
   )

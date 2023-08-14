@@ -48,6 +48,8 @@ const Table: React.FC<TableProps> = (props) => {
       : null
   )
 
+  const isExpandable = expandable !== null && typeof expandable.render === "function"
+
   /** preps the data for the table to use */
   const manipulatedData = () => {
     if (term) {
@@ -70,7 +72,7 @@ const Table: React.FC<TableProps> = (props) => {
   const manipulatedColumns = (): TableColumn[] => {
     const cols: any = []
 
-    if (expandable) {
+    if (isExpandable) {
       const expandableColumn = {
         key: "_expandable",
         label: "",
@@ -194,12 +196,12 @@ const Table: React.FC<TableProps> = (props) => {
 
     const ExpandedRow = ({ row }) => (
       <tr>
-        {expandable && expandedRow?._id === row._id && (
+        {isExpandable && expandedRow?._id === row._id && (
           <td
             colSpan={columns.length}
             className="w-full whitespace-break-spaces bg-base-200 p-4 px-4"
           >
-            {expandable && expandable?.render(row)}
+            {isExpandable && expandable?.render(row)}
           </td>
         )}
       </tr>
