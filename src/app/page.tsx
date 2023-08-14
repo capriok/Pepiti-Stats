@@ -14,9 +14,7 @@ export const metadata = {
 export default async function Page() {
   const user = await GetAuthUser()
 
-  const ctaLink = user.guid
-    ? `/profile/${user.guid}`
-    : "https://pepiti.com/stats/api/v0/steam_login"
+  const ctaLink = user.guid ? `/profile/${user.guid}` : "https://api.pepiti.com/v1/steam_login"
 
   return (
     <PageLayout width="app">

@@ -162,7 +162,7 @@ function AppNavigation({ user }) {
 
     return (
       <NavigationMenuItem>
-        <Link href="https://pepiti.com/stats/api/v0/steam_login" legacyBehavior passHref>
+        <Link href="https://api.pepiti.com/v1/steam_login" legacyBehavior passHref>
           <NavigationMenuLink className={navigationMenuTriggerStyle()}>Sign In</NavigationMenuLink>
         </Link>
       </NavigationMenuItem>

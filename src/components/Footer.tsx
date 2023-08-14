@@ -82,7 +82,7 @@ export default function Footer({ user }: Props) {
             </>
           ) : (
             <Link
-              href="https://pepiti.com/stats/api/v0/steam_login"
+              href="https://api.pepiti.com/v1/steam_login"
               target="_blank"
               referrerPolicy="origin"
             >
