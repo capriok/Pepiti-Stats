@@ -92,6 +92,12 @@ const ServerTableRenderer = ({ global, servers }) => {
 
   const [expandedRowId, setExpandedRow] = useState<any>(idParam)
 
+  useEffect(() => {
+    if (global) setExpandedRow(undefined)
+
+    return () => setExpandedRow(undefined)
+  }, [global])
+
   const onExpand = (row) => {
     console.log("%cExpanded Row", "color: goldenrod", row)
     setExpandedRow(row?.id)
