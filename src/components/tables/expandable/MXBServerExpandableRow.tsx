@@ -223,7 +223,10 @@ const ServerRoster = ({ server }) => {
     },
   ]
 
-  const columns = [...baseColumns, ...(server.serverType === "pepiti" ? pepitiColumns : mxbColumns)]
+  const columns = [
+    ...baseColumns,
+    ...(server.serverType.includes("pepiti") ? pepitiColumns : mxbColumns),
+  ]
 
   return (
     <>

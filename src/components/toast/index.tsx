@@ -54,7 +54,10 @@ const actions: {
   error: (err) => ({
     title: "Oh no!",
     description: "There was an error, more information below",
-    data: err.message,
+    data:
+      process.env.NODE_ENV === "development"
+        ? err.message
+        : "Please let us know what happened in the MXB Discord",
     variant: "error",
   }),
   signedOut: () => ({

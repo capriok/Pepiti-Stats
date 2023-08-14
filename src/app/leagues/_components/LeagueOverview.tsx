@@ -27,6 +27,13 @@ export default function LeagueOverview({ user, rider, league, host, eligibility 
   const isInLeague = eligibility.league_joined === true
   const leagueRider = league.riders[rider._id] ?? {}
 
+  if (!user.isAdmin)
+  return (
+    <div>
+      <center className="text-sm text-primary-content">Admin Only, Coming Soon</center>
+    </div>
+  )
+
   return (
     <LeagueContext.Provider value={{ user, rider, league, host, eligibility }}>
       <LeagueBanner league={league} />

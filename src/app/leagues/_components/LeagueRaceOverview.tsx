@@ -20,6 +20,13 @@ export default function LeagueRaceOverview({ user, race, eligibility }: Props) {
   console.log("%cLeagueRace", "color: steelblue", { user, race, eligibility })
   const isInRace = eligibility.race_joined === true
 
+  if (!user.isAdmin)
+    return (
+      <div>
+        <center className="text-sm text-primary-content">Admin Only, Coming Soon</center>
+      </div>
+    )
+
   return (
     <>
       <LeagueRaceAlert isInRace={isInRace} />
