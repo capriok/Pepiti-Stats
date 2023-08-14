@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import useSWR from "swr"
 import RiderLink from "~/components/RiderLink"
@@ -21,13 +23,6 @@ export default function MXBServerExpandableRow({ row }) {
     { refreshInterval: 5000 }
   )
 
-  if (isLoadingServer || isLoadingTrack)
-    return (
-      <div className="mt-2">
-        <Spinner />
-      </div>
-    )
-
   const track = trackData
   const server: MXBServer = {
     ...row,
@@ -38,7 +33,7 @@ export default function MXBServerExpandableRow({ row }) {
   console.log("%cTrackData", "color: goldenrod", { track })
   console.log("%cServerData", "color: goldenrod", { server })
 
-  const Stat = ({ label, text, col = false }) => {
+  const Line = ({ label, text, col = false }) => {
     return (
       <div className={`mb-1 flex items-center gap-2 ${col ? "flex-col" : ""}`}>
         <span className="text-accent">{label}:</span>
@@ -47,16 +42,29 @@ export default function MXBServerExpandableRow({ row }) {
     )
   }
 
+  const Riders = () => {
+    if (isLoadingServer || isLoadingTrack)
+      return (
+        <div className="my-4">
+          <Spinner />
+        </div>
+      )
+
+    if (!server.clients || server.clients?.length === 0) return <center>No Riders</center>
+
+    return <ServerRoster server={server} />
+  }
+
   return (
     <Card>
       <CardHeader>
         <div className="flex justify-between">
           <div className="w-[50%]">
             <div className="font-semi-bold pb-2 text-[16px]">Server</div>
-            <Stat label="Server ID" text={server.id} />
-            <Stat label="Address" text={server.address} />
-            <Stat label="Private Address" text={server["private address"]} />
-            <Stat
+            <Line label="Server ID" text={server.id} />
+            <Line label="Address" text={server.address} />
+            <Line label="Private Address" text={server["private address"]} />
+            <Line
               label="Dedicated"
               text={
                 server.dedicated === "0" ? (
@@ -69,10 +77,10 @@ export default function MXBServerExpandableRow({ row }) {
           </div>
           <div className="w-[50%]">
             <div className="font-semi-bold pb-2 text-[16px]">Event</div>
-            <Stat label="Type" text={server.event.type} />
-            {server.race_length && <Stat label="Length" text={server.race_length} />}
-            {server.event.race_type && <Stat label="Format" text={server.event.race_type} />}
-            <Stat
+            <Line label="Type" text={server.event.type} />
+            {server.race_length && <Line label="Length" text={server.race_length} />}
+            {server.event.race_type && <Line label="Format" text={server.event.race_type} />}
+            <Line
               label="Weather"
               text={
                 <div className="flex gap-2">
@@ -95,37 +103,12 @@ export default function MXBServerExpandableRow({ row }) {
           )}
         </div>
       </CardHeader>
-      {server.clients && server.clients.length > 0 ? (
-        <CardContent>
-          <div className="font-semi-bold pb-2 text-[16px]">Riders</div>
-          <ServerRoster server={server} />
-        </CardContent>
-      ) : (
-        <></>
-      )}
+      <CardContent>
+        <div className="font-semi-bold pb-2 text-[16px]">Riders</div>
+        <Riders />
+      </CardContent>
     </Card>
   )
-}
-
-const parseInsanity = (input: string) => {
-  try {
-    const clean = input.replace(/\n\t/g, "")
-    const data = JSON.parse(clean)
-    return {
-      ...data.server,
-      clients: data.client,
-    }
-  } catch (error) {
-    console.error("Error parsing Server Response:", error)
-    return {}
-  }
-}
-
-function getDownloadLocation(url: string): string {
-  const domain = new URL(url).hostname
-  let loc = domain.charAt(0).toUpperCase() + domain.slice(1)
-
-  return `Track Download | ${loc}`
 }
 
 const ServerRoster = ({ server }) => {
@@ -241,4 +224,25 @@ const ServerRoster = ({ server }) => {
       )}
     </>
   )
+}
+
+const parseInsanity = (input: string) => {
+  try {
+    const clean = input.replace(/\n\t/g, "")
+    const data = JSON.parse(clean)
+    return {
+      ...data.server,
+      clients: data.client,
+    }
+  } catch (error) {
+    console.error("Error parsing Server Response:", error)
+    return {}
+  }
+}
+
+function getDownloadLocation(url: string): string {
+  const domain = new URL(url).hostname
+  let loc = domain.charAt(0).toUpperCase() + domain.slice(1)
+
+  return `Track Download | ${loc}`
 }

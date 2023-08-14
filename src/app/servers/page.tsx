@@ -2,6 +2,7 @@ import Link from "next/link"
 import { GetAllPepitiServers } from "~/api"
 import PageLayout from "~/components/PageLayout"
 import MXBServers from "./components/MXBServers"
+import { processMXBServers } from "./components"
 
 export const metadata = {
   title: "Pepiti | MXB Servers",
@@ -9,7 +10,9 @@ export const metadata = {
 }
 
 export default async function Page() {
-  const serverList = await GetAllPepitiServers()
+  const pepitiServers = await GetAllPepitiServers()
+
+  const servers = processMXBServers(pepitiServers)
 
   return (
     <PageLayout
@@ -19,7 +22,7 @@ export default async function Page() {
         extra: <Link href="/dashboard">Go back</Link>,
       }}
     >
-      <MXBServers servers={Object.keys(serverList.servers).map((s) => serverList.servers[s])} />
+      <MXBServers servers={servers} />
     </PageLayout>
   )
 }

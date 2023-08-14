@@ -11,6 +11,7 @@ import MXBServersTable from "~/components/tables/MXBServersTable"
 import MXBServerExpandableRow from "~/components/tables/expandable/MXBServerExpandableRow"
 import { Button } from "~/ui/Button"
 import { Card, CardContent, CardHeader } from "~/ui/Card"
+import { processMXBServers } from "."
 
 export default function MXBServers({ servers }) {
   const router = useRouter()
@@ -90,7 +91,7 @@ const ServerList = ({ global, servers }) => {
 
   const onExpand = (row) => {
     console.log("%cExpanded Row", "color: goldenrod", row)
-    setExpandedRow(row.id)
+    setExpandedRow(row?.id)
   }
 
   const GlobalServers = ({ expandable }) => {
@@ -107,10 +108,7 @@ const ServerList = ({ global, servers }) => {
         </div>
       )
 
-    const servers = Object.keys(globalServers.servers).map((s) => ({
-      ...globalServers.servers[s],
-      serverType: determineType(globalServers.servers[s].name.toLowerCase()),
-    }))
+    const servers = processMXBServers(globalServers)
 
     return <MXBServersTable servers={servers} expandable={expandable} />
   }
@@ -124,19 +122,9 @@ const ServerList = ({ global, servers }) => {
 
     if (isLoading) return <MXBServersTable servers={servers} expandable={expandable} />
 
-    const clientFetchedServers = Object.keys(pepitiServers.servers).map((s) => ({
-      ...pepitiServers.servers[s],
-      serverType: determineType(pepitiServers.servers[s].name.toLowerCase()),
-    }))
+    const clientFetchedServers = processMXBServers(pepitiServers)
 
     return <MXBServersTable servers={clientFetchedServers} expandable={expandable} />
-  }
-
-  const determineType = (name: string) => {
-    if (name.includes("low sr")) return "pepiti sr"
-    if (name.includes("pepiti")) return "pepiti"
-
-    return "global"
   }
 
   return (
