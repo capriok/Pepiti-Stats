@@ -4,13 +4,30 @@
       "meta": {
         "author": "Tooky",
         "date": "08/14/2023",
+        "scope": "Component",
+        "type": "Addition",
+        "page": "/servers"
+      },
+      "content": {
+        "description": "Added Copy to Clipboard Button to allow sharing servers from the /servers page",
+        "attachments": [
+          "https://cdn.discordapp.com/attachments/1138590709545443409/1140786578566938634/image.png"
+        ]
+      }
+    },
+    {
+      "meta": {
+        "author": "Tooky",
+        "date": "08/14/2023",
         "scope": "Page",
         "type": "Addition",
         "page": "/servers"
       },
       "content": {
         "description": "Added /servers page with live information aggregated from Pepiti Stats and INConnect by Insane",
-        "attachments": []
+        "attachments": [
+          "https://cdn.discordapp.com/attachments/1138590709545443409/1140785224784019466/image.png"
+        ]
       }
     },
     {

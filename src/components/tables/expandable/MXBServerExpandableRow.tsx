@@ -1,17 +1,20 @@
 "use client"
 
 import Link from "next/link"
-import { useEffect, useState } from "react"
 import useSWR from "swr"
 import RiderLink from "~/components/RiderLink"
 import Spinner from "~/components/Spinner"
 import Pill from "~/components/pills/Pill"
 import SRPill from "~/components/pills/SRPill"
+import { actions, useToast } from "~/components/toast"
 import { Button } from "~/ui/Button"
 import { Card, CardContent, CardHeader } from "~/ui/Card"
 import Table from "~/ui/Table"
+import { Copy } from "lucide-react"
 
 export default function MXBServerExpandableRow({ row }) {
+  const { pushToast } = useToast()
+
   const { data: trackData, isLoading: isLoadingTrack } = useSWR(
     `https://projects.mxb-mods.com/mxbjson/tracks/get.php?track=${row.track.replace("*", "")}`,
     (url) => fetch(url).then((res) => res.json()),
@@ -63,7 +66,21 @@ export default function MXBServerExpandableRow({ row }) {
 
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className="relative">
+        <div className="absolute right-4 top-6">
+          <div
+            className="cursor-pointer"
+            title="Copy Server Link"
+            onClick={() => {
+              const shareLink = `${process.env.NEXT_PUBLIC_DOMAIN}/servers/?id=${server.id}`
+
+              navigator.clipboard.writeText(shareLink)
+              pushToast(() => actions.copiedToClipboard(shareLink))
+            }}
+          >
+            <Copy size={20} />
+          </div>
+        </div>
         <div className="flex justify-between">
           <div className="w-[50%]">
             <div className="font-semi-bold pb-2 text-[16px]">Server</div>

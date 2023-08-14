@@ -41,16 +41,6 @@ function useToast() {
 const actions: {
   [key: string]: (arg?: any) => Toast
 } = {
-  comingSoon: () => ({
-    title: "Unsupported",
-    description: "This feature may come soon ™",
-    variant: "default",
-  }),
-  default: () => ({
-    title: "Uh oh!",
-    description: "Something went wrong, try again later",
-    variant: "default",
-  }),
   error: (err) => ({
     title: "Oh no!",
     description: "There was an error, more information below",
@@ -59,6 +49,21 @@ const actions: {
         ? err.message
         : "Please let us know what happened in the MXB Discord",
     variant: "error",
+  }),
+  default: () => ({
+    title: "Uh oh!",
+    description: "Something went wrong, try again later",
+    variant: "default",
+  }),
+  comingSoon: () => ({
+    title: "Unsupported",
+    description: "This feature may come soon ™",
+    variant: "default",
+  }),
+  copiedToClipboard: (str) => ({
+    title: "Copied to clipboard",
+    description: str,
+    variant: "info",
   }),
   signedOut: () => ({
     title: "User",

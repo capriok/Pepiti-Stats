@@ -3,7 +3,7 @@
 import { RefreshCcw } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useEffect, useState } from "react"
 import useSWR from "swr"
 import Spinner from "~/components/Spinner"
@@ -21,7 +21,7 @@ export default function MXBServers({ servers }) {
     <>
       <Card className="mb-20">
         <Header setFilter={setGlobal} filter={global} refresh={() => router.refresh()} />
-        <ServerList global={global} servers={servers} />
+        <ServerTableRenderer global={global} servers={servers} />
         <div className="-mb-6 mt-4 grid w-full place-items-center">
           <Credits />
         </div>
@@ -86,8 +86,11 @@ const Header = ({ filter, setFilter, refresh }) => {
   )
 }
 
-const ServerList = ({ global, servers }) => {
-  const [expandedRowId, setExpandedRow] = useState<any>(null)
+const ServerTableRenderer = ({ global, servers }) => {
+  const searchParams = useSearchParams()
+  const idParam = searchParams.get("id")
+
+  const [expandedRowId, setExpandedRow] = useState<any>(idParam)
 
   const onExpand = (row) => {
     console.log("%cExpanded Row", "color: goldenrod", row)
@@ -162,7 +165,7 @@ const Credits = () => (
     </CardHeader>
     <CardContent className="flex justify-center">
       <div className="flex gap-2">
-        <Link href="https://api.pepiti.com/v1/" rel="noopener noreferrer" target="_blank">
+        <Link href={process.env.NEXT_PUBLIC_API!} rel="noopener noreferrer" target="_blank">
           <PepitiLogo size={52} />
         </Link>
         <Link href="https://connect.mxb-mods.com/2023" rel="noopener noreferrer" target="_blank">
