@@ -11,48 +11,15 @@ import MXBServersTable from "~/components/tables/MXBServersTable"
 import { Button } from "~/ui/Button"
 import { Card, CardContent, CardHeader } from "~/ui/Card"
 
-interface Props {
-  servers: Array<MXBServer>
-}
-
-export default function MXBServers({ servers }: Props) {
+export default function MXBServers({ servers }) {
   const router = useRouter()
-  const [filter, setFilter] = useState(false)
-
-  useEffect(() => {
-    console.log("%cMXBServers", "color: steelblue", { servers })
-  }, [])
-
-  const GlobalServers = () => {
-    const { data: globalServers, isLoading } = useSWR(
-      "https://projects.mxb-mods.com/mxbjson/servers/?sortby=num_clients",
-      (url) => fetch(url).then((res) => res.json())
-    )
-
-    if (isLoading)
-      return (
-        <div className="mt-2">
-          <Spinner />
-        </div>
-      )
-    console.log("rendering")
-
-    const servers = Object.keys(globalServers.servers).map((s) => globalServers.servers[s])
-
-    return <MXBServersTable servers={servers} />
-  }
-
-  const PepitiServers = ({ servers }) => {
-    return <MXBServersTable servers={servers} />
-  }
+  const [global, setGlobal] = useState(false)
 
   return (
     <>
       <Card className="mb-20">
-        <Header setFilter={setFilter} filter={filter} refresh={() => router.refresh()} />
-        <CardContent>
-          {filter ? <GlobalServers /> : <PepitiServers servers={servers} />}
-        </CardContent>
+        <Header setFilter={setGlobal} filter={global} refresh={() => router.refresh()} />
+        <ServerList global={global} servers={servers} />
         <div className="-mb-6 mt-4 grid w-full place-items-center">
           <Credits />
         </div>
@@ -66,7 +33,7 @@ const Header = ({ filter, setFilter, refresh }) => {
   const [step, setStep] = useState(0)
 
   useEffect(() => {
-    const interval = 15000
+    const interval = 10000
     const numSteps = 1000
 
     const timer = setInterval(() => {
@@ -82,14 +49,10 @@ const Header = ({ filter, setFilter, refresh }) => {
     return () => clearInterval(timer)
   }, [step])
 
-  const resetRefresh = () => {
-    setStep(0)
-    setPercent(0)
-  }
-
   const onRefresh = () => {
     console.log("%cOn Demand refresh", "color: goldenrod")
-    resetRefresh()
+    setStep(0)
+    setPercent(0)
     refresh()
   }
 
@@ -102,34 +65,88 @@ const Header = ({ filter, setFilter, refresh }) => {
     <CardHeader className="pb-0">
       <div className="flex items-center justify-between gap-2">
         <div className="flex">{filter ? "All Servers" : "Pepiti Servers"}</div>
-        <Button className={filter ? "bg-base-100" : "bg-base-300"} onClick={onFilter}>
-          {filter ? (
-            <div className="px-2.5">
-              <InsaneLogo size={20} />
-            </div>
-          ) : (
-            <Image
-              title="Pepiti Stats."
-              src="/assets/brand/pepiti-p.svg"
-              alt="pepiti"
-              width={40}
-              height={40}
-            />
-          )}
+        <Button
+          className={`min-w-[75px] ${filter ? "bg-base-100" : "bg-base-300"}`}
+          onClick={onFilter}
+        >
+          {filter ? <InsaneLogo size={20} /> : <PepitiLogo size={40} />}
         </Button>
       </div>
       <div className="flex flex-col items-end justify-center gap-2">
         <div className="my-1 h-[3px] w-full rounded-full bg-base-100">
           <div className="h-full rounded-full bg-primary" style={{ width: `${percent}%` }} />
         </div>
-        <div>
-          <Button onClick={onRefresh} className="bg-base-100">
-            <RefreshCcw size={16} />
-          </Button>
-        </div>
+        <Button onClick={onRefresh} className="min-w-[50px] bg-base-100">
+          <RefreshCcw size={16} />
+        </Button>
       </div>
     </CardHeader>
   )
+}
+
+const ServerList = ({ global, servers }) => {
+  const [expandedRowId, setExpandedRow] = useState<any>(null)
+
+  const onExpand = (row) => {
+    console.log("%cExpanded Row", "color: goldenrod", row)
+    setExpandedRow(row.id)
+  }
+
+  return (
+    <CardContent>
+      {!global ? (
+        <PepitiServers
+          servers={servers}
+          expandable={{
+            onExpand,
+            defaultExpandedId: expandedRowId,
+          }}
+        />
+      ) : (
+        <GlobalServers
+          expandable={{
+            onExpand,
+            defaultExpandedId: expandedRowId,
+          }}
+        />
+      )}
+    </CardContent>
+  )
+}
+
+const GlobalServers = ({ expandable }) => {
+  const { data: globalServers, isLoading } = useSWR(
+    "https://projects.mxb-mods.com/mxbjson/servers/?sortby=num_clients",
+    (url) => fetch(url).then((res) => res.json()),
+    { refreshInterval: 10000 }
+  )
+
+  if (isLoading)
+    return (
+      <div className="mt-2">
+        <Spinner />
+      </div>
+    )
+
+  const servers = Object.keys(globalServers.servers).map((s) => globalServers.servers[s])
+
+  return <MXBServersTable servers={servers} expandable={expandable} />
+}
+
+const PepitiServers = ({ servers, expandable }) => {
+  const { data: pepitiServers, isLoading } = useSWR(
+    "https://projects.mxb-mods.com/mxbjson/servers/?search=pepiti&server_type=pepiti&sortby=num_clients",
+    (url) => fetch(url).then((res) => res.json()),
+    { refreshInterval: 10000 }
+  )
+
+  if (isLoading) return <MXBServersTable servers={servers} expandable={expandable} />
+
+  const clientFetchedServers = Object.keys(pepitiServers.servers).map(
+    (s) => pepitiServers.servers[s]
+  )
+
+  return <MXBServersTable servers={clientFetchedServers} expandable={expandable} />
 }
 
 const Credits = () => (
@@ -142,22 +159,26 @@ const Credits = () => (
     <CardContent className="flex justify-center">
       <div className="flex gap-2">
         <Link href="https://api.pepiti.com/v1/" rel="noopener noreferrer" target="_blank">
-          <Image
-            title="Pepiti Stats."
-            src="/assets/brand/pepiti-p.svg"
-            alt="pepiti"
-            width={52}
-            height={52}
-          />
+          <PepitiLogo size={52} />
         </Link>
         <Link href="https://connect.mxb-mods.com/2023" rel="noopener noreferrer" target="_blank">
           <div className="mr-4">
-            <InsaneLogo size={26} />
+            <InsaneLogo size={28} />
           </div>
         </Link>
       </div>
     </CardContent>
   </Card>
+)
+
+const PepitiLogo = ({ size }) => (
+  <Image
+    title="Pepiti Stats."
+    src="/assets/brand/pepiti-p.svg"
+    alt="pepiti"
+    width={size}
+    height={size}
+  />
 )
 
 const InsaneLogo = ({ size }) => (

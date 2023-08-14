@@ -4,8 +4,8 @@ import PageLayout from "~/components/PageLayout"
 import MXBServers from "./components/MXBServers"
 
 export const metadata = {
-  title: "Pepiti | Leagues",
-  description: "Compete in race leagues for real prizes and profile accolades",
+  title: "Pepiti | MXB Servers",
+  description: "MXB Servers aggregated from Pepiti and INConnect by Insane.",
 }
 
 export default async function Page() {

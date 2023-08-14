@@ -42,7 +42,11 @@ const Table: React.FC<TableProps> = (props) => {
     dir: SortDirection.None,
     key: null,
   })
-  const [expandedRow, setExpandedRow] = useState<any>(null)
+  const [expandedRow, setExpandedRow] = useState<any>(
+    expandable?.defaultExpandedId
+      ? props.data.find((d) => d._id === expandable?.defaultExpandedId)
+      : null
+  )
 
   /** preps the data for the table to use */
   const manipulatedData = () => {
@@ -74,7 +78,10 @@ const Table: React.FC<TableProps> = (props) => {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => setExpandedRow(expandedRow?._id === row._id ? null : row)}
+            onClick={() => {
+              setExpandedRow(expandedRow?._id === row._id ? null : row)
+              expandable.onExpand?.(expandedRow?._id === row._id ? null : row)
+            }}
           >
             {expandedRow?._id !== row._id ? <Plus size={14} /> : <Minus size={14} />}
           </Button>

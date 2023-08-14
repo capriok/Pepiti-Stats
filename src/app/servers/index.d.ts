@@ -5,6 +5,7 @@ interface MXBServer {
   "private address": string
   dedicated: string
   password: string
+  clients?: any[]
   num_clients: string
   max_clients: string
   track_id: string

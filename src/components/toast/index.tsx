@@ -41,6 +41,11 @@ function useToast() {
 const actions: {
   [key: string]: (arg?: any) => Toast
 } = {
+  comingSoon: () => ({
+    title: "Unsupported",
+    description: "This feature may come soon ™",
+    variant: "default",
+  }),
   default: () => ({
     title: "Uh oh!",
     description: "Something went wrong, try again later",

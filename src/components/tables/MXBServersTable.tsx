@@ -4,7 +4,8 @@ import { Hammer } from "lucide-react"
 import Image from "next/image"
 import Pill from "~/components/pills/Pill"
 import Table from "~/ui/Table"
-import ServerExpandableRow from "./expandable/ServerExpandableRow"
+import MXBServerExpandableRow from "./expandable/MXBServerExpandableRow"
+import { useToast, actions } from "../toast"
 
 interface Props {
   servers: Array<MXBServer>
@@ -52,6 +53,11 @@ export default function MXBServersTable(props: Props) {
         <Pill text={`${riders}/${row.totalRiders}`} color={riders > 0 ? "primary" : "neutral"} />
       ),
     },
+    {
+      key: "id",
+      label: "",
+      render: (id, row) => <JoinButton row={row} />,
+    },
   ]
 
   const sortingKeys = ["name", "track", "status", "riders"]
@@ -66,10 +72,11 @@ export default function MXBServersTable(props: Props) {
       sortingKeys={sortingKeys}
       rankEnabled={false}
       searchEnabled={true}
-      expandable={{
-        render: ServerExpandableRow,
-      }}
       {...rest}
+      expandable={{
+        render: (row) => <MXBServerExpandableRow row={row} />,
+        ...rest.expandable,
+      }}
     />
   )
 }
@@ -98,4 +105,19 @@ const renderServerType = (type: string) => {
     default:
       return <></>
   }
+}
+
+const JoinButton = ({ row }) => {
+  const { pushToast } = useToast()
+
+  const onJoin = () => {
+    console.log(row)
+    pushToast(actions.comingSoon)
+  }
+
+  return (
+    <div className=" cursor-pointer text-primary" onClick={onJoin}>
+      Join
+    </div>
+  )
 }

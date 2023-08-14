@@ -247,6 +247,11 @@ function LandingNavigation() {
       href: "/leagues",
       description: "Compete in race leagues to win real prizes and profile badges.",
     },
+    {
+      href: "/servers",
+      title: "Servers",
+      description: "See a List of all Pepiti servers available to participate in.",
+    },
   ]
 
   return (
@@ -284,11 +289,13 @@ function LandingNavigation() {
                   </a>
                 </NavigationMenuLink>
               </li>
-              {featureItems.map((item) => (
-                <LinkItem key={item.title} title={item.title} href={item.href}>
-                  {item.description}
-                </LinkItem>
-              ))}
+              <div className="flex flex-col justify-end">
+                {featureItems.map((item) => (
+                  <LinkItem key={item.title} title={item.title} href={item.href}>
+                    {item.description}
+                  </LinkItem>
+                ))}
+              </div>
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
