@@ -114,6 +114,8 @@ const ServerList = ({ global, servers }) => {
   }
 
   const PepitiServers = ({ servers, expandable }) => {
+    // return <MXBServersTable servers={servers} expandable={expandable} />
+
     const { data: pepitiServers, isLoading } = useSWR(
       "https://projects.mxb-mods.com/mxbjson/servers/?search=pepiti&server_type=pepiti&sortby=num_clients",
       (url) => fetch(url).then((res) => res.json()),

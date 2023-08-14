@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useEffect, useState } from "react"
 import useSWR from "swr"
 import RiderLink from "~/components/RiderLink"
 import Spinner from "~/components/Spinner"
@@ -17,43 +18,48 @@ export default function MXBServerExpandableRow({ row }) {
     { refreshInterval: 5000 }
   )
 
-  const { data: serverData, isLoading: isLoadingServer } = useSWR(
-    `https://projects.mxb-mods.com/mxbjson/servers/?server=${row.id}`,
-    (url) => fetch(url).then((res) => res.json()),
-    { refreshInterval: 5000 }
-  )
+  if (isLoadingTrack)
+    return (
+      <div className="mt-2">
+        <Spinner />
+      </div>
+    )
 
   const track = trackData
   const server: MXBServer = {
     ...row,
     ...track,
-    ...parseInsanity(serverData),
-  }
-
-  console.log("%cTrackData", "color: goldenrod", { track })
-  console.log("%cServerData", "color: goldenrod", { server })
-
-  const Line = ({ label, text, col = false }) => {
-    return (
-      <div className={`mb-1 flex items-center gap-2 ${col ? "flex-col" : ""}`}>
-        <span className="text-accent">{label}:</span>
-        <span className="">{text}</span>
-      </div>
-    )
   }
 
   const Riders = () => {
-    if (isLoadingServer || isLoadingTrack)
+    const { data: clientsData, isLoading: isLoadingClients } = useSWR(
+      `https://projects.mxb-mods.com/mxbjson/servers/?server=${row.id}`,
+      (url) => fetch(url).then((res) => res.json()),
+      { refreshInterval: 5000 }
+    )
+
+    if (isLoadingClients)
       return (
         <div className="my-4">
           <Spinner />
         </div>
       )
 
-    if (!server.clients || server.clients?.length === 0) return <center>No Riders</center>
+    const clients = parseDirtyClients(clientsData).clients
 
-    return <ServerRoster server={server} />
+    if (!clients || clients?.length === 0) return <center>No Riders</center>
+
+    const serverWithClients = {
+      ...server,
+      clients: clients,
+    }
+
+    console.log("%cServerWithClients", "color: goldenrod", { serverWithClients })
+
+    return <ServerRoster server={serverWithClients} />
   }
+
+  console.log("%cServer", "color: goldenrod", { server })
 
   return (
     <Card>
@@ -63,7 +69,7 @@ export default function MXBServerExpandableRow({ row }) {
             <div className="font-semi-bold pb-2 text-[16px]">Server</div>
             <Line label="Server ID" text={server.id} />
             <Line label="Address" text={server.address} />
-            <Line label="Private Address" text={server["private address"]} />
+            <Line label="Private Address" text={server.private_address} />
             <Line
               label="Dedicated"
               text={
@@ -103,11 +109,21 @@ export default function MXBServerExpandableRow({ row }) {
           )}
         </div>
       </CardHeader>
+
       <CardContent>
         <div className="font-semi-bold pb-2 text-[16px]">Riders</div>
         <Riders />
       </CardContent>
     </Card>
+  )
+}
+
+const Line = ({ label, text, col = false }) => {
+  return (
+    <div className={`mb-1 flex items-center gap-2 ${col ? "flex-col" : ""}`}>
+      <span className="text-accent">{label}:</span>
+      <span className="">{text}</span>
+    </div>
   )
 }
 
@@ -154,6 +170,10 @@ const ServerRoster = ({ server }) => {
     return render ? render(riderData[dataKey]) : riderData[dataKey]
   }
 
+  const data = server.clients
+    .map((c) => ({ ...c, _id: c.id }))
+    .sort((a, b) => a?.name.localeCompare(b?.name))
+
   const baseColumns = [
     {
       key: "name",
@@ -188,19 +208,19 @@ const ServerRoster = ({ server }) => {
       ),
     },
     {
-      key: "id",
+      key: "sr",
       label: "SR",
       render: (_, row) => (
         <DynamicPepitiCol id={row.id} dataKey="SR" render={(val) => <SRPill sr={val} />} />
       ),
     },
     {
-      key: "id",
+      key: "contact",
       label: "Contacts",
       render: (_, row) => <DynamicPepitiCol id={row.id} dataKey="contact" />,
     },
     {
-      key: "id",
+      key: "total_laps",
       label: "Total Laps",
       render: (_, row) => <DynamicPepitiCol id={row.id} dataKey="total_laps" />,
     },
@@ -213,20 +233,16 @@ const ServerRoster = ({ server }) => {
 
   return (
     <>
-      {server.clients && server.clients?.length > 0 ? (
-        <Table
-          data={server.clients.map((c) => ({ ...c, _id: c.id }))}
-          columns={columns}
-          rankEnabled={false}
-        />
-      ) : (
+      {!server.clients || server.clients?.length === 0 ? (
         <></>
+      ) : (
+        <Table data={data} columns={columns} rankEnabled={false} />
       )}
     </>
   )
 }
 
-const parseInsanity = (input: string) => {
+const parseDirtyClients = (input: string) => {
   try {
     const clean = input.replace(/\n\t/g, "")
     const data = JSON.parse(clean)
@@ -235,8 +251,12 @@ const parseInsanity = (input: string) => {
       clients: data.client,
     }
   } catch (error) {
-    console.error("Error parsing Server Response:", error)
-    return {}
+    console.log("Error parsing Server Response:", error)
+    return {
+      id: null,
+      name: "",
+      clients: [],
+    }
   }
 }
 

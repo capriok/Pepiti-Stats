@@ -2,7 +2,7 @@ interface MXBServer {
   id: string
   name: string
   address: string
-  "private address": string
+  private_address: string
   dedicated: string
   password: string
   clients?: any[]
