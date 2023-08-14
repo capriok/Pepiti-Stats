@@ -4,7 +4,6 @@ import { Hammer } from "lucide-react"
 import Image from "next/image"
 import Pill from "~/components/pills/Pill"
 import Table from "~/ui/Table"
-import MXBServerExpandableRow from "./expandable/MXBServerExpandableRow"
 import { useToast, actions } from "../toast"
 
 interface Props {
@@ -23,7 +22,6 @@ export default function MXBServersTable(props: Props) {
     status: s.event.session,
     riders: s.num_clients,
     totalRiders: s.max_clients,
-    serverType: determineType(s.name.toLowerCase()),
   }))
 
   const columns = [
@@ -80,13 +78,6 @@ export default function MXBServersTable(props: Props) {
   )
 }
 
-const determineType = (name: string) => {
-  if (name.includes("low sr")) return "sr"
-  if (name.includes("pepiti")) return "pepiti"
-
-  return "unknown"
-}
-
 const renderServerType = (type: string) => {
   switch (type) {
     case "pepiti":
@@ -96,13 +87,25 @@ const renderServerType = (type: string) => {
           alt="pepiti-brand"
           width={16}
           height={16}
+          title="Pepiti Race Server"
+        />
+      )
+    case "pepiti sr":
+      return (
+        <div title="Pepiti SR Ban Race Server">
+          <Hammer size={20} />
+        </div>
+      )
+    default:
+      return (
+        <Image
+          src="/assets/brand/white-flag.svg"
+          alt="race-brand"
+          width={16}
+          height={16}
           title="Public Race Server"
         />
       )
-    case "sr":
-      return <Hammer size={20} />
-    default:
-      return <></>
   }
 }
 

@@ -1,13 +1,14 @@
-import Image from "next/image"
 import Link from "next/link"
 import useSWR from "swr"
+import RiderLink from "~/components/RiderLink"
 import Spinner from "~/components/Spinner"
 import Pill from "~/components/pills/Pill"
+import SRPill from "~/components/pills/SRPill"
 import { Button } from "~/ui/Button"
 import { Card, CardContent, CardHeader } from "~/ui/Card"
 import Table from "~/ui/Table"
 
-export default function MXBServerExpandableRow({ row, pepitiRoster = true }) {
+export default function MXBServerExpandableRow({ row }) {
   const { data: trackData, isLoading: isLoadingTrack } = useSWR(
     `https://projects.mxb-mods.com/mxbjson/tracks/get.php?track=${row.track.replace("*", "")}`,
     (url) => fetch(url).then((res) => res.json()),
@@ -97,7 +98,7 @@ export default function MXBServerExpandableRow({ row, pepitiRoster = true }) {
       {server.clients && server.clients.length > 0 ? (
         <CardContent>
           <div className="font-semi-bold pb-2 text-[16px]">Riders</div>
-          <ServerRoster server={server} pepitiRoster={pepitiRoster} />
+          <ServerRoster server={server} />
         </CardContent>
       ) : (
         <></>
@@ -127,8 +128,30 @@ function getDownloadLocation(url: string): string {
   return `Track Download | ${loc}`
 }
 
-const ServerRoster = ({ server, pepitiRoster }) => {
-  const DynamicCol = ({
+const ServerRoster = ({ server }) => {
+  const DynamicMXBCol = ({
+    id,
+    dataKey,
+    render,
+  }: {
+    id: string
+    dataKey: string
+    render?: (val: any) => JSX.Element
+  }) => {
+    const { data: riderData, isLoading } = useSWR(
+      `https://connect.mxb-mods.com/2023/get_piboso.php?piboso=${id}`,
+      (url) => fetch(url).then((res) => res.json()),
+      { refreshInterval: 5000 }
+    )
+
+    if (isLoading) return <Spinner />
+
+    return <></>
+
+    // return render ? render(riderData[dataKey]) : riderData[dataKey]
+  }
+
+  const DynamicPepitiCol = ({
     id,
     dataKey,
     render,
@@ -148,43 +171,59 @@ const ServerRoster = ({ server, pepitiRoster }) => {
     return render ? render(riderData[dataKey]) : riderData[dataKey]
   }
 
-  const columns = [
+  const baseColumns = [
+    {
+      key: "name",
+      label: "Name",
+      render: (_, row) => <RiderLink name={row.name} href={`/profile/${row.id}`} />,
+    },
+  ]
+
+  const mxbColumns = [
     {
       key: "id",
-      label: "Name",
-      render: (_, row) => (pepitiRoster ? <DynamicCol id={row.id} dataKey="name" /> : row.name),
+      label: "More Info coming soon ™",
     },
+    // {
+    //   key: "id",
+    //   label: "Races",
+    //   render: (_, row) => <DynamicMXBCol id={row.id} dataKey="races_completed" />,
+    // },
+    // {
+    //   key: "id",
+    //   label: "Rating",
+    //   render: (_, row) => <DynamicMXBCol id={row.id} dataKey="rating" />,
+    // },
+  ]
+
+  const pepitiColumns = [
     {
       key: "id",
       label: "MMR",
-      render: (_, row) =>
-        pepitiRoster ? (
-          <DynamicCol id={row.id} dataKey="MMR" render={(val) => <Pill text={val} />} />
-        ) : (
-          ""
-        ),
+      render: (_, row) => (
+        <DynamicPepitiCol id={row.id} dataKey="MMR" render={(val) => <Pill text={val} />} />
+      ),
     },
     {
       key: "id",
       label: "SR",
-      render: (_, row) =>
-        pepitiRoster ? (
-          <DynamicCol id={row.id} dataKey="SR" render={(val) => <Pill text={val} />} />
-        ) : (
-          ""
-        ),
+      render: (_, row) => (
+        <DynamicPepitiCol id={row.id} dataKey="SR" render={(val) => <SRPill sr={val} />} />
+      ),
     },
     {
       key: "id",
       label: "Contacts",
-      render: (_, row) => (pepitiRoster ? <DynamicCol id={row.id} dataKey="contact" /> : ""),
+      render: (_, row) => <DynamicPepitiCol id={row.id} dataKey="contact" />,
     },
     {
       key: "id",
       label: "Total Laps",
-      render: (_, row) => (pepitiRoster ? <DynamicCol id={row.id} dataKey="total_laps" /> : ""),
+      render: (_, row) => <DynamicPepitiCol id={row.id} dataKey="total_laps" />,
     },
   ]
+
+  const columns = [...baseColumns, ...(server.serverType === "pepiti" ? pepitiColumns : mxbColumns)]
 
   return (
     <>

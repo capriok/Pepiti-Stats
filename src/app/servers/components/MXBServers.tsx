@@ -93,6 +93,52 @@ const ServerList = ({ global, servers }) => {
     setExpandedRow(row.id)
   }
 
+  const GlobalServers = ({ expandable }) => {
+    const { data: globalServers, isLoading } = useSWR(
+      "https://projects.mxb-mods.com/mxbjson/servers/?sortby=num_clients",
+      (url) => fetch(url).then((res) => res.json()),
+      { refreshInterval: 10000 }
+    )
+
+    if (isLoading)
+      return (
+        <div className="mt-2">
+          <Spinner />
+        </div>
+      )
+
+    const servers = Object.keys(globalServers.servers).map((s) => ({
+      ...globalServers.servers[s],
+      serverType: determineType(globalServers.servers[s].name.toLowerCase()),
+    }))
+
+    return <MXBServersTable servers={servers} expandable={expandable} />
+  }
+
+  const PepitiServers = ({ servers, expandable }) => {
+    const { data: pepitiServers, isLoading } = useSWR(
+      "https://projects.mxb-mods.com/mxbjson/servers/?search=pepiti&server_type=pepiti&sortby=num_clients",
+      (url) => fetch(url).then((res) => res.json()),
+      { refreshInterval: 10000 }
+    )
+
+    if (isLoading) return <MXBServersTable servers={servers} expandable={expandable} />
+
+    const clientFetchedServers = Object.keys(pepitiServers.servers).map((s) => ({
+      ...pepitiServers.servers[s],
+      serverType: determineType(pepitiServers.servers[s].name.toLowerCase()),
+    }))
+
+    return <MXBServersTable servers={clientFetchedServers} expandable={expandable} />
+  }
+
+  const determineType = (name: string) => {
+    if (name.includes("low sr")) return "pepiti sr"
+    if (name.includes("pepiti")) return "pepiti"
+
+    return "global"
+  }
+
   return (
     <CardContent>
       {!global ? (
@@ -109,47 +155,12 @@ const ServerList = ({ global, servers }) => {
           expandable={{
             onExpand,
             defaultExpandedId: expandedRowId,
-            render: (row) => <MXBServerExpandableRow row={row} pepitiRoster={false} />,
+            render: (row) => <MXBServerExpandableRow row={row} />,
           }}
         />
       )}
     </CardContent>
   )
-}
-
-const GlobalServers = ({ expandable }) => {
-  const { data: globalServers, isLoading } = useSWR(
-    "https://projects.mxb-mods.com/mxbjson/servers/?sortby=num_clients",
-    (url) => fetch(url).then((res) => res.json()),
-    { refreshInterval: 10000 }
-  )
-
-  if (isLoading)
-    return (
-      <div className="mt-2">
-        <Spinner />
-      </div>
-    )
-
-  const servers = Object.keys(globalServers.servers).map((s) => globalServers.servers[s])
-
-  return <MXBServersTable servers={servers} expandable={expandable} />
-}
-
-const PepitiServers = ({ servers, expandable }) => {
-  const { data: pepitiServers, isLoading } = useSWR(
-    "https://projects.mxb-mods.com/mxbjson/servers/?search=pepiti&server_type=pepiti&sortby=num_clients",
-    (url) => fetch(url).then((res) => res.json()),
-    { refreshInterval: 10000 }
-  )
-
-  if (isLoading) return <MXBServersTable servers={servers} expandable={expandable} />
-
-  const clientFetchedServers = Object.keys(pepitiServers.servers).map(
-    (s) => pepitiServers.servers[s]
-  )
-
-  return <MXBServersTable servers={clientFetchedServers} expandable={expandable} />
 }
 
 const Credits = () => (

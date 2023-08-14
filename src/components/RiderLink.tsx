@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import React from "react"
-import { handleRacismSanitization } from '~/utils/handleRacismSanitization'
+import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 
 interface RiderProps {
   href: string

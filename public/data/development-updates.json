@@ -3,13 +3,25 @@
     {
       "meta": {
         "author": "Tooky",
+        "date": "08/14/2023",
+        "scope": "Page",
+        "type": "Addition",
+        "page": "/servers"
+      },
+      "content": {
+        "description": "Added /servers page with live information aggregated from Pepiti Stats and INConnect by Insane",
+        "attachments": []
+      }
+    },
+    {
+      "meta": {
+        "author": "Tooky",
         "date": "08/10/2023",
         "scope": "Component",
         "type": "Addition",
         "page": "Global"
       },
       "content": {
-        "reference": "",
         "description": "Added OverlayableImage component to allow expanding key images",
         "attachments": []
       }
