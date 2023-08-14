@@ -42,6 +42,8 @@ export interface TableOptions {
   resultsEnabled?: boolean
   expandable?: {
     render: (record: TableData) => JSX.Element
+    defaultExpandedId?: string
+    onExpand?: (record: TableData) => void
     filter?: (record: TableData) => boolean // ! not implemented yet, all rows will be expandable for now
   }
 }

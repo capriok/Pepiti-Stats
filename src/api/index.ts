@@ -4,7 +4,7 @@ import { cookies } from "next/headers"
 import jwt_decode from "jwt-decode"
 
 const ENDPOINT = process.env.NEXT_PUBLIC_API
-const nextConfig = { next: { revalidate: 30 } }
+const nextConfig = { next: { revalidate: 15 } }
 
 const fetcher = async (url: string, token?: string) => {
   const res = await fetch(ENDPOINT + url, {
@@ -31,6 +31,8 @@ export default async function GetAuthUser() {
     return makeUser({})
   }
 }
+
+// COMMON
 
 export async function GetSummaryStats(): Promise<SummaryStats> {
   const data = await fetcher(`/summary`)
@@ -156,6 +158,16 @@ export async function GetConstantOEMBikes(token: string): Promise<{ [key: string
 export async function GetConstantServers(token: string): Promise<{ datacenters: any }> {
   const data = await fetcher("/constants/server_locations", token)
   return data
+}
+
+// MXB MODS
+
+export async function GetAllPepitiServers(): Promise<{ [key: string]: Array<any> }> {
+  const data = await fetch(
+    "https://projects.mxb-mods.com/mxbjson/servers/?search=pepiti&server_type=pepiti&sortby=num_clients",
+    nextConfig
+  )
+  return data.json()
 }
 
 interface SteamUser {
