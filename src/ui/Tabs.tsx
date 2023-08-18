@@ -82,7 +82,7 @@ export default function Tabs({
     <>
       <TabsPrimitive.Tabs
         className={wide ? "w-full" : "w-fit"}
-        defaultValue={tabParam ?? ""}
+        defaultValue={tabParam ? tabParam : items[0].key}
         onValueChange={(key) => onChange(items.find((i) => i.key === key)!)}
       >
         <TabsList className={`grid w-full ${getGridSize(items.length)}`}>
