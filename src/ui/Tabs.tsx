@@ -3,6 +3,7 @@
 import * as React from "react"
 import * as TabsPrimitive from "@radix-ui/react-tabs"
 import cn from "~/utils/cn"
+import { useSearchParams } from "next/navigation"
 
 const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
@@ -66,10 +67,12 @@ interface Props {
 export default function Tabs({
   items,
   wide,
-  defaultActive,
   onChange = function () {},
   renderChildren = true,
 }: Props) {
+  const searchParams = useSearchParams()
+  const tabParam = searchParams.get("tab")
+
   const children = items.map((item) => (
     <TabsContent key={item.key} value={item.key}>
       {item.children}
@@ -79,7 +82,7 @@ export default function Tabs({
     <>
       <TabsPrimitive.Tabs
         className={wide ? "w-full" : "w-fit"}
-        defaultValue={defaultActive ? defaultActive : items[0].key}
+        defaultValue={tabParam ?? ""}
         onValueChange={(key) => onChange(items.find((i) => i.key === key)!)}
       >
         <TabsList className={`grid w-full ${getGridSize(items.length)}`}>

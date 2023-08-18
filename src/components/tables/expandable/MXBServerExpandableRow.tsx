@@ -156,8 +156,7 @@ const ServerRoster = ({ server }) => {
   }) => {
     const { data: riderData, isLoading } = useSWR(
       `https://connect.mxb-mods.com/2023/get_piboso.php?piboso=${id}`,
-      (url) => fetch(url).then((res) => res.json()),
-      { refreshInterval: 5000 }
+      (url) => fetch(url).then((res) => res.json())
     )
 
     if (isLoading) return <Spinner />
@@ -178,8 +177,7 @@ const ServerRoster = ({ server }) => {
   }) => {
     const { data: riderData, isLoading } = useSWR(
       `${process.env.NEXT_PUBLIC_API}/rider/${id}`,
-      (url) => fetch(url).then((res) => res.json()),
-      { refreshInterval: 5000 }
+      (url) => fetch(url).then((res) => res.json())
     )
 
     if (isLoading) return <Spinner />

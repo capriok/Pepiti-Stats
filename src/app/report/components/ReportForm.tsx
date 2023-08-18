@@ -38,7 +38,7 @@ export default function RiderReportForm({ events }: Props) {
       <div className="flex flex-col justify-center align-middle">
         <form action={submit} className="form-control w-full">
           {/* User Guid */}
-          <div className="mb-2 text-lg font-semibold">GUID</div>
+          <div className="mb-2 text-lg font-semibold">Your GUID</div>
           <input
             readOnly
             name="userGuid"
@@ -106,7 +106,7 @@ export function RiderFormPart2({ eventId }) {
 
   return (
     <>
-      <div className="mb-2 text-lg font-semibold">Rider</div>
+      <div className="mb-2 text-lg font-semibold">Rider at fault</div>
       <label className="label">
         <span className="label-text">
           <span className="text-red-500">* </span> Rider Name
