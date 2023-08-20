@@ -67,6 +67,7 @@ interface Props {
 export default function Tabs({
   items,
   wide,
+  defaultActive,
   onChange = function () {},
   renderChildren = true,
 }: Props) {
@@ -82,7 +83,7 @@ export default function Tabs({
     <>
       <TabsPrimitive.Tabs
         className={wide ? "w-full" : "w-fit"}
-        defaultValue={tabParam ? tabParam : items[0].key}
+        defaultValue={tabParam ? tabParam : defaultActive ? defaultActive : items[0].key}
         onValueChange={(key) => onChange(items.find((i) => i.key === key)!)}
       >
         <TabsList className={`grid w-full ${getGridSize(items.length)}`}>

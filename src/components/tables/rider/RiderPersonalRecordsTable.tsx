@@ -14,10 +14,12 @@ interface Props {
 }
 
 export default function RiderPersonalRecordsTable({ records }: Props) {
+  console.log(records)
+
   const data = records
     .map((record) => ({
       _id: record._id,
-      date: parseInt(record._id.slice(0, 8), 16) * 1000,
+      date: record.timestamp,
       track: record.track,
       bike: record.bike,
       averageSpeed: record.average_speed,
@@ -37,7 +39,8 @@ export default function RiderPersonalRecordsTable({ records }: Props) {
     {
       key: "date",
       label: "Date",
-      render: (date) => (dateIsValid(new Date(date)) ? new Date(date).toLocaleDateString() : "-"),
+      render: (date) =>
+        dateIsValid(new Date(date * 1000)) ? new Date(date * 1000).toLocaleDateString() : "-",
     },
     {
       key: "track",
