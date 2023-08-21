@@ -7,6 +7,7 @@ import MMRPill from "~/components/pills/MMRPill"
 import Table from "~/ui/Table"
 import Pill from "~/components/pills/Pill"
 import Link from "next/link"
+import { handleRaceGap } from "~/utils/handleRaceGap"
 
 interface Props {
   races: Array<any>
@@ -51,7 +52,7 @@ export default function RiderRacesTable({ races }: Props) {
     {
       key: "gap",
       label: "Gap",
-      render: (gap) => (gap ? handleLapTimes(gap) : "-"),
+      render: (gap) => (gap !== undefined ? handleRaceGap(gap) : "-"),
     },
     {
       key: "laps",

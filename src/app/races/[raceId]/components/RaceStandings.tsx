@@ -5,6 +5,7 @@ import Table from "~/ui/Table"
 import RiderSafetyStatsRow from "~/components/tables/expandable/RiderSafetyStatsRow"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
+import { handleRaceGap } from "~/utils/handleRaceGap"
 
 interface Props {
   standings: any
@@ -35,7 +36,7 @@ export default function RaceStandings({ standings }: Props) {
     {
       key: "gap",
       label: "Gap",
-      render: (gap) => (gap ? handleLapTimes(gap) : "-"),
+      render: (gap) => (gap !== undefined ? handleRaceGap(gap) : "-"),
     },
     {
       key: "raceTime",
