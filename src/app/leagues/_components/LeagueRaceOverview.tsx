@@ -9,6 +9,7 @@ import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 import { Alert, AlertDescription, AlertTitle } from "~/ui/Alert"
 import { Card } from "~/ui/Card"
+import { useEffect, useState } from "react"
 
 interface Props {
   user: User
@@ -18,7 +19,9 @@ interface Props {
 
 export default function LeagueRaceOverview({ user, race, eligibility }: Props) {
   console.log("%cLeagueRace", "color: steelblue", { user, race, eligibility })
+
   const isInRace = eligibility.race_joined === true
+  const raceTime = race.timestamp
 
   if (!user.isAdmin)
     return (
@@ -29,7 +32,7 @@ export default function LeagueRaceOverview({ user, race, eligibility }: Props) {
 
   return (
     <>
-      <LeagueRaceAlert isInRace={isInRace} />
+      <LeagueRaceAlert isInRace={isInRace} raceTime={raceTime} />
 
       <LeagueRaceInformation race={race} />
 
@@ -42,7 +45,17 @@ export default function LeagueRaceOverview({ user, race, eligibility }: Props) {
   )
 }
 
-const LeagueRaceAlert = ({ isInRace }: { isInRace: boolean }) => {
+const LeagueRaceAlert = ({ isInRace, raceTime }) => {
+  const [countdown, setCountdown] = useState(timeToGateDrop(raceTime))
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCountdown(timeToGateDrop(raceTime))
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [])
+
   if (!isInRace)
     return (
       <Alert className="mb-4">
@@ -56,12 +69,26 @@ const LeagueRaceAlert = ({ isInRace }: { isInRace: boolean }) => {
       </Alert>
     )
 
+  function timeToGateDrop(unixTimestamp: number): string {
+    const timeDifference = Math.max(0, Math.floor(unixTimestamp - Date.now() / 1000))
+
+    if (timeDifference <= 0) return "The race has finished!"
+
+    const seconds = timeDifference % 60
+    const minutes = Math.floor(timeDifference / 60) % 60
+    const hours = Math.floor(timeDifference / (60 * 60)) % 24
+    const days = Math.floor(timeDifference / (60 * 60 * 24))
+
+    return `Gate drop in: ${days}d ${hours}h ${minutes}m ${seconds}s`
+  }
+
   return (
     <Alert className="mb-4 border-primary/80">
       <CheckIcon size={20} />
       <AlertTitle>Heads Up!</AlertTitle>
-      <AlertDescription>
-        <div className="flex">You are Registered for the Race</div>
+      <AlertDescription className="flex justify-between">
+        <div>You are Registered for the Race</div>
+        <div>{countdown}</div>
       </AlertDescription>
     </Alert>
   )
