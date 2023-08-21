@@ -16,7 +16,7 @@ export default function ContactRecordsTable({ worldContacts, ...rest }: Props) {
       name: r.name,
       contacts: r.contact,
       laps: laps,
-      aware: laps,
+      ratio: Math.ceil((r.contact / laps) * 100) / 100,
     }
   })
   // console.log("%cContactRecordsTable", "color: steelblue", { worldContacts: data })
@@ -35,21 +35,13 @@ export default function ContactRecordsTable({ worldContacts, ...rest }: Props) {
       align: "right",
     },
     {
-      key: "laps",
+      key: "ratio",
       label: "Hits per lap",
-      render: (laps, row) => {
-        const ratio = row.contacts / laps
-        return (
-          <Pill
-            color={handleHPLColor(Math.ceil(ratio * 100) / 100)}
-            text={Math.ceil(ratio * 100) / 100}
-          />
-        )
-      },
+      render: (ratio) => <Pill color={handleHPLColor(ratio)} text={ratio} />,
     },
   ]
 
-  const sortKeys = ["contacts", "laps", "aware"]
+  const sortKeys = ["contacts", "ratio"]
 
   return (
     <div className="flex flex-col items-end">
