@@ -154,7 +154,10 @@ function AppNavigation({ user, notifications }) {
       return (
         <NavigationMenuItem>
           <NavigationMenuTrigger>
-            {label}
+            <div className="flex items-center justify-center gap-2">
+              {isAdmin && hasNotifications && <div className="h-2 w-2 rounded-full bg-red-500" />}
+              {label}
+            </div>
             {/* <Image src={user.avatar} alt="avatar" width={24} height={24} className="rounded-full" /> */}
           </NavigationMenuTrigger>
           <NavigationMenuContent>
@@ -209,18 +212,7 @@ function AppNavigation({ user, notifications }) {
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
-          <ProfileDropdown
-            label={
-              <>
-                <div className="flex items-center justify-center gap-2">
-                  {isAdmin && hasNotifications && (
-                    <div className="h-2 w-2 rounded-full bg-red-500" />
-                  )}
-                  <div>{user.name.slice(0, 12)}</div>
-                </div>
-              </>
-            }
-          />
+          <ProfileDropdown label={user.name.slice(0, 12)} />
         </div>
 
         {/* MOBILE */}
