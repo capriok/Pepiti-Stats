@@ -20,12 +20,13 @@ import { LogOut, ShieldAlert, User2 } from "lucide-react"
 
 interface Props {
   user: User
+  notifications: any
 }
 
-function NavBar({ user }: Props) {
+function NavBar({ user, notifications }: Props) {
   const pathname = usePathname()
-
   const innerCn = `navbar flex w-full justify-between ${layoutWidthMap.app}`
+
   return (
     <>
       <div className="sticky top-0 z-50 flex h-[65px] max-h-[65px] min-h-[65px] justify-center border-b border-accent/40 bg-base-200 backdrop-blur-lg">
@@ -43,7 +44,11 @@ function NavBar({ user }: Props) {
             />
           </Link>
           <div className="mr-2 flex w-fit justify-end gap-2 md:mr-0">
-            {pathname === "/" ? <LandingNavigation /> : <AppNavigation user={user} />}
+            {pathname === "/" ? (
+              <LandingNavigation />
+            ) : (
+              <AppNavigation user={user} notifications={notifications} />
+            )}
             <div className="hidden md:flex">
               <ThemeSwitch />
             </div>
@@ -63,7 +68,10 @@ interface Item {
   admin?: boolean
 }
 
-function AppNavigation({ user }) {
+function AppNavigation({ user, notifications }) {
+  const isAdmin = user.isAdmin
+  const hasNotifications = Object.keys(notifications).some((k) => notifications[k] > 0)
+
   const racingItems: Array<Item> = [
     {
       href: "/races",
@@ -146,7 +154,10 @@ function AppNavigation({ user }) {
       return (
         <NavigationMenuItem>
           <NavigationMenuTrigger>
-            {label}
+            <div className="flex items-center justify-center gap-2">
+              {isAdmin && hasNotifications && <div className="h-2 w-2 rounded-full bg-red-500" />}
+              {label}
+            </div>
             {/* <Image src={user.avatar} alt="avatar" width={24} height={24} className="rounded-full" /> */}
           </NavigationMenuTrigger>
           <NavigationMenuContent>

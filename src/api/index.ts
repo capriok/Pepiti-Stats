@@ -103,10 +103,8 @@ export async function GetLeagueRace(raceId: string, token: string): Promise<Leag
   const data = await fetcher(`/race/${raceId}`, token)
   return data
 }
-export async function GetLeagueEligibility(
-  leagueId: string,
-  token: string
-): Promise<LeagueEligibility> {
+// prettier-ignore
+export async function GetLeagueEligibility(leagueId: string, token: string): Promise<LeagueEligibility> {
   const data = await fetcher(`/league/${leagueId}/check`, token)
   return data
 }
@@ -127,19 +125,20 @@ export async function GetBlackListNonSR(): Promise<{ riders: Array<BlacklistRide
   return data
 }
 // prettier-ignore
-export async function GetAdminRiderReports(
-  token: string,
-  status?: string
-): Promise<{ results: Array<RiderReport> }> {
+export async function GetAdminRiderReports(token: string, status?: string): Promise<{ results: Array<RiderReport> }> {
   const data = await fetcher(`/rider/report/${status}`, token)
   return data
 }
 // prettier-ignore
-export async function GetAdminRiderAppeals(
-  token: string,
-  status?: string
-): Promise<{ results: Array<BanAppeal> }> {
+export async function GetAdminRiderAppeals(token: string, status?: string): Promise<{ results: Array<BanAppeal> }> {
   const data = await fetcher(`/rider/appeal/${status}`, token)
+  return data
+}
+export async function GetAdminNotifications(token: string): Promise<any> {
+  const riderReports = await fetcher(`/rider/report/open`, token)
+  const data = {
+    adminRiderReports: riderReports?.results?.length,
+  }
   return data
 }
 
