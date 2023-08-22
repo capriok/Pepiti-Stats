@@ -9,7 +9,7 @@ export const metadata = {
 
 import { Providers } from "./providers"
 import { Toaster } from "~/ui/Toaster"
-import GetAuthUser from "~/api"
+import GetAuthUser, { GetAdminNotifications } from "~/api"
 import NavBar from "~/components/Navbar"
 import Footer from "~/components/Footer"
 
@@ -22,13 +22,14 @@ interface Props {
 
 export default async function RootLayout(props: Props) {
   const user = await GetAuthUser()
+  const notifications = await GetAdminNotifications(user.token)
 
   return (
     <html lang="en" data-theme="light" suppressHydrationWarning>
       <body className={inter.className}>
         <Providers user={user}>
           <main className="flex min-h-screen flex-col">
-            <NavBar user={user} />
+            <NavBar user={user} notifications={notifications} />
             <div className="flex-1">
               {props.children}
               {props.modal}
