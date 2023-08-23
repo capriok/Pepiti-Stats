@@ -69,44 +69,12 @@ export async function deleteCookie() {
   })
 }
 
-// --
-// ? BAN APPEAL
-
-export async function postBanAppeal(formData: FormData) {
-  const body = {
-    by: formData.get("userGuid"),
-    appeal: formData.get("appeal"),
-  }
-
-  console.log("Action: postBanAppeal", body)
-
-  // ! Unsupported (Future feature)
-  return await new Promise((res, rej) => rej(new Error("Not Supported")))
-  // return await poster(`/appeal`, { method: "POST", body }).then(() => revalidatePath("/"))
-}
-
-// --
-// ? ADMIN APPEALS
-
-export async function dismissBanAppeal(formData: FormData) {
-  const appealId = formData.get("appealId")
-
-  console.log("Action: dismissAppeal", { appealId })
-
-  // ! Unsupported (Future feature)
-  return await new Promise((res, rej) => rej(new Error("Not Supported")))
-  // return await poster(`/appeal/${appealId}`, { method: "DELETE" }).then(() => revalidatePath("/"))
-}
-
-// --
 // ? RIDER REPORT
 
 export async function postRiderReport(formData: FormData) {
   const proofs: any = []
   for (let i = 1; i < 4; i++) {
     const proof = formData.get(`proof${i}`)
-    console.log(proof)
-
     if (proof) proofs.push(proof)
   }
   const body = {
@@ -122,7 +90,6 @@ export async function postRiderReport(formData: FormData) {
   return await poster(`/rider/report`, { method: "POST", body }).then(() => revalidatePath("/"))
 }
 
-// --
 // ? ADMIN REPORTS
 
 export async function dismissRiderReport(formData: FormData) {
@@ -134,18 +101,7 @@ export async function dismissRiderReport(formData: FormData) {
     revalidatePath("/")
   )
 }
-export async function dismissAbuseRiderReport(formData: FormData) {
-  const reportId = formData.get("reportId")
-  const userId = formData.get("userId")
 
-  console.log("Action: dismissAbuseRiderReport", { reportId })
-
-  // ! Unsupported (Future feature)
-  return await new Promise((res, rej) => rej(new Error("Not Supported")))
-  // return await poster(`/rider/report/${reportId}${userId}`, { method: "DELETE" }).then(() => revalidatePath("/"))
-}
-
-// --
 // ? RIDER BANS
 
 export async function banRider(formData: FormData) {
@@ -165,7 +121,6 @@ export async function unbanRider(formData: FormData) {
   return await fetcher(`/rider/${guid}/unban`).then(() => revalidatePath("/"))
 }
 
-// --
 // ? LEAGUES
 
 export async function joinLeague(formData: FormData) {
