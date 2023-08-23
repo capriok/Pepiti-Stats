@@ -27,7 +27,7 @@ const Managers = () => {
         <div className="my-4 text-xl font-semibold">Blacklists</div>
         <Link href="/admin/blacklists">
           <div className="group btn flex min-h-[75px] w-[300px] items-center justify-between border border-accent/40 bg-base-200 text-accent shadow-md hover:border-primary hover:bg-base-200">
-            <div className="dark:text-white">Blacklists</div>
+            <div className="dark:text-white">MXB Blacklists</div>
             <ScrollText className="group-hover:text-primary" />
           </div>
         </Link>
@@ -39,16 +39,6 @@ const Managers = () => {
           <div className="group btn flex min-h-[75px] w-[300px] items-center justify-between border border-accent/40 bg-base-200 text-accent shadow-md hover:border-primary hover:bg-base-200">
             <div className="dark:text-white">Rider Reports</div>
             <Shield className="group-hover:text-primary" />
-          </div>
-        </Link>
-      </div>
-
-      <div>
-        <div className="my-4 text-xl font-semibold">Bans</div>
-        <Link href="/admin/appeals">
-          <div className="group btn flex min-h-[75px] w-[300px] items-center justify-between border border-accent/40 bg-base-200 text-accent shadow-md hover:border-primary hover:bg-base-200">
-            <div className="dark:text-white">Ban Appeals</div>
-            <Hammer className="group-hover:text-primary" />
           </div>
         </Link>
       </div>

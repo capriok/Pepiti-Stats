@@ -5,6 +5,7 @@ import Image from "next/image"
 import Pill from "~/components/pills/Pill"
 import Table from "~/ui/Table"
 import { useToast, actions } from "../toast"
+import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 
 interface Props {
   servers: Array<MXBServer>
@@ -33,7 +34,7 @@ export default function MXBServersTable(props: Props) {
     {
       key: "name",
       label: "Name",
-      render: (name) => <span className="whitespace-nowrap">{name}</span>,
+      render: (name) => <span className="whitespace-nowrap">{handleRacismSanitization(name)}</span>,
     },
     {
       key: "track",
