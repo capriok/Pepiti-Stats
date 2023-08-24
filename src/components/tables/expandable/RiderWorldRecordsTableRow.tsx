@@ -43,7 +43,8 @@ const Tables = ({ rider }) => {
     <RiderWorldRecordsTable
       records={worldRecords}
       table={{
-        defaultPageSize: 100,
+        defaultPageSize: 10,
+        paginationEnabled: true,
       }}
     />
   )

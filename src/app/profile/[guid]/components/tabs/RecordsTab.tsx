@@ -43,7 +43,8 @@ const Tables = ({ rider }) => {
           <RiderWorldRecordsTable
             records={worldRecords}
             table={{
-              defaultPageSize: 100,
+              defaultPageSize: 20,
+              paginationEnabled: true,
             }}
           />
         </>
@@ -54,7 +55,6 @@ const Tables = ({ rider }) => {
       <RiderPersonalRecordsTable
         records={personalRecords}
         table={{
-          defaultPageSize: 5,
           paginationEnabled: true,
         }}
       />
