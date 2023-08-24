@@ -4,10 +4,9 @@ import { useEffect, useState } from "react"
 import useSWR from "swr"
 import Table, { TableOptions } from "~/ui/Table"
 import { TrackRecordsTable } from "~/components/tables/records/TrackRecordsTable"
-import { useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
-import { Button } from "~/ui/Button"
-import { ChevronsRight } from "lucide-react"
+import RiderWorldRecordsTableRow from "~/components/tables/expandable/RiderWorldRecordsTableRow"
 
 interface Props {
   trackList: any
@@ -17,6 +16,7 @@ interface Props {
 export default function TrackRecords(props: Props) {
   const { trackList } = props
 
+  const router = useRouter()
   const searchParams = useSearchParams()
   const trackParam = searchParams.get("track")
 
@@ -28,6 +28,7 @@ export default function TrackRecords(props: Props) {
 
   function handleTrackSelect(e) {
     setSelectedTrack(e.target.value)
+    router.replace(`/records/track?track=${e.target.value}`)
   }
 
   const Content = () => {
@@ -38,13 +39,18 @@ export default function TrackRecords(props: Props) {
 
     if (isLoading) return <SkeletonTable />
 
+    const expandable = {
+      render: (record) => <RiderWorldRecordsTableRow row={{ ...record, _id: record.rider_guid }} />,
+    }
+
     return (
       <TrackRecordsTable
         {...props.table}
         trackRecords={data.records}
-        resultsEnabled={false}
-        searchEnabled={false}
-        paginationEnabled={false}
+        resultsEnabled={true}
+        searchEnabled={true}
+        paginationEnabled={true}
+        expandable={expandable}
       />
     )
   }
@@ -54,15 +60,6 @@ export default function TrackRecords(props: Props) {
       <div className="group flex justify-between">
         <Link href={`/records/track?track=${selectedTrack}`} className="w-full">
           <div className="mb-2 text-lg font-semibold">Track Records</div>
-        </Link>
-        <Link
-          href="/records/track"
-          title="Explore track records"
-          className="hidden group-hover:flex"
-        >
-          <Button variant="ghost">
-            <ChevronsRight size={14} />
-          </Button>
         </Link>
       </div>
       <select
@@ -97,6 +94,7 @@ const SkeletonTable = () => (
     {_id: '0', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
   ]}
     // prettier-ignore
+    searchEnabled={true}
     columns={[
       { key: "rank", label: "Rank" },
       { key: "name", label: "Name" },
