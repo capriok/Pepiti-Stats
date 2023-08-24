@@ -9,7 +9,7 @@ export async function generateMetadata({ params: { top } }) {
 
   return {
     title: `Pepiti | Top Records`,
-    description: `Top ${dynamicTitleMap[top].title}`,
+    description: `${dynamicTitleMap[top].title}`,
   }
 }
 
@@ -22,7 +22,7 @@ export default async function Page({ params: { top } }) {
     <PageLayout
       width="app"
       header={{
-        title: `Top ${dynamicTitleMap[top].title}`,
+        title: `${dynamicTitleMap[top].title}`,
         extra: (
           <Link href="/records" className="no-underline">
             Go back

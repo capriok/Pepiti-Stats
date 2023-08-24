@@ -3,6 +3,22 @@
     {
       "meta": {
         "author": "Tooky",
+        "date": "08/23/2023",
+        "scope": "Page",
+        "type": "Addition",
+        "page": "/records/track?track=<trackname>"
+      },
+      "content": {
+        "description": "Added /records/track page to show fastest lap times for each track",
+        "link": "/records/track?track=Forest%20Raceway",
+        "attachments": [
+          "https://cdn.discordapp.com/attachments/1138590709545443409/1144128263975882792/image.png"
+        ]
+      }
+    },
+    {
+      "meta": {
+        "author": "Tooky",
         "date": "08/14/2023",
         "scope": "Component",
         "type": "Addition",
@@ -10,6 +26,7 @@
       },
       "content": {
         "description": "Added Copy to Clipboard Button to allow sharing servers from the /servers page",
+        "link": "/servers?id=93",
         "attachments": [
           "https://cdn.discordapp.com/attachments/1138590709545443409/1140786578566938634/image.png"
         ]
@@ -25,6 +42,7 @@
       },
       "content": {
         "description": "Added /servers page with live information aggregated from Pepiti Stats and INConnect by Insane",
+        "link": "/servers",
         "attachments": [
           "https://cdn.discordapp.com/attachments/1138590709545443409/1140785224784019466/image.png"
         ]
@@ -53,6 +71,7 @@
       },
       "content": {
         "description": "Dashboard Header's Rider Search input now allows searching by MXB GUID",
+        "link": "/dashboard",
         "attachments": [
           "https://cdn.discordapp.com/attachments/1138590709545443409/1138625916143145030/image.png",
           "https://cdn.discordapp.com/attachments/1138590709545443409/1138593662805225492/image.png"
@@ -69,6 +88,7 @@
       },
       "content": {
         "description": "Added Scatter Analysis Chart to a new Recent Race Analysis tab",
+        "link": "/races/647a7eb252ba8f591d874788",
         "attachments": [
           "https://cdn.discordapp.com/attachments/1138590709545443409/1138600818816335912/image.png"
         ]

@@ -1,7 +1,7 @@
 import Link from "next/link"
-import MMRPill from "~/components/pills/MMRPill"
-import RankTicTac from "~/components/pills/RankTicTac"
 import { Card, CardContent } from "~/ui/Card"
+import MMRPill from "~/components/pills/MMRPill"
+import RankTrophy from "~/components/pills/RankTrophy"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 
@@ -40,7 +40,7 @@ export default function RaceNotables({ race }: Props) {
               </Link>
             </div>
             <div>
-              <RankTicTac rank={2} />
+              <RankTrophy rank={2} size={16} />
             </div>
           </div>
         </div>
@@ -58,7 +58,7 @@ export default function RaceNotables({ race }: Props) {
               </Link>
             </div>
             <div>
-              <RankTicTac rank={3} />
+              <RankTrophy rank={3} size={16} />
             </div>
           </div>
         </div>

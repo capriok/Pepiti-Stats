@@ -1,9 +1,9 @@
 import useSwr from "swr"
 import RiderAvatar from "~/app/profile/[guid]/components/RiderAvatar"
+import { Card, CardContent, CardFooter } from "~/ui/Card"
 import MMRPill from "~/components/pills/MMRPill"
 import Pill from "~/components/pills/Pill"
-import RankTicTac from "~/components/pills/RankTicTac"
-import { Card, CardContent, CardFooter } from "~/ui/Card"
+import RankTrophy from "~/components/pills/RankTrophy"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 
 interface Props {
@@ -32,7 +32,7 @@ export default function WinnerCircle({ race }: Props) {
               <div className="mb-2 flex flex-col items-center justify-center whitespace-nowrap">
                 <div className="text-md font-semibold text-accent">Race Number</div>
                 <div className="flex items-center text-lg text-primary">
-                  <RankTicTac rank={1} />
+                  <RankTrophy rank={1} size={16} />
                   <div className="flex gap-1">
                     <div className="text-accent"># </div>
                     <div>{race.winner.raceNumber}</div>

@@ -8,6 +8,7 @@ import { dateIsValid } from "~/utils/dateIsValid"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
 import { handleSessionEnum } from "~/utils/handleSessionEnum"
+import Link from "next/link"
 
 interface Props {
   records: Array<any>
@@ -44,7 +45,7 @@ export default function RiderWorldRecordsTable({ records }: Props) {
     {
       key: "track",
       label: "Track",
-      render: (track) => (track ? track : "-"),
+      render: (track) => <Link href={`/records/track?track=${track}`}>{track ? track : "-"}</Link>,
     },
     {
       key: "lapTime",

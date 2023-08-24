@@ -2,33 +2,62 @@
 
 import React, { useState } from "react"
 import useSWR from "swr"
-import Table from "~/ui/Table"
+import Table, { TableOptions } from "~/ui/Table"
 import { TrackRecordsTable } from "~/components/tables/records/TrackRecordsTable"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import Link from "next/link"
+import { Button } from "~/ui/Button"
+import RiderWorldRecordsTableRow from "~/components/tables/expandable/RiderWorldRecordsTableRow"
 
 interface Props {
   trackList: any
+  table?: TableOptions
 }
 
-export default function TrackRecords({ trackList }: Props) {
-  const [selectedTrack, setSelectedTrack] = useState("Forest Raceway")
+export default function TrackRecords(props: Props) {
+  const { trackList } = props
 
-  const { data, error, isLoading } = useSWR(`/records/track/${selectedTrack}`)
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const trackParam = searchParams.get("track")
+  const isAtDashboard = pathname === "/dashboard"
+
+  const [selectedTrack, setSelectedTrack] = useState(trackParam ? trackParam : "Forest Raceway")
 
   function handleTrackSelect(e) {
     setSelectedTrack(e.target.value)
+    if (isAtDashboard) return
+    router.replace(`/records/track?track=${e.target.value}`)
   }
 
-  const Content = ({ data, error, isLoading }) => {
+  const Table = () => {
+    const { data, error, isLoading } = useSWR(`/records/track/${selectedTrack}`)
+
     if (error)
       return <div className="flex justify-center text-lg font-semibold">Failed to Load</div>
+
     if (isLoading) return <SkeletonTable />
 
-    return <TrackRecordsTable trackRecords={data.records} resultsEnabled={false} />
+    const expandable = {
+      render: (record) => <RiderWorldRecordsTableRow row={{ ...record, _id: record.rider_guid }} />,
+    }
+
+    return (
+      <TrackRecordsTable
+        {...props.table}
+        trackRecords={data.records}
+        resultsEnabled={false}
+        expandable={isAtDashboard ? undefined : expandable}
+      />
+    )
   }
 
   return (
-    <div className="overflow-auto md:w-full">
-      <div className="mb-2 text-lg font-semibold">Track Records</div>
+    <div className="w-full overflow-auto">
+      <Link href={`/records/track?track=${selectedTrack}`}>
+        <div className="mb-2 text-lg font-semibold">Track Records</div>
+      </Link>
       <select
         value={selectedTrack}
         className="select select-xs mb-2 w-full border-none bg-base-200 md:select-sm"
@@ -40,7 +69,7 @@ export default function TrackRecords({ trackList }: Props) {
           </option>
         ))}
       </select>
-      <Content data={data} error={error} isLoading={isLoading} />
+      <Table />
     </div>
   )
 }

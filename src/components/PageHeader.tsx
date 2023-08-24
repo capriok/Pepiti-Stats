@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation"
 import DonationBanner from "~/app/dashboard/components/DonationBanner"
 
 interface Props {
-  title: string
+  title: React.ReactNode | string
   width: string
   extra?: React.ReactNode
   subExtra?: React.ReactNode // this is temp until i have a better idea of what to do extend on
