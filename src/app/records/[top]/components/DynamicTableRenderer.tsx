@@ -1,5 +1,9 @@
 "use client"
 
+import { useEffect, useState } from "react"
+import useSwr from "swr"
+import Pill from "~/components/pills/Pill"
+import Spinner from "~/components/Spinner"
 import WorldRecordsTable from "~/components/tables/records/WorldRecordsTable"
 import RiderWorldRecordsTableRow from "~/components/tables/expandable/RiderWorldRecordsTableRow"
 import MMRRecordsTable from "~/components/tables/records/MMRRecordsTable"
@@ -63,7 +67,32 @@ const dynamicDataMap = {
   },
   bikes: {
     render: (records) => {
-      return <BikeRecordsTable worldBikes={records} {...tableProps} />
+      const Content = () => {
+        const { data: apiData, isLoading } = useSwr("/summary")
+        const [laps, setLaps] = useState(0)
+
+        useEffect(() => {
+          if (apiData) setLaps(apiData.laps)
+        }, [isLoading])
+
+        return (
+          <>
+            <div className="mb-4 flex justify-end gap-2">
+              <div className="text-accent">Total Laps</div>
+              {laps ? (
+                <Pill text={laps.toLocaleString()} color="primary" />
+              ) : (
+                <div className="min-h-[28px]">
+                  <Spinner />
+                </div>
+              )}
+            </div>
+            <BikeRecordsTable worldBikes={records} totalLaps={laps} {...tableProps} />
+          </>
+        )
+      }
+
+      return <Content />
     },
   },
   contacts: {

@@ -37,7 +37,7 @@ export default function ContactRecordsTable({ worldContacts, ...rest }: Props) {
     {
       key: "ratio",
       label: "Hits per lap",
-      render: (ratio) => <Pill color={handleHPLColor(ratio)} text={ratio} />,
+      render: (ratio) => <Pill color={handleHPLColor(ratio)} text={ratio.toFixed(2)} />,
     },
   ]
 
@@ -50,7 +50,7 @@ export default function ContactRecordsTable({ worldContacts, ...rest }: Props) {
   )
 }
 
-function handleHPLColor(n: number) {
+export function handleHPLColor(n: number) {
   if (n < 0) return ""
   if (n >= 0.9) {
     return "red"
