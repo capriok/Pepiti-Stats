@@ -31,7 +31,7 @@ export default async function Page() {
 
         <TopRecords worldRecords={worldRecords} worldMMR={worldMMR} worldSR={worldSR} />
 
-        <TrackRecords trackList={trackList.tracks} />
+        <TrackRecords trackList={trackList.tracks.sort((a, b) => a.name.localeCompare(b.name))} />
       </div>
     </PageLayout>
   )

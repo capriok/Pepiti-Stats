@@ -133,7 +133,6 @@ const Table: React.FC<TableProps> = (props) => {
               dir: sortDirection as SortDirection,
               key: sortDirection === SortDirection.None ? null : key,
             }
-
             console.log("%cTable: Sorting", "color: goldenrod", sort)
             setSorting(sort)
           }
@@ -181,7 +180,11 @@ const Table: React.FC<TableProps> = (props) => {
   const startIndex = page * pageSize
   const endIndex = startIndex + pageSize
   const sortedData = sorting.dir !== SortDirection.None ? sorting.data : data
-  const paginatedData = paginationEnabled ? sortedData.slice(startIndex, endIndex) : sortedData
+  const paginatedData = !paginationEnabled
+    ? sortedData.slice(startIndex, defaultPageSize)
+    : paginationEnabled
+    ? sortedData.slice(startIndex, endIndex)
+    : sortedData
 
   /** maps prepped data to table rows in respective column */
   const TableRows = () => {
