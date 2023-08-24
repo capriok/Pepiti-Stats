@@ -1,6 +1,15 @@
 import Link from "next/link"
 import PageLayout from "~/components/PageLayout"
-import { Bike, Crosshair, Crown, HardHat, Timer } from "lucide-react"
+import {
+  Bike,
+  CloudLightning,
+  Crosshair,
+  Crown,
+  FastForward,
+  Flag,
+  HardHat,
+  Timer,
+} from "lucide-react"
 
 export async function generateMetadata() {
   return {
@@ -45,7 +54,7 @@ const Records = () => {
         <Link href="/records/riders">
           <div className="group btn flex w-[300px] justify-between  border border-accent/40 bg-base-200 text-accent shadow-md hover:border-primary hover:bg-base-200">
             <div className="dark:text-white">Record Holders</div>
-            <Timer className="group-hover:text-primary" />
+            <Flag className="group-hover:text-primary" />
           </div>
         </Link>
       </div>

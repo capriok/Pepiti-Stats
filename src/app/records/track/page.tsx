@@ -17,9 +17,9 @@ export default async function Page() {
     <PageLayout
       width="app"
       header={{
-        title: "Pepiti Records",
+        title: "Track Records",
         extra: (
-          <Link href="/dashboard" className="no-underline">
+          <Link href="/records" className="no-underline">
             Go back
           </Link>
         ),
@@ -29,7 +29,6 @@ export default async function Page() {
         trackList={trackList.tracks}
         table={{
           defaultPageSize: 100,
-          searchEnabled: false,
         }}
       />
     </PageLayout>

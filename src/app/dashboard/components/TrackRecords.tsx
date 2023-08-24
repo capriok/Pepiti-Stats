@@ -7,6 +7,7 @@ import { TrackRecordsTable } from "~/components/tables/records/TrackRecordsTable
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { Button } from "~/ui/Button"
+import RiderWorldRecordsTableRow from "~/components/tables/expandable/RiderWorldRecordsTableRow"
 
 interface Props {
   trackList: any
@@ -38,7 +39,18 @@ export default function TrackRecords(props: Props) {
 
     if (isLoading) return <SkeletonTable />
 
-    return <TrackRecordsTable {...props.table} trackRecords={data.records} resultsEnabled={false} />
+    const expandable = {
+      render: (record) => <RiderWorldRecordsTableRow row={{ ...record, _id: record.rider_guid }} />,
+    }
+
+    return (
+      <TrackRecordsTable
+        {...props.table}
+        trackRecords={data.records}
+        resultsEnabled={false}
+        expandable={isAtDashboard ? undefined : expandable}
+      />
+    )
   }
 
   return (
