@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import { useEffect, useState } from "react"
 import useSWR from "swr"
 import Table, { TableOptions } from "~/ui/Table"
 import { TrackRecordsTable } from "~/components/tables/records/TrackRecordsTable"
@@ -8,6 +8,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { Button } from "~/ui/Button"
 import RiderWorldRecordsTableRow from "~/components/tables/expandable/RiderWorldRecordsTableRow"
+import { ChevronsRight } from "lucide-react"
 
 interface Props {
   trackList: any
@@ -25,13 +26,17 @@ export default function TrackRecords(props: Props) {
 
   const [selectedTrack, setSelectedTrack] = useState(trackParam ? trackParam : "Forest Raceway")
 
+  useEffect(() => {
+    if (trackParam) setSelectedTrack(trackParam)
+  }, [trackParam])
+
   function handleTrackSelect(e) {
     setSelectedTrack(e.target.value)
     if (isAtDashboard) return
     router.replace(`/records/track?track=${e.target.value}`)
   }
 
-  const Table = () => {
+  const Content = () => {
     const { data, error, isLoading } = useSWR(`/records/track/${selectedTrack}`)
 
     if (error)
@@ -48,16 +53,31 @@ export default function TrackRecords(props: Props) {
         {...props.table}
         trackRecords={data.records}
         resultsEnabled={false}
+        searchEnabled={isAtDashboard ? false : true}
         expandable={isAtDashboard ? undefined : expandable}
+        paginationEnabled={isAtDashboard ? false : true}
       />
     )
   }
 
   return (
     <div className="w-full overflow-auto">
-      <Link href={`/records/track?track=${selectedTrack}`}>
-        <div className="mb-2 text-lg font-semibold">Track Records</div>
-      </Link>
+      <div className="group flex justify-between">
+        <Link href={`/records/track?track=${selectedTrack}`} className="w-full">
+          <div className="mb-2 text-lg font-semibold">Track Records</div>
+        </Link>
+        {isAtDashboard && (
+          <Link
+            href="/records/track"
+            title="Explore track records"
+            className="hidden group-hover:flex"
+          >
+            <Button variant="ghost">
+              <ChevronsRight size={14} />
+            </Button>
+          </Link>
+        )}
+      </div>
       <select
         value={selectedTrack}
         className="select select-xs mb-2 w-full border-none bg-base-200 md:select-sm"
@@ -69,7 +89,7 @@ export default function TrackRecords(props: Props) {
           </option>
         ))}
       </select>
-      <Table />
+      <Content />
     </div>
   )
 }
@@ -78,16 +98,16 @@ const SkeletonTable = () => (
   <Table
     // prettier-ignore
     data={[
-    {_id: '1', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '2', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '3', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '4', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '5', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '6', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '7', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '8', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '9', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '0', rank:"-", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '1', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '2', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '3', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '4', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '5', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '6', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '7', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '8', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '9', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '0', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
   ]}
     // prettier-ignore
     searchEnabled={true}

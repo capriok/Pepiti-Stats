@@ -1,15 +1,6 @@
 import Link from "next/link"
 import PageLayout from "~/components/PageLayout"
-import {
-  Bike,
-  CloudLightning,
-  Crosshair,
-  Crown,
-  FastForward,
-  Flag,
-  HardHat,
-  Timer,
-} from "lucide-react"
+import { Bike, Crosshair, Crown, HardHat, Timer, Trophy } from "lucide-react"
 
 export async function generateMetadata() {
   return {
@@ -54,7 +45,7 @@ const Records = () => {
         <Link href="/records/riders">
           <div className="group btn flex w-[300px] justify-between  border border-accent/40 bg-base-200 text-accent shadow-md hover:border-primary hover:bg-base-200">
             <div className="dark:text-white">Record Holders</div>
-            <Flag className="group-hover:text-primary" />
+            <Trophy className="group-hover:text-primary" />
           </div>
         </Link>
       </div>
@@ -63,7 +54,7 @@ const Records = () => {
         <div className="my-4 text-xl font-semibold">MMR</div>
         <Link href="/records/mmr">
           <div className="group btn flex w-[300px] justify-between  border border-accent/40 bg-base-200 text-accent shadow-md hover:border-primary hover:bg-base-200">
-            <div className="dark:text-white">Top MMR Rankings</div>
+            <div className="dark:text-white">MMR Rankings</div>
             <Crown className="group-hover:text-primary" />
           </div>
         </Link>
@@ -73,7 +64,7 @@ const Records = () => {
         <div className="my-4 text-xl font-semibold">SR</div>
         <Link href="/records/sr">
           <div className="group btn flex w-[300px] justify-between  border border-accent/40 bg-base-200 text-accent shadow-md hover:border-primary hover:bg-base-200">
-            <div className="dark:text-white">Top SR Rankings</div>
+            <div className="dark:text-white">Safety Rankings</div>
             <HardHat className="group-hover:text-primary" />
           </div>
         </Link>
@@ -83,7 +74,7 @@ const Records = () => {
         <div className="my-4 text-xl font-semibold">Bikes</div>
         <Link href="/records/bikes">
           <div className="group btn flex w-[300px] justify-between  border border-accent/40 bg-base-200 text-accent shadow-md hover:border-primary hover:bg-base-200">
-            <div className="dark:text-white">Bike Lap Totals</div>
+            <div className="dark:text-white">Bike Lap Records</div>
             <Bike className="group-hover:text-primary" />
           </div>
         </Link>
@@ -93,7 +84,7 @@ const Records = () => {
         <div className="my-4 text-xl font-semibold">Contacts</div>
         <Link href="/records/contacts">
           <div className="group btn flex w-[300px] justify-between  border border-accent/40 bg-base-200 text-accent shadow-md hover:border-primary hover:bg-base-200">
-            <div className="dark:text-white">Top Contact Riders</div>
+            <div className="dark:text-white">Contact Records</div>
             <Crosshair className="group-hover:text-primary" />
           </div>
         </Link>
