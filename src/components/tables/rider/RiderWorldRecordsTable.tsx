@@ -46,7 +46,11 @@ export default function RiderWorldRecordsTable({ records, table }: Props) {
     {
       key: "track",
       label: "Track",
-      render: (track) => <Link href={`/records/track?track=${track}`}>{track ? track : "-"}</Link>,
+      render: (track) => (
+        <Link href={`/records/track?track=${track}`} className="font-semibold text-primary/80">
+          {track ? track : "-"}
+        </Link>
+      ),
     },
     {
       key: "lapTime",
