@@ -8,6 +8,7 @@ import BikeTicTac from "~/components/pills/BikeTicTac"
 import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
 import Image from "next/image"
 import { handleSessionEnum } from "~/utils/handleSessionEnum"
+import Link from "next/link"
 
 interface Props {
   records: Array<any>
@@ -44,7 +45,11 @@ export default function RiderPersonalRecordsTable({ records, table }: Props) {
     {
       key: "track",
       label: "Track",
-      render: (track) => (track ? track : "-"),
+      render: (track) => (
+        <Link href={`/records/track?track=${track}`} className="font-semibold text-primary/80">
+          {track ? track : "-"}
+        </Link>
+      ),
     },
     {
       key: "lapTime",

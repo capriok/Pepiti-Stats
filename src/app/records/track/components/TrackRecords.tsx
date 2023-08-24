@@ -104,5 +104,8 @@ const SkeletonTable = () => (
       { key: "split2", label: "Split 2" },
       { key: "bike", label: "Bike" },
     ]}
+    expandable={{
+      render: () => <></>,
+    }}
   />
 )
