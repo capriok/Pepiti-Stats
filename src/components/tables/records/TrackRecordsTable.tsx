@@ -33,11 +33,6 @@ export const TrackRecordsTable = ({ trackRecords, ...rest }: Props) => {
       render: (lapTime) => handleLapTimes(lapTime),
     },
     {
-      key: "average_speed",
-      label: "Avg Speed",
-      render: (averageSpeed) => handleAverageSpeed(averageSpeed),
-    },
-    {
       key: "split_1",
       label: "Split 1",
       render: (split) => handleLapTimes(split),
@@ -46,6 +41,11 @@ export const TrackRecordsTable = ({ trackRecords, ...rest }: Props) => {
       key: "split_2",
       label: "Split 2",
       render: (split) => handleLapTimes(split),
+    },
+    {
+      key: "average_speed",
+      label: "Avg Speed",
+      render: (averageSpeed) => handleAverageSpeed(averageSpeed),
     },
     {
       key: "bike",
