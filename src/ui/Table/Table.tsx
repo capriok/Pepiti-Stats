@@ -254,6 +254,9 @@ const Table: React.FC<TableProps> = (props) => {
     setPage(0)
   }
 
+  console.log(pageSize)
+  console.log(paginatedData.length >= pageSize)
+
   return (
     <div className="w-full">
       <div className="w-full overflow-x-auto rounded-lg">
@@ -276,7 +279,7 @@ const Table: React.FC<TableProps> = (props) => {
           </tbody>
         </table>
       </div>
-      {paginationEnabled && (
+      {paginationEnabled && paginatedData.length >= pageSize && (
         <div className="mt-4 flex items-center justify-between gap-2 px-3 text-sm">
           <div className="flex flex-col gap-2 md:flex-row">
             <div className="whitespace-nowrap">
