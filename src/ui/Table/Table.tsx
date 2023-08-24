@@ -98,7 +98,7 @@ const Table: React.FC<TableProps> = (props) => {
         render: (_, row) => {
           const rank = data.find((d) => row._id === d._id)!.rank
           return (
-            <div className="flex items-center justify-start text-base font-medium">
+            <div className="flex items-center justify-start">
               <RankTicTac rank={rank} />
               <div className="py-1">{rank}</div>
             </div>
@@ -224,7 +224,7 @@ const Table: React.FC<TableProps> = (props) => {
                 return (
                   <td key={dataKey} className={rowCn}>
                     <div className={"flex min-h-[45px] items-center font-medium"}>
-                      {renderer ? renderer(value, row) : value.toLocaleString()}
+                      {renderer ? renderer(value, row, i) : value.toLocaleString()}
                     </div>
                   </td>
                 )

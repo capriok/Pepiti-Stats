@@ -15,13 +15,17 @@ export const TrackRecordsTable = ({ trackRecords, ...rest }: Props) => {
     ...r,
     name: r.rider_name,
   }))
-  // console.log("%cTrackRecordsTable", "color: steelblue", { trackRecords: data })
+  console.log("%cTrackRecordsTable", "color: steelblue", { trackRecords: data })
 
   const columns = [
     {
       key: "name",
       label: "Name",
-      render: (name, row) => <RiderLink href={`/profile/${row.rider_guid}`} name={name} />,
+      render: (name, row, index) => (
+        <div className={`${index < 3 ? "py-4" : ""}`}>
+          <RiderLink href={`/profile/${row.rider_guid}`} name={name} />
+        </div>
+      ),
     },
     {
       key: "lap_time",

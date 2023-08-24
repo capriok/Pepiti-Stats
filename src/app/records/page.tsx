@@ -31,6 +31,16 @@ const Records = () => {
   return (
     <div className="grid place-items-center gap-2 md:mt-6 md:px-4">
       <div>
+        <div className="my-4 text-xl font-semibold">Track Records</div>
+        <Link href="/records/track">
+          <div className="group btn flex w-[300px] justify-between  border border-accent/40 bg-base-200 text-accent shadow-md hover:border-primary hover:bg-base-200">
+            <div className="dark:text-white">Fastest Laps</div>
+            <Timer className="group-hover:text-primary" />
+          </div>
+        </Link>
+      </div>
+
+      <div>
         <div className="my-4 text-xl font-semibold">World Records</div>
         <Link href="/records/riders">
           <div className="group btn flex w-[300px] justify-between  border border-accent/40 bg-base-200 text-accent shadow-md hover:border-primary hover:bg-base-200">

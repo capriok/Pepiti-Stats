@@ -19,7 +19,7 @@ export interface TableData {
 export interface TableColumn {
   key: string
   label: string | JSX.Element
-  render?: (value: any, row: TableData) => any
+  render?: (value: any, row: TableData, i: number) => any
   width?: string
 }
 
