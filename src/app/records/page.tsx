@@ -71,21 +71,21 @@ const Records = () => {
       </div>
 
       <div>
-        <div className="my-4 text-xl font-semibold">Bikes</div>
-        <Link href="/records/bikes">
+        <div className="my-4 text-xl font-semibold">Contacts</div>
+        <Link href="/records/contacts">
           <div className="group btn flex w-[300px] justify-between  border border-accent/40 bg-base-200 text-accent shadow-md hover:border-primary hover:bg-base-200">
-            <div className="dark:text-white">Bike Lap Records</div>
-            <Bike className="group-hover:text-primary" />
+            <div className="dark:text-white">Contact Rankings</div>
+            <Crosshair className="group-hover:text-primary" />
           </div>
         </Link>
       </div>
 
       <div>
-        <div className="my-4 text-xl font-semibold">Contacts</div>
-        <Link href="/records/contacts">
+        <div className="my-4 text-xl font-semibold">Bikes</div>
+        <Link href="/records/bikes">
           <div className="group btn flex w-[300px] justify-between  border border-accent/40 bg-base-200 text-accent shadow-md hover:border-primary hover:bg-base-200">
-            <div className="dark:text-white">Contact Records</div>
-            <Crosshair className="group-hover:text-primary" />
+            <div className="dark:text-white">Bike Lap Rankings</div>
+            <Bike className="group-hover:text-primary" />
           </div>
         </Link>
       </div>
