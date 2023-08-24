@@ -10,9 +10,9 @@ import {
   TableData,
   TableOptions,
 } from "."
-import { ChevronsUpDown, ChevronUp, ChevronDown, Plus, Minus, Trophy } from "lucide-react"
-import RankTicTac from "~/components/pills/RankTicTac"
+import { ChevronsUpDown, ChevronUp, ChevronDown, Plus, Minus } from "lucide-react"
 import { Button } from "../Button"
+import RankTrophy from "~/components/pills/RankTrophy"
 
 interface TableProps extends TableOptions {
   data: Array<TableData>
@@ -99,7 +99,7 @@ const Table: React.FC<TableProps> = (props) => {
           const rank = data.find((d) => row._id === d._id)!.rank
           return (
             <div className="flex items-center justify-start">
-              <RankTicTac rank={rank} />
+              <RankTrophy rank={rank} />
               <div className="py-1">{rank}</div>
             </div>
           )

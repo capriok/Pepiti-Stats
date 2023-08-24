@@ -22,7 +22,7 @@ export const TrackRecordsTable = ({ trackRecords, ...rest }: Props) => {
       key: "name",
       label: "Name",
       render: (name, row, index) => (
-        <div className={`${index < 3 ? "py-4" : ""}`}>
+        <div className={`${index < 3 ? "py-4" : ""} whitespace-nowrap`}>
           <RiderLink href={`/profile/${row.rider_guid}`} name={name} />
         </div>
       ),
@@ -50,7 +50,11 @@ export const TrackRecordsTable = ({ trackRecords, ...rest }: Props) => {
     {
       key: "bike",
       label: "Bike",
-      render: (bike) => <BikeTicTac bike={bike} />,
+      render: (bike) => (
+        <div className="whitespace-nowrap">
+          <BikeTicTac bike={bike} />
+        </div>
+      ),
     },
   ]
 
