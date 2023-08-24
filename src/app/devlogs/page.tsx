@@ -4,6 +4,7 @@ import OverlayableImage from "~/components/OverlayableImage"
 import { Card, CardContent, CardFooter, CardHeader } from "~/ui/Card"
 
 import devUpdates from "@/data/development-updates.json"
+import { Eye } from "lucide-react"
 
 export const metadata = {
   title: "Pepiti | Development Updates",
@@ -51,6 +52,15 @@ export default function Page() {
               <div className="mb-2 font-semibold text-accent">Description</div>
               <div>{entry.content.description}</div>
             </CardContent>
+
+            {entry.content.link && (
+              <CardContent className="mt-2 flex items-center gap-2 text-sm">
+                <div className="font-semibold text-accent">Link</div>
+                <Link href={entry.content.link}>
+                  <Eye size={16} />
+                </Link>
+              </CardContent>
+            )}
 
             <CardContent className="mt-2 flex flex-col items-start">
               {entry.content.attachments.length > 0 && (

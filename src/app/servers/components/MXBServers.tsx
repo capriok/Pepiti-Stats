@@ -90,12 +90,13 @@ const ServerTableRenderer = ({ global, servers }) => {
   const searchParams = useSearchParams()
   const idParam = searchParams.get("id")
 
+  console.log(idParam)
   const [expandedRowId, setExpandedRow] = useState<any>(idParam)
 
   useEffect(() => {
     if (global) setExpandedRow(undefined)
 
-    return () => setExpandedRow(undefined)
+    return () => global && setExpandedRow(undefined)
   }, [global])
 
   const onExpand = (row) => {
@@ -123,8 +124,6 @@ const ServerTableRenderer = ({ global, servers }) => {
   }
 
   const PepitiServers = ({ servers, expandable }) => {
-    // return <MXBServersTable servers={servers} expandable={expandable} />
-
     const { data: pepitiServers, isLoading } = useSWR(
       "https://projects.mxb-mods.com/mxbjson/servers/?search=pepiti&server_type=pepiti&sortby=num_clients",
       (url) => fetch(url).then((res) => res.json()),
@@ -137,6 +136,8 @@ const ServerTableRenderer = ({ global, servers }) => {
 
     return <MXBServersTable servers={clientFetchedServers} expandable={expandable} />
   }
+
+  console.log(expandedRowId)
 
   return (
     <CardContent>
