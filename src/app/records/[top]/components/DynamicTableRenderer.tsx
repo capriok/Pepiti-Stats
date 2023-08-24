@@ -11,7 +11,9 @@ import RiderRecentRacesTableRow from "~/components/tables/expandable/RiderRecent
 import SRRecordsTable from "~/components/tables/records/SRRecordsTable"
 import RiderSafetyStatsRow from "~/components/tables/expandable/RiderSafetyStatsRow"
 import BikeRecordsTable from "~/components/tables/records/BikeRecordsTable"
-import ContactRecordsTable from "~/components/tables/records/ContactRecordsTable"
+import ContactRecordsTable, {
+  handleHPLColor,
+} from "~/components/tables/records/ContactRecordsTable"
 
 export default function DynamicTableRenderer({ top, records }) {
   return dynamicDataMap[top].render(records)
@@ -60,6 +62,30 @@ const dynamicDataMap = {
           expandable={{
             render: (row) => <RiderSafetyStatsRow row={row} />,
           }}
+          additionalColumns={[
+            {
+              key: "ratio",
+              label: "Hits per lap",
+              render: (ratio) => <Pill color={handleHPLColor(ratio)} text={ratio.toFixed(2)} />,
+            },
+          ]}
+          {...tableProps}
+        />
+      )
+    },
+  },
+  contacts: {
+    render: (records) => {
+      return (
+        <ContactRecordsTable
+          worldContacts={records}
+          additionalColumns={[
+            {
+              key: "ratio",
+              label: "Hits per lap",
+              render: (ratio) => <Pill color={handleHPLColor(ratio)} text={ratio.toFixed(2)} />,
+            },
+          ]}
           {...tableProps}
         />
       )
@@ -93,11 +119,6 @@ const dynamicDataMap = {
       }
 
       return <Content />
-    },
-  },
-  contacts: {
-    render: (records) => {
-      return <ContactRecordsTable worldContacts={records} {...tableProps} />
     },
   },
 }

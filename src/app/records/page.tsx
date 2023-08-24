@@ -31,7 +31,7 @@ const Records = () => {
   return (
     <div className="grid place-items-center gap-2 md:mt-6 md:px-4">
       <div>
-        <div className="my-4 text-xl font-semibold">Track Records</div>
+        <div className="mb-2 mt-6 text-xl font-semibold">Track Records</div>
         <Link href="/records/track">
           <div className="group btn flex w-[300px] justify-between  border border-accent/40 bg-base-200 text-accent shadow-md hover:border-primary hover:bg-base-200">
             <div className="dark:text-white">Fastest Laps</div>
@@ -41,7 +41,7 @@ const Records = () => {
       </div>
 
       <div>
-        <div className="my-4 text-xl font-semibold">World Records</div>
+        <div className="mb-2 mt-6 text-xl font-semibold">World Records</div>
         <Link href="/records/riders">
           <div className="group btn flex w-[300px] justify-between  border border-accent/40 bg-base-200 text-accent shadow-md hover:border-primary hover:bg-base-200">
             <div className="dark:text-white">Record Holders</div>
@@ -51,27 +51,27 @@ const Records = () => {
       </div>
 
       <div>
-        <div className="my-4 text-xl font-semibold">MMR</div>
+        <div className="mb-2 mt-6 text-xl font-semibold">MMR Rankings</div>
         <Link href="/records/mmr">
           <div className="group btn flex w-[300px] justify-between  border border-accent/40 bg-base-200 text-accent shadow-md hover:border-primary hover:bg-base-200">
-            <div className="dark:text-white">MMR Rankings</div>
+            <div className="dark:text-white">Matchmaking Rating</div>
             <Crown className="group-hover:text-primary" />
           </div>
         </Link>
       </div>
 
       <div>
-        <div className="my-4 text-xl font-semibold">SR</div>
+        <div className="mb-2 mt-6 text-xl font-semibold">Safety Rankings</div>
         <Link href="/records/sr">
           <div className="group btn flex w-[300px] justify-between  border border-accent/40 bg-base-200 text-accent shadow-md hover:border-primary hover:bg-base-200">
-            <div className="dark:text-white">Safety Rankings</div>
+            <div className="dark:text-white">Safety Rating</div>
             <HardHat className="group-hover:text-primary" />
           </div>
         </Link>
       </div>
 
       <div>
-        <div className="my-4 text-xl font-semibold">Contacts</div>
+        <div className="mb-2 mt-6 text-xl font-semibold">Contacts</div>
         <Link href="/records/contacts">
           <div className="group btn flex w-[300px] justify-between  border border-accent/40 bg-base-200 text-accent shadow-md hover:border-primary hover:bg-base-200">
             <div className="dark:text-white">Contact Rankings</div>
@@ -81,7 +81,7 @@ const Records = () => {
       </div>
 
       <div>
-        <div className="my-4 text-xl font-semibold">Bikes</div>
+        <div className="mb-2 mt-6 text-xl font-semibold">Bikes</div>
         <Link href="/records/bikes">
           <div className="group btn flex w-[300px] justify-between  border border-accent/40 bg-base-200 text-accent shadow-md hover:border-primary hover:bg-base-200">
             <div className="dark:text-white">Bike Lap Rankings</div>

@@ -1,15 +1,14 @@
 "use client"
 
 import RiderLink from "~/components/RiderLink"
-import Table, { TableOptions } from "~/ui/Table"
-import { handleHPLColor } from "./ContactRecordsTable"
-import Pill from "~/components/pills/Pill"
+import Table, { TableColumn, TableOptions } from "~/ui/Table"
 
 interface Props extends TableOptions {
   worldSR: any
+  additionalColumns?: TableColumn[]
 }
 
-export default function SRRecordsTable({ worldSR, ...rest }: Props) {
+export default function SRRecordsTable({ worldSR, additionalColumns = [], ...rest }: Props) {
   const data: any = worldSR.riders.map((r) => {
     const laps = Object.keys(r.bikes).reduce((acc, curr) => acc + r.bikes[curr].laps, 0)
     return {
@@ -34,11 +33,7 @@ export default function SRRecordsTable({ worldSR, ...rest }: Props) {
       label: "Rating",
       align: "right",
     },
-    {
-      key: "ratio",
-      label: "Hits per lap",
-      render: (ratio) => <Pill color={handleHPLColor(ratio)} text={ratio.toFixed(2)} />,
-    },
+    ...additionalColumns,
   ]
 
   const sortKeys = ["rating", "ratio"]
