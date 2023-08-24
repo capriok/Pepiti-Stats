@@ -18,7 +18,7 @@ export default function LeagueList({ leagues }: Props) {
   if (!user.isAdmin)
     return (
       <div>
-        <center className="text-sm text-primary-content">Admin Only, Coming Soon</center>
+        <center className="text-sm text-primary-content">Coming Soon ™</center>
       </div>
     )
 
