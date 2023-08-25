@@ -82,12 +82,11 @@ const BanAppealButtons = () => {
   const router = useRouter()
 
   return (
-    <div className="mb-4 flex w-fit flex-wrap justify-center gap-2 md:w-full md:justify-end">
-      <Button variant="outline" disabled={true} onClick={() => router.push(`/appeal`)}>
-        On-Site Appeal
-      </Button>
+    <div className="mb-4 flex w-fit justify-center gap-2 md:w-full md:justify-end">
       <Link target="_blank" rel="noopener noreferrer" href="https://discord.com/invite/mx-bikes">
-        <Button variant="outline">Discord Appeal</Button>
+        <Button variant="outline" className="bg-base-200">
+          Discord Appeal
+        </Button>
       </Link>
     </div>
   )

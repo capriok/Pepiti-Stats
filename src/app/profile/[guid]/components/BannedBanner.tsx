@@ -14,7 +14,7 @@ export default function BannedBanner({ banned, reason }) {
 
   return (
     banned && (
-      <Alert className="mb-8 border-error">
+      <Alert className={`mb-8 ${isSrBan ? "border-warning" : "border-error"}`}>
         <Hammer size={20} />
         <AlertTitle className="text-md mb-4">{handleReasonRemedy(reason)}.</AlertTitle>
         <AlertDescription className="mb-4">
