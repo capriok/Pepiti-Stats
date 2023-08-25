@@ -7,63 +7,19 @@ import { RiderProfile } from "./components/RiderProfile"
 export async function generateMetadata({ params }) {
   const rider = await GetRider(params.guid)
 
-  if (!rider) {
-    return {
-      title: `Pepiti | Profile`,
-      description: "Pepiti Rider Profile Not Found.",
-    }
-  }
+  const bannedDescription = `Rider: ${rider?.name}
+Banned: True
+Reason: ${rider?.banned_by}`
 
-  const bannedDescription = (
-    <div className="flex gap-2">
-      <div>
-        <div className="font-semibold text-accent">Banned</div>
-        <div className="mt-2">True</div>
-      </div>
-
-      <div>
-        <div className="font-semibold text-accent">Reason</div>
-        <div className="mt-2">{rider.banned_by}</div>
-      </div>
-    </div>
-  )
-
-  const riderDescription = (
-    <div className="flex flex-col gap-2">
-      <div>
-        <div>
-          <div className="font-semibold text-accent">Rider</div>
-          <div className="mt-2">{rider?.name}</div>
-        </div>
-
-        <div>
-          <div className="font-semibold text-accent">Online</div>
-          <div className="mt-2">{rider?.online}</div>
-        </div>
-      </div>
-
-      <div>
-        <div>
-          <div className="font-semibold text-accent">MMR</div>
-          <div className="mt-2">{rider?.MMR}</div>
-        </div>
-
-        <div>
-          <div className="font-semibold text-accent">SR</div>
-          <div className="mt-2">{rider?.SR}</div>
-        </div>
-
-        <div>
-          <div className="font-semibold text-accent">Contacts</div>
-          <div className="mt-2">{rider?.contact}</div>
-        </div>
-      </div>
-    </div>
-  )
+  const riderDescription = `Rider: ${rider?.name}
+Online: ${rider?.online}
+MMR: ${rider?.MMR}
+SR: ${rider?.SR}
+Contacts: ${rider?.contact}`
 
   return {
     title: `Pepiti | Profile`,
-    description: rider?.banned ? bannedDescription : riderDescription,
+    description: rider.banned ? bannedDescription : riderDescription,
     openGraph: {
       images: rider.avatar ? [rider.avatar] : [],
     },
