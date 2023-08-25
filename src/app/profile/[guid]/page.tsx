@@ -11,10 +11,11 @@ export async function generateMetadata({ params }) {
 
   const bannedData = {
     title: `Pepiti | Profile`,
-    description: `Rider: ${handleRacismSanitization(rider?.name)}
+    description: `GUID: ${rider?._id}
+Rider: ${handleRacismSanitization(rider?.name)}
 Banned: True
 Reason: ${rider?.banned_by}
-Remedy: ${handleReasonRemedy(rider?.banned_by)}`,
+Detail: ${handleReasonRemedy(rider?.banned_by)}`,
     openGraph: {
       images: rider.avatar ? [rider.avatar] : [],
     },
@@ -23,10 +24,10 @@ Remedy: ${handleReasonRemedy(rider?.banned_by)}`,
   const riderData = {
     title: `Pepiti | Profile`,
     description: `Rider: ${handleRacismSanitization(rider?.name)}
-Online: ${rider?.online}
-MMR: ${rider?.MMR}
-SR: ${rider?.SR}
-Contacts: ${rider?.contact}`,
+Online: ${rider?.online ? "Online" : "Offline"}
+MMR: ${rider?.MMR.toLocaleString()}
+SR: ${rider?.SR.toLocaleString()}
+Contacts: ${rider?.contact.toLocaleString()}`,
     openGraph: {
       images: rider.avatar ? [rider.avatar] : [],
     },
