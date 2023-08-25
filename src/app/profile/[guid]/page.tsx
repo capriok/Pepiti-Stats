@@ -7,9 +7,16 @@ import { RiderProfile } from "./components/RiderProfile"
 export async function generateMetadata({ params }) {
   const rider = await GetRider(params.guid)
 
+  const reasonMap = {
+    sr: "Safety Rating Banned (Temporary)",
+    global: "Globally Banned (Permanent)",
+    "": "Banned (Appealable)",
+  }
+
   const bannedDescription = `Rider: ${rider?.name}
 Banned: True
-Reason: ${rider?.banned_by}`
+Reason: ${rider?.banned_by}
+Remedy: ${reasonMap[rider?.banned_by?.toLowerCase() ?? ""]}`
 
   const riderDescription = `Rider: ${rider?.name}
 Online: ${rider?.online}

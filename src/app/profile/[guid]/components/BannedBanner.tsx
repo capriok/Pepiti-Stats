@@ -16,7 +16,7 @@ export default function BannedBanner({ banned, reason }) {
       <Alert className="mb-8 border-error">
         <Hammer size={20} />
         <AlertTitle className="text-md mb-4">
-          {reasonMap[reason?.toLowerCase()] ?? "Banned"}.
+          {reasonMap[reason?.toLowerCase()] ?? "Banned (Appealable)"}.
         </AlertTitle>
         <AlertDescription className="mb-4">
           <div className="flex gap-2">
