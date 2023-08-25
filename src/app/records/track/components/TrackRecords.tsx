@@ -7,6 +7,9 @@ import { TrackRecordsTable } from "~/components/tables/records/TrackRecordsTable
 import { useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
 import RiderWorldRecordsTableRow from "~/components/tables/expandable/RiderWorldRecordsTableRow"
+import GeneralEventAlert from "~/components/alerts/GeneralEventAlert"
+
+import applicationAlerts from "@/data/application-alerts.json"
 
 interface Props {
   trackList: any
@@ -45,18 +48,23 @@ export default function TrackRecords(props: Props) {
 
     return (
       <TrackRecordsTable
-        {...props.table}
         trackRecords={data.records}
         resultsEnabled={true}
         searchEnabled={true}
         paginationEnabled={true}
         expandable={expandable}
+        {...props.table}
       />
     )
   }
+  const alert = applicationAlerts.alerts["FinnsFarm"]
 
   return (
     <div className="w-full overflow-auto">
+      {(selectedTrack === "FinnsFarm" || selectedTrack === "FinnsFarmSX") && (
+        <GeneralEventAlert alert={alert} />
+      )}
+
       <div className="group flex justify-between">
         <Link href={`/records/track?track=${selectedTrack}`} className="w-full">
           <div className="mb-2 text-lg font-semibold">Track Records</div>
