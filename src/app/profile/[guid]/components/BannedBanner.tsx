@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { Alert, AlertDescription, AlertTitle } from "~/ui/Alert"
 import { Hammer } from "lucide-react"
+import { handleReasonRemedy } from "~/utils/handleReasonRemedy"
 
 export default function BannedBanner({ banned, reason }) {
   const reasonMap = {
@@ -15,9 +16,7 @@ export default function BannedBanner({ banned, reason }) {
     banned && (
       <Alert className="mb-8 border-error">
         <Hammer size={20} />
-        <AlertTitle className="text-md mb-4">
-          {reasonMap[reason?.toLowerCase()] ?? "Banned (Appealable)"}.
-        </AlertTitle>
+        <AlertTitle className="text-md mb-4">{handleReasonRemedy(reason)}.</AlertTitle>
         <AlertDescription className="mb-4">
           <div className="flex gap-2">
             <div>Reason:</div>

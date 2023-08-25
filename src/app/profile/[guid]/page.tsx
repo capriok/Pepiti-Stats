@@ -3,34 +3,36 @@ import PageLayout from "~/components/PageLayout"
 import AdminControls from "./components/AdminControls"
 import BannedBanner from "./components/BannedBanner"
 import { RiderProfile } from "./components/RiderProfile"
+import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
+import { handleReasonRemedy } from "~/utils/handleReasonRemedy"
 
 export async function generateMetadata({ params }) {
   const rider = await GetRider(params.guid)
 
-  const reasonMap = {
-    sr: "Safety Rating Banned (Temporary)",
-    global: "Globally Banned (Permanent)",
-    "": "Banned (Appealable)",
-  }
-
-  const bannedDescription = `Rider: ${rider?.name}
+  const bannedData = {
+    title: `Pepiti | Profile`,
+    description: `Rider: ${handleRacismSanitization(rider?.name)}
 Banned: True
 Reason: ${rider?.banned_by}
-Remedy: ${reasonMap[rider?.banned_by?.toLowerCase() ?? ""]}`
-
-  const riderDescription = `Rider: ${rider?.name}
-Online: ${rider?.online}
-MMR: ${rider?.MMR}
-SR: ${rider?.SR}
-Contacts: ${rider?.contact}`
-
-  return {
-    title: `Pepiti | Profile`,
-    description: rider.banned ? bannedDescription : riderDescription,
+Remedy: ${handleReasonRemedy(rider?.banned_by)}`,
     openGraph: {
       images: rider.avatar ? [rider.avatar] : [],
     },
   }
+
+  const riderData = {
+    title: `Pepiti | Profile`,
+    description: `Rider: ${handleRacismSanitization(rider?.name)}
+Online: ${rider?.online}
+MMR: ${rider?.MMR}
+SR: ${rider?.SR}
+Contacts: ${rider?.contact}`,
+    openGraph: {
+      images: rider.avatar ? [rider.avatar] : [],
+    },
+  }
+
+  return rider.banned ? bannedData : riderData
 }
 
 export default async function Page({ params: { guid } }) {
