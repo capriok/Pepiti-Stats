@@ -62,14 +62,11 @@ export default function TrackRecords(props: Props) {
   return (
     <div className="w-full overflow-auto">
       {(selectedTrack === "FinnsFarm" || selectedTrack === "FinnsFarmSX") && (
-        <GeneralEventAlert alert={alert} />
+        <div className="mb-8">
+          <GeneralEventAlert alert={alert} />
+        </div>
       )}
 
-      <div className="group flex justify-between">
-        <Link href={`/records/track?track=${selectedTrack}`} className="w-full">
-          <div className="mb-2 text-lg font-semibold">Track Records</div>
-        </Link>
-      </div>
       <select
         value={selectedTrack}
         className="select select-xs mb-2 w-full border-none bg-base-200 md:select-sm"

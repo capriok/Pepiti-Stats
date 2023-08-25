@@ -1,7 +1,7 @@
 const sessionsMap = {
   PRACTICE: "Practice",
-  PRE_QUALIFY: "Pre-Qualify",
-  QUALIFY_PRACTICE: "Qualify Practice",
+  PREQUALIFY: "Pre-Qualify",
+  QUALIFYPRACTICE: "Qualify Practice",
   QUALIFY: "Qualify",
   WARMUP: "Warmup",
   RACE1: "Race",

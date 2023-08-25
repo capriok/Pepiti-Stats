@@ -24,8 +24,9 @@ export default function RiderWorldRecordStats({ rider }) {
         <div className="stat-value mt-2 text-xl">
           {(
             rider.world_records["MX2 OEM"] +
+            rider.world_records["MX1-2T OEM"] +
             rider.world_records["FACTORY 250"] +
-            rider.world_records["MX1-2T OEM"]
+            rider.world_records["FACTORY 250 2T"]
           ).toLocaleString()}
         </div>
       </div>
