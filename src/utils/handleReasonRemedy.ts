@@ -1,5 +1,5 @@
 export const handleReasonRemedy = (reason) => {
-  switch (reason.toLowerCase()) {
+  switch (reason?.toLowerCase()) {
     case "global":
       return "Globally Banned (Permanent)"
     case "sr":
