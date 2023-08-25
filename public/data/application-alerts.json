@@ -24,7 +24,7 @@
         ],
         "links": [
           {
-            "url": "/servers?search=FinnsFarm",
+            "url": "/servers",
             "label": "Join FinnFarm Servers"
           }
         ],

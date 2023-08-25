@@ -89,7 +89,6 @@ const Header = ({ filter, setFilter, refresh }) => {
 const ServerTableRenderer = ({ global, servers }) => {
   const searchParams = useSearchParams()
   const idParam = searchParams.get("id")
-  const searchParam = searchParams.get("search")
 
   const [expandedRowId, setExpandedRow] = useState<any>(idParam)
 
@@ -147,7 +146,6 @@ const ServerTableRenderer = ({ global, servers }) => {
             defaultExpandedId: expandedRowId,
             render: (row) => <MXBServerExpandableRow row={row} />,
           }}
-          searchTerm={searchParam ?? ""}
         />
       ) : (
         <GlobalServers
@@ -156,7 +154,6 @@ const ServerTableRenderer = ({ global, servers }) => {
             defaultExpandedId: expandedRowId,
             render: (row) => <MXBServerExpandableRow row={row} />,
           }}
-          searchTerm={searchParam ?? ""}
         />
       )}
     </CardContent>
