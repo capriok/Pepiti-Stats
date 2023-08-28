@@ -19,8 +19,8 @@ export default async function Page() {
   return (
     <PageLayout width="app">
       <div className="flex min-h-screen flex-col items-center px-4 lg:justify-evenly">
-        <div className="flex w-full max-w-full flex-col lg:flex-row">
-          <div>
+        <div className="flex w-full max-w-full flex-col justify-between gap-20 lg:flex-row">
+          <div className="mt-10 md:mt-0">
             <div className="mb-5 mt-5 h-[1px] w-[200px] border border-accent md:mb-10 md:w-[300px]" />
 
             <div className="mb-5 text-4xl font-bold leading-relaxed md:text-6xl">
@@ -46,7 +46,7 @@ export default async function Page() {
               alt="hero-dashboard"
               width={1440}
               height={1440}
-              className="w-[1000px]"
+              className="w-[1200px]"
             />
           </div>
         </div>
