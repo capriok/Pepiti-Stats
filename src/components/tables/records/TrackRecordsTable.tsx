@@ -64,8 +64,8 @@ export const TrackRecordsTable = ({ trackRecords, ...rest }: Props) => {
     <Table
       data={data}
       columns={columns}
-      searchEnabled={true}
-      paginationEnabled={true}
+      searchEnabled={false}
+      paginationEnabled={false}
       sortingEnabled={true}
       sortingKeys={sortKeys}
       {...rest}

@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import Pill from "~/components/pills/Pill"
 
 interface Props {

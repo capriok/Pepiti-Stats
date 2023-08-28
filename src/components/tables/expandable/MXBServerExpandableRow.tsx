@@ -112,6 +112,7 @@ export default function MXBServerExpandableRow({ row }) {
                 </div>
               }
             />
+            {<Line label="Bikes" text={server.category.replaceAll("/", " | ")} />}
           </div>
         </div>
         <div className="flex justify-end">

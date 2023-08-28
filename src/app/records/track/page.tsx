@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { GetTrackNames } from "~/api"
-import TrackRecords from "~/app/dashboard/components/TrackRecords"
 import PageLayout from "~/components/PageLayout"
+import TrackRecords from "./components/TrackRecords"
 
 export async function generateMetadata() {
   return {

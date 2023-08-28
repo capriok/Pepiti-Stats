@@ -15,6 +15,7 @@ interface Props {
 
 export default function ProfileTabs({ rider, mmrHistory }: Props) {
   const user = useUserContext()
+  const isAdmin = user.isAdmin
   const isUserProfile = user.guid === rider._id
 
   const items = [
@@ -35,7 +36,7 @@ export default function ProfileTabs({ rider, mmrHistory }: Props) {
     },
   ]
 
-  if (isUserProfile)
+  if (isUserProfile && isAdmin)
     items.push({
       key: "leagues",
       label: "Leagues",

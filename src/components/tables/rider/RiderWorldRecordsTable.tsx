@@ -2,7 +2,7 @@
 
 import React from "react"
 import Image from "next/image"
-import Table from "~/ui/Table"
+import Table, { TableOptions } from "~/ui/Table"
 import BikeTicTac from "~/components/pills/BikeTicTac"
 import { dateIsValid } from "~/utils/dateIsValid"
 import { handleLapTimes } from "~/utils/handleLapTimes"
@@ -12,9 +12,10 @@ import Link from "next/link"
 
 interface Props {
   records: Array<any>
+  table?: TableOptions
 }
 
-export default function RiderWorldRecordsTable({ records }: Props) {
+export default function RiderWorldRecordsTable({ records, table }: Props) {
   const data = records
     .map((record) => ({
       _id: record._id,
@@ -45,7 +46,11 @@ export default function RiderWorldRecordsTable({ records }: Props) {
     {
       key: "track",
       label: "Track",
-      render: (track) => <Link href={`/records/track?track=${track}`}>{track ? track : "-"}</Link>,
+      render: (track) => (
+        <Link href={`/records/track?track=${track}`} className="font-semibold text-primary/80">
+          {track ? track : "-"}
+        </Link>
+      ),
     },
     {
       key: "lapTime",
@@ -101,6 +106,7 @@ export default function RiderWorldRecordsTable({ records }: Props) {
       rankEnabled={false}
       sortingEnabled={true}
       sortingKeys={sortKeys}
+      {...table}
     />
   )
 }

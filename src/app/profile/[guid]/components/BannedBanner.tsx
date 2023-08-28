@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { Alert, AlertDescription, AlertTitle } from "~/ui/Alert"
 import { Hammer } from "lucide-react"
+import { handleReasonRemedy } from "~/utils/handleReasonRemedy"
 
 export default function BannedBanner({ banned, reason }) {
   const reasonMap = {
@@ -13,11 +14,9 @@ export default function BannedBanner({ banned, reason }) {
 
   return (
     banned && (
-      <Alert className="mb-8 border-error">
+      <Alert className={`mb-8 ${isSrBan ? "border-warning" : "border-error"}`}>
         <Hammer size={20} />
-        <AlertTitle className="text-md mb-4">
-          {reasonMap[reason?.toLowerCase()] ?? "Banned"}.
-        </AlertTitle>
+        <AlertTitle className="text-md mb-4">{handleReasonRemedy(reason)}.</AlertTitle>
         <AlertDescription className="mb-4">
           <div className="flex gap-2">
             <div>Reason:</div>
@@ -26,8 +25,8 @@ export default function BannedBanner({ banned, reason }) {
         </AlertDescription>
         <AlertDescription>
           <div className="mb-1">
-            &quot;SR&quot; ban means your safety rating is under 950. Race in a banned/no-contact
-            server to raise SR above 950 to be automatically unbanned.
+            &quot;SR&quot; ban means your safety rating is under 950. You can gain 2 SR per lap in
+            the Low-SR No-Contact server to raise SR above 950 to be automatically unbanned.
           </div>
           <div className="mb-1">
             &quot;Global&quot; ban means you did something to be banned from online racing for the

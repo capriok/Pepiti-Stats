@@ -13,10 +13,9 @@ export default function RiderWorldRecordStats({ rider }) {
         <div className="stat-title">450 Class</div>
         <div className="stat-value mt-2 text-xl">
           {(
-            rider.world_records["MX1 OEM"] ||
-            0 + rider.world_records["FACTORY 450"] ||
-            0 + rider.world_records["MX1-2T OEM"] ||
-            0
+            rider.world_records["MX1 OEM"] +
+            rider.world_records["MX3 OEM"] +
+            rider.world_records["FACTORY 450"]
           ).toLocaleString()}
         </div>
       </div>
@@ -24,9 +23,10 @@ export default function RiderWorldRecordStats({ rider }) {
         <div className="stat-title">250 Class</div>
         <div className="stat-value mt-2 text-xl">
           {(
-            rider.world_records["MX2 OEM"] ||
-            0 + rider.world_records["FACTORY 250"] ||
-            0
+            rider.world_records["MX2 OEM"] +
+            rider.world_records["MX1-2T OEM"] +
+            rider.world_records["FACTORY 250"] +
+            rider.world_records["FACTORY 250 2T"]
           ).toLocaleString()}
         </div>
       </div>
@@ -34,10 +34,9 @@ export default function RiderWorldRecordStats({ rider }) {
         <div className="stat-title">Lights</div>
         <div className="stat-value mt-2 text-xl">
           {(
-            rider.world_records["MX2-2T OEM"] ||
-            0 + rider.world_records["FACTORY 125"] ||
-            0 + rider.world_records["FACTORY 150"] ||
-            0
+            rider.world_records["MX2-2T OEM"] +
+            rider.world_records["FACTORY 125"] +
+            rider.world_records["FACTORY 150"]
           ).toLocaleString()}
         </div>
       </div>

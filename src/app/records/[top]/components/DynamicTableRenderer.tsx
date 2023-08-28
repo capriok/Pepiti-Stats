@@ -1,5 +1,9 @@
 "use client"
 
+import { useEffect, useState } from "react"
+import useSwr from "swr"
+import Pill from "~/components/pills/Pill"
+import Spinner from "~/components/Spinner"
 import WorldRecordsTable from "~/components/tables/records/WorldRecordsTable"
 import RiderWorldRecordsTableRow from "~/components/tables/expandable/RiderWorldRecordsTableRow"
 import MMRRecordsTable from "~/components/tables/records/MMRRecordsTable"
@@ -7,7 +11,9 @@ import RiderRecentRacesTableRow from "~/components/tables/expandable/RiderRecent
 import SRRecordsTable from "~/components/tables/records/SRRecordsTable"
 import RiderSafetyStatsRow from "~/components/tables/expandable/RiderSafetyStatsRow"
 import BikeRecordsTable from "~/components/tables/records/BikeRecordsTable"
-import ContactRecordsTable from "~/components/tables/records/ContactRecordsTable"
+import ContactRecordsTable, {
+  handleHPLColor,
+} from "~/components/tables/records/ContactRecordsTable"
 
 export default function DynamicTableRenderer({ top, records }) {
   return dynamicDataMap[top].render(records)
@@ -56,6 +62,30 @@ const dynamicDataMap = {
           expandable={{
             render: (row) => <RiderSafetyStatsRow row={row} />,
           }}
+          additionalColumns={[
+            {
+              key: "ratio",
+              label: "Hits per lap",
+              render: (ratio) => <Pill color={handleHPLColor(ratio)} text={ratio.toFixed(2)} />,
+            },
+          ]}
+          {...tableProps}
+        />
+      )
+    },
+  },
+  contacts: {
+    render: (records) => {
+      return (
+        <ContactRecordsTable
+          worldContacts={records}
+          additionalColumns={[
+            {
+              key: "ratio",
+              label: "Hits per lap",
+              render: (ratio) => <Pill color={handleHPLColor(ratio)} text={ratio.toFixed(2)} />,
+            },
+          ]}
           {...tableProps}
         />
       )
@@ -63,12 +93,32 @@ const dynamicDataMap = {
   },
   bikes: {
     render: (records) => {
-      return <BikeRecordsTable worldBikes={records} {...tableProps} />
-    },
-  },
-  contacts: {
-    render: (records) => {
-      return <ContactRecordsTable worldContacts={records} {...tableProps} />
+      const Content = () => {
+        const { data: apiData, isLoading } = useSwr("/summary")
+        const [laps, setLaps] = useState(0)
+
+        useEffect(() => {
+          if (apiData) setLaps(apiData.laps)
+        }, [isLoading])
+
+        return (
+          <>
+            <div className="mb-4 flex justify-end gap-2">
+              <div className="text-accent">Total Laps</div>
+              {laps ? (
+                <Pill text={laps.toLocaleString()} color="primary" />
+              ) : (
+                <div className="min-h-[28px]">
+                  <Spinner />
+                </div>
+              )}
+            </div>
+            <BikeRecordsTable worldBikes={records} totalLaps={laps} {...tableProps} />
+          </>
+        )
+      }
+
+      return <Content />
     },
   },
 }

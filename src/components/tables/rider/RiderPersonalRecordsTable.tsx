@@ -3,19 +3,19 @@
 import React from "react"
 import { dateIsValid } from "~/utils/dateIsValid"
 import { handleLapTimes } from "~/utils/handleLapTimes"
-import Table from "~/ui/Table"
+import Table, { TableOptions } from "~/ui/Table"
 import BikeTicTac from "~/components/pills/BikeTicTac"
 import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
 import Image from "next/image"
 import { handleSessionEnum } from "~/utils/handleSessionEnum"
+import Link from "next/link"
 
 interface Props {
   records: Array<any>
+  table?: TableOptions
 }
 
-export default function RiderPersonalRecordsTable({ records }: Props) {
-  console.log(records)
-
+export default function RiderPersonalRecordsTable({ records, table }: Props) {
   const data = records
     .map((record) => ({
       _id: record._id,
@@ -45,7 +45,11 @@ export default function RiderPersonalRecordsTable({ records }: Props) {
     {
       key: "track",
       label: "Track",
-      render: (track) => (track ? track : "-"),
+      render: (track) => (
+        <Link href={`/records/track?track=${track}`} className="font-semibold text-primary/80">
+          {track ? track : "-"}
+        </Link>
+      ),
     },
     {
       key: "lapTime",
@@ -104,6 +108,7 @@ export default function RiderPersonalRecordsTable({ records }: Props) {
       paginationEnabled={true}
       sortingEnabled={true}
       sortingKeys={sortKeys}
+      {...table}
     />
   )
 }

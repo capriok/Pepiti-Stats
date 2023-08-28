@@ -1,18 +1,40 @@
 {
-  "alerts": [
-    {
+  "alerts": {
+    "FinnsFarm": {
       "meta": {
-        "date": "",
-        "expires": "",
-        "action": {
-          "url": ""
-        }
+        "expires": "2023-09-01T00:00:00Z"
       },
       "content": {
-        "title": "",
-        "description": "",
-        "icon": ""
+        "title": "Heads up! FinnsFarm 2-Stroke Hotlap Challenge is Live, Aug 25 - Sept 1",
+        "body": [
+          "One Week to run the fastest laps you can on FinnsFarm riding a Factory 250 2-Stroke.",
+          "Winner Prizes - $50 Paypal for MX Fastest Lap | $50 Paypal for SX Fastest Lap",
+          "Bonus Prize - $50 Paypal for Best Video Edit on the track, must Tag or DM @systemdecal.mxb on Instagram, winner will be judged and chosen 2 days after competition.",
+          "Podium Prize - 2nd and 3rd Fastest Laps on each layout will receive a custom factory bike skin on the brand of their choice."
+        ],
+        "buttons": [
+          {
+            "url": "/records/track?track=FinnsFarm",
+            "label": "MX Laps"
+          },
+          {
+            "url": "/records/track?track=FinnsFarmSX",
+            "label": "SX Laps"
+          }
+        ],
+        "links": [
+          {
+            "url": "/servers",
+            "label": "Join Servers"
+          }
+        ],
+        "externalLinks": [
+          {
+            "url": "https://www.mxbikes-shop.com/downloads/finns-farm/",
+            "label": "Track Download | MXB-Shop"
+          }
+        ]
       }
     }
-  ]
+  }
 }

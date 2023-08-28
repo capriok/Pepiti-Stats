@@ -90,7 +90,6 @@ const ServerTableRenderer = ({ global, servers }) => {
   const searchParams = useSearchParams()
   const idParam = searchParams.get("id")
 
-  console.log(idParam)
   const [expandedRowId, setExpandedRow] = useState<any>(idParam)
 
   useEffect(() => {
@@ -104,7 +103,7 @@ const ServerTableRenderer = ({ global, servers }) => {
     setExpandedRow(row?.id)
   }
 
-  const GlobalServers = ({ expandable }) => {
+  const GlobalServers = (props) => {
     const { data: globalServers, isLoading } = useSWR(
       "https://projects.mxb-mods.com/mxbjson/servers/?sortby=num_clients",
       (url) => fetch(url).then((res) => res.json()),
@@ -120,24 +119,22 @@ const ServerTableRenderer = ({ global, servers }) => {
 
     const servers = processMXBServers(globalServers)
 
-    return <MXBServersTable servers={servers} expandable={expandable} />
+    return <MXBServersTable servers={servers} {...props} />
   }
 
-  const PepitiServers = ({ servers, expandable }) => {
+  const PepitiServers = (props) => {
     const { data: pepitiServers, isLoading } = useSWR(
       "https://projects.mxb-mods.com/mxbjson/servers/?search=pepiti&server_type=pepiti&sortby=num_clients",
       (url) => fetch(url).then((res) => res.json()),
       { refreshInterval: 10000 }
     )
 
-    if (isLoading) return <MXBServersTable servers={servers} expandable={expandable} />
+    if (isLoading) return <MXBServersTable servers={props.servers} {...props} />
 
     const clientFetchedServers = processMXBServers(pepitiServers)
 
-    return <MXBServersTable servers={clientFetchedServers} expandable={expandable} />
+    return <MXBServersTable servers={clientFetchedServers} {...props} />
   }
-
-  console.log(expandedRowId)
 
   return (
     <CardContent>

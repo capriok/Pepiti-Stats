@@ -86,14 +86,14 @@ function AppNavigation({ user, notifications }) {
     {
       href: "/servers",
       title: "Servers",
-      description: "See a List of all Pepiti servers available to participate in.",
+      description: "See a List of all Pepiti or MXB servers available to participate in.",
     },
   ]
 
   const featureItems: Array<Item> = [
     {
       href: "/records",
-      title: "Top Records",
+      title: "Records",
       description: "Explore top records statistics and analyze intuitive data.",
     },
     {

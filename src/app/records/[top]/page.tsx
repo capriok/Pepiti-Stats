@@ -38,7 +38,7 @@ export default async function Page({ params: { top } }) {
 const dynamicTitleMap = {
   riders: {
     dataKey: "riders",
-    title: "Record holders",
+    title: "Record Holders",
   },
   mmr: {
     dataKey: "riders",
@@ -48,12 +48,12 @@ const dynamicTitleMap = {
     dataKey: "riders",
     title: "Safety Rankings",
   },
-  bikes: {
-    dataKey: "bikes",
-    title: "Bike Records",
-  },
   contacts: {
     dataKey: "riders",
-    title: "Contact Riders",
+    title: "Contact Rankings",
+  },
+  bikes: {
+    dataKey: "bikes",
+    title: "Bike Rankings",
   },
 }
