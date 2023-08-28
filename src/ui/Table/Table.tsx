@@ -10,7 +10,15 @@ import {
   TableData,
   TableOptions,
 } from "."
-import { ChevronsUpDown, ChevronUp, ChevronDown, Plus, Minus } from "lucide-react"
+import {
+  ChevronUp,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  ChevronsUpDown,
+  Plus,
+  Minus,
+} from "lucide-react"
 import { Button } from "../Button"
 import RankTrophy from "~/components/pills/RankTrophy"
 
@@ -22,7 +30,6 @@ interface TableProps extends TableOptions {
 const Table: React.FC<TableProps> = (props) => {
   const {
     paginationEnabled = false,
-    miniControls = false,
     jumpToEnabled = true,
     defaultPageSize = 10,
     sortingKeys = [],
@@ -255,15 +262,15 @@ const Table: React.FC<TableProps> = (props) => {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full overflow-x-auto">
       <div className="w-full overflow-x-auto rounded-lg">
         {searchEnabled && (
-          <div className="flex justify-between bg-base-200 pl-4 pt-4">
+          <div className="flex justify-between bg-base-200 px-4 pt-4">
             <input
               value={term}
               placeholder={`Search by ${searchKey}...`}
               onChange={(e) => handleTermChange(e.target.value)}
-              className=" input input-sm mb-2 w-full border border-accent/40 bg-base-100 md:w-[400px]"
+              className="input input-sm mb-2 w-full border border-accent/40 bg-base-100 md:w-[400px]"
             />
           </div>
         )}
@@ -277,7 +284,7 @@ const Table: React.FC<TableProps> = (props) => {
         </table>
       </div>
       {paginationEnabled && (
-        <div className="mt-4 flex items-center justify-between gap-2 px-3 text-sm">
+        <div className="my-4 flex items-center justify-between gap-2 px-3 text-sm">
           <div className="flex flex-col gap-2 md:flex-row">
             <div className="whitespace-nowrap">
               Page: {page + 1} / {Math.ceil(data.length / pageSize)}
@@ -298,14 +305,14 @@ const Table: React.FC<TableProps> = (props) => {
                   onClick={() => handlePageChange(page > 0 ? page - 1 : page)}
                   disabled={page === 0}
                 >
-                  {miniControls ? "-" : "Prev Page"}
+                  <ChevronLeft size={14} />
                 </Button>
                 <Button
                   variant="ghost"
                   onClick={() => handlePageChange(paginatedData.length ? page + 1 : page)}
                   disabled={(page + 1) * pageSize >= data.length}
                 >
-                  {miniControls ? "+" : "Next Page"}
+                  <ChevronRight size={14} />
                 </Button>
               </div>
               {jumpToEnabled && (

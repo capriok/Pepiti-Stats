@@ -10,6 +10,7 @@ import RiderWorldRecordsTableRow from "~/components/tables/expandable/RiderWorld
 import GeneralEventAlert from "~/components/alerts/GeneralEventAlert"
 
 import applicationAlerts from "@/data/application-alerts.json"
+import Pill from "~/components/pills/Pill"
 
 interface Props {
   trackList: any
@@ -25,34 +26,57 @@ export default function TrackRecords(props: Props) {
 
   const [selectedTrack, setSelectedTrack] = useState(trackParam ? trackParam : "Forest Raceway")
 
+  const [filter, setFilter] = useState({
+    key: null,
+    data: [],
+  })
+
+  const { data: trackData, error, isLoading } = useSWR(`/records/track/${selectedTrack}`)
+
+  useEffect(() => {
+    return () => setFilter({ key: null, data: [] })
+  }, [selectedTrack])
+
   useEffect(() => {
     if (trackParam) setSelectedTrack(trackParam)
   }, [trackParam])
 
   function handleTrackSelect(e) {
     setSelectedTrack(e.target.value)
-    router.replace(`/records/track?track=${e.target.value}`)
+    router.push(`/records/track?track=${e.target.value}`)
   }
 
-  const Content = () => {
-    const { data, error, isLoading } = useSWR(`/records/track/${selectedTrack}`)
+  const categories = [
+    ...(new Set(trackData?.records.map((record) => record.category)) as any),
+  ].sort((a: any, b: any) => -a.localeCompare(b))
 
+  const handleFilter = (cat) =>
+    setFilter(
+      cat === filter.key
+        ? { key: null, data: [] }
+        : {
+            key: cat,
+            data: trackData?.records.filter((c) => c.category === cat),
+          }
+    )
+
+  const Content = () => {
     if (error)
       return <div className="flex justify-center text-lg font-semibold">Failed to Load</div>
 
     if (isLoading) return <SkeletonTable />
 
-    const expandable = {
-      render: (record) => <RiderWorldRecordsTableRow row={{ ...record, _id: record.rider_guid }} />,
-    }
-
     return (
       <TrackRecordsTable
-        trackRecords={data.records}
+        trackRecords={filter.key ? filter.data : trackData.records}
         resultsEnabled={true}
         searchEnabled={true}
         paginationEnabled={true}
-        expandable={expandable}
+        expandable={{
+          render: (record) => (
+            <RiderWorldRecordsTableRow row={{ ...record, _id: record.rider_guid }} />
+          ),
+        }}
         {...props.table}
       />
     )
@@ -67,17 +91,31 @@ export default function TrackRecords(props: Props) {
         </div>
       )}
 
-      <select
-        value={selectedTrack}
-        className="select select-xs mb-2 w-full border-none bg-base-200 md:select-sm"
-        onChange={handleTrackSelect}
-      >
-        {trackList.map((track) => (
-          <option key={track._id} value={track.name}>
-            {track.name}
-          </option>
-        ))}
-      </select>
+      <div className="mb-4 flex w-full flex-wrap items-center justify-between gap-4 md:flex-nowrap">
+        <select
+          value={selectedTrack}
+          className="select select-sm border-none bg-base-200"
+          onChange={handleTrackSelect}
+        >
+          {trackList.map((track) => (
+            <option key={track._id} value={track.name}>
+              {track.name}
+            </option>
+          ))}
+        </select>
+        <div className="no-scrollbar flex gap-2 overflow-x-scroll">
+          {categories.map((cat, i) => (
+            <Pill
+              key={i}
+              text={cat}
+              color={filter.key === cat ? "primary" : "base"}
+              className="cursor-pointer select-none px-4 py-1.5"
+              onClick={() => handleFilter(cat)}
+            />
+          ))}
+        </div>
+      </div>
+
       <Content />
     </div>
   )

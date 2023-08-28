@@ -1,10 +1,17 @@
+import cn from "~/utils/cn"
+
 interface PillProps {
   text: any
   color?: string
+  [key: string]: any
 }
 
-export default function Pill({ text, color = "neutral" }: PillProps) {
+export default function Pill({ text, color = "neutral", ...rest }: PillProps) {
   const colorMap = {
+    base: {
+      bg: "bg-base-200 dark:bg-base-200",
+      text: "text-base-200 dark:text-base-content",
+    },
     neutral: {
       bg: "bg-accent/60 dark:bg-accent/40",
       text: "text-neutral-100 dark:text-accent-content",
@@ -33,7 +40,14 @@ export default function Pill({ text, color = "neutral" }: PillProps) {
 
   return (
     <div
-      className={`pill ${colorMap[color].bg} ${colorMap[color].text} w-fit rounded-[10px] px-2 py-1 text-center font-semibold`}
+      title={text}
+      className={cn(
+        "pill w-fit whitespace-nowrap rounded-[10px] px-2 py-1 text-center font-semibold",
+        colorMap[color].bg,
+        colorMap[color].text,
+        rest.className
+      )}
+      onClick={rest.onClick}
     >
       <div className="m-0 p-0 px-1 text-sm">{text}</div>
     </div>
