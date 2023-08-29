@@ -14,7 +14,7 @@ interface Props {
   table?: TableOptions
 }
 
-export default function WorldRecords(props: Props) {
+export default function DashWorldRecords(props: Props) {
   const { trackList } = props
 
   const searchParams = useSearchParams()

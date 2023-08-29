@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { GetTrackNames } from "~/api"
 import PageLayout from "~/components/PageLayout"
-import WorldRecordLaps from "./components/WorldRecordLaps"
+import WorldRecords from "./components/WorldRecords"
 
 export async function generateMetadata() {
   return {
@@ -25,7 +25,7 @@ export default async function Page() {
         ),
       }}
     >
-      <WorldRecordLaps
+      <WorldRecords
         trackList={trackList.tracks.sort((a, b) => a.name.localeCompare(b.name))}
         table={{
           defaultPageSize: 25,

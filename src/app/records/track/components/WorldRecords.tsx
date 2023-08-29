@@ -1,16 +1,13 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import useSWR from "swr"
+import cn from "~/utils/cn"
 import Table, { TableOptions } from "~/ui/Table"
 import { TrackRecordsTable } from "~/components/tables/records/TrackRecordsTable"
-import { useRouter, useSearchParams } from "next/navigation"
-import Link from "next/link"
 import RiderWorldRecordsTableRow from "~/components/tables/expandable/RiderWorldRecordsTableRow"
 import GeneralEventAlert from "~/components/alerts/GeneralEventAlert"
-
-import applicationAlerts from "@/data/application-alerts.json"
-import Pill from "~/components/pills/Pill"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,24 +15,26 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "~/ui/Dropdown"
-import { Filter, MoreHorizontal, X } from "lucide-react"
-import cn from "~/utils/cn"
+import { Filter, X } from "lucide-react"
+
+import applicationAlerts from "@/data/application-alerts.json"
 
 interface Props {
   trackList: any
   table?: TableOptions
 }
 
-export default function WorldRecordLaps(props: Props) {
+export default function WorldRecords(props: Props) {
   const { trackList } = props
 
   const router = useRouter()
   const searchParams = useSearchParams()
   const trackParam = searchParams.get("track")
+  const filterParam = searchParams.get("filter")
 
   const [selectedTrack, setSelectedTrack] = useState(trackParam ? trackParam : "Forest Raceway")
 
-  const [filter, setFilter] = useState({
+  const [filter, setFilter] = useState<any>({
     key: null,
     data: [],
   })
@@ -50,16 +49,26 @@ export default function WorldRecordLaps(props: Props) {
     if (trackParam) setSelectedTrack(trackParam)
   }, [trackParam])
 
+  useEffect(() => {
+    if (isLoading) return
+
+    if (filterParam)
+      setFilter({
+        key: filterParam,
+        data: trackData.records.filter((c) => c.category === filterParam),
+      })
+  }, [isLoading])
+
   function handleTrackSelect(e) {
     setSelectedTrack(e.target.value)
-    router.push(`/records/track?track=${e.target.value}`)
+    router.replace(`/records/track?track=${e.target.value}`)
   }
 
   const categories = [
     ...(new Set(trackData?.records.map((record) => record.category)) as any),
   ].sort((a: any, b: any) => -a.localeCompare(b))
 
-  const handleFilter = (cat) =>
+  const handleFilter = (cat) => {
     setFilter(
       filter.key === cat
         ? { key: null, data: [] }
@@ -68,6 +77,8 @@ export default function WorldRecordLaps(props: Props) {
             data: trackData.records.filter((c) => c.category === cat),
           }
     )
+    router.replace(`/records/track?track=${selectedTrack}&filter=${cat}`)
+  }
 
   const Content = () => {
     if (error)
@@ -90,6 +101,7 @@ export default function WorldRecordLaps(props: Props) {
       />
     )
   }
+
   const alert = applicationAlerts.alerts["FinnsFarm"]
 
   return (
@@ -120,7 +132,18 @@ export default function WorldRecordLaps(props: Props) {
               <Filter size={16} className={filter.key ? "text-primary" : ""} />
             </DropdownMenuTrigger>
             <DropdownMenuContent>
-              <DropdownMenuLabel>Categories</DropdownMenuLabel>
+              <DropdownMenuLabel className="flex w-full justify-between">
+                <div>Categories</div>
+                {filter.key && (
+                  <div
+                    title="Clear Filter"
+                    className="group cursor-pointer"
+                    onClick={() => setFilter({ key: null, data: [] })}
+                  >
+                    <X size={14} className="group-hover:text-primary" />
+                  </div>
+                )}
+              </DropdownMenuLabel>
               {categories?.map((cat, i) => (
                 <DropdownMenuItem
                   key={i}
@@ -133,15 +156,6 @@ export default function WorldRecordLaps(props: Props) {
                   {cat}
                 </DropdownMenuItem>
               ))}
-              <DropdownMenuItem className="mt-2">
-                <div
-                  className="group flex w-full cursor-pointer items-center justify-between"
-                  onClick={() => setFilter({ key: null, data: [] })}
-                >
-                  <div>Clear</div>
-                  <X size={14} className="group-hover:text-primary" />
-                </div>
-              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
