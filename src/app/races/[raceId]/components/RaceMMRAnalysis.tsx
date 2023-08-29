@@ -88,7 +88,6 @@ export default function RaceMMRAnalysis({ standings }: Props) {
     <Table
       columns={columns}
       data={standings}
-      sortingEnabled={true}
       sortingKeys={sortKeys}
       expandable={{
         render: (row) => <RiderRecentRacesTableRow row={row} />,

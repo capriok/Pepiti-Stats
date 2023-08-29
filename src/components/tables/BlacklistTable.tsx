@@ -77,7 +77,6 @@ export default function BlacklistTable({ blacklist }: Props) {
       searchTerm={guidParam ?? ""}
       rankEnabled={false}
       paginationEnabled={true}
-      sortingEnabled={true}
       sortingKeys={sortKeys}
       expandable={{
         render: (row) => <RiderSafetyStatsRow row={row} />,

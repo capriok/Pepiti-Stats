@@ -19,6 +19,8 @@ export interface TableData {
 export interface TableColumn {
   key: string
   label: string | JSX.Element
+  filters?: Array<{ key: string; value: string }>
+  onFilter?: (value: any, row: TableData) => boolean
   render?: (value: any, row: TableData, i: number) => any
   width?: string
 }
@@ -29,16 +31,15 @@ export interface TableColumn {
  *  ? if searchEnabled, pass searchKey prop to search on a  specific data key, default: name
  */
 export interface TableOptions {
-  paginationEnabled?: boolean
-  jumpToEnabled?: boolean
   defaultPageSize?: number
-  sortingKeys?: Array<string>
-  sortingEnabled?: boolean
-  searchEnabled?: boolean
+  sortingKeys?: string[]
   searchKey?: string
   searchTerm?: string
+  searchEnabled?: boolean
   rankEnabled?: boolean
   resultsEnabled?: boolean
+  jumpToEnabled?: boolean
+  paginationEnabled?: boolean
   expandable?: {
     render: (record: TableData) => JSX.Element
     defaultExpandedId?: string

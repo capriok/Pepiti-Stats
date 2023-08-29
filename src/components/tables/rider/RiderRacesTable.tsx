@@ -91,7 +91,6 @@ export default function RiderRacesTable({ races }: Props) {
       rankEnabled={false}
       searchEnabled={true}
       paginationEnabled={true}
-      sortingEnabled={true}
       sortingKeys={sortKeys}
     />
   )

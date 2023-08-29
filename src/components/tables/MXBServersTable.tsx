@@ -67,7 +67,6 @@ export default function MXBServersTable(props: Props) {
       columns={columns}
       paginationEnabled={true}
       defaultPageSize={25}
-      sortingEnabled={true}
       sortingKeys={sortingKeys}
       rankEnabled={false}
       searchEnabled={true}

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import {
   cycleSortingDirection,
   genId,
@@ -18,9 +18,19 @@ import {
   ChevronsUpDown,
   Plus,
   Minus,
+  Filter,
+  X,
 } from "lucide-react"
 import { Button } from "../Button"
 import RankTrophy from "~/components/pills/RankTrophy"
+import cn from "~/utils/cn"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "../Dropdown"
 
 interface TableProps extends TableOptions {
   data: Array<TableData>
@@ -33,7 +43,6 @@ const Table: React.FC<TableProps> = (props) => {
     jumpToEnabled = true,
     defaultPageSize = 10,
     sortingKeys = [],
-    sortingEnabled = false,
     searchEnabled = false,
     searchKey = "name",
     searchTerm = "",
@@ -44,17 +53,22 @@ const Table: React.FC<TableProps> = (props) => {
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(defaultPageSize)
   const [term, setTerm] = useState(searchTerm)
+
   const [sorting, setSorting] = useState({
     data: props.data,
     dir: SortDirection.None,
     key: null,
   })
+  const [filtering, setFiltering] = useState<any>({
+    key: null,
+    data: [],
+  })
+
   const [expandedRow, setExpandedRow] = useState<any>(
     expandable?.defaultExpandedId
       ? props.data.find((d) => d._id === expandable?.defaultExpandedId)
       : null
   )
-
   const isExpandable = expandable !== null && typeof expandable.render === "function"
 
   /** preps the data for the table to use */
@@ -103,7 +117,7 @@ const Table: React.FC<TableProps> = (props) => {
         key: "_rank",
         label: "",
         render: (_, row) => {
-          const rank = data.find((d) => row._id === d._id)!.rank
+          const rank = data.find((d) => d._id === row._id)!.rank
           return (
             <div className="flex items-center justify-start">
               <RankTrophy rank={rank} />
@@ -125,33 +139,34 @@ const Table: React.FC<TableProps> = (props) => {
       <tr>
         {columns.map((column, idx) => {
           const isRankColumn = column.key === "_rank"
-          const columnIsSortable =
-            sortingKeys.some((k) => k === column.key) && !isRankColumn && sortingEnabled
-
-          const handleHeaderClick = (key) => {
-            if (!columnIsSortable) return
-
-            const sortDirection =
-              sorting.key === key ? cycleSortingDirection(sorting.dir) : SortDirection.Ascending
-            const sortData = sortDataByColumn(data, key, sortDirection)
-
-            const sort = {
-              data: sortData,
-              dir: sortDirection as SortDirection,
-              key: sortDirection === SortDirection.None ? null : key,
-            }
-            console.log("%cTable: Sorting", "color: goldenrod", sort)
-            setSorting(sort)
-          }
-
+          const columnIsSortable = sortingKeys.some((k) => k === column.key) && !isRankColumn
+          const columnIsFilterable = column.filters && column.filters?.length > 0
           const SortingControls = () => {
             if (!columnIsSortable) return <></>
+
+            const handleSorting = (key) => {
+              const sortDirection =
+                sorting.key === key ? cycleSortingDirection(sorting.dir) : SortDirection.Ascending
+              const sortData = sortDataByColumn(tableData, key, sortDirection)
+
+              const sort = {
+                data: sortData,
+                dir: sortDirection as SortDirection,
+                key: sortDirection === SortDirection.None ? null : key,
+              }
+              console.log("%cTable: Sorting", "color: goldenrod", sort)
+              setSorting(sort)
+            }
 
             const isColumnSorting = sorting.key === column.key
 
             return (
               <div
-                className={isColumnSorting ? "text-primary group-hover:scale-125" : "text-accent"}
+                className={cn(
+                  "cursor-pointer",
+                  isColumnSorting ? "text-primary group-hover:scale-125" : "text-accent"
+                )}
+                onClick={() => handleSorting(column.key)}
               >
                 {!isColumnSorting || sorting.dir === SortDirection.None ? (
                   <ChevronsUpDown size={16} />
@@ -164,18 +179,74 @@ const Table: React.FC<TableProps> = (props) => {
             )
           }
 
-          const firstColCn = idx === 0 ? "pl-4" : ""
-          const columnCn = `flex select-none items-center gap-4 px-2 max-w-[40%] ${firstColCn} ${column.width}`
+          const FilteringControls = () => {
+            if (!columnIsFilterable) return <></>
+
+            const handleFiltering = (value) => {
+              const filteredData = data.filter((record) => {
+                const filter = column.filters?.find((f) => f.key === value)
+                return column.onFilter!(filter?.value!, record)
+              })
+
+              const filter = {
+                key: column.key,
+                value: value,
+                data: filteredData,
+              }
+              console.log("%cTable: Filtering", "color: goldenrod", filter)
+              setFiltering(filter)
+            }
+
+            return (
+              <div className={cn("flex cursor-pointer items-center")}>
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <Filter
+                      size={14}
+                      className={filtering.key === column.key ? "text-primary" : ""}
+                    />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuLabel>Filters</DropdownMenuLabel>
+                    {column.filters?.map(({ key, value }) => (
+                      <DropdownMenuItem
+                        key={key}
+                        className={cn(
+                          "capitalize",
+                          filtering.value === value ? "text-primary" : ""
+                        )}
+                        onClick={() => handleFiltering(value)}
+                      >
+                        {value}
+                      </DropdownMenuItem>
+                    ))}
+                    <DropdownMenuItem className="mt-2">
+                      <div
+                        onClick={() => setFiltering({ key: null, data: [] })}
+                        className="group flex w-full cursor-pointer items-center justify-between"
+                      >
+                        <div>Clear</div>
+                        <X size={14} className="group-hover:text-primary" />
+                      </div>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            )
+          }
 
           return (
-            <th
-              key={column.key}
-              className={`group bg-base-200 p-0 py-4 ${columnIsSortable ? "cursor-pointer" : ""}`}
-              onClick={() => handleHeaderClick(column.key)}
-            >
-              <div className={columnCn}>
+            <th key={column.key} className={`group bg-base-200 p-0 py-4`}>
+              <div
+                className={cn(
+                  "flex max-w-[40%] select-none items-center gap-4 px-2",
+                  idx === 0 ? "pl-4" : "",
+                  column.width
+                )}
+              >
                 {column.label}
                 <SortingControls />
+                <FilteringControls />
               </div>
             </th>
           )
@@ -184,18 +255,9 @@ const Table: React.FC<TableProps> = (props) => {
     )
   }
 
-  const startIndex = page * pageSize
-  const endIndex = startIndex + pageSize
-  const sortedData = sorting.dir !== SortDirection.None ? sorting.data : data
-  const paginatedData = !paginationEnabled
-    ? sortedData.slice(startIndex, defaultPageSize)
-    : paginationEnabled
-    ? sortedData.slice(startIndex, endIndex)
-    : sortedData
-
   /** maps prepped data to table rows in respective column */
   const TableRows = () => {
-    if (!paginatedData.length)
+    if (!pageData.length)
       return (
         <tr>
           <td className="text-center" colSpan={columns.length}>
@@ -219,7 +281,7 @@ const Table: React.FC<TableProps> = (props) => {
 
     return (
       <>
-        {paginatedData.map((row, i) => (
+        {pageData.map((row, i) => (
           <React.Fragment key={genId(row._id)}>
             <tr className="w-full">
               {columns.map((column, idx) => {
@@ -227,12 +289,16 @@ const Table: React.FC<TableProps> = (props) => {
                 const renderer = column.render
                 const value = row[dataKey]
 
-                const firstColCn = idx === 0 ? "pl-4 w-fit" : ""
-                const isLightRow = i % 2 === 0 ? "bg-base-100" : "bg-base-200"
-                const rowCn = `rounded-none p-0 px-2 max-w-[40%] ${firstColCn} ${isLightRow} ${column.width}`
-
                 return (
-                  <td key={dataKey} className={rowCn}>
+                  <td
+                    key={dataKey}
+                    className={cn(
+                      "max-w-[40%] rounded-none p-0 px-2",
+                      idx === 0 ? "w-fit pl-4" : "",
+                      i % 2 === 0 ? "bg-base-100" : "bg-base-200",
+                      column.width
+                    )}
+                  >
                     <div className={"flex min-h-[45px] items-center font-medium"}>
                       {renderer ? renderer(value, row, i) : value.toLocaleString()}
                     </div>
@@ -246,6 +312,17 @@ const Table: React.FC<TableProps> = (props) => {
       </>
     )
   }
+
+  const filteredData = filtering.key ? filtering.data : data
+  const sortedData = sorting.dir !== SortDirection.None ? sorting.data : filteredData
+  const tableData = sortedData
+
+  const startIndex = page * pageSize
+  const pageData = !paginationEnabled
+    ? tableData.slice(startIndex, defaultPageSize)
+    : paginationEnabled
+    ? tableData.slice(startIndex, startIndex + pageSize)
+    : tableData
 
   const handleTermChange = (term) => {
     setTerm(term)
@@ -287,17 +364,17 @@ const Table: React.FC<TableProps> = (props) => {
         <div className="my-4 flex items-center justify-between gap-2 px-3 text-sm">
           <div className="flex flex-col gap-2 md:flex-row">
             <div className="whitespace-nowrap">
-              Page: {page + 1} / {Math.ceil(data.length / pageSize)}
+              Page: {page + 1} / {Math.ceil(tableData.length / pageSize)}
             </div>
             {resultsEnabled && (
               <div className="flex flex-nowrap gap-[2px]">
                 <span className="text-primary">(</span>
-                <span className="whitespace-nowrap">{`${data.length} Results`}</span>
+                <span className="whitespace-nowrap">{`${tableData.length} Results`}</span>
                 <span className="text-primary">)</span>
               </div>
             )}
           </div>
-          {data.length > pageSize && (
+          {tableData.length > pageSize && (
             <div className="flex flex-wrap items-center justify-end gap-2">
               <div className="join">
                 <Button
@@ -309,8 +386,8 @@ const Table: React.FC<TableProps> = (props) => {
                 </Button>
                 <Button
                   variant="ghost"
-                  onClick={() => handlePageChange(paginatedData.length ? page + 1 : page)}
-                  disabled={(page + 1) * pageSize >= data.length}
+                  onClick={() => handlePageChange(tableData.length ? page + 1 : page)}
+                  disabled={(page + 1) * pageSize >= tableData.length}
                 >
                   <ChevronRight size={14} />
                 </Button>

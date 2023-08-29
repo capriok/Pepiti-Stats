@@ -238,5 +238,5 @@ const LeagueRaceStandings = ({ division }: { division: LeagueRaceDivision }) => 
 
   const sortKeys = ["lapTime", "averageSpeed", "split1", "split2"]
 
-  return <Table data={data} columns={columns} sortingEnabled={true} sortingKeys={sortKeys} />
+  return <Table data={data} columns={columns} sortingKeys={sortKeys} />
 }

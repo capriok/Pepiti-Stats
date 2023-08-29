@@ -28,11 +28,11 @@ export default function LeagueOverview({ user, rider, league, host, eligibility 
   const leagueRider = league.riders[rider._id] ?? {}
 
   if (!user.isAdmin)
-  return (
-    <div>
-      <center className="text-sm text-primary-content">Admin Only, Coming Soon</center>
-    </div>
-  )
+    return (
+      <div>
+        <center className="text-sm text-primary-content">Admin Only, Coming Soon</center>
+      </div>
+    )
 
   return (
     <LeagueContext.Provider value={{ user, rider, league, host, eligibility }}>
@@ -254,5 +254,5 @@ const LeagueStandings = ({ league }: { league: League }) => {
 
   const sortKeys = ["name", "score", "bike_id", "team"]
 
-  return <Table data={data} columns={columns} sortingEnabled={true} sortingKeys={sortKeys} />
+  return <Table data={data} columns={columns} sortingKeys={sortKeys} />
 }

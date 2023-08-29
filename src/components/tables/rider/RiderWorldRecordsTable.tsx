@@ -100,14 +100,7 @@ export default function RiderWorldRecordsTable({ records, table }: Props) {
   const sortKeys = ["date", "track", "lapTime", "split1", "split2", "averageSpeed"]
 
   return (
-    <Table
-      columns={columns}
-      data={data}
-      rankEnabled={false}
-      sortingEnabled={true}
-      sortingKeys={sortKeys}
-      {...table}
-    />
+    <Table columns={columns} data={data} rankEnabled={false} sortingKeys={sortKeys} {...table} />
   )
 }
 

@@ -106,7 +106,6 @@ export default function RiderPersonalRecordsTable({ records, table }: Props) {
       searchKey="track"
       searchEnabled={true}
       paginationEnabled={true}
-      sortingEnabled={true}
       sortingKeys={sortKeys}
       {...table}
     />
