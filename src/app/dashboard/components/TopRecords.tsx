@@ -11,7 +11,7 @@ export default function TopRecords({ worldRecords, worldMMR, worldSR }) {
       <div>
         <div className="group flex justify-between">
           <Link href="/records/riders" className="w-full">
-            <div className="mb-2 text-lg font-semibold">Record Holders</div>
+            <div className="mb-2 text-lg font-semibold">World Record Holders</div>
           </Link>
 
           <Link

@@ -30,7 +30,6 @@ export interface TableColumn {
  */
 export interface TableOptions {
   paginationEnabled?: boolean
-  miniControls?: boolean
   jumpToEnabled?: boolean
   defaultPageSize?: number
   sortingKeys?: Array<string>

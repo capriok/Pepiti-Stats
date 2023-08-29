@@ -3,6 +3,22 @@
     {
       "meta": {
         "author": "Tooky",
+        "date": "08/28/2023",
+        "scope": "Component",
+        "type": "Addition",
+        "page": "/records/track?track=<trackname>"
+      },
+      "content": {
+        "description": "Added bike category filter to allow filtering by bike category",
+        "link": "/records/track?track=Forest%20Raceway",
+        "attachments": [
+          "https://cdn.discordapp.com/attachments/1138590709545443409/1145925509407068171/image.png"
+        ]
+      }
+    },
+    {
+      "meta": {
+        "author": "Tooky",
         "date": "08/23/2023",
         "scope": "Page",
         "type": "Addition",
