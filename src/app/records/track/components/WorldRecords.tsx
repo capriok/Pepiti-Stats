@@ -18,6 +18,7 @@ import {
 import { Filter, X } from "lucide-react"
 
 import applicationAlerts from "@/data/application-alerts.json"
+import Pill from "~/components/pills/Pill"
 
 interface Props {
   trackList: any
@@ -71,14 +72,10 @@ export default function WorldRecords(props: Props) {
   ].sort((a: any, b: any) => -a.localeCompare(b))
 
   const handleFilter = (cat) => {
-    setFilter(
-      filter.key === cat
-        ? { key: null, data: [] }
-        : {
-            key: cat,
-            data: trackData.records.filter((c) => c.category === cat),
-          }
-    )
+    setFilter({
+      key: cat,
+      data: trackData.records.filter((c) => c.category === cat),
+    })
     router.replace(`/records/track?track=${selectedTrack}&filter=${cat}`)
   }
 
@@ -134,22 +131,28 @@ export default function WorldRecords(props: Props) {
 
         <div className="mx-4">
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex select-none items-center gap-2">
-              <div className="text-sm">Filters</div>
-              <Filter size={16} className={filter.key ? "text-primary" : ""} />
-            </DropdownMenuTrigger>
+            <div className="flex items-center justify-center gap-4">
+              {filter.key && (
+                <div onClick={clearFilter}>
+                  <Pill
+                    text={
+                      <div className="group flex cursor-pointer items-center justify-center gap-2 text-xs">
+                        {filter.key}
+                        <X size={12} className="group-hover:text-primary" />
+                      </div>
+                    }
+                    color="base"
+                  />
+                </div>
+              )}
+              <DropdownMenuTrigger className="flex select-none items-center gap-2">
+                <div className="text-sm">Filters</div>
+                <Filter size={16} className={filter.key ? "text-primary" : ""} />
+              </DropdownMenuTrigger>
+            </div>
             <DropdownMenuContent>
-              <DropdownMenuLabel className="flex w-full justify-between">
+              <DropdownMenuLabel>
                 <div>Categories</div>
-                {filter.key && (
-                  <div
-                    title="Clear Filter"
-                    className="group flex w-full cursor-pointer items-center justify-end"
-                    onClick={clearFilter}
-                  >
-                    <X size={14} className="group-hover:text-primary" />
-                  </div>
-                )}
               </DropdownMenuLabel>
               {categories?.map((cat, i) => (
                 <DropdownMenuItem
