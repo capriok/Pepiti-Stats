@@ -11,13 +11,22 @@ import GeneralEventAlert from "~/components/alerts/GeneralEventAlert"
 
 import applicationAlerts from "@/data/application-alerts.json"
 import Pill from "~/components/pills/Pill"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "~/ui/Dropdown"
+import { Filter, MoreHorizontal, X } from "lucide-react"
+import cn from "~/utils/cn"
 
 interface Props {
   trackList: any
   table?: TableOptions
 }
 
-export default function TrackRecords(props: Props) {
+export default function WorldRecordLaps(props: Props) {
   const { trackList } = props
 
   const router = useRouter()
@@ -52,11 +61,11 @@ export default function TrackRecords(props: Props) {
 
   const handleFilter = (cat) =>
     setFilter(
-      cat === filter.key
+      filter.key === cat
         ? { key: null, data: [] }
         : {
             key: cat,
-            data: trackData?.records.filter((c) => c.category === cat),
+            data: trackData.records.filter((c) => c.category === cat),
           }
     )
 
@@ -91,7 +100,7 @@ export default function TrackRecords(props: Props) {
         </div>
       )}
 
-      <div className="mb-4 flex w-full flex-wrap items-center justify-between gap-4 md:flex-nowrap">
+      <div className="mb-4 flex w-full flex-wrap items-center justify-end gap-4 md:flex-nowrap md:justify-between">
         <select
           value={selectedTrack}
           className="select select-sm border-none bg-base-200"
@@ -103,16 +112,38 @@ export default function TrackRecords(props: Props) {
             </option>
           ))}
         </select>
-        <div className="no-scrollbar flex gap-2 overflow-x-scroll">
-          {categories.map((cat, i) => (
-            <Pill
-              key={i}
-              text={cat}
-              color={filter.key === cat ? "primary" : "base"}
-              className="cursor-pointer select-none px-4 py-1.5"
-              onClick={() => handleFilter(cat)}
-            />
-          ))}
+
+        <div className="mx-4">
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center gap-2">
+              <div className="text-sm">Filters</div>
+              <Filter size={16} className={filter.key ? "text-primary" : ""} />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>Categories</DropdownMenuLabel>
+              {categories?.map((cat, i) => (
+                <DropdownMenuItem
+                  key={i}
+                  onClick={() => handleFilter(cat)}
+                  className={cn(
+                    "min-w-[200px] capitalize",
+                    filter.key === cat ? "text-primary" : ""
+                  )}
+                >
+                  {cat}
+                </DropdownMenuItem>
+              ))}
+              <DropdownMenuItem className="mt-2">
+                <div
+                  className="group flex w-full cursor-pointer items-center justify-between"
+                  onClick={() => setFilter({ key: null, data: [] })}
+                >
+                  <div>Clear</div>
+                  <X size={14} className="group-hover:text-primary" />
+                </div>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
 

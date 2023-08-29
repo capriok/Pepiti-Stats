@@ -14,7 +14,7 @@ interface Props {
   table?: TableOptions
 }
 
-export default function TrackRecords(props: Props) {
+export default function WorldRecords(props: Props) {
   const { trackList } = props
 
   const searchParams = useSearchParams()
@@ -53,7 +53,7 @@ export default function TrackRecords(props: Props) {
     <div className="w-full overflow-auto">
       <div className="group flex justify-between">
         <Link href={`/records/track?track=${selectedTrack}`} className="w-full">
-          <div className="mb-2 text-lg font-semibold">Track Records</div>
+          <div className="mb-2 text-lg font-semibold">World Record Laps</div>
         </Link>
         <Link
           href="/records/track"
