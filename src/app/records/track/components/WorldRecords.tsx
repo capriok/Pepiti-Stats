@@ -61,7 +61,9 @@ export default function WorldRecords(props: Props) {
 
   function handleTrackSelect(e) {
     setSelectedTrack(e.target.value)
-    router.replace(`/records/track?track=${e.target.value}`)
+    router.replace(
+      `/records/track?track=${e.target.value}${filterParam ? `&filter=${filterParam}` : ""}`
+    )
   }
 
   const categories = [
@@ -78,6 +80,11 @@ export default function WorldRecords(props: Props) {
           }
     )
     router.replace(`/records/track?track=${selectedTrack}&filter=${cat}`)
+  }
+
+  const clearFilter = () => {
+    setFilter({ key: null, data: [] })
+    router.replace(`/records/track?track=${selectedTrack}`)
   }
 
   const Content = () => {
@@ -127,7 +134,7 @@ export default function WorldRecords(props: Props) {
 
         <div className="mx-4">
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-2">
+            <DropdownMenuTrigger className="flex select-none items-center gap-2">
               <div className="text-sm">Filters</div>
               <Filter size={16} className={filter.key ? "text-primary" : ""} />
             </DropdownMenuTrigger>
@@ -137,8 +144,8 @@ export default function WorldRecords(props: Props) {
                 {filter.key && (
                   <div
                     title="Clear Filter"
-                    className="group cursor-pointer"
-                    onClick={() => setFilter({ key: null, data: [] })}
+                    className="group flex w-full cursor-pointer items-center justify-end"
+                    onClick={clearFilter}
                   >
                     <X size={14} className="group-hover:text-primary" />
                   </div>
