@@ -1,12 +1,12 @@
 import Link from "next/link"
 import { GetTrackNames } from "~/api"
 import PageLayout from "~/components/PageLayout"
-import TrackRecords from "./components/TrackRecords"
+import WorldRecords from "./components/WorldRecords"
 
 export async function generateMetadata() {
   return {
-    title: `Pepiti | Track Records`,
-    description: "Track Records for Pepiti servers",
+    title: `Pepiti | World Record Laps`,
+    description: "World Record Laps for Pepiti servers",
   }
 }
 
@@ -17,7 +17,7 @@ export default async function Page() {
     <PageLayout
       width="app"
       header={{
-        title: "Track Records",
+        title: "World Record Laps",
         extra: (
           <Link href="/records" className="no-underline">
             Go back
@@ -25,10 +25,10 @@ export default async function Page() {
         ),
       }}
     >
-      <TrackRecords
+      <WorldRecords
         trackList={trackList.tracks.sort((a, b) => a.name.localeCompare(b.name))}
         table={{
-          defaultPageSize: 100,
+          defaultPageSize: 25,
         }}
       />
     </PageLayout>

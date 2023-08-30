@@ -14,7 +14,7 @@ interface Props {
   table?: TableOptions
 }
 
-export default function TrackRecords(props: Props) {
+export default function DashWorldRecords(props: Props) {
   const { trackList } = props
 
   const searchParams = useSearchParams()
@@ -53,7 +53,7 @@ export default function TrackRecords(props: Props) {
     <div className="w-full overflow-auto">
       <div className="group flex justify-between">
         <Link href={`/records/track?track=${selectedTrack}`} className="w-full">
-          <div className="mb-2 text-lg font-semibold">Track Records</div>
+          <div className="mb-2 text-lg font-semibold">World Record Laps</div>
         </Link>
         <Link
           href="/records/track"
@@ -85,20 +85,19 @@ const SkeletonTable = () => (
   <Table
     // prettier-ignore
     data={[
-    {_id: '1', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '2', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '3', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '4', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '5', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '6', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '7', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '8', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '9', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '0', rank:"", name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '1', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '2', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '3', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '4', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '5', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '6', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '7', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '8', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '9', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
+    {_id: '0', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
   ]}
     // prettier-ignore
     columns={[
-      { key: "rank", label: "Rank" },
       { key: "name", label: "Name" },
       { key: "lapTime", label: "Lap Time" },
       { key: "averageSpeed", label: "Average Speed" },

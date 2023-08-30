@@ -3,6 +3,22 @@
     {
       "meta": {
         "author": "Tooky",
+        "date": "08/28/2023",
+        "scope": "Component",
+        "type": "Addition",
+        "page": "/records/track?track=<trackname>&filter=<bikecategory>"
+      },
+      "content": {
+        "description": "Added bike category filter to allow filtering by bike category",
+        "link": "/records/track?track=Assen&filter=FACTORY%20250%202T",
+        "attachments": [
+          "https://cdn.discordapp.com/attachments/1138590709545443409/1146228116021325874/image.png"
+        ]
+      }
+    },
+    {
+      "meta": {
+        "author": "Tooky",
         "date": "08/23/2023",
         "scope": "Page",
         "type": "Addition",
