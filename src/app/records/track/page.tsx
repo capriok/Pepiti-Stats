@@ -5,8 +5,8 @@ import WorldRecords from "./components/WorldRecords"
 
 export async function generateMetadata() {
   return {
-    title: `Pepiti | Track Records`,
-    description: "Track Records for Pepiti servers",
+    title: `Pepiti | World Record Laps`,
+    description: "World Record Laps for Pepiti servers",
   }
 }
 
