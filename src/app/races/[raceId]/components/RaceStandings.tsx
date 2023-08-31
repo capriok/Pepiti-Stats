@@ -68,6 +68,7 @@ export default function RaceStandings({ standings }: Props) {
         data={standings}
         columns={tableColumns}
         sortingKeys={sortKeys}
+        defaultPageSize={standings.length}
         expandable={{
           render: (row) => <RiderSafetyStatsRow row={row} />,
         }}

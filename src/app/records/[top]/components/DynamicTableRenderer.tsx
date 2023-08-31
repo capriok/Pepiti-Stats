@@ -33,6 +33,7 @@ const dynamicDataMap = {
       return (
         <WorldRecordsTable
           worldRecords={records}
+          sortingKeys={["records"]}
           expandable={{
             render: (row) => <RiderWorldRecordsTableRow row={row} />,
           }}
@@ -46,6 +47,7 @@ const dynamicDataMap = {
       return (
         <MMRRecordsTable
           worldMMR={records}
+          sortingKeys={["rating"]}
           expandable={{
             render: (row) => <RiderRecentRacesTableRow row={row} />,
           }}
@@ -59,6 +61,7 @@ const dynamicDataMap = {
       return (
         <SRRecordsTable
           worldSR={records}
+          sortingKeys={["rating", "ratio"]}
           expandable={{
             render: (row) => <RiderSafetyStatsRow row={row} />,
           }}
@@ -79,6 +82,7 @@ const dynamicDataMap = {
       return (
         <ContactRecordsTable
           worldContacts={records}
+          sortingKeys={["contacts", "ratio"]}
           additionalColumns={[
             {
               key: "ratio",

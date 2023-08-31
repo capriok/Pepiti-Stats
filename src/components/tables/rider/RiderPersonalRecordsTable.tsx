@@ -10,12 +10,11 @@ import Image from "next/image"
 import { handleSessionEnum } from "~/utils/handleSessionEnum"
 import Link from "next/link"
 
-interface Props {
+interface Props extends TableOptions {
   records: Array<any>
-  table?: TableOptions
 }
 
-export default function RiderPersonalRecordsTable({ records, table }: Props) {
+export default function RiderPersonalRecordsTable({ records, ...rest }: Props) {
   const data = records
     .map((r) => ({
       _id: r._id,
@@ -102,16 +101,7 @@ export default function RiderPersonalRecordsTable({ records, table }: Props) {
   const sortKeys = ["date", "track", "lapTime", "split1", "split2", "averageSpeed", "wr"]
 
   return (
-    <Table
-      columns={columns}
-      data={data}
-      rankEnabled={false}
-      searchKey="track"
-      searchEnabled={true}
-      paginationEnabled={true}
-      sortingKeys={sortKeys}
-      {...table}
-    />
+    <Table columns={columns} data={data} rankEnabled={false} sortingKeys={sortKeys} {...rest} />
   )
 }
 

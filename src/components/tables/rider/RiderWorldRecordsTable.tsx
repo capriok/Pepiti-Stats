@@ -10,12 +10,11 @@ import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
 import { handleSessionEnum } from "~/utils/handleSessionEnum"
 import Link from "next/link"
 
-interface Props {
+interface Props extends TableOptions {
   records: Array<any>
-  table?: TableOptions
 }
 
-export default function RiderWorldRecordsTable({ records, table }: Props) {
+export default function RiderWorldRecordsTable({ records, ...rest }: Props) {
   const data = records
     .map((r) => ({
       _id: r._id,
@@ -103,7 +102,7 @@ export default function RiderWorldRecordsTable({ records, table }: Props) {
   const sortKeys = ["date", "track", "lapTime", "split1", "split2", "averageSpeed"]
 
   return (
-    <Table columns={columns} data={data} rankEnabled={false} sortingKeys={sortKeys} {...table} />
+    <Table columns={columns} data={data} rankEnabled={false} sortingKeys={sortKeys} {...rest} />
   )
 }
 

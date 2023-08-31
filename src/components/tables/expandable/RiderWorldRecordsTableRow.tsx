@@ -39,13 +39,5 @@ const Tables = ({ rider }) => {
 
   const worldRecords = recordsData.records.filter((record) => record.wr)
 
-  return (
-    <RiderWorldRecordsTable
-      records={worldRecords}
-      table={{
-        defaultPageSize: 10,
-        paginationEnabled: true,
-      }}
-    />
-  )
+  return <RiderWorldRecordsTable records={worldRecords} paginationEnabled={true} />
 }

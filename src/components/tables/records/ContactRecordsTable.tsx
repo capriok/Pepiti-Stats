@@ -1,8 +1,7 @@
 "use client"
 
-import Pill from "~/components/pills/Pill"
-import RiderLink from "~/components/RiderLink"
 import Table, { TableColumn, TableOptions } from "~/ui/Table"
+import RiderLink from "~/components/RiderLink"
 
 interface Props extends TableOptions {
   worldContacts: any
@@ -39,16 +38,13 @@ export default function ContactRecordsTable({
       label: "Contacts",
       align: "right",
     },
-   
+
     ...additionalColumns,
   ]
 
-  const sortKeys = ["contacts", "ratio"]
-
   return (
     <div className="flex flex-col items-end">
-      <Table data={data} columns={columns} sortingKeys={sortKeys} 
-       {...rest} />
+      <Table data={data} columns={columns} {...rest} />
     </div>
   )
 }

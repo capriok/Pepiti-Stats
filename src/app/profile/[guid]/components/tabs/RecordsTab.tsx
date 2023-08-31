@@ -40,13 +40,7 @@ const Tables = ({ rider }) => {
       {worldRecords.length ? (
         <>
           <div className="mb-4 mt-8 whitespace-nowrap text-xl font-semibold">World Records</div>
-          <RiderWorldRecordsTable
-            records={worldRecords}
-            table={{
-              defaultPageSize: 20,
-              paginationEnabled: true,
-            }}
-          />
+          <RiderWorldRecordsTable records={worldRecords} paginationEnabled={true} />
         </>
       ) : (
         <> </>
@@ -54,9 +48,7 @@ const Tables = ({ rider }) => {
       <div className="mb-4 mt-8 whitespace-nowrap text-xl font-semibold">Personal Records</div>
       <RiderPersonalRecordsTable
         records={personalRecords}
-        table={{
-          paginationEnabled: true,
-        }}
+        paginationEnabled={true} 
       />
     </>
   )
