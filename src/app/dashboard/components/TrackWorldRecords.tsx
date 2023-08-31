@@ -6,7 +6,9 @@ import Link from "next/link"
 import useSWR from "swr"
 import Table, { TableOptions } from "~/ui/Table"
 import { Button } from "~/ui/Button"
-import { TrackRecordsTable } from "~/components/tables/records/TrackRecordsTable"
+import TrackRecordsTable, {
+  trackRecordsColumns,
+} from "~/components/tables/records/TrackRecordsTable"
 import { ChevronsRight } from "lucide-react"
 
 interface Props extends TableOptions {
@@ -35,7 +37,7 @@ export default function TrackWorldRecords({ tracks, ...rest }: Props) {
 
     if (isLoading) return <SkeletonTable />
 
-    return <TrackRecordsTable records={data.records} {...rest} />
+    return <TrackRecordsTable records={data.records} columns={trackRecordsColumns} {...rest} />
   }
 
   return (

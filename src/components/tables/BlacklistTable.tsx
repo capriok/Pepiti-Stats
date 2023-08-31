@@ -29,6 +29,7 @@ export default function BlacklistTable({ blacklist }: Props) {
     {
       key: "guid",
       label: "GUID",
+      onFilter: (value, row) => row.guid.toLowerCase().includes(value.toLowerCase()),
     },
     {
       key: "name",

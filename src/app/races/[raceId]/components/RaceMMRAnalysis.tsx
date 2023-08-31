@@ -16,6 +16,7 @@ export default function RaceMMRAnalysis({ standings }: Props) {
       key: "name",
       label: "Name",
       render: (name, row) => <RiderLink href={`/profile/${row._id}`} name={name} />,
+      onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
     },
     {
       key: "mmrGain",

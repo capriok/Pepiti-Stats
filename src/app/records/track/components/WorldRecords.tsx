@@ -12,7 +12,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "~/ui/Dropdown"
-import { WorldRecordsTable } from "~/components/tables/records/WorldRecordsTable"
+import TrackRecordsTable, {
+  worldRecordsColumns,
+} from "~/components/tables/records/TrackRecordsTable"
 import RiderWorldRecordsTableRow from "~/components/tables/expandable/RiderWorldRecordsTableRow"
 import GeneralEventAlert from "~/components/alerts/GeneralEventAlert"
 import Pill from "~/components/pills/Pill"
@@ -93,8 +95,9 @@ export default function WorldRecords({ trackList, ...rest }: Props) {
     const sortingKeys = ["lap_time", "average_speed", "split_1", "split_2", "bike"]
 
     return (
-      <WorldRecordsTable
+      <TrackRecordsTable
         records={filter.key ? filter.data : trackData.records}
+        columns={worldRecordsColumns}
         defaultPageSize={PAGE_SIZE}
         pageSizeEnabled={true}
         paginationEnabled={true}

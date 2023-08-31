@@ -1,6 +1,6 @@
 "use client"
 
-import Table, { TableColumn, TableOptions } from "~/ui/Table"
+import Table, { TableOptions } from "~/ui/Table"
 import RiderLink from "~/components/RiderLink"
 import Pill from "~/components/pills/Pill"
 

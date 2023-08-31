@@ -3,11 +3,16 @@
 import Link from "next/link"
 import MMRPill from "~/components/pills/MMRPill"
 import Pill from "~/components/pills/Pill"
-import Table from "~/ui/Table"
+import Table, { TableOptions } from "~/ui/Table"
 import { dateIsValid } from "~/utils/dateIsValid"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
 
-export default function RiderRecentRacesTable({ races }) {
+interface Props extends TableOptions {
+  races: Array<any>
+  columns: any
+}
+
+export default function RiderRecentRacesTable({ races, columns, ...rest }: Props) {
   const lastRaces = races.slice(0, 10)
 
   const data = lastRaces.map((race) => ({
@@ -20,36 +25,70 @@ export default function RiderRecentRacesTable({ races }) {
   }))
   console.log("%cRiderRecentRacesTable", "color: goldenrod", { races: data })
 
-  const columns = [
-    {
-      key: "date",
-      label: "Date",
-      render: (date) => (dateIsValid(new Date(date)) ? new Date(date).toLocaleDateString() : "-"),
-    },
-    {
-      key: "track",
-      label: "Track",
-      render: (track, row) => (
-        <Link href={`/races/${row._id}`} className="font-semibold text-primary/80">
-          {track ? track : "-"}
-        </Link>
-      ),
-    },
-    {
-      key: "position",
-      label: "Position",
-      render: (position) => (position ? <b>{handlePlaceSuffix(position)}</b> : "-"),
-    },
-    {
-      key: "mmrGain",
-      label: "MMR +/-",
-      render: (mmrGain) => <MMRPill mmr={mmrGain} />,
-    },
-    {
-      key: "newMMR",
-      label: "New MMR",
-      render: (newMMR) => <Pill text={newMMR} />,
-    },
-  ]
-  return <Table data={data} columns={columns} rankEnabled={false} />
+  return <Table data={data} columns={columns} rankEnabled={false} {...rest} />
 }
+
+export const riderRecentRacesColumns = [
+  {
+    key: "date",
+    label: "Date",
+    render: (date) => (dateIsValid(new Date(date)) ? new Date(date).toLocaleDateString() : "-"),
+  },
+  {
+    key: "track",
+    label: "Track",
+    render: (track, row) => (
+      <Link href={`/races/${row._id}`} className="font-semibold text-primary/80">
+        {track ? track : "-"}
+      </Link>
+    ),
+  },
+  {
+    key: "position",
+    label: "Position",
+    render: (position) => (position ? <b>{handlePlaceSuffix(position)}</b> : "-"),
+  },
+  {
+    key: "mmrGain",
+    label: "MMR +/-",
+    render: (mmrGain) => <MMRPill mmr={mmrGain} />,
+  },
+  {
+    key: "newMMR",
+    label: "New MMR",
+    render: (newMMR) => <Pill text={newMMR} />,
+  },
+]
+
+export const riderRecentRacesColumnsWithFilter = [
+  {
+    key: "date",
+    label: "Date",
+    render: (date) => (dateIsValid(new Date(date)) ? new Date(date).toLocaleDateString() : "-"),
+  },
+  {
+    key: "track",
+    label: "Track",
+    render: (track, row) => (
+      <Link href={`/races/${row._id}`} className="font-semibold text-primary/80">
+        {track ? track : "-"}
+      </Link>
+    ),
+    onFilter: (value, row) => row.track.toLowerCase().includes(value.toLowerCase()),
+  },
+  {
+    key: "position",
+    label: "Position",
+    render: (position) => (position ? <b>{handlePlaceSuffix(position)}</b> : "-"),
+  },
+  {
+    key: "mmrGain",
+    label: "MMR +/-",
+    render: (mmrGain) => <MMRPill mmr={mmrGain} />,
+  },
+  {
+    key: "newMMR",
+    label: "New MMR",
+    render: (newMMR) => <Pill text={newMMR} />,
+  },
+]
