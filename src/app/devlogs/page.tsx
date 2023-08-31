@@ -30,7 +30,7 @@ export default function Page() {
         {devUpdates.logs.map((entry, i) => (
           <Card key={i} className="w-full">
             <CardHeader className="rounded-md bg-base-300 pb-4">
-              <div className="flex w-full flex-row justify-between">
+              <div className="flex w-full flex-col justify-between gap-2 md:flex-row">
                 <div className="flex flex-col">
                   <div className="mb-2 font-semibold text-accent">Scope</div>
                   <code>{entry.meta.scope}</code>

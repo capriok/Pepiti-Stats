@@ -23,7 +23,7 @@
         "date": "08/28/2023",
         "scope": "Component",
         "type": "Addition",
-        "page": "/records/track?track=<trackname>&filter=<bikecategory>"
+        "page": "/records/track?track=<track>&filter=<category>"
       },
       "content": {
         "description": "Added a filter to allow filtering track records data by bike category",
