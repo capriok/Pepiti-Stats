@@ -23,8 +23,8 @@ const tableProps = {
   defaultPageSize: 20,
   searchEnabled: true,
   pageSizeEnabled: true,
-  paginationEnabled: true,
   sortingEnabled: true,
+  paginationEnabled: true,
 }
 
 const dynamicDataMap = {

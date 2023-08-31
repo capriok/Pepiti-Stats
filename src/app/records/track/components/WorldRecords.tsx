@@ -93,11 +93,10 @@ export default function WorldRecords(props: Props) {
     return (
       <TrackRecordsTable
         trackRecords={filter.key ? filter.data : trackData.records}
-        resultsEnabled={true}
-        searchEnabled={true}
-        paginationEnabled={true}
-        pageSizeEnabled={true}
         defaultPageSize={10}
+        searchEnabled={true}
+        pageSizeEnabled={true}
+        paginationEnabled={true}
         expandable={{
           render: (record) => (
             <RiderWorldRecordsTableRow row={{ ...record, _id: record.rider_guid }} />
