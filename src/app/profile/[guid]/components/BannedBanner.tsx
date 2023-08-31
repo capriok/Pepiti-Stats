@@ -6,10 +6,6 @@ import { Hammer } from "lucide-react"
 import { handleReasonRemedy } from "~/utils/handleReasonRemedy"
 
 export default function BannedBanner({ banned, reason }) {
-  const reasonMap = {
-    sr: "Safety Rating Banned (Temporary)",
-    global: "Globally Banned (Permanent)",
-  }
   const isSrBan = reason?.toLowerCase() === "sr"
 
   return (
