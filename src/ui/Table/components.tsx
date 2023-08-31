@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react"
 import cn from "~/utils/cn"
 import { Button } from "../Button"
+import { SortDirection, cycleSortingDirection, sortDataByColumn } from "./utilities"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +19,7 @@ import {
   MoreVertical,
   X,
 } from "lucide-react"
-import { SortDirection, cycleSortingDirection, sortDataByColumn } from "./utilities"
+import { ScrollArea } from "../ScrollArea"
 
 export const SearchBox = ({ term, handleTermChange, searchKey }) => {
   return (
@@ -30,14 +32,7 @@ export const SearchBox = ({ term, handleTermChange, searchKey }) => {
   )
 }
 
-export const SortingControls = ({
-  column,
-  columnIsSortable,
-  sorting,
-  tableData,
-  setSorting,
-  SortDirection,
-}) => {
+export const SortingControls = ({ tableData, column, columnIsSortable, sorting, setSorting }) => {
   if (!columnIsSortable) return <></>
 
   const handleSorting = (key) => {
@@ -59,7 +54,7 @@ export const SortingControls = ({
   return (
     <div
       className={cn(
-        "cursor-pointer",
+        "cursor-pointer px-2",
         isColumnSorting ? "text-primary group-hover:scale-125" : "text-accent"
       )}
       onClick={() => handleSorting(column.key)}
@@ -75,19 +70,19 @@ export const SortingControls = ({
   )
 }
 
-export const FilteringControls = ({
-  column,
-  columnIsFilterable,
-  data,
-  filtering,
-  setFiltering,
-}) => {
+export const FilteringControls = ({ data, column, filtering, setFiltering }) => {
+  const [term, setTerm] = useState(filtering.key ? filtering.value : "")
+
+  const columnIsFilterable = column.onFilter || (column.filters && column.filters?.length > 0)
+
   if (!columnIsFilterable) return <></>
 
   const handleFiltering = (value) => {
+    console.log(value)
+    if (!value) return
+
     const filteredData = data.filter((record) => {
-      const filter = column.filters?.find((f) => f.key === value)
-      return column.onFilter!(filter?.value!, record)
+      return column.onFilter!(value, record)
     })
 
     const filter = {
@@ -95,36 +90,69 @@ export const FilteringControls = ({
       value: value,
       data: filteredData,
     }
+
     console.log("%cTable: Filtering", "color: goldenrod", filter)
+    setFiltering(filter)
+  }
+
+  const clearFilter = () => {
+    const filter = {
+      key: null,
+      value: "",
+      data: [],
+    }
+
+    console.log("%cTable: Filtering", "color: goldenrod", filter)
+    setTerm("")
     setFiltering(filter)
   }
 
   return (
     <div className="flex cursor-pointer items-center">
       <DropdownMenu>
-        <DropdownMenuTrigger>
+        <DropdownMenuTrigger className="px-2">
           <Filter size={14} className={filtering.key === column.key ? "text-primary" : ""} />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuLabel>Filters</DropdownMenuLabel>
-          {column.filters?.map(({ key, value }) => (
-            <DropdownMenuItem
-              key={key}
-              className={cn("capitalize", filtering.value === value ? "text-primary" : "")}
-              onClick={() => handleFiltering(value)}
-            >
-              {value}
-            </DropdownMenuItem>
-          ))}
-          <DropdownMenuItem className="mt-2">
-            <div
-              onClick={() => setFiltering({ key: null, data: [] })}
-              className="group flex w-full cursor-pointer items-center justify-between"
-            >
-              <div>Clear</div>
-              <X size={14} className="group-hover:text-primary" />
-            </div>
-          </DropdownMenuItem>
+          <DropdownMenuLabel className="flex items-center justify-between">
+            <div>Filters</div>
+            {filtering.key && (
+              <div
+                className="flex w-full cursor-pointer justify-end hover:text-primary"
+                onClick={clearFilter}
+              >
+                <X size={14} />
+              </div>
+            )}
+          </DropdownMenuLabel>
+          <ScrollArea className="max-h-[200px] rounded-md px-2">
+            {column.filters?.map(({ key, value }) => (
+              <div
+                key={key}
+                className={cn(
+                  "cursor-default px-1 py-1.5 text-sm hover:bg-base-100",
+                  "capitalize",
+                  filtering.value === value ? "text-primary" : ""
+                )}
+                onClick={() => handleFiltering(value)}
+              >
+                {value}
+              </div>
+            ))}
+          </ScrollArea>
+          <div className="flex flex-col items-end gap-4 p-2">
+            <input
+              type="text"
+              placeholder="Search Filter"
+              value={term}
+              autoFocus={true}
+              onChange={(e) => setTerm(e.target.value)}
+              className="input input-sm w-full"
+            />
+            <Button size="sm" className="w-fit text-sm" onClick={() => handleFiltering(term)}>
+              Submit
+            </Button>
+          </div>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
@@ -157,7 +185,7 @@ export const Pagination = ({ tableData, pageSize, page, handlePageChange }) => {
           </div>
           <div className="flex flex-nowrap gap-[2px]">
             <span className="text-primary">(</span>
-            <span className="whitespace-nowrap">{`${tableData.length} Results`}</span>
+            <span className="whitespace-nowrap">{`${tableData.length} Rows`}</span>
             <span className="text-primary">)</span>
           </div>
         </div>

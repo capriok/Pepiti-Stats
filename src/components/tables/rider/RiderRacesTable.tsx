@@ -43,6 +43,7 @@ export default function RiderRacesTable({ races }: Props) {
           {track ? track : "-"}
         </Link>
       ),
+      onFilter: (value, row) => row.track.toLowerCase().includes(value.toLowerCase()),
     },
     {
       key: "position",
@@ -87,9 +88,7 @@ export default function RiderRacesTable({ races }: Props) {
     <Table
       columns={columns}
       data={data}
-      searchKey="track"
       rankEnabled={false}
-      searchEnabled={true}
       paginationEnabled={true}
       sortingKeys={sortKeys}
     />

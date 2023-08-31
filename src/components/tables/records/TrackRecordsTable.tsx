@@ -7,15 +7,15 @@ import { handleLapTimes } from "~/utils/handleLapTimes"
 import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
 
 interface Props extends TableOptions {
-  trackRecords: TrackRecord[]
+  records: TrackRecord[]
 }
 
-export const TrackRecordsTable = ({ trackRecords, ...rest }: Props) => {
-  const data = trackRecords.map((r) => ({
+export const TrackRecordsTable = ({ records, ...rest }: Props) => {
+  const data = records.map((r) => ({
     ...r,
     name: r.rider_name,
   }))
-  console.log("%cTrackRecordsTable", "color: steelblue", { trackRecords: data })
+  console.log("%cTrackRecordsTable", "color: steelblue", { records: data })
 
   const columns = [
     {
@@ -57,7 +57,6 @@ export const TrackRecordsTable = ({ trackRecords, ...rest }: Props) => {
       ),
     },
   ]
-
 
   return <Table data={data} columns={columns} {...rest} />
 }

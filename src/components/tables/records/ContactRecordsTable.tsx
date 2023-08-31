@@ -2,17 +2,14 @@
 
 import Table, { TableColumn, TableOptions } from "~/ui/Table"
 import RiderLink from "~/components/RiderLink"
+import Pill from "~/components/pills/Pill"
 
 interface Props extends TableOptions {
   worldContacts: any
-  additionalColumns?: TableColumn[]
+  columns: any
 }
 
-export default function ContactRecordsTable({
-  worldContacts,
-  additionalColumns = [],
-  ...rest
-}: Props) {
+export default function ContactRecordsTable({ worldContacts, columns, ...rest }: Props) {
   const data: any = worldContacts.riders.map((r) => {
     const laps = Object.keys(r.bikes).reduce((acc, curr) => acc + r.bikes[curr].laps, 0)
     return {
@@ -24,23 +21,6 @@ export default function ContactRecordsTable({
     }
   })
   // console.log("%cContactRecordsTable", "color: steelblue", { worldContacts: data })
-
-  const columns = [
-    {
-      key: "name",
-      label: "Rider",
-      render: (name, row) => (
-        <RiderLink href={`/profile/${row._id}`} donator={row.donation > 0} name={name} />
-      ),
-    },
-    {
-      key: "contacts",
-      label: "Contacts",
-      align: "right",
-    },
-
-    ...additionalColumns,
-  ]
 
   return (
     <div className="flex flex-col items-end">
@@ -61,3 +41,39 @@ export function handleHPLColor(n: number) {
     return "primary"
   }
 }
+
+export const contactRecordsColumns = [
+  {
+    key: "name",
+    label: "Rider",
+    render: (name, row) => (
+      <RiderLink href={`/profile/${row._id}`} donator={row.donation > 0} name={name} />
+    ),
+  },
+  {
+    key: "contacts",
+    label: "Contacts",
+    align: "right",
+  },
+]
+
+export const contactRecordsColumnsWithRatio = [
+  {
+    key: "name",
+    label: "Rider",
+    render: (name, row) => (
+      <RiderLink href={`/profile/${row._id}`} donator={row.donation > 0} name={name} />
+    ),
+    onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
+  },
+  {
+    key: "contacts",
+    label: "Contacts",
+    align: "right",
+  },
+  {
+    key: "ratio",
+    label: "Hits per lap",
+    render: (ratio) => <Pill color={handleHPLColor(ratio)} text={ratio.toFixed(2)} />,
+  },
+]

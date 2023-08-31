@@ -2,29 +2,15 @@
 
 import React, { useState } from "react"
 import cn from "~/utils/cn"
-import { TableColumn, TableData, TableOptions } from "."
-import {
-  FilteringControls,
-  PageSizeDropdown,
-  Pagination,
-  SearchBox,
-  SortingControls,
-} from "./components"
+import { TableProps } from "."
 import { SortDirection, manipulatedColumns, manipulatedData } from "./utilities"
-
-interface TableProps extends TableOptions {
-  data: Array<TableData>
-  columns: Array<TableColumn>
-}
+import { FilteringControls, PageSizeDropdown, Pagination, SortingControls } from "./components"
 
 const Table: React.FC<TableProps> = (props) => {
   const {
     defaultPageSize = 10,
     sortingKeys = [],
-    searchKey = "name",
-    searchTerm = "",
     rankEnabled = true,
-    searchEnabled = false,
     paginationEnabled = false,
     pageSizeEnabled = false,
     expandable = null,
@@ -32,15 +18,15 @@ const Table: React.FC<TableProps> = (props) => {
 
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(defaultPageSize)
-  const [term, setTerm] = useState(searchTerm)
 
   const [sorting, setSorting] = useState({
-    data: props.data,
-    dir: SortDirection.None,
     key: null,
+    dir: SortDirection.None,
+    data: props.data,
   })
   const [filtering, setFiltering] = useState<any>({
     key: null,
+    value: null,
     data: [],
   })
 
@@ -52,16 +38,16 @@ const Table: React.FC<TableProps> = (props) => {
   const isExpandable = expandable !== null && typeof expandable.render === "function"
 
   /** preps the data for the table to use */
-  const data = manipulatedData(props.data, term, searchKey)
+  const data = manipulatedData(props.data)
 
   /** preps the columns for the table by applying options and props */
   const columns = manipulatedColumns(
     data,
     props.columns,
-    expandable,
-    expandedRow,
-    isExpandable,
     rankEnabled,
+    expandable,
+    isExpandable,
+    expandedRow,
     setExpandedRow
   )
 
@@ -72,30 +58,27 @@ const Table: React.FC<TableProps> = (props) => {
         {columns.map((column, idx) => {
           const isRankColumn = column.key === "_rank"
           const columnIsSortable = sortingKeys.some((k) => k === column.key) && !isRankColumn
-          const columnIsFilterable = column.filters && column.filters?.length > 0
 
           return (
-            <th key={column.key} className="group bg-base-200 p-0 py-4">
+            <th key={column.key} className="group p-0 py-4">
               <div
                 className={cn(
-                  "flex max-w-[40%] select-none items-center gap-4 px-2",
-                  idx === 0 ? "pl-4" : "",
+                  "flex max-w-[40%] select-none items-center px-2",
+                  idx === 0 ? "pl-2" : "",
                   column.width
                 )}
               >
-                {column.label}
+                <div className="pr-2">{column.label}</div>
                 <SortingControls
+                  tableData={tableData}
                   column={column}
                   sorting={sorting}
                   setSorting={setSorting}
-                  SortDirection={SortDirection}
                   columnIsSortable={columnIsSortable}
-                  tableData={tableData}
                 />
                 <FilteringControls
-                  column={column}
-                  columnIsFilterable={columnIsFilterable}
                   data={data}
+                  column={column}
                   filtering={filtering}
                   setFiltering={setFiltering}
                 />
@@ -152,7 +135,7 @@ const Table: React.FC<TableProps> = (props) => {
                     )}
                   >
                     <div className={"flex min-h-[45px] items-center font-medium"}>
-                      {renderer ? renderer(value, row, i) : value.toLocaleString()}
+                      {renderer ? renderer(value, row, i) : value?.toLocaleString()}
                     </div>
                   </td>
                 )
@@ -176,11 +159,6 @@ const Table: React.FC<TableProps> = (props) => {
     ? tableData.slice(startIndex, startIndex + pageSize)
     : tableData
 
-  const handleTermChange = (term) => {
-    setTerm(term)
-    setPage(0)
-  }
-
   const handlePageChange = (page) => {
     setPage(page)
   }
@@ -192,11 +170,9 @@ const Table: React.FC<TableProps> = (props) => {
 
   return (
     <div className="w-full overflow-x-auto rounded-lg">
-      {(searchEnabled || pageSizeEnabled) && (
-        <div className="flex items-center justify-between gap-4 rounded-tr-lg bg-base-200 p-4">
-          {searchEnabled && (
-            <SearchBox term={term} handleTermChange={handleTermChange} searchKey={searchKey} />
-          )}
+      {pageSizeEnabled && (
+        <div className="flex justify-between gap-4 rounded-tr-lg bg-base-200 p-4 pb-0">
+          <div />
           {pageSizeEnabled && <PageSizeDropdown change={handlePageSizeChange} />}
         </div>
       )}

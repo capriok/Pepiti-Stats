@@ -1,38 +1,63 @@
 "use client"
 
-import RiderLink from "~/components/RiderLink"
 import Table, { TableOptions } from "~/ui/Table"
+import RiderLink from "~/components/RiderLink"
+import BikeTicTac from "~/components/pills/BikeTicTac"
+import { handleLapTimes } from "~/utils/handleLapTimes"
+import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
 
 interface Props extends TableOptions {
-  worldRecords: any
+  records: TrackRecord[]
 }
 
-export default function WorldRecordsTable({ worldRecords, ...rest }: Props) {
-  const data: any = Object.keys(worldRecords.riders).map((guid) => ({
-    _id: worldRecords.riders[guid]._id,
-    name: worldRecords.riders[guid].name,
-    records: worldRecords.riders[guid].total,
+export const WorldRecordsTable = ({ records, ...rest }: Props) => {
+  const data = records.map((r) => ({
+    ...r,
+    name: r.rider_name,
   }))
-  // console.log("%cWorldRecordsTable", "color: steelblue", { worldRecords: data })
+  console.log("%cWorldRecordsTable", "color: steelblue", { records: data })
 
   const columns = [
     {
       key: "name",
-      label: "Rider",
-      render: (name, row) => {
-        return <RiderLink href={`/profile/${row._id}`} donator={row.donation > 0} name={name} />
-      },
+      label: "Name",
+      render: (name, row, index) => (
+        <div className={`${index < 3 ? "py-4" : ""} whitespace-nowrap`}>
+          <RiderLink href={`/profile/${row.rider_guid}`} name={name} />
+        </div>
+      ),
+      onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
     },
     {
-      key: "records",
-      label: "Records",
-      align: "right",
+      key: "lap_time",
+      label: "Lap Time",
+      render: (lapTime) => handleLapTimes(lapTime),
+    },
+    {
+      key: "split_1",
+      label: "Split 1",
+      render: (split) => handleLapTimes(split),
+    },
+    {
+      key: "split_2",
+      label: "Split 2",
+      render: (split) => handleLapTimes(split),
+    },
+    {
+      key: "average_speed",
+      label: "Avg Speed",
+      render: (averageSpeed) => handleAverageSpeed(averageSpeed),
+    },
+    {
+      key: "bike",
+      label: "Bike",
+      render: (bike) => (
+        <div className="whitespace-nowrap">
+          <BikeTicTac bike={bike} />
+        </div>
+      ),
     },
   ]
 
-  return (
-    <div className="flex flex-col items-end">
-      <Table data={data} columns={columns} {...rest} />
-    </div>
-  )
+  return <Table data={data} columns={columns} {...rest} />
 }

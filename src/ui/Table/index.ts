@@ -1,4 +1,12 @@
 /**
+ *  table props includes data, columns, and options
+ */
+export interface TableProps extends TableOptions {
+  data: Array<TableData>
+  columns: Array<TableColumn>
+}
+
+/**
  *  table data can include any properties but must include unique _id
  */
 export interface TableData {
@@ -28,10 +36,7 @@ export interface TableColumn {
 export interface TableOptions {
   defaultPageSize?: number
   sortingKeys?: string[]
-  searchKey?: string
-  searchTerm?: string
   rankEnabled?: boolean
-  searchEnabled?: boolean
   pageSizeEnabled?: boolean
   paginationEnabled?: boolean
   expandable?: {

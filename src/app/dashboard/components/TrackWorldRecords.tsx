@@ -1,22 +1,19 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import useSWR from "swr"
-import Table, { TableOptions } from "~/ui/Table"
-import { TrackRecordsTable } from "~/components/tables/records/TrackRecordsTable"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
+import useSWR from "swr"
+import Table, { TableOptions } from "~/ui/Table"
 import { Button } from "~/ui/Button"
+import { TrackRecordsTable } from "~/components/tables/records/TrackRecordsTable"
 import { ChevronsRight } from "lucide-react"
 
-interface Props {
-  trackList: any
-  table?: TableOptions
+interface Props extends TableOptions {
+  tracks: any
 }
 
-export default function DashWorldRecords(props: Props) {
-  const { trackList } = props
-
+export default function TrackWorldRecords({ tracks, ...rest }: Props) {
   const searchParams = useSearchParams()
   const trackParam = searchParams.get("track")
 
@@ -38,7 +35,7 @@ export default function DashWorldRecords(props: Props) {
 
     if (isLoading) return <SkeletonTable />
 
-    return <TrackRecordsTable {...props.table} trackRecords={data.records} rankEnabled={true} />
+    return <TrackRecordsTable records={data.records} {...rest} />
   }
 
   return (
@@ -62,7 +59,7 @@ export default function DashWorldRecords(props: Props) {
         className="select select-xs mb-2 w-full border-none bg-base-200 md:select-sm"
         onChange={handleTrackSelect}
       >
-        {trackList.map((track) => (
+        {tracks.map((track) => (
           <option key={track._id} value={track.name}>
             {track.name}
           </option>

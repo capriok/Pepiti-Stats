@@ -3,7 +3,7 @@ import PageLayout from "~/components/PageLayout"
 import RiderSearch from "./components/RiderSearch"
 import SummaryStats from "./components/Summary"
 import TopRecords from "./components/TopRecords"
-import DashWorldRecords from "./components/DashWorldRecords"
+import TrackWorldRecords from "./components/TrackWorldRecords"
 import GeneralEventAlert from "~/components/alerts/GeneralEventAlert"
 
 import applicationAlerts from "@/data/application-alerts.json"
@@ -38,9 +38,7 @@ export default async function Page() {
 
         <TopRecords worldRecords={worldRecords} worldMMR={worldMMR} worldSR={worldSR} />
 
-        <DashWorldRecords
-          trackList={trackList.tracks.sort((a, b) => a.name.localeCompare(b.name))}
-        />
+        <TrackWorldRecords tracks={trackList.tracks.sort((a, b) => a.name.localeCompare(b.name))} />
       </div>
     </PageLayout>
   )
