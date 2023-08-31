@@ -17,19 +17,19 @@ interface Props {
 
 export default function RiderPersonalRecordsTable({ records, table }: Props) {
   const data = records
-    .map((record) => ({
-      _id: record._id,
-      date: record.timestamp,
-      track: record.track,
-      bike: record.bike,
-      averageSpeed: record.average_speed,
-      split1: record.split_1,
-      split2: record.split_2,
-      lapTime: record.lap_time,
-      session: record.session,
+    .map((r) => ({
+      _id: r._id,
+      date: r.timestamp,
+      track: r.track,
+      bike: r.bike,
+      category: r.category,
+      averageSpeed: r.average_speed,
+      split1: r.split_1,
+      split2: r.split_2,
+      lapTime: r.lap_time,
+      session: r.session,
       isRace:
-        record.session === RiderRecordRaceSession.RACE1 ||
-        record.session === RiderRecordRaceSession.RACE2,
+        r.session === RiderRecordRaceSession.RACE1 || r.session === RiderRecordRaceSession.RACE2,
     }))
     .sort((a, b) => b.date - a.date)
 
@@ -45,8 +45,11 @@ export default function RiderPersonalRecordsTable({ records, table }: Props) {
     {
       key: "track",
       label: "Track",
-      render: (track) => (
-        <Link href={`/records/track?track=${track}`} className="font-semibold text-primary/80">
+      render: (track, row) => (
+        <Link
+          href={`/records/track?track=${track}&filter=${row.category}`}
+          className="font-semibold text-primary/80"
+        >
           {track ? track : "-"}
         </Link>
       ),
