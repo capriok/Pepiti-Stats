@@ -7,6 +7,7 @@ import RacesTab from "./tabs/RacesTab"
 import RecordsTab from "./tabs/RecordsTab"
 import LeaguesTab from "./tabs/LeaguesTab"
 import { Card } from "~/ui/Card"
+import { useRouter, useSearchParams } from "next/navigation"
 
 interface Props {
   rider: RiderProfile
@@ -14,9 +15,12 @@ interface Props {
 }
 
 export default function ProfileTabs({ rider, mmrHistory }: Props) {
+  const router = useRouter()
   const user = useUserContext()
   const isAdmin = user.isAdmin
   const isUserProfile = user.guid === rider._id
+  const searchParams = useSearchParams()
+  const tabParam = searchParams.get("tab")
 
   const items = [
     {
@@ -43,9 +47,13 @@ export default function ProfileTabs({ rider, mmrHistory }: Props) {
       children: <LeaguesTab />,
     })
 
+  const handleTabChange = (item) => {
+    router.replace(`/profile/${rider._id}?tab=${item.key}`)
+  }
+
   return (
     <Card className="mt-20">
-      <Tabs items={items} wide={true} />
+      <Tabs items={items} defaultActive={tabParam ?? ""} onChange={handleTabChange} wide={true} />
     </Card>
   )
 }
