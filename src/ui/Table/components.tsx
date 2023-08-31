@@ -78,17 +78,12 @@ export const FilteringControls = ({ data, column, filtering, setFiltering }) => 
   if (!columnIsFilterable) return <></>
 
   const handleFiltering = (value) => {
-    console.log(value)
     if (!value) return
-
-    const filteredData = data.filter((record) => {
-      return column.onFilter!(value, record)
-    })
 
     const filter = {
       key: column.key,
       value: value,
-      data: filteredData,
+      data: data.filter((r) => column.onFilter!(value, r)),
     }
 
     console.log("%cTable: Filtering", "color: goldenrod", filter)
@@ -115,7 +110,7 @@ export const FilteringControls = ({ data, column, filtering, setFiltering }) => 
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel className="flex items-center justify-between">
-            <div>Filters</div>
+            <div>{column.filters && column.filters?.length ? "Filters" : "Filter"}</div>
             {filtering.key && (
               <div
                 className="flex w-full cursor-pointer justify-end hover:text-primary"

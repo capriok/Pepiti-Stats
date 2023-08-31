@@ -153,7 +153,7 @@ export default function WorldRecords({ trackList, ...rest }: Props) {
                 </div>
               )}
               <DropdownMenuTrigger className="flex select-none items-center gap-2">
-                <div className="text-sm">Filters</div>
+                <div className="text-sm">Filter</div>
                 <Filter size={16} className={filter.key ? "text-primary" : ""} />
               </DropdownMenuTrigger>
             </div>
