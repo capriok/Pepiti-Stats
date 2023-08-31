@@ -36,6 +36,7 @@ export default function BlacklistTable({ blacklist }: Props) {
       label: "Name",
       width: "w-full",
       render: (name, row) => <RiderLink href={`/profile/${row._id}`} name={name} />,
+      onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
     },
     {
       key: "banned_by",
@@ -46,6 +47,7 @@ export default function BlacklistTable({ blacklist }: Props) {
           color={renderBannedBy(reason)}
         />
       ),
+      onFilter: (value, row) => row.banned_by.toLowerCase().includes(value.toLowerCase()),
     },
   ]
 

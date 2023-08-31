@@ -37,7 +37,7 @@ export default function BanRiderButton({ riderId, name, hackit = false }: Props)
             name="reason"
             ref={reasonRef}
             autoComplete="off"
-            placeholder="Ramming, Racism, Retard..."
+            placeholder="Rammer, Cutting, Racism..."
             className="input-bordered input input-sm w-full"
           />
           <Button variant="error" name="guid" value={riderId} type="submit" className="mt-4 w-full">
