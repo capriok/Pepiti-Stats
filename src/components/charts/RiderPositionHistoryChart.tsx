@@ -84,7 +84,7 @@ export default function RiderPositionHistoryChart({ races }: Props) {
           <div>Race History</div>
         </div>
         <div className="flex items-center justify-center">
-          <div className="pr-4 text-accent">{days} Days</div>
+          <div className="pr-4 text-sm text-accent">{days} Days</div>
           <div className="join">
             <Button
               variant="ghost"

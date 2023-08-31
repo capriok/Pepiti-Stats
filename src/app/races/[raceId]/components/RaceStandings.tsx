@@ -65,8 +65,8 @@ export default function RaceStandings({ standings }: Props) {
   return (
     <>
       <Table
-        columns={tableColumns}
         data={standings}
+        columns={tableColumns}
         sortingKeys={sortKeys}
         expandable={{
           render: (row) => <RiderSafetyStatsRow row={row} />,

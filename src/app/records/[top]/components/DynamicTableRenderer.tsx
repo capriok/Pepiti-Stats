@@ -20,10 +20,10 @@ export default function DynamicTableRenderer({ top, records }) {
 }
 
 const tableProps = {
-  defaultPageSize: 25,
+  defaultPageSize: 20,
   searchEnabled: true,
+  pageSizeEnabled: true,
   paginationEnabled: true,
-  jumpToEnabled: true,
   sortingEnabled: true,
 }
 

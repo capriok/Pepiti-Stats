@@ -72,8 +72,8 @@ export default function BlacklistTable({ blacklist }: Props) {
     <Table
       data={data}
       columns={columns}
-      searchKey="guid"
       searchEnabled={true}
+      searchKey="guid"
       searchTerm={guidParam ?? ""}
       rankEnabled={false}
       paginationEnabled={true}

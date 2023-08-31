@@ -96,6 +96,8 @@ export default function WorldRecords(props: Props) {
         resultsEnabled={true}
         searchEnabled={true}
         paginationEnabled={true}
+        pageSizeEnabled={true}
+        defaultPageSize={10}
         expandable={{
           render: (record) => (
             <RiderWorldRecordsTableRow row={{ ...record, _id: record.rider_guid }} />

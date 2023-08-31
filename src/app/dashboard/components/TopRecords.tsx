@@ -24,12 +24,7 @@ export default function TopRecords({ worldRecords, worldMMR, worldSR }) {
             </Button>
           </Link>
         </div>
-        <WorldRecordsTable
-          worldRecords={worldRecords}
-          resultsEnabled={false}
-          sortingEnabled={false}
-          paginationEnabled={false}
-        />
+        <WorldRecordsTable worldRecords={worldRecords} />
       </div>
       <div>
         <div className="group flex justify-between">
@@ -42,12 +37,7 @@ export default function TopRecords({ worldRecords, worldMMR, worldSR }) {
             </Button>
           </Link>
         </div>
-        <MMRRecordsTable
-          worldMMR={worldMMR}
-          resultsEnabled={false}
-          sortingEnabled={false}
-          paginationEnabled={false}
-        />
+        <MMRRecordsTable worldMMR={worldMMR} />
       </div>
       <div>
         <div className="group flex justify-between">
@@ -64,12 +54,7 @@ export default function TopRecords({ worldRecords, worldMMR, worldSR }) {
             </Button>
           </Link>
         </div>
-        <SRRecordsTable
-          worldSR={worldSR}
-          resultsEnabled={false}
-          sortingEnabled={false}
-          paginationEnabled={false}
-        />
+        <SRRecordsTable worldSR={worldSR} />
       </div>
     </div>
   )

@@ -38,15 +38,7 @@ export default function DashWorldRecords(props: Props) {
 
     if (isLoading) return <SkeletonTable />
 
-    return (
-      <TrackRecordsTable
-        {...props.table}
-        trackRecords={data.records}
-        resultsEnabled={false}
-        searchEnabled={false}
-        paginationEnabled={false}
-      />
-    )
+    return <TrackRecordsTable {...props.table} trackRecords={data.records} rankEnabled={true} />
   }
 
   return (

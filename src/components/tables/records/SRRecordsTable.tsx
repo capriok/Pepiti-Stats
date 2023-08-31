@@ -40,14 +40,7 @@ export default function SRRecordsTable({ worldSR, additionalColumns = [], ...res
 
   return (
     <div className="flex flex-col items-end">
-      <Table
-        data={data}
-        columns={columns}
-        paginationEnabled={true}
-        jumpToEnabled={false}
-        sortingKeys={sortKeys}
-        {...rest}
-      />
+      <Table data={data} columns={columns} sortingKeys={sortKeys} {...rest} />
     </div>
   )
 }

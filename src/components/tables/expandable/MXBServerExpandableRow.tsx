@@ -86,7 +86,7 @@ export default function MXBServerExpandableRow({ row }) {
             <div className="font-semi-bold pb-2 text-[16px]">Server</div>
             <Line label="Server ID" text={server.id} />
             <Line label="Address" text={server.address} />
-            <Line label="Private Address" text={server.private_address} />
+            <Line label="Private Address" text={server["private address"]} />
             <Line
               label="Dedicated"
               text={
