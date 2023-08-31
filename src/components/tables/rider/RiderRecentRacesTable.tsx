@@ -60,7 +60,7 @@ export const riderRecentRacesColumns = [
   },
 ]
 
-export const riderRecentRacesColumnsWithFilter = [
+export const riderRecentRacesColumnsWithControls = [
   {
     key: "date",
     label: "Date",

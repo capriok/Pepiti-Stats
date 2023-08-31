@@ -3,7 +3,7 @@
 import useSWR from "swr"
 import Spinner from "~/components/Spinner"
 import RiderRacesTable, {
-  riderRacesColumnsWithFilters,
+  riderRacesColumnsWithControls,
 } from "~/components/tables/rider/RiderRacesTable"
 
 interface Props {
@@ -27,7 +27,7 @@ export default function RacesTab({ rider }: Props) {
       <div className="my-4 whitespace-nowrap text-xl font-semibold">Recent Races</div>
       <RiderRacesTable
         races={raceData.races}
-        columns={riderRacesColumnsWithFilters}
+        columns={riderRacesColumnsWithControls}
         sortingKeys={sortingKeys}
       />
     </div>

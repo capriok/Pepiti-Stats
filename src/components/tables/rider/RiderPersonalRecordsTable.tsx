@@ -103,7 +103,7 @@ export const personalRecordsColumns = [
   },
 ]
 
-export const personalRecordsColumnsWithFilters = [
+export const personalRecordsColumnsWithControls = [
   {
     key: "date",
     label: "Date",

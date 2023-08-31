@@ -4,7 +4,7 @@ import useSWR from "swr"
 import Spinner from "~/components/Spinner"
 import RiderPersonalRecordsTable from "~/components/tables/rider/RiderPersonalRecordsTable"
 import RiderWorldRecordsTable, {
-  riderWorldRecordsColumnsWithFilters,
+  riderWorldRecordsColumnsWithControls,
 } from "~/components/tables/rider/RiderWorldRecordsTable"
 import RiderWorldRecordStats from "~/components/stats/RiderWorldRecordStats"
 
@@ -46,7 +46,7 @@ const Tables = ({ rider }) => {
           <div className="mb-4 mt-8 whitespace-nowrap text-xl font-semibold">World Records</div>
           <RiderWorldRecordsTable
             records={worldRecords}
-            columns={riderWorldRecordsColumnsWithFilters}
+            columns={riderWorldRecordsColumnsWithControls}
             sortingKeys={sortingKeys}
             paginationEnabled={true}
           />
@@ -57,7 +57,7 @@ const Tables = ({ rider }) => {
       <div className="mb-4 mt-8 whitespace-nowrap text-xl font-semibold">Personal Records</div>
       <RiderPersonalRecordsTable
         records={personalRecords}
-        columns={riderWorldRecordsColumnsWithFilters}
+        columns={riderWorldRecordsColumnsWithControls}
         sortingKeys={sortingKeys}
         paginationEnabled={true}
       />

@@ -38,7 +38,7 @@ export const recordHoldersColumns = [
   },
 ]
 
-export const recordHoldersColumnWithFilters = [
+export const recordHoldersColumnWithControls = [
   {
     key: "name",
     label: "Rider",

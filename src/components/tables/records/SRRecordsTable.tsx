@@ -36,7 +36,6 @@ export const srRecordsColumns = [
     render: (name, row) => (
       <RiderLink href={`/profile/${row._id}`} donator={row.donation > 0} name={name} />
     ),
-    onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
   },
   {
     key: "rating",
@@ -45,13 +44,14 @@ export const srRecordsColumns = [
   },
 ]
 
-export const srRecordsColumnsWithRatio = [
+export const srRecordsColumnsWithControls = [
   {
     key: "name",
     label: "Rider",
     render: (name, row) => (
       <RiderLink href={`/profile/${row._id}`} donator={row.donation > 0} name={name} />
     ),
+    onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
   },
   {
     key: "rating",

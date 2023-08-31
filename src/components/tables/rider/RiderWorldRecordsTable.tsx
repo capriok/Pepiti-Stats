@@ -37,9 +37,7 @@ export default function RiderWorldRecordsTable({ records, columns, ...rest }: Pr
 
   console.log("%cRiderWorldRecordsTable", "color: steelblue", { records: data })
 
-  return (
-    <Table data={data} columns={columns} rankEnabled={false} {...rest} />
-  )
+  return <Table data={data} columns={columns} rankEnabled={false} {...rest} />
 }
 
 export const riderWorldRecordsColumns = [
@@ -106,7 +104,7 @@ export const riderWorldRecordsColumns = [
   },
 ]
 
-export const riderWorldRecordsColumnsWithFilters = [
+export const riderWorldRecordsColumnsWithControls = [
   {
     key: "date",
     label: "Date",

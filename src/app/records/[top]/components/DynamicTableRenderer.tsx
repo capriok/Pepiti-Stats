@@ -5,19 +5,20 @@ import useSwr from "swr"
 import Pill from "~/components/pills/Pill"
 import Spinner from "~/components/Spinner"
 import RecordHoldersTable, {
-  recordHoldersColumnWithFilters,
+  recordHoldersColumnWithControls,
 } from "~/components/tables/records/RecordHoldersTable"
 import RiderWorldRecordsTableRow from "~/components/tables/expandable/RiderWorldRecordsTableRow"
-import MMRRecordsTable, { mmrRecordsColumns } from "~/components/tables/records/MMRRecordsTable"
+import MMRRecordsTable, {
+  mmrRecordsColumnsWithControls,
+} from "~/components/tables/records/MMRRecordsTable"
 import RiderRecentRacesTableRow from "~/components/tables/expandable/RiderRecentRacesTableRow"
 import SRRecordsTable, {
-  srRecordsColumnsWithRatio,
+  srRecordsColumnsWithControls,
 } from "~/components/tables/records/SRRecordsTable"
 import RiderSafetyStatsRow from "~/components/tables/expandable/RiderSafetyStatsRow"
 import BikeRecordsTable, { bikeRecordsColumns } from "~/components/tables/records/BikeRecordsTable"
 import ContactRecordsTable, {
   contactRecordsColumnsWithRatio,
-  handleHPLColor,
 } from "~/components/tables/records/ContactRecordsTable"
 
 export default function DynamicTableRenderer({ top, records }) {
@@ -37,7 +38,7 @@ const dynamicDataMap = {
       return (
         <RecordHoldersTable
           riders={records.riders}
-          columns={recordHoldersColumnWithFilters}
+          columns={recordHoldersColumnWithControls}
           sortingKeys={["records"]}
           expandable={{
             render: (row) => <RiderWorldRecordsTableRow row={row} />,
@@ -52,7 +53,7 @@ const dynamicDataMap = {
       return (
         <MMRRecordsTable
           riders={records.riders}
-          columns={mmrRecordsColumns}
+          columns={mmrRecordsColumnsWithControls}
           sortingKeys={["rating"]}
           expandable={{
             render: (row) => <RiderRecentRacesTableRow row={row} />,
@@ -67,7 +68,7 @@ const dynamicDataMap = {
       return (
         <SRRecordsTable
           riders={records.riders}
-          columns={srRecordsColumnsWithRatio}
+          columns={srRecordsColumnsWithControls}
           sortingKeys={["rating", "ratio"]}
           expandable={{
             render: (row) => <RiderSafetyStatsRow row={row} />,
