@@ -5,9 +5,6 @@ import { useRouter, useSearchParams } from "next/navigation"
 import useSWR from "swr"
 import cn from "~/utils/cn"
 import Table, { TableOptions } from "~/ui/Table"
-import { TrackRecordsTable } from "~/components/tables/records/TrackRecordsTable"
-import RiderWorldRecordsTableRow from "~/components/tables/expandable/RiderWorldRecordsTableRow"
-import GeneralEventAlert from "~/components/alerts/GeneralEventAlert"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,21 +12,24 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "~/ui/Dropdown"
+import TrackRecordsTable, {
+  worldRecordsColumns,
+} from "~/components/tables/records/TrackRecordsTable"
+import RiderWorldRecordsTableRow from "~/components/tables/expandable/RiderWorldRecordsTableRow"
+import GeneralEventAlert from "~/components/alerts/GeneralEventAlert"
+import Pill from "~/components/pills/Pill"
+
 import { Filter, X } from "lucide-react"
 
 import applicationAlerts from "@/data/application-alerts.json"
-import Pill from "~/components/pills/Pill"
 
-interface Props {
+interface Props extends TableOptions {
   trackList: any
-  table?: TableOptions
 }
 
 const PAGE_SIZE = 20
 
-export default function WorldRecords(props: Props) {
-  const { trackList } = props
-
+export default function WorldRecords({ trackList, ...rest }: Props) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const trackParam = searchParams.get("track")
@@ -96,9 +96,9 @@ export default function WorldRecords(props: Props) {
 
     return (
       <TrackRecordsTable
-        trackRecords={filter.key ? filter.data : trackData.records}
+        records={filter.key ? filter.data : trackData.records}
+        columns={worldRecordsColumns}
         defaultPageSize={PAGE_SIZE}
-        searchEnabled={true}
         pageSizeEnabled={true}
         paginationEnabled={true}
         sortingKeys={sortingKeys}
@@ -107,7 +107,7 @@ export default function WorldRecords(props: Props) {
             <RiderWorldRecordsTableRow row={{ ...record, _id: record.rider_guid }} />
           ),
         }}
-        {...props.table}
+        {...rest}
       />
     )
   }
@@ -141,10 +141,11 @@ export default function WorldRecords(props: Props) {
               {filter.key && (
                 <div onClick={clearFilter}>
                   <Pill
+                    title={filter.key}
                     text={
                       <div className="group flex cursor-pointer items-center justify-center gap-2 text-xs">
                         {filter.key}
-                        <X size={12} className="group-hover:text-primary" />
+                        <X size={14} className="group-hover:text-primary" />
                       </div>
                     }
                     color="base"
@@ -152,7 +153,7 @@ export default function WorldRecords(props: Props) {
                 </div>
               )}
               <DropdownMenuTrigger className="flex select-none items-center gap-2">
-                <div className="text-sm">Filters</div>
+                <div className="text-sm">Filter</div>
                 <Filter size={16} className={filter.key ? "text-primary" : ""} />
               </DropdownMenuTrigger>
             </div>
@@ -202,7 +203,6 @@ const SkeletonTable = () => (
       { key: "bike", label: "Bike" },
     ]}
     defaultPageSize={PAGE_SIZE}
-    searchEnabled={true}
     expandable={{
       render: () => <></>,
     }}

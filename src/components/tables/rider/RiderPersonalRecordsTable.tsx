@@ -9,12 +9,14 @@ import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
 import Image from "next/image"
 import { handleSessionEnum } from "~/utils/handleSessionEnum"
 import Link from "next/link"
+import { RiderRecordRaceSession } from "~/utils/constants"
 
 interface Props extends TableOptions {
   records: Array<any>
+  columns: any
 }
 
-export default function RiderPersonalRecordsTable({ records, ...rest }: Props) {
+export default function RiderPersonalRecordsTable({ records, columns, ...rest }: Props) {
   const data = records
     .map((r) => ({
       _id: r._id,
@@ -34,83 +36,134 @@ export default function RiderPersonalRecordsTable({ records, ...rest }: Props) {
 
   console.log("%cRiderPersonalRecordsTable", "color: steelblue", { records: data })
 
-  const columns = [
-    {
-      key: "date",
-      label: "Date",
-      render: (date) =>
-        dateIsValid(new Date(date * 1000)) ? new Date(date * 1000).toLocaleDateString() : "-",
-    },
-    {
-      key: "track",
-      label: "Track",
-      render: (track, row) => (
-        <Link
-          href={`/records/track?track=${track}&filter=${row.category}`}
-          className="font-semibold text-primary/80"
-        >
-          {track ? track : "-"}
-        </Link>
-      ),
-    },
-    {
-      key: "lapTime",
-      label: "Lap Time",
-      render: (lapTime) => (lapTime ? handleLapTimes(lapTime) : "-"),
-    },
-    {
-      key: "split1",
-      label: "Split 1",
-      render: (split1) => (split1 ? handleLapTimes(split1) : "-"),
-    },
-    {
-      key: "split2",
-      label: "Split 2",
-      render: (split2) => (split2 ? handleLapTimes(split2) : "-"),
-    },
-    {
-      key: "averageSpeed",
-      label: "Average Speed",
-      render: (averageSpeed) => (averageSpeed ? handleAverageSpeed(averageSpeed) : "-"),
-    },
-    {
-      key: "bike",
-      label: "Bike",
-      render: (bike) => <BikeTicTac bike={bike} />,
-    },
-    {
-      key: "session",
-      label: "Session",
-      render: (session, row) => (
-        <div className="flex w-full justify-between">
-          {handleSessionEnum(session)}
-          {row.isRace && (
-            <Image
-              alt="wr"
-              src="/assets/brand/white-flag.svg"
-              className="mx-2"
-              width={14}
-              height={14}
-            />
-          )}
-        </div>
-      ),
-    },
-  ]
-
-  const sortKeys = ["date", "track", "lapTime", "split1", "split2", "averageSpeed", "wr"]
-
-  return (
-    <Table columns={columns} data={data} rankEnabled={false} sortingKeys={sortKeys} {...rest} />
-  )
+  return <Table data={data} columns={columns} rankEnabled={false} {...rest} />
 }
 
-enum RiderRecordRaceSession {
-  PRACTICE = "PRACTICE",
-  PRE_QUALIFY = "PRE-QUALIFY",
-  QUALIFY_PRACTICE = "QUALIFY PRACTICE",
-  QUALIFY = "QUALIFY",
-  WARMUP = "WARMUP",
-  RACE1 = "RACE1",
-  RACE2 = "RACE2",
-}
+export const personalRecordsColumns = [
+  {
+    key: "date",
+    label: "Date",
+    render: (date) =>
+      dateIsValid(new Date(date * 1000)) ? new Date(date * 1000).toLocaleDateString() : "-",
+  },
+  {
+    key: "track",
+    label: "Track",
+    render: (track, row) => (
+      <Link
+        href={`/records/track?track=${track}&filter=${row.category}`}
+        className="font-semibold text-primary/80"
+      >
+        {track ? track : "-"}
+      </Link>
+    ),
+  },
+  {
+    key: "lapTime",
+    label: "Lap Time",
+    render: (lapTime) => (lapTime ? handleLapTimes(lapTime) : "-"),
+  },
+  {
+    key: "split1",
+    label: "Split 1",
+    render: (split1) => (split1 ? handleLapTimes(split1) : "-"),
+  },
+  {
+    key: "split2",
+    label: "Split 2",
+    render: (split2) => (split2 ? handleLapTimes(split2) : "-"),
+  },
+  {
+    key: "averageSpeed",
+    label: "Average Speed",
+    render: (averageSpeed) => (averageSpeed ? handleAverageSpeed(averageSpeed) : "-"),
+  },
+  {
+    key: "bike",
+    label: "Bike",
+    render: (bike) => <BikeTicTac bike={bike} />,
+  },
+  {
+    key: "session",
+    label: "Session",
+    render: (session, row) => (
+      <div className="flex w-full justify-between">
+        {handleSessionEnum(session)}
+        {row.isRace && (
+          <Image
+            alt="wr"
+            src="/assets/brand/white-flag.svg"
+            className="mx-2"
+            width={14}
+            height={14}
+          />
+        )}
+      </div>
+    ),
+  },
+]
+
+export const personalRecordsColumnsWithControls = [
+  {
+    key: "date",
+    label: "Date",
+    render: (date) =>
+      dateIsValid(new Date(date * 1000)) ? new Date(date * 1000).toLocaleDateString() : "-",
+  },
+  {
+    key: "track",
+    label: "Track",
+    render: (track, row) => (
+      <Link
+        href={`/records/track?track=${track}&filter=${row.category}`}
+        className="font-semibold text-primary/80"
+      >
+        {track ? track : "-"}
+      </Link>
+    ),
+    onFilter: (value, row) => row.track.toLowerCase().includes(value.toLowerCase()),
+  },
+  {
+    key: "lapTime",
+    label: "Lap Time",
+    render: (lapTime) => (lapTime ? handleLapTimes(lapTime) : "-"),
+  },
+  {
+    key: "split1",
+    label: "Split 1",
+    render: (split1) => (split1 ? handleLapTimes(split1) : "-"),
+  },
+  {
+    key: "split2",
+    label: "Split 2",
+    render: (split2) => (split2 ? handleLapTimes(split2) : "-"),
+  },
+  {
+    key: "averageSpeed",
+    label: "Average Speed",
+    render: (averageSpeed) => (averageSpeed ? handleAverageSpeed(averageSpeed) : "-"),
+  },
+  {
+    key: "bike",
+    label: "Bike",
+    render: (bike) => <BikeTicTac bike={bike} />,
+  },
+  {
+    key: "session",
+    label: "Session",
+    render: (session, row) => (
+      <div className="flex w-full justify-between">
+        {handleSessionEnum(session)}
+        {row.isRace && (
+          <Image
+            alt="wr"
+            src="/assets/brand/white-flag.svg"
+            className="mx-2"
+            width={14}
+            height={14}
+          />
+        )}
+      </div>
+    ),
+  },
+]

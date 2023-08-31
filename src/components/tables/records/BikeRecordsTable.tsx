@@ -7,12 +7,13 @@ import Pill from "~/components/pills/Pill"
 import Table, { TableOptions } from "~/ui/Table"
 
 interface Props extends TableOptions {
-  worldBikes: any
+  bikes: any
+  columns: any
   totalLaps: number
 }
 
-export default function BikeRecordsTable({ worldBikes, totalLaps, ...rest }: Props) {
-  const data = worldBikes.bikes.map((bike) => {
+export default function BikeRecordsTable({ bikes, columns, totalLaps, ...rest }: Props) {
+  const data = bikes.map((bike) => {
     const ratio = totalLaps ? (bike.laps / totalLaps) * 100 : 0
     return {
       _id: bike.name + bike.laps,
@@ -21,34 +22,7 @@ export default function BikeRecordsTable({ worldBikes, totalLaps, ...rest }: Pro
       ratio: ratio,
     }
   })
-  // console.log("%cBikeRecordsTable", "color: steelblue", { worldBikes: data })
-
-  const columns = [
-    {
-      key: "name",
-      label: "Bike",
-      render: (name) => <BikeTicTac bike={name} />,
-    },
-    {
-      key: "laps",
-      label: "Laps",
-      align: "right",
-      render: (laps) => (laps ? laps.toLocaleString() : "-"),
-    },
-    {
-      key: "ratio",
-      label: "Total laps %",
-      render: (ratio) =>
-        ratio ? (
-          <Pill
-            text={ratio.toFixed(2) + "%"}
-            color={ratio > 10 ? "primary" : ratio > 5 ? "yellow" : "info"}
-          />
-        ) : (
-          <Spinner />
-        ),
-    },
-  ]
+  // console.log("%cBikeRecordsTable", "color: steelblue", { bikes: data })
 
   const sortKeys = ["laps", "ratio"]
 
@@ -58,3 +32,31 @@ export default function BikeRecordsTable({ worldBikes, totalLaps, ...rest }: Pro
     </div>
   )
 }
+
+export const bikeRecordsColumns = [
+  {
+    key: "name",
+    label: "Bike",
+    render: (name) => <BikeTicTac bike={name} />,
+    onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
+  },
+  {
+    key: "laps",
+    label: "Laps",
+    align: "right",
+    render: (laps) => (laps ? laps.toLocaleString() : "-"),
+  },
+  {
+    key: "ratio",
+    label: "Total laps %",
+    render: (ratio) =>
+      ratio ? (
+        <Pill
+          text={ratio.toFixed(2) + "%"}
+          color={ratio > 10 ? "primary" : ratio > 5 ? "yellow" : "info"}
+        />
+      ) : (
+        <Spinner />
+      ),
+  },
+]

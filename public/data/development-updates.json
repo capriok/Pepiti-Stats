@@ -3,13 +3,30 @@
     {
       "meta": {
         "author": "Tooky",
+        "date": "08/31/2023",
+        "scope": "Component",
+        "type": "Update",
+        "page": "Global"
+      },
+      "content": {
+        "description": "Added inline table column filtering by search and/or filter items",
+        "deprecation": "Removed floating search box from table header",
+        "link": "/records/bikes",
+        "attachments": [
+          "https://cdn.discordapp.com/attachments/1138590709545443409/1146889981512650885/image.png"
+        ]
+      }
+    },
+    {
+      "meta": {
+        "author": "Tooky",
         "date": "08/28/2023",
         "scope": "Component",
         "type": "Addition",
-        "page": "/records/track?track=<trackname>&filter=<bikecategory>"
+        "page": "/records/track?track=<track>&filter=<category>"
       },
       "content": {
-        "description": "Added bike category filter to allow filtering by bike category",
+        "description": "Added a filter to allow filtering track records data by bike category",
         "link": "/records/track?track=Assen&filter=FACTORY%20250%202T",
         "attachments": [
           "https://cdn.discordapp.com/attachments/1138590709545443409/1146228116021325874/image.png"

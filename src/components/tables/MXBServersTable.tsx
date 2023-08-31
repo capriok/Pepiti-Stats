@@ -69,7 +69,6 @@ export default function MXBServersTable(props: Props) {
       defaultPageSize={25}
       sortingKeys={sortingKeys}
       rankEnabled={false}
-      searchEnabled={true}
       {...rest}
       expandable={{
         ...expandable,

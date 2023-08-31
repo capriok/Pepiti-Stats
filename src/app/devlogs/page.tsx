@@ -30,7 +30,7 @@ export default function Page() {
         {devUpdates.logs.map((entry, i) => (
           <Card key={i} className="w-full">
             <CardHeader className="rounded-md bg-base-300 pb-4">
-              <div className="flex w-full flex-row justify-between">
+              <div className="flex w-full flex-col justify-between gap-2 md:flex-row">
                 <div className="flex flex-col">
                   <div className="mb-2 font-semibold text-accent">Scope</div>
                   <code>{entry.meta.scope}</code>
@@ -53,10 +53,17 @@ export default function Page() {
               <div>{entry.content.description}</div>
             </CardContent>
 
+            {entry.content.deprecation && (
+              <CardContent className="flex flex-col">
+                <div className="mb-2 font-semibold italic text-accent">Deprecations</div>
+                <div className="text-sm">{entry.content.deprecation}</div>
+              </CardContent>
+            )}
+
             {entry.content.link && (
-              <CardContent className="mt-2 flex items-center gap-2 text-sm">
-                <div className="font-semibold text-accent">Link</div>
-                <Link href={entry.content.link}>
+              <CardContent className="mt-2 flex items-center gap-2">
+                <div className="font-semibold italic text-accent">Link</div>
+                <Link href={entry.content.link} className="text-sm">
                   <Eye size={16} />
                 </Link>
               </CardContent>

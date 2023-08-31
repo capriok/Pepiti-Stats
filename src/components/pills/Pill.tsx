@@ -40,7 +40,7 @@ export default function Pill({ text, color = "neutral", ...rest }: PillProps) {
 
   return (
     <div
-      title={text}
+      title={rest.title ?? text}
       className={cn(
         "pill w-fit whitespace-nowrap rounded-[10px] px-2 py-1 text-center font-semibold",
         colorMap[color].bg,

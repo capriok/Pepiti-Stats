@@ -3,29 +3,17 @@ import RankTrophy from "~/components/pills/RankTrophy"
 import { TableData, TableColumn } from "."
 import { Minus, Plus } from "lucide-react"
 
-export const manipulatedData = (data: TableData[], term: string, searchKey: string) => {
-  if (term) {
-    /** * filter data by record[searchKey] search term */
-    return data.filter((record) => {
-      if (typeof record[searchKey] === "string") {
-        return record[searchKey].toLowerCase().includes(term.toLowerCase())
-      }
-      if (typeof record[searchKey] === "number") {
-        return record[searchKey].toString().includes(term)
-      }
-      return
-    })
-  }
+export const manipulatedData = (data: TableData[]) => {
   return data.map((d, i) => ({ ...d, rank: i + 1 }))
 }
 
 export const manipulatedColumns = (
   data: TableData[],
   columns: TableColumn[],
-  expandable: any,
-  expandedRow: TableData | null,
-  isExpandable: boolean,
   rankEnabled: boolean,
+  expandable: any,
+  isExpandable: boolean,
+  expandedRow: TableData | null,
   setExpandedRow: (row: TableData) => void
 ): TableColumn[] => {
   const cols: any = []

@@ -4,15 +4,21 @@ import { useEffect, useState } from "react"
 import useSwr from "swr"
 import Pill from "~/components/pills/Pill"
 import Spinner from "~/components/Spinner"
-import WorldRecordsTable from "~/components/tables/records/WorldRecordsTable"
+import RecordHoldersTable, {
+  recordHoldersColumnWithControls,
+} from "~/components/tables/records/RecordHoldersTable"
 import RiderWorldRecordsTableRow from "~/components/tables/expandable/RiderWorldRecordsTableRow"
-import MMRRecordsTable from "~/components/tables/records/MMRRecordsTable"
+import MMRRecordsTable, {
+  mmrRecordsColumnsWithControls,
+} from "~/components/tables/records/MMRRecordsTable"
 import RiderRecentRacesTableRow from "~/components/tables/expandable/RiderRecentRacesTableRow"
-import SRRecordsTable from "~/components/tables/records/SRRecordsTable"
+import SRRecordsTable, {
+  srRecordsColumnsWithControls,
+} from "~/components/tables/records/SRRecordsTable"
 import RiderSafetyStatsRow from "~/components/tables/expandable/RiderSafetyStatsRow"
-import BikeRecordsTable from "~/components/tables/records/BikeRecordsTable"
+import BikeRecordsTable, { bikeRecordsColumns } from "~/components/tables/records/BikeRecordsTable"
 import ContactRecordsTable, {
-  handleHPLColor,
+  contactRecordsColumnsWithRatio,
 } from "~/components/tables/records/ContactRecordsTable"
 
 export default function DynamicTableRenderer({ top, records }) {
@@ -21,7 +27,6 @@ export default function DynamicTableRenderer({ top, records }) {
 
 const tableProps = {
   defaultPageSize: 20,
-  searchEnabled: true,
   pageSizeEnabled: true,
   sortingEnabled: true,
   paginationEnabled: true,
@@ -31,8 +36,9 @@ const dynamicDataMap = {
   riders: {
     render: (records) => {
       return (
-        <WorldRecordsTable
-          worldRecords={records}
+        <RecordHoldersTable
+          riders={records.riders}
+          columns={recordHoldersColumnWithControls}
           sortingKeys={["records"]}
           expandable={{
             render: (row) => <RiderWorldRecordsTableRow row={row} />,
@@ -46,7 +52,8 @@ const dynamicDataMap = {
     render: (records) => {
       return (
         <MMRRecordsTable
-          worldMMR={records}
+          riders={records.riders}
+          columns={mmrRecordsColumnsWithControls}
           sortingKeys={["rating"]}
           expandable={{
             render: (row) => <RiderRecentRacesTableRow row={row} />,
@@ -60,18 +67,12 @@ const dynamicDataMap = {
     render: (records) => {
       return (
         <SRRecordsTable
-          worldSR={records}
+          riders={records.riders}
+          columns={srRecordsColumnsWithControls}
           sortingKeys={["rating", "ratio"]}
           expandable={{
             render: (row) => <RiderSafetyStatsRow row={row} />,
           }}
-          additionalColumns={[
-            {
-              key: "ratio",
-              label: "Hits per lap",
-              render: (ratio) => <Pill color={handleHPLColor(ratio)} text={ratio.toFixed(2)} />,
-            },
-          ]}
           {...tableProps}
         />
       )
@@ -82,14 +83,8 @@ const dynamicDataMap = {
       return (
         <ContactRecordsTable
           worldContacts={records}
+          columns={contactRecordsColumnsWithRatio}
           sortingKeys={["contacts", "ratio"]}
-          additionalColumns={[
-            {
-              key: "ratio",
-              label: "Hits per lap",
-              render: (ratio) => <Pill color={handleHPLColor(ratio)} text={ratio.toFixed(2)} />,
-            },
-          ]}
           {...tableProps}
         />
       )
@@ -117,7 +112,12 @@ const dynamicDataMap = {
                 </div>
               )}
             </div>
-            <BikeRecordsTable worldBikes={records} totalLaps={laps} {...tableProps} />
+            <BikeRecordsTable
+              bikes={records.bikes}
+              columns={bikeRecordsColumns}
+              totalLaps={laps}
+              {...tableProps}
+            />
           </>
         )
       }

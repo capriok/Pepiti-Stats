@@ -29,6 +29,7 @@ export default function BlacklistTable({ blacklist }: Props) {
     {
       key: "guid",
       label: "GUID",
+      onFilter: (value, row) => row.guid.toLowerCase().includes(value.toLowerCase()),
     },
     {
       key: "name",
@@ -72,9 +73,6 @@ export default function BlacklistTable({ blacklist }: Props) {
     <Table
       data={data}
       columns={columns}
-      searchEnabled={true}
-      searchKey="guid"
-      searchTerm={guidParam ?? ""}
       rankEnabled={false}
       paginationEnabled={true}
       sortingKeys={sortKeys}
