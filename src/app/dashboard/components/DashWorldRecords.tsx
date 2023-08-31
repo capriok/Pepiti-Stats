@@ -75,20 +75,15 @@ export default function DashWorldRecords(props: Props) {
 
 const SkeletonTable = () => (
   <Table
-    // prettier-ignore
-    data={[
-    {_id: '1', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '2', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '3', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '4', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '5', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '6', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '7', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '8', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '9', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '0', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-  ]}
-    // prettier-ignore
+    data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((id) => ({
+      _id: id.toString(),
+      name: "",
+      lapTime: "",
+      averageSpeed: "",
+      split1: "",
+      split2: "",
+      bike: "",
+    }))}
     columns={[
       { key: "name", label: "Name" },
       { key: "lapTime", label: "Lap Time" },

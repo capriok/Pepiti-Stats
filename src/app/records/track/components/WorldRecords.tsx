@@ -25,6 +25,8 @@ interface Props {
   table?: TableOptions
 }
 
+const PAGE_SIZE = 20
+
 export default function WorldRecords(props: Props) {
   const { trackList } = props
 
@@ -90,13 +92,16 @@ export default function WorldRecords(props: Props) {
 
     if (isLoading) return <SkeletonTable />
 
+    const sortingKeys = ["lap_time", "average_speed", "split_1", "split_2", "bike"]
+
     return (
       <TrackRecordsTable
         trackRecords={filter.key ? filter.data : trackData.records}
-        defaultPageSize={10}
+        defaultPageSize={PAGE_SIZE}
         searchEnabled={true}
         pageSizeEnabled={true}
         paginationEnabled={true}
+        sortingKeys={sortingKeys}
         expandable={{
           render: (record) => (
             <RiderWorldRecordsTableRow row={{ ...record, _id: record.rider_guid }} />
@@ -179,21 +184,15 @@ export default function WorldRecords(props: Props) {
 
 const SkeletonTable = () => (
   <Table
-    // prettier-ignore
-    data={[
-    {_id: '1', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '2', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '3', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '4', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '5', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '6', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '7', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '8', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '9', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-    {_id: '0', name:"-", lapTime:"-", averageSpeed:"-", split1:'-', split2:'-', bike: '-'},
-  ]}
-    // prettier-ignore
-    searchEnabled={true}
+    data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((id) => ({
+      _id: id.toString(),
+      name: "",
+      lapTime: "",
+      averageSpeed: "",
+      split1: "",
+      split2: "",
+      bike: "",
+    }))}
     columns={[
       { key: "name", label: "Name" },
       { key: "lapTime", label: "Lap Time" },
@@ -202,6 +201,8 @@ const SkeletonTable = () => (
       { key: "split2", label: "Split 2" },
       { key: "bike", label: "Bike" },
     ]}
+    defaultPageSize={PAGE_SIZE}
+    searchEnabled={true}
     expandable={{
       render: () => <></>,
     }}

@@ -75,7 +75,7 @@ const Table: React.FC<TableProps> = (props) => {
           const columnIsFilterable = column.filters && column.filters?.length > 0
 
           return (
-            <th key={column.key} className={`group bg-base-200 p-0 py-4`}>
+            <th key={column.key} className="group bg-base-200 p-0 py-4">
               <div
                 className={cn(
                   "flex max-w-[40%] select-none items-center gap-4 px-2",

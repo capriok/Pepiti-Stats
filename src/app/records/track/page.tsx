@@ -25,12 +25,7 @@ export default async function Page() {
         ),
       }}
     >
-      <WorldRecords
-        trackList={trackList.tracks.sort((a, b) => a.name.localeCompare(b.name))}
-        table={{
-          defaultPageSize: 25,
-        }}
-      />
+      <WorldRecords trackList={trackList.tracks.sort((a, b) => a.name.localeCompare(b.name))} />
     </PageLayout>
   )
 }
