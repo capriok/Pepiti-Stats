@@ -31,7 +31,7 @@ const PageHeader: React.FC<Props> = ({ title, extra, width, subExtra, backEnable
             <div className="absolute right-0 top-0 hidden md:inline">
               <div
                 onClick={() => router.back()}
-                className="mt-2 cursor-pointer p-2 pr-4 hover:bg-base-200/80"
+                className="mt-2 cursor-pointer rounded-md px-4 py-2 hover:bg-base-100/80"
                 title="Go Back"
               >
                 <Undo size={20} />
