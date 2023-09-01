@@ -1,6 +1,5 @@
 "use client"
 
-import { Bike, CheckIcon, RocketIcon, VerifiedIcon } from "lucide-react"
 import React from "react"
 import BikeTicTac from "~/components/pills/BikeTicTac"
 import Pill from "~/components/pills/Pill"
@@ -9,6 +8,7 @@ import { Alert, AlertDescription, AlertTitle } from "~/ui/Alert"
 import { Card, CardContent } from "~/ui/Card"
 import Table from "~/ui/Table"
 import LeagueRaceCard from "./LeagueRaceCard"
+import { RocketIcon, VerifiedIcon } from "lucide-react"
 
 interface Props {
   user: User
@@ -102,7 +102,7 @@ const LeagueBanner = ({ league }: { league: League }) => {
     <div className="m-8">
       <div className="flex w-full justify-between">
         <div className="text-2xl font-semibold">{league.name}</div>
-        <div data-tip="Verified League" className="tooltip-accent tooltip text-purple-600">
+        <div title="Verified League" className="text-primary">
           {league.verified && <VerifiedIcon />}
         </div>
       </div>

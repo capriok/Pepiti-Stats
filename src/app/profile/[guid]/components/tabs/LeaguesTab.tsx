@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import Spinner from "~/components/Spinner"
-import LeagueList from "~/app/leagues/_components/LeagueList"
+import LeagueList from "~/app/leagues/components/LeagueList"
 import { GetRiderLeagues } from "~/api"
 import { useUserContext } from "~/providers/UserProvider"
 

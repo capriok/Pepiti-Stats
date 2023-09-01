@@ -1,8 +1,8 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
 import { useLeagueContext } from "./LeagueOverview"
 import { GetLeagueRaceEligibility } from "~/api"
 import Pill from "~/components/pills/Pill"

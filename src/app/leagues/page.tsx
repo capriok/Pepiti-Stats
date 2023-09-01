@@ -1,6 +1,6 @@
 import { GetAllLeagues } from "~/api"
 import PageLayout from "~/components/PageLayout"
-import LeagueList from "./_components/LeagueList"
+import LeagueList from "./components/LeagueList"
 
 export const metadata = {
   title: "Pepiti | Leagues",
@@ -14,6 +14,7 @@ export default async function Page() {
     <PageLayout
       width="app"
       header={{
+        backEnabled: true,
         title: "Leagues",
       }}
     >

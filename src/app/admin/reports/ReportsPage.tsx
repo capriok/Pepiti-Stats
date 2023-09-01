@@ -1,6 +1,5 @@
 "use client"
 
-import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { useState } from "react"
 import PageLayout from "~/components/PageLayout"
@@ -32,12 +31,9 @@ export default function ReportsPage({ openReports, closedReports }) {
     <PageLayout
       width="feed"
       header={{
+        backEnabled: true,
         title: "Rider Reports",
-        extra: (
-          <Link href="/admin" className="no-underline">
-            Go back
-          </Link>
-        ),
+
         subExtra: (
           <Tabs
             items={items}

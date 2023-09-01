@@ -1,10 +1,8 @@
-import Link from "next/link"
 import GetAuthUser from "~/api"
 import { GetLeagueRace, GetLeagueRaceEligibility } from "~/api"
 import PageLayout from "~/components/PageLayout"
-import LeagueRaceOverview from "../../_components/LeagueRaceOverview"
-import LeagueRaceActions from "../../_components/LeagueRaceActions"
-import { Button } from "~/ui/Button"
+import LeagueRaceOverview from "../../components/LeagueRaceOverview"
+import LeagueRaceActions from "../../components/LeagueRaceActions"
 
 export const metadata = {
   title: "Pepiti | League Race",
@@ -23,17 +21,9 @@ export default async function Page(props) {
     <PageLayout
       width="app"
       header={{
+        backEnabled: true,
         title: "League Race",
-        extra: (
-          <div className="flex gap-4">
-            <LeagueRaceActions race={race} eligibility={eligibility} />
-            <Link href={`/leagues/${race.league_id}`}>
-              <Button variant="ghost" className="text-[16px] font-normal">
-                Go Back
-              </Button>
-            </Link>
-          </div>
-        ),
+        extra: <LeagueRaceActions race={race} eligibility={eligibility} />,
       }}
     >
       <LeagueRaceOverview user={user} race={race} eligibility={eligibility} />

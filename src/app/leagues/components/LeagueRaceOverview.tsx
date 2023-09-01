@@ -1,15 +1,15 @@
 "use client"
 
-import { CheckIcon, Rocket, RocketIcon } from "lucide-react"
-import Table from "~/ui/Table"
-import RiderLink from "~/components/RiderLink"
-import Tabs from "~/ui/Tabs"
-import BikeTicTac from "~/components/pills/BikeTicTac"
-import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
-import { handleLapTimes } from "~/utils/handleLapTimes"
-import { Alert, AlertDescription, AlertTitle } from "~/ui/Alert"
-import { Card } from "~/ui/Card"
 import { useEffect, useState } from "react"
+import Table from "~/ui/Table"
+import Tabs from "~/ui/Tabs"
+import { Card } from "~/ui/Card"
+import { Alert, AlertDescription, AlertTitle } from "~/ui/Alert"
+import RiderLink from "~/components/RiderLink"
+import BikeTicTac from "~/components/pills/BikeTicTac"
+import { handleLapTimes } from "~/utils/handleLapTimes"
+import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
+import { CheckIcon, Rocket } from "lucide-react"
 
 interface Props {
   user: User

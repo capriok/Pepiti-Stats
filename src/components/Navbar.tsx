@@ -16,7 +16,7 @@ import {
   navigationMenuTriggerStyle,
 } from "~/ui/NavigationMenu"
 import cn from "~/utils/cn"
-import { LogOut, ShieldAlert, User2 } from "lucide-react"
+import { Hammer, LogOut, ShieldAlert, User2 } from "lucide-react"
 
 interface Props {
   user: User
@@ -83,11 +83,6 @@ function AppNavigation({ user, notifications }) {
       title: "Leagues",
       description: "Compete in race leagues to win real prizes and profile badges.",
     },
-    {
-      href: "/servers",
-      title: "Servers",
-      description: "See a List of all Pepiti or MXB servers available to participate in.",
-    },
   ]
 
   const featureItems: Array<Item> = [
@@ -97,14 +92,14 @@ function AppNavigation({ user, notifications }) {
       description: "Explore top records statistics and analyze intuitive data.",
     },
     {
+      href: "/servers",
+      title: "Servers",
+      description: "See a List of all Pepiti or MXB servers available to participate in.",
+    },
+    {
       href: "/blacklists",
       title: "Blacklists",
       description: "View Global and SR blacklist, dont end up on these lists.",
-    },
-    {
-      href: "/report",
-      title: "Report Rider",
-      description: "Report riders with image/video proof for administrative review.",
     },
   ]
 
@@ -137,6 +132,15 @@ function AppNavigation({ user, notifications }) {
         </div>
       ),
       admin: true,
+    },
+    {
+      href: "/report",
+      title: (
+        <div className="flex w-full justify-between gap-4">
+          <div>Report Rider</div>
+          <Hammer size={20} />
+        </div>
+      ),
     },
     {
       href: `/signout`,
@@ -244,7 +248,7 @@ function AppNavigation({ user, notifications }) {
 function LandingNavigation() {
   const featureItems: { title: string; href: string; description: string }[] = [
     {
-      title: "Top Records",
+      title: "Records",
       href: "/records",
       description: "Explore top records from fastest laps to most contacts.",
     },

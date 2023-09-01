@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { Card, CardContent } from "~/ui/Card"
 import PageLayout from "~/components/PageLayout"
@@ -50,12 +49,9 @@ export default function AdminBlacklistsPage({ blacklistSR, blacklistNonSR }: Pro
     <PageLayout
       width="app"
       header={{
+        backEnabled: true,
         title: "Blacklists",
-        extra: (
-          <Link href="/admin" className="no-underline">
-            Go back
-          </Link>
-        ),
+
         subExtra: (
           <Tabs
             items={items}

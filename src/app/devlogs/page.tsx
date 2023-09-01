@@ -1,4 +1,3 @@
-import Link from "next/link"
 import PageLayout from "~/components/PageLayout"
 import Devlogs from "./Devlogs"
 
@@ -12,12 +11,8 @@ export default function Page() {
     <PageLayout
       width="feed"
       header={{
+        backEnabled: true,
         title: "Development Updates",
-        extra: (
-          <Link href="/dashboard" className="no-underline">
-            Go back
-          </Link>
-        ),
       }}
     >
       <Devlogs />

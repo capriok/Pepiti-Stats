@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { GetDynamicTopRecords } from "~/api"
 import PageLayout from "~/components/PageLayout"
 import Result from "~/components/Result"
@@ -22,12 +21,8 @@ export default async function Page({ params: { top } }) {
     <PageLayout
       width="app"
       header={{
+        backEnabled: true,
         title: `${dynamicTitleMap[top].title}`,
-        extra: (
-          <Link href="/records" className="no-underline">
-            Go back
-          </Link>
-        ),
       }}
     >
       <DynamicTableRenderer top={top} records={topRecords} />

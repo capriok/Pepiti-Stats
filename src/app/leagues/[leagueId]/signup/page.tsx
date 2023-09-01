@@ -1,7 +1,6 @@
-import { GetConstantOEMBikes, GetConstantServers, GetLeague } from "~/api"
 import GetAuthUser from "~/api"
-import PageHeader from "~/components/PageHeader"
-import LeagueSignupForm from "../../_components/LeagueSignupForm"
+import { GetConstantOEMBikes, GetConstantServers, GetLeague } from "~/api"
+import LeagueSignupForm from "../../components/LeagueSignupForm"
 import PageLayout from "~/components/PageLayout"
 
 export const metadata = {

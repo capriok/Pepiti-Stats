@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { GetTrackNames } from "~/api"
 import PageLayout from "~/components/PageLayout"
 import WorldRecords from "./components/WorldRecords"
@@ -17,12 +16,8 @@ export default async function Page() {
     <PageLayout
       width="app"
       header={{
+        backEnabled: true,
         title: "World Record Laps",
-        extra: (
-          <Link href="/records" className="no-underline">
-            Go back
-          </Link>
-        ),
       }}
     >
       <WorldRecords trackList={trackList.tracks.sort((a, b) => a.name.localeCompare(b.name))} />

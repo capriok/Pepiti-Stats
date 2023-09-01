@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { GetAllPepitiServers } from "~/api"
 import PageLayout from "~/components/PageLayout"
 import MXBServers from "./components/MXBServers"
@@ -18,8 +17,8 @@ export default async function Page() {
     <PageLayout
       width="app"
       header={{
+        backEnabled: true,
         title: "MXB Servers",
-        extra: <Link href="/dashboard">Go back</Link>,
       }}
     >
       <MXBServers servers={servers} />

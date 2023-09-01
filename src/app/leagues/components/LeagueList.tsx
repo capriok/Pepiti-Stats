@@ -1,11 +1,11 @@
 "use client"
 
-import { VerifiedIcon } from "lucide-react"
 import Link from "next/link"
 import { useUserContext } from "~/providers/UserProvider"
-import Pill from "~/components/pills/Pill"
 import { Button } from "~/ui/Button"
 import { Card } from "~/ui/Card"
+import Pill from "~/components/pills/Pill"
+import { VerifiedIcon } from "lucide-react"
 
 interface Props {
   leagues: Array<League>
@@ -42,7 +42,7 @@ const LeagueCard = ({ league }: { league: League }) => {
       <div className="p-4 md:p-6">
         <div className="flex items-center justify-between">
           <div className="text-xl font-semibold">{league.name}</div>
-          <div data-tip="Verified League" className="tooltip-accent tooltip text-purple-600">
+          <div title="Verified League" className="text-primary">
             {league.verified && <VerifiedIcon />}
           </div>
         </div>

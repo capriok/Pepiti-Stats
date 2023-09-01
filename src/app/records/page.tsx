@@ -14,12 +14,8 @@ export default async function Page() {
     <PageLayout
       width="app"
       header={{
+        backEnabled: true,
         title: "Pepiti Records",
-        extra: (
-          <Link href="/dashboard" className="no-underline">
-            Go back
-          </Link>
-        ),
       }}
     >
       <Records />

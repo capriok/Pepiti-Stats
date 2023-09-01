@@ -1,7 +1,7 @@
 "use client"
 
-import { useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import { joinLeague } from "~/api/actions"
 import { useToast, actions } from "~/components/toast"
 import { Button } from "~/ui/Button"

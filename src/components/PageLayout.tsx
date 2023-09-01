@@ -12,6 +12,7 @@ interface Props {
     title: string
     extra?: React.ReactNode
     subExtra?: React.ReactNode
+    backEnabled?: boolean
   }
   children: React.ReactNode
 }
@@ -33,6 +34,7 @@ export default function PageLayout(props: Props) {
           title={props.header.title}
           extra={props.header.extra}
           subExtra={props.header.subExtra}
+          backEnabled={props.header.backEnabled}
           width={width}
         />
       )}

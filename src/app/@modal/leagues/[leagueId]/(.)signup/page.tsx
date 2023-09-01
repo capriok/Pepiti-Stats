@@ -1,7 +1,7 @@
 import { GetConstantOEMBikes, GetConstantServers, GetLeague } from "~/api"
 import GetAuthUser from "~/api"
 import InterceptingModal from "../../../InterceptingModal"
-import LeagueSignupForm from "~/app/leagues/_components/LeagueSignupForm"
+import LeagueSignupForm from "~/app/leagues/components/LeagueSignupForm"
 
 export const dynamic = "force-dynamic"
 
