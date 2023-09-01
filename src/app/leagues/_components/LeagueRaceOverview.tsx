@@ -88,7 +88,7 @@ const LeagueRaceAlert = ({ isInRace, raceTime }) => {
       <AlertTitle>Heads Up!</AlertTitle>
       <AlertDescription className="flex justify-between">
         <div>You are Registered for the Race</div>
-        <div>{countdown}</div>
+        <div className="text-right">{countdown}</div>
       </AlertDescription>
     </Alert>
   )

@@ -5,6 +5,8 @@ import MMRPill from "~/components/pills/MMRPill"
 import Pill from "~/components/pills/Pill"
 import RankTrophy from "~/components/pills/RankTrophy"
 import { handleLapTimes } from "~/utils/handleLapTimes"
+import { handleBikeFormatting, handleCategoryFormatting } from "~/utils/handleBikeFormatting"
+import BikeTicTac from "~/components/pills/BikeTicTac"
 
 interface Props {
   race: Race
@@ -43,7 +45,7 @@ export default function WinnerCircle({ race }: Props) {
             <div className="flex w-full flex-1 flex-col items-center">
               <div className="mb-2 flex flex-col items-center justify-center whitespace-nowrap">
                 <div className="text-md font-semibold text-accent">Category</div>
-                <div className="text-lg">{race.winner.category}</div>
+                <div className="text-lg">{handleCategoryFormatting(race.winner.category)}</div>
               </div>
             </div>
           </div>
@@ -57,7 +59,7 @@ export default function WinnerCircle({ race }: Props) {
             <div className="flex w-full flex-1 flex-col items-center">
               <div className="mb-2 flex flex-col items-center justify-center whitespace-nowrap">
                 <div className="text-md font-semibold text-accent">Bike</div>
-                <div className="text-lg">{race.winner.bikeNameShort}</div>
+                <div className="text-lg">{<BikeTicTac bike={race.winner.bikeNameShort} />}</div>
               </div>
             </div>
           </div>

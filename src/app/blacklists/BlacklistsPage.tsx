@@ -1,15 +1,13 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import Tabs from "~/ui/Tabs"
 import { Card, CardContent } from "~/ui/Card"
 import PageLayout from "~/components/PageLayout"
 import GlobalBlacklistAlert from "~/components/alerts/GlobalBlacklistAlert"
 import SafetyBlacklistAlert from "~/components/alerts/SafetyBlacklistAlert"
 import BlacklistTable from "~/components/tables/BlacklistTable"
-import { Button } from "~/ui/Button"
 
 interface Props {
   blacklistSR: any
@@ -27,7 +25,6 @@ export default function Blacklists({ blacklistSR, blacklistNonSR }: Props) {
       children: (
         <>
           <GlobalBlacklistAlert />
-          <BanAppealButtons />
           <Card>
             <CardContent className="pt-4">
               <BlacklistTable blacklist={blacklistNonSR} />
@@ -42,7 +39,6 @@ export default function Blacklists({ blacklistSR, blacklistNonSR }: Props) {
       children: (
         <>
           <SafetyBlacklistAlert />
-          <BanAppealButtons />
           <Card>
             <CardContent className="pt-4">
               <BlacklistTable blacklist={blacklistSR} />
@@ -75,19 +71,5 @@ export default function Blacklists({ blacklistSR, blacklistNonSR }: Props) {
     >
       {tab.children}
     </PageLayout>
-  )
-}
-
-const BanAppealButtons = () => {
-  const router = useRouter()
-
-  return (
-    <div className="mb-4 flex w-fit justify-center gap-2 md:w-full md:justify-end">
-      <Link target="_blank" rel="noopener noreferrer" href="https://discord.com/invite/mx-bikes">
-        <Button variant="outline" className="bg-base-200">
-          Discord Appeal
-        </Button>
-      </Link>
-    </div>
   )
 }

@@ -10,7 +10,7 @@ export const handleReasonRemedy = (reason) => {
       return "Admin Banned (Permanent)"
 
     case "afk":
-    case "ramming":
+    case "rammer":
     case "cutting":
     case "cheating":
     case "riding backwards":

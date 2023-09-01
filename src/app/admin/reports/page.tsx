@@ -12,7 +12,7 @@ export default async function Page() {
 
   return (
     <ReportsPage
-      openReports={openReports}
+      openReports={openReports.results.sort(sortByDateDescending)}
       closedReports={closedReports.results.sort(sortByDateDescending)}
     />
   )

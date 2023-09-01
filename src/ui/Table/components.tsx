@@ -120,21 +120,23 @@ export const FilteringControls = ({ data, column, filtering, setFiltering }) => 
               </div>
             )}
           </DropdownMenuLabel>
-          <ScrollArea className="max-h-[200px] rounded-md px-2">
-            {column.filters?.map(({ key, value }) => (
-              <div
-                key={key}
-                className={cn(
-                  "cursor-default px-1 py-1.5 text-sm hover:bg-base-100",
-                  "capitalize",
-                  filtering.value === value ? "text-primary" : ""
-                )}
-                onClick={() => handleFiltering(value)}
-              >
-                {value}
-              </div>
-            ))}
-          </ScrollArea>
+          {column.filters && column.filters?.length && (
+            <ScrollArea className="mb-2 max-h-[200px] rounded-md px-2">
+              {column.filters?.map(({ key, value }) => (
+                <div
+                  key={key}
+                  className={cn(
+                    "cursor-default px-1 py-1.5 text-sm hover:bg-base-100",
+                    "capitalize",
+                    filtering.value === value ? "text-primary" : ""
+                  )}
+                  onClick={() => handleFiltering(value)}
+                >
+                  {value}
+                </div>
+              ))}
+            </ScrollArea>
+          )}
           <div className="flex flex-col items-end gap-4 p-2">
             <input
               type="text"

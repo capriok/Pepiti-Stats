@@ -1,3 +1,5 @@
+import { handleBikeFormatting } from "~/utils/handleBikeFormatting"
+
 interface Props {
   bike: string
   showLabel?: boolean
@@ -9,7 +11,7 @@ export default function BikeTicTac({ bike, showLabel = true }: Props) {
   return (
     <div className="flex items-center">
       <div className={`mr-3 h-5 w-2 rounded-md shadow-sm ${bikeColor}`} />
-      {(showLabel && sanitizeBikeString(bike)) || ""}
+      {(showLabel && handleBikeFormatting(bike)) || ""}
     </div>
   )
 }
@@ -65,6 +67,3 @@ export const handleBikeColor = (bike: string) => {
 
   return brandMap[brand || ""] + " text-center"
 }
-
-const sanitizeBikeString = (bike: string) =>
-  bike.replace("2023", "").replace("FACTORY_", "Factory ")

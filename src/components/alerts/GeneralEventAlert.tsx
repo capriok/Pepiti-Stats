@@ -3,29 +3,24 @@
 import Link from "next/link"
 import { Button } from "~/ui/Button"
 import { Alert, AlertDescription, AlertTitle } from "~/ui/Alert"
-import { Hammer, Timer } from "lucide-react"
+import { Timer } from "lucide-react"
 
-type Link = {
-  url: string
-  label: string
-}
-interface Props {
-  alert: {
-    meta: {
-      expires: string
-    }
-    content: {
-      title: string
-      body: string[]
-      buttons: Link[]
-      links: Link[]
-      externalLinks: Link[]
-    }
-  }
-}
+import applicationAlerts from "@/data/application-alerts.json"
+import { usePathname, useSearchParams } from "next/navigation"
 
-export default function GeneralEventAlert({ alert }: Props) {
-  if (alert.meta.expires < new Date().toISOString()) return <></>
+export default function GeneralEventAlert() {
+  const pathname = usePathname()
+  const sp = useSearchParams()
+  const trackParam = sp.get("track")
+
+  const alert = applicationAlerts["General"].alerts[0]
+
+  const isExpired = alert.meta.expires < new Date().toISOString()
+
+  const fullPath = pathname + (trackParam ? `?track=${trackParam}` : "")
+  const isOnPath = alert.meta.paths.some((p) => p === fullPath)
+
+  if (isExpired || !isOnPath) return <></>
 
   return (
     <Alert className="mb-4 border-primary/80">

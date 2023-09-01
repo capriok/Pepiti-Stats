@@ -162,9 +162,9 @@ function AppNavigation({ user, notifications }) {
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="flex flex-col justify-center gap-2 p-2 sm:w-[300px] lg:w-[300px]">
-              {profileItems.map((item) => {
+              {profileItems.map((item, i) => {
                 if (item.admin && !user.isAdmin) return <></>
-                return <LinkItem key={item.title} title={item.title} href={item.href} />
+                return <LinkItem key={i} title={item.title} href={item.href} />
               })}
             </ul>
           </NavigationMenuContent>
@@ -191,8 +191,8 @@ function AppNavigation({ user, notifications }) {
             <NavigationMenuTrigger>Racing</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className={menuContentCn}>
-                {racingItems.map((item) => (
-                  <LinkItem key={item.title} title={item.title} href={item.href}>
+                {racingItems.map((item, i) => (
+                  <LinkItem key={i} title={item.title} href={item.href}>
                     {item.description}
                   </LinkItem>
                 ))}
@@ -204,8 +204,8 @@ function AppNavigation({ user, notifications }) {
             <NavigationMenuTrigger>Explore</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className={menuContentCn}>
-                {featureItems.map((item) => (
-                  <LinkItem key={item.title} title={item.title} href={item.href}>
+                {featureItems.map((item, i) => (
+                  <LinkItem key={i} title={item.title} href={item.href}>
                     {item.description}
                   </LinkItem>
                 ))}
@@ -221,13 +221,13 @@ function AppNavigation({ user, notifications }) {
             <NavigationMenuTrigger>Explore</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className={menuContentCn}>
-                {racingItems.map((item) => (
-                  <LinkItem key={item.title} title={item.title} href={item.href}>
+                {racingItems.map((item, i) => (
+                  <LinkItem key={i} title={item.title} href={item.href}>
                     {item.description}
                   </LinkItem>
                 ))}
-                {featureItems.map((item) => (
-                  <LinkItem key={item.title} title={item.title} href={item.href}>
+                {featureItems.map((item, i) => (
+                  <LinkItem key={i} title={item.title} href={item.href}>
                     {item.description}
                   </LinkItem>
                 ))}
@@ -301,8 +301,8 @@ function LandingNavigation() {
                 </NavigationMenuLink>
               </li>
               <div className="flex flex-col justify-end">
-                {featureItems.map((item) => (
-                  <LinkItem key={item.title} title={item.title} href={item.href}>
+                {featureItems.map((item, i) => (
+                  <LinkItem key={i} title={item.title} href={item.href}>
                     {item.description}
                   </LinkItem>
                 ))}

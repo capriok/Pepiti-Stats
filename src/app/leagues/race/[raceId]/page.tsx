@@ -25,15 +25,13 @@ export default async function Page(props) {
       header={{
         title: "League Race",
         extra: (
-          <div className="flex gap-2">
+          <div className="flex gap-4">
+            <LeagueRaceActions race={race} eligibility={eligibility} />
             <Link href={`/leagues/${race.league_id}`}>
-              <Button variant="outline">Go to League</Button>
+              <Button variant="ghost" className="text-[16px] font-normal">
+                Go Back
+              </Button>
             </Link>
-            <LeagueRaceActions
-              raceId={race._id}
-              eligibility={eligibility}
-              name={race.config.event.track}
-            />
           </div>
         ),
       }}

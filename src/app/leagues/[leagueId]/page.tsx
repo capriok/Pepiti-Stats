@@ -3,6 +3,8 @@ import GetAuthUser from "~/api"
 import LeagueOverview from "../_components/LeagueOverview"
 import LeagueActions from "../_components/LeagueActions"
 import PageLayout from "~/components/PageLayout"
+import Link from "next/link"
+import { Button } from "~/ui/Button"
 
 export const metadata = {
   title: "Pepiti | League",
@@ -21,7 +23,16 @@ export default async function Page({ params: { leagueId } }) {
       width="app"
       header={{
         title: "League",
-        extra: <LeagueActions league={league} rider={rider} eligibility={eligibility} />,
+        extra: (
+          <div className="flex gap-4">
+            <LeagueActions league={league} rider={rider} eligibility={eligibility} />
+            <Link href="/leagues">
+              <Button variant="ghost" className="text-[16px] font-normal">
+                Go Back
+              </Button>
+            </Link>
+          </div>
+        ),
       }}
     >
       <LeagueOverview

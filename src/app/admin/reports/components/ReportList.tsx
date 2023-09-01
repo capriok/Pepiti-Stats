@@ -1,15 +1,15 @@
 "use client"
 
-import Link from "next/link"
-import { Button } from "~/ui/Button"
-import { ArrowRightIcon, X } from "lucide-react"
-import { Card, CardContent, CardDescription, CardHeader } from "~/ui/Card"
 import { useState } from "react"
-import BanRiderButton from "~/components/actions/BanRiderButton"
-import DismissRiderReport from "~/components/actions/DismissRiderReport"
-import Pill from "~/components/pills/Pill"
+import Link from "next/link"
 import useSWR from "swr"
+import { Button } from "~/ui/Button"
+import { Card, CardContent, CardDescription, CardHeader } from "~/ui/Card"
+import Pill from "~/components/pills/Pill"
 import Spinner from "~/components/Spinner"
+import BanRiderDialog from "~/components/dialogs/BanRiderDialog"
+import DismissReportDialog from "~/components/dialogs/DismissReportDialog"
+import { ArrowRightIcon, X } from "lucide-react"
 
 export default function ReportList({ reports, status }) {
   const [open, setOpen] = useState(undefined)
@@ -170,8 +170,15 @@ const ReviewContent = ({ report, status }) => {
         <>
           <br />
           <div className="flex justify-between">
-            <BanRiderButton riderId={report.rider._id} name={report.rider.name} hackit={true} />
-            <DismissRiderReport reportId={report._id} hackit={true} />
+            <BanRiderDialog guid={report.rider._id} name={report.rider.name} hackit={true} />
+            <DismissReportDialog
+              reportId={report._id}
+              date={new Date(parseInt(report.race._id.slice(0, 8), 16) * 1000).toLocaleString()}
+              event={report.race.track}
+              user={report.by.name}
+              rider={report.rider.name}
+              hackit={true}
+            />
           </div>
         </>
       ) : (

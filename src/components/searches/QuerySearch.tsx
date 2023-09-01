@@ -49,8 +49,8 @@ export default function QuerySearch({
   }, [term])
 
   return (
-    <div className="relative flex justify-center gap-2">
-      <div className="relative">
+    <div className="relative flex w-full justify-center gap-2">
+      <div className="relative w-full">
         <input
           className="input input-sm w-full border border-accent/40 bg-base-100 p-4 md:w-[400px]"
           placeholder={placeholder}

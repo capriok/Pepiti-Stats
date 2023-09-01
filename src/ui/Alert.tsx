@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import cn from "~/utils/cn"
 
 const alertVariants = cva(
-  "relative w-full rounded-lg border border-accent/40 px-4 py-3 text-sm [&:has(svg)]:pl-11 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
+  "relative w-full rounded-lg border border-accent/40 px-4 py-3 text-sm [&:has(svg)]:pl-12 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
   {
     variants: {
       variant: {

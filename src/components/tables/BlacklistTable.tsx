@@ -1,13 +1,19 @@
 "use client"
 
-import { usePathname, useSearchParams } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { useUserContext } from "~/providers/UserProvider"
-import { Popover, PopoverContent, PopoverTrigger } from "~/ui/Popover"
-import UnbanRiderButton from "../actions/UnbanRiderButton"
 import Table from "~/ui/Table"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "~/ui/Dropdown"
 import RiderLink from "~/components/RiderLink"
 import Pill from "~/components/pills/Pill"
 import RiderSafetyStatsRow from "./expandable/RiderSafetyStatsRow"
+import UnbanRiderDialog from "../dialogs/UnbanRiderDialog"
+
 import { MoreHorizontal } from "lucide-react"
 
 interface Props {
@@ -17,8 +23,6 @@ interface Props {
 export default function BlacklistTable({ blacklist }: Props) {
   const user = useUserContext()
   const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const guidParam = searchParams.get("guid")
   const isAdministrating = pathname.includes("admin") && user.isAdmin
 
   const data = blacklist.map((rider) => ({
@@ -47,7 +51,12 @@ export default function BlacklistTable({ blacklist }: Props) {
           color={renderBannedBy(reason)}
         />
       ),
-      onFilter: (value, row) => row.banned_by.toLowerCase().includes(value.toLowerCase()),
+      filters: [
+        { key: "Global", value: "Global" },
+        { key: "Admin", value: "Admin" },
+      ],
+      onFilter: (value, row) =>
+        value === "Global" ? row.banned_by === "Global" : row.banned_by !== "Global",
     },
   ]
 
@@ -56,14 +65,17 @@ export default function BlacklistTable({ blacklist }: Props) {
     label: "Action",
     align: "right",
     render: (guid, row) => (
-      <Popover>
-        <PopoverTrigger>
+      <DropdownMenu>
+        <DropdownMenuTrigger>
           <MoreHorizontal />
-        </PopoverTrigger>
-        <PopoverContent className="flex flex-col items-center justify-center gap-4">
-          <UnbanRiderButton riderId={guid} name={row.name} />
-        </PopoverContent>
-      </Popover>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuLabel>Administration</DropdownMenuLabel>
+          <div className="p-2 text-sm hover:bg-neutral-800/80">
+            <UnbanRiderDialog guid={guid} name={row.name} reason={row.banned_by} />
+          </div>
+        </DropdownMenuContent>
+      </DropdownMenu>
     ),
   }
 
@@ -87,14 +99,13 @@ export default function BlacklistTable({ blacklist }: Props) {
 
 export const renderBannedBy = (reason) => {
   switch (reason.toLowerCase()) {
-    case "global":
-    case "perma":
-    case "racism":
-    case "racist":
-      return "red"
     case "sr":
       return "orange"
+
+    case "global":
+      return "red"
+
     default:
-      return "primary"
+      return "info"
   }
 }

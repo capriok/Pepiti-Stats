@@ -1,8 +1,8 @@
 "use client"
 
 import { useUserContext } from "~/providers/UserProvider"
-import BanRiderButton from "~/components/actions/BanRiderButton"
-import UnbanRiderButton from "~/components/actions/UnbanRiderButton"
+import BanRiderDialog from "~/components/dialogs/BanRiderDialog"
+import UnbanRiderDialog from "~/components/dialogs/UnbanRiderDialog"
 
 interface Props {
   rider: RiderProfile
@@ -15,9 +15,9 @@ export default function AdminControls({ rider }: Props) {
   return (
     <div className="mb-2 flex justify-end">
       {rider.banned ? (
-        <UnbanRiderButton riderId={rider._id} name={rider.name} />
+        <UnbanRiderDialog guid={rider._id} name={rider.name} reason={rider.banned_by} />
       ) : (
-        <BanRiderButton riderId={rider._id} name={rider.name} />
+        <BanRiderDialog guid={rider._id} name={rider.name} />
       )}
     </div>
   )

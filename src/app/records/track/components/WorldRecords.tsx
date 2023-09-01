@@ -21,7 +21,7 @@ import Pill from "~/components/pills/Pill"
 
 import { Filter, X } from "lucide-react"
 
-import applicationAlerts from "@/data/application-alerts.json"
+import { handleCategoryFormatting } from "~/utils/handleBikeFormatting"
 
 interface Props extends TableOptions {
   trackList: any
@@ -61,6 +61,8 @@ export default function WorldRecords({ trackList, ...rest }: Props) {
         data: trackData.records.filter((c) => c.category === filterParam),
       })
   }, [isLoading])
+
+  console.log("%cTableFilter", "color: goldenrod", filter)
 
   function handleTrackSelect(e) {
     setSelectedTrack(e.target.value)
@@ -112,13 +114,11 @@ export default function WorldRecords({ trackList, ...rest }: Props) {
     )
   }
 
-  const alert = applicationAlerts.alerts["FinnsFarm"]
-
   return (
     <div className="w-full overflow-auto">
       {(selectedTrack === "FinnsFarm" || selectedTrack === "FinnsFarmSX") && (
         <div className="mb-8">
-          <GeneralEventAlert alert={alert} />
+          <GeneralEventAlert />
         </div>
       )}
 
@@ -144,7 +144,7 @@ export default function WorldRecords({ trackList, ...rest }: Props) {
                     title={filter.key}
                     text={
                       <div className="group flex cursor-pointer items-center justify-center gap-2 text-xs">
-                        {filter.key}
+                        {handleCategoryFormatting(filter.key)}
                         <X size={14} className="group-hover:text-primary" />
                       </div>
                     }
@@ -170,7 +170,7 @@ export default function WorldRecords({ trackList, ...rest }: Props) {
                     filter.key === cat ? "text-primary" : ""
                   )}
                 >
-                  {cat}
+                  {handleCategoryFormatting(cat)}
                 </DropdownMenuItem>
               ))}
             </DropdownMenuContent>

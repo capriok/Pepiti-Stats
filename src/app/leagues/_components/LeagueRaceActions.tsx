@@ -1,16 +1,15 @@
 "use client"
 
-import JoinLeagueRaceButton from "~/components/actions/JoinLeagueRaceButton"
-import LeaveLeagueRaceButton from "~/components/actions/LeaveLeagueRaceButton"
+import UnregisterLeagueRaceDialog from "~/components/dialogs/UnregisterLeagueRaceDialog"
+import RegisterLeagueRaceDialog from "~/components/dialogs/RegisterLeagueRaceDialog"
 import { checkRequirements } from "."
 
 interface Props {
+  race: LeagueRaceDetails
   eligibility: LeagueRaceEligibility
-  raceId: string
-  name: string
 }
 
-export default function LeagueRaceActions({ eligibility, raceId, name }: Props) {
+export default function LeagueRaceActions({ race, eligibility }: Props) {
   const meetsRequirements = checkRequirements(eligibility)
 
   const isJoinedLeague = eligibility.league_joined === true
@@ -20,8 +19,17 @@ export default function LeagueRaceActions({ eligibility, raceId, name }: Props) 
   const isEligible = isJoinedLeague && !isJoinedRace && !isBanned && meetsRequirements
 
   return isJoinedRace ? (
-    <LeaveLeagueRaceButton raceId={raceId} name={name} />
+    <UnregisterLeagueRaceDialog
+      raceId={race._id}
+      date={new Date(race.timestamp * 1000).toLocaleString()}
+      track={race.config.event.track}
+    />
   ) : (
-    <JoinLeagueRaceButton isEligible={isEligible} raceId={raceId} name={name} />
+    <RegisterLeagueRaceDialog
+      raceId={race._id}
+      isEligible={isEligible}
+      date={new Date(race.timestamp * 1000).toLocaleString()}
+      track={race.config.event.track}
+    />
   )
 }
