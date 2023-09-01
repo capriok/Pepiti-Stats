@@ -49,7 +49,7 @@ export default function BanRiderDialog({ guid, name, hackit = false }) {
           </div>
         </AlertDialogHeader>
         <AlertDialogDescription>
-          <div className="text-accent">Give Reason</div>
+          <span className="text-accent">Give Reason</span>
           <input
             name="reason"
             onChange={(e) => setReason(e.target.value)}
