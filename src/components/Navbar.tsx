@@ -25,7 +25,7 @@ interface Props {
 
 function NavBar({ user, notifications }: Props) {
   const pathname = usePathname()
-  const innerCn = `navbar flex w-full justify-between ${layoutWidthMap.app}`
+  const innerCn = ` flex w-full justify-between ${layoutWidthMap.app}`
 
   return (
     <>
