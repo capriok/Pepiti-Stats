@@ -64,19 +64,22 @@ export default function BlacklistTable({ blacklist }: Props) {
     key: "guid",
     label: "Action",
     align: "right",
-    render: (guid, row) => (
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          <MoreHorizontal />
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuLabel>Administration</DropdownMenuLabel>
-          <div className="p-2 text-sm hover:bg-neutral-800/80">
-            <UnbanRiderDialog guid={guid} name={row.name} reason={row.banned_by} />
-          </div>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    ),
+    render: (guid, row) =>
+      row.banned_by !== "Global" ? (
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <MoreHorizontal />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>Administration</DropdownMenuLabel>
+            <div className="p-2 text-sm hover:bg-neutral-800/80">
+              <UnbanRiderDialog guid={guid} name={row.name} reason={row.banned_by} />
+            </div>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ) : (
+        <></>
+      ),
   }
 
   if (isAdministrating) columns.push(adminAction as any)
