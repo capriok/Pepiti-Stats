@@ -55,6 +55,7 @@ export default function Blacklists({ blacklistSR, blacklistNonSR }: Props) {
     <PageLayout
       width="app"
       header={{
+        backEnabled: true,
         title: "Blacklists",
         extra: (
           <div className="text-sm text-accent">Be sure to check the Global and SR blacklists</div>
