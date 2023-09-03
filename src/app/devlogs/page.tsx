@@ -11,7 +11,6 @@ export default function Page() {
     <PageLayout
       width="feed"
       header={{
-        backEnabled: true,
         title: "Development Updates",
       }}
     >
