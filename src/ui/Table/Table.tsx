@@ -208,7 +208,11 @@ const Table: React.FC<TableProps> = (props) => {
                     )}
                   >
                     <div className={"flex min-h-[45px] items-center font-medium"}>
-                      {renderer ? renderer(value, row, i) : value?.toLocaleString()}
+                      {row._id.includes("_empty")
+                        ? ""
+                        : renderer
+                        ? renderer(value, row, i)
+                        : value?.toLocaleString()}
                     </div>
                   </td>
                 )
