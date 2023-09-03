@@ -2,8 +2,9 @@ import RiderLink from "~/components/RiderLink"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
 import { handleRaceGap } from "~/utils/handleRaceGap"
 import { handleLapTimes } from "~/utils/handleLapTimes"
+import { TableColumn } from "~/ui/Table"
 
-export const recentRaceStandingsColumnsWithControls = [
+export const recentRaceStandingsColumn = [
   {
     key: "raceNumber",
     label: "Race #",
@@ -18,7 +19,6 @@ export const recentRaceStandingsColumnsWithControls = [
     key: "name",
     label: "Name",
     render: (name, row) => <RiderLink href={`/profile/${row._id}`} name={name} />,
-    onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
   },
   {
     key: "position",
@@ -51,3 +51,15 @@ export const recentRaceStandingsColumnsWithControls = [
     render: (fastestLap) => (fastestLap ? handleLapTimes(fastestLap) : ""),
   },
 ]
+
+export const recentRaceStandingsColumnsWithControls = recentRaceStandingsColumn.map((c) => {
+  let col = { ...c } as TableColumn
+
+  if (col.key === "name") {
+    col = {
+      ...col,
+      onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
+    }
+  }
+  return col
+})

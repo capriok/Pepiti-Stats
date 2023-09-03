@@ -1,6 +1,7 @@
 import RiderLink from "~/components/RiderLink"
 import { renderBannedBy } from "../../../app/blacklists/components/BlacklistTable"
 import Pill from "~/components/pills/Pill"
+import { TableColumn } from "~/ui/Table"
 
 export const mxbBlacklistData = (blacklist) =>
   blacklist.map((rider) => ({
@@ -8,7 +9,7 @@ export const mxbBlacklistData = (blacklist) =>
     guid: rider._id,
   }))
 
-export const mxbBlacklistColumnsWithControls = [
+export const mxbBlacklistColumns = [
   {
     key: "guid",
     label: "GUID",
@@ -39,3 +40,22 @@ export const mxbBlacklistColumnsWithControls = [
       value === "Global" ? row.banned_by === "Global" : row.banned_by !== "Global",
   },
 ]
+
+export const mxbBlacklistColumnsWithControls = mxbBlacklistColumns.map((c) => {
+  let col = { ...c } as TableColumn
+
+  if (col.key === "guid") {
+    col = {
+      ...col,
+      onFilter: (value, row) => row.guid.toLowerCase().includes(value.toLowerCase()),
+    }
+  }
+
+  if (col.key === "name") {
+    col = {
+      ...col,
+      onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
+    }
+  }
+  return col
+})

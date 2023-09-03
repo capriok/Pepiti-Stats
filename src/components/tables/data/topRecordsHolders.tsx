@@ -1,4 +1,5 @@
 import RiderLink from "~/components/RiderLink"
+import { TableColumn } from "~/ui/Table"
 
 export const recordHoldersData = (records) =>
   Object.keys(records).map((guid) => ({
@@ -21,19 +22,15 @@ export const recordHoldersColumns = [
     align: "right",
   },
 ]
+export const recordHoldersColumnsWithControls = recordHoldersColumns.map((c) => {
+  let col = { ...c } as TableColumn
 
-export const recordHoldersColumnsWithControls = [
-  {
-    key: "name",
-    label: "Rider",
-    render: (name, row) => {
-      return <RiderLink href={`/profile/${row._id}`} donator={row.donation > 0} name={name} />
-    },
-    onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
-  },
-  {
-    key: "records",
-    label: "Records",
-    align: "right",
-  },
-]
+  if (col.key === "name") {
+    col = {
+      ...col,
+      onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
+    }
+  }
+
+  return col
+})

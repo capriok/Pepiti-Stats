@@ -1,6 +1,7 @@
 import Spinner from "~/components/Spinner"
 import BikeTicTac from "~/components/pills/BikeTicTac"
 import Pill from "~/components/pills/Pill"
+import { TableColumn } from "~/ui/Table"
 
 export const bikeRecordsData = (bikes, totalLaps = 0) =>
   bikes.map((bike) => {
@@ -14,12 +15,11 @@ export const bikeRecordsData = (bikes, totalLaps = 0) =>
     return res
   })
 
-export const bikeRecordsColumnsWithControls = [
+export const bikeRecordsColumns = [
   {
     key: "name",
     label: "Bike",
     render: (name) => <BikeTicTac bike={name} />,
-    onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
   },
   {
     key: "laps",
@@ -41,3 +41,15 @@ export const bikeRecordsColumnsWithControls = [
       ),
   },
 ]
+
+export const bikeRecordsColumnsWithControls = bikeRecordsColumns.map((c) => {
+  let col = { ...c } as TableColumn
+
+  if (col.key === "name") {
+    col = {
+      ...col,
+      onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
+    }
+  }
+  return col
+})

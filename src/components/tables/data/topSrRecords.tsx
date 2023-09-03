@@ -1,6 +1,7 @@
 import RiderLink from "~/components/RiderLink"
 import Pill from "~/components/pills/Pill"
 import { handleHPLColor } from "./topContactRecords"
+import { TableColumn } from "~/ui/Table"
 
 export const srRecordsData = (records) =>
   records.map((r) => {
@@ -28,23 +29,23 @@ export const srRecordsColumns = [
   },
 ]
 
-export const srRecordsColumnsWithControls = [
-  {
-    key: "name",
-    label: "Rider",
-    render: (name, row) => (
-      <RiderLink href={`/profile/${row._id}`} donator={row.donation > 0} name={name} />
-    ),
-    onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
-  },
-  {
-    key: "rating",
-    label: "Rating",
-    align: "right",
-  },
-  {
-    key: "ratio",
-    label: "Hits per lap",
-    render: (ratio) => <Pill color={handleHPLColor(ratio)} text={ratio.toFixed(2)} />,
-  },
-]
+export const srRecordsColumnsWithControls = srRecordsColumns
+  .map((c) => {
+    let col = { ...c } as TableColumn
+
+    if (col.key === "name") {
+      col = {
+        ...col,
+        onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
+      }
+    }
+
+    return col
+  })
+  .concat([
+    {
+      key: "ratio",
+      label: "Hits per lap",
+      render: (ratio) => <Pill color={handleHPLColor(ratio)} text={ratio.toFixed(2)} />,
+    },
+  ])

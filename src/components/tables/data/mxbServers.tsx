@@ -3,6 +3,7 @@ import Pill from "~/components/pills/Pill"
 import { actions, useToast } from "~/components/toast"
 import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 import { Hammer } from "lucide-react"
+import { TableColumn } from "~/ui/Table"
 
 export const mxbServersData = (servers) =>
   servers.map((s) => ({
@@ -15,7 +16,7 @@ export const mxbServersData = (servers) =>
     totalRiders: s.max_clients,
   }))
 
-export const mxbServersColumnsWithControls = [
+export const mxbServersColumns = [
   {
     key: "serverType",
     label: "",
@@ -51,6 +52,18 @@ export const mxbServersColumnsWithControls = [
     render: (id, row) => row.name && <JoinButton row={row} />,
   },
 ]
+
+export const mxbServersColumnsWithControls = mxbServersColumns.map((c) => {
+  let col = { ...c } as TableColumn
+
+  if (col.key === "name") {
+    col = {
+      ...col,
+      onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
+    }
+  }
+  return col
+})
 
 const renderServerType = (type: string) => {
   switch (type) {

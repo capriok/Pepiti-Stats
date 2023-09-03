@@ -1,14 +1,14 @@
 import RiderLink from "~/components/RiderLink"
 import MMRPill from "~/components/pills/MMRPill"
 import Pill from "~/components/pills/Pill"
+import { TableColumn } from "~/ui/Table"
 import { toFixedIfNecessary } from "~/utils/toFixedIfNecessary"
 
-export const recentRaceMmrStandingsColumnsWithControls = [
+export const recentRaceMmrStandingsColumns = [
   {
     key: "name",
     label: "Name",
     render: (name, row) => <RiderLink href={`/profile/${row._id}`} name={name} />,
-    onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
   },
   {
     key: "mmrGain",
@@ -74,3 +74,15 @@ export const recentRaceMmrStandingsColumnsWithControls = [
     render: (hs) => (hs ? <MMRPill mmr={toFixedIfNecessary(hs)} /> : ""),
   },
 ]
+
+export const recentRaceMmrStandingsColumnsWithControls = recentRaceMmrStandingsColumns.map((c) => {
+  let col = { ...c } as TableColumn
+
+  if (col.key === "name") {
+    col = {
+      ...col,
+      onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
+    }
+  }
+  return col
+})
