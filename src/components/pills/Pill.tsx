@@ -10,7 +10,7 @@ export default function Pill({ text, color = "neutral", ...rest }: PillProps) {
   const colorMap = {
     base: {
       bg: "bg-base-200 dark:bg-base-200",
-      text: "text-base-200 dark:text-base-content",
+      text: "text-black dark:text-black-content",
     },
     neutral: {
       bg: "bg-accent/60 dark:bg-accent/40",

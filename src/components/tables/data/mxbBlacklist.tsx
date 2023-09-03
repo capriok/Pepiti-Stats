@@ -18,18 +18,19 @@ export const mxbBlacklistColumnsWithControls = [
     key: "name",
     label: "Name",
     width: "w-full",
-    render: (name, row) => <RiderLink href={`/profile/${row._id}`} name={name} />,
+    render: (name, row) => name && <RiderLink href={`/profile/${row._id}`} name={name} />,
     onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
   },
   {
     key: "banned_by",
     label: "Reason",
-    render: (reason) => (
-      <Pill
-        text={reason.charAt(0).toUpperCase() + reason.slice(1)}
-        color={renderBannedBy(reason)}
-      />
-    ),
+    render: (reason) =>
+      reason && (
+        <Pill
+          text={reason.charAt(0).toUpperCase() + reason.slice(1)}
+          color={renderBannedBy(reason)}
+        />
+      ),
     filters: [
       { key: "Global", value: "Global" },
       { key: "Admin", value: "Admin" },

@@ -31,39 +31,40 @@ export const riderWorldRecordsColumns = [
     key: "date",
     label: "Date",
     render: (date) =>
-      dateIsValid(new Date(date * 1000)) ? new Date(date * 1000).toLocaleDateString() : "-",
+      dateIsValid(new Date(date)) ? new Date(date * 1000).toLocaleDateString() : "",
   },
   {
     key: "track",
     label: "Track",
-    render: (track, row) => (
-      <Link
-        href={`/records/track?track=${track}&filter=${row.category}`}
-        className="font-semibold text-primary/80"
-      >
-        {track ? track : "-"}
-      </Link>
-    ),
+    render: (track, row) =>
+      track && (
+        <Link
+          href={`/records/track?track=${track}&filter=${row.category}`}
+          className="font-semibold text-primary/80"
+        >
+          {track}
+        </Link>
+      ),
   },
   {
     key: "lapTime",
     label: "Lap Time",
-    render: (lapTime) => (lapTime ? handleLapTimes(lapTime) : "-"),
+    render: (lapTime) => (lapTime ? handleLapTimes(lapTime) : ""),
   },
   {
     key: "split1",
     label: "Split 1",
-    render: (split1) => (split1 ? handleLapTimes(split1) : "-"),
+    render: (split1) => (split1 ? handleLapTimes(split1) : ""),
   },
   {
     key: "split2",
     label: "Split 2",
-    render: (split2) => (split2 ? handleLapTimes(split2) : "-"),
+    render: (split2) => (split2 ? handleLapTimes(split2) : ""),
   },
   {
     key: "averageSpeed",
     label: "Average Speed",
-    render: (averageSpeed) => (averageSpeed ? handleAverageSpeed(averageSpeed) : "-"),
+    render: (averageSpeed) => (averageSpeed ? handleAverageSpeed(averageSpeed) : ""),
   },
   {
     key: "bike",
@@ -73,20 +74,21 @@ export const riderWorldRecordsColumns = [
   {
     key: "session",
     label: "Session",
-    render: (session, row) => (
-      <div className="flex w-full justify-between">
-        {handleSessionEnum(session)}
-        {row.isRace && (
-          <Image
-            alt="wr"
-            src="/assets/brand/gold-flag.svg"
-            className="mx-2"
-            width={14}
-            height={14}
-          />
-        )}
-      </div>
-    ),
+    render: (session, row) =>
+      session && (
+        <div className="flex w-full justify-between">
+          {handleSessionEnum(session)}
+          {row.isRace && (
+            <Image
+              alt="wr"
+              src="/assets/brand/gold-flag.svg"
+              className="mx-2"
+              width={14}
+              height={14}
+            />
+          )}
+        </div>
+      ),
   },
 ]
 
@@ -95,40 +97,41 @@ export const riderWorldRecordsColumnsWithControls = [
     key: "date",
     label: "Date",
     render: (date) =>
-      dateIsValid(new Date(date * 1000)) ? new Date(date * 1000).toLocaleDateString() : "-",
+      dateIsValid(new Date(date)) ? new Date(date * 1000).toLocaleDateString() : "",
   },
   {
     key: "track",
     label: "Track",
-    render: (track, row) => (
-      <Link
-        href={`/records/track?track=${track}&filter=${row.category}`}
-        className="font-semibold text-primary/80"
-      >
-        {track ? track : "-"}
-      </Link>
-    ),
+    render: (track, row) =>
+      track && (
+        <Link
+          href={`/records/track?track=${track}&filter=${row.category}`}
+          className="font-semibold text-primary/80"
+        >
+          {track}
+        </Link>
+      ),
     onFilter: (value, row) => row.track.toLowerCase().includes(value.toLowerCase()),
   },
   {
     key: "lapTime",
     label: "Lap Time",
-    render: (lapTime) => (lapTime ? handleLapTimes(lapTime) : "-"),
+    render: (lapTime) => (lapTime ? handleLapTimes(lapTime) : ""),
   },
   {
     key: "split1",
     label: "Split 1",
-    render: (split1) => (split1 ? handleLapTimes(split1) : "-"),
+    render: (split1) => (split1 ? handleLapTimes(split1) : ""),
   },
   {
     key: "split2",
     label: "Split 2",
-    render: (split2) => (split2 ? handleLapTimes(split2) : "-"),
+    render: (split2) => (split2 ? handleLapTimes(split2) : ""),
   },
   {
     key: "averageSpeed",
     label: "Average Speed",
-    render: (averageSpeed) => (averageSpeed ? handleAverageSpeed(averageSpeed) : "-"),
+    render: (averageSpeed) => (averageSpeed ? handleAverageSpeed(averageSpeed) : ""),
   },
   {
     key: "bike",
@@ -138,19 +141,20 @@ export const riderWorldRecordsColumnsWithControls = [
   {
     key: "session",
     label: "Session",
-    render: (session, row) => (
-      <div className="flex w-full justify-between">
-        {handleSessionEnum(session)}
-        {row.isRace && (
-          <Image
-            alt="wr"
-            src="/assets/brand/gold-flag.svg"
-            className="mx-2"
-            width={14}
-            height={14}
-          />
-        )}
-      </div>
-    ),
+    render: (session, row) =>
+      session && (
+        <div className="flex w-full justify-between">
+          {handleSessionEnum(session)}
+          {row.isRace && (
+            <Image
+              alt="wr"
+              src="/assets/brand/gold-flag.svg"
+              className="mx-2"
+              width={14}
+              height={14}
+            />
+          )}
+        </div>
+      ),
   },
 ]

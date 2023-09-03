@@ -22,22 +22,22 @@ export const trackRecordsColumns = [
   {
     key: "lap_time",
     label: "Lap Time",
-    render: (lapTime) => handleLapTimes(lapTime),
+    render: (lapTime) => (lapTime ? handleLapTimes(lapTime) : ""),
   },
   {
     key: "split_1",
     label: "Split 1",
-    render: (split) => handleLapTimes(split),
+    render: (split) => (split ? handleLapTimes(split) : ""),
   },
   {
     key: "split_2",
     label: "Split 2",
-    render: (split) => handleLapTimes(split),
+    render: (split) => (split ? handleLapTimes(split) : ""),
   },
   {
     key: "average_speed",
     label: "Avg Speed",
-    render: (averageSpeed) => handleAverageSpeed(averageSpeed),
+    render: (averageSpeed) => (averageSpeed ? handleAverageSpeed(averageSpeed) : ""),
   },
   {
     key: "bike",
@@ -64,22 +64,22 @@ export const worldRecordsColumnsWithControls = [
   {
     key: "lap_time",
     label: "Lap Time",
-    render: (lapTime) => handleLapTimes(lapTime),
+    render: (lapTime) => (lapTime ? handleLapTimes(lapTime) : ""),
   },
   {
     key: "split_1",
     label: "Split 1",
-    render: (split) => handleLapTimes(split),
+    render: (split) => (split ? handleLapTimes(split) : ""),
   },
   {
     key: "split_2",
     label: "Split 2",
-    render: (split) => handleLapTimes(split),
+    render: (split) => (split ? handleLapTimes(split) : ""),
   },
   {
     key: "average_speed",
     label: "Avg Speed",
-    render: (averageSpeed) => handleAverageSpeed(averageSpeed),
+    render: (averageSpeed) => (averageSpeed ? handleAverageSpeed(averageSpeed) : ""),
   },
   {
     key: "bike",

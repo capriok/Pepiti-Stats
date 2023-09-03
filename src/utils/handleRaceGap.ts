@@ -10,7 +10,7 @@ export const handleRaceGap = (gap: any): string => {
   }
 
   if (gap === "--") {
-    return "-"
+    return ""
   }
 
   return gap.replace("L ", "- ") + "L"

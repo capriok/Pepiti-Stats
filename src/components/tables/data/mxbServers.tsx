@@ -19,17 +19,19 @@ export const mxbServersColumnsWithControls = [
   {
     key: "serverType",
     label: "",
-    render: (serverType) => renderServerType(serverType),
+    render: (serverType) => (serverType ? renderServerType(serverType) : ""),
   },
   {
     key: "name",
     label: "Name",
-    render: (name) => <span className="whitespace-nowrap">{handleRacismSanitization(name)}</span>,
+    render: (name) =>
+      name && <span className="whitespace-nowrap">{handleRacismSanitization(name)}</span>,
   },
   {
     key: "track",
     label: "Track",
-    render: (track) => <span className="whitespace-nowrap">{track.replaceAll("*", "")}</span>,
+    render: (track) =>
+      track && <span className="whitespace-nowrap">{track.replaceAll("*", "")}</span>,
   },
   {
     key: "status",
@@ -38,14 +40,15 @@ export const mxbServersColumnsWithControls = [
   {
     key: "riders",
     label: "Riders",
-    render: (riders, row) => (
-      <Pill text={`${riders}/${row.totalRiders}`} color={riders > 0 ? "primary" : "neutral"} />
-    ),
+    render: (riders, row) =>
+      riders && (
+        <Pill text={`${riders}/${row.totalRiders}`} color={riders > 0 ? "primary" : "neutral"} />
+      ),
   },
   {
     key: "id",
     label: "",
-    render: (id, row) => <JoinButton row={row} />,
+    render: (id, row) => row.name && <JoinButton row={row} />,
   },
 ]
 

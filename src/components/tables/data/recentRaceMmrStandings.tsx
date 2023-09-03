@@ -17,7 +17,7 @@ export const recentRaceMmrStandingsColumnsWithControls = [
         MMR +/-
       </div>
     ),
-    render: (mmrGain) => <MMRPill mmr={toFixedIfNecessary(mmrGain)} />,
+    render: (mmrGain) => (mmrGain ? <MMRPill mmr={toFixedIfNecessary(mmrGain)} /> : ""),
   },
   {
     key: "newMmr",
@@ -26,7 +26,7 @@ export const recentRaceMmrStandingsColumnsWithControls = [
         New MMR
       </div>
     ),
-    render: (newMmr) => <Pill text={newMmr} />,
+    render: (newMmr) => (newMmr ? <Pill text={newMmr} /> : ""),
   },
   {
     key: "bpp",
@@ -35,7 +35,7 @@ export const recentRaceMmrStandingsColumnsWithControls = [
         BPP
       </div>
     ),
-    render: (bpp) => <MMRPill mmr={toFixedIfNecessary(bpp)} />,
+    render: (bpp) => (bpp ? <MMRPill mmr={toFixedIfNecessary(bpp)} /> : ""),
   },
   {
     key: "prb",
@@ -44,7 +44,7 @@ export const recentRaceMmrStandingsColumnsWithControls = [
         PRB
       </div>
     ),
-    render: (prb) => <MMRPill mmr={toFixedIfNecessary(prb)} />,
+    render: (prb) => (prb ? <MMRPill mmr={toFixedIfNecessary(prb)} /> : ""),
   },
   {
     key: "nrb",
@@ -53,7 +53,7 @@ export const recentRaceMmrStandingsColumnsWithControls = [
         NRB
       </div>
     ),
-    render: (nrb) => <MMRPill mmr={toFixedIfNecessary(nrb)} />,
+    render: (nrb) => (nrb ? <MMRPill mmr={toFixedIfNecessary(nrb)} /> : ""),
   },
   {
     key: "fl",
@@ -62,7 +62,7 @@ export const recentRaceMmrStandingsColumnsWithControls = [
         FL
       </div>
     ),
-    render: (fl) => <MMRPill mmr={toFixedIfNecessary(fl)} />,
+    render: (fl) => (fl ? <MMRPill mmr={toFixedIfNecessary(fl)} /> : ""),
   },
   {
     key: "hs",
@@ -71,6 +71,6 @@ export const recentRaceMmrStandingsColumnsWithControls = [
         HS
       </div>
     ),
-    render: (hs) => <MMRPill mmr={toFixedIfNecessary(hs)} />,
+    render: (hs) => (hs ? <MMRPill mmr={toFixedIfNecessary(hs)} /> : ""),
   },
 ]

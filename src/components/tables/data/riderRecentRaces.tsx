@@ -18,31 +18,32 @@ export const riderRecentRacesColumns = [
   {
     key: "date",
     label: "Date",
-    render: (date) => (dateIsValid(new Date(date)) ? new Date(date).toLocaleDateString() : "-"),
+    render: (date) => (dateIsValid(new Date(date)) ? new Date(date).toLocaleDateString() : ""),
   },
   {
     key: "track",
     label: "Track",
-    render: (track, row) => (
-      <Link href={`/races/${row._id}`} className="font-semibold text-primary/80">
-        {track ? track : "-"}
-      </Link>
-    ),
+    render: (track, row) =>
+      track && (
+        <Link href={`/races/${row._id}`} className="font-semibold text-primary/80">
+          {track}
+        </Link>
+      ),
   },
   {
     key: "position",
     label: "Position",
-    render: (position) => (position ? <b>{handlePlaceSuffix(position)}</b> : "-"),
+    render: (position) => (position ? <b>{handlePlaceSuffix(position)}</b> : ""),
   },
   {
     key: "mmrGain",
     label: "MMR +/-",
-    render: (mmrGain) => <MMRPill mmr={mmrGain} />,
+    render: (mmrGain) => (mmrGain ? <MMRPill mmr={mmrGain} /> : ""),
   },
   {
     key: "newMMR",
     label: "New MMR",
-    render: (newMMR) => <Pill text={newMMR} />,
+    render: (newMMR) => (newMMR ? <Pill text={newMMR} /> : ""),
   },
 ]
 
@@ -50,31 +51,32 @@ export const riderRecentRacesColumnsWithControls = [
   {
     key: "date",
     label: "Date",
-    render: (date) => (dateIsValid(new Date(date)) ? new Date(date).toLocaleDateString() : "-"),
+    render: (date) => (dateIsValid(new Date(date)) ? new Date(date).toLocaleDateString() : ""),
   },
   {
     key: "track",
     label: "Track",
-    render: (track, row) => (
-      <Link href={`/races/${row._id}`} className="font-semibold text-primary/80">
-        {track ? track : "-"}
-      </Link>
-    ),
+    render: (track, row) =>
+      track && (
+        <Link href={`/races/${row._id}`} className="font-semibold text-primary/80">
+          {track}
+        </Link>
+      ),
     onFilter: (value, row) => row.track.toLowerCase().includes(value.toLowerCase()),
   },
   {
     key: "position",
     label: "Position",
-    render: (position) => (position ? <b>{handlePlaceSuffix(position)}</b> : "-"),
+    render: (position) => (position ? <b>{handlePlaceSuffix(position)}</b> : ""),
   },
   {
     key: "mmrGain",
     label: "MMR +/-",
-    render: (mmrGain) => <MMRPill mmr={mmrGain} />,
+    render: (mmrGain) => (mmrGain ? <MMRPill mmr={mmrGain} /> : ""),
   },
   {
     key: "newMMR",
     label: "New MMR",
-    render: (newMMR) => <Pill text={newMMR} />,
+    render: (newMMR) => (newMMR ? <Pill text={newMMR} /> : ""),
   },
 ]

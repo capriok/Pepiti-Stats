@@ -144,7 +144,7 @@ const ServerTableRenderer = ({ global, servers }) => {
       <Table
         data={mxbServersData(data)}
         columns={mxbServersColumnsWithControls}
-        defaultPageSize={25}
+        defaultPageSize={20}
         sortingKeys={sortingKeys}
         rankEnabled={false}
         paginationEnabled={true}

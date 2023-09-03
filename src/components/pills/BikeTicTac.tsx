@@ -6,6 +6,8 @@ interface Props {
 }
 
 export default function BikeTicTac({ bike, showLabel = true }: Props) {
+  if (!bike) return <></>
+
   const bikeColor = handleBikeColor(bike)
 
   return (

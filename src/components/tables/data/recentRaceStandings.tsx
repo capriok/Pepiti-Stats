@@ -23,31 +23,31 @@ export const recentRaceStandingsColumnsWithControls = [
   {
     key: "position",
     label: "Position",
-    render: (position) => (position ? <b>{handlePlaceSuffix(position)}</b> : "-"),
+    render: (position) => (position ? <b>{handlePlaceSuffix(position)}</b> : ""),
   },
   {
     key: "gap",
     label: "Gap",
-    render: (gap) => (gap !== undefined ? handleRaceGap(gap) : "-"),
+    render: (gap) => (gap !== undefined && gap !== "" ? handleRaceGap(gap) : ""),
   },
   {
     key: "raceTime",
     label: "Race Time",
-    render: (raceTime) => (raceTime ? handleLapTimes(raceTime) : "-"),
+    render: (raceTime) => (raceTime ? handleLapTimes(raceTime) : ""),
   },
   {
     key: "laps",
     label: "Laps",
-    render: (laps) => (laps ? laps : "-"),
+    render: (laps) => (laps ? laps : ""),
   },
   {
     key: "penalty",
     label: "Penalty",
-    render: (penalty) => (penalty ? penalty + " s" : "-"),
+    render: (penalty) => (penalty ? penalty + " s" : ""),
   },
   {
     key: "fastestLap",
     label: "Fastest Lap",
-    render: (fastestLap) => (fastestLap ? handleLapTimes(fastestLap) : "-"),
+    render: (fastestLap) => (fastestLap ? handleLapTimes(fastestLap) : ""),
   },
 ]
