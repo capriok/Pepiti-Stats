@@ -2,8 +2,9 @@
 
 import useSWR from "swr"
 import Spinner from "~/components/Spinner"
+import Table from "~/ui/Table"
 import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
-import RiderWorldRecordsTable, { riderWorldRecordsColumns } from "../rider/RiderWorldRecordsTable"
+import { riderWorldRecordsColumns, riderWorldRecordsData } from "../data/riderWorldRecords"
 
 export default function RiderWorldRecordsTableRow({ row }) {
   const { data: rider, isLoading } = useSWR(`/rider/${row._id}`)
@@ -40,8 +41,8 @@ const Tables = ({ rider }) => {
   const worldRecords = recordsData.records.filter((record) => record.wr)
 
   return (
-    <RiderWorldRecordsTable
-      records={worldRecords}
+    <Table
+      data={riderWorldRecordsData(worldRecords)}
       columns={riderWorldRecordsColumns}
       paginationEnabled={true}
     />

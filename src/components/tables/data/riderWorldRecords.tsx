@@ -1,23 +1,14 @@
-"use client"
-
-import React from "react"
 import Image from "next/image"
 import Link from "next/link"
-import Table, { TableOptions } from "~/ui/Table"
 import BikeTicTac from "~/components/pills/BikeTicTac"
-import { dateIsValid } from "~/utils/dateIsValid"
-import { handleLapTimes } from "~/utils/handleLapTimes"
-import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
-import { handleSessionEnum } from "~/utils/handleSessionEnum"
 import { RiderRecordRaceSession } from "~/utils/constants"
+import { dateIsValid } from "~/utils/dateIsValid"
+import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
+import { handleLapTimes } from "~/utils/handleLapTimes"
+import { handleSessionEnum } from "~/utils/handleSessionEnum"
 
-interface Props extends TableOptions {
-  records: Array<any>
-  columns: any
-}
-
-export default function RiderWorldRecordsTable({ records, columns, ...rest }: Props) {
-  const data = records
+export const riderWorldRecordsData = (records) =>
+  records
     .map((r) => ({
       _id: r._id,
       wr: r.wr,
@@ -34,11 +25,6 @@ export default function RiderWorldRecordsTable({ records, columns, ...rest }: Pr
         r.session === RiderRecordRaceSession.RACE1 || r.session === RiderRecordRaceSession.RACE2,
     }))
     .sort((a, b) => b.date - a.date)
-
-  console.log("%cRiderWorldRecordsTable", "color: steelblue", { records: data })
-
-  return <Table data={data} columns={columns} rankEnabled={false} {...rest} />
-}
 
 export const riderWorldRecordsColumns = [
   {

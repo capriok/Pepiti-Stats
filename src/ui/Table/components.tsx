@@ -156,23 +156,57 @@ export const FilteringControls = ({ data, column, filtering, setFiltering }) => 
   )
 }
 
-export const PageSizeDropdown = ({ change }) => (
+export const OptionsDropdown = ({
+  pageSize,
+  pageSizeEnabled,
+  dataCap,
+  dataCapEnabled,
+  onPageSizeChange,
+  onDataCapChange,
+}) => (
   <DropdownMenu>
     <DropdownMenuTrigger>
       <MoreVertical size={18} />
     </DropdownMenuTrigger>
     <DropdownMenuContent>
-      <DropdownMenuLabel>Page Size</DropdownMenuLabel>
-      {[5, 10, 20, 50, 100]?.map((value, i) => (
-        <DropdownMenuItem key={i} onClick={() => change(value)}>
-          {value}
-        </DropdownMenuItem>
-      ))}
+      {pageSizeEnabled && (
+        <>
+          <DropdownMenuLabel>Page Size</DropdownMenuLabel>
+          <select
+            value={pageSize}
+            className="select select-sm w-full border-none"
+            onChange={(e) => onPageSizeChange(e.target.value)}
+          >
+            {[5, 10, 20, 50, 100].map((page, i) => (
+              <option key={i} value={page}>
+                {page}
+              </option>
+            ))}
+          </select>
+        </>
+      )}
+
+      {dataCapEnabled && (
+        <>
+          <DropdownMenuLabel>Table Size</DropdownMenuLabel>
+          <select
+            value={dataCap}
+            className="select select-sm w-full border-none"
+            onChange={(e) => onDataCapChange(e.target.value)}
+          >
+            {[100, 250, 500, 1000].map((cap, i) => (
+              <option key={i} value={cap}>
+                {cap}
+              </option>
+            ))}
+          </select>
+        </>
+      )}
     </DropdownMenuContent>
   </DropdownMenu>
 )
 
-export const Pagination = ({ tableData, pageSize, page, handlePageChange }) => {
+export const Pagination = ({ tableData, pageSize, page, onChange }) => {
   return (
     <>
       <div className="my-4 flex items-center justify-between gap-2 px-3 text-sm">
@@ -191,14 +225,14 @@ export const Pagination = ({ tableData, pageSize, page, handlePageChange }) => {
             <div className="join">
               <Button
                 variant="ghost"
-                onClick={() => handlePageChange(page > 0 ? page - 1 : page)}
+                onClick={() => onChange(page > 0 ? page - 1 : page)}
                 disabled={page === 0}
               >
                 <ChevronLeft size={14} />
               </Button>
               <Button
                 variant="ghost"
-                onClick={() => handlePageChange(tableData.length ? page + 1 : page)}
+                onClick={() => onChange(tableData.length ? page + 1 : page)}
                 disabled={(page + 1) * pageSize >= tableData.length}
               >
                 <ChevronRight size={14} />

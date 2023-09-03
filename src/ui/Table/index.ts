@@ -35,15 +35,18 @@ export interface TableColumn {
  */
 export interface TableOptions {
   defaultPageSize?: number
+  defaultDataCap?: number
   sortingKeys?: string[]
   rankEnabled?: boolean
   pageSizeEnabled?: boolean
   paginationEnabled?: boolean
+  dataCapEnabled?: boolean
   expandable?: {
     render: (record: TableData) => JSX.Element
     defaultExpandedId?: string
     onExpand?: (record: TableData) => void
   }
+  onDataCapChange?: (cap: number) => void
 }
 
 import Table from "./Table"

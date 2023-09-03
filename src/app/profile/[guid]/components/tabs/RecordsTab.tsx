@@ -2,11 +2,16 @@
 
 import useSWR from "swr"
 import Spinner from "~/components/Spinner"
-import RiderPersonalRecordsTable from "~/components/tables/rider/RiderPersonalRecordsTable"
-import RiderWorldRecordsTable, {
-  riderWorldRecordsColumnsWithControls,
-} from "~/components/tables/rider/RiderWorldRecordsTable"
+import Table from "~/ui/Table"
 import RiderWorldRecordStats from "~/components/stats/RiderWorldRecordStats"
+import {
+  riderWorldRecordsColumnsWithControls,
+  riderWorldRecordsData,
+} from "~/components/tables/data/riderWorldRecords"
+import {
+  riderPersonalRecordsColumnsWithControls,
+  riderPersonalRecordsData,
+} from "~/components/tables/data/riderPersonalRecords"
 
 interface Props {
   rider: RiderProfile
@@ -44,8 +49,8 @@ const Tables = ({ rider }) => {
       {worldRecords.length ? (
         <>
           <div className="mb-4 mt-8 whitespace-nowrap text-xl font-semibold">World Records</div>
-          <RiderWorldRecordsTable
-            records={worldRecords}
+          <Table
+            data={riderWorldRecordsData(worldRecords)}
             columns={riderWorldRecordsColumnsWithControls}
             sortingKeys={sortingKeys}
             paginationEnabled={true}
@@ -55,9 +60,9 @@ const Tables = ({ rider }) => {
         <> </>
       )}
       <div className="mb-4 mt-8 whitespace-nowrap text-xl font-semibold">Personal Records</div>
-      <RiderPersonalRecordsTable
-        records={personalRecords}
-        columns={riderWorldRecordsColumnsWithControls}
+      <Table
+        data={riderPersonalRecordsData(personalRecords)}
+        columns={riderPersonalRecordsColumnsWithControls}
         sortingKeys={sortingKeys}
         paginationEnabled={true}
       />

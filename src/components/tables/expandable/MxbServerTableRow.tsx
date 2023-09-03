@@ -12,7 +12,7 @@ import { Card, CardContent, CardHeader } from "~/ui/Card"
 import Table from "~/ui/Table"
 import { Copy } from "lucide-react"
 
-export default function MXBServerExpandableRow({ row }) {
+export default function MxbServerTableRow({ row }) {
   const { pushToast } = useToast()
 
   const { data: trackData, isLoading: isLoadingTrack } = useSWR(

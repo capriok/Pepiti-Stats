@@ -1,10 +1,11 @@
+"use client"
+
 import Link from "next/link"
-import RecordHoldersTable, {
-  recordHoldersColumns,
-} from "~/components/tables/records/RecordHoldersTable"
-import MMRRecordsTable, { mmrRecordsColumns } from "~/components/tables/records/MMRRecordsTable"
-import SRRecordsTable, { srRecordsColumns } from "~/components/tables/records/SRRecordsTable"
+import Table from "~/ui/Table"
 import { Button } from "~/ui/Button"
+import { mmrRecordsData, mmrRecordsColumns } from "~/components/tables/data/topMmrRecords"
+import { srRecordsData, srRecordsColumns } from "~/components/tables/data/topSrRecords"
+import { recordHoldersColumns, recordHoldersData } from "~/components/tables/data/topRecordsHolders"
 import { ChevronsRight } from "lucide-react"
 
 export default function TopRecords({ worldRecords, worldMMR, worldSR }) {
@@ -26,7 +27,7 @@ export default function TopRecords({ worldRecords, worldMMR, worldSR }) {
             </Button>
           </Link>
         </div>
-        <RecordHoldersTable riders={worldRecords.riders} columns={recordHoldersColumns} />
+        <Table data={recordHoldersData(worldRecords.riders)} columns={recordHoldersColumns} />
       </div>
       <div>
         <div className="group flex justify-between">
@@ -39,7 +40,7 @@ export default function TopRecords({ worldRecords, worldMMR, worldSR }) {
             </Button>
           </Link>
         </div>
-        <MMRRecordsTable riders={worldMMR.riders} columns={mmrRecordsColumns} />
+        <Table data={mmrRecordsData(worldMMR.riders)} columns={mmrRecordsColumns} />
       </div>
       <div>
         <div className="group flex justify-between">
@@ -56,7 +57,7 @@ export default function TopRecords({ worldRecords, worldMMR, worldSR }) {
             </Button>
           </Link>
         </div>
-        <SRRecordsTable riders={worldSR.riders} columns={srRecordsColumns} />
+        <Table data={srRecordsData(worldSR.riders)} columns={srRecordsColumns} />
       </div>
     </div>
   )

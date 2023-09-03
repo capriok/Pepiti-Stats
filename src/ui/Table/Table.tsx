@@ -4,20 +4,24 @@ import React, { useState } from "react"
 import cn from "~/utils/cn"
 import { TableProps } from "."
 import { SortDirection, manipulatedColumns, manipulatedData } from "./utilities"
-import { FilteringControls, PageSizeDropdown, Pagination, SortingControls } from "./components"
+import { FilteringControls, OptionsDropdown, Pagination, SortingControls } from "./components"
 
 const Table: React.FC<TableProps> = (props) => {
   const {
     defaultPageSize = 10,
+    defaultDataCap = 1000,
     sortingKeys = [],
     rankEnabled = true,
     paginationEnabled = false,
     pageSizeEnabled = false,
+    dataCapEnabled = false,
     expandable = null,
+    onDataCapChange = () => {},
   } = props
 
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(defaultPageSize)
+  const [dataCap, setDataCap] = useState(defaultDataCap)
 
   const [sorting, setSorting] = useState({
     key: null,
@@ -168,12 +172,28 @@ const Table: React.FC<TableProps> = (props) => {
     setPage(0)
   }
 
+  const handleDataCapChange = (cap) => {
+    console.log("%cTable: DataCapChange", "color: goldenrod", { cap })
+
+    setDataCap(cap)
+    onDataCapChange(cap)
+  }
+
   return (
     <div className="w-full overflow-x-auto rounded-lg">
       {pageSizeEnabled && (
         <div className="flex justify-between gap-4 rounded-tr-lg bg-base-200 p-4 pb-0">
           <div />
-          {pageSizeEnabled && <PageSizeDropdown change={handlePageSizeChange} />}
+          {pageSizeEnabled && (
+            <OptionsDropdown
+              pageSize={pageSize}
+              pageSizeEnabled={pageSizeEnabled}
+              dataCap={dataCap}
+              dataCapEnabled={dataCapEnabled}
+              onPageSizeChange={handlePageSizeChange}
+              onDataCapChange={handleDataCapChange}
+            />
+          )}
         </div>
       )}
 
@@ -191,7 +211,7 @@ const Table: React.FC<TableProps> = (props) => {
           tableData={tableData}
           page={page}
           pageSize={pageSize}
-          handlePageChange={handlePageChange}
+          onChange={handlePageChange}
         />
       )}
     </div>

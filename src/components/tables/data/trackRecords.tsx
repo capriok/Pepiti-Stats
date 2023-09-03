@@ -1,25 +1,13 @@
-"use client"
-
-import Table, { TableOptions } from "~/ui/Table"
 import RiderLink from "~/components/RiderLink"
 import BikeTicTac from "~/components/pills/BikeTicTac"
-import { handleLapTimes } from "~/utils/handleLapTimes"
 import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
+import { handleLapTimes } from "~/utils/handleLapTimes"
 
-interface Props extends TableOptions {
-  records: TrackRecord[]
-  columns: any
-}
-
-export default function TrackRecordsTable({ records, columns, ...rest }: Props) {
-  const data = records.map((r) => ({
+export const trackRecordsData = (records) =>
+  records.map((r) => ({
     ...r,
     name: r.rider_name,
   }))
-  console.log("%cTrackRecordsTable", "color: steelblue", { records: data })
-
-  return <Table data={data} columns={columns} {...rest} />
-}
 
 export const trackRecordsColumns = [
   {
@@ -62,7 +50,7 @@ export const trackRecordsColumns = [
   },
 ]
 
-export const worldRecordsColumns = [
+export const worldRecordsColumnsWithControls = [
   {
     key: "name",
     label: "Name",

@@ -1,27 +1,11 @@
-"use client"
-
 import RiderLink from "~/components/RiderLink"
-import Table, { TableOptions } from "~/ui/Table"
 
-interface Props extends TableOptions {
-  riders: any
-  columns: any
-}
-
-export default function RecordHoldersTable({ riders, columns, ...rest }: Props) {
-  const data: any = Object.keys(riders).map((guid) => ({
-    _id: riders[guid]._id,
-    name: riders[guid].name,
-    records: riders[guid].total,
+export const recordHoldersData = (records) =>
+  Object.keys(records).map((guid) => ({
+    _id: records[guid]._id,
+    name: records[guid].name,
+    records: records[guid].total,
   }))
-  // console.log("%cWorldRecordsTable", "color: steelblue", { worldRecords: data })
-
-  return (
-    <div className="flex flex-col items-end">
-      <Table data={data} columns={columns} {...rest} />
-    </div>
-  )
-}
 
 export const recordHoldersColumns = [
   {
@@ -38,7 +22,7 @@ export const recordHoldersColumns = [
   },
 ]
 
-export const recordHoldersColumnWithControls = [
+export const recordHoldersColumnsWithControls = [
   {
     key: "name",
     label: "Rider",

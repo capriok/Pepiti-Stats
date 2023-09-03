@@ -1,23 +1,14 @@
-"use client"
-
-import React from "react"
-import { dateIsValid } from "~/utils/dateIsValid"
-import { handleLapTimes } from "~/utils/handleLapTimes"
-import Table, { TableOptions } from "~/ui/Table"
-import BikeTicTac from "~/components/pills/BikeTicTac"
-import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
 import Image from "next/image"
-import { handleSessionEnum } from "~/utils/handleSessionEnum"
 import Link from "next/link"
+import BikeTicTac from "~/components/pills/BikeTicTac"
 import { RiderRecordRaceSession } from "~/utils/constants"
+import { dateIsValid } from "~/utils/dateIsValid"
+import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
+import { handleLapTimes } from "~/utils/handleLapTimes"
+import { handleSessionEnum } from "~/utils/handleSessionEnum"
 
-interface Props extends TableOptions {
-  records: Array<any>
-  columns: any
-}
-
-export default function RiderPersonalRecordsTable({ records, columns, ...rest }: Props) {
-  const data = records
+export const riderPersonalRecordsData = (records) =>
+  records
     .map((r) => ({
       _id: r._id,
       date: r.timestamp,
@@ -34,12 +25,7 @@ export default function RiderPersonalRecordsTable({ records, columns, ...rest }:
     }))
     .sort((a, b) => b.date - a.date)
 
-  console.log("%cRiderPersonalRecordsTable", "color: steelblue", { records: data })
-
-  return <Table data={data} columns={columns} rankEnabled={false} {...rest} />
-}
-
-export const personalRecordsColumns = [
+export const riderPersonalRecordsColumns = [
   {
     key: "date",
     label: "Date",
@@ -103,7 +89,7 @@ export const personalRecordsColumns = [
   },
 ]
 
-export const personalRecordsColumnsWithControls = [
+export const riderPersonalRecordsColumnsWithControls = [
   {
     key: "date",
     label: "Date",

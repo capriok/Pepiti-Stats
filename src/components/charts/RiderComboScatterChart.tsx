@@ -6,9 +6,23 @@ import { Scatter } from "react-chartjs-2"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
 import { Button } from "~/ui/Button"
 
+export type Label = {
+  titles: {
+    label: string
+    key: string
+  }[]
+  tickLabel: (val: any) => string
+  toolTipLabel: (val: any) => string[]
+  dataFilter: (stat: any) => boolean
+}
+
+export type Labels = {
+  [key: string]: Label
+}
+
 interface Props {
   standings: Array<any>
-  labels: any
+  labels: Labels
 }
 
 export function RiderComboScatterChart({ standings, labels }: Props) {

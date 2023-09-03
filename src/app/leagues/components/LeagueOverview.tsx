@@ -254,5 +254,5 @@ const LeagueStandings = ({ league }: { league: League }) => {
 
   const sortKeys = ["name", "score", "bike_id", "team"]
 
-  return <Table data={data} columns={columns} sortingKeys={sortKeys} />
+  return <Table data={data} columns={columns} sortingKeys={sortKeys} paginationEnabled={true} />
 }

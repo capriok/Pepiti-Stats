@@ -3,6 +3,23 @@
     {
       "meta": {
         "author": "Tooky",
+        "date": "09/3/2023",
+        "scope": "Page",
+        "type": "Update",
+        "page": "/records/<riders|mmr|sr|contacts|bikes>"
+      },
+      "content": {
+        "description": "Added table size option to table dropdown to allow increasing data limit for table",
+        "deprecation": "Riders | MMR | SR | Contacts | Bikes tables now limited to 100 by default; all else 1000",
+        "link": "/records/mmr",
+        "attachments": [
+          "https://cdn.discordapp.com/attachments/1138590709545443409/1147962524977860670/image.png"
+        ]
+      }
+    },
+    {
+      "meta": {
+        "author": "Tooky",
         "date": "08/31/2023",
         "scope": "Component",
         "type": "Update",

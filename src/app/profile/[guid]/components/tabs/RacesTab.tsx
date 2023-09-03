@@ -2,9 +2,8 @@
 
 import useSWR from "swr"
 import Spinner from "~/components/Spinner"
-import RiderRacesTable, {
-  riderRacesColumnsWithControls,
-} from "~/components/tables/rider/RiderRacesTable"
+import Table from "~/ui/Table"
+import { riderRacesColumnsWithControls, riderRacesData } from "~/components/tables/data/riderRaces"
 
 interface Props {
   rider: RiderProfile
@@ -25,10 +24,11 @@ export default function RacesTab({ rider }: Props) {
   return (
     <div className="p-4 pt-0">
       <div className="my-4 whitespace-nowrap text-xl font-semibold">Recent Races</div>
-      <RiderRacesTable
-        races={raceData.races}
+      <Table
+        data={riderRacesData(raceData.races)}
         columns={riderRacesColumnsWithControls}
         sortingKeys={sortingKeys}
+        paginationEnabled={true}
       />
     </div>
   )

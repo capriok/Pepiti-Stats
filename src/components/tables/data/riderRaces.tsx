@@ -1,34 +1,26 @@
-"use client"
-
 import Link from "next/link"
 import MMRPill from "~/components/pills/MMRPill"
 import Pill from "~/components/pills/Pill"
-import Table, { TableOptions } from "~/ui/Table"
 import { dateIsValid } from "~/utils/dateIsValid"
+import { handleLapTimes } from "~/utils/handleLapTimes"
 import handlePlaceSuffix from "~/utils/handlePlaceSuffix"
+import { handleRaceGap } from "~/utils/handleRaceGap"
 
-interface Props extends TableOptions {
-  races: Array<any>
-  columns: any
-}
-
-export default function RiderRecentRacesTable({ races, columns, ...rest }: Props) {
-  const lastRaces = races.slice(0, 10)
-
-  const data = lastRaces.map((race) => ({
-    _id: race._id,
+export const riderRacesData = (races) =>
+  races.map((race) => ({
     date: parseInt(race._id.slice(0, 8), 16) * 1000,
+    _id: race._id,
     track: race.track,
     position: race?.Classification?.Pos ?? "",
+    laps: race?.Classification?.Laps ?? "",
+    gap: race?.Classification?.Gap ?? "",
+    penalties: race?.Classification?.Penalty ?? "",
+    fastestLap: race.FastestLap,
     mmrGain: race.MMR.total,
     newMMR: race.MMR.old_MMR + race.MMR.total,
   }))
-  console.log("%cRiderRecentRacesTable", "color: goldenrod", { races: data })
 
-  return <Table data={data} columns={columns} rankEnabled={false} {...rest} />
-}
-
-export const riderRecentRacesColumns = [
+export const riderRacesColumns = [
   {
     key: "date",
     label: "Date",
@@ -49,6 +41,26 @@ export const riderRecentRacesColumns = [
     render: (position) => (position ? <b>{handlePlaceSuffix(position)}</b> : "-"),
   },
   {
+    key: "gap",
+    label: "Gap",
+    render: (gap) => (gap !== undefined ? handleRaceGap(gap) : "-"),
+  },
+  {
+    key: "laps",
+    label: "Laps",
+    render: (laps) => (laps ? laps : "-"),
+  },
+  {
+    key: "penalties",
+    label: "Penalties",
+    render: (penalties) => (penalties ? penalties + " s" : "-"),
+  },
+  {
+    key: "fastestLap",
+    label: "Fastest Lap",
+    render: (fastestLap) => (fastestLap ? handleLapTimes(fastestLap) : "-"),
+  },
+  {
     key: "mmrGain",
     label: "MMR +/-",
     render: (mmrGain) => <MMRPill mmr={mmrGain} />,
@@ -60,7 +72,7 @@ export const riderRecentRacesColumns = [
   },
 ]
 
-export const riderRecentRacesColumnsWithControls = [
+export const riderRacesColumnsWithControls = [
   {
     key: "date",
     label: "Date",
@@ -80,6 +92,26 @@ export const riderRecentRacesColumnsWithControls = [
     key: "position",
     label: "Position",
     render: (position) => (position ? <b>{handlePlaceSuffix(position)}</b> : "-"),
+  },
+  {
+    key: "gap",
+    label: "Gap",
+    render: (gap) => (gap !== undefined ? handleRaceGap(gap) : "-"),
+  },
+  {
+    key: "laps",
+    label: "Laps",
+    render: (laps) => (laps ? laps : "-"),
+  },
+  {
+    key: "penalties",
+    label: "Penalties",
+    render: (penalties) => (penalties ? penalties + " s" : "-"),
+  },
+  {
+    key: "fastestLap",
+    label: "Fastest Lap",
+    render: (fastestLap) => (fastestLap ? handleLapTimes(fastestLap) : "-"),
   },
   {
     key: "mmrGain",

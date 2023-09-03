@@ -1,35 +1,19 @@
-"use client"
-
 import RiderLink from "~/components/RiderLink"
 import Pill from "~/components/pills/Pill"
-import Table, { TableColumn, TableOptions } from "~/ui/Table"
-import { handleHPLColor } from "./ContactRecordsTable"
 
-interface Props extends TableOptions {
-  riders: any
-  columns: any
-}
-
-export default function SRRecordsTable({ riders, columns, ...rest }: Props) {
-  const data: any = riders.map((r) => {
+export const contactRecordsData = (records) =>
+  records.riders.map((r) => {
     const laps = Object.keys(r.bikes).reduce((acc, curr) => acc + r.bikes[curr].laps, 0)
     return {
       _id: r._id,
       name: r.name,
-      rating: r.SR,
+      contacts: r.contact,
+      laps: laps,
       ratio: Math.ceil((r.contact / laps) * 100) / 100,
     }
   })
-  // console.log("%cSRRecordsTable", "color: steelblue", { riders: data })
 
-  return (
-    <div className="flex flex-col items-end">
-      <Table data={data} columns={columns} {...rest} />
-    </div>
-  )
-}
-
-export const srRecordsColumns = [
+export const contactRecordsColumns = [
   {
     key: "name",
     label: "Rider",
@@ -38,13 +22,13 @@ export const srRecordsColumns = [
     ),
   },
   {
-    key: "rating",
-    label: "Rating",
+    key: "contacts",
+    label: "Contacts",
     align: "right",
   },
 ]
 
-export const srRecordsColumnsWithControls = [
+export const contactRecordsColumnsWithRatio = [
   {
     key: "name",
     label: "Rider",
@@ -54,8 +38,8 @@ export const srRecordsColumnsWithControls = [
     onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
   },
   {
-    key: "rating",
-    label: "Rating",
+    key: "contacts",
+    label: "Contacts",
     align: "right",
   },
   {
@@ -64,3 +48,16 @@ export const srRecordsColumnsWithControls = [
     render: (ratio) => <Pill color={handleHPLColor(ratio)} text={ratio.toFixed(2)} />,
   },
 ]
+
+export function handleHPLColor(n: number) {
+  if (n < 0) return ""
+  if (n >= 0.9) {
+    return "red"
+  } else if (n >= 0.7) {
+    return "orange"
+  } else if (n >= 0.5) {
+    return "info"
+  } else {
+    return "primary"
+  }
+}
