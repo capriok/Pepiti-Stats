@@ -48,14 +48,16 @@ export default function BlacklistTable({ blacklist }: Props) {
       ),
   }
 
-  if (isAdministrating) mxbBlacklistColumnsWithControls.push(adminAction as any)
+  const columns = [...mxbBlacklistColumnsWithControls]
+
+  if (isAdministrating) columns.push(adminAction as any)
 
   const sortKeys = ["name", "banned_by"]
 
   return (
     <Table
       data={mxbBlacklistData(blacklist)}
-      columns={mxbBlacklistColumnsWithControls}
+      columns={columns}
       rankEnabled={false}
       paginationEnabled={true}
       sortingKeys={sortKeys}
