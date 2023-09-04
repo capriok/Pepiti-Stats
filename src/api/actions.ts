@@ -22,11 +22,11 @@ async function fetcher(url: string) {
 
   try {
     const data = await res.json()
-    if (status !== 200) throw new Error(data.message)
+    if (status !== 200) throw Error(data.message)
 
     return data
-  } catch (error) {
-    throw new Error("An unknown error occurred")
+  } catch (error: any) {
+    throw new Error(error)
   }
 }
 
@@ -52,11 +52,11 @@ async function poster(url: string, options: { method: string; body?: any }) {
 
   try {
     const data = await res.json()
-    if (status !== 200) throw new Error(data.message)
+    if (status !== 200) throw Error(data.message)
 
     return data
-  } catch (error) {
-    throw new Error("An unknown error occurred")
+  } catch (error: any) {
+    throw new Error(error)
   }
 }
 

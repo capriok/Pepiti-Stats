@@ -14,8 +14,8 @@ export const fetcher = async (url: string) => {
     if (status !== 200) throw new Error(data.message)
 
     return data
-  } catch (error) {
-    throw new Error("An unknown error occurred")
+  } catch (error: any) {
+    throw new Error(error)
   }
 }
 
@@ -33,7 +33,7 @@ export const fetcherWithToken = async (url: string, token: string) => {
     if (status !== 200) throw new Error(data.message)
 
     return data
-  } catch (error) {
-    throw new Error("An unknown error occurred")
+  } catch (error: any) {
+    throw new Error(error)
   }
 }
