@@ -224,12 +224,13 @@ const LeagueStandings = ({ league }: { league: League }) => {
     {
       key: "race_number",
       label: "Race #",
-      render: (race_number) => (
-        <div className="flex gap-2">
-          <div className="text-accent">#</div>
-          <div className="text-primary">{race_number}</div>
-        </div>
-      ),
+      render: (race_number) =>
+        race_number && (
+          <div className="flex gap-2">
+            <div className="text-accent">#</div>
+            <div className="text-primary">{race_number}</div>
+          </div>
+        ),
     },
     {
       key: "name",
@@ -239,7 +240,7 @@ const LeagueStandings = ({ league }: { league: League }) => {
     {
       key: "score",
       label: "Score",
-      render: (score) => score ?? "-",
+      render: (score) => score ?? "",
     },
     {
       key: "bike_id",
@@ -254,5 +255,5 @@ const LeagueStandings = ({ league }: { league: League }) => {
 
   const sortKeys = ["name", "score", "bike_id", "team"]
 
-  return <Table data={data} columns={columns} sortingKeys={sortKeys} />
+  return <Table data={data} columns={columns} sortingKeys={sortKeys} paginationEnabled={true} />
 }

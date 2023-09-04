@@ -22,19 +22,20 @@ export const manipulatedColumns = (
     const expandableColumn = {
       key: "_expandable",
       label: "",
-      render: (_, row) => (
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => {
-            const expanded = expandedRow?._id === row._id ? null : row
-            setExpandedRow(expanded)
-            expandable.onExpand?.(expanded)
-          }}
-        >
-          {expandedRow?._id !== row._id ? <Plus size={14} /> : <Minus size={14} />}
-        </Button>
-      ),
+      render: (_, row) =>
+        !row._id.includes("_empty") && (
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => {
+              const expanded = expandedRow?._id === row._id ? null : row
+              setExpandedRow(expanded)
+              expandable.onExpand?.(expanded)
+            }}
+          >
+            {expandedRow?._id !== row._id ? <Plus size={14} /> : <Minus size={14} />}
+          </Button>
+        ),
     }
     cols.push(expandableColumn)
   }
@@ -43,7 +44,8 @@ export const manipulatedColumns = (
       key: "_rank",
       label: "",
       render: (_, row) => {
-        const rank = data.find((d) => d._id === row._id)!.rank
+        const rowIdx = data.find((d) => d._id === row._id)
+        const rank = rowIdx ? rowIdx.rank : ""
         return (
           <div className="flex items-center justify-start">
             <RankTrophy rank={rank} />

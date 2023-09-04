@@ -2,17 +2,17 @@
 
 import Link from "next/link"
 import useSWR from "swr"
-import RiderLink from "~/components/RiderLink"
-import Spinner from "~/components/Spinner"
-import Pill from "~/components/pills/Pill"
-import SRPill from "~/components/pills/SRPill"
-import { actions, useToast } from "~/components/toast"
+import Table from "~/ui/Table"
 import { Button } from "~/ui/Button"
 import { Card, CardContent, CardHeader } from "~/ui/Card"
-import Table from "~/ui/Table"
+import { actions, useToast } from "~/components/toast"
+import Spinner from "~/components/Spinner"
+import RiderLink from "~/components/RiderLink"
+import Pill from "~/components/pills/Pill"
+import SRPill from "~/components/pills/SRPill"
 import { Copy } from "lucide-react"
 
-export default function MXBServerExpandableRow({ row }) {
+export default function MxbServerTableRow({ row }) {
   const { pushToast } = useToast()
 
   const { data: trackData, isLoading: isLoadingTrack } = useSWR(

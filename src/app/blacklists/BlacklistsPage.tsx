@@ -7,7 +7,7 @@ import { Card, CardContent } from "~/ui/Card"
 import PageLayout from "~/components/PageLayout"
 import GlobalBlacklistAlert from "~/components/alerts/GlobalBlacklistAlert"
 import SafetyBlacklistAlert from "~/components/alerts/SafetyBlacklistAlert"
-import BlacklistTable from "~/components/tables/BlacklistTable"
+import BlacklistTable from "~/app/blacklists/components/BlacklistTable"
 
 interface Props {
   blacklistSR: any
@@ -55,7 +55,6 @@ export default function Blacklists({ blacklistSR, blacklistNonSR }: Props) {
     <PageLayout
       width="app"
       header={{
-        backEnabled: true,
         title: "Blacklists",
         extra: (
           <div className="text-sm text-accent">Be sure to check the Global and SR blacklists</div>

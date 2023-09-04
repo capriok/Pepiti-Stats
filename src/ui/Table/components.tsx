@@ -32,23 +32,7 @@ export const SearchBox = ({ term, handleTermChange, searchKey }) => {
   )
 }
 
-export const SortingControls = ({ tableData, column, columnIsSortable, sorting, setSorting }) => {
-  if (!columnIsSortable) return <></>
-
-  const handleSorting = (key) => {
-    const sortDirection =
-      sorting.key === key ? cycleSortingDirection(sorting.dir) : SortDirection.Ascending
-    const sortData = sortDataByColumn(tableData, key, sortDirection)
-
-    const sort = {
-      data: sortData,
-      dir: sortDirection as SortDirection,
-      key: sortDirection === SortDirection.None ? null : key,
-    }
-    console.log("%cTable: Sorting", "color: goldenrod", sort)
-    setSorting(sort)
-  }
-
+export const SortingControls = ({ column, sorting, handleSortingChange }) => {
   const isColumnSorting = sorting.key === column.key
 
   return (
@@ -57,7 +41,7 @@ export const SortingControls = ({ tableData, column, columnIsSortable, sorting, 
         "cursor-pointer px-2",
         isColumnSorting ? "text-primary group-hover:scale-125" : "text-accent"
       )}
-      onClick={() => handleSorting(column.key)}
+      onClick={() => handleSortingChange(column.key)}
     >
       {!isColumnSorting || sorting.dir === SortDirection.None ? (
         <ChevronsUpDown size={16} />
@@ -70,36 +54,21 @@ export const SortingControls = ({ tableData, column, columnIsSortable, sorting, 
   )
 }
 
-export const FilteringControls = ({ data, column, filtering, setFiltering }) => {
+export const FilteringControls = ({
+  column,
+  filtering,
+  handleFilteringChange,
+  handleClearFilter,
+}) => {
   const [term, setTerm] = useState(filtering.key ? filtering.value : "")
 
   const columnIsFilterable = column.onFilter || (column.filters && column.filters?.length > 0)
 
   if (!columnIsFilterable) return <></>
 
-  const handleFiltering = (value) => {
-    if (!value) return
-
-    const filter = {
-      key: column.key,
-      value: value,
-      data: data.filter((r) => column.onFilter!(value, r)),
-    }
-
-    console.log("%cTable: Filtering", "color: goldenrod", filter)
-    setFiltering(filter)
-  }
-
   const clearFilter = () => {
-    const filter = {
-      key: null,
-      value: "",
-      data: [],
-    }
-
-    console.log("%cTable: Filtering", "color: goldenrod", filter)
     setTerm("")
-    setFiltering(filter)
+    handleClearFilter()
   }
 
   return (
@@ -130,7 +99,7 @@ export const FilteringControls = ({ data, column, filtering, setFiltering }) => 
                     "capitalize",
                     filtering.value === value ? "text-primary" : ""
                   )}
-                  onClick={() => handleFiltering(value)}
+                  onClick={() => handleFilteringChange(value)}
                 >
                   {value}
                 </div>
@@ -146,7 +115,7 @@ export const FilteringControls = ({ data, column, filtering, setFiltering }) => 
               onChange={(e) => setTerm(e.target.value)}
               className="input input-sm w-full"
             />
-            <Button size="sm" className="w-fit text-sm" onClick={() => handleFiltering(term)}>
+            <Button size="sm" className="w-fit text-sm" onClick={() => handleFilteringChange(term)}>
               Submit
             </Button>
           </div>
@@ -156,23 +125,57 @@ export const FilteringControls = ({ data, column, filtering, setFiltering }) => 
   )
 }
 
-export const PageSizeDropdown = ({ change }) => (
+export const OptionsDropdown = ({
+  pageSize,
+  pageSizeEnabled,
+  dataCap,
+  dataCapEnabled,
+  onPageSizeChange,
+  onDataCapChange,
+}) => (
   <DropdownMenu>
     <DropdownMenuTrigger>
       <MoreVertical size={18} />
     </DropdownMenuTrigger>
     <DropdownMenuContent>
-      <DropdownMenuLabel>Page Size</DropdownMenuLabel>
-      {[5, 10, 20, 50, 100]?.map((value, i) => (
-        <DropdownMenuItem key={i} onClick={() => change(value)}>
-          {value}
-        </DropdownMenuItem>
-      ))}
+      {pageSizeEnabled && (
+        <>
+          <DropdownMenuLabel>Page Size</DropdownMenuLabel>
+          <select
+            value={pageSize}
+            className="select select-sm w-full border-none"
+            onChange={(e) => onPageSizeChange(e.target.value)}
+          >
+            {[5, 10, 20, 50, 100].map((page, i) => (
+              <option key={i} value={page}>
+                {page}
+              </option>
+            ))}
+          </select>
+        </>
+      )}
+
+      {dataCapEnabled && (
+        <>
+          <DropdownMenuLabel>Table Size</DropdownMenuLabel>
+          <select
+            value={dataCap}
+            className="select select-sm w-full border-none"
+            onChange={(e) => onDataCapChange(e.target.value)}
+          >
+            {[100, 250, 500, 1000].map((cap, i) => (
+              <option key={i} value={cap}>
+                {cap}
+              </option>
+            ))}
+          </select>
+        </>
+      )}
     </DropdownMenuContent>
   </DropdownMenu>
 )
 
-export const Pagination = ({ tableData, pageSize, page, handlePageChange }) => {
+export const Pagination = ({ tableData, pageSize, page, onChange }) => {
   return (
     <>
       <div className="my-4 flex items-center justify-between gap-2 px-3 text-sm">
@@ -191,14 +194,14 @@ export const Pagination = ({ tableData, pageSize, page, handlePageChange }) => {
             <div className="join">
               <Button
                 variant="ghost"
-                onClick={() => handlePageChange(page > 0 ? page - 1 : page)}
+                onClick={() => onChange(page > 0 ? page - 1 : page)}
                 disabled={page === 0}
               >
                 <ChevronLeft size={14} />
               </Button>
               <Button
                 variant="ghost"
-                onClick={() => handlePageChange(tableData.length ? page + 1 : page)}
+                onClick={() => onChange(tableData.length ? page + 1 : page)}
                 disabled={(page + 1) * pageSize >= tableData.length}
               >
                 <ChevronRight size={14} />

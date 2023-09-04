@@ -1,19 +1,9 @@
 import React from "react"
-import { RiderComboScatterChart } from "~/components/charts/RiderComboScatterChart"
+import { Labels, RiderComboScatterChart } from "~/components/charts/RiderComboScatterChart"
 import { handleLapTimes } from "~/utils/handleLapTimes"
 
-type Label = {
-  titles: {
-    label: string
-    key: string
-  }[]
-  tickLabel: (val: any) => string
-  toolTipLabel: (val: any) => string[]
-  dataFilter: (stat: any) => boolean
-}
-
-type Labels = {
-  [key: string]: Label
+export default function RaceScatter({ standings }) {
+  return <RiderComboScatterChart standings={standings} labels={labels} />
 }
 
 const labels: Labels = {
@@ -54,9 +44,3 @@ const labels: Labels = {
     dataFilter: (stat) => true,
   },
 }
-
-function RaceScatter({ standings }) {
-  return <RiderComboScatterChart standings={standings} labels={labels} />
-}
-
-export default RaceScatter

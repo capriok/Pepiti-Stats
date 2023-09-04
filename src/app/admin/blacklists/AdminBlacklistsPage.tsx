@@ -2,10 +2,10 @@
 
 import { useState } from "react"
 import { useSearchParams } from "next/navigation"
-import { Card, CardContent } from "~/ui/Card"
 import PageLayout from "~/components/PageLayout"
 import Tabs from "~/ui/Tabs"
-import BlacklistTable from "~/components/tables/BlacklistTable"
+import { Card, CardContent } from "~/ui/Card"
+import BlacklistTable from "~/app/blacklists/components/BlacklistTable"
 
 interface Props {
   blacklistSR: any

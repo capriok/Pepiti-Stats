@@ -212,22 +212,22 @@ const LeagueRaceStandings = ({ division }: { division: LeagueRaceDivision }) => 
     {
       key: "lapTime",
       label: "Lap Time",
-      render: (lapTime) => (lapTime ? handleLapTimes(lapTime) : "-"),
+      render: (lapTime) => (lapTime ? handleLapTimes(lapTime) : ""),
     },
     {
       key: "averageSpeed",
       label: "Avg Speed",
-      render: (averageSpeed) => (averageSpeed ? handleAverageSpeed(averageSpeed) : "-"),
+      render: (averageSpeed) => (averageSpeed ? handleAverageSpeed(averageSpeed) : ""),
     },
     {
       key: "split1",
       label: "Split 1",
-      render: (split1) => (split1 ? handleLapTimes(split1) : "-"),
+      render: (split1) => (split1 ? handleLapTimes(split1) : ""),
     },
     {
       key: "split2",
       label: "Split 2",
-      render: (split2) => (split2 ? handleLapTimes(split2) : "-"),
+      render: (split2) => (split2 ? handleLapTimes(split2) : ""),
     },
     {
       key: "bike",
@@ -238,5 +238,5 @@ const LeagueRaceStandings = ({ division }: { division: LeagueRaceDivision }) => 
 
   const sortKeys = ["lapTime", "averageSpeed", "split1", "split2"]
 
-  return <Table data={data} columns={columns} sortingKeys={sortKeys} />
+  return <Table data={data} columns={columns} sortingKeys={sortKeys} paginationEnabled={true} />
 }

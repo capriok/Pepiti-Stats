@@ -9,11 +9,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "~/ui/Dropdown"
-import RiderLink from "~/components/RiderLink"
-import Pill from "~/components/pills/Pill"
-import RiderSafetyStatsRow from "./expandable/RiderSafetyStatsRow"
-import UnbanRiderDialog from "../dialogs/UnbanRiderDialog"
-
+import RiderSafetyStatsRow from "../../../components/tables/expandable/RiderSafetyStatsRow"
+import UnbanRiderDialog from "../../../components/dialogs/UnbanRiderDialog"
+import {
+  mxbBlacklistColumnsWithControls,
+  mxbBlacklistData,
+} from "../../../components/tables/data/mxbBlacklist"
 import { MoreHorizontal } from "lucide-react"
 
 interface Props {
@@ -24,41 +25,6 @@ export default function BlacklistTable({ blacklist }: Props) {
   const user = useUserContext()
   const pathname = usePathname()
   const isAdministrating = pathname.includes("admin") && user.isAdmin
-
-  const data = blacklist.map((rider) => ({
-    ...rider,
-    guid: rider._id,
-  }))
-  const columns = [
-    {
-      key: "guid",
-      label: "GUID",
-      onFilter: (value, row) => row.guid.toLowerCase().includes(value.toLowerCase()),
-    },
-    {
-      key: "name",
-      label: "Name",
-      width: "w-full",
-      render: (name, row) => <RiderLink href={`/profile/${row._id}`} name={name} />,
-      onFilter: (value, row) => row.name.toLowerCase().includes(value.toLowerCase()),
-    },
-    {
-      key: "banned_by",
-      label: "Reason",
-      render: (reason) => (
-        <Pill
-          text={reason.charAt(0).toUpperCase() + reason.slice(1)}
-          color={renderBannedBy(reason)}
-        />
-      ),
-      filters: [
-        { key: "Global", value: "Global" },
-        { key: "Admin", value: "Admin" },
-      ],
-      onFilter: (value, row) =>
-        value === "Global" ? row.banned_by === "Global" : row.banned_by !== "Global",
-    },
-  ]
 
   const adminAction = {
     key: "guid",
@@ -82,13 +48,15 @@ export default function BlacklistTable({ blacklist }: Props) {
       ),
   }
 
+  const columns = [...mxbBlacklistColumnsWithControls]
+
   if (isAdministrating) columns.push(adminAction as any)
 
   const sortKeys = ["name", "banned_by"]
 
   return (
     <Table
-      data={data}
+      data={mxbBlacklistData(blacklist)}
       columns={columns}
       rankEnabled={false}
       paginationEnabled={true}

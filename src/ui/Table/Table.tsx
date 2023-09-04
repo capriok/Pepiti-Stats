@@ -2,22 +2,32 @@
 
 import React, { useState } from "react"
 import cn from "~/utils/cn"
-import { TableProps } from "."
-import { SortDirection, manipulatedColumns, manipulatedData } from "./utilities"
-import { FilteringControls, PageSizeDropdown, Pagination, SortingControls } from "./components"
+import { TableData, TableProps } from "."
+import {
+  SortDirection,
+  cycleSortingDirection,
+  manipulatedColumns,
+  manipulatedData,
+  sortDataByColumn,
+} from "./utilities"
+import { FilteringControls, OptionsDropdown, Pagination, SortingControls } from "./components"
 
 const Table: React.FC<TableProps> = (props) => {
   const {
     defaultPageSize = 10,
+    defaultDataCap = 1000,
     sortingKeys = [],
     rankEnabled = true,
     paginationEnabled = false,
     pageSizeEnabled = false,
+    dataCapEnabled = false,
     expandable = null,
+    onDataCapChange = () => {},
   } = props
 
   const [page, setPage] = useState(0)
   const [pageSize, setPageSize] = useState(defaultPageSize)
+  const [dataCap, setDataCap] = useState(defaultDataCap)
 
   const [sorting, setSorting] = useState({
     key: null,
@@ -59,6 +69,46 @@ const Table: React.FC<TableProps> = (props) => {
           const isRankColumn = column.key === "_rank"
           const columnIsSortable = sortingKeys.some((k) => k === column.key) && !isRankColumn
 
+          const handleSortingChange = (key) => {
+            const sortDirection =
+              sorting.key === key ? cycleSortingDirection(sorting.dir) : SortDirection.Ascending
+            const sortData = sortDataByColumn(tableData, key, sortDirection)
+
+            const sort = {
+              data: sortData,
+              dir: sortDirection as SortDirection,
+              key: sortDirection === SortDirection.None ? null : key,
+            }
+            console.log("%cTable: Sorting", "color: goldenrod", sort)
+            setSorting(sort)
+          }
+
+          const handleFilteringChange = (value) => {
+            if (!value) return
+
+            const filter = {
+              key: column.key,
+              value: value,
+              data: data.filter((r) => column.onFilter!(value, r)),
+            }
+
+            console.log("%cTable: Filtering", "color: goldenrod", filter)
+            setFiltering(filter)
+            setPage(0)
+          }
+
+          const handleClearFilter = () => {
+            const filter = {
+              key: null,
+              value: "",
+              data: [],
+            }
+
+            console.log("%cTable: Filtering", "color: goldenrod", filter)
+            setFiltering(filter)
+            setPage(0)
+          }
+
           return (
             <th key={column.key} className="group p-0 py-4">
               <div
@@ -69,18 +119,19 @@ const Table: React.FC<TableProps> = (props) => {
                 )}
               >
                 <div className="pr-2">{column.label}</div>
-                <SortingControls
-                  tableData={tableData}
-                  column={column}
-                  sorting={sorting}
-                  setSorting={setSorting}
-                  columnIsSortable={columnIsSortable}
-                />
+
+                {columnIsSortable && (
+                  <SortingControls
+                    column={column}
+                    sorting={sorting}
+                    handleSortingChange={handleSortingChange}
+                  />
+                )}
                 <FilteringControls
-                  data={data}
                   column={column}
                   filtering={filtering}
-                  setFiltering={setFiltering}
+                  handleFilteringChange={handleFilteringChange}
+                  handleClearFilter={handleClearFilter}
                 />
               </div>
             </th>
@@ -92,15 +143,6 @@ const Table: React.FC<TableProps> = (props) => {
 
   /** maps prepped data to table rows in respective column */
   const TableRows = () => {
-    if (!pageData.length)
-      return (
-        <tr>
-          <td className="text-center" colSpan={columns.length}>
-            No Results
-          </td>
-        </tr>
-      )
-
     const ExpandedRow = ({ row }) => (
       <tr>
         {isExpandable && expandedRow?._id === row._id && (
@@ -114,9 +156,40 @@ const Table: React.FC<TableProps> = (props) => {
       </tr>
     )
 
+    if (!pageData.length)
+      return (
+        <tr>
+          <td className="text-center" colSpan={columns.length}>
+            No Results
+          </td>
+        </tr>
+      )
+
+    const populatedPage =
+      tableData.length < pageSize ? pageData : fillArrayToSize(pageData, pageSize)
+    console.log("%cTable: PopulatedPage", "color: goldenrod", { populatedPage })
+
+    function fillArrayToSize(arr: any[], size: number): TableData[] {
+      const result: TableData[] = [...arr]
+      const leftOvers = size - arr.length
+
+      for (let i = 0; i < leftOvers; i++) {
+        const emptyRow = {} as (typeof data)[0]
+
+        Object.keys(data[0]).forEach((key) => (emptyRow[key] = ""))
+
+        emptyRow._id = `_empty-${i + 1}`
+        emptyRow.rank = tableData.length + 1 + i
+
+        result.push(emptyRow)
+      }
+
+      return result
+    }
+
     return (
       <>
-        {pageData.map((row, i) => (
+        {populatedPage.map((row, i) => (
           <React.Fragment key={row._id}>
             <tr className="w-full">
               {columns.map((column, idx) => {
@@ -135,7 +208,11 @@ const Table: React.FC<TableProps> = (props) => {
                     )}
                   >
                     <div className={"flex min-h-[45px] items-center font-medium"}>
-                      {renderer ? renderer(value, row, i) : value?.toLocaleString()}
+                      {row._id.includes("_empty")
+                        ? ""
+                        : renderer
+                        ? renderer(value, row, i)
+                        : value?.toLocaleString()}
                     </div>
                   </td>
                 )
@@ -168,12 +245,28 @@ const Table: React.FC<TableProps> = (props) => {
     setPage(0)
   }
 
+  const handleDataCapChange = (cap) => {
+    console.log("%cTable: DataCapChange", "color: goldenrod", { cap })
+
+    setDataCap(cap)
+    onDataCapChange(cap)
+  }
+
   return (
     <div className="w-full overflow-x-auto rounded-lg">
       {pageSizeEnabled && (
         <div className="flex justify-between gap-4 rounded-tr-lg bg-base-200 p-4 pb-0">
           <div />
-          {pageSizeEnabled && <PageSizeDropdown change={handlePageSizeChange} />}
+          {pageSizeEnabled && (
+            <OptionsDropdown
+              pageSize={pageSize}
+              pageSizeEnabled={pageSizeEnabled}
+              dataCap={dataCap}
+              dataCapEnabled={dataCapEnabled}
+              onPageSizeChange={handlePageSizeChange}
+              onDataCapChange={handleDataCapChange}
+            />
+          )}
         </div>
       )}
 
@@ -191,7 +284,7 @@ const Table: React.FC<TableProps> = (props) => {
           tableData={tableData}
           page={page}
           pageSize={pageSize}
-          handlePageChange={handlePageChange}
+          onChange={handlePageChange}
         />
       )}
     </div>

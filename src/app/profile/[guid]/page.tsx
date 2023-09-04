@@ -44,7 +44,6 @@ export default async function Page({ params: { guid } }) {
     <PageLayout
       width="app"
       header={{
-        backEnabled: true,
         title: "Rider Profile",
         extra: <AdminControls rider={rider} />,
       }}

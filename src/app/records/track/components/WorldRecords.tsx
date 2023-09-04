@@ -4,7 +4,9 @@ import { useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import useSWR from "swr"
 import cn from "~/utils/cn"
-import Table, { TableOptions } from "~/ui/Table"
+import Table from "~/ui/Table"
+import Pill from "~/components/pills/Pill"
+import GeneralEventAlert from "~/components/alerts/GeneralEventAlert"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,24 +14,21 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "~/ui/Dropdown"
-import TrackRecordsTable, {
-  worldRecordsColumns,
-} from "~/components/tables/records/TrackRecordsTable"
+import {
+  trackRecordsData,
+  worldRecordsColumnsWithControls,
+} from "~/components/tables/data/trackRecords"
 import RiderWorldRecordsTableRow from "~/components/tables/expandable/RiderWorldRecordsTableRow"
-import GeneralEventAlert from "~/components/alerts/GeneralEventAlert"
-import Pill from "~/components/pills/Pill"
-
+import { handleCategoryFormatting } from "~/utils/handleBikeFormatting"
 import { Filter, X } from "lucide-react"
 
-import { handleCategoryFormatting } from "~/utils/handleBikeFormatting"
-
-interface Props extends TableOptions {
+interface Props {
   trackList: any
 }
 
 const PAGE_SIZE = 20
 
-export default function WorldRecords({ trackList, ...rest }: Props) {
+export default function WorldRecords({ trackList }: Props) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const trackParam = searchParams.get("track")
@@ -97,9 +96,9 @@ export default function WorldRecords({ trackList, ...rest }: Props) {
     const sortingKeys = ["lap_time", "average_speed", "split_1", "split_2", "bike"]
 
     return (
-      <TrackRecordsTable
-        records={filter.key ? filter.data : trackData.records}
-        columns={worldRecordsColumns}
+      <Table
+        data={trackRecordsData(filter.key ? filter.data : trackData.records)}
+        columns={worldRecordsColumnsWithControls}
         defaultPageSize={PAGE_SIZE}
         pageSizeEnabled={true}
         paginationEnabled={true}
@@ -109,18 +108,15 @@ export default function WorldRecords({ trackList, ...rest }: Props) {
             <RiderWorldRecordsTableRow row={{ ...record, _id: record.rider_guid }} />
           ),
         }}
-        {...rest}
       />
     )
   }
 
   return (
     <div className="w-full overflow-auto">
-      {(selectedTrack === "FinnsFarm" || selectedTrack === "FinnsFarmSX") && (
-        <div className="mb-8">
-          <GeneralEventAlert />
-        </div>
-      )}
+      <div className="mb-8">
+        <GeneralEventAlert />
+      </div>
 
       <div className="mb-4 flex w-full flex-wrap items-center justify-end gap-4 md:flex-nowrap md:justify-between">
         <select

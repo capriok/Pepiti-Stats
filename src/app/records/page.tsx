@@ -14,7 +14,6 @@ export default async function Page() {
     <PageLayout
       width="app"
       header={{
-        backEnabled: true,
         title: "Pepiti Records",
       }}
     >

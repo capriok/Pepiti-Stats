@@ -1,17 +1,18 @@
 "use client"
 
-import { RefreshCcw } from "lucide-react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react"
 import useSWR from "swr"
-import Spinner from "~/components/Spinner"
-import MXBServersTable from "~/components/tables/MXBServersTable"
-import MXBServerExpandableRow from "~/components/tables/expandable/MXBServerExpandableRow"
-import { Button } from "~/ui/Button"
+import Table from "~/ui/Table"
 import { Card, CardContent, CardHeader } from "~/ui/Card"
+import { Button } from "~/ui/Button"
+import Spinner from "~/components/Spinner"
+import MxbServerTableRow from "~/components/tables/expandable/MxbServerTableRow"
+import { mxbServersColumnsWithControls, mxbServersData } from "~/components/tables/data/mxbServers"
 import { processMXBServers } from "."
+import { RefreshCcw } from "lucide-react"
 
 export default function MXBServers({ servers }) {
   const router = useRouter()
@@ -103,7 +104,7 @@ const ServerTableRenderer = ({ global, servers }) => {
     setExpandedRow(row?.id)
   }
 
-  const GlobalServers = (props) => {
+  const GlobalServers = () => {
     const { data: globalServers, isLoading } = useSWR(
       "https://projects.mxb-mods.com/mxbjson/servers/?sortby=num_clients",
       (url) => fetch(url).then((res) => res.json()),
@@ -119,7 +120,7 @@ const ServerTableRenderer = ({ global, servers }) => {
 
     const servers = processMXBServers(globalServers)
 
-    return <MXBServersTable servers={servers} {...props} />
+    return <MXBServersTable data={servers} />
   }
 
   const PepitiServers = (props) => {
@@ -129,35 +130,34 @@ const ServerTableRenderer = ({ global, servers }) => {
       { refreshInterval: 10000 }
     )
 
-    if (isLoading) return <MXBServersTable servers={props.servers} {...props} />
+    if (isLoading) return <MXBServersTable data={props.data} />
 
     const clientFetchedServers = processMXBServers(pepitiServers)
 
-    return <MXBServersTable servers={clientFetchedServers} {...props} />
+    return <MXBServersTable data={clientFetchedServers} />
   }
 
-  return (
-    <CardContent>
-      {!global ? (
-        <PepitiServers
-          servers={servers}
-          expandable={{
-            onExpand,
-            defaultExpandedId: expandedRowId,
-            render: (row) => <MXBServerExpandableRow row={row} />,
-          }}
-        />
-      ) : (
-        <GlobalServers
-          expandable={{
-            onExpand,
-            defaultExpandedId: expandedRowId,
-            render: (row) => <MXBServerExpandableRow row={row} />,
-          }}
-        />
-      )}
-    </CardContent>
-  )
+  const MXBServersTable = ({ data }) => {
+    const sortingKeys = ["name", "track", "status", "riders"]
+
+    return (
+      <Table
+        data={mxbServersData(data)}
+        columns={mxbServersColumnsWithControls}
+        defaultPageSize={20}
+        sortingKeys={sortingKeys}
+        rankEnabled={false}
+        paginationEnabled={true}
+        expandable={{
+          onExpand,
+          defaultExpandedId: expandedRowId,
+          render: (row) => <MxbServerTableRow row={row} />,
+        }}
+      />
+    )
+  }
+
+  return <CardContent>{!global ? <PepitiServers data={servers} /> : <GlobalServers />}</CardContent>
 }
 
 const Credits = () => (
