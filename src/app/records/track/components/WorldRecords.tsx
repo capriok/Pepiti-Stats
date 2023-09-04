@@ -1,8 +1,9 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
 import useSWR from "swr"
+import useSWRMutation from "swr/mutation"
+import { useRouter, useSearchParams } from "next/navigation"
 import cn from "~/utils/cn"
 import Table from "~/ui/Table"
 import Pill from "~/components/pills/Pill"
@@ -21,12 +22,14 @@ import {
 import RiderWorldRecordsTableRow from "~/components/tables/expandable/RiderWorldRecordsTableRow"
 import { handleCategoryFormatting } from "~/utils/handleBikeFormatting"
 import { Filter, X } from "lucide-react"
+import { fetcher } from "~/api/fetcher"
 
 interface Props {
   trackList: any
 }
 
 const PAGE_SIZE = 20
+const LIMIT = 100
 
 export default function WorldRecords({ trackList }: Props) {
   const router = useRouter()
@@ -41,7 +44,11 @@ export default function WorldRecords({ trackList }: Props) {
     data: [],
   })
 
-  const { data: trackData, error, isLoading } = useSWR(`/records/track/${selectedTrack}`)
+  const {
+    data: trackData,
+    error,
+    isLoading,
+  } = useSWR(`/records/track/${selectedTrack}?size=${LIMIT}`)
 
   useEffect(() => {
     return () => setFilter({ key: null, data: [] })
@@ -88,21 +95,45 @@ export default function WorldRecords({ trackList }: Props) {
   }
 
   const Content = () => {
+    const [limit, setLimit] = useState(LIMIT)
+
+    const {
+      data: worldRecords,
+      trigger,
+      isMutating,
+    } = useSWRMutation(`/records/track/${selectedTrack}?size=${limit}`, fetcher)
+
+    useEffect(() => {
+      if (limit === LIMIT) return
+      trigger()
+    }, [limit])
+
     if (error)
       return <div className="flex justify-center text-lg font-semibold">Failed to Load</div>
 
-    if (isLoading) return <SkeletonTable />
+    if (isLoading || isMutating) return <SkeletonTable />
 
     const sortingKeys = ["lap_time", "average_speed", "split_1", "split_2", "bike"]
 
+    const data = trackRecordsData(
+      filter.key
+        ? filter.data
+        : !worldRecords || isMutating
+        ? trackData.records
+        : worldRecords.records
+    )
+
     return (
       <Table
-        data={trackRecordsData(filter.key ? filter.data : trackData.records)}
+        data={data}
         columns={worldRecordsColumnsWithControls}
         defaultPageSize={PAGE_SIZE}
+        defaultDataCap={limit}
         pageSizeEnabled={true}
         paginationEnabled={true}
         sortingKeys={sortingKeys}
+        dataCapEnabled={true}
+        onDataCapChange={setLimit}
         expandable={{
           render: (record) => (
             <RiderWorldRecordsTableRow row={{ ...record, _id: record.rider_guid }} />
@@ -114,9 +145,7 @@ export default function WorldRecords({ trackList }: Props) {
 
   return (
     <div className="w-full overflow-auto">
-      <div className="mb-8">
-        <GeneralEventAlert />
-      </div>
+      <GeneralEventAlert />
 
       <div className="mb-4 flex w-full flex-wrap items-center justify-end gap-4 md:flex-nowrap md:justify-between">
         <select

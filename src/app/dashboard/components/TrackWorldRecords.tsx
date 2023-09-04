@@ -28,14 +28,22 @@ export default function TrackWorldRecords({ tracks, ...rest }: Props) {
   }
 
   const Content = () => {
-    const { data, error, isLoading } = useSWR(`/records/track/${selectedTrack}`)
+    const { data, error, isLoading } = useSWR(`/records/track/${selectedTrack}?size=10`)
 
     if (error)
       return <div className="flex justify-center text-lg font-semibold">Failed to Load</div>
 
     if (isLoading) return <SkeletonTable />
 
-    return <Table data={trackRecordsData(data.records)} columns={trackRecordsColumns} {...rest} />
+    return (
+      <Table
+        data={trackRecordsData(data.records)}
+        columns={trackRecordsColumns}
+        defaultPageSize={10}
+        defaultDataCap={10}
+        {...rest}
+      />
+    )
   }
 
   return (

@@ -23,7 +23,7 @@ export default function GeneralEventAlert() {
   if (isExpired || !isOnPath) return <></>
 
   return (
-    <Alert className="mb-4 border-primary/80">
+    <Alert className="mb-8 border-primary/80">
       <Timer size={20} />
 
       <AlertTitle className="font-semibold">{alert.content.title}</AlertTitle>
