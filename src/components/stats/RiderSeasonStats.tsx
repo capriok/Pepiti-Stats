@@ -10,7 +10,7 @@ export default function RiderSeasonStats({ seasons }: Props) {
   if (!seasons?.length) return <></>
 
   const season = {
-    name: "Summer 2023",
+    name: "Autumn 2023",
     MMR: seasons[0].MMR,
     position: seasons[0].position,
   }
