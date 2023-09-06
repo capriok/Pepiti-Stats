@@ -34,11 +34,13 @@ export const RiderProfile = ({ rider, mmrHistory }: Props) => {
 }
 
 const RiderStats = ({ rider }: { rider: RiderProfile }) => {
+  const overallMMR = rider.seasons.reduce((acc, curr) => acc + curr.MMR, 0)
+
   return (
     <div className="stats mb-10 w-full rounded-md border border-accent/40 bg-base-200 shadow-md">
       <div className="stat">
         <div className="stat-title">MMR</div>
-        <div className="stat-value py-1 text-2xl">{rider.MMR}</div>
+        <div className="stat-value py-1 text-2xl">{overallMMR}</div>
         <div className="stat-desc">Matchmaking rating</div>
       </div>
       <div className="stat">
@@ -70,6 +72,10 @@ const RiderStats = ({ rider }: { rider: RiderProfile }) => {
 }
 
 const OverallStats = ({ rider }: { rider: RiderProfile }) => {
+  const overallTotalRaces = rider.seasons.reduce((acc, curr) => acc + curr.races.total_races, 0)
+  const overallFastestLaps = rider.seasons.reduce((acc, curr) => acc + curr.races.fastlap, 0)
+  const overallHoleshots = rider.seasons.reduce((acc, curr) => acc + curr.races.holeshot, 0)
+
   return (
     <div className="stats w-full rounded-md border border-accent/40 bg-base-200 shadow-md">
       <div className="stat">
@@ -79,7 +85,7 @@ const OverallStats = ({ rider }: { rider: RiderProfile }) => {
       </div>
       <div className="stat">
         <div className="stat-title">Races</div>
-        <div className="stat-value py-1 text-2xl">{rider.races.total_races}</div>
+        <div className="stat-value py-1 text-2xl">{overallTotalRaces}</div>
         <div className="stat-desc">Gate drops</div>
       </div>
       <div className="stat">
@@ -89,12 +95,12 @@ const OverallStats = ({ rider }: { rider: RiderProfile }) => {
       </div>
       <div className="stat">
         <div className="stat-title">Fastest Laps</div>
-        <div className="stat-value py-1 text-2xl">{rider.races.fastlap}</div>
+        <div className="stat-value py-1 text-2xl">{overallFastestLaps}</div>
         <div className="stat-desc">Just sending it</div>
       </div>
       <div className="stat">
         <div className="stat-title">Holeshots</div>
-        <div className="stat-value py-1 text-2xl">{rider.races.holeshot}</div>
+        <div className="stat-value py-1 text-2xl">{overallHoleshots}</div>
         <div className="stat-desc">Wide open right away</div>
       </div>
     </div>

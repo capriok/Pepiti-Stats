@@ -29,14 +29,14 @@ export default function ProfileTabs({ rider, mmrHistory }: Props) {
       children: <OverviewTab riderId={rider._id} seasons={rider.seasons} mmrHistory={mmrHistory} />,
     },
     {
-      key: "races",
-      label: "Races",
-      children: <RacesTab rider={rider} />,
-    },
-    {
       key: "records",
       label: "Records",
       children: <RecordsTab rider={rider} />,
+    },
+    {
+      key: "races",
+      label: "Races",
+      children: <RacesTab rider={rider} />,
     },
   ]
 

@@ -36,7 +36,7 @@ const Header = ({ filter, setFilter, refresh }) => {
   const [step, setStep] = useState(0)
 
   useEffect(() => {
-    const interval = 10000
+    const interval = 30000
     const numSteps = 1000
 
     const timer = setInterval(() => {
@@ -108,7 +108,7 @@ const ServerTableRenderer = ({ global, servers }) => {
     const { data: globalServers, isLoading } = useSWR(
       "https://projects.mxb-mods.com/mxbjson/servers/?sortby=num_clients",
       (url) => fetch(url).then((res) => res.json()),
-      { refreshInterval: 10000 }
+      { refreshInterval: 30000 }
     )
 
     if (isLoading)
@@ -127,7 +127,7 @@ const ServerTableRenderer = ({ global, servers }) => {
     const { data: pepitiServers, isLoading } = useSWR(
       "https://projects.mxb-mods.com/mxbjson/servers/?search=pepiti&server_type=pepiti&sortby=num_clients",
       (url) => fetch(url).then((res) => res.json()),
-      { refreshInterval: 10000 }
+      { refreshInterval: 30000 }
     )
 
     if (isLoading) return <MXBServersTable data={props.data} />

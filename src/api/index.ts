@@ -4,7 +4,7 @@ import { cookies } from "next/headers"
 import jwt_decode from "jwt-decode"
 
 const ENDPOINT = process.env.NEXT_PUBLIC_API
-const nextConfig = { next: { revalidate: 15 } }
+const nextConfig = { next: { revalidate: 30 } }
 
 const fetcher = async (url: string, token?: string) => {
   const res = await fetch(ENDPOINT + url, {

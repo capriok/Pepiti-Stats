@@ -39,6 +39,14 @@ interface LeagueSeason {
   name: string
   MMR: number
   position: number
+  races: {
+    holeshot: number
+    first: number
+    second: number
+    third: number
+    fastlap: number
+    total_races: number
+  }
 }
 
 interface RiderProfile {
