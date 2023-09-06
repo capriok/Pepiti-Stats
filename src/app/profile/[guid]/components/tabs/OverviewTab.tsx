@@ -16,7 +16,7 @@ export default function OverviewTab({ riderId, seasons, mmrHistory }: Props) {
   return (
     <div className="flex flex-col">
       <div className="my-10 w-full px-0">
-        <RiderSeasonStats seasonsList={seasons} />
+        <RiderSeasonStats seasons={seasons} />
       </div>
       <Charts mmrHistory={mmrHistory} riderId={riderId} />
     </div>

@@ -11,11 +11,11 @@ import {
 import Pill from "~/components/pills/Pill"
 
 interface Props {
-  seasonsList: Array<LeagueSeason>
+  seasons: Array<LeagueSeason>
 }
 
-export default function RiderSeasonStats({ seasonsList }: Props) {
-  const seasons = seasonsList.map((s) => {
+export default function RiderSeasonStats({ seasons }: Props) {
+  const formattedSeasons = seasons.map((s) => {
     let name = s.name.toLocaleLowerCase()
 
     if (name === "first season") name = "Summer 2023"
@@ -24,19 +24,16 @@ export default function RiderSeasonStats({ seasonsList }: Props) {
     return { ...s, name }
   })
 
-  const [season, setSeason] = useState(seasons[0])
+  const [season, setSeason] = useState(formattedSeasons[0])
 
-  console.log("%cRiderSeasonStats", "color: steelblue", { seasons: seasons })
+  console.log("%cRiderSeasonStats", "color: steelblue", { seasons: formattedSeasons })
 
-  if (!seasons?.length) return <></>
+  if (!formattedSeasons?.length) return <></>
 
   return (
     <div className="w-full overflow-y-auto">
       <div className="flex w-full flex-col justify-center gap-8">
-        <div className="flex flex-col items-center gap-2">
-          <div className="stat-title">Season</div>
-          <SeasonDropdown seasons={seasons} season={season} setSeason={setSeason} />
-        </div>
+        <SeasonDropdown seasons={formattedSeasons} season={season} setSeason={setSeason} />
         <div className="grid w-full place-items-center">
           <div className="flex w-full flex-wrap gap-4 md:w-[80%] md:flex-nowrap">
             <div className="flex w-full flex-wrap justify-evenly md:justify-around">
@@ -77,7 +74,8 @@ export default function RiderSeasonStats({ seasonsList }: Props) {
 const SeasonDropdown = ({ season, seasons, setSeason }) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex select-none items-center gap-2">
+      <DropdownMenuTrigger className="flex select-none flex-col items-center gap-2 gap-2">
+        <div className="stat-title">Season</div>
         <div className="stat-value text-2xl">{season.name}</div>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
