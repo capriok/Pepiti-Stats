@@ -55,6 +55,7 @@ interface RiderProfile {
   MMR: number
   SR: number
   name: string
+  rider_name: string
   contact: number
   personal_records: number
   world_records: RiderWorldRecords

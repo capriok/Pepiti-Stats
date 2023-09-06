@@ -18,7 +18,7 @@ export const RiderProfile = ({ rider, mmrHistory }: Props) => {
       <div className="w-full">
         <div className="flex flex-col items-center lg:flex-row lg:justify-between lg:gap-10">
           <div className="mt-10 flex w-full flex-1 justify-center md:mt-0">
-            <RiderAvatar rider={rider} />
+            <RiderAvatar rider={rider} name={rider.rider_name} />
           </div>
           <div className="w-full overflow-hidden lg:w-3/4">
             <div className="pb-2 text-lg font-semibold">Rider Stats</div>
