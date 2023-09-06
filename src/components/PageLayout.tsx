@@ -25,7 +25,7 @@ export const layoutWidthMap = {
 
 export default function PageLayout(props: Props) {
   const width = layoutWidthMap[props.width]
-  const layoutCn = `mx-auto px-4 md:px-0 ${width}`
+  const layoutCn = `mx-auto px-4 2xl:px-0 ${width}`
 
   return (
     <>
