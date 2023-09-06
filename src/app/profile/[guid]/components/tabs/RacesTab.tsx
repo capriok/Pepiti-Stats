@@ -29,6 +29,7 @@ export default function RacesTab({ rider }: Props) {
         columns={riderRacesColumnsWithControls}
         sortingKeys={sortingKeys}
         paginationEnabled={true}
+        rankEnabled={false}
       />
     </div>
   )

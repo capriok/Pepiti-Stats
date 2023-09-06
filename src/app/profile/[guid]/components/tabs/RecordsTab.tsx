@@ -54,6 +54,7 @@ const Tables = ({ rider }) => {
             columns={riderWorldRecordsColumnsWithControls}
             sortingKeys={sortingKeys}
             paginationEnabled={true}
+            rankEnabled={false}
           />
         </>
       ) : (
@@ -65,6 +66,7 @@ const Tables = ({ rider }) => {
         columns={riderPersonalRecordsColumnsWithControls}
         sortingKeys={sortingKeys}
         paginationEnabled={true}
+        rankEnabled={false}
       />
     </>
   )
