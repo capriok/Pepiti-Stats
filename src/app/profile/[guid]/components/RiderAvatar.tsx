@@ -4,7 +4,12 @@ import Image from "next/image"
 import Link from "next/link"
 import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 
-export default function RiderAvatar({ rider, name }) {
+interface Props {
+  rider: RiderProfile
+  name?: string
+}
+
+export default function RiderAvatar({ rider, name }: Props) {
   return (
     <div className="flex flex-col items-center gap-3">
       <div className="indicator avatar min-h-[128px]">

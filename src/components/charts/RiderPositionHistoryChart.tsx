@@ -50,6 +50,20 @@ export default function RiderPositionHistoryChart({ races }: Props) {
         borderWidth: 1,
       },
       {
+        label: "Season",
+        data: races.reduce(
+          (acc, curr) => {
+            const date = parseInt(curr._id.slice(0, 8), 16) * 1000
+            if (!inLastXDays(90, date)) return acc
+            return reducePosition(acc, curr)
+          },
+          labels.map((_) => 0)
+        ),
+        backgroundColor: ["rgba(21, 81, 131, 0.2)"],
+        borderColor: ["rgb(21, 81, 131)"],
+        borderWidth: 1,
+      },
+      {
         label: `Last ${days}`,
         data: races.reduce(
           (acc, curr) => {
