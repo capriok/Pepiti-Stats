@@ -3,6 +3,23 @@
     {
       "meta": {
         "author": "Tooky",
+        "date": "09/7/2023",
+        "scope": "Component",
+        "type": "Update",
+        "page": "/servers"
+      },
+      "content": {
+        "description": "Added functionality to Join button in servers table to allow joining server from /servers page",
+        "notes": "User must have appropriate MXB Registry Entries. See <a href='http://forum.mx-bikes.com/index.php?topic=3221.0' rel='noopener noreferrer' target='_blank'>MXB Forums</a> for more information",
+        "link": "/servers",
+        "attachments": [
+          "https://cdn.discordapp.com/attachments/708462766679392268/1149380533785206784/image.png"
+        ]
+      }
+    },
+    {
+      "meta": {
+        "author": "Tooky",
         "date": "09/3/2023",
         "scope": "Page",
         "type": "Update",
@@ -10,7 +27,7 @@
       },
       "content": {
         "description": "Added table size option to table dropdown to allow increasing data limit for table",
-        "deprecation": "Riders | MMR | SR | Contacts | Bikes tables now limited to 100 by default; all else 1000",
+        "notes": "Riders | MMR | SR | Contacts | Bikes tables now limited to 100 by default",
         "link": "/records/mmr",
         "attachments": [
           "https://cdn.discordapp.com/attachments/1138590709545443409/1147962524977860670/image.png"

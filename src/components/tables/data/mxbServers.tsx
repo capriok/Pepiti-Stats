@@ -1,9 +1,9 @@
 import Image from "next/image"
+import { useToast, actions } from "~/components/toast"
+import { TableColumn } from "~/ui/Table"
 import Pill from "~/components/pills/Pill"
-import { actions, useToast } from "~/components/toast"
 import { handleRacismSanitization } from "~/utils/handleRacismSanitization"
 import { Hammer } from "lucide-react"
-import { TableColumn } from "~/ui/Table"
 
 export const mxbServersData = (servers) =>
   servers.map((s) => ({
@@ -98,15 +98,16 @@ const renderServerType = (type: string) => {
 
 const JoinButton = ({ row }) => {
   const { pushToast } = useToast()
+  const link = `mxbikes://${row.address}/${row["private address"]}/${row.name}/${row.password}/${row.track_id}//${row.category}`
 
   const onJoin = () => {
-    console.log(row)
-    pushToast(actions.comingSoon)
+    console.log("%cExternal Protocol", "color: steelblue", { protocol: link })
+    pushToast(() => actions.externalProtocol("Launching MX Bikes, Stand by"))
   }
 
   return (
-    <div className=" cursor-pointer text-primary" onClick={onJoin}>
+    <a href={link} className="text-primary" onClick={onJoin}>
       Join
-    </div>
+    </a>
   )
 }

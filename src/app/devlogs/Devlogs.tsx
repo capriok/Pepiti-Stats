@@ -53,10 +53,12 @@ export default function Devlogs() {
             <div>{entry.content.description}</div>
           </CardContent>
 
-          {entry.content.deprecation && (
+          {entry.content.notes && (
             <CardContent className="flex flex-col">
-              <div className="mb-2 font-semibold italic text-accent">Deprecations</div>
-              <div className="text-sm">{entry.content.deprecation}</div>
+              <div className="mb-2 font-semibold text-accent">Notes</div>
+              <div className="text-sm italic ">
+                <div dangerouslySetInnerHTML={{ __html: entry.content.notes }}></div>
+              </div>
             </CardContent>
           )}
 

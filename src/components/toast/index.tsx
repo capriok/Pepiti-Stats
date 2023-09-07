@@ -110,6 +110,11 @@ const actions: {
     description: `You have left the race at ${name}`,
     variant: "warning",
   }),
+  externalProtocol: (msg) => ({
+    title: "External Protocol Request",
+    description: msg,
+    variant: "info",
+  }),
 }
 
 export { useToast, actions }
