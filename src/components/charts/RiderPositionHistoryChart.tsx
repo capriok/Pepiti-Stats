@@ -17,11 +17,14 @@ import { Button } from "~/ui/Button"
 
 interface Props {
   races: Array<any>
+  season: LeagueSeason
 }
 
-export default function RiderPositionHistoryChart({ races }: Props) {
+export default function RiderPositionHistoryChart({ races, season }: Props) {
   const theme = useTheme()
   const [days, setDays] = useState(30)
+
+  console.log("%cRiderRacesHistory", "color: steelblue", { races })
 
   const labels = ["First", "Second", "Third", "Top 5", "Top 10"]
 
@@ -54,7 +57,7 @@ export default function RiderPositionHistoryChart({ races }: Props) {
         data: races.reduce(
           (acc, curr) => {
             const date = parseInt(curr._id.slice(0, 8), 16) * 1000
-            if (!inLastXDays(90, date)) return acc
+            if (!isThisSeason(new Date(date), season.start!, season.end!)) return acc
             return reducePosition(acc, curr)
           },
           labels.map((_) => 0)
@@ -125,6 +128,10 @@ export default function RiderPositionHistoryChart({ races }: Props) {
 }
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, BarElement, Title, Tooltip, Legend)
+
+function isThisSeason(currentDate: Date, startDate: Date, endDate: Date): boolean {
+  return currentDate >= startDate && currentDate <= endDate
+}
 
 function inLastXDays(days, date) {
   var currentDate = new Date()

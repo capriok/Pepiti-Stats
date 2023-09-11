@@ -17,37 +17,31 @@ import { Button } from "~/ui/Button"
 
 interface Props {
   mmrHistory: Array<RiderMMRHistory>
+  season: LeagueSeason
 }
 
-export default function RiderMMRHistoryChart({ mmrHistory }: Props) {
+export default function RiderMMRHistoryChart({ mmrHistory, season }: Props) {
   const [limit, setLimit] = useState(mmrHistory.length > 20 ? 20 : mmrHistory.length)
 
   console.log("%cRiderMMRHistoryChart", "color: steelblue", { mmrHistory })
 
-  const totaledData = mmrHistory
-    .reduce((acc: Array<number>, curr, currIdx) => {
-      if (currIdx !== 0) {
-        // add each to prev idx
-        acc.push(curr.mmr + acc[currIdx - 1])
-      } else {
-        // Use initial value of 1000
-        acc.push(curr.mmr)
-      }
-      return acc
-    }, [])
-    .slice(mmrHistory.length - limit)
+  const reduceMMR = (acc: Array<number>, curr, currIdx) => {
+    currIdx !== 0 ? acc.push(curr.mmr + acc[currIdx - 1]) : acc.push(curr.mmr)
+    return acc
+  }
 
-  const labels = totaledData
-    .map((_, idx) => {
-      if (idx + 1 === 1) {
-        return "Prev race"
-      }
-      return idx + 1 + " races ago"
-    })
-    .reverse()
+  const thisSeasonsHistory = mmrHistory
+  // ? uncomment this when pepiti supports mmr history per season
+  // .filter(({ timestamp }) => {
+  //   return isThisSeason(new Date(timestamp * 1000), season.start!, season.end!)
+  // })
 
-  const chartData = {
-    labels,
+  const totaledData = thisSeasonsHistory.reduce(reduceMMR, []).slice(mmrHistory.length - limit)
+
+  const data = {
+    labels: totaledData
+      .map((_, idx) => (idx + 1 === 1 ? "Prev race" : idx + 1 + " races ago"))
+      .reverse(),
     datasets: [
       {
         label: "Total MMR",
@@ -76,19 +70,25 @@ export default function RiderMMRHistoryChart({ mmrHistory }: Props) {
         </div>
         <div className="flex items-center justify-center">
           <div className="pr-4 text-sm text-accent">{limit} Races</div>
-          <Button variant="ghost" size="icon" onClick={() => setLimit((l) => (l > 5 ? l - 5 : l))}>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setLimit((l) => (l > 5 ? l - 5 : l))}
+            disabled={limit <= 5}
+          >
             -
           </Button>
           <Button
             variant="ghost"
             size="icon"
             onClick={() => setLimit((l) => (l < mmrHistory.length ? l + 5 : l))}
+            disabled={limit >= mmrHistory.length - 1}
           >
             +
           </Button>
         </div>
       </div>
-      <Line options={options} data={chartData} />
+      <Line options={options} data={data} />
     </div>
   )
 }

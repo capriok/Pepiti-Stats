@@ -37,6 +37,8 @@ interface RiderSearch {
 
 interface LeagueSeason {
   name: string
+  start?: Date
+  end?: Date
   MMR: number
   position: number
   races: {

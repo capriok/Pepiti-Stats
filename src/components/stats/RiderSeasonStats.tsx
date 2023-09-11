@@ -12,28 +12,19 @@ import Pill from "~/components/pills/Pill"
 
 interface Props {
   seasons: Array<LeagueSeason>
+  season: LeagueSeason
+  setSeason: (s: LeagueSeason) => void
 }
 
-export default function RiderSeasonStats({ seasons }: Props) {
-  const formattedSeasons = seasons.map((s) => {
-    let name = s.name.toLocaleLowerCase()
+export default function RiderSeasonStats({ seasons, season, setSeason }: Props) {
+  console.log("%cRiderSeasonStats", "color: steelblue", { seasons: seasons })
 
-    if (name === "first season") name = "Summer 2023"
-    if (name === "first autumn") name = "Autumn 2023"
-
-    return { ...s, name }
-  })
-
-  const [season, setSeason] = useState(formattedSeasons[0])
-
-  console.log("%cRiderSeasonStats", "color: steelblue", { seasons: formattedSeasons })
-
-  if (!formattedSeasons?.length) return <></>
+  if (!seasons?.length) return <></>
 
   return (
     <div className="w-full overflow-y-auto">
       <div className="flex w-full flex-col justify-center gap-8">
-        <SeasonDropdown seasons={formattedSeasons} season={season} setSeason={setSeason} />
+        <SeasonDropdown seasons={seasons} season={season} setSeason={setSeason} />
         <div className="grid w-full place-items-center">
           <div className="flex w-full flex-wrap gap-4 md:w-[80%] md:flex-nowrap">
             <div className="flex w-full flex-wrap justify-evenly md:justify-around">
@@ -74,7 +65,7 @@ export default function RiderSeasonStats({ seasons }: Props) {
 const SeasonDropdown = ({ season, seasons, setSeason }) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex select-none flex-col items-center gap-2 gap-2">
+      <DropdownMenuTrigger className="flex select-none flex-col items-center gap-2">
         <div className="stat-title">Season</div>
         <div className="stat-value text-2xl">{season.name}</div>
       </DropdownMenuTrigger>
