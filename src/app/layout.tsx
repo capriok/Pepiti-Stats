@@ -14,6 +14,7 @@ import NavBar from "~/components/Navbar"
 import Footer from "~/components/Footer"
 
 import "~/globals.css"
+import DonationBanner from "./dashboard/components/DonationBanner"
 
 interface Props {
   children: React.ReactNode
@@ -35,6 +36,7 @@ export default async function RootLayout(props: Props) {
               {props.modal}
             </div>
             <Footer user={user} />
+            <DonationBanner />
             <Toaster />
           </main>
         </Providers>

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import GetAuthUser from "~/api"
-import { ChevronsDown } from "lucide-react"
+import { ChevronDown, ChevronsDown } from "lucide-react"
 import PageLayout from "~/components/PageLayout"
 import OverlayableImage from "~/components/OverlayableImage"
 import { Button } from "~/ui/Button"
@@ -20,7 +20,7 @@ export default async function Page() {
     <PageLayout width="app">
       <div className="flex min-h-screen flex-col items-center px-4 lg:justify-evenly">
         <div className="flex w-full max-w-full flex-col justify-between gap-20 lg:flex-row">
-          <div className="mt-10 md:mt-0">
+          <div>
             <div className="mb-5 mt-5 h-[1px] w-[200px] border border-accent md:mb-10 md:w-[300px]" />
 
             <div className="mb-5 text-4xl font-bold leading-relaxed md:text-6xl">
@@ -50,8 +50,8 @@ export default async function Page() {
             />
           </div>
         </div>
-        <div className="mt-10 lg:mt-0">
-          <ChevronsDown size={50} className="animate-bounce opacity-40" />
+        <div>
+          <ChevronDown size={40} className="animate-bounce opacity-40" />
         </div>
       </div>
 

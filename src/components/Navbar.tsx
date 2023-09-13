@@ -16,7 +16,8 @@ import {
   navigationMenuTriggerStyle,
 } from "~/ui/NavigationMenu"
 import cn from "~/utils/cn"
-import { Hammer, LogOut, ShieldAlert, User2 } from "lucide-react"
+import { DollarSign, Hammer, LogOut, ShieldAlert, User2 } from "lucide-react"
+import { Button } from "~/ui/Button"
 
 interface Props {
   user: User
@@ -66,6 +67,7 @@ interface Item {
   title: any
   description?: string
   admin?: boolean
+  newTab?: boolean
 }
 
 function AppNavigation({ user, notifications }) {
@@ -151,6 +153,16 @@ function AppNavigation({ user, notifications }) {
         </div>
       ),
     },
+    {
+      href: "https://paypal.me/pepitisdevs?country.x=US&locale.x=en_US",
+      newTab: true,
+      title: (
+        <div className="flex w-full justify-between gap-4">
+          <div className="text-primary">Donate</div>
+          <DollarSign size={20} />
+        </div>
+      ),
+    },
   ]
 
   const ProfileDropdown = ({ label }) => {
@@ -167,8 +179,11 @@ function AppNavigation({ user, notifications }) {
           <NavigationMenuContent>
             <ul className="flex flex-col justify-center gap-2 p-2 sm:w-[300px] lg:w-[300px]">
               {profileItems.map((item, i) => {
+                const newTabProps = item.newTab ? { target: "_blank", rel: "noreferrer" } : {}
+
                 if (item.admin && !user.isAdmin) return <></>
-                return <LinkItem key={i} title={item.title} href={item.href} />
+
+                return <LinkItem key={i} title={item.title} href={item.href} {...newTabProps} />
               })}
             </ul>
           </NavigationMenuContent>

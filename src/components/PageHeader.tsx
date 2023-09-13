@@ -1,9 +1,7 @@
 "use client"
 
-import { ArrowLeft, Backpack, Undo, UndoDot } from "lucide-react"
-import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
-import DonationBanner from "~/app/dashboard/components/DonationBanner"
+import { Undo } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 interface Props {
   title: React.ReactNode | string
@@ -14,16 +12,11 @@ interface Props {
 }
 
 const PageHeader: React.FC<Props> = ({ title, extra, width, subExtra, backEnabled = false }) => {
-  const pathname = usePathname()
   const router = useRouter()
-
-  const isAtDashboard = pathname === "/dashboard"
-  const marginBottom = isAtDashboard ? "mb-0" : "mb-10"
-  const headerCn = `relative bg-base-200 px-4 flex md:justify-center shadow-md border-b border-accent/40 ${marginBottom}`
 
   return (
     <>
-      <div className={headerCn}>
+      <div className="relative mb-10 flex border-b border-accent/40 bg-base-200 px-4 shadow-md md:justify-center">
         <div
           className={`md:py-18 relative flex w-full flex-col py-10 md:flex-row md:items-center md:justify-between md:py-16 ${width}`}
         >
@@ -43,7 +36,6 @@ const PageHeader: React.FC<Props> = ({ title, extra, width, subExtra, backEnable
           <div className="absolute bottom-0 right-0 flex w-full justify-end">{subExtra}</div>
         </div>
       </div>
-      {isAtDashboard && <DonationBanner />}
     </>
   )
 }

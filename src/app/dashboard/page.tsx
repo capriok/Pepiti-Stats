@@ -29,11 +29,8 @@ export default async function Page() {
     >
       <div className="mx-auto flex w-full flex-col gap-6 md:gap-12">
         <GeneralEventAlert />
-
         <SummaryStats stats={apiStats} />
-
         <TopRecords worldRecords={worldRecords} worldMMR={worldMMR} worldSR={worldSR} />
-
         <TrackWorldRecords tracks={trackList.tracks.sort((a, b) => a.name.localeCompare(b.name))} />
       </div>
     </PageLayout>
