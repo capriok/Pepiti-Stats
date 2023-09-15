@@ -11,9 +11,9 @@ import {
 import Pill from "~/components/pills/Pill"
 
 interface Props {
-  seasons: Array<LeagueSeason>
-  season: LeagueSeason
-  setSeason: (s: LeagueSeason) => void
+  seasons: Array<RiderSeason>
+  season: RiderSeason
+  setSeason: (s: RiderSeason) => void
 }
 
 export default function RiderSeasonStats({ seasons, season, setSeason }: Props) {

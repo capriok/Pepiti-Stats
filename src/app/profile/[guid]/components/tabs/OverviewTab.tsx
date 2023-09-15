@@ -9,7 +9,7 @@ import { useState } from "react"
 
 interface Props {
   riderId: string
-  seasons: Array<LeagueSeason>
+  seasons: Array<RiderSeason>
   mmrHistory: Array<RiderMMRHistory>
 }
 

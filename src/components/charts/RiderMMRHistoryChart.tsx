@@ -17,7 +17,7 @@ import { Button } from "~/ui/Button"
 
 interface Props {
   mmrHistory: Array<RiderMMRHistory>
-  season: LeagueSeason
+  season: RiderSeason
 }
 
 export default function RiderMMRHistoryChart({ mmrHistory, season }: Props) {

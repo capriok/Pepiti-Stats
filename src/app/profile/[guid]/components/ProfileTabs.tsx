@@ -12,9 +12,10 @@ import { useRouter, useSearchParams } from "next/navigation"
 interface Props {
   rider: RiderProfile
   mmrHistory: Array<RiderMMRHistory>
+  seasons: Array<RiderSeason>
 }
 
-export default function ProfileTabs({ rider, mmrHistory }: Props) {
+export default function ProfileTabs({ rider, mmrHistory, seasons }: Props) {
   const router = useRouter()
   const user = useUserContext()
   const isAdmin = user.isAdmin
@@ -26,7 +27,7 @@ export default function ProfileTabs({ rider, mmrHistory }: Props) {
     {
       key: "overview",
       label: "Overview",
-      children: <OverviewTab riderId={rider._id} seasons={rider.seasons} mmrHistory={mmrHistory} />,
+      children: <OverviewTab riderId={rider._id} seasons={seasons} mmrHistory={mmrHistory} />,
     },
     {
       key: "records",

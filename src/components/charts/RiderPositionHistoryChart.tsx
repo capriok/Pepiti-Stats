@@ -17,7 +17,7 @@ import { Button } from "~/ui/Button"
 
 interface Props {
   races: Array<any>
-  season: LeagueSeason
+  season: RiderSeason
 }
 
 export default function RiderPositionHistoryChart({ races, season }: Props) {

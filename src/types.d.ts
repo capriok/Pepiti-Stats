@@ -24,7 +24,7 @@ interface RiderSearch {
   avatar: string
   type: "user"
   donation: number
-  seasons: LeagueSeason[]
+  seasons: RiderSeason[]
   races: {
     first: number
     second: number
@@ -35,7 +35,7 @@ interface RiderSearch {
   }
 }
 
-interface LeagueSeason {
+interface RiderSeason {
   name: string
   start?: Date
   end?: Date
@@ -66,7 +66,7 @@ interface RiderProfile {
     name: string
     laps: number
   }
-  seasons: LeagueSeason[]
+  seasons: RiderSeason[]
   average_speed: number
   banned: boolean
   banned_by: null | string
@@ -474,7 +474,7 @@ interface ReportRider {
   online: boolean
   server: string | null
   donation: number
-  seasons: LeagueSeason[]
+  seasons: RiderSeason[]
   races: {
     first: number
     second: number
@@ -503,7 +503,7 @@ interface BlacklistRider {
   donation: number
   online: boolean
   server: null | string
-  seasons: LeagueSeason[]
+  seasons: RiderSeason[]
   races: {
     first: number
     second: number

@@ -13,6 +13,8 @@ interface Props {
 export const RiderProfile = ({ rider, mmrHistory }: Props) => {
   console.log("%cRider Profile", "color: steelblue", { rider })
 
+  const seasons = transformSeasonsBug(rider.seasons)
+
   return (
     <>
       <div className="w-full">
@@ -22,19 +24,19 @@ export const RiderProfile = ({ rider, mmrHistory }: Props) => {
           </div>
           <div className="w-full overflow-hidden lg:w-3/4">
             <div className="pb-2 text-lg font-semibold">Rider Stats</div>
-            <RiderStats rider={rider} />
+            <RiderStats rider={rider} seasons={seasons} />
             <div className="pb-2 text-lg font-semibold">Overall Stats</div>
-            <OverallStats rider={rider} />
+            <OverallStats rider={rider} seasons={seasons} />
           </div>
         </div>
       </div>
-      <ProfileTabs rider={rider} mmrHistory={mmrHistory} />
+      <ProfileTabs rider={rider} mmrHistory={mmrHistory} seasons={seasons} />
     </>
   )
 }
 
-const RiderStats = ({ rider }: { rider: RiderProfile }) => {
-  const overallMMR = rider.seasons.reduce((acc, curr) => acc + curr.MMR, 0)
+const RiderStats = ({ rider, seasons }: { rider: RiderProfile; seasons: RiderSeason[] }) => {
+  const overallMMR = seasons.reduce((acc, curr) => acc + curr.MMR, 0)
 
   return (
     <div className="stats mb-10 w-full rounded-md border border-accent/40 bg-base-200 shadow-md">
@@ -71,10 +73,10 @@ const RiderStats = ({ rider }: { rider: RiderProfile }) => {
   )
 }
 
-const OverallStats = ({ rider }: { rider: RiderProfile }) => {
-  const overallTotalRaces = rider.seasons.reduce((acc, curr) => acc + curr.races.total_races, 0)
-  const overallFastestLaps = rider.seasons.reduce((acc, curr) => acc + curr.races.fastlap, 0)
-  const overallHoleshots = rider.seasons.reduce((acc, curr) => acc + curr.races.holeshot, 0)
+const OverallStats = ({ rider, seasons }: { rider: RiderProfile; seasons: RiderSeason[] }) => {
+  const overallTotalRaces = seasons.reduce((acc, curr) => acc + curr.races.total_races, 0)
+  const overallFastestLaps = seasons.reduce((acc, curr) => acc + curr.races.fastlap, 0)
+  const overallHoleshots = seasons.reduce((acc, curr) => acc + curr.races.holeshot, 0)
 
   return (
     <div className="stats w-full rounded-md border border-accent/40 bg-base-200 shadow-md">
@@ -105,4 +107,23 @@ const OverallStats = ({ rider }: { rider: RiderProfile }) => {
       </div>
     </div>
   )
+}
+
+function transformSeasonsBug(seasons: any): any[] {
+  const list: any[] = []
+
+  if (Array.isArray(seasons)) {
+    list.push(...seasons)
+  } else if (typeof seasons === "object" && seasons !== null) {
+    for (const key in seasons) {
+      if (seasons.hasOwnProperty(key)) {
+        list.push(seasons[key])
+      }
+    }
+  }
+
+  return list.map((s) => ({
+    ...s,
+    name: s.name ?? "Season",
+  }))
 }
