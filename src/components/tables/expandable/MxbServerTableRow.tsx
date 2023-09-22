@@ -252,7 +252,7 @@ const ServerRoster = ({ server }) => {
       {!server.clients || server.clients?.length === 0 ? (
         <></>
       ) : (
-        <Table data={data} columns={columns} rankEnabled={false} />
+        <Table data={data} columns={columns} rankEnabled={false} defaultPageSize={100} />
       )}
     </>
   )
