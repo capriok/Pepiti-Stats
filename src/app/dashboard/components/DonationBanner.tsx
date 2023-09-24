@@ -2,7 +2,7 @@
 
 import { X } from "lucide-react"
 import Image from "next/image"
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Button } from "~/ui/Button"
 import { Card, CardContent, CardHeader } from "~/ui/Card"
@@ -23,8 +23,23 @@ export default function DonationBanner() {
     localStorageJson ? JSON.parse(localStorageJson) : initialState
   )
 
+  function isDismissDateInFuture(dismissDate) {
+    // Parse the dismiss date string into a Date object
+    const dismissDateObj = new Date(dismissDate)
+
+    // Calculate the current date
+    const currentDate = new Date()
+
+    // Calculate the date 30 days in the future
+    const futureDate = new Date()
+    futureDate.setDate(currentDate.getDate() + 30)
+
+    // Compare the dismiss date with the future date
+    return dismissDateObj > futureDate
+  }
+
   const hasBeenDismissed = bannerState.dismissed === true
-  const hasBeenAMonth = bannerState.lastDismissed > Date.now() - 2629743833 // 1 month in ms
+  const hasBeenAMonth = bannerState.nextAppearance >= Date.now()
   const hasBeenDismissedInLastMonth = hasBeenDismissed && hasBeenAMonth
 
   useEffect(() => {
@@ -40,7 +55,7 @@ export default function DonationBanner() {
   const onDismiss = () => {
     setBannerState({
       dismissed: true,
-      lastDismissed: Date.now(),
+      nextAppearance: Date.now() + 30 * 24 * 60 * 60 * 1000,
     })
   }
 
