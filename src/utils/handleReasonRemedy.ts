@@ -1,7 +1,7 @@
 export const handleReasonRemedy = (reason) => {
   switch (reason?.toLowerCase()) {
     case "sr":
-      return "Safety Rating Banned (Temporary)"
+      return "Safety Rating Blacklisted (Temporary)"
 
     case "global":
       return "Globally Banned (Permanent)"
@@ -17,6 +17,6 @@ export const handleReasonRemedy = (reason) => {
       return "Admin Banned (Appealable)"
 
     default:
-      return "Banned (Appealable)"
+      return "Blacklisted (Appealable)"
   }
 }

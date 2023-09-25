@@ -8,7 +8,7 @@ const nextConfig = { next: { revalidate: 30 } }
 const token = cookies().get("access_token")?.value
 
 async function fetcher(url: string) {
-  console.log("Fetcher", { url, token })
+  // console.log("Fetcher", { url, token })
 
   const res = await fetch(ENDPOINT + url, {
     ...nextConfig,
@@ -36,7 +36,7 @@ async function poster(url: string, options: { method: string; body?: any }) {
     body: JSON.stringify(options.body),
   }
 
-  console.log("Poster", { url, token, opts })
+  // console.log("Poster", { url, token, opts })
 
   const res = await fetch(ENDPOINT + url, {
     ...nextConfig,

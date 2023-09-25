@@ -9,31 +9,29 @@ import { handleReasonRemedy } from "~/utils/handleReasonRemedy"
 export async function generateMetadata({ params }) {
   const rider = await GetRider(params.guid)
 
-  const bannedData = {
+  const bannedDescription = `GUID: ${rider?._id}
+  Rider: ${handleRacismSanitization(rider?.name)}
+  Banned: True
+  Reason: ${rider?.banned_by ?? "N/a"}
+  Detail: ${rider?.banned ? handleReasonRemedy(rider?.banned_by) : "N/a"}`
+
+  const riderDescription = `Rider: ${handleRacismSanitization(rider?.name)}
+  Online: ${rider?.online ? "Online" : "Offline"}
+  MMR: ${rider?.MMR.toLocaleString()}
+  SR: ${rider?.SR.toLocaleString()}
+  Contacts: ${rider?.contact.toLocaleString()}`
+
+  const description = rider.banned ? bannedDescription : riderDescription
+
+  console.log(description)
+
+  return {
     title: `Pepiti | Profile`,
-    description: `GUID: ${rider?._id}
-Rider: ${handleRacismSanitization(rider?.name)}
-Banned: True
-Reason: ${rider?.banned_by}
-Detail: ${handleReasonRemedy(rider?.banned_by)}`,
+    description: description,
     openGraph: {
       images: rider.avatar ? [rider.avatar] : [],
     },
   }
-
-  const riderData = {
-    title: `Pepiti | Profile`,
-    description: `Rider: ${handleRacismSanitization(rider?.name)}
-Online: ${rider?.online ? "Online" : "Offline"}
-MMR: ${rider?.MMR.toLocaleString()}
-SR: ${rider?.SR.toLocaleString()}
-Contacts: ${rider?.contact.toLocaleString()}`,
-    openGraph: {
-      images: rider.avatar ? [rider.avatar] : [],
-    },
-  }
-
-  return rider.banned ? bannedData : riderData
 }
 
 export default async function Page({ params: { guid } }) {

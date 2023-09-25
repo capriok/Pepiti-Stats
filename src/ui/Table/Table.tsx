@@ -167,7 +167,7 @@ const Table: React.FC<TableProps> = (props) => {
 
     const populatedPage =
       tableData.length < pageSize ? pageData : fillArrayToSize(pageData, pageSize)
-    console.log("%cTable: PopulatedPage", "color: goldenrod", { populatedPage })
+    // console.log("%cTable: PopulatedPage", "color: goldenrod", { populatedPage })
 
     function fillArrayToSize(arr: any[], size: number): TableData[] {
       const result: TableData[] = [...arr]

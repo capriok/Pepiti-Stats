@@ -61,6 +61,10 @@ export default function WorldRecords({ trackList }: Props) {
   useEffect(() => {
     if (isLoading) return
 
+    console.log("%cTrackData", "color: steelblue", {
+      records: trackData.records,
+    })
+
     if (filterParam)
       setFilter({
         key: filterParam,
@@ -68,7 +72,7 @@ export default function WorldRecords({ trackList }: Props) {
       })
   }, [isLoading])
 
-  console.log("%cTableFilter", "color: goldenrod", filter)
+  // console.log("%cTableFilter", "color: goldenrod", filter)
 
   function handleTrackSelect(e) {
     setSelectedTrack(e.target.value)

@@ -1,6 +1,3 @@
-"use client"
-
-import AdminControls from "./AdminControls"
 import RiderAvatar from "./RiderAvatar"
 import ProfileTabs from "./ProfileTabs"
 import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
