@@ -23,20 +23,14 @@ export default function DonationBanner() {
     localStorageJson ? JSON.parse(localStorageJson) : initialState
   )
 
-  function isDismissDateInFuture(dismissDate) {
-    // Parse the dismiss date string into a Date object
-    const dismissDateObj = new Date(dismissDate)
+  const daysToNextAppearance = Math.floor(
+    (bannerState.nextAppearance - Date.now()) / (1000 * 60 * 60 * 24)
+  ).toFixed(0)
 
-    // Calculate the current date
-    const currentDate = new Date()
-
-    // Calculate the date 30 days in the future
-    const futureDate = new Date()
-    futureDate.setDate(currentDate.getDate() + 30)
-
-    // Compare the dismiss date with the future date
-    return dismissDateObj > futureDate
-  }
+  parseInt(daysToNextAppearance) < 5 &&
+    console.log("%cDaysTorReappearance", "color:steelblue", {
+      appearanceIn: daysToNextAppearance + " Days",
+    })
 
   const hasBeenDismissed = bannerState.dismissed === true
   const hasBeenAMonth = bannerState.nextAppearance >= Date.now()
@@ -53,9 +47,12 @@ export default function DonationBanner() {
   }, [bannerState])
 
   const onDismiss = () => {
+    const dateInaMonth = Date.now() + 30 * 24 * 60 * 60 * 1000
+    const dateInaMonthMidnight = new Date(dateInaMonth)
+    dateInaMonthMidnight.setHours(0, 0, 0, 0)
     setBannerState({
       dismissed: true,
-      nextAppearance: Date.now() + 30 * 24 * 60 * 60 * 1000,
+      nextAppearance: dateInaMonthMidnight.getTime(),
     })
   }
 
