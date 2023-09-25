@@ -37,8 +37,6 @@ export default function OverviewTab({ riderId, seasons, mmrHistory }: Props) {
     return { ...s, name }
   })
 
-  console.log("formattedSeasons", formattedSeasons)
-
   const [season, setSeason] = useState(formattedSeasons[0])
 
   return (

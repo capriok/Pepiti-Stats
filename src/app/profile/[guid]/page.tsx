@@ -23,8 +23,6 @@ export async function generateMetadata({ params }) {
 
   const description = rider.banned ? bannedDescription : riderDescription
 
-  console.log(description)
-
   return {
     title: `Pepiti | Profile`,
     description: description,

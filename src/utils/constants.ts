@@ -21,4 +21,9 @@ export const bikeCategories = [
   "FACTORY 250 2T",
   "FACTORY 150",
   "FACTORY 125",
+  "E10 450",
+  "E10 250",
+  "E10 250T",
+  "E10 150",
+  "E10 125",
 ]

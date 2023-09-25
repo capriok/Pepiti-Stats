@@ -1,3 +1,5 @@
+"use client"
+
 import RiderAvatar from "./RiderAvatar"
 import ProfileTabs from "./ProfileTabs"
 import { handleAverageSpeed } from "~/utils/handleAverageSpeed"
@@ -8,7 +10,7 @@ interface Props {
 }
 
 export const RiderProfile = ({ rider, mmrHistory }: Props) => {
-  console.log("%cRider Profile", "color: steelblue", { rider })
+  console.log("%cRiderProfile", "color: steelblue", { rider })
 
   const seasons = transformSeasonsBug(rider.seasons)
 

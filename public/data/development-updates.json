@@ -61,7 +61,7 @@
       },
       "content": {
         "description": "Added a filter to allow filtering track records data by bike category",
-        "link": "/records/track?track=Assen&filter=FACTORY%20250%202T",
+        "link": "/records/track?track=Assen&filter=MX1%20OEM",
         "attachments": [
           "https://cdn.discordapp.com/attachments/1138590709545443409/1146228116021325874/image.png"
         ]

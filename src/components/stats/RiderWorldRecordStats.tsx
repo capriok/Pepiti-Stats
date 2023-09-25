@@ -6,17 +6,22 @@ export default function RiderWorldRecordStats({ rider }) {
       "MX3 OEM": rider.world_records["MX3 OEM"],
       "MX1 OEM": rider.world_records["MX1 OEM"],
       "FACTORY 450": rider.world_records["FACTORY 450"],
+      "E10 450": rider.world_records["E10 450"],
     },
     "250": {
       "MX2 OEM": rider.world_records["MX2 OEM"],
       "MX1-2T OEM": rider.world_records["MX1-2T OEM"],
       "FACTORY 250": rider.world_records["FACTORY 250"],
+      "E10 250": rider.world_records["E10 250"],
       "FACTORY 250 2T": rider.world_records["FACTORY 250 2T"],
+      "E10 250 2T": rider.world_records["E10 250T"],
     },
     "125": {
       "MX2-2T OEM": rider.world_records["MX2-2T OEM"],
       "FACTORY 150": rider.world_records["FACTORY 150"],
+      "E10 150": rider.world_records["E10 150"],
       "FACTORY 125": rider.world_records["FACTORY 125"],
+      "E10 125": rider.world_records["E10 125"],
     },
   }
 
