@@ -85,21 +85,24 @@ interface RiderProfile {
 
 interface RiderWorldRecords {
   [key: string]: number
+  "MX3 OEM"?: number
   "MX1 OEM"?: number
   "MX1-2T OEM"?: number
   "MX2 OEM"?: number
   "MX2-2T OEM"?: number
-  "MX3 OEM"?: number
+  "Classic MX1 OEM"?: number
+  "Classic MX2 OEM"?: number
+  "MX-E OEM"?: number
   "FACTORY 450"?: number
   "FACTORY 250"?: number
   "FACTORY 250 2T"?: number
   "FACTORY 150"?: number
   "FACTORY 125"?: number
-  "E10 125"?: number
-  "E10 150"?: number
+  "E10 450"?: number
   "E10 250"?: number
   "E10 250T"?: number
-  "E10 450"?: number
+  "E10 150"?: number
+  "E10 125"?: number
 
   total: number
   name?: string
