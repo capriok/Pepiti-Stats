@@ -95,7 +95,7 @@ function AppNavigation({ user, notifications }) {
     {
       href: "/servers",
       title: "Servers",
-      description: "See a list of all Pepiti or MXB servers available to participate in.",
+      description: "Check out a panel of all Pepiti or MXB servers available to participate in.",
     },
     {
       href: "/tracks",

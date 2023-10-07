@@ -3,6 +3,22 @@
     {
       "meta": {
         "author": "Tooky",
+        "date": "10/7/2023",
+        "scope": "Page",
+        "type": "Addition",
+        "page": "/tracks"
+      },
+      "content": {
+        "description": "Added a informational page to show all tracks in Pepiti server rotations and to prompt users for feedback.",
+        "link": "/servers",
+        "attachments": [
+          "https://cdn.discordapp.com/attachments/1138590709545443409/1160323228351340645/image.png"
+        ]
+      }
+    },
+    {
+      "meta": {
+        "author": "Tooky",
         "date": "09/7/2023",
         "scope": "Component",
         "type": "Update",
