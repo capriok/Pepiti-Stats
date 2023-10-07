@@ -17,7 +17,6 @@ import {
 } from "~/ui/NavigationMenu"
 import cn from "~/utils/cn"
 import { DollarSign, Hammer, LogOut, ShieldAlert, User2 } from "lucide-react"
-import { Button } from "~/ui/Button"
 
 interface Props {
   user: User
@@ -96,7 +95,12 @@ function AppNavigation({ user, notifications }) {
     {
       href: "/servers",
       title: "Servers",
-      description: "See a List of all Pepiti or MXB servers available to participate in.",
+      description: "See a list of all Pepiti or MXB servers available to participate in.",
+    },
+    {
+      href: "/tracks",
+      title: "Tracks",
+      description: "See a list of all tracks hosted on Pepiti servers in race rotation.",
     },
     {
       href: "/blacklists",
