@@ -37,7 +37,7 @@ export default function OverviewTab({ riderId, seasons, mmrHistory }: Props) {
     return { ...s, name }
   })
 
-  const [season, setSeason] = useState(formattedSeasons[0])
+  const [season, setSeason] = useState(formattedSeasons[0] ?? [])
 
   return (
     <div className="flex flex-col">
