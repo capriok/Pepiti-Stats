@@ -2,8 +2,8 @@ import PageLayout from "~/components/PageLayout"
 import tracks from "@/data/tracks.json"
 
 export const metadata = {
-  title: "Pepiti | Rider Report",
-  description: "Report riders from recent events for administrative review",
+  title: "Pepiti | Tracks in Rotation",
+  description: "A list of all tracks in Rotation on Pepiti Servers",
 }
 
 export default async function Page() {
