@@ -10,7 +10,7 @@
       },
       "content": {
         "description": "Added a informational page to show all tracks in Pepiti server rotations and to prompt users for feedback.",
-        "link": "/servers",
+        "link": "/tracks",
         "attachments": [
           "https://cdn.discordapp.com/attachments/1138590709545443409/1160323228351340645/image.png"
         ]
