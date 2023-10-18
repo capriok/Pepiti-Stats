@@ -37,10 +37,13 @@ export const handleBikeColor = (bike: string) => {
     "RM": "bg-yellow-300/80 dark:bg-yellow-400/60",
     
     "GASGAS": "bg-red-600/80 dark:bg-red-600/60",
+    "MC": "bg-red-600/80 dark:bg-red-600/60",
 
     "Husqvarna": "bg-neutral-500/60 dark:bg-neutral-500/80",
+    "FC": "bg-neutral-500/60 dark:bg-neutral-500/80",
 
     "Fantic": "bg-neutral-700/80 dark:bg-neutral-700/60",
+    "XF": "bg-neutral-700/80 dark:bg-neutral-700/60",
     
     "TM": "bg-sky-400/80 dark:bg-sky-400/60",
     
