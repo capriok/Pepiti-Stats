@@ -5,8 +5,9 @@ import { Alert, AlertDescription, AlertTitle } from "~/ui/Alert"
 import { Hammer } from "lucide-react"
 import { handleReasonRemedy } from "~/utils/handleReasonRemedy"
 
-export default function BannedBanner({ banned, reason }) {
-  const isSrBan = reason?.toLowerCase() === "sr"
+export default function BannedBanner({ banned, reason: reasonRaw }) {
+  const reason = reasonRaw?.toLowerCase()
+  const isSrBan = reason === "sr"
 
   return (
     banned && (
@@ -20,29 +21,43 @@ export default function BannedBanner({ banned, reason }) {
           </div>
         </AlertDescription>
         <AlertDescription>
-          <div className="mb-1">
-            &quot;SR&quot; ban means your safety rating is under 950. You can gain 2 SR per lap in
-            the Low-SR No-Contact server to raise SR above 950 to be automatically unbanned.
-          </div>
-          <div className="mb-1">
-            &quot;Global&quot; ban means you did something to be banned from online racing for the
-            foreseeable future.
-          </div>
-          <div className="mb-1">
-            Custom message ban means you were banned by an admin for a specific reason, submit a ban
-            appeal.
-          </div>
+          {
+            reason.includes("global")
+            ? <section>
+              <div className="mb-1">You are banned Globally, this means you did something to be banned by an MXB Discord admin for the foreseeable future.</div>
+              <div className="mb-1">You may try to appeal in the MXB Discord through the official ban-appeal channel, good luck.</div>
+            </section>
+            : reason.includes("sr")
+            ? <div className="mb-1">You are temporarily blacklisted for Low SR, this means your safety rating is under 950. You can gain 2 SR per lap in the Low-SR No-Contact server to raise SR above 950 to be automatically unbanned.</div>
+            : <section>
+              {
+                reason.includes("backwards")
+                ? <div className="mb-1">You are banned for Riding backwards.</div>
+                : reason.includes("rammer")
+                ? <div className="mb-1">You are banned for Ramming.</div>
+                : reason.includes("cutting")
+                ? <div className="mb-1">You are banned for Cutting.</div>
+                : reason.includes("cheating")
+                ? <div className="mb-1">You are banned for Cheating.</div>
+                : <div className="mb-1">A Custom ban reason means you were banned by an admin for a specific reason.</div>
+              }
+              <div className="mb-1">You may submit a ban appeal by clicking the button below and pleading your case in the Pepiti-ban-appeal channel.</div>
+            </section>
+          }
           <br />
           <div className="mb-4 underline">
             {isSrBan ? (
-              <Link href="/servers?id=93">
+              <Link href="/servers">
                 <div className="flex gap-2">
                   Join the Low SR Server
                   <Hammer size={18} />
                 </div>
               </Link>
             ) : (
-              <Link href="/blacklists">Submit Appeal</Link>
+              <Link href="https://discord.com/invite/mx-bikes"
+                target="_blank"
+                rel="noopener noreferrer"
+              >Submit Appeal</Link>
             )}
           </div>
         </AlertDescription>
