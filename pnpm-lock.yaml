@@ -3090,7 +3090,7 @@ packages:
         optional: true
     dependencies:
       lilconfig: 2.1.0
-      postcss: 8.4.23
+      postcss: 8.4.31
       yaml: 2.3.3
 
   /postcss-nested@6.0.1(postcss@8.4.31):
