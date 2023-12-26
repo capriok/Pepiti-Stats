@@ -8,6 +8,10 @@ export function middleware(request: NextRequest) {
   if (!access_token) {
     return NextResponse.redirect(new URL("/signin", request.url))
   }
+
+  if (request.nextUrl.pathname.startsWith("/profile/guid")) {
+    return NextResponse.rewrite(new URL("/profile", request.url))
+  }
 }
 
 // See "Matching Paths" below to learn more

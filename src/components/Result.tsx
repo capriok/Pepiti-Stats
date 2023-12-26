@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import Link from "next/link"
 import { Button } from "~/ui/Button"
 
 interface Props {
@@ -11,7 +11,6 @@ interface Props {
 }
 
 const Result: React.FC<Props> = (props) => {
-  const router = useRouter()
   const defaultTitle = "Error"
   const defaultDescription = "Something went wrong"
 
@@ -21,12 +20,16 @@ const Result: React.FC<Props> = (props) => {
         <div className="mx-auto w-fit p-4 md:p-10">
           <div className="mb-5 text-2xl">{props.title || defaultTitle}</div>
           <div className="mb-5">{props.description || defaultDescription}</div>
-          <div className="flex flex-col items-start gap-2">
+          <div className="flex flex-col items-start gap-2 md:flex-row">
             <div>{props.extra}</div>
-            <Button variant="outline" onClick={() => router.back()}>
-              <div className="hidden font-normal md:inline">{props.goBackText || "Go Back"}</div>
-              <div className="font-normal md:hidden">Go back</div>
-            </Button>
+            <Link href="/dashboard">
+              <Button variant="ghost">
+                <div className="hidden font-normal md:inline">
+                  {props.goBackText || "Get out of here"}
+                </div>
+                <div className="font-normal md:hidden">Go back</div>
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
