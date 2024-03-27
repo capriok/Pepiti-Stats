@@ -11,7 +11,7 @@ export default function SummaryStats({ stats }: Props) {
         <div className="stat place-items-center">
           <div className="stat-title">Laps</div>
           <div className="stat-value py-2 text-2xl md:text-3xl">{stats.laps.toLocaleString()}</div>
-          <div className="stat-desc">Laps combined</div>
+          <div className="stat-desc">Could have been 6,874,033…</div>
         </div>
 
         <div className="stat place-items-center">
