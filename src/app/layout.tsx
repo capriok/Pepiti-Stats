@@ -15,6 +15,8 @@ import Footer from "~/components/Footer"
 
 import "~/globals.css"
 import DonationBanner from "./dashboard/components/DonationBanner"
+import { Alert, AlertDescription, AlertTitle } from "~/ui/Alert"
+import { PowerOff } from "lucide-react"
 
 interface Props {
   children: React.ReactNode
@@ -32,11 +34,24 @@ export default async function RootLayout(props: Props) {
           <main className="flex min-h-screen flex-col">
             <NavBar user={user} notifications={notifications} />
             <div className="flex-1">
+              <Alert className="flex justify-center">
+                <div className="flex flex-col items-center justify-center">
+                  <PowerOff size={40} className="mb-4 ml-auto w-full text-primary" />
+                  <AlertTitle>Attention!</AlertTitle>
+                  <AlertDescription>
+                    Pepiti Servers are shut down for good, the team has lost interest in the
+                    project.
+                  </AlertDescription>
+                  <AlertDescription>
+                    Thank you to everyone who helped out and supported us along the way.
+                  </AlertDescription>
+                </div>
+              </Alert>
               {props.children}
               {props.modal}
             </div>
             <Footer user={user} />
-            <DonationBanner />
+            {/* <DonationBanner /> */}
             <Toaster />
           </main>
         </Providers>
