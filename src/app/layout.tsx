@@ -12,11 +12,10 @@ import { Toaster } from "~/ui/Toaster"
 import GetAuthUser, { GetAdminNotifications } from "~/api"
 import NavBar from "~/components/Navbar"
 import Footer from "~/components/Footer"
-
-import "~/globals.css"
-import DonationBanner from "./dashboard/components/DonationBanner"
 import { Alert, AlertDescription, AlertTitle } from "~/ui/Alert"
 import { PowerOff } from "lucide-react"
+import { Button } from "~/ui/Button"
+import "~/globals.css"
 
 interface Props {
   children: React.ReactNode
@@ -34,16 +33,20 @@ export default async function RootLayout(props: Props) {
           <main className="flex min-h-screen flex-col">
             <NavBar user={user} notifications={notifications} />
             <div className="flex-1">
-              <Alert className="flex justify-center">
+              <Alert className="flex justify-center py-4">
                 <div className="flex flex-col items-center justify-center">
                   <PowerOff size={40} className="mb-4 ml-auto w-full text-primary" />
                   <AlertTitle>Attention!</AlertTitle>
-                  <AlertDescription>
-                    Pepiti Servers are shut down for good, the team has lost interest in the
-                    project.
+                  <AlertDescription className="mt-2">
+                    Pepiti Servers are shut down, Pepiti lost interest.
                   </AlertDescription>
-                  <AlertDescription>
-                    Thank you to everyone who helped out and supported us along the way.
+                  <AlertDescription className="mt-2 text-center">
+                    <div>Tooky and PDR have created a new platform at MXB-Races.com</div>
+                    <Button variant="info" size="sm" className="mt-4">
+                      <a href="https://mxb-races.com" className="text-sm">
+                        Visit New Platform
+                      </a>
+                    </Button>
                   </AlertDescription>
                 </div>
               </Alert>
